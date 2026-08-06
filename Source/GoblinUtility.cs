@@ -242,6 +242,11 @@ namespace MUGB
                 return 1f;
             }
 
+            if (IsBabyLifeStage(pawn))
+            {
+                return BabyAddonOffsetFactor;
+            }
+
             LifeStageDef lifeStage = pawn.ageTracker.CurLifeStage;
             float body = Mathf.Sqrt(Mathf.Max(0.01f, lifeStage.bodySizeFactor));
             float head = Mathf.Max(0.01f, lifeStage.headSizeFactor ?? 1f);
@@ -253,6 +258,11 @@ namespace MUGB
             if (!NeedsJuvenileRenderCompensation(pawn))
             {
                 return 1f;
+            }
+
+            if (IsBabyLifeStage(pawn))
+            {
+                return BabyHeadOffsetFactor;
             }
 
             return Mathf.Clamp(JuvenileAddonOffsetFactor(pawn) + 0.06f, 0.84f, 1f);
@@ -303,8 +313,50 @@ namespace MUGB
                 return 1f;
             }
 
+            if (IsBabyLifeStage(pawn))
+            {
+                return BabyAddonScaleFactor;
+            }
+
             LifeStageDef lifeStage = pawn.ageTracker.CurLifeStage;
             return Mathf.Clamp((lifeStage.headSizeFactor ?? 1f) + 0.08f, 0.82f, 1f);
+        }
+
+        /*
+            [아기 단계 렌더 보정 - 왜 별도 분기인가]
+
+            위 세 함수의 계산식은 LifeStageDef의 bodySizeFactor/headSizeFactor에서 일반식으로 값을 뽑지만,
+            마지막 Clamp의 하한(0.76 / 0.84 / 0.82)이 어린이 단계 값에 맞춰져 있습니다.
+            아기 단계(bodySizeFactor 0.2, headSizeFactor 0.5)를 그 식에 그대로 넣으면 하한에 잘려
+            머리보다 부속이 크게 남습니다.
+
+            그런데 하한을 내리는 방식은 쓰지 않았습니다. 그러면 이미 잘 맞춰져 있는
+            어린이/청소년/성인 고블린이 지나가는 코드가 바뀌기 때문입니다.
+            계산 결과가 같다는 논증에 기대는 대신, 아기가 아닌 폰은 아래 상수를 아예 만나지 못하게
+            분기로 갈라 두었습니다. 어린이 이상은 기존 식과 기존 하한을 글자 그대로 통과합니다.
+
+            상수 값은 위 계산식에 아기 단계 수치를 넣어 클램프만 적용하지 않은 결과입니다.
+            (0.532 / 0.592 / 0.58) 즉 어린이에서 이어지는 자연스러운 연장선입니다.
+        */
+        internal const float BabyAddonOffsetFactor = 0.53f;
+        internal const float BabyHeadOffsetFactor = 0.59f;
+        internal const float BabyAddonScaleFactor = 0.58f;
+
+        // 아기 단계는 라이프스테이지로만 판정합니다. 나이로 판정하면 빠른 성장 직후
+        // 라이프스테이지 캐시와 나이가 한 틱 어긋나는 순간에 보정이 튑니다.
+        //
+        // 옵션이 꺼져 있으면 고블린은 어린이로 태어나고 라이프스테이지 강제도 어린이로 가므로
+        // 아기 고블린이 존재할 수 없습니다. 그때는 정적 bool 하나만 읽고 끝냅니다.
+        // 이 함수는 부속 렌더 경로에서 프레임마다 불리므로, 옵션이 꺼진 사람에게는
+        // 라이프스테이지 조회 비용조차 발생하지 않게 합니다.
+        public static bool IsBabyLifeStage(Pawn pawn)
+        {
+            if (Patches.GoblinAgeUtility.SkipBabyStage)
+            {
+                return false;
+            }
+
+            return pawn?.ageTracker?.CurLifeStage?.developmentalStage == DevelopmentalStage.Baby;
         }
 
         private static bool NeedsJuvenileRenderCompensation(Pawn pawn)

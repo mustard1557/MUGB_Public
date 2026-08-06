@@ -137,6 +137,10 @@
   <MUGB_SettingsGoblinChildStageDaysButton>고블린 어린이 기간: {0}</MUGB_SettingsGoblinChildStageDaysButton>
   <MUGB_SettingsGoblinChildStageDaysValue>{0}일</MUGB_SettingsGoblinChildStageDaysValue>
   <MUGB_SettingsGoblinChildStageDaysDesc>순종 고블린이 13세에 도달하기까지의 기간입니다. 0일은 어린이 단계를 생략합니다.</MUGB_SettingsGoblinChildStageDaysDesc>
+  <MUGB_SettingsGoblinBabyStageDaysButton>고블린 아기 기간: {0}</MUGB_SettingsGoblinBabyStageDaysButton>
+  <MUGB_SettingsGoblinBabyStageDaysValue>{0}일</MUGB_SettingsGoblinBabyStageDaysValue>
+  <MUGB_SettingsGoblinBabyStageDisabled>없음 (어린이로 태어남)</MUGB_SettingsGoblinBabyStageDisabled>
+  <MUGB_SettingsGoblinBabyStageDaysDesc>갓 태어난 순종 고블린이 어린이가 되기까지 아기로 지내는 기간입니다. 없음 / 0.5 / 1 / 2 / 3일 중에서 고를 수 있습니다. '없음'이면 예전처럼 3세로 태어납니다. 고블린 아기는 포대에 싸이지 않고, 정착민이 안전한 온도로 옮겨주지도 않습니다.</MUGB_SettingsGoblinBabyStageDaysDesc>
   <MUGB_SettingsGoblinBirthStrainButton>고블린 출산 피로 한계: {0}</MUGB_SettingsGoblinBirthStrainButton>
   <MUGB_SettingsGoblinBirthStrainCount>{0}회</MUGB_SettingsGoblinBirthStrainCount>
   <MUGB_SettingsGoblinBirthStrainDisabled>비활성화</MUGB_SettingsGoblinBirthStrainDisabled>

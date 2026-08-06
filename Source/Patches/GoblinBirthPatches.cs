@@ -493,7 +493,19 @@ namespace MUGB.Patches
             if (rjwPostBirth != null && rjwPostBirthPostfix != null)
             {
                 harmony.Patch(rjwPostBirth, postfix: new HarmonyMethod(rjwPostBirthPostfix));
+
+                // 같은 지점에 출생 후처리도 붙입니다. RJW 경로는 ApplyBirthOutcome을 거치지 않아
+                // MUGB의 PostProcessBirth가 돌지 않으므로 여기서 관계/사상/신분을 마무리합니다.
+                MethodInfo rjwNewbornPostfix = AccessTools.Method(
+                    typeof(RJW_HediffBasePregnancy_PostBirth_GoblinNewbornPatch),
+                    nameof(RJW_HediffBasePregnancy_PostBirth_GoblinNewbornPatch.Postfix));
+                if (rjwNewbornPostfix != null)
+                {
+                    harmony.Patch(rjwPostBirth, postfix: new HarmonyMethod(rjwNewbornPostfix));
+                }
             }
+
+            GoblinRJWBirthCompat.Patch(harmony);
 
             MethodInfo menstruationPostfix = AccessTools.Method(typeof(RJWMenstruation_GoNextStage_GoblinRecovery_Patch), nameof(RJWMenstruation_GoNextStage_GoblinRecovery_Patch.Postfix));
             System.Type menstruationType = AccessTools.TypeByName("RJW_Menstruation.HediffComp_Menstruation");
@@ -590,6 +602,31 @@ namespace MUGB.Patches
 
             ApplyGoblinBirthStrain(geneticMother);
             ApplyGoblinBirthMood(geneticMother);
+        }
+
+        // 한국어 의도: RJW 경로 출산의 출생 후처리입니다.
+        //
+        // RJW와 RJW Menstruation은 PregnancyUtility.ApplyBirthOutcome을 거치지 않고 자체적으로
+        // 아기를 스폰하므로 PostProcessBirth가 돌지 않습니다. 아기 자체는 수태 시점에
+        // GoblinRJWBirthCompat이 MUGB 규격으로 만들어 두었으니, 여기서는 스폰 이후에만
+        // 할 수 있는 일 세 가지만 처리합니다.
+        //
+        // 산자수와 출산 부담은 일부러 건드리지 않습니다. RJW 경로 기존 플레이어의 출산 규모를
+        // 바꾸지 않기 위한 결정이며, 외형 문제와 무관합니다.
+        public static void ApplyRJWNewbornFollowUp(Pawn mother, Pawn father, Pawn baby)
+        {
+            if (mother == null
+                || !GoblinUtility.IsGoblin(father)
+                || baby == null
+                || baby.Dead
+                || (!GoblinUtility.IsGoblin(baby) && !GoblinUtility.HasHalfGoblinAncestry(baby)))
+            {
+                return;
+            }
+
+            NormalizeGoblinBirthRelations(baby, mother, father);
+            InheritGoblinIdeo(baby, mother, father);
+            ApplyBirthGuestStatus(baby, mother);
         }
 
         public static bool IsGoblinPregnancy(Pawn mother, Pawn father, Pawn baby = null)
@@ -824,15 +861,14 @@ namespace MUGB.Patches
                 return GoblinBirthResult.MotherXenotype;
             }
 
-            if (value < 0.93f)
+            // 한국어 의도: 띤 고블린 아비에게서는 어미 종족을 따르는 아기가 나오지 않습니다.
+            // 고블린 혈통이 아비 쪽이라는 설정을 띤 아비에서 확실히 하기 위해,
+            // 예전 어미종족 2%를 띤 고블린 쪽으로 넘겼습니다. 홉 아비는 그대로 2%가 남습니다.
+            if (value < 0.95f)
             {
                 return GoblinBirthResult.ThinGoblin;
             }
-            if (value < 0.98f)
-            {
-                return GoblinBirthResult.Hobgoblin;
-            }
-            return GoblinBirthResult.MotherXenotype;
+            return GoblinBirthResult.Hobgoblin;
         }
 
         public static XenotypeDef XenotypeFor(GoblinBirthResult result, Pawn geneticMother)
@@ -874,6 +910,17 @@ namespace MUGB.Patches
             }
 
             GoblinUtility.EnforceGoblinStoryGraphics(child);
+
+            // 한국어 의도: 렌더 트리를 반드시 한 번 버리게 합니다.
+            //
+            // HAR은 꼬리/뿔 같은 부속을 그릴지 말지를 렌더 트리를 만들 때 한 번 판정해 캐시합니다.
+            // 그런데 RJW Menstruation은 아기를 만든 직후 EnsureGraphicsInitialized를 불러 트리를
+            // 미리 만들어 버립니다. 그 시점은 MUGB가 제노타입을 찍기 전이라, "아직 고블린이 아닌"
+            // 상태로 판정된 부속 노드가 그대로 남습니다.
+            //
+            // EnforceGoblinStoryGraphics는 바꿀 것이 있을 때만 트리를 버리므로, 제노타입만 바뀐
+            // 경우에는 부속이 정리되지 않습니다. 출산당 1회뿐이니 여기서 무조건 버립니다.
+            child.Drawer?.renderer?.SetAllGraphicsDirty();
         }
 
 
@@ -905,7 +952,9 @@ namespace MUGB.Patches
                 return;
             }
 
-            // Full goblins spend about 3.5 days as children, then mature at 16 and 18.
+            // Full goblins may spend a short baby stage first (mod option, half a day by default),
+            // then about 3.5 days as children, then mature at 16 and 18.
+            // BirthAgeYears follows that option: 0 with the baby stage on, 3 with it off.
             GoblinPawnKindBackstoryUtility.AssignGrowingGoblinChildhood(child);
             long birthAgeTicks = GoblinAgeUtility.TicksForYears(GoblinAgeUtility.BirthAgeYears);
             child.ageTracker.AgeBiologicalTicks = birthAgeTicks;
@@ -962,7 +1011,9 @@ namespace MUGB.Patches
                 }
             }
 
-            // Korean source intent: 1%로 어머니 종족을 따라 나온 하프고블린은 고블린만큼은 아니어도 영리한 혈통으로 보이게 빠른학습을 붙인다.
+            // Korean source intent: 홉고블린 아비에게서 낮은 확률로 어머니 종족을 따라 나온 하프고블린은
+            // 고블린만큼은 아니어도 영리한 혈통으로 보이게 빠른학습을 붙인다.
+            // 띤고블린 아비에게서는 하프고블린이 나오지 않으므로 이 경로는 홉 아비 전용이다.
             child.genes.AddGene(MUGBDefOf.MUGB_Gene_GoblinFastLearner, xenogene: false);
         }
 
@@ -1099,9 +1150,23 @@ namespace MUGB.Patches
             GoblinPersonalNameUtility.InheritGoblinLineName(child, father);
         }
 
+        // 한국어 의도: 어미의 신분(노예/포로)을 아기에게 물려줍니다.
+        //
+        // 예전에는 순수 고블린만 대상이었습니다. 그래서 어미 종족을 따라 나온 하프고블린은
+        // 이 함수를 그냥 통과했고, 노예는 팩션이 Faction.OfPlayer이므로 게스트 신분이 지정되지 않은
+        // 아기가 자유 정착민으로 태어나 버렸습니다. 하프고블린도 같은 규칙을 따르게 넓혔습니다.
+        //
+        // 포로로 태어난 고블린 표시는 13세 신분 선택 편지와 짝인 순수 고블린 전용 흐름이므로
+        // 하프고블린에는 달지 않습니다. 하프고블린은 바닐라 아기->어린이 편지를 그대로 받습니다.
         private static void ApplyBirthGuestStatus(Pawn child, Pawn geneticMother)
         {
-            if (child?.guest == null || geneticMother == null || !GoblinUtility.IsGoblin(child))
+            if (child?.guest == null || geneticMother == null)
+            {
+                return;
+            }
+
+            bool pureGoblin = GoblinUtility.IsGoblin(child);
+            if (!pureGoblin && !GoblinUtility.HasHalfGoblinAncestry(child))
             {
                 return;
             }
@@ -1111,7 +1176,10 @@ namespace MUGB.Patches
                 if (ModsConfig.IdeologyActive)
                 {
                     child.guest.SetGuestStatus(Faction.OfPlayer, GuestStatus.Slave);
-                    Current.Game?.GetComponent<GoblinRapidMaturationComponent>()?.MarkCaptiveBornGoblin(child);
+                    if (pureGoblin)
+                    {
+                        Current.Game?.GetComponent<GoblinRapidMaturationComponent>()?.MarkCaptiveBornGoblin(child);
+                    }
                 }
                 else
                 {
@@ -1296,6 +1364,17 @@ namespace MUGB.Patches
             comp.Initialize(hediff.pawn, father);
             PendingGoblinFathersByMother.Remove(hediff.pawn.thingIDNumber);
         }
+
+        // 한국어 의도: 계획 comp가 없는 임신 헤디프(RJW 계열)로 수태가 끝난 뒤 대기 항목을 비웁니다.
+        // 그러지 않으면 이 표가 아비 폰 참조를 계속 들고 있게 되고, 나중에 같은 어미가
+        // 다른 방식으로 임신했을 때 지난 아비가 잘못 잡힐 수 있습니다.
+        public static void ClearPendingFather(Pawn mother)
+        {
+            if (mother != null)
+            {
+                PendingGoblinFathersByMother.Remove(mother.thingIDNumber);
+            }
+        }
     }
 
     public class HediffCompProperties_MUGBGoblinPregnancyPlan : HediffCompProperties
@@ -1406,6 +1485,20 @@ namespace MUGB.Patches
             }
 
             return null;
+        }
+
+        // 한국어 의도: 계획에 없던 아기가 뒤늦게 늘어났을 때(이란성 쌍둥이) 결과를 하나 더 굴려
+        // 계획 끝에 붙입니다. 그 결과대로 아기를 만들어 두면 출산 시 다시 적용되는 판정과
+        // 생성 시점의 아기가 어긋나지 않습니다.
+        public GoblinBirthUtility.GoblinBirthResult AppendRolledResult(bool fatherIsHobgoblin)
+        {
+            GoblinBirthUtility.GoblinBirthResult roll = GoblinBirthUtility.RollGoblinBirthResult(fatherIsHobgoblin);
+            if (plannedResults == null)
+            {
+                plannedResults = new List<int>();
+            }
+            plannedResults.Add((int)roll);
+            return roll;
         }
 
         public GoblinBirthUtility.GoblinBirthResult NextResultOrFallback(bool fatherIsHobgoblin)

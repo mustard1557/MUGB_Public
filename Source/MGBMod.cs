@@ -62,6 +62,7 @@ namespace MUGB
             ContentPack = content;
             Settings = GetSettings<MUGBSettings>();
             Patches.GoblinAgeUtility.RefreshChildStageSettings();
+            Patches.GoblinAgeUtility.RefreshBabyStageSettings();
             MUGBVisualTuningDefaults.InitializeApparelDefaults(content.RootDir);
             GoblinClosedEyeUtility.ScheduleInitialize();
             GoblinGoneAddonUtility.ScheduleInitialize();
@@ -252,6 +253,22 @@ namespace MUGB
             if (!Mathf.Approximately(oldGoblinChildStageDays, Settings.goblinChildStageDays))
             {
                 Patches.GoblinAgeUtility.RefreshChildStageSettings();
+                Settings.Write();
+            }
+
+            float oldGoblinBabyStageDays = Settings.goblinBabyStageDays;
+            string babyStageDuration = Settings.goblinBabyStageDays <= 0f
+                ? "MUGB_SettingsGoblinBabyStageDisabled".Translate().ToString()
+                : "MUGB_SettingsGoblinBabyStageDaysValue".Translate(
+                    Settings.goblinBabyStageDays.ToString("0.#", CultureInfo.InvariantCulture)).ToString();
+            if (listing.ButtonText("MUGB_SettingsGoblinBabyStageDaysButton".Translate(babyStageDuration)))
+            {
+                Settings.goblinBabyStageDays = Patches.GoblinAgeUtility.NextBabyStageDays(Settings.goblinBabyStageDays);
+            }
+            listing.Label("MUGB_SettingsGoblinBabyStageDaysDesc".Translate());
+            if (!Mathf.Approximately(oldGoblinBabyStageDays, Settings.goblinBabyStageDays))
+            {
+                Patches.GoblinAgeUtility.RefreshBabyStageSettings();
                 Settings.Write();
             }
 
@@ -3041,6 +3058,7 @@ namespace MUGB
         public bool americanBeautyStandard;
         public float goblinLitterSizeMultiplier = 1f;
         public float goblinChildStageDays = 3.5f;
+        public float goblinBabyStageDays = 0.5f;
         public int goblinBirthStrainLimit = 4;
         public bool disableToxicPheromonesCheat;
         public bool allowFacialAnimationForGoblins;
@@ -3150,6 +3168,8 @@ namespace MUGB
             goblinLitterSizeMultiplier = Patches.GoblinLitterSizeUtility.NormalizeMultiplier(goblinLitterSizeMultiplier);
             Scribe_Values.Look(ref goblinChildStageDays, "goblinChildStageDays", 3.5f);
             goblinChildStageDays = Patches.GoblinAgeUtility.NormalizeChildStageDays(goblinChildStageDays);
+            Scribe_Values.Look(ref goblinBabyStageDays, "goblinBabyStageDays", 0.5f);
+            goblinBabyStageDays = Patches.GoblinAgeUtility.NormalizeBabyStageDays(goblinBabyStageDays);
             Scribe_Values.Look(ref goblinBirthStrainLimit, "goblinBirthStrainLimit", 4);
             goblinBirthStrainLimit = Patches.GoblinBirthStrainUtility.NormalizeLimit(goblinBirthStrainLimit);
             Scribe_Values.Look(ref disableToxicPheromonesCheat, "disableToxicPheromonesCheat", false);

@@ -2,6 +2,7 @@
 using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Verse;
 
 namespace MUGB.Patches
@@ -615,11 +616,13 @@ namespace MUGB.Patches
             float age = ___pawn.ageTracker.AgeBiologicalYearsFloat;
             if (GoblinUtility.IsGoblin(___pawn) && age < GoblinAgeUtility.AdultAgeYears)
             {
-                __result = age < GoblinAgeUtility.TeenAgeYears
-                    ? GoblinAgeUtility.ChildGrowthRate
-                    : age < GoblinAgeUtility.RomanceMinAgeYears
-                        ? GoblinAgeUtility.TeenGrowthRate
-                        : GoblinAgeUtility.LateTeenGrowthRate;
+                __result = age < GoblinAgeUtility.BabyAgeYears
+                    ? GoblinAgeUtility.BabyGrowthRate
+                    : age < GoblinAgeUtility.TeenAgeYears
+                        ? GoblinAgeUtility.ChildGrowthRate
+                        : age < GoblinAgeUtility.RomanceMinAgeYears
+                            ? GoblinAgeUtility.TeenGrowthRate
+                            : GoblinAgeUtility.LateTeenGrowthRate;
                 return;
             }
 
@@ -646,6 +649,15 @@ namespace MUGB.Patches
 
             long teenTicks = GoblinAgeUtility.TicksForYears(GoblinAgeUtility.TeenAgeYears);
             if (__state >= teenTicks)
+            {
+                return;
+            }
+
+            // 한국어 의도: 어린이 단계를 0일로 껐어도 아기 단계는 건너뛰지 않습니다.
+            // 아기 단계를 다 보내고 어린이 나이에 들어선 뒤에 청소년으로 점프시킵니다.
+            // 아기 단계가 꺼져 있으면 출생 나이가 이미 3세라 이 검사는 통과합니다.
+            if (!GoblinAgeUtility.SkipBabyStage
+                && __state < GoblinAgeUtility.TicksForYears(GoblinAgeUtility.BabyAgeYears))
             {
                 return;
             }
@@ -693,12 +705,24 @@ namespace MUGB.Patches
 
     public static class GoblinAgeUtility
     {
-        public const float BirthAgeYears = 3f;
+        // 한국어 의도: 아기 단계를 쓰지 않을 때의 출생 나이입니다.
+        // 아기 단계 옵션이 켜져 있으면 0세로 태어나 BabyAgeYears까지 아기로 지냅니다.
+        // 상수가 아니라 속성인 이유는 설정 변경이 다음 출산부터 즉시 반영되어야 하기 때문입니다.
+        public static float BirthAgeYears => skipBabyStage ? BabyAgeYears : 0f;
+
+        // 바닐라 HumanlikeBaby 라이프스테이지가 0~3세 구간이라 경계값도 3세입니다.
+        public const float BabyAgeYears = 3f;
         public const float TeenAgeYears = 13f;
         private const float DefaultChildStageDays = 3.5f;
         private const float ChildGrowthRateNumerator = 600f;
+        // 배속 = (구간 연수 × 3600000틱) / (일수 × 60000틱) = 구간 연수 × 60 / 일수.
+        // 아기 구간은 3년이므로 분자가 180입니다. 어린이 구간(10년)의 600과 같은 규칙입니다.
+        private const float BabyGrowthRateNumerator = 180f;
+        private const float DefaultBabyStageDays = 0.5f;
         private static float childGrowthRate = ChildGrowthRateNumerator / DefaultChildStageDays;
+        private static float babyGrowthRate = BabyGrowthRateNumerator / DefaultBabyStageDays;
         private static bool skipChildStage;
+        private static bool skipBabyStage;
         public const float TeenGrowthRate = 90f;
         public const float LateTeenGrowthRate = 30f;
         // 한국어 참고: 고블린 청소년 렌더 축소 구간입니다. 13~16세는 더 작게, 16~18세는 성인에 가깝게 그립니다.
@@ -711,6 +735,11 @@ namespace MUGB.Patches
         private const long AgeTicksPerYear = 3600000L;
         public static float ChildGrowthRate => childGrowthRate;
         public static bool SkipChildStage => skipChildStage;
+        public static bool SkipBabyStage => skipBabyStage;
+
+        // 아기 단계를 끈 상태에서 어떤 이유로든 3세 미만 고블린이 존재하면(개발자 모드 등)
+        // 예전과 똑같이 어린이 배속으로 자라게 둡니다. 새 배속이 끼어들지 않습니다.
+        public static float BabyGrowthRate => skipBabyStage ? childGrowthRate : babyGrowthRate;
 
         public static float NormalizeChildStageDays(float days)
         {
@@ -752,6 +781,50 @@ namespace MUGB.Patches
             float days = NormalizeChildStageDays(MUGBMod.Settings?.goblinChildStageDays ?? DefaultChildStageDays);
             skipChildStage = days <= 0f;
             childGrowthRate = skipChildStage ? 1f : ChildGrowthRateNumerator / days;
+        }
+
+        // 아기 단계 길이 선택지입니다. 0이면 예전처럼 어린이(3세)로 태어납니다.
+        // 값을 늘리거나 줄일 때는 이 배열만 고치면 정규화와 순환이 함께 따라갑니다.
+        private static readonly float[] BabyStageDayOptions = { 0f, 0.5f, 1f, 2f, 3f };
+
+        // 저장값이 선택지에 없으면 가장 가까운 값으로 당깁니다.
+        // 선택지를 나중에 줄여도 예전 세이브가 이상한 값을 들고 있지 않게 하는 장치입니다.
+        public static float NormalizeBabyStageDays(float days)
+        {
+            float closest = BabyStageDayOptions[0];
+            float closestDistance = Mathf.Abs(days - closest);
+            for (int i = 1; i < BabyStageDayOptions.Length; i++)
+            {
+                float distance = Mathf.Abs(days - BabyStageDayOptions[i]);
+                if (distance < closestDistance)
+                {
+                    closest = BabyStageDayOptions[i];
+                    closestDistance = distance;
+                }
+            }
+
+            return closest;
+        }
+
+        public static float NextBabyStageDays(float currentDays)
+        {
+            float normalized = NormalizeBabyStageDays(currentDays);
+            for (int i = 0; i < BabyStageDayOptions.Length; i++)
+            {
+                if (Mathf.Approximately(BabyStageDayOptions[i], normalized))
+                {
+                    return BabyStageDayOptions[(i + 1) % BabyStageDayOptions.Length];
+                }
+            }
+
+            return DefaultBabyStageDays;
+        }
+
+        public static void RefreshBabyStageSettings()
+        {
+            float days = NormalizeBabyStageDays(MUGBMod.Settings?.goblinBabyStageDays ?? DefaultBabyStageDays);
+            skipBabyStage = days <= 0f;
+            babyGrowthRate = BabyGrowthRateNumerator / (skipBabyStage ? DefaultBabyStageDays : days);
         }
 
         private static readonly HashSet<string> AgeHediffDefNames = new HashSet<string>
@@ -852,7 +925,14 @@ namespace MUGB.Patches
 
             string preferredDefName;
             float age = pawn.ageTracker.AgeBiologicalYearsFloat;
-            if (age < TeenAgeYears)
+            // 아기 단계 옵션이 꺼져 있으면 예전과 똑같이 13세 미만 전체를 어린이로 봅니다.
+            // 켜져 있을 때만 3세 미만이 아기 단계를 갖습니다.
+            bool baby = !SkipBabyStage && age < BabyAgeYears;
+            if (baby)
+            {
+                preferredDefName = "HumanlikeBaby";
+            }
+            else if (age < TeenAgeYears)
             {
                 preferredDefName = "HumanlikeChild";
             }
@@ -871,7 +951,9 @@ namespace MUGB.Patches
                 return true;
             }
 
-            DevelopmentalStage fallbackStage = age < AdultAgeYears ? DevelopmentalStage.Child : DevelopmentalStage.Adult;
+            DevelopmentalStage fallbackStage = baby
+                ? DevelopmentalStage.Baby
+                : age < AdultAgeYears ? DevelopmentalStage.Child : DevelopmentalStage.Adult;
             index = pawn.RaceProps.lifeStageAges.FindIndex(stage => stage?.def?.developmentalStage == fallbackStage);
             return index >= 0;
         }

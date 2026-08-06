@@ -137,6 +137,10 @@
   <MUGB_SettingsGoblinChildStageDaysButton>Goblin child stage: {0}</MUGB_SettingsGoblinChildStageDaysButton>
   <MUGB_SettingsGoblinChildStageDaysValue>{0} days</MUGB_SettingsGoblinChildStageDaysValue>
   <MUGB_SettingsGoblinChildStageDaysDesc>Time for a pure goblin child to reach age 13. Zero skips the child stage.</MUGB_SettingsGoblinChildStageDaysDesc>
+  <MUGB_SettingsGoblinBabyStageDaysButton>Goblin baby stage: {0}</MUGB_SettingsGoblinBabyStageDaysButton>
+  <MUGB_SettingsGoblinBabyStageDaysValue>{0} days</MUGB_SettingsGoblinBabyStageDaysValue>
+  <MUGB_SettingsGoblinBabyStageDisabled>None (born as children)</MUGB_SettingsGoblinBabyStageDisabled>
+  <MUGB_SettingsGoblinBabyStageDaysDesc>Time a newborn pure goblin spends as a baby before becoming a child. Choose none, 0.5, 1, 2 or 3 days. None means goblins are born at age 3 as before. Goblin babies are not swaddled, and colonists will not carry them to safe temperatures.</MUGB_SettingsGoblinBabyStageDaysDesc>
   <MUGB_SettingsGoblinBirthStrainButton>Goblin birth strain limit: {0}</MUGB_SettingsGoblinBirthStrainButton>
   <MUGB_SettingsGoblinBirthStrainCount>{0} births</MUGB_SettingsGoblinBirthStrainCount>
   <MUGB_SettingsGoblinBirthStrainDisabled>Disabled</MUGB_SettingsGoblinBirthStrainDisabled>
