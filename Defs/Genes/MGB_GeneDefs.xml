@@ -1,0 +1,819 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    [파일 개요]
+    MUGB 고블린/홉고블린의 핵심 유전자입니다.
+    의도:
+    - 바닐라 GeneDef와 VEF StatDef만으로 가능한 부분은 XML에서 처리해 틱 부담을 만들지 않습니다.
+    - 머리/몸 강제는 유전자 적용 시점과 생성 완료 시점에 한 번만 보정합니다.
+    - label/description은 영어 기본값이며, 아래 한국어 주석은 번역 작업 참고용입니다.
+  -->
+
+  <GeneDef ParentName="GeneVoiceBase">
+    <defName>MGB_GoblinVoice</defName>
+    <geneClass>MUGB.Gene_GoblinVoice</geneClass>
+    <label>goblin voice</label>
+    <description>Carriers vocalize with the harsh cries shared by goblins and hobgoblins. This gene is inactive without a goblin body-plan gene.</description>
+    <iconPath>UI/Icons/Genes/MGB_GoblinVoice</iconPath>
+    <displayOrderInCategory>135</displayOrderInCategory>
+    <biostatCpx>0</biostatCpx>
+    <biostatMet>0</biostatMet>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+    <soundDeath>MGB_GoblinVoice_Scream</soundDeath>
+    <soundWounded>MGB_GoblinVoice_Scream</soundWounded>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_GoblinCore</defName>
+    <geneClass>VEF.Genes.GeneGendered</geneClass>
+    <label>goblin body plan</label>
+    <!-- 한국어 설명 참고: 고블린 전용 머리, 귀, 피부색, 기본 체형을 부여하는 핵심 유전자입니다. -->
+    <description>Carriers express the stable goblin body plan: green skin, a dedicated goblin head, pointed ears, and a compact frame.</description>
+    <iconPath>UI/Icons/Genes/MGB_GoblinFrame</iconPath>
+    <displayCategory>Cosmetic_Body</displayCategory>
+    <displayOrderInCategory>10</displayOrderInCategory>
+    <biostatCpx>1</biostatCpx>
+    <biostatMet>1</biostatMet>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+    <endogeneCategory>BodyType</endogeneCategory>
+    <exclusionTags>
+      <li>BodyType</li>
+      <li>MUGB_GoblinBodyPlan</li>
+    </exclusionTags>
+    <modExtensions>
+      <li Class="VEF.Genes.GeneExtension">
+        <!-- VEF 성별 제한/렌더 확장입니다. 여성 고블린 외형은 별도 구현 전까지 발현되지 않게 둡니다. -->
+        <forGenderOnly>Male</forGenderOnly>
+        <!-- bodyType 자체는 바닐라 Thin으로 유지하고, 몸 텍스처만 고블린 전용으로 바꿔 HAR/Character Editor와 충돌을 줄입니다. -->
+        <forcedBodyType>Thin</forcedBodyType>
+        <bodyNakedGraphicPath>Things/Pawn/MGBlike/Bodies/Naked_Thin</bodyNakedGraphicPath>
+        <bodyDessicatedGraphicPath>Things/Pawn/MGBlike/Bodies/Dessicated/Dessicated_Thin</bodyDessicatedGraphicPath>
+      </li>
+    </modExtensions>
+    <!-- GeneDef.bodyType은 바닐라 GeneticBodyType enum만 받습니다. 실제 텍스처는 VEF 확장과 MUGB 렌더 패치에서 교체합니다. -->
+    <bodyType>Thin</bodyType>
+    <skinColorOverride>(111, 116, 73)</skinColorOverride>
+    <randomBrightnessFactor>0</randomBrightnessFactor>
+    <forcedHeadTypes>
+      <li>MUGB_GoblinHead</li>
+    </forcedHeadTypes>
+    <statOffsets>
+      <!-- 한국어 의도: 고블린은 거칠고 무딘 기질이라 인간보다 정신적으로 잘 버팁니다.
+           추함/낮은 사회성/인육갈망이 상시로 기분을 깎는 구조라, 그 보정 없이는
+           오히려 인간보다 자주 무너집니다. 음수일수록 정신붕괴 문턱이 낮아져 잘 안 터집니다. -->
+      <MentalBreakThreshold>-0.07</MentalBreakThreshold>
+    </statOffsets>
+    <statFactors>
+      <VEF_BodySize_Multiplier>0.8</VEF_BodySize_Multiplier>
+      <!-- VEF는 실제 크기 배율과 cosmetic 배율을 size + cosmetic - 1로 합칩니다. 시각 크기를 실제 0.8배와 맞추려면 cosmetic은 1로 둡니다. -->
+      <VEF_CosmeticBodySize_Multiplier>1.0</VEF_CosmeticBodySize_Multiplier>
+      <VEF_HeadSize_Cosmetic>0.9</VEF_HeadSize_Cosmetic>
+      <MeleeDamageFactor>0.92</MeleeDamageFactor>
+      <PainShockThreshold>0.85</PainShockThreshold>
+      <SocialImpact>0.8</SocialImpact>
+      <NegotiationAbility>0.85</NegotiationAbility>
+      <TradePriceImprovement>0.9</TradePriceImprovement>
+      <PlantWorkSpeed>0.9</PlantWorkSpeed>
+      <PlantHarvestYield>0.85</PlantHarvestYield>
+      <MiningSpeed>1.05</MiningSpeed>
+      <CookSpeed>1.05</CookSpeed>
+      <ConstructionSpeed>0.95</ConstructionSpeed>
+      <AimingDelayFactor>0.95</AimingDelayFactor>
+      <ImmunityGainSpeed>1.05</ImmunityGainSpeed>
+      <InjuryHealingFactor>1.25</InjuryHealingFactor>
+      <LifespanFactor>0.5</LifespanFactor>
+      <VEF_NegativeThoughtDurationFactor>0.9</VEF_NegativeThoughtDurationFactor>
+    </statFactors>
+    <statOffsets>
+      <MoveSpeed>0.11</MoveSpeed>
+      <CarryingCapacity>-4</CarryingCapacity>
+    </statOffsets>
+    <renderNodeProperties>
+      <!-- 고블린 바디 애드온 좌표를 바닐라 렌더 노드에서 재사용합니다. 귀/눈/코/턱이 손실되면 해당 텍스처만 숨깁니다. -->
+      <li Class="MUGB.PawnRenderNodeProperties_GoblinAddon">
+        <nodeClass>MUGB.PawnRenderNode_GoblinAddon</nodeClass>
+        <workerClass>MUGB.PawnRenderNodeWorker_GoblinAddon</workerClass>
+        <texPath>Things/Pawn/Addons/Ears/Base/MGB_EarLeft</texPath>
+        <tuningKey>EarLeft</tuningKey>
+        <bodyPartDefName>Ear</bodyPartDefName>
+        <bodyPartSide>Left</bodyPartSide>
+        <drawNorth>true</drawNorth>
+        <drawWest>true</drawWest>
+        <mirrorEastForWest>false</mirrorEastForWest>
+        <thinSouthOffset>(-0.225,0.47)</thinSouthOffset>
+        <thinNorthOffset>(-0.225,0.75)</thinNorthOffset>
+        <thinWestOffset>(-0.45,0.4)</thinWestOffset>
+        <maleSouthOffset>(-0.215,0.56)</maleSouthOffset>
+        <maleNorthOffset>(-0.2115,0.85)</maleNorthOffset>
+        <maleWestOffset>(-0.415,0.4625)</maleWestOffset>
+        <colorType>Custom</colorType>
+        <color>(1,1,1,1)</color>
+        <parentTagDef>Head</parentTagDef>
+        <useSkinShader>false</useSkinShader>
+        <useRottenColor>true</useRottenColor>
+        <rotDrawMode>Fresh, Rotting</rotDrawMode>
+        <drawData><defaultData><layer>70</layer></defaultData></drawData>
+      </li>
+      <li Class="MUGB.PawnRenderNodeProperties_GoblinAddon">
+        <nodeClass>MUGB.PawnRenderNode_GoblinAddon</nodeClass>
+        <workerClass>MUGB.PawnRenderNodeWorker_GoblinAddon</workerClass>
+        <texPath>Things/Pawn/Addons/Ears/Base/MGB_EarRight</texPath>
+        <tuningKey>EarRight</tuningKey>
+        <bodyPartDefName>Ear</bodyPartDefName>
+        <bodyPartSide>Right</bodyPartSide>
+        <drawNorth>true</drawNorth>
+        <drawEast>true</drawEast>
+        <mirrorEastForWest>false</mirrorEastForWest>
+        <thinSouthOffset>(-0.625,0.47)</thinSouthOffset>
+        <thinNorthOffset>(0.225,0.75)</thinNorthOffset>
+        <thinEastOffset>(-0.45,0.4)</thinEastOffset>
+        <maleSouthOffset>(-0.62,0.56)</maleSouthOffset>
+        <maleNorthOffset>(0.2115,0.85)</maleNorthOffset>
+        <maleEastOffset>(-0.415,0.4625)</maleEastOffset>
+        <colorType>Custom</colorType>
+        <color>(1,1,1,1)</color>
+        <parentTagDef>Head</parentTagDef>
+        <useSkinShader>false</useSkinShader>
+        <useRottenColor>true</useRottenColor>
+        <rotDrawMode>Fresh, Rotting</rotDrawMode>
+        <drawData><defaultData><layer>70</layer></defaultData></drawData>
+      </li>
+      <li Class="MUGB.PawnRenderNodeProperties_GoblinAddon">
+        <nodeClass>MUGB.PawnRenderNode_GoblinAddon</nodeClass>
+        <workerClass>MUGB.PawnRenderNodeWorker_GoblinAddon</workerClass>
+        <texPath>Things/Pawn/Addons/Eyes/MGB_EyeLeft1</texPath>
+        <tuningKey>EyeLeft</tuningKey>
+        <bodyPartDefName>Eye</bodyPartDefName>
+        <bodyPartSide>Left</bodyPartSide>
+        <drawNorth>true</drawNorth>
+        <drawWest>true</drawWest>
+        <mirrorEastForWest>false</mirrorEastForWest>
+        <thinSouthOffset>(-0.32,0.16)</thinSouthOffset>
+        <thinNorthOffset>(0.225,0.1)</thinNorthOffset>
+        <thinEastOffset>(0.5,0.43)</thinEastOffset>
+        <thinWestOffset>(0.5,0.43)</thinWestOffset>
+        <maleSouthOffset>(-0.32,0.16)</maleSouthOffset>
+        <maleNorthOffset>(0.225,0.1)</maleNorthOffset>
+        <maleEastOffset>(0.5,0.43)</maleEastOffset>
+        <maleWestOffset>(0.5,0.43)</maleWestOffset>
+        <colorType>Custom</colorType>
+        <color>(1,1,1,1)</color>
+        <parentTagDef>Head</parentTagDef>
+        <useSkinShader>false</useSkinShader>
+        <useRottenColor>true</useRottenColor>
+        <rotDrawMode>Fresh, Rotting</rotDrawMode>
+        <drawData><defaultData><layer>90</layer></defaultData></drawData>
+      </li>
+      <li Class="MUGB.PawnRenderNodeProperties_GoblinAddon">
+        <nodeClass>MUGB.PawnRenderNode_GoblinAddon</nodeClass>
+        <workerClass>MUGB.PawnRenderNodeWorker_GoblinAddon</workerClass>
+        <texPath>Things/Pawn/Addons/Eyes/MGB_EyeRight1</texPath>
+        <tuningKey>EyeRight</tuningKey>
+        <bodyPartDefName>Eye</bodyPartDefName>
+        <bodyPartSide>Right</bodyPartSide>
+        <drawNorth>true</drawNorth>
+        <drawEast>true</drawEast>
+        <mirrorEastForWest>false</mirrorEastForWest>
+        <thinSouthOffset>(-0.515,0.16)</thinSouthOffset>
+        <thinNorthOffset>(0.225,0.1)</thinNorthOffset>
+        <thinEastOffset>(-0.525,0.2)</thinEastOffset>
+        <maleSouthOffset>(-0.515,0.16)</maleSouthOffset>
+        <maleNorthOffset>(0.225,0.1)</maleNorthOffset>
+        <maleEastOffset>(-0.525,0.2)</maleEastOffset>
+        <colorType>Custom</colorType>
+        <color>(1,1,1,1)</color>
+        <parentTagDef>Head</parentTagDef>
+        <useSkinShader>false</useSkinShader>
+        <useRottenColor>true</useRottenColor>
+        <rotDrawMode>Fresh, Rotting</rotDrawMode>
+        <drawData><defaultData><layer>90</layer></defaultData></drawData>
+      </li>
+      <li Class="MUGB.PawnRenderNodeProperties_GoblinAddon">
+        <nodeClass>MUGB.PawnRenderNode_GoblinAddon</nodeClass>
+        <workerClass>MUGB.PawnRenderNodeWorker_GoblinAddon</workerClass>
+        <texPath>Things/Pawn/Addons/Mouth/MGB_Mouth1</texPath>
+        <tuningKey>Mouth</tuningKey>
+        <bodyPartDefName>Jaw</bodyPartDefName>
+        <drawEast>true</drawEast>
+        <!-- 서쪽 텍스처가 실제로 존재하므로 east 미러 fallback이 아니라 west 재질을 명시적으로 사용한다. -->
+        <drawWest>true</drawWest>
+        <mirrorEastForWest>false</mirrorEastForWest>
+        <thinSouthOffset>(-0.42,0.0575)</thinSouthOffset>
+        <thinEastOffset>(-0.55,0.05)</thinEastOffset>
+        <thinWestOffset>(0.55,0.05)</thinWestOffset>
+        <maleSouthOffset>(-0.42,0.05)</maleSouthOffset>
+        <maleEastOffset>(-0.5322,0.05)</maleEastOffset>
+        <maleWestOffset>(0.5322,0.05)</maleWestOffset>
+        <colorType>Custom</colorType>
+        <color>(1,1,1,1)</color>
+        <parentTagDef>Head</parentTagDef>
+        <useSkinShader>false</useSkinShader>
+        <useRottenColor>true</useRottenColor>
+        <rotDrawMode>Fresh, Rotting</rotDrawMode>
+        <drawData><defaultData><layer>91</layer></defaultData></drawData>
+      </li>
+      <li Class="MUGB.PawnRenderNodeProperties_GoblinAddon">
+        <nodeClass>MUGB.PawnRenderNode_GoblinAddon</nodeClass>
+        <workerClass>MUGB.PawnRenderNodeWorker_GoblinAddon</workerClass>
+        <texPath>Things/Pawn/Addons/Nose/MGB_Nose1</texPath>
+        <tuningKey>Nose</tuningKey>
+        <bodyPartDefName>Nose</bodyPartDefName>
+        <drawEast>true</drawEast>
+        <!-- 서쪽 텍스처가 실제로 존재하므로 east 미러 fallback이 아니라 west 재질을 명시적으로 사용한다. -->
+        <drawWest>true</drawWest>
+        <mirrorEastForWest>false</mirrorEastForWest>
+        <thinSouthOffset>(-0.42,0.105)</thinSouthOffset>
+        <thinEastOffset>(-0.58,0.135)</thinEastOffset>
+        <thinWestOffset>(0.58,0.135)</thinWestOffset>
+        <maleSouthOffset>(-0.42,0.13)</maleSouthOffset>
+        <maleEastOffset>(-0.577,0.135)</maleEastOffset>
+        <maleWestOffset>(0.577,0.135)</maleWestOffset>
+        <colorType>Custom</colorType>
+        <color>(1,1,1,1)</color>
+        <parentTagDef>Head</parentTagDef>
+        <useSkinShader>false</useSkinShader>
+        <useRottenColor>true</useRottenColor>
+        <rotDrawMode>Fresh, Rotting</rotDrawMode>
+        <drawData><defaultData><layer>92</layer></defaultData></drawData>
+      </li>
+    </renderNodeProperties>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_HobgoblinFrame</defName>
+    <geneClass>VEF.Genes.GeneGendered</geneClass>
+    <label>hobgoblin frame</label>
+    <!-- 한국어 설명 참고: 드물게 나타나는 큰 고블린 체격입니다. 실제/시각 크기 모두 인간 대비 약 1.1배로 둡니다. -->
+    <description>Carriers express a broader hobgoblin frame. They are larger and stronger than common goblins, but still use the dedicated goblin head and skin pattern.</description>
+    <iconPath>UI/Icons/Genes/MGB_HobgoblinFrame</iconPath>
+    <displayCategory>Cosmetic_Body</displayCategory>
+    <displayOrderInCategory>20</displayOrderInCategory>
+    <biostatCpx>1</biostatCpx>
+    <biostatMet>-1</biostatMet>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+    <endogeneCategory>BodyType</endogeneCategory>
+    <exclusionTags>
+      <li>BodyType</li>
+      <li>MUGB_GoblinBodyPlan</li>
+    </exclusionTags>
+    <modExtensions>
+      <li Class="VEF.Genes.GeneExtension">
+        <!-- VEF 성별 제한/렌더 확장입니다. 여성 홉고블린은 별도 구현 전까지 발현되지 않게 둡니다. -->
+        <forGenderOnly>Male</forGenderOnly>
+        <!-- bodyType 자체는 바닐라 Male로 유지하고, 몸 텍스처만 홉고블린 전용으로 바꿔 HAR/Character Editor와 충돌을 줄입니다. -->
+        <forcedBodyType>Male</forcedBodyType>
+        <bodyNakedGraphicPath>Things/Pawn/MGBlike/Bodies/Naked_Male</bodyNakedGraphicPath>
+        <bodyDessicatedGraphicPath>Things/Pawn/MGBlike/Bodies/Dessicated/Dessicated_Male</bodyDessicatedGraphicPath>
+      </li>
+    </modExtensions>
+    <!-- GeneDef.bodyType은 바닐라 GeneticBodyType enum만 받습니다. Standard는 남성 폰에서 바닐라 Male bodyType으로 해석됩니다. -->
+    <bodyType>Standard</bodyType>
+    <skinColorOverride>(111, 116, 73)</skinColorOverride>
+    <randomBrightnessFactor>0</randomBrightnessFactor>
+    <forcedHeadTypes>
+      <li>MUGB_GoblinHead</li>
+    </forcedHeadTypes>
+    <statOffsets>
+      <!-- 한국어 의도: 고블린은 거칠고 무딘 기질이라 인간보다 정신적으로 잘 버팁니다.
+           추함/낮은 사회성/인육갈망이 상시로 기분을 깎는 구조라, 그 보정 없이는
+           오히려 인간보다 자주 무너집니다. 음수일수록 정신붕괴 문턱이 낮아져 잘 안 터집니다. -->
+      <MentalBreakThreshold>-0.07</MentalBreakThreshold>
+    </statOffsets>
+    <statFactors>
+      <VEF_BodySize_Multiplier>1.1</VEF_BodySize_Multiplier>
+      <!-- VEF는 실제 크기 배율과 cosmetic 배율을 size + cosmetic - 1로 합칩니다. 시각 크기를 실제 1.1배와 맞추려면 cosmetic은 1로 둡니다. -->
+      <VEF_CosmeticBodySize_Multiplier>1.0</VEF_CosmeticBodySize_Multiplier>
+      <VEF_HeadSize_Cosmetic>0.95</VEF_HeadSize_Cosmetic>
+      <MeleeDamageFactor>1.06</MeleeDamageFactor>
+      <PainShockThreshold>1.08</PainShockThreshold>
+      <SocialImpact>0.9</SocialImpact>
+      <NegotiationAbility>0.95</NegotiationAbility>
+      <TradePriceImprovement>0.95</TradePriceImprovement>
+      <PlantWorkSpeed>0.93</PlantWorkSpeed>
+      <PlantHarvestYield>0.9</PlantHarvestYield>
+      <MiningSpeed>1.03</MiningSpeed>
+      <CookSpeed>1.0</CookSpeed>
+      <ConstructionSpeed>1.0</ConstructionSpeed>
+      <AimingDelayFactor>1.02</AimingDelayFactor>
+      <ImmunityGainSpeed>1.05</ImmunityGainSpeed>
+      <InjuryHealingFactor>1.25</InjuryHealingFactor>
+      <LifespanFactor>0.5</LifespanFactor>
+    </statFactors>
+    <statOffsets>
+      <MoveSpeed>0.06</MoveSpeed>
+      <CarryingCapacity>8</CarryingCapacity>
+    </statOffsets>
+    <renderNodeProperties>
+      <!-- 고블린 바디 애드온 좌표를 바닐라 렌더 노드에서 재사용합니다. 귀/눈/코/턱이 손실되면 해당 텍스처만 숨깁니다. -->
+      <li Class="MUGB.PawnRenderNodeProperties_GoblinAddon">
+        <nodeClass>MUGB.PawnRenderNode_GoblinAddon</nodeClass>
+        <workerClass>MUGB.PawnRenderNodeWorker_GoblinAddon</workerClass>
+        <texPath>Things/Pawn/Addons/Ears/Base/MGB_EarLeft</texPath>
+        <tuningKey>EarLeft</tuningKey>
+        <bodyPartDefName>Ear</bodyPartDefName>
+        <bodyPartSide>Left</bodyPartSide>
+        <drawNorth>true</drawNorth>
+        <drawWest>true</drawWest>
+        <mirrorEastForWest>false</mirrorEastForWest>
+        <thinSouthOffset>(-0.225,0.47)</thinSouthOffset>
+        <thinNorthOffset>(-0.225,0.75)</thinNorthOffset>
+        <thinWestOffset>(-0.45,0.4)</thinWestOffset>
+        <maleSouthOffset>(-0.215,0.56)</maleSouthOffset>
+        <maleNorthOffset>(-0.2115,0.85)</maleNorthOffset>
+        <maleWestOffset>(-0.415,0.4625)</maleWestOffset>
+        <colorType>Custom</colorType>
+        <color>(1,1,1,1)</color>
+        <parentTagDef>Head</parentTagDef>
+        <useSkinShader>false</useSkinShader>
+        <useRottenColor>true</useRottenColor>
+        <rotDrawMode>Fresh, Rotting</rotDrawMode>
+        <drawData><defaultData><layer>70</layer></defaultData></drawData>
+      </li>
+      <li Class="MUGB.PawnRenderNodeProperties_GoblinAddon">
+        <nodeClass>MUGB.PawnRenderNode_GoblinAddon</nodeClass>
+        <workerClass>MUGB.PawnRenderNodeWorker_GoblinAddon</workerClass>
+        <texPath>Things/Pawn/Addons/Ears/Base/MGB_EarRight</texPath>
+        <tuningKey>EarRight</tuningKey>
+        <bodyPartDefName>Ear</bodyPartDefName>
+        <bodyPartSide>Right</bodyPartSide>
+        <drawNorth>true</drawNorth>
+        <drawEast>true</drawEast>
+        <mirrorEastForWest>false</mirrorEastForWest>
+        <thinSouthOffset>(-0.625,0.47)</thinSouthOffset>
+        <thinNorthOffset>(0.225,0.75)</thinNorthOffset>
+        <thinEastOffset>(-0.45,0.4)</thinEastOffset>
+        <maleSouthOffset>(-0.62,0.56)</maleSouthOffset>
+        <maleNorthOffset>(0.2115,0.85)</maleNorthOffset>
+        <maleEastOffset>(-0.415,0.4625)</maleEastOffset>
+        <colorType>Custom</colorType>
+        <color>(1,1,1,1)</color>
+        <parentTagDef>Head</parentTagDef>
+        <useSkinShader>false</useSkinShader>
+        <useRottenColor>true</useRottenColor>
+        <rotDrawMode>Fresh, Rotting</rotDrawMode>
+        <drawData><defaultData><layer>70</layer></defaultData></drawData>
+      </li>
+      <li Class="MUGB.PawnRenderNodeProperties_GoblinAddon">
+        <nodeClass>MUGB.PawnRenderNode_GoblinAddon</nodeClass>
+        <workerClass>MUGB.PawnRenderNodeWorker_GoblinAddon</workerClass>
+        <texPath>Things/Pawn/Addons/Eyes/MGB_EyeLeft1</texPath>
+        <tuningKey>EyeLeft</tuningKey>
+        <bodyPartDefName>Eye</bodyPartDefName>
+        <bodyPartSide>Left</bodyPartSide>
+        <drawNorth>true</drawNorth>
+        <drawWest>true</drawWest>
+        <mirrorEastForWest>false</mirrorEastForWest>
+        <thinSouthOffset>(-0.32,0.16)</thinSouthOffset>
+        <thinNorthOffset>(0.225,0.1)</thinNorthOffset>
+        <thinEastOffset>(0.5,0.43)</thinEastOffset>
+        <thinWestOffset>(0.5,0.43)</thinWestOffset>
+        <maleSouthOffset>(-0.32,0.16)</maleSouthOffset>
+        <maleNorthOffset>(0.225,0.1)</maleNorthOffset>
+        <maleEastOffset>(0.5,0.43)</maleEastOffset>
+        <maleWestOffset>(0.5,0.43)</maleWestOffset>
+        <colorType>Custom</colorType>
+        <color>(1,1,1,1)</color>
+        <parentTagDef>Head</parentTagDef>
+        <useSkinShader>false</useSkinShader>
+        <useRottenColor>true</useRottenColor>
+        <rotDrawMode>Fresh, Rotting</rotDrawMode>
+        <drawData><defaultData><layer>90</layer></defaultData></drawData>
+      </li>
+      <li Class="MUGB.PawnRenderNodeProperties_GoblinAddon">
+        <nodeClass>MUGB.PawnRenderNode_GoblinAddon</nodeClass>
+        <workerClass>MUGB.PawnRenderNodeWorker_GoblinAddon</workerClass>
+        <texPath>Things/Pawn/Addons/Eyes/MGB_EyeRight1</texPath>
+        <tuningKey>EyeRight</tuningKey>
+        <bodyPartDefName>Eye</bodyPartDefName>
+        <bodyPartSide>Right</bodyPartSide>
+        <drawNorth>true</drawNorth>
+        <drawEast>true</drawEast>
+        <mirrorEastForWest>false</mirrorEastForWest>
+        <thinSouthOffset>(-0.515,0.16)</thinSouthOffset>
+        <thinNorthOffset>(0.225,0.1)</thinNorthOffset>
+        <thinEastOffset>(-0.525,0.2)</thinEastOffset>
+        <maleSouthOffset>(-0.515,0.16)</maleSouthOffset>
+        <maleNorthOffset>(0.225,0.1)</maleNorthOffset>
+        <maleEastOffset>(-0.525,0.2)</maleEastOffset>
+        <colorType>Custom</colorType>
+        <color>(1,1,1,1)</color>
+        <parentTagDef>Head</parentTagDef>
+        <useSkinShader>false</useSkinShader>
+        <useRottenColor>true</useRottenColor>
+        <rotDrawMode>Fresh, Rotting</rotDrawMode>
+        <drawData><defaultData><layer>90</layer></defaultData></drawData>
+      </li>
+      <li Class="MUGB.PawnRenderNodeProperties_GoblinAddon">
+        <nodeClass>MUGB.PawnRenderNode_GoblinAddon</nodeClass>
+        <workerClass>MUGB.PawnRenderNodeWorker_GoblinAddon</workerClass>
+        <texPath>Things/Pawn/Addons/Mouth/MGB_Mouth1</texPath>
+        <tuningKey>Mouth</tuningKey>
+        <bodyPartDefName>Jaw</bodyPartDefName>
+        <drawEast>true</drawEast>
+        <!-- 서쪽 텍스처가 실제로 존재하므로 east 미러 fallback이 아니라 west 재질을 명시적으로 사용한다. -->
+        <drawWest>true</drawWest>
+        <mirrorEastForWest>false</mirrorEastForWest>
+        <thinSouthOffset>(-0.42,0.0575)</thinSouthOffset>
+        <thinEastOffset>(-0.55,0.05)</thinEastOffset>
+        <thinWestOffset>(0.55,0.05)</thinWestOffset>
+        <maleSouthOffset>(-0.42,0.05)</maleSouthOffset>
+        <maleEastOffset>(-0.5322,0.05)</maleEastOffset>
+        <maleWestOffset>(0.5322,0.05)</maleWestOffset>
+        <colorType>Custom</colorType>
+        <color>(1,1,1,1)</color>
+        <parentTagDef>Head</parentTagDef>
+        <useSkinShader>false</useSkinShader>
+        <useRottenColor>true</useRottenColor>
+        <rotDrawMode>Fresh, Rotting</rotDrawMode>
+        <drawData><defaultData><layer>91</layer></defaultData></drawData>
+      </li>
+      <li Class="MUGB.PawnRenderNodeProperties_GoblinAddon">
+        <nodeClass>MUGB.PawnRenderNode_GoblinAddon</nodeClass>
+        <workerClass>MUGB.PawnRenderNodeWorker_GoblinAddon</workerClass>
+        <texPath>Things/Pawn/Addons/Nose/MGB_Nose1</texPath>
+        <tuningKey>Nose</tuningKey>
+        <bodyPartDefName>Nose</bodyPartDefName>
+        <drawEast>true</drawEast>
+        <!-- 서쪽 텍스처가 실제로 존재하므로 east 미러 fallback이 아니라 west 재질을 명시적으로 사용한다. -->
+        <drawWest>true</drawWest>
+        <mirrorEastForWest>false</mirrorEastForWest>
+        <thinSouthOffset>(-0.42,0.105)</thinSouthOffset>
+        <thinEastOffset>(-0.58,0.135)</thinEastOffset>
+        <thinWestOffset>(0.58,0.135)</thinWestOffset>
+        <maleSouthOffset>(-0.42,0.13)</maleSouthOffset>
+        <maleEastOffset>(-0.577,0.135)</maleEastOffset>
+        <maleWestOffset>(0.577,0.135)</maleWestOffset>
+        <colorType>Custom</colorType>
+        <color>(1,1,1,1)</color>
+        <parentTagDef>Head</parentTagDef>
+        <useSkinShader>false</useSkinShader>
+        <useRottenColor>true</useRottenColor>
+        <rotDrawMode>Fresh, Rotting</rotDrawMode>
+        <drawData><defaultData><layer>92</layer></defaultData></drawData>
+      </li>
+    </renderNodeProperties>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_GoblinInbredStock</defName>
+    <label>goblin inbred stock</label>
+    <description>The carrier belongs to the tightly interbred goblin stock. It is a mark of blood and upbringing more than of function, but goblins read it instantly, and treat the bearer accordingly.</description>
+    <iconPath>UI/Icons/Genes/MGB_GoblinInbredStock</iconPath>
+    <displayCategory>Miscellaneous</displayCategory>
+    <displayOrderInCategory>111</displayOrderInCategory>
+    <biostatCpx>0</biostatCpx>
+    <biostatMet>3</biostatMet>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+    <customEffectDescriptions>
+      <li>Reduces fertility to 85%.</li>
+    </customEffectDescriptions>
+    <statFactors>
+      <Fertility>0.85</Fertility>
+    </statFactors>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_GoblinFertile</defName>
+    <label>goblin fertility mutation</label>
+    <!-- 한국어 명칭/설명 참고: 고블린다산유전자. [변]{고}. 고블린들에게만 발현되는 변이유전자로 이 유전자를 소유한 고블린은 자식을 가질 확률이 다른고블린들보다 더 높습니다. -->
+    <description>This goblin-only mutation makes its carrier more likely to sire children than other goblins. The effect is simple, ugly, and extremely useful to a tribe that survives by numbers.</description>
+    <iconPath>UI/Icons/Genes/MGB_GoblinFertile</iconPath>
+    <displayCategory>Reproduction</displayCategory>
+    <displayOrderInCategory>120</displayOrderInCategory>
+    <biostatCpx>1</biostatCpx>
+    <biostatMet>-1</biostatMet>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+    <exclusionTags>
+      <li>Fertility</li>
+    </exclusionTags>
+    <statFactors>
+      <Fertility>2.1</Fertility>
+    </statFactors>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_GoblinSlowLearner</defName>
+    <label>goblin slow learner</label>
+    <!-- 한국어 설명 참고: 주로 띤고블린에게 발현. 연구와 전역 학습이 인간보다 느리지만, 바닐라 느린 학습만큼 답답하지는 않게 0.82로 설계. -->
+    <description>Carriers learn and research more slowly than baseliners. Goblins can still be taught, but ideas need to be beaten into place more than once.</description>
+    <iconPath>UI/Icons/Genes/MGB_slowlearner</iconPath>
+    <displayCategory>Miscellaneous</displayCategory>
+    <displayOrderInCategory>114</displayOrderInCategory>
+    <biostatCpx>0</biostatCpx>
+    <biostatMet>1</biostatMet>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+    <exclusionTags>
+      <li>MUGB_GoblinLearningRate</li>
+    </exclusionTags>
+    <statFactors>
+      <GlobalLearningFactor>0.82</GlobalLearningFactor>
+      <ResearchSpeed>0.82</ResearchSpeed>
+    </statFactors>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_GoblinFastLearner</defName>
+    <label>goblin quick learner</label>
+    <!-- 한국어 설명 참고: 주로 홉고블린과 하프고블린에게 발현. 전역 학습/연구가 인간보다 아주 살짝 좋은 1.02. -->
+    <description>Carriers learn and research a little faster than baseliners. The advantage is small, but enough to make the sharper goblin strains noticeably less frustrating to train.</description>
+    <iconPath>UI/Icons/Genes/MGB_fastlearner</iconPath>
+    <displayCategory>Miscellaneous</displayCategory>
+    <displayOrderInCategory>115</displayOrderInCategory>
+    <biostatCpx>1</biostatCpx>
+    <biostatMet>-1</biostatMet>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+    <exclusionTags>
+      <li>MUGB_GoblinLearningRate</li>
+    </exclusionTags>
+    <statFactors>
+      <GlobalLearningFactor>1.02</GlobalLearningFactor>
+      <ResearchSpeed>1.02</ResearchSpeed>
+    </statFactors>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_GoblinIronStomach</defName>
+    <label>goblin iron stomach</label>
+    <description>Goblins digest foul food better than baseliners, but they are not completely immune to food poisoning.</description>
+    <iconPath>UI/Icons/Genes/MGB_GoblinIronStomach</iconPath>
+    <displayCategory>Miscellaneous</displayCategory>
+    <displayOrderInCategory>112</displayOrderInCategory>
+    <foodPoisoningChanceFactor>0.5</foodPoisoningChanceFactor>
+    <biostatCpx>0</biostatCpx>
+    <biostatMet>0</biostatMet>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_GoblinButcherInstinct</defName>
+    <label>born butcher</label>
+    <description>Carriers have an instinctive knack for breaking down bodies cleanly and wasting less flesh during butchery.</description>
+    <iconPath>UI/Icons/Genes/MGB_GoblinButcherInstinct</iconPath>
+    <displayCategory>Miscellaneous</displayCategory>
+    <displayOrderInCategory>113</displayOrderInCategory>
+    <statFactors>
+      <ButcheryFleshEfficiency>1.10</ButcheryFleshEfficiency>
+    </statFactors>
+    <biostatCpx>0</biostatCpx>
+    <biostatMet>0</biostatMet>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_GoblinToxicResistance</defName>
+    <label>goblin toxic resistance</label>
+    <description>Carriers are adapted to polluted air, tox gas, and rot stink exposure. This is a goblin-tuned version of antitoxic lungs.</description>
+    <iconPath>UI/Icons/Genes/MGB_GoblinToxicResistance</iconPath>
+    <displayCategory>ResistanceAndWeakness</displayCategory>
+    <displayOrderInCategory>31</displayOrderInCategory>
+    <immuneToToxGasExposure>true</immuneToToxGasExposure>
+    <customEffectDescriptions>
+      <li>Tox gas immunity</li>
+    </customEffectDescriptions>
+    <statOffsets>
+      <ToxicEnvironmentResistance>1</ToxicEnvironmentResistance>
+      <ToxicResistance>0.5</ToxicResistance>
+    </statOffsets>
+    <biostatCpx>1</biostatCpx>
+    <biostatMet>0</biostatMet>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+    <exclusionTags>
+      <li>ToxicEnvironmentResistance</li>
+    </exclusionTags>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_GoblinAggression</defName>
+    <label>goblin aggression</label>
+    <description>Carriers are more prone to violence and prison breaks than baseliners, but less extreme than fully aggressive xenotypes.</description>
+    <iconPath>UI/Icons/Genes/MGB_GoblinAggression</iconPath>
+    <displayCategory>Violence</displayCategory>
+    <displayOrderInCategory>11</displayOrderInCategory>
+    <socialFightChanceFactor>1.1</socialFightChanceFactor>
+    <aggroMentalBreakSelectionChanceFactor>1.5</aggroMentalBreakSelectionChanceFactor>
+    <prisonBreakMTBFactor>0.8</prisonBreakMTBFactor>
+    <biostatCpx>0</biostatCpx>
+    <biostatMet>1</biostatMet>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+    <exclusionTags>
+      <li>Aggressive</li>
+    </exclusionTags>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_GoblinFleshCraving</defName>
+    <label>goblin flesh craving</label>
+    <description>Carriers are biologically keyed to crave humanlike flesh. Denied it for too long, they grow agitated, then desperate.</description>
+    <iconPath>UI/Icons/Genes/MGB_GoblinFleshCraving</iconPath>
+    <displayCategory>Miscellaneous</displayCategory>
+    <displayOrderInCategory>114</displayOrderInCategory>
+    <customEffectDescriptions>
+      <li>Enables the MUGB flesh craving need when supported by MUGB systems.</li>
+    </customEffectDescriptions>
+    <enablesNeeds>
+      <li>MUGB_FleshCraving</li>
+    </enablesNeeds>
+    <biostatCpx>1</biostatCpx>
+    <biostatMet>0</biostatMet>
+    <canGenerateInGeneSet>true</canGenerateInGeneSet>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_GoblinWeakToxicPheromone</defName>
+    <label>weak toxic pheromone</label>
+    <description>This goblin emits a thin, sour musk. It sickens those nearby only slowly, and never mixes with the stronger strain.</description>
+    <iconPath>UI/Icons/Genes/MGB_GoblinWeakToxicPheromone</iconPath>
+    <displayCategory>Miscellaneous</displayCategory>
+    <displayOrderInCategory>120</displayOrderInCategory>
+    <customEffectDescriptions>
+      <li>Marker for weak MUGB toxic pheromone emission.</li>
+    </customEffectDescriptions>
+    <biostatCpx>1</biostatCpx>
+    <biostatMet>0</biostatMet>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+    <exclusionTags>
+      <li>MUGB_ToxicPheromoneStrength</li>
+    </exclusionTags>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_GoblinStrongToxicPheromone</defName>
+    <label>strong toxic pheromone</label>
+    <description>This goblin emits the thick musk common to the breed. Anything humanlike that lingers close enough will start to sicken.</description>
+    <iconPath>UI/Icons/Genes/MGB_GoblinStrongToxicPheromone</iconPath>
+    <displayCategory>Miscellaneous</displayCategory>
+    <displayOrderInCategory>121</displayOrderInCategory>
+    <customEffectDescriptions>
+      <li>Marker for strong MUGB toxic pheromone emission.</li>
+    </customEffectDescriptions>
+    <biostatCpx>1</biostatCpx>
+    <biostatMet>0</biostatMet>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+    <exclusionTags>
+      <li>MUGB_ToxicPheromoneStrength</li>
+    </exclusionTags>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_GoblinSwarmPheromone</defName>
+    <label>goblin swarm pheromone</label>
+    <description>Common goblins release a low-rank swarm pheromone. Packed close together, they fight with a crude, contagious courage.</description>
+    <iconPath>UI/Icons/Genes/MGB_GoblinSwarmPheromone</iconPath>
+    <displayCategory>Miscellaneous</displayCategory>
+    <displayOrderInCategory>122</displayOrderInCategory>
+    <customEffectDescriptions>
+      <li>Marker for MUGB common goblin swarm pheromone systems.</li>
+    </customEffectDescriptions>
+    <biostatCpx>1</biostatCpx>
+    <biostatMet>0</biostatMet>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_HobgoblinCommandPheromone</defName>
+    <label>hobgoblin command pheromone</label>
+    <description>Hobgoblins release a higher-rank command pheromone. Lesser goblins nearby fall into line without being told.</description>
+    <iconPath>UI/Icons/Genes/MGB_HobgoblinCommandPheromone</iconPath>
+    <displayCategory>Miscellaneous</displayCategory>
+    <displayOrderInCategory>123</displayOrderInCategory>
+    <customEffectDescriptions>
+      <li>Marker for MUGB hobgoblin command pheromone systems.</li>
+    </customEffectDescriptions>
+    <biostatCpx>1</biostatCpx>
+    <biostatMet>0</biostatMet>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_HobgoblinTenacity</defName>
+    <label>hobgoblin tenacity</label>
+    <description>Carriers recover from stagger more quickly, reflecting the sturdier hobgoblin frame without granting full unstoppable movement.</description>
+    <iconPath>UI/Icons/Genes/MGB_HobgoblinTenacity</iconPath>
+    <displayCategory>Miscellaneous</displayCategory>
+    <displayOrderInCategory>124</displayOrderInCategory>
+    <statFactors>
+      <StaggerDurationFactor>0.5</StaggerDurationFactor>
+    </statFactors>
+    <biostatCpx>1</biostatCpx>
+    <biostatMet>-1</biostatMet>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_GoblinPupilDefect</defName>
+    <label>goblin pupil defect</label>
+    <description>Carriers have unstable pupils that make medium and long range shooting less reliable.</description>
+    <iconPath>UI/Icons/Genes/MGB_GoblinPupilDefect</iconPath>
+    <displayCategory>Miscellaneous</displayCategory>
+    <displayOrderInCategory>125</displayOrderInCategory>
+    <statFactors>
+      <ShootingAccuracyFactor_Medium>0.9</ShootingAccuracyFactor_Medium>
+      <ShootingAccuracyFactor_Long>0.85</ShootingAccuracyFactor_Long>
+    </statFactors>
+    <biostatCpx>1</biostatCpx>
+    <biostatMet>1</biostatMet>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+    <exclusionTags>
+      <li>ShootingAccuracy</li>
+    </exclusionTags>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_GoblinDenseBones</defName>
+    <label>goblin dense bones</label>
+    <description>Carriers take slightly less incoming damage. This is intentionally weaker than tough-style damage reduction.</description>
+    <iconPath>UI/Icons/Genes/MGB_GoblinDenseBones</iconPath>
+    <displayCategory>Pain</displayCategory>
+    <displayOrderInCategory>126</displayOrderInCategory>
+    <statFactors>
+      <IncomingDamageFactor>0.95</IncomingDamageFactor>
+    </statFactors>
+    <biostatCpx>1</biostatCpx>
+    <biostatMet>-1</biostatMet>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+    <exclusionTags>
+      <li>IncomingDamageFactor</li>
+    </exclusionTags>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_GoblinStableCellMetabolism</defName>
+    <label>stable goblin cell metabolism</label>
+    <description>The carrier's cells burn stolen protein slowly. The craving for flesh creeps back at a gentler pace.</description>
+    <iconPath>UI/Icons/Genes/MGB_GoblinStableCellMetabolism</iconPath>
+    <displayCategory>Miscellaneous</displayCategory>
+    <displayOrderInCategory>127</displayOrderInCategory>
+    <customEffectDescriptions>
+      <li>Marker for slower MUGB flesh craving decay.</li>
+    </customEffectDescriptions>
+    <biostatCpx>1</biostatCpx>
+    <biostatMet>-1</biostatMet>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+    <exclusionTags>
+      <li>MUGB_GoblinCellMetabolism</li>
+    </exclusionTags>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_GoblinUnstableCellMetabolism</defName>
+    <label>unstable goblin cell metabolism</label>
+    <description>The carrier's cells burn through stolen protein fast. The craving for flesh returns sooner, and harder.</description>
+    <iconPath>UI/Icons/Genes/MGB_GoblinUnstableCellMetabolism</iconPath>
+    <displayCategory>Miscellaneous</displayCategory>
+    <displayOrderInCategory>128</displayOrderInCategory>
+    <customEffectDescriptions>
+      <li>Marker for faster MUGB flesh craving decay.</li>
+    </customEffectDescriptions>
+    <biostatCpx>1</biostatCpx>
+    <biostatMet>1</biostatMet>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+    <exclusionTags>
+      <li>MUGB_GoblinCellMetabolism</li>
+    </exclusionTags>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_HalfGoblinAncestry</defName>
+    <label>half-goblin ancestry</label>
+    <description>Carriers show traces of goblin ancestry without expressing the goblin body plan. Goblins can still smell it on them.</description>
+    <iconPath>UI/Icons/Genes/MGB_HalfGoblinAncestry</iconPath>
+    <displayCategory>Miscellaneous</displayCategory>
+    <displayOrderInCategory>129</displayOrderInCategory>
+    <customEffectDescriptions>
+      <li>Marker for reduced MUGB harmful pheromone buildup.</li>
+    </customEffectDescriptions>
+    <biostatCpx>1</biostatCpx>
+    <biostatMet>0</biostatMet>
+    <canGenerateInGeneSet>true</canGenerateInGeneSet>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>MUGB_Gene_CrossEyed</defName>
+    <label>cross-eyed goblin face</label>
+    <description>This goblin expresses the cross-eyed facial arrangement.</description>
+    <iconPath>UI/Icons/Genes/MGB_GoblinCrossEyed</iconPath>
+    <displayCategory>Cosmetic_Body</displayCategory>
+    <displayOrderInCategory>30</displayOrderInCategory>
+    <statFactors>
+      <MeleeHitChance>0.92</MeleeHitChance>
+      <ShootingAccuracyFactor_Touch>1.03</ShootingAccuracyFactor_Touch>
+      <ShootingAccuracyFactor_Short>1.03</ShootingAccuracyFactor_Short>
+      <ShootingAccuracyFactor_Medium>1.03</ShootingAccuracyFactor_Medium>
+      <ShootingAccuracyFactor_Long>1.03</ShootingAccuracyFactor_Long>
+    </statFactors>
+    <capMods>
+      <li>
+        <capacity>Sight</capacity>
+        <offset>0.05</offset>
+      </li>
+    </capMods>
+    <biostatCpx>0</biostatCpx>
+    <biostatMet>0</biostatMet>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+  </GeneDef>
+
+</Defs>
+
+
+

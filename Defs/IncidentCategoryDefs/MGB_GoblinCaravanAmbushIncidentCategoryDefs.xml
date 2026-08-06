@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <IncidentCategoryDef>
+    <defName>MUGB_GoblinCaravanAmbush</defName>
+    <needsParmsPoints>true</needsParmsPoints>
+    <tale>MajorThreat</tale>
+  </IncidentCategoryDef>
+</Defs>

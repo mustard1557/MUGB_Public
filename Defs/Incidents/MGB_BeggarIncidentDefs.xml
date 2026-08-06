@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <IncidentDef>
+    <defName>MUGB_BeggarTravelerGroup</defName>
+    <label>wandering beggars passing</label>
+    <!-- 한국어 의도: 김덕팔 스토리텔러 전용 일정이 4~8일 간격으로 실행하므로, 일반 스토리텔러 후보에는 직접 넣지 않는다. -->
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>MUGB.IncidentWorker_BeggarTravelerGroup</workerClass>
+    <category>FactionArrival</category>
+    <baseChance>0</baseChance>
+    <requireColonistsPresent>true</requireColonistsPresent>
+    <ignoreRecentSelectionWeighting>true</ignoreRecentSelectionWeighting>
+    <canOccurOnAllPlanetLayers>true</canOccurOnAllPlanetLayers>
+  </IncidentDef>
+</Defs>

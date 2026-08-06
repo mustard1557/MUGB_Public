@@ -1,0 +1,2499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Auto-generated from (???)???_????_???_2.txt. Existing hand-written core backstories are kept in MGB_GoblinBackstoryDefs.xml. -->
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_LivestockPenHand</defName>
+    <slot>Childhood</slot>
+    <title>livestock pen hand</title>
+    <titleShort>livestock pen hand</titleShort>
+    <description>[PAWN_nameDef] is a runt raised in the human livestock pens. Watching prisoners herded around like cattle must have done something — [PAWN_pronoun] never did learn to think of humans as people.</description>
+    <skillGains>
+      <Animals>3</Animals>
+      <Cooking>1</Cooking>
+    </skillGains>
+    <workDisables>Social</workDisables>
+    <forcedTraits>
+      <Cannibal>0</Cannibal>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_RaidersPackHauler</defName>
+    <slot>Childhood</slot>
+    <title>raiders' pack-hauler</title>
+    <titleShort>raiders' pack-hauler</titleShort>
+    <description>[PAWN_nameDef] spent [PAWN_possessive] early years hauling equipment and plunder behind the raiding parties. Got plenty of front-row seats to the violence. Never got handed a weapon.</description>
+    <skillGains>
+      <Construction>1</Construction>
+      <Plants>1</Plants>
+    </skillGains>
+    <forcedTraits>
+      <Industriousness>2</Industriousness>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_RuntOfTheLitter</defName>
+    <slot>Childhood</slot>
+    <title>runt of the litter</title>
+    <titleShort>runt of the</titleShort>
+    <description>[PAWN_nameDef] was the weakest of five born in the same litter. Always got shoved to the back. That habit never went away.</description>
+    <skillGains>
+      <Plants>1</Plants>
+      <Social>-3</Social>
+      <Melee>-1</Melee>
+    </skillGains>
+    <forcedTraits>
+      <Wimp>0</Wimp>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_CreviceCrawler</defName>
+    <slot>Childhood</slot>
+    <title>crevice crawler</title>
+    <titleShort>crevice crawler</titleShort>
+    <description>[PAWN_nameDef] was born in a narrow mineshaft and dragged into mine work not long after. Spent an entire childhood underground.</description>
+    <skillGains>
+      <Mining>3</Mining>
+      <Melee>1</Melee>
+      <Medicine>-1</Medicine>
+      <Shooting>-2</Shooting>
+      <Construction>2</Construction>
+    </skillGains>
+    <workDisables>Animals</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_AlchemyTestSubject</defName>
+    <slot>Childhood</slot>
+    <title>alchemy test subject</title>
+    <titleShort>alchemy test subject</titleShort>
+    <description>'KIYAAAH!! STOP!! I HURT!! NO MORE WEIRD LIQUID!!' — [PAWN_nameDef] was a test subject for goblin alchemical experiments. Every foul brew and painful procedure they could think of. On the bright side, [PAWN_pronoun] barely reacts to poison anymore.</description>
+    <skillGains>
+      <Medicine>4</Medicine>
+      <Cooking>1</Cooking>
+      <Construction>-1</Construction>
+      <Melee>-1</Melee>
+      <Shooting>-1</Shooting>
+    </skillGains>
+    <workDisables>Animals</workDisables>
+    <forcedTraits>
+      <Tough>0</Tough>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_SlaughterhouseCorner</defName>
+    <slot>Childhood</slot>
+    <title>slaughterhouse corner</title>
+    <titleShort>slaughterhouse corner</titleShort>
+    <description>[PAWN_nameDef] grew up in the corner of the slaughterhouse, playing with severed scraps like toys. The difference between a meal and a plaything never quite formed.</description>
+    <skillGains>
+      <Cooking>1</Cooking>
+      <Medicine>1</Medicine>
+      <Social>-2</Social>
+    </skillGains>
+    <forcedTraits>
+      <Cannibal>0</Cannibal>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_SkinMaskThief</defName>
+    <slot>Childhood</slot>
+    <title>skin mask thief</title>
+    <titleShort>skin mask thief</titleShort>
+    <description>[PAWN_nameDef] wanted [PAWN_possessive] own skin mask so badly that [PAWN_pronoun] quietly began peeling small strips from the bound prisoners. The patchwork result was hideous. [PAWN_pronoun] wore it with pride.</description>
+    <skillGains>
+      <Crafting>4</Crafting>
+      <Social>-3</Social>
+      <Shooting>-1</Shooting>
+      <Melee>-1</Melee>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_RuinsScavenger</defName>
+    <slot>Childhood</slot>
+    <title>ruins scavenger</title>
+    <titleShort>ruins scavenger</titleShort>
+    <description>[PAWN_nameDef] scavenged through ruins left over from the Mechanoid Wars, picking through scrap and wreckage. Still has no idea what most of it was for. Still picks it up.</description>
+    <skillGains>
+      <Crafting>1</Crafting>
+      <Intellectual>1</Intellectual>
+      <Social>-2</Social>
+      <Construction>1</Construction>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_LivingShield</defName>
+    <slot>Childhood</slot>
+    <title>living shield</title>
+    <titleShort>living shield</titleShort>
+    <description>[PAWN_nameDef] was captured by a Ratkin knight order and strapped to a tower shield as a living meat screen. [PAWN_possessive] surviving kin took out their frustrations on [PAWN_objective] the whole time. [PAWN_pronoun] spent every moment planning revenge.</description>
+    <skillGains>
+      <Melee>-3</Melee>
+      <Shooting>-1</Shooting>
+      <Medicine>2</Medicine>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_InTheSquadLeaderSShadow</defName>
+    <slot>Childhood</slot>
+    <title>in the squad leader's shadow</title>
+    <titleShort>in the squad</titleShort>
+    <description>[PAWN_nameDef] never strayed far from the commander's side, picking up tactics through sheer proximity. Never received a single formal order — and yet the shape of a squad formation comes naturally.</description>
+    <skillGains>
+      <Melee>2</Melee>
+      <Social>1</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_FirstKill</defName>
+    <slot>Childhood</slot>
+    <title>first kill</title>
+    <titleShort>first kill</titleShort>
+    <description>[PAWN_nameDef] proved [PAWN_possessive] worth through combat within days of awakening. [PAWN_possessive] opponent from that duel became the evening meal. [PAWN_pronoun] hasn't hesitated since.</description>
+    <skillGains>
+      <Melee>3</Melee>
+      <Social>-1</Social>
+    </skillGains>
+    <forcedTraits>
+      <Bloodlust>0</Bloodlust>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_ShamanSAide</defName>
+    <slot>Childhood</slot>
+    <title>shaman's aide</title>
+    <titleShort>shaman's aide</titleShort>
+    <description>[PAWN_nameDef] assisted the priest of the flesh-consuming faith from an early age, learning the doctrine before most goblins had even heard of it. [PAWN_pronoun] was the first to believe — truly believe — that it was possible to become human.</description>
+    <skillGains>
+      <Intellectual>2</Intellectual>
+      <Social>1</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_LittleCaesar</defName>
+    <slot>Childhood</slot>
+    <title>little caesar</title>
+    <titleShort>little caesar</titleShort>
+    <description>[PAWN_nameDef] started bossing other goblins around almost immediately after awakening. Never learned how to give commands — they just came out naturally.</description>
+    <skillGains>
+      <Melee>1</Melee>
+      <Social>2</Social>
+    </skillGains>
+    <forcedTraits>
+      <Greedy>0</Greedy>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_BoneToyCraftsman</defName>
+    <slot>Childhood</slot>
+    <title>bone toy craftsman</title>
+    <titleShort>bone toy craftsman</titleShort>
+    <description>[PAWN_nameDef] grew up playing with toys made from bones. The idea that this might be unusual never occurred to [PAWN_pronoun]. Whoever tried to take those toys became the next set of materials.</description>
+    <skillGains>
+      <Crafting>3</Crafting>
+      <Social>-1</Social>
+    </skillGains>
+    <forcedTraits>
+      <Greedy>0</Greedy>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_PunchingBagHobgoblin</defName>
+    <slot>Childhood</slot>
+    <title>punching bag hobgoblin</title>
+    <titleShort>punching bag hobgoblin</titleShort>
+    <description>[PAWN_nameDef] grew up on the receiving end of a stronger littermate's fists. The rage piled up — and since it had nowhere to go, it found its way to the goblins and prisoners lower on the chain.</description>
+    <skillGains>
+      <Melee>3</Melee>
+      <Social>-2</Social>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>-2</Nerves>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_LateBloomer</defName>
+    <slot>Childhood</slot>
+    <title>late bloomer</title>
+    <titleShort>late bloomer</titleShort>
+    <description>[PAWN_nameDef]'s mother had an unusually long gestation. All that extra time spent drinking in nutrients shows — [PAWN_nameDef] came out with a noticeably larger head and a sharper one to match.</description>
+    <skillGains>
+      <Intellectual>4</Intellectual>
+      <Social>2</Social>
+      <Melee>2</Melee>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_PheromoneSired</defName>
+    <slot>Childhood</slot>
+    <title>pheromone-sired</title>
+    <titleShort>pheromone-sired</titleShort>
+    <description>[PAWN_nameDef] was born from a pheromone transfer and has no idea who the father is. No idea who the mother is either, really. Only a faint smell of blood to stand in for a childhood.</description>
+    <skillGains>
+      <Intellectual>-1</Intellectual>
+      <Melee>2</Melee>
+      <Social>-1</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_BirthwayBreaker</defName>
+    <slot>Childhood</slot>
+    <title>birthway breaker</title>
+    <titleShort>birthway breaker</titleShort>
+    <description>[PAWN_nameDef] was different from the start — literally tore through the mother's abdomen on the way out. A pioneer spirit, if you want to put it nicely.</description>
+    <skillGains>
+      <Melee>3</Melee>
+      <Construction>1</Construction>
+    </skillGains>
+    <forcedTraits>
+      <Tough>0</Tough>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_WargNursed</defName>
+    <slot>Childhood</slot>
+    <title>warg-nursed</title>
+    <titleShort>warg-nursed</titleShort>
+    <description>[PAWN_nameDef]'s human mother abandoned [PAWN_objective] in front of a warg den to hide what she'd given birth to. The wargs, drawn by the pheromones, nursed [PAWN_objective] anyway.</description>
+    <skillGains>
+      <Animals>5</Animals>
+      <Social>-3</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_FirstBreathOfAsh</defName>
+    <slot>Childhood</slot>
+    <title>first breath of ash</title>
+    <titleShort>first breath of</titleShort>
+    <description>[PAWN_nameDef] was born under a toxic atmospheric generator. First breath was a trial. The lungs that survived it made [PAWN_pronoun] what [PAWN_pronoun] is today.</description>
+    <skillGains>
+      <Mining>1</Mining>
+      <Construction>1</Construction>
+    </skillGains>
+    <forcedTraits>
+      <Tough>0</Tough>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_HerderSPup</defName>
+    <slot>Childhood</slot>
+    <title>herder's pup</title>
+    <titleShort>herder's pup</titleShort>
+    <description>[PAWN_nameDef] grew up among livestock handlers. The same gestures used to move animals come out automatically when dealing with people.</description>
+    <skillGains>
+      <Animals>2</Animals>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_FiresideTaleListener</defName>
+    <slot>Childhood</slot>
+    <title>fireside tale-listener</title>
+    <titleShort>fireside tale-listener</titleShort>
+    <description>[PAWN_nameDef] grew up listening to war stories around the fire. About half of [PAWN_possessive] own stories come from those nights.</description>
+    <skillGains>
+      <Social>1</Social>
+      <Intellectual>1</Intellectual>
+    </skillGains>
+    <forcedTraits>
+      <NaturalMood>2</NaturalMood>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_GoblinLivestock</defName>
+    <slot>Childhood</slot>
+    <title>goblin livestock</title>
+    <titleShort>goblin livestock</titleShort>
+    <description>[PAWN_nameDef] spent [PAWN_possessive] early years chained up in an unruly mob. Even now, [PAWN_pronoun] sometimes reaches down to touch [PAWN_possessive] wrists.</description>
+    <skillGains>
+      <Melee>1</Melee>
+      <Social>-2</Social>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>-2</Nerves>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_YoungHusband</defName>
+    <slot>Childhood</slot>
+    <title>young husband</title>
+    <titleShort>young husband</titleShort>
+    <description>Upon birth, [PAWN_nameDef] immediately tried to crawl back from whence [PAWN_objective] came. Watching this, the other goblins held their bellies and cackled "Kishishit!", while the other prisoners could only watch in sheer horror.</description>
+    <skillGains>
+      <Animals>2</Animals>
+      <Medicine>1</Medicine>
+      <Shooting>-1</Shooting>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_MousieFireStarter</defName>
+    <slot>Childhood</slot>
+    <title>mousie fire starter</title>
+    <titleShort>mousie fire starter</titleShort>
+    <description>[PAWN_nameDef] spent [PAWN_possessive] early years setting fire to Mousie prisoners and watching them run. Standard childhood entertainment.</description>
+    <skillGains>
+      <Melee>1</Melee>
+      <Social>-1</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_SewerPup</defName>
+    <slot>Childhood</slot>
+    <title>sewer pup</title>
+    <titleShort>sewer pup</titleShort>
+    <description>[PAWN_nameDef] was born in a human settlement. [PAWN_possessive] mother took one look, panicked, dumped [PAWN_nameDef] and [PAWN_possessive] siblings down a sewer drain, and ran. They grew up wild.</description>
+    <skillGains>
+      <Melee>1</Melee>
+      <Shooting>1</Shooting>
+    </skillGains>
+    <workDisables>Cooking, Intellectual, Animals</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_FastNewborn</defName>
+    <slot>Childhood</slot>
+    <title>fast newborn</title>
+    <titleShort>fast newborn</titleShort>
+    <description>[PAWN_nameDef] was sprinting around the room before the umbilical cord was even cut.</description>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_LittermateEater</defName>
+    <slot>Childhood</slot>
+    <title>littermate eater</title>
+    <titleShort>littermate eater</titleShort>
+    <description>'Hungry!! Too bright!! You're loud!!' — [PAWN_nameDef] ate [PAWN_possessive] littermates immediately after birth.</description>
+    <skillGains>
+      <Cooking>1</Cooking>
+      <Social>-2</Social>
+    </skillGains>
+    <forcedTraits>
+      <Cannibal>0</Cannibal>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_RevengeSurvivor</defName>
+    <slot>Childhood</slot>
+    <title>revenge survivor</title>
+    <titleShort>revenge survivor</titleShort>
+    <description>[PAWN_nameDef] watched every goblin [PAWN_pronoun] knew get killed in a human extermination raid. [PAWN_possessive] legs were fast enough to lose the pursuers.</description>
+    <skillGains>
+      <Construction>1</Construction>
+      <Melee>-2</Melee>
+      <Shooting>-1</Shooting>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_IsekaiReincarnator</defName>
+    <slot>Childhood</slot>
+    <title>isekai reincarnator(?)</title>
+    <titleShort>isekai reincarnator(?)</titleShort>
+    <description>'OI, [PAWN_nameDef]!! STOP RAMBLING!! GO SHOVEL THAT DUNG PILE!! IT GOES IN THE STEW!!' — [PAWN_nameDef] has always had a strange air about [PAWN_pronoun]. Talks like a human. Keeps muttering something about an unfamiliar ceiling.</description>
+    <forcedTraits>
+      <Nimble>0</Nimble>
+      <ShootingAccuracy>-1</ShootingAccuracy>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_LivestockLiberator</defName>
+    <slot>Childhood</slot>
+    <title>livestock liberator</title>
+    <titleShort>livestock liberator</titleShort>
+    <description>[PAWN_nameDef] used to secretly cut prisoners loose and let them run. Whether it was twisted sport, or just hunger for fresh meat, nobody was entirely sure.</description>
+    <skillGains>
+      <Shooting>3</Shooting>
+      <Melee>-1</Melee>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_ScheduledForThePot</defName>
+    <slot>Childhood</slot>
+    <title>scheduled for the pot</title>
+    <titleShort>scheduled for the</titleShort>
+    <description>[PAWN_nameDef] was classified as 'pot-ready' immediately after birth — too small, too weak — and hung up in storage. A fatter prisoner arrived and bumped [PAWN_nameDef]'s slot. Then everyone forgot.</description>
+    <skillGains>
+      <Social>-2</Social>
+    </skillGains>
+    <workDisables>Cooking</workDisables>
+    <forcedTraits>
+      <Wimp>0</Wimp>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_TaggedMeat</defName>
+    <slot>Childhood</slot>
+    <title>tagged meat</title>
+    <titleShort>tagged meat</titleShort>
+    <description>[PAWN_nameDef] was branded as livestock-grade material and marked accordingly. The scars never faded.</description>
+    <skillGains>
+      <Social>-2</Social>
+      <Medicine>1</Medicine>
+    </skillGains>
+    <forcedTraits>
+      <Tough>0</Tough>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_EscapedSacrifice</defName>
+    <slot>Childhood</slot>
+    <title>escaped sacrifice</title>
+    <titleShort>escaped sacrifice</titleShort>
+    <description>[PAWN_nameDef] was on the ritual altar, about to be consumed, when an outside raid disrupted the ceremony. Lucky doesn't quite cover it.</description>
+    <skillGains>
+      <Melee>1</Melee>
+      <Social>-1</Social>
+    </skillGains>
+    <workDisables>Cooking</workDisables>
+    <forcedTraits>
+      <NaturalMood>2</NaturalMood>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_EscapedCourseDish</defName>
+    <slot>Childhood</slot>
+    <title>escaped course dish</title>
+    <titleShort>escaped course dish</titleShort>
+    <description>[PAWN_nameDef] watched [PAWN_possessive] siblings get eaten piece by piece. Got out before [PAWN_possessive] own turn came.</description>
+    <skillGains>
+      <Social>-3</Social>
+      <Cooking>-1</Cooking>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>-2</Nerves>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_GoblinFoodStock</defName>
+    <slot>Childhood</slot>
+    <title>goblin food stock</title>
+    <titleShort>goblin food stock</titleShort>
+    <description>[PAWN_nameDef] watched [PAWN_possessive] siblings go straight from birth into a boiling cauldron. Ran. Didn't stop.</description>
+    <skillGains>
+      <Melee>-2</Melee>
+      <Shooting>1</Shooting>
+      <Social>-4</Social>
+      <Medicine>1</Medicine>
+      <Construction>1</Construction>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_MotherEater</defName>
+    <slot>Childhood</slot>
+    <title>mother-eater</title>
+    <titleShort>mother-eater</titleShort>
+    <description>[PAWN_nameDef] handled the first meal personally — the mother died mid-birth from goblin postpartum syndrome, and [PAWN_nameDef] helped [PAWN_pronoun]self. Whether that was love or hunger is a question [PAWN_pronoun] has never thought to ask.</description>
+    <skillGains>
+      <Cooking>1</Cooking>
+      <Social>-2</Social>
+    </skillGains>
+    <workDisables>Caring</workDisables>
+    <forcedTraits>
+      <Cannibal>0</Cannibal>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_WastePitBirth</defName>
+    <slot>Childhood</slot>
+    <title>waste pit birth</title>
+    <titleShort>waste pit birth</titleShort>
+    <description>[PAWN_nameDef] was thrown into the waste pit as a prank the day [PAWN_pronoun] was born. Fed on filth, beaten back down every time [PAWN_pronoun] tried to climb out. The goblins thought it was hilarious. [PAWN_nameDef] spent all of it planning what comes next.</description>
+    <skillGains>
+      <Construction>3</Construction>
+      <Melee>-2</Melee>
+      <Medicine>2</Medicine>
+    </skillGains>
+    <workDisables>Social</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_PunchingBagSlave</defName>
+    <slot>Childhood</slot>
+    <title>punching bag slave</title>
+    <titleShort>punching bag slave</titleShort>
+    <description>[PAWN_nameDef] was the runt the others practiced on for fun. Got used to being hit. Never did figure out what [PAWN_pronoun] did to deserve it.</description>
+    <skillGains>
+      <Melee>-2</Melee>
+      <Social>-2</Social>
+      <Medicine>1</Medicine>
+    </skillGains>
+    <forcedTraits>
+      <Wimp>0</Wimp>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_TheTickler</defName>
+    <slot>Childhood</slot>
+    <title>the tickler</title>
+    <titleShort>the tickler</titleShort>
+    <description>[PAWN_nameDef] used to poke at the human prisoners with iron skewers and call it 'tickling.' Couldn't understand why they laughed and cried at the same time. Found it fascinating.</description>
+    <skillGains>
+      <Melee>2</Melee>
+      <Medicine>1</Medicine>
+      <Social>-1</Social>
+    </skillGains>
+    <workDisables>Cleaning</workDisables>
+    <forcedTraits>
+      <Bloodlust>0</Bloodlust>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_OffalBarrelScrubber</defName>
+    <slot>Childhood</slot>
+    <title>offal barrel scrubber</title>
+    <titleShort>offal barrel scrubber</titleShort>
+    <description>[PAWN_nameDef] spent [PAWN_possessive] early years scrubbing out the offal barrels in the slaughterhouse. The smell never left. [PAWN_pronoun] doesn't notice it anymore.</description>
+    <skillGains>
+      <Cooking>2</Cooking>
+      <Medicine>1</Medicine>
+      <Social>-2</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_BurnScarredApprentice</defName>
+    <slot>Childhood</slot>
+    <title>burn-scarred apprentice</title>
+    <titleShort>burn-scarred apprentice</titleShort>
+    <description>[PAWN_nameDef] apprenticed beside a forge fire, collecting burns along the way. The scarred hands are the only record of those years.</description>
+    <skillGains>
+      <Crafting>3</Crafting>
+      <Melee>-1</Melee>
+      <Construction>2</Construction>
+    </skillGains>
+    <forcedTraits>
+      <Tough>0</Tough>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_SilenceVowJoke</defName>
+    <slot>Childhood</slot>
+    <title>silence vow (joke)</title>
+    <titleShort>silence vow (joke)</titleShort>
+    <description>[PAWN_nameDef] barely speaks anymore. The bosses threatened to sew [PAWN_possessive] mouth shut if [PAWN_pronoun] didn't shut up. It was probably a joke. [PAWN_nameDef] took it literally and never recovered.</description>
+    <skillGains>
+      <Crafting>1</Crafting>
+    </skillGains>
+    <workDisables>Social</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_LeechValleySurvivor</defName>
+    <slot>Childhood</slot>
+    <title>leech valley survivor</title>
+    <titleShort>leech valley survivor</titleShort>
+    <description>[PAWN_nameDef] was abandoned in a swamp and covered in leeches and parasites for what felt like forever. Survived. Doesn't flinch when things crawl on [PAWN_pronoun] anymore.</description>
+    <skillGains>
+      <Medicine>1</Medicine>
+      <Plants>1</Plants>
+      <Social>-2</Social>
+    </skillGains>
+    <forcedTraits>
+      <Tough>0</Tough>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_CowardRaider</defName>
+    <slot>Childhood</slot>
+    <title>coward raider</title>
+    <titleShort>coward raider</titleShort>
+    <description>[PAWN_nameDef] has played dead in the middle of combat more than once. Knows it's cowardly. Is proud of it anyway.</description>
+    <skillGains>
+      <Melee>-1</Melee>
+      <Social>1</Social>
+      <Intellectual>1</Intellectual>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_TheSnitch</defName>
+    <slot>Childhood</slot>
+    <title>the snitch</title>
+    <titleShort>the snitch</titleShort>
+    <description>[PAWN_nameDef] used to report on prisoners' every move to the guards — sometimes accurately, sometimes not. Getting a prisoner beaten on a false tip and listening to the screams was [PAWN_possessive] favorite part of the day.</description>
+    <skillGains>
+      <Medicine>1</Medicine>
+      <Animals>2</Animals>
+      <Intellectual>1</Intellectual>
+    </skillGains>
+    <workDisables>Social</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_PetMaggotKeeper</defName>
+    <slot>Childhood</slot>
+    <title>pet maggot keeper</title>
+    <titleShort>pet maggot keeper</titleShort>
+    <description>[PAWN_nameDef] kept maggots from a corpse as pets and gave them names. They grew up and flew away. [PAWN_pronoun] was heartbroken.</description>
+    <skillGains>
+      <Animals>3</Animals>
+      <Medicine>2</Medicine>
+      <Social>-2</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_SkinMaskFittingModel</defName>
+    <slot>Childhood</slot>
+    <title>skin mask fitting model</title>
+    <titleShort>skin mask fitting</titleShort>
+    <description>[PAWN_nameDef] was called in every time a new skin mask needed fitting. Takes a strange pride in being the template.</description>
+    <skillGains>
+      <Crafting>1</Crafting>
+      <Social>-2</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_BoneDiceStakes</defName>
+    <slot>Childhood</slot>
+    <title>bone dice stakes</title>
+    <titleShort>bone dice stakes</titleShort>
+    <description>[PAWN_nameDef] was staked in a bone-dice game and won by the side that refused to take [PAWN_objective]. Has been unable to look at bone dice since.</description>
+    <skillGains>
+      <Social>-1</Social>
+      <Intellectual>1</Intellectual>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_SkullCollector</defName>
+    <slot>Childhood</slot>
+    <title>skull collector</title>
+    <titleShort>skull collector</titleShort>
+    <description>[PAWN_nameDef] collected rat skulls and considered [PAWN_pronoun]self a scholar. The count was the measure of intelligence — more skulls, smarter goblin. Also takes Mousie skulls, apparently.</description>
+    <skillGains>
+      <Intellectual>1</Intellectual>
+      <Animals>1</Animals>
+      <Social>-1</Social>
+    </skillGains>
+    <forcedTraits>
+      <NaturalMood>2</NaturalMood>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_DampCaveExplorer</defName>
+    <slot>Childhood</slot>
+    <title>damp cave explorer</title>
+    <titleShort>damp cave explorer</titleShort>
+    <description>[PAWN_nameDef] was born in a cave and helped dig them ever since. Doesn't feel at home unless it smells like wet rock.</description>
+    <skillGains>
+      <Mining>3</Mining>
+      <Construction>2</Construction>
+    </skillGains>
+    <forcedTraits>
+      <Undergrounder>0</Undergrounder>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_GoatMilkSucker</defName>
+    <slot>Childhood</slot>
+    <title>goat milk sucker</title>
+    <titleShort>goat milk sucker</titleShort>
+    <description>[PAWN_nameDef] used to chase down goats in the field and drink their milk directly. Was fairly well known among the goats for this.</description>
+    <skillGains>
+      <Animals>2</Animals>
+      <Cooking>1</Cooking>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_YoungAttacker</defName>
+    <slot>Childhood</slot>
+    <title>young attacker</title>
+    <titleShort>young attacker</titleShort>
+    <description>[PAWN_nameDef] was regularly drafted into raids on nearby goblin settlements and human villages.</description>
+    <skillGains>
+      <Melee>1</Melee>
+      <Medicine>2</Medicine>
+      <Social>-3</Social>
+      <Cooking>-1</Cooking>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_SkullTowerBuilder</defName>
+    <slot>Childhood</slot>
+    <title>skull tower builder</title>
+    <titleShort>skull tower builder</titleShort>
+    <description>[PAWN_nameDef] used to stack severed goblin and human heads into towers for fun.</description>
+    <skillGains>
+      <Construction>3</Construction>
+      <Melee>-2</Melee>
+      <Shooting>-2</Shooting>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_StoneScribbler</defName>
+    <slot>Childhood</slot>
+    <title>stone scribbler</title>
+    <titleShort>stone scribbler</titleShort>
+    <description>[PAWN_nameDef] covered stone slabs in marks and drawings. Everyone called it scribbling. It was actually a private record-keeping system only [PAWN_pronoun] could read.</description>
+    <skillGains>
+      <Intellectual>2</Intellectual>
+      <Crafting>1</Crafting>
+      <Social>-1</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_GoblinProdigy</defName>
+    <slot>Childhood</slot>
+    <title>goblin prodigy</title>
+    <titleShort>goblin prodigy</titleShort>
+    <description>[PAWN_nameDef] was talking and counting before the others. Got both admiration and a lot of shoves for it.</description>
+    <skillGains>
+      <Intellectual>3</Intellectual>
+      <Social>-1</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_CriedOnceNeverAgain</defName>
+    <slot>Childhood</slot>
+    <title>cried once never again</title>
+    <titleShort>cried once never</titleShort>
+    <description>[PAWN_nameDef] cried exactly once after being born, then never again. Has been considered the 'tough one' ever since.</description>
+    <skillGains>
+      <Social>-1</Social>
+      <Melee>1</Melee>
+    </skillGains>
+    <forcedTraits>
+      <Tough>0</Tough>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_WokeUpByThePot</defName>
+    <slot>Childhood</slot>
+    <title>woke up by the pot</title>
+    <titleShort>woke up by</titleShort>
+    <description>[PAWN_nameDef] came to [PAWN_possessive] senses already tied up next to a cauldron. A fatter prisoner went in first, which is the only reason [PAWN_pronoun] is here. Freezes up at the sound of boiling water.</description>
+    <skillGains>
+      <Cooking>-1</Cooking>
+      <Social>-2</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_ShaftDigger</defName>
+    <slot>Adulthood</slot>
+    <title>shaft digger</title>
+    <titleShort>shaft digger</titleShort>
+    <description>[PAWN_nameDef] works the deepest part of the shaft — the spots that look like solid rock to everyone else. Has spent more time underground than above it. In open daylight, [PAWN_pronoun] can barely keep [PAWN_possessive] eyes open.</description>
+    <skillGains>
+      <Mining>6</Mining>
+      <Construction>2</Construction>
+    </skillGains>
+    <workDisables>Social, Cooking</workDisables>
+    <forcedTraits>
+      <Undergrounder>0</Undergrounder>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_HumanLivestockKeeper</defName>
+    <slot>Adulthood</slot>
+    <title>human livestock keeper</title>
+    <titleShort>human livestock keeper</titleShort>
+    <description>[PAWN_nameDef] manages the human livestock. Never learned to see them as anything else.</description>
+    <skillGains>
+      <Animals>4</Animals>
+      <Melee>2</Melee>
+      <Social>-3</Social>
+    </skillGains>
+    <workDisables>Caring</workDisables>
+    <forcedTraits>
+      <Cannibal>0</Cannibal>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_CauldronKeeper</defName>
+    <slot>Adulthood</slot>
+    <title>cauldron keeper</title>
+    <titleShort>cauldron keeper</titleShort>
+    <description>[PAWN_nameDef] runs the cauldrons and the butchering block. Nobody in the squad comes close on knife work.</description>
+    <skillGains>
+      <Cooking>5</Cooking>
+      <Crafting>1</Crafting>
+      <Intellectual>-2</Intellectual>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_PackHauler</defName>
+    <slot>Adulthood</slot>
+    <title>pack hauler</title>
+    <titleShort>pack hauler</titleShort>
+    <description>[PAWN_nameDef] hauls supplies and plunder in a skin-leather pack. Gets calmer the heavier the load.</description>
+    <skillGains>
+      <Construction>1</Construction>
+    </skillGains>
+    <workDisables>Crafting, PlantWork</workDisables>
+    <forcedTraits>
+      <Industriousness>2</Industriousness>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_PheromoneSignalRunner</defName>
+    <slot>Adulthood</slot>
+    <title>pheromone signal runner</title>
+    <titleShort>pheromone signal runner</titleShort>
+    <description>[PAWN_nameDef] carries tactical information through pheromone signals when ash clouds cut visibility. Gets the message across more accurately than words.</description>
+    <skillGains>
+      <Intellectual>1</Intellectual>
+      <Social>1</Social>
+      <Shooting>1</Shooting>
+    </skillGains>
+    <workDisables>Cooking</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_BreedingStoreCleaner</defName>
+    <slot>Adulthood</slot>
+    <title>breeding store cleaner</title>
+    <titleShort>breeding store cleaner</titleShort>
+    <description>[PAWN_nameDef] maintains the breeding facility tools with obsessive care. Has never once been selected for pheromone extraction. [PAWN_pronoun] is, however, the most skilled handler in the squad.</description>
+    <skillGains>
+      <Medicine>4</Medicine>
+      <Animals>1</Animals>
+      <Social>-2</Social>
+      <Crafting>3</Crafting>
+    </skillGains>
+    <workDisables>Cleaning</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_HumanButcher</defName>
+    <slot>Adulthood</slot>
+    <title>human butcher</title>
+    <titleShort>human butcher</titleShort>
+    <description>[PAWN_nameDef] handles butchering as a dedicated role. Whether the subject is still breathing or not doesn't factor into the work.</description>
+    <skillGains>
+      <Cooking>4</Cooking>
+      <Medicine>2</Medicine>
+      <Shooting>-3</Shooting>
+    </skillGains>
+    <workDisables>Cleaning, Crafting</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_HummingButcher</defName>
+    <slot>Adulthood</slot>
+    <title>humming butcher</title>
+    <titleShort>humming butcher</titleShort>
+    <description>[PAWN_nameDef] hums while doing a full human breakdown. To [PAWN_pronoun], it's just background music.</description>
+    <skillGains>
+      <Cooking>4</Cooking>
+      <Medicine>1</Medicine>
+      <Social>-3</Social>
+    </skillGains>
+    <workDisables>Cleaning</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_TortureChamberHand</defName>
+    <slot>Adulthood</slot>
+    <title>torture chamber hand</title>
+    <titleShort>torture chamber hand</titleShort>
+    <description>[PAWN_nameDef] handles cell cleanup and beating assistance. [PAWN_pronoun] genuinely isn't sure which one is the main job.</description>
+    <skillGains>
+      <Melee>2</Melee>
+      <Social>-1</Social>
+    </skillGains>
+    <workDisables>Cleaning, PlantWork, Crafting</workDisables>
+    <forcedTraits>
+      <Bloodlust>0</Bloodlust>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_LamePackHauler</defName>
+    <slot>Adulthood</slot>
+    <title>lame pack hauler</title>
+    <titleShort>lame pack hauler</titleShort>
+    <description>[PAWN_nameDef] injured [PAWN_possessive] leg young and has hauled cargo ever since. Can't move fast. Won't put the load down.</description>
+    <skillGains>
+      <Construction>1</Construction>
+      <Melee>-3</Melee>
+    </skillGains>
+    <workDisables>Cleaning, PlantWork, Crafting, Intellectual</workDisables>
+    <forcedTraits>
+      <Wimp>0</Wimp>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_BeaconAshHauler</defName>
+    <slot>Adulthood</slot>
+    <title>beacon ash hauler</title>
+    <titleShort>beacon ash hauler</titleShort>
+    <description>[PAWN_nameDef] assists with beacon ignition. Permanently soaked in smoke. The cough hasn't gone away.</description>
+    <skillGains>
+      <Construction>2</Construction>
+      <Intellectual>-1</Intellectual>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_CreviceObsessive</defName>
+    <slot>Adulthood</slot>
+    <title>crevice obsessive</title>
+    <titleShort>crevice obsessive</titleShort>
+    <description>[PAWN_nameDef] has an intense fixation on narrow, damp crevices. Digs into them compulsively. Never cleans up afterward.</description>
+    <skillGains>
+      <Mining>4</Mining>
+    </skillGains>
+    <workDisables>Social, Caring</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_SlaveMarketMerchant</defName>
+    <slot>Adulthood</slot>
+    <title>slave market merchant</title>
+    <titleShort>slave market merchant</titleShort>
+    <description>[PAWN_nameDef] works the black markets and trading caravans, moving slaves. Doesn't lose a negotiation.</description>
+    <skillGains>
+      <Social>6</Social>
+      <Intellectual>1</Intellectual>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_PheromoneHarvester</defName>
+    <slot>Adulthood</slot>
+    <title>pheromone harvester</title>
+    <titleShort>pheromone harvester</titleShort>
+    <description>[PAWN_nameDef] specializes in pheromone extraction — the backbone of the breeding system.</description>
+    <skillGains>
+      <Medicine>4</Medicine>
+      <Intellectual>3</Intellectual>
+      <Social>-1</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_WeaponsOverseer</defName>
+    <slot>Adulthood</slot>
+    <title>weapons overseer</title>
+    <titleShort>weapons overseer</titleShort>
+    <description>[PAWN_nameDef] runs the forge and oversees weapon production. If [PAWN_pronoun] doesn't like what came out, the smith starts over.</description>
+    <skillGains>
+      <Crafting>5</Crafting>
+      <Melee>2</Melee>
+    </skillGains>
+    <forcedTraits>
+      <Industriousness>2</Industriousness>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_WillBreakingEnforcer</defName>
+    <slot>Adulthood</slot>
+    <title>will-breaking enforcer</title>
+    <titleShort>will-breaking enforcer</titleShort>
+    <description>[PAWN_nameDef] handles the dedicated will-breaking detail. No hesitation. Efficient.</description>
+    <skillGains>
+      <Melee>2</Melee>
+      <Social>2</Social>
+    </skillGains>
+    <workDisables>Caring</workDisables>
+    <forcedTraits>
+      <Bloodlust>0</Bloodlust>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_BeaconKeeper</defName>
+    <slot>Adulthood</slot>
+    <title>beacon keeper</title>
+    <titleShort>beacon keeper</titleShort>
+    <description>[PAWN_nameDef] manages the goblin signal beacons and handles raid call-outs.</description>
+    <skillGains>
+      <Intellectual>2</Intellectual>
+      <Melee>2</Melee>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_WarchiefCandidate</defName>
+    <slot>Adulthood</slot>
+    <title>warchief candidate</title>
+    <titleShort>warchief candidate</titleShort>
+    <description>[PAWN_nameDef] has ambitions that span more than one squad.</description>
+    <skillGains>
+      <Melee>4</Melee>
+      <Social>5</Social>
+      <Intellectual>1</Intellectual>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>2</Nerves>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_BrideHunter</defName>
+    <slot>Adulthood</slot>
+    <title>bride hunter</title>
+    <titleShort>bride hunter</titleShort>
+    <description>The most feared name whispered in the villages. [PAWN_nameDef] lines up the women taken in a raid and calls out assessments — teeth, build, bearing — out loud, one by one. When [PAWN_pronoun] points, that one doesn't stand in line again. Every survivor who made it back says the same thing: the expression never changed.</description>
+    <skillGains>
+      <Social>2</Social>
+      <Melee>2</Melee>
+      <Shooting>1</Shooting>
+    </skillGains>
+    <workDisables>Caring</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_TortureArtisan</defName>
+    <slot>Adulthood</slot>
+    <title>torture artisan</title>
+    <titleShort>torture artisan</titleShort>
+    <description>[PAWN_nameDef] considers interrogation and torture to be close to an art form. Won't accept a result [PAWN_pronoun] isn't satisfied with. Starts over.</description>
+    <skillGains>
+      <Melee>3</Melee>
+      <Crafting>2</Crafting>
+      <Social>-2</Social>
+    </skillGains>
+    <workDisables>Caring</workDisables>
+    <forcedTraits>
+      <Bloodlust>0</Bloodlust>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_HumanFleshGourmet</defName>
+    <slot>Adulthood</slot>
+    <title>human flesh gourmet</title>
+    <titleShort>human flesh gourmet</titleShort>
+    <description>[PAWN_nameDef] has detailed opinions on every cut and preparation method. The listener is always uncomfortable. [PAWN_pronoun] is always sincere.</description>
+    <skillGains>
+      <Cooking>3</Cooking>
+      <Social>2</Social>
+      <Intellectual>1</Intellectual>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_DeserterRetriever</defName>
+    <slot>Adulthood</slot>
+    <title>deserter retriever</title>
+    <titleShort>deserter retriever</titleShort>
+    <description>[PAWN_nameDef] rounds up scattered feral goblins and folds them into the squad.</description>
+    <skillGains>
+      <Social>3</Social>
+      <Melee>2</Melee>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_DruggedDeputy</defName>
+    <slot>Adulthood</slot>
+    <title>drugged deputy</title>
+    <titleShort>drugged deputy</titleShort>
+    <description>[PAWN_nameDef] is soaked in sticky fluid and has trembling hands. Still holds the deputy position.</description>
+    <skillGains>
+      <Melee>2</Melee>
+      <Social>1</Social>
+      <Intellectual>-2</Intellectual>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_HumanLeatherTailor</defName>
+    <slot>Adulthood</slot>
+    <title>human leather tailor</title>
+    <titleShort>human leather tailor</titleShort>
+    <description>[PAWN_nameDef] handles leather processing full-time. Precise work.</description>
+    <skillGains>
+      <Crafting>4</Crafting>
+      <Social>-1</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_BonePowderApothecary</defName>
+    <slot>Adulthood</slot>
+    <title>bone powder apothecary</title>
+    <titleShort>bone powder apothecary</titleShort>
+    <description>[PAWN_nameDef] grinds bones into powder and compounds it into medicines.</description>
+    <skillGains>
+      <Medicine>3</Medicine>
+      <Crafting>1</Crafting>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_BeaconCeremonyDancer</defName>
+    <slot>Adulthood</slot>
+    <title>beacon ceremony dancer</title>
+    <titleShort>beacon ceremony dancer</titleShort>
+    <description>[PAWN_nameDef] performs at the ignition ceremony. The prisoners in attendance have described the dance as 'disturbing.'</description>
+    <skillGains>
+      <Social>3</Social>
+      <Artistic>2</Artistic>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinDeserter</defName>
+    <slot>Adulthood</slot>
+    <title>goblin deserter</title>
+    <titleShort>goblin deserter</titleShort>
+    <description>[PAWN_nameDef] was expelled from another mob and drifted until landing here.</description>
+    <skillGains>
+      <Melee>2</Melee>
+      <Social>-3</Social>
+    </skillGains>
+    <workDisables>PlantWork, Intellectual, Cooking, Crafting</workDisables>
+    <forcedTraits>
+      <Nerves>-2</Nerves>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_AddledLaborer</defName>
+    <slot>Adulthood</slot>
+    <title>addled laborer</title>
+    <titleShort>addled laborer</titleShort>
+    <description>[PAWN_nameDef] does manual labor in a state of constant sticky-fluid addiction.</description>
+    <skillGains>
+      <Construction>1</Construction>
+      <Mining>1</Mining>
+      <Intellectual>-2</Intellectual>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_HumanMimic</defName>
+    <slot>Adulthood</slot>
+    <title>human mimic</title>
+    <titleShort>human mimic</titleShort>
+    <description>[PAWN_nameDef] imitates humans and gets mocked for it by [PAWN_possessive] own kind. Hasn't stopped.</description>
+    <skillGains>
+      <Social>1</Social>
+      <Intellectual>1</Intellectual>
+    </skillGains>
+    <forcedTraits>
+      <Wimp>0</Wimp>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinLivestockTrader</defName>
+    <slot>Adulthood</slot>
+    <title>goblin livestock trader</title>
+    <titleShort>goblin livestock trader</titleShort>
+    <description>[PAWN_nameDef] specialized in conditioning captured prisoners into compliant livestock and selling them on. To [PAWN_nameDef], humans are useful animals. Nothing more.</description>
+    <skillGains>
+      <Social>2</Social>
+      <Melee>1</Melee>
+      <Medicine>1</Medicine>
+      <Crafting>-4</Crafting>
+    </skillGains>
+    <workDisables>Artistic</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_SlavePitManager</defName>
+    <slot>Adulthood</slot>
+    <title>slave pit manager</title>
+    <titleShort>slave pit manager</titleShort>
+    <description>[PAWN_nameDef] managed the holding pit and ran down escapees. Humans, goblins, Mousies, Vixens — all mixed in waiting for the end. [PAWN_nameDef]'s favorite part was listening to the crying, and watching the fights that broke out inside.</description>
+    <skillGains>
+      <Shooting>1</Shooting>
+      <Melee>-1</Melee>
+      <Crafting>-3</Crafting>
+      <Social>2</Social>
+    </skillGains>
+    <workDisables>Cleaning, Cooking</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinPirateCrew</defName>
+    <slot>Adulthood</slot>
+    <title>goblin pirate crew</title>
+    <titleShort>goblin pirate crew</titleShort>
+    <description>[PAWN_nameDef] raided fishing villages and merchant ships up and down the coast. Claims to have found legendary treasure once. Ate it because [PAWN_pronoun] was hungry.</description>
+    <skillGains>
+      <Shooting>2</Shooting>
+      <Melee>2</Melee>
+      <Social>-1</Social>
+    </skillGains>
+    <workDisables>Crafting, PlantWork, Intellectual, Animals</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinAlchemist</defName>
+    <slot>Adulthood</slot>
+    <title>goblin alchemist</title>
+    <titleShort>goblin alchemist</titleShort>
+    <description>[PAWN_nameDef] combines urine, ground bone, and deep-earth mineral dust and calls it alchemy. It's chemistry. The goblin black powder [PAWN_pronoun] produces is genuinely good.</description>
+    <skillGains>
+      <Intellectual>4</Intellectual>
+      <Medicine>3</Medicine>
+      <Crafting>1</Crafting>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinFieldEngineer</defName>
+    <slot>Adulthood</slot>
+    <title>goblin field engineer</title>
+    <titleShort>goblin field engineer</titleShort>
+    <description>[PAWN_nameDef] builds field barricades and traps on the fly in the middle of a fight.</description>
+    <skillGains>
+      <Construction>5</Construction>
+      <Crafting>2</Crafting>
+      <Mining>1</Mining>
+    </skillGains>
+    <forcedTraits>
+      <Industriousness>2</Industriousness>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinHeadCook</defName>
+    <slot>Adulthood</slot>
+    <title>goblin head cook</title>
+    <titleShort>goblin head cook</titleShort>
+    <description>[PAWN_nameDef] handles the high-end cooking. Considers [PAWN_pronoun]self a step above the cauldron crew. The cauldron crew has opinions about this.</description>
+    <skillGains>
+      <Cooking>6</Cooking>
+      <Social>1</Social>
+      <Crafting>1</Crafting>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinStealthScout</defName>
+    <slot>Adulthood</slot>
+    <title>goblin stealth scout</title>
+    <titleShort>goblin stealth scout</titleShort>
+    <description>[PAWN_nameDef] handles night reconnaissance and ambush scouting.</description>
+    <skillGains>
+      <Shooting>2</Shooting>
+      <Intellectual>2</Intellectual>
+      <Social>-2</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_NutcrackerMaster</defName>
+    <slot>Adulthood</slot>
+    <title>nutcracker master</title>
+    <titleShort>nutcracker master</titleShort>
+    <description>[PAWN_nameDef] developed [PAWN_possessive] own fighting style: the 'Nutcracker.' Particularly effective against male combatants. There is also a related technique called the 'Nutbite.' Neither is taught at any school.</description>
+    <skillGains>
+      <Melee>3</Melee>
+      <Shooting>-3</Shooting>
+      <Plants>-3</Plants>
+      <Crafting>-3</Crafting>
+      <Mining>1</Mining>
+    </skillGains>
+    <workDisables>Caring</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinBlade</defName>
+    <slot>Adulthood</slot>
+    <title>goblin blade</title>
+    <titleShort>goblin blade</titleShort>
+    <description>[PAWN_nameDef] wields a blade so skillfully that [PAWN_pronoun] might as well be considered one with it. Once, when captured by humans and facing execution, [PAWN_pronoun] swung a broken blade, cutting down all the guards and casually making [PAWN_possessive] escape. "This chilly yet heavy sensation! Hoouman! I shall strip the flesh from your bones!"</description>
+    <skillGains>
+      <Melee>4</Melee>
+      <Shooting>-7</Shooting>
+    </skillGains>
+    <workDisables>Social, Crafting, PlantWork, Intellectual</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoldenGoblin</defName>
+    <slot>Adulthood</slot>
+    <title>golden goblin</title>
+    <titleShort>golden goblin</titleShort>
+    <description>[PAWN_nameDef] was tasked with manufacturing goblin alloys in the forge, but one day got into an argument with another goblin while working. Enraged, [PAWN_nameDef] poured the molten gold meant for the alloy over the rival goblin's head. Watching this, the other goblins cackled "Kishishit!" and gave [PAWN_nameDef] the nickname 'Golden Goblin', joking that [PAWN_pronoun] had created a goblin made of gold.</description>
+    <workDisables>Social, PlantWork, Intellectual</workDisables>
+    <forcedTraits>
+      <Greedy>0</Greedy>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinCaravanMember</defName>
+    <slot>Adulthood</slot>
+    <title>goblin caravan member</title>
+    <titleShort>goblin caravan member</titleShort>
+    <description>[PAWN_nameDef] was a member of a goblin caravan. However, whenever negotiations failed, the caravan would almost always turn from traders into raiders.</description>
+    <workDisables>Crafting, Intellectual</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_FingerCollector</defName>
+    <slot>Adulthood</slot>
+    <title>finger collector</title>
+    <titleShort>finger collector</titleShort>
+    <description>Word among the squad is that [PAWN_nameDef] has the exact count of every enemy finger memorized. On nights when the tally drops, [PAWN_pronoun] doesn't sleep.</description>
+    <skillGains>
+      <Crafting>2</Crafting>
+      <Medicine>1</Medicine>
+      <Social>-2</Social>
+    </skillGains>
+    <workDisables>Hauling</workDisables>
+    <forcedTraits>
+      <Bloodlust>0</Bloodlust>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_HumanFlowerArranger</defName>
+    <slot>Adulthood</slot>
+    <title>human flower arranger</title>
+    <titleShort>human flower arranger</titleShort>
+    <description>A slave who saw the aftermath described it — branches stuffed into every wound, spread out like a garden bed from a distance. [PAWN_nameDef] thought it looked genuinely beautiful.</description>
+    <skillGains>
+      <Crafting>3</Crafting>
+      <Artistic>5</Artistic>
+      <Social>-2</Social>
+    </skillGains>
+    <workDisables>Caring, PlantWork</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_HumanGardener</defName>
+    <slot>Adulthood</slot>
+    <title>human gardener</title>
+    <titleShort>human gardener</titleShort>
+    <description>[PAWN_nameDef] trims. Everything that protrudes. Meticulously.</description>
+    <skillGains>
+      <Crafting>2</Crafting>
+      <Social>-2</Social>
+    </skillGains>
+    <workDisables>Caring</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinSisterPeanutVersion</defName>
+    <slot>Adulthood</slot>
+    <title>goblin sister (peanut version)</title>
+    <titleShort>goblin sister (peanut</titleShort>
+    <description>[PAWN_nameDef] loved mimicking 'Peanut,' a Mousie nun who thought [PAWN_pronoun] could be reformed. Peanut met a noisy end — stripped alive. Her hide is still with the goblin she believed in. [PAWN_nameDef] is delighted about this. 'SQUEAKERS CAN BE NUNS!! GOBLINS CAN TOO!! I ALSO SERVE THE HAMSTER LORD!!'</description>
+    <skillGains>
+      <Social>3</Social>
+      <Plants>2</Plants>
+      <Crafting>-2</Crafting>
+      <Melee>-1</Melee>
+    </skillGains>
+    <workDisables>Caring</workDisables>
+    <forcedTraits>
+      <NaturalMood>2</NaturalMood>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_VixenTailPullChampion</defName>
+    <slot>Adulthood</slot>
+    <title>vixen tail-pull champion</title>
+    <titleShort>vixen tail-pull champion</titleShort>
+    <description>[PAWN_nameDef] is the reigning champion of the Vixen tail-cutting contest. 'FLUFFY!! FEELS GOOD!! YIPPERS CAN CRY ALL THEY WANT!!'</description>
+    <skillGains>
+      <Melee>2</Melee>
+      <Social>-1</Social>
+      <Shooting>-3</Shooting>
+    </skillGains>
+    <workDisables>Intellectual, Crafting</workDisables>
+    <forcedTraits>
+      <Bloodlust>0</Bloodlust>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_SlenderFingers</defName>
+    <slot>Adulthood</slot>
+    <title>slender fingers</title>
+    <titleShort>slender fingers</titleShort>
+    <description>[PAWN_nameDef] has thin fingers and knows exactly where to press inside a prisoner's body to get the response [PAWN_pronoun] wants. The same hands produce unusually precise craft work for a goblin.</description>
+    <skillGains>
+      <Medicine>4</Medicine>
+      <Crafting>3</Crafting>
+      <Artistic>1</Artistic>
+      <Melee>-2</Melee>
+      <Shooting>-2</Shooting>
+    </skillGains>
+    <workDisables>Intellectual, Cooking</workDisables>
+    <forcedTraits>
+      <Wimp>0</Wimp>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_EyeballNecklaceArtisan</defName>
+    <slot>Adulthood</slot>
+    <title>eyeball necklace artisan</title>
+    <titleShort>eyeball necklace artisan</titleShort>
+    <description>A trader who saw the necklace up close said [PAWN_pronoun] thought it was gemstones at first. Finding out what it actually was is the moment [PAWN_pronoun] regrets most.</description>
+    <skillGains>
+      <Crafting>3</Crafting>
+      <Artistic>2</Artistic>
+      <Social>-2</Social>
+    </skillGains>
+    <workDisables>Cleaning, PlantWork, Intellectual</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinMusician</defName>
+    <slot>Adulthood</slot>
+    <title>goblin musician</title>
+    <titleShort>goblin musician</titleShort>
+    <description>'LISTEN!! THIS IS MUSIC!! EACH ONE MAKES A DIFFERENT SOUND, HIGH ONES, LOW ONES!! EAT THEM ALL TOGETHER AND YOU GET A CHORUS!! YOU TRY A VERSE!!' Cooking ruins the pitch. [PAWN_nameDef] eats everything raw.</description>
+    <skillGains>
+      <Artistic>4</Artistic>
+      <Social>-2</Social>
+    </skillGains>
+    <workDisables>Cooking</workDisables>
+    <forcedTraits>
+      <Cannibal>0</Cannibal>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_VixenHunter</defName>
+    <slot>Adulthood</slot>
+    <title>vixen hunter</title>
+    <titleShort>vixen hunter</titleShort>
+    <description>[PAWN_nameDef] is obsessed with Vixen tails. Specifically with watching Vixens scramble and yip as they run. [PAWN_pronoun] always aims away from the vitals and lets them go. Then follows.</description>
+    <skillGains>
+      <Shooting>2</Shooting>
+      <Melee>-2</Melee>
+      <Crafting>-2</Crafting>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_TailBlanchConnoisseur</defName>
+    <slot>Adulthood</slot>
+    <title>tail blanch connoisseur</title>
+    <titleShort>tail blanch connoisseur</titleShort>
+    <description>[PAWN_nameDef] prefers tail meat — Mousie or Vixen, blanched alive, sliced fresh. The struggling and screaming, [PAWN_pronoun] will tell you, really does improve the appetite.</description>
+    <skillGains>
+      <Cooking>3</Cooking>
+      <Melee>1</Melee>
+      <Crafting>1</Crafting>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinWaddler</defName>
+    <slot>Adulthood</slot>
+    <title>goblin waddler</title>
+    <titleShort>goblin waddler</titleShort>
+    <description>[PAWN_nameDef] earned that nickname from the walk.</description>
+    <skillGains>
+      <Melee>1</Melee>
+      <Social>-1</Social>
+    </skillGains>
+    <forcedTraits>
+      <NaturalMood>2</NaturalMood>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinLemonadeMaker</defName>
+    <slot>Adulthood</slot>
+    <title>goblin lemonade maker</title>
+    <titleShort>goblin lemonade maker</titleShort>
+    <description>[PAWN_nameDef] earned that nickname in combat. Still does.</description>
+    <skillGains>
+      <Shooting>-1</Shooting>
+      <Social>-2</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinCoward</defName>
+    <slot>Adulthood</slot>
+    <title>goblin coward</title>
+    <titleShort>goblin coward</titleShort>
+    <description>[PAWN_nameDef] is in the bushes the moment the signal sounds. Gets dragged out by the collar every time. Screams 'I SAID I'M NOT FIGHTING!!' the whole way. Still swings when it comes to it. Somehow has the best survival rate in the squad.</description>
+    <skillGains>
+      <Melee>-3</Melee>
+      <Shooting>-1</Shooting>
+      <Social>-1</Social>
+    </skillGains>
+    <forcedTraits>
+      <Wimp>0</Wimp>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_ScaredOfOwnShadow</defName>
+    <slot>Adulthood</slot>
+    <title>scared of own shadow</title>
+    <titleShort>scared of own</titleShort>
+    <description>[PAWN_nameDef] attacks [PAWN_possessive] own shadow on sight due to pheromone hallucinations. Every time.</description>
+    <skillGains>
+      <Melee>1</Melee>
+      <Intellectual>-1</Intellectual>
+      <Social>-1</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_KidneyStoneCollector</defName>
+    <slot>Adulthood</slot>
+    <title>kidney stone collector</title>
+    <titleShort>kidney stone collector</titleShort>
+    <description>[PAWN_nameDef] saves the kidney stones and bladder stones found while butchering. Keeps them somewhere private.</description>
+    <skillGains>
+      <Mining>2</Mining>
+      <Social>-1</Social>
+      <Construction>1</Construction>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_SkinKnitter</defName>
+    <slot>Adulthood</slot>
+    <title>skin knitter</title>
+    <titleShort>skin knitter</titleShort>
+    <description>[PAWN_nameDef] learned knitting from an old prisoner, but uses strips of skin taken from the living instead of thread.</description>
+    <skillGains>
+      <Crafting>2</Crafting>
+      <Medicine>1</Medicine>
+      <Social>-2</Social>
+    </skillGains>
+    <workDisables>Cleaning</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_ToothHunter</defName>
+    <slot>Adulthood</slot>
+    <title>tooth hunter</title>
+    <titleShort>tooth hunter</titleShort>
+    <description>[PAWN_nameDef] pulls teeth from living subjects, one at a time, counting as [PAWN_pronoun] goes. Marks the hundredth quietly.</description>
+    <skillGains>
+      <Social>-2</Social>
+    </skillGains>
+    <workDisables>Caring</workDisables>
+    <forcedTraits>
+      <Bloodlust>0</Bloodlust>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_ScreamIdentifier</defName>
+    <slot>Adulthood</slot>
+    <title>scream identifier</title>
+    <titleShort>scream identifier</titleShort>
+    <description>[PAWN_nameDef] can identify which body part a scream is coming from just by the sound. Gets genuinely annoyed when [PAWN_pronoun] guesses wrong.</description>
+    <skillGains>
+      <Intellectual>1</Intellectual>
+      <Social>-2</Social>
+    </skillGains>
+    <workDisables>Caring</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_MirrorPlayer</defName>
+    <slot>Adulthood</slot>
+    <title>mirror player</title>
+    <titleShort>mirror player</titleShort>
+    <description>A barely escaped prisoner reported the worst part wasn't the cutting — it was seeing it in the polished shield [PAWN_nameDef] held up. [PAWN_nameDef] seemed to think showing them was a kindness.</description>
+    <skillGains>
+      <Crafting>1</Crafting>
+      <Social>-2</Social>
+    </skillGains>
+    <workDisables>Cleaning</workDisables>
+    <forcedTraits>
+      <Bloodlust>0</Bloodlust>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_Puppeteer</defName>
+    <slot>Adulthood</slot>
+    <title>puppeteer</title>
+    <titleShort>puppeteer</titleShort>
+    <description>A prisoner who survived the camp and made it out described it: every morning [PAWN_nameDef] greets the dolls. When a new one appears overnight in a dead person's spot, [PAWN_pronoun] picks right back up mid-conversation. If one doesn't answer, [PAWN_pronoun] gets genuinely angry.</description>
+    <skillGains>
+      <Crafting>3</Crafting>
+      <Artistic>1</Artistic>
+      <Social>-3</Social>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>-2</Nerves>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_LeechFarmer</defName>
+    <slot>Adulthood</slot>
+    <title>leech farmer</title>
+    <titleShort>leech farmer</titleShort>
+    <description>Every prisoner released from there had leech marks all over. [PAWN_nameDef] called it a harvest and bragged about it the way a farmer brags about a good crop.</description>
+    <skillGains>
+      <Medicine>3</Medicine>
+      <Animals>1</Animals>
+      <Social>-2</Social>
+    </skillGains>
+    <workDisables>Hauling</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GutRopeAcrobat</defName>
+    <slot>Adulthood</slot>
+    <title>gut-rope acrobat</title>
+    <titleShort>gut-rope acrobat</titleShort>
+    <description>[PAWN_nameDef] performs acrobatics on a line made from dried intestine. When it snaps, [PAWN_pronoun] gets annoyed — not about the source material, just that the line broke. The prisoner count in the holding pit always drops on those days.</description>
+    <skillGains>
+      <Crafting>2</Crafting>
+      <Melee>1</Melee>
+      <Social>-1</Social>
+    </skillGains>
+    <forcedTraits>
+      <NaturalMood>2</NaturalMood>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_NailGroomer</defName>
+    <slot>Adulthood</slot>
+    <title>nail groomer</title>
+    <titleShort>nail groomer</titleShort>
+    <description>[PAWN_nameDef] offers to 'tidy up' nails with pliers. Removes them completely. Every time.</description>
+    <skillGains>
+      <Medicine>1</Medicine>
+      <Crafting>1</Crafting>
+      <Social>-2</Social>
+    </skillGains>
+    <workDisables>Cleaning</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_FalseComforter</defName>
+    <slot>Adulthood</slot>
+    <title>false comforter</title>
+    <titleShort>false comforter</titleShort>
+    <description>A prisoner at the end of an execution line recounted it afterward: [PAWN_nameDef] held [PAWN_possessive] hand, patted [PAWN_possessive] shoulder, whispered that it would be fine, that it would be quick, that it wouldn't hurt. The prisoner relaxed. The thing [PAWN_nameDef] was holding wasn't a remedy.</description>
+    <skillGains>
+      <Social>2</Social>
+      <Melee>2</Melee>
+    </skillGains>
+    <workDisables>Caring</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinQuack</defName>
+    <slot>Adulthood</slot>
+    <title>goblin quack</title>
+    <titleShort>goblin quack</titleShort>
+    <description>'ITS FINE ITS FINE!! I AM DOCTOR!! REAL DOCTOR!! LOOK, HANDS NOT SHAKING... HEY WHY YOU SCREAMING I JUST CUT YOU. THIS IS MEDICINE!! COME BACK NEXT TIME I CUT MORE BETTER!!'</description>
+    <skillGains>
+      <Social>-2</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_ScreamJarCollector</defName>
+    <slot>Adulthood</slot>
+    <title>scream jar collector</title>
+    <titleShort>scream jar collector</titleShort>
+    <description>[PAWN_nameDef] believes [PAWN_pronoun] is trapping prisoner screams in jars. Labels each one.</description>
+    <skillGains>
+      <Crafting>1</Crafting>
+      <Intellectual>1</Intellectual>
+      <Social>-2</Social>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>-2</Nerves>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_BeastfolkWallBuilder</defName>
+    <slot>Adulthood</slot>
+    <title>beastfolk wall builder</title>
+    <titleShort>beastfolk wall builder</titleShort>
+    <description>[PAWN_nameDef] has a technique for using small-framed Mousies and Vixens as structural elements — inserted alive with just enough exposed to stay functional, mortared in when they stop. Goblins don't notice the smell.</description>
+    <skillGains>
+      <Construction>3</Construction>
+      <Shooting>-1</Shooting>
+      <Melee>-1</Melee>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_TailCollector</defName>
+    <slot>Adulthood</slot>
+    <title>tail collector</title>
+    <titleShort>tail collector</titleShort>
+    <description>[PAWN_nameDef] collects the protruding parts — tails are the favorite. Takes them very slowly from Vixens, Mousies, and Itakin prisoners, listening the whole time. Then ties the cut piece around the original owner's neck as a gift. Sweet, in a way.</description>
+    <skillGains>
+      <Crafting>3</Crafting>
+      <Medicine>1</Medicine>
+      <Melee>-1</Melee>
+      <Shooting>-2</Shooting>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_HideStripper</defName>
+    <slot>Adulthood</slot>
+    <title>hide stripper</title>
+    <titleShort>hide stripper</titleShort>
+    <description>[PAWN_nameDef] strips hides from prisoners and corpses. Doesn't check which one first.</description>
+    <skillGains>
+      <Crafting>4</Crafting>
+      <Shooting>-3</Shooting>
+      <Medicine>1</Medicine>
+    </skillGains>
+    <workDisables>Social</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_ShadowDuelist</defName>
+    <slot>Adulthood</slot>
+    <title>shadow duelist</title>
+    <titleShort>shadow duelist</titleShort>
+    <description>[PAWN_nameDef] has considered [PAWN_possessive] own shadow a lifelong rival. Challenges it daily.</description>
+    <skillGains>
+      <Melee>2</Melee>
+      <Intellectual>-2</Intellectual>
+      <Social>-1</Social>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>-2</Nerves>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_NonsenseProphet</defName>
+    <slot>Adulthood</slot>
+    <title>nonsense prophet</title>
+    <titleShort>nonsense prophet</titleShort>
+    <description>[PAWN_nameDef] says things that mean nothing. Some of them turn out to be right. [PAWN_pronoun] now has followers.</description>
+    <skillGains>
+      <Social>2</Social>
+      <Intellectual>-1</Intellectual>
+    </skillGains>
+    <workDisables>PlantWork, Crafting</workDisables>
+    <forcedTraits>
+      <NaturalMood>2</NaturalMood>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_BoneDominoChampion</defName>
+    <slot>Adulthood</slot>
+    <title>bone domino champion</title>
+    <titleShort>bone domino champion</titleShort>
+    <description>[PAWN_nameDef]'s only hobby is setting up bone domino runs. Surprisingly precise.</description>
+    <skillGains>
+      <Crafting>2</Crafting>
+      <Intellectual>1</Intellectual>
+      <Social>-1</Social>
+      <Artistic>2</Artistic>
+    </skillGains>
+    <workDisables>Cleaning</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_ComradeLover</defName>
+    <slot>Adulthood</slot>
+    <title>comrade lover</title>
+    <titleShort>comrade lover</titleShort>
+    <description>When females were absent, [PAWN_nameDef] became the object of comradely love for other comrades. It was awkward in the beginning, but now [PAWN_nameDef] has been reborn as a true lover of comradely love, sharing it with full vigor. Lai Lai Cha Cha Cha! Hey! Ppa Ppa Ri Ppa!</description>
+    <skillGains>
+      <Melee>2</Melee>
+    </skillGains>
+    <workDisables>PlantWork, Intellectual, Cleaning, Cooking, Crafting</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinToothPuller</defName>
+    <slot>Adulthood</slot>
+    <title>goblin tooth-puller</title>
+    <titleShort>goblin tooth-puller</titleShort>
+    <description>'OPEN UP!! PULLING THE CAVITY!! ...WAIT THIS ONE IS WHITE, NOT A CAVITY? DOESN'T MATTER, ALREADY OUT!! NEXT TOOTH!!'</description>
+    <skillGains>
+      <Social>-2</Social>
+    </skillGains>
+    <workDisables>Caring</workDisables>
+    <forcedTraits>
+      <Bloodlust>0</Bloodlust>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinBarber</defName>
+    <slot>Adulthood</slot>
+    <title>goblin barber</title>
+    <titleShort>goblin barber</titleShort>
+    <description>[PAWN_nameDef] trims hair. Along with the scalp.</description>
+    <skillGains>
+      <Crafting>2</Crafting>
+      <Social>-1</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinMidwife</defName>
+    <slot>Adulthood</slot>
+    <title>goblin midwife</title>
+    <titleShort>goblin midwife</titleShort>
+    <description>[PAWN_nameDef] arrives with a knife to 'help' with childbirth. Has never actually helped.</description>
+    <skillGains>
+      <Social>-3</Social>
+    </skillGains>
+    <workDisables>Caring</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinAnimalDoctor</defName>
+    <slot>Adulthood</slot>
+    <title>goblin animal doctor</title>
+    <titleShort>goblin animal doctor</titleShort>
+    <description>[PAWN_nameDef] treats prisoners instead of livestock. Extracts teeth without anesthetic as 'preventive care.'</description>
+    <skillGains>
+      <Medicine>3</Medicine>
+      <Animals>1</Animals>
+      <Social>-2</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinGatekeeper</defName>
+    <slot>Adulthood</slot>
+    <title>goblin gatekeeper</title>
+    <titleShort>goblin gatekeeper</titleShort>
+    <description>[PAWN_nameDef] hangs prisoners from their limbs one at a time for 'security.' Is the most dangerous thing in the vicinity. Nobody has told [PAWN_pronoun].</description>
+    <skillGains>
+      <Melee>2</Melee>
+      <Social>1</Social>
+    </skillGains>
+    <forcedTraits>
+      <Bloodlust>0</Bloodlust>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinMessenger</defName>
+    <slot>Adulthood</slot>
+    <title>goblin messenger</title>
+    <titleShort>goblin messenger</titleShort>
+    <description>[PAWN_nameDef] delivers prisoner body parts to other tribes as formal messages. Brands them delivered.</description>
+    <skillGains>
+      <Social>1</Social>
+      <Melee>1</Melee>
+    </skillGains>
+    <forcedTraits>
+      <NaturalMood>2</NaturalMood>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinLedgerKeeper</defName>
+    <slot>Adulthood</slot>
+    <title>goblin ledger keeper</title>
+    <titleShort>goblin ledger keeper</titleShort>
+    <description>[PAWN_nameDef] logs prisoner flesh by cut and weight in a ledger. Calls it inventory management.</description>
+    <skillGains>
+      <Intellectual>2</Intellectual>
+      <Crafting>1</Crafting>
+      <Social>-2</Social>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>-2</Nerves>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_SweetDreamsFriend</defName>
+    <slot>Adulthood</slot>
+    <title>sweet dreams friend</title>
+    <titleShort>sweet dreams friend</titleShort>
+    <description>[PAWN_nameDef] puts people to sleep with a club and considers it a kindness. 'HUMAN KEEP CRYING SO I PUT THEM SLEEP!! REST WELL FRIEND!!'</description>
+    <skillGains>
+      <Medicine>1</Medicine>
+      <Melee>1</Melee>
+      <Social>-2</Social>
+      <Shooting>-3</Shooting>
+      <Plants>-4</Plants>
+    </skillGains>
+    <workDisables>Cleaning</workDisables>
+    <forcedTraits>
+      <Nerves>-2</Nerves>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinTattooArtist</defName>
+    <slot>Adulthood</slot>
+    <title>goblin tattoo artist</title>
+    <titleShort>goblin tattoo artist</titleShort>
+    <description>[PAWN_nameDef] uses skin as a canvas and prisoners as the subject. Works while they're still breathing.</description>
+    <skillGains>
+      <Artistic>3</Artistic>
+      <Crafting>1</Crafting>
+      <Social>-2</Social>
+    </skillGains>
+    <workDisables>Caring</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinScribe</defName>
+    <slot>Adulthood</slot>
+    <title>goblin scribe</title>
+    <titleShort>goblin scribe</titleShort>
+    <description>[PAWN_nameDef] carves raid tallies and tribal rules into leather and stone. The only member of the mob considered to 'read and write.'</description>
+    <skillGains>
+      <Intellectual>4</Intellectual>
+      <Crafting>1</Crafting>
+      <Social>1</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinStonemason</defName>
+    <slot>Adulthood</slot>
+    <title>goblin stonemason</title>
+    <titleShort>goblin stonemason</titleShort>
+    <description>[PAWN_nameDef] has a gift for mixing bone and stone into walls and totems. [PAWN_pronoun] believes the earth spirits lend [PAWN_possessive] hands. It's a genetic trait.</description>
+    <skillGains>
+      <Construction>5</Construction>
+      <Mining>2</Mining>
+      <Crafting>1</Crafting>
+    </skillGains>
+    <forcedTraits>
+      <Industriousness>2</Industriousness>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinCorpseSculptor</defName>
+    <slot>Adulthood</slot>
+    <title>goblin corpse sculptor</title>
+    <titleShort>goblin corpse sculptor</titleShort>
+    <description>[PAWN_nameDef] designs structural arrangements using human remains. Not compulsion — the technique and aesthetic judgment are genuinely there.</description>
+    <skillGains>
+      <Artistic>4</Artistic>
+      <Crafting>3</Crafting>
+      <Social>-2</Social>
+    </skillGains>
+    <workDisables>Caring</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_StarNavigator</defName>
+    <slot>Adulthood</slot>
+    <title>star navigator</title>
+    <titleShort>star navigator</titleShort>
+    <description>[PAWN_nameDef] can navigate by star charts even through ash cloud cover. The tribe's pathfinder.</description>
+    <skillGains>
+      <Intellectual>3</Intellectual>
+      <Social>1</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinCasanova</defName>
+    <slot>Adulthood</slot>
+    <title>goblin casanova</title>
+    <titleShort>goblin casanova</titleShort>
+    <description>[PAWN_nameDef] has an unusual capacity for reading the state of mind of female prisoners. Applied primarily to reduce resistance in bride negotiations and slave bonding.</description>
+    <skillGains>
+      <Social>5</Social>
+      <Intellectual>2</Intellectual>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinConArtist</defName>
+    <slot>Adulthood</slot>
+    <title>goblin con artist</title>
+    <titleShort>goblin con artist</titleShort>
+    <description>[PAWN_nameDef] has lured many enemies out of cover with a promise of mercy. Breaks the promise every time.</description>
+    <skillGains>
+      <Social>4</Social>
+      <Melee>2</Melee>
+      <Intellectual>1</Intellectual>
+    </skillGains>
+    <workDisables>Caring</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_ProfessionalBait</defName>
+    <slot>Adulthood</slot>
+    <title>professional bait</title>
+    <titleShort>professional bait</titleShort>
+    <description>[PAWN_nameDef] is the decoy — deliberately exposed while playing weak to draw enemies into the kill zone. Rotates out frequently.</description>
+    <skillGains>
+      <Melee>1</Melee>
+      <Shooting>1</Shooting>
+      <Social>-1</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_Untitled</defName>
+    <slot>Adulthood</slot>
+    <title>--------------------------------------------------</title>
+    <titleShort>--------------------------------------------------</titleShort>
+    <description>eng_title:</description>
+    <skillGains>
+      <Intellectual>2</Intellectual>
+      <Social>1</Social>
+    </skillGains>
+    <workDisables>Cooking, Caring</workDisables>
+    <forcedTraits>
+      <Greedy>0</Greedy>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinQuickfeet</defName>
+    <slot>Adulthood</slot>
+    <title>goblin quickfeet</title>
+    <titleShort>goblin quickfeet</titleShort>
+    <description>The whole squad will tell you the same thing — [PAWN_nameDef] had [PAWN_possessive] back turned before they even saw the enemy. Nobody has ever caught [PAWN_pronoun]. Nobody's seen [PAWN_pronoun] fight either.</description>
+    <skillGains>
+      <Melee>-2</Melee>
+      <Social>-1</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinCourier</defName>
+    <slot>Adulthood</slot>
+    <title>goblin courier</title>
+    <titleShort>goblin courier</titleShort>
+    <description>[PAWN_nameDef] carries orders and signals between squads. Makes it through ash clouds without getting lost. Always first to arrive.</description>
+    <skillGains>
+      <Social>1</Social>
+      <Intellectual>1</Intellectual>
+      <Shooting>-1</Shooting>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_HeadFootballChamp</defName>
+    <slot>Adulthood</slot>
+    <title>head football champ</title>
+    <titleShort>head football champ</titleShort>
+    <description>'HEY!! LOOK!! I AM VERY GOOD AT HEAD FOOTBALL!! SWOOSH — GOAL!! YOU WANT TO TRY?? JUST LEND ME ONE HEAD!!'</description>
+    <skillGains>
+      <Melee>1</Melee>
+      <Social>-1</Social>
+    </skillGains>
+    <forcedTraits>
+      <NaturalMood>2</NaturalMood>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_ArsonRaider</defName>
+    <slot>Adulthood</slot>
+    <title>arson raider</title>
+    <titleShort>arson raider</titleShort>
+    <description>Every survivor of every raided village reports the same thing — [PAWN_nameDef] set fire to things before anyone touched the loot. [PAWN_possessive] own squadmates complain constantly. [PAWN_pronoun] has no idea why.</description>
+    <skillGains>
+      <Melee>1</Melee>
+      <Construction>-2</Construction>
+      <Social>-2</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinTrenchDigger</defName>
+    <slot>Adulthood</slot>
+    <title>goblin trench digger</title>
+    <titleShort>goblin trench digger</titleShort>
+    <description>[PAWN_nameDef] digs field trenches ahead of the raiding party. Support role. Rarely sees direct fighting.</description>
+    <skillGains>
+      <Melee>2</Melee>
+      <Construction>5</Construction>
+      <Mining>2</Mining>
+      <Crafting>1</Crafting>
+      <Social>-2</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinScout</defName>
+    <slot>Adulthood</slot>
+    <title>goblin scout</title>
+    <titleShort>goblin scout</titleShort>
+    <description>[PAWN_nameDef] moves fast, locates the enemy, reports back. Avoids anything that requires close combat.</description>
+    <skillGains>
+      <Intellectual>1</Intellectual>
+      <Shooting>4</Shooting>
+      <Melee>-2</Melee>
+    </skillGains>
+    <workDisables>Hauling</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_SausageCollector</defName>
+    <slot>Adulthood</slot>
+    <title>sausage collector</title>
+    <titleShort>sausage collector</titleShort>
+    <description>[PAWN_nameDef] was a light skirmisher — short blade, minimal armor, run in low and disrupt the formation from the groin up. Nobody really liked having [PAWN_pronoun] on the same side either.</description>
+    <skillGains>
+      <Melee>2</Melee>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinCamelRider</defName>
+    <slot>Adulthood</slot>
+    <title>goblin camel rider</title>
+    <titleShort>goblin camel rider</titleShort>
+    <description>[PAWN_nameDef] raided desert trade routes from camel-back, bow and firearm both. Hit merchant convoys across open sand.</description>
+    <skillGains>
+      <Shooting>3</Shooting>
+      <Melee>-2</Melee>
+      <Construction>-2</Construction>
+      <Animals>5</Animals>
+    </skillGains>
+    <workDisables>Cleaning, Crafting</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinWargRider</defName>
+    <slot>Adulthood</slot>
+    <title>goblin warg rider</title>
+    <titleShort>goblin warg rider</titleShort>
+    <description>[PAWN_nameDef] rode a warg, swinging a curved blade and throwing a lasso. That's the whole job description.</description>
+    <skillGains>
+      <Melee>3</Melee>
+      <Shooting>-2</Shooting>
+      <Construction>-2</Construction>
+      <Animals>5</Animals>
+    </skillGains>
+    <workDisables>Cleaning, Crafting</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinHerald</defName>
+    <slot>Adulthood</slot>
+    <title>goblin herald</title>
+    <titleShort>goblin herald</titleShort>
+    <description>The standard for a mounted herald is someone imposing and handsome. [PAWN_nameDef] got the role anyway.</description>
+    <skillGains>
+      <Construction>1</Construction>
+      <Crafting>1</Crafting>
+      <Plants>2</Plants>
+      <Melee>1</Melee>
+      <Social>-2</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_VirginPlunderer</defName>
+    <slot>Adulthood</slot>
+    <title>virgin plunderer</title>
+    <titleShort>virgin plunderer</titleShort>
+    <description>[PAWN_nameDef] participates in pillaging for one reason only: to hunt virgins. Everything else is completely irrelevant. Using a freakishly sharp sense of smell, [PAWN_pronoun] never fails to track down virgins.</description>
+    <skillGains>
+      <Melee>1</Melee>
+      <Construction>-2</Construction>
+      <Social>-2</Social>
+    </skillGains>
+    <workDisables>Cleaning, Intellectual, Cooking</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinEntrailAddict</defName>
+    <slot>Adulthood</slot>
+    <title>goblin entrail addict</title>
+    <titleShort>goblin entrail addict</titleShort>
+    <description>'FRESH GUTS!! GUTS GUTS GUTS!! WARM ONES ONLY, CHEWING IS DIFFERENT!! MY HANDS ARE SHAKING... MORE!! MORE MORE MORE!! I CANNOT WORK WITHOUT THEM!!'</description>
+    <skillGains>
+      <Cooking>2</Cooking>
+      <Medicine>1</Medicine>
+      <Social>-1</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GutScarfFashionista</defName>
+    <slot>Adulthood</slot>
+    <title>gut scarf fashionista</title>
+    <titleShort>gut scarf fashionista</titleShort>
+    <description>[PAWN_nameDef] wears fresh intestines as a scarf. The smell intensifies in warm weather. [PAWN_pronoun] considers it perfume.</description>
+    <skillGains>
+      <Crafting>1</Crafting>
+      <Artistic>1</Artistic>
+      <Social>-2</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_VintageWineConnoisseur</defName>
+    <slot>Adulthood</slot>
+    <title>vintage wine connoisseur</title>
+    <titleShort>vintage wine connoisseur</titleShort>
+    <description>[PAWN_nameDef] developed a preference for older female prisoners after a particular experience. Other goblins call it the henhouse instinct. [PAWN_nameDef] calls them 'wine' and treats them with what [PAWN_pronoun] considers respect. Still goes on raids specifically to find one.</description>
+    <skillGains>
+      <Intellectual>2</Intellectual>
+      <Social>1</Social>
+      <Shooting>1</Shooting>
+    </skillGains>
+    <workDisables>Artistic</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinHumper</defName>
+    <slot>Adulthood</slot>
+    <title>goblin humper</title>
+    <titleShort>goblin humper</titleShort>
+    <description>[PAWN_nameDef] possesses an absurdly higher stamina and impulse than other goblins. In fact, [PAWN_pronoun] can easily be found by simply following the trail of heavy goblin panting, moans, the wet slapping sound of flesh, and the disgusting stench of chestnut blossoms.</description>
+    <skillGains>
+      <Animals>1</Animals>
+      <Shooting>2</Shooting>
+    </skillGains>
+    <workDisables>Cleaning, Crafting, Intellectual</workDisables>
+    <forcedTraits>
+      <ShootingAccuracy>-1</ShootingAccuracy>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinFeministActivist</defName>
+    <slot>Adulthood</slot>
+    <title>goblin feminist activist</title>
+    <titleShort>goblin feminist activist</titleShort>
+    <description>[PAWN_nameDef] found a book about feminism during a raid on a human settlement and became fascinated by it. [PAWN_pronoun] now champions women's rights, preaching that all men must be crushed. Paradoxically, [PAWN_pronoun] hasn't yet processed the minor detail that [PAWN_pronoun] is, in fact, a male.</description>
+    <workDisables>Cleaning, Crafting, PlantWork, Cooking, Hauling</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_BitesToDecide</defName>
+    <slot>Adulthood</slot>
+    <title>bites to decide</title>
+    <titleShort>bites to decide</titleShort>
+    <description>[PAWN_nameDef] bites first whenever there's a dispute. First to step forward when the squad hierarchy gets unclear.</description>
+    <skillGains>
+      <Melee>2</Melee>
+      <Social>-2</Social>
+      <Intellectual>-2</Intellectual>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>-2</Nerves>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_MechanoidWarVeteran</defName>
+    <slot>Adulthood</slot>
+    <title>mechanoid war veteran</title>
+    <titleShort>mechanoid war veteran</titleShort>
+    <description>[PAWN_nameDef] carries traces of advanced military conditioning from the Mechanoid War era. The precision stands out sharply against [PAWN_possessive] own kind.</description>
+    <skillGains>
+      <Shooting>3</Shooting>
+      <Construction>2</Construction>
+      <Intellectual>2</Intellectual>
+    </skillGains>
+    <workDisables>Social</workDisables>
+    <forcedTraits>
+      <Tough>0</Tough>
+      <Nerves>2</Nerves>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_TwistedHumanAspirant</defName>
+    <slot>Adulthood</slot>
+    <title>twisted human aspirant</title>
+    <titleShort>twisted human aspirant</titleShort>
+    <description>[PAWN_nameDef] has mutilated [PAWN_possessive] own body trying to look more human. Seems satisfied every time [PAWN_pronoun] checks the mirror.</description>
+    <skillGains>
+      <Intellectual>2</Intellectual>
+      <Social>-3</Social>
+      <Melee>-1</Melee>
+    </skillGains>
+    <workDisables>Caring</workDisables>
+    <forcedTraits>
+      <Nerves>-2</Nerves>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_BreedingStud</defName>
+    <slot>Adulthood</slot>
+    <title>breeding stud</title>
+    <titleShort>breeding stud</titleShort>
+    <description>[PAWN_nameDef] was a diligent goblin whose exceptional stamina allowed endless work without rest. The air around [PAWN_nameDef] always reeked of sour sweat and a heavy, musky scent.</description>
+    <skillGains>
+      <Shooting>3</Shooting>
+      <Plants>3</Plants>
+      <Crafting>-2</Crafting>
+      <Medicine>1</Medicine>
+    </skillGains>
+    <workDisables>Cooking, Cleaning</workDisables>
+    <forcedTraits>
+      <Industriousness>2</Industriousness>
+      <Beauty>-2</Beauty>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_BeaconHunterBackstoryBase">
+    <defName>MUGB_Backstory_HumanChild_HalfGoblin</defName>
+    <slot>Childhood</slot>
+    <title>half-goblin</title>
+    <titleShort>half-goblin</titleShort>
+    <description>[PAWN_nameDef] is a rare being who was sired by a goblin father but is not a goblin. Nevertheless, goblin blood undoubtedly runs through [PAWN_pronoun]'s veins.</description>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_BeaconHunterBackstoryBase">
+    <defName>MUGB_Backstory_HumanChild_GoblinLivestock2</defName>
+    <slot>Childhood</slot>
+    <title>goblin livestock</title>
+    <titleShort>goblin livestock</titleShort>
+    <description>[PAWN_nameDef] was captured by goblins and spent [PAWN_possessive] childhood as a prisoner. In a horrific environment where [PAWN_pronoun] never knew when [PAWN_pronoun] might be eaten, [PAWN_nameDef] lost both [PAWN_possessive] words and vitality.</description>
+    <workDisables>Violent, Social</workDisables>
+    <forcedTraits>
+      <TorturedArtist>0</TorturedArtist>
+      <NaturalMood>-1</NaturalMood>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_BeaconHunterBackstoryBase">
+    <defName>MUGB_Backstory_HumanChild_SavedSoul</defName>
+    <slot>Childhood</slot>
+    <title>saved soul</title>
+    <titleShort>saved soul</titleShort>
+    <description>During [PAWN_possessive] childhood, [PAWN_nameDef] lost [PAWN_possessive] parents right before [PAWN_possessive] eyes and witnessed their corpses being brutally butchered by goblins. Just moments before [PAWN_pronoun] too was about to become an ingredient for a goblin dish, [PAWN_pronoun] was narrowly rescued by goblin hunters. [PAWN_pronoun] vowed to one day exterminate every last goblin.</description>
+    <workDisables>Cooking, Caring</workDisables>
+    <forcedTraits>
+      <Tough>0</Tough>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_BeaconHunterBackstoryBase">
+    <defName>MUGB_Backstory_HumanChild_GoblinSPlaything</defName>
+    <slot>Childhood</slot>
+    <title>goblin's plaything</title>
+    <titleShort>goblin's plaything</titleShort>
+    <description>During [PAWN_possessive] childhood, [PAWN_nameDef] managed to escape a gruesome fate by catching the fancy of an eccentric goblin—whether by luck or misfortune. Though [PAWN_pronoun] survived by serving the eccentric goblin, [PAWN_pronoun] was branded as a traitor by the other prisoners.</description>
+    <forcedTraits>
+      <Beauty>1</Beauty>
+      <Masochist>0</Masochist>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_BeaconHunterBackstoryBase">
+    <defName>MUGB_Backstory_HumanAdult_GoblinPunitiveSoldier</defName>
+    <slot>Adulthood</slot>
+    <title>goblin punitive soldier</title>
+    <titleShort>goblin punitive soldier</titleShort>
+    <description>[PAWN_nameDef] lost family to goblins and joined a punitive force for revenge. [PAWN_pronoun] will do anything to make goblins pay.</description>
+    <forcedTraits>
+      <Nerves>1</Nerves>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_BeaconHunterBackstoryBase">
+    <defName>MUGB_Backstory_HumanAdult_GoblinSubjugator</defName>
+    <slot>Adulthood</slot>
+    <title>goblin subjugator</title>
+    <titleShort>goblin subjugator</titleShort>
+    <description>[PAWN_nameDef] lost [PAWN_possessive] family to goblins. Burning with a desire for revenge, [PAWN_pronoun] volunteered for the subjugation squad. Holding infinite hostility towards goblins, [PAWN_pronoun] is ready to do whatever it takes to avenge [PAWN_possessive] family.</description>
+    <forcedTraits>
+      <Nerves>1</Nerves>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_BeaconHunterBackstoryBase">
+    <defName>MUGB_Backstory_HumanAdult_GoblinHunter2</defName>
+    <slot>Adulthood</slot>
+    <title>goblin hunter</title>
+    <titleShort>goblin hunter</titleShort>
+    <description>Despising goblins, [PAWN_nameDef] decided to punish them with [PAWN_possessive] own hands. [PAWN_pronoun] honed [PAWN_possessive] skills to specialize in hunting goblins, making a living by rescuing prisoners captured by them and selling goblin trophies.</description>
+    <workDisables>PlantWork</workDisables>
+    <forcedTraits>
+      <ShootingAccuracy>1</ShootingAccuracy>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_BeaconHunterBackstoryBase">
+    <defName>MUGB_Backstory_HumanAdult_GoblinSubjugationCaptain</defName>
+    <slot>Adulthood</slot>
+    <title>goblin subjugation captain</title>
+    <titleShort>goblin subjugation captain</titleShort>
+    <description>Recognized for [PAWN_possessive] outstanding leadership and combat abilities, [PAWN_nameDef] was appointed as the captain of the goblin subjugation squad. Under [PAWN_possessive] command, [PAWN_pronoun] defeated countless goblins and saved numerous lives.</description>
+    <workDisables>Crafting, Cooking, PlantWork</workDisables>
+    <forcedTraits>
+      <Nerves>2</Nerves>
+      <Tough>0</Tough>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_BeaconHunterBackstoryBase">
+    <defName>MUGB_Backstory_HumanAdult_GoblinSlayer</defName>
+    <slot>Adulthood</slot>
+    <title>goblin slayer</title>
+    <titleShort>goblin slayer</titleShort>
+    <description>At some point, [PAWN_nameDef] began hearing auditory hallucinations. A voice claiming that [PAWN_pronoun] must lead the goblin extermination in its stead revealed the location of a crashed ancient spacecraft to [PAWN_nameDef]. Upon arriving at the designated spot, [PAWN_pronoun] indeed found a spacecraft, and within its wreckage, [PAWN_pronoun] discovered a serum containing mysterious mechanite particles. Despite [PAWN_possessive] suspicions, [PAWN_nameDef] injected the serum into [PAWN_objective]self as the voice commanded, feeling an immense power surge through [PAWN_possessive] body. [PAWN_pronoun] came to trust the voice and, following its will, became a legend known as the 'Goblin Slayer', slaughtering every goblin in sight. [PAWN_pronoun] is now a figure of absolute terror to goblins, and a true symbol of heroism to the inhabitants of the rimworld.</description>
+    <forcedTraits>
+      <Nerves>2</Nerves>
+      <Nimble>0</Nimble>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_BeaconHunterBackstoryBase">
+    <defName>MUGB_Backstory_HumanAdult_GoblinVendingMachine</defName>
+    <slot>Adulthood</slot>
+    <title>goblin vending machine</title>
+    <titleShort>goblin vending machine</titleShort>
+    <description>[PAWN_nameDef] was unfortunately captured by goblins and reduced to a state of producing babies for them. With each birth, [PAWN_pronoun] felt the life force draining from [PAWN_possessive] body, falling into deep despair. Fortunately, a goblin subjugation squad discovered [PAWN_objective] and rescued [PAWN_objective] from that horrific reality.</description>
+    <workDisables>Violent</workDisables>
+    <forcedTraits>
+      <Masochist>0</Masochist>
+    </forcedTraits>
+  </BackstoryDef>
+
+</Defs>

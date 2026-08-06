@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="MUGB_MakeGloopJuice"]/description</xpath>
+        <value><description>Ferment viscera, psilocaps, and raw fungus into a crude goblin combat stimulant.</description></value>
+      </li>
+      <li Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="MUGB_MakeGloopJuice"]/ingredients/li[filter/thingDefs/li="MedicineHerbal"]</xpath>
+        <value>
+          <li>
+            <filter><thingDefs><li>Drug_Psilocap</li></thingDefs></filter>
+            <count>9</count>
+          </li>
+        </value>
+      </li>
+      <li Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="MUGB_MakeGloopJuice"]/fixedIngredientFilter/thingDefs/li[.="MedicineHerbal"]</xpath>
+        <value><li>Drug_Psilocap</li></value>
+      </li>
+
+      <li Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="MUGB_MakeSpermJuice"]/description</xpath>
+        <value><description>Process a goblin reproductive sac with psilocaps and fungus into a crude work and fertility stimulant.</description></value>
+      </li>
+      <li Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="MUGB_MakeSpermJuice"]/ingredients/li[filter/thingDefs/li="MedicineHerbal"]</xpath>
+        <value>
+          <li>
+            <filter><thingDefs><li>Drug_Psilocap</li></thingDefs></filter>
+            <count>6</count>
+          </li>
+        </value>
+      </li>
+      <li Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="MUGB_MakeSpermJuice"]/fixedIngredientFilter/thingDefs/li[.="MedicineHerbal"]</xpath>
+        <value><li>Drug_Psilocap</li></value>
+      </li>
+    </operations>
+  </Operation>
+</Patch>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <RaidStrategyDef>
+    <defName>MUGB_GoblinSapperRaid</defName>
+    <workerClass>MUGB.RaidStrategyWorker_GoblinSapperRaid</workerClass>
+    <minPawns>6</minPawns>
+    <pointsFactorCurve>
+      <points>
+        <li>(0, 0.90)</li>
+      </points>
+    </pointsFactorCurve>
+    <selectionWeightPerPointsCurve>
+      <points>
+        <li>(0, 0)</li>
+        <li>(849, 0)</li>
+        <li>(850, 0.05)</li>
+        <li>(1000, 0.35)</li>
+        <li>(1500, 0.50)</li>
+        <li>(3000, 0.65)</li>
+      </points>
+    </selectionWeightPerPointsCurve>
+    <arriveModes><li>EdgeWalkIn</li></arriveModes>
+    <letterLabelEnemy>Goblin sapper raid</letterLabelEnemy>
+    <arrivalTextEnemy>The goblins are attacking with dedicated sapper squads. Their breachers will open a path while the rest of the force escorts them.</arrivalTextEnemy>
+    <layerWhitelist><li>Surface</li></layerWhitelist>
+  </RaidStrategyDef>
+
+  <RaidStrategyDef>
+    <defName>MUGB_GoblinSuicideSapperRaid</defName>
+    <workerClass>MUGB.RaidStrategyWorker_GoblinSuicideSapperRaid</workerClass>
+    <minPawns>6</minPawns>
+    <pointsFactorCurve><points><li>(0, 1.0)</li></points></pointsFactorCurve>
+    <selectionWeightPerPointsCurve>
+      <points>
+        <li>(0, 0)</li>
+        <li>(849, 0)</li>
+        <li>(850, 0.03)</li>
+        <li>(1200, 0.10)</li>
+        <li>(1800, 0.16)</li>
+        <li>(3000, 0.22)</li>
+        <li>(5000, 0.26)</li>
+      </points>
+    </selectionWeightPerPointsCurve>
+    <arriveModes><li>EdgeWalkIn</li></arriveModes>
+    <letterLabelEnemy>Goblin boomstick sapper raid</letterLabelEnemy>
+    <arrivalTextEnemy>Goblin suicide sappers are advancing behind heavily armed escorts. They will breach the colony one boomstick at a time.</arrivalTextEnemy>
+    <layerWhitelist><li>Surface</li></layerWhitelist>
+  </RaidStrategyDef>
+
+  <RaidStrategyDef>
+    <defName>MUGB_GoblinCompositeSapperRaid</defName>
+    <workerClass>MUGB.RaidStrategyWorker_GoblinCompositeSapperRaid</workerClass>
+    <minPawns>12</minPawns>
+    <pointsFactorCurve><points><li>(0, 1.0)</li></points></pointsFactorCurve>
+    <selectionWeightPerPointsCurve>
+      <points>
+        <li>(0, 0)</li>
+        <li>(1799, 0)</li>
+        <li>(1800, 0.12)</li>
+        <li>(2500, 0.22)</li>
+        <li>(4000, 0.32)</li>
+        <li>(6000, 0.36)</li>
+      </points>
+    </selectionWeightPerPointsCurve>
+    <arriveModes><li>MUGB_GoblinCompositeTwoDirections</li></arriveModes>
+    <letterLabelEnemy>Goblin two-pronged sapper raid</letterLabelEnemy>
+    <arrivalTextEnemy>A large goblin force has split into two attack axes. Sappers and their escorts are breaching from one direction while a second force assaults from another.</arrivalTextEnemy>
+    <layerWhitelist><li>Surface</li></layerWhitelist>
+  </RaidStrategyDef>
+
+  <PawnsArrivalModeDef>
+    <defName>MUGB_GoblinCompositeTwoDirections</defName>
+    <workerClass>MUGB.PawnsArrivalModeWorker_GoblinCompositeTwoDirections</workerClass>
+    <selectionWeightCurve><points><li>(0, 1)</li></points></selectionWeightCurve>
+    <textEnemy>They are approaching from two directions.</textEnemy>
+    <textFriendly>They are approaching from two directions.</textFriendly>
+  </PawnsArrivalModeDef>
+</Defs>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 한국어 명칭: 고블린 공성술. 고블린 박격포와 대형연노를 해금한다.
+       2026-07-10: 미디블 오버홀 의존 전면 제거 (탭/발리스타 선행/고급연구대).
+       조건부 발리스타 선행도 검토 후 제외 — 미디블 발리스타(1000)+선행+고급연구대까지
+       끌려와 "저렴한 고블린 트리" 원칙이 깨지므로 자체 연구만으로 완주한다. -->
+  <ResearchProjectDef>
+    <defName>MUGB_GoblinSiegecraft</defName>
+    <label>goblin siegecraft</label>
+    <description>Adapt goblin blackpowder into the arts of shell lobbing, heavy bolt magazines, and ruinous battlefield improvisation.</description>
+    <baseCost>1000</baseCost>
+    <techLevel>Medieval</techLevel>
+    <tab>MUGB_GoblinResearchTab</tab>
+    <researchViewX>4</researchViewX>
+    <researchViewY>2.2</researchViewY>
+    <prerequisites>
+      <li>MUGB_Research_Blackpowder</li>
+    </prerequisites>
+  </ResearchProjectDef>
+</Defs>

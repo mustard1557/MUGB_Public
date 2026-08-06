@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  <!-- Keep the archer and mixed-ranged weapon pools exact instead of inheriting broad vanilla ranged tags. -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bow_Short"]/weaponTags</xpath>
+    <value>
+      <li>MUGB_PrimitiveArcherBow</li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bow_Recurve"]/weaponTags</xpath>
+    <value>
+      <li>MUGB_PrimitiveArcherBow</li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bow_Great"]/weaponTags</xpath>
+    <value>
+      <li>MUGB_MedievalArcherBow</li>
+      <li>MUGB_MedievalRangedSquadWeapon</li>
+    </value>
+  </Operation>
+</Patch>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <RecipeDef>
+    <defName>MUGB_ExtractBrain</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>extract brain</label>
+    <description>Crack open the skull and extract the brain for goblin cooking. Success yields a brain and skull; failure kills the patient without useful brain matter.</description>
+    <workerClass>MUGB.Recipe_ExtractBrain</workerClass>
+    <uiIconThing>MUGB_brain</uiIconThing>
+    <jobString>Extracting brain.</jobString>
+    <workAmount>900</workAmount>
+    <effectWorking>Surgery</effectWorking>
+    <soundWorking>Recipe_Surgery</soundWorking>
+    <workSpeedStat>MedicalOperationSpeed</workSpeedStat>
+    <workSkill>Medicine</workSkill>
+    <workSkillLearnFactor>0</workSkillLearnFactor>
+    <humanlikeOnly>true</humanlikeOnly>
+    <isViolation>true</isViolation>
+    <anesthetize>false</anesthetize>
+    <displayPriority>250</displayPriority>
+    <appliedOnFixedBodyParts>
+      <li>Brain</li>
+    </appliedOnFixedBodyParts>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>MUGB_ExtractHeart</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>extract heart</label>
+    <description>Rip out the heart in a crude goblin butchery operation. Success is certain and yields a prepared goblin cooking heart, but the patient does not survive.</description>
+    <workerClass>MUGB.Recipe_ExtractHeart</workerClass>
+    <uiIconThing>MUGB_heart</uiIconThing>
+    <jobString>Extracting heart.</jobString>
+    <workAmount>500</workAmount>
+    <effectWorking>Surgery</effectWorking>
+    <soundWorking>Recipe_Surgery</soundWorking>
+    <workSpeedStat>MedicalOperationSpeed</workSpeedStat>
+    <workSkill>Medicine</workSkill>
+    <workSkillLearnFactor>0</workSkillLearnFactor>
+    <humanlikeOnly>true</humanlikeOnly>
+    <isViolation>true</isViolation>
+    <anesthetize>false</anesthetize>
+    <displayPriority>250</displayPriority>
+    <appliedOnFixedBodyParts>
+      <li>Heart</li>
+    </appliedOnFixedBodyParts>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>MUGB_ExtractFleshChunks</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>extract meat chunks</label>
+    <description>Hack usable meat chunks from a living humanlike patient. Success yields raw flesh chunks and removes two limbs; failure still yields flesh, but kills the patient.</description>
+    <workerClass>MUGB.Recipe_ExtractFleshChunks</workerClass>
+    <uiIconThing>Meat_Human</uiIconThing>
+    <jobString>Extracting meat chunks.</jobString>
+    <workAmount>300</workAmount>
+    <effectWorking>Surgery</effectWorking>
+    <soundWorking>Recipe_Surgery</soundWorking>
+    <workSpeedStat>MedicalOperationSpeed</workSpeedStat>
+    <workSkill>Medicine</workSkill>
+    <workSkillLearnFactor>0</workSkillLearnFactor>
+    <humanlikeOnly>true</humanlikeOnly>
+    <isViolation>true</isViolation>
+    <anesthetize>false</anesthetize>
+    <displayPriority>251</displayPriority>
+    <appliedOnFixedBodyParts>
+      <li>Torso</li>
+    </appliedOnFixedBodyParts>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>MUGB_ExtractGoblinReproductiveSac</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>extract goblin reproductive sac</label>
+    <description>Drain and remove a goblin reproductive sac. The operation is crude but reliable, and the donor needs time before another sac can be taken.</description>
+    <workerClass>MUGB.Recipe_ExtractGoblinReproductiveSac</workerClass>
+    <uiIconThing>MUGB_GBroodSac</uiIconThing>
+    <jobString>Extracting goblin reproductive sac.</jobString>
+    <workAmount>220</workAmount>
+    <effectWorking>Surgery</effectWorking>
+    <soundWorking>Recipe_Surgery</soundWorking>
+    <workSpeedStat>MedicalOperationSpeed</workSpeedStat>
+    <workSkill>Medicine</workSkill>
+    <workSkillLearnFactor>4</workSkillLearnFactor>
+    <humanlikeOnly>true</humanlikeOnly>
+    <isViolation>true</isViolation>
+    <anesthetize>false</anesthetize>
+    <displayPriority>253</displayPriority>
+    <appliedOnFixedBodyParts>
+      <li>Torso</li>
+    </appliedOnFixedBodyParts>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>MUGB_AdministerGoblinReproductiveSac</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>administer goblin reproductive sac</label>
+    <description>Force a harvested goblin reproductive sac into a non-goblin humanlike patient. This gives a large jump in goblin pheromone conditioning, but leaves the patient sickened and disgusted.</description>
+    <workerClass>MUGB.Recipe_AdministerGoblinReproductiveSac</workerClass>
+    <uiIconThing>MUGB_GBroodSac</uiIconThing>
+    <jobString>Administering goblin reproductive sac.</jobString>
+    <workAmount>180</workAmount>
+    <effectWorking>Surgery</effectWorking>
+    <soundWorking>Recipe_Surgery</soundWorking>
+    <workSpeedStat>MedicalOperationSpeed</workSpeedStat>
+    <workSkill>Medicine</workSkill>
+    <workSkillLearnFactor>2</workSkillLearnFactor>
+    <surgeryOutcomeEffect>SurgeryOutcomeBase</surgeryOutcomeEffect>
+    <surgerySuccessChanceFactor>1</surgerySuccessChanceFactor>
+    <humanlikeOnly>true</humanlikeOnly>
+    <isViolation>true</isViolation>
+    <anesthetize>false</anesthetize>
+    <displayPriority>253</displayPriority>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>MUGB_GBroodSac</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>MUGB_GBroodSac</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <appliedOnFixedBodyParts>
+      <li>Torso</li>
+    </appliedOnFixedBodyParts>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>MUGB_ImplantGoblinEmbryo</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>implant goblin embryo</label>
+    <description>Implant a goblin embryo into a female humanlike patient. The operation is crude and risky, but successful implantation starts a goblin pregnancy.</description>
+    <workerClass>MUGB.Recipe_ImplantGoblinEmbryo</workerClass>
+    <uiIconThing>MUGB_Gfetus</uiIconThing>
+    <jobString>Implanting goblin embryo.</jobString>
+    <workAmount>1020</workAmount>
+    <effectWorking>Surgery</effectWorking>
+    <soundWorking>Recipe_Surgery</soundWorking>
+    <workSpeedStat>MedicalOperationSpeed</workSpeedStat>
+    <workSkill>Medicine</workSkill>
+    <workSkillLearnFactor>10</workSkillLearnFactor>
+    <surgeryOutcomeEffect>SurgeryOutcomeBase</surgeryOutcomeEffect>
+    <surgerySuccessChanceFactor>0.85</surgerySuccessChanceFactor>
+    <humanlikeOnly>true</humanlikeOnly>
+    <isViolation>true</isViolation>
+    <anesthetize>true</anesthetize>
+    <displayPriority>254</displayPriority>
+    <skillRequirements>
+      <Medicine>4</Medicine>
+    </skillRequirements>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>MUGB_Gfetus</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <categories>
+            <li>Medicine</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>MUGB_Gfetus</li>
+      </thingDefs>
+      <categories>
+        <li>Medicine</li>
+      </categories>
+    </fixedIngredientFilter>
+    <appliedOnFixedBodyParts>
+      <li>Torso</li>
+    </appliedOnFixedBodyParts>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>MUGB_NosePickLobotomy</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>goblin nose-pick lobotomy</label>
+    <description>Destroy the frontal lobe through the nose using a crude goblin implement. The patient becomes calmer and easier to control, but suffers severe mental and physical impairment.</description>
+    <workerClass>MUGB.Recipe_NosePickLobotomy</workerClass>
+    <uiIconThing>MUGB_brain</uiIconThing>
+    <jobString>Performing goblin nose-pick lobotomy.</jobString>
+    <workAmount>650</workAmount>
+    <effectWorking>Surgery</effectWorking>
+    <soundWorking>Recipe_Surgery</soundWorking>
+    <workSpeedStat>MedicalOperationSpeed</workSpeedStat>
+    <workSkill>Medicine</workSkill>
+    <workSkillLearnFactor>16</workSkillLearnFactor>
+    <surgeryOutcomeEffect>SurgeryOutcomeBase</surgeryOutcomeEffect>
+    <surgerySuccessChanceFactor>1</surgerySuccessChanceFactor>
+    <humanlikeOnly>true</humanlikeOnly>
+    <isViolation>true</isViolation>
+    <anesthetize>true</anesthetize>
+    <displayPriority>252</displayPriority>
+    <skillRequirements>
+      <Medicine>6</Medicine>
+    </skillRequirements>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Medicine</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Medicine</li>
+      </categories>
+    </fixedIngredientFilter>
+    <appliedOnFixedBodyParts>
+      <li>Brain</li>
+    </appliedOnFixedBodyParts>
+  </RecipeDef>
+
+</Defs>

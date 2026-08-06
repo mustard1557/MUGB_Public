@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>MUGB_goblinbeacon</defName>
+    <label>goblin beacon</label>
+    <description>A crude beacon of wood, bones, and a loaded goblin corpse. When lit, it burns with heavy smoke and calls nearby trouble.</description>
+    <thingClass>MUGB.Building_GoblinBeacon</thingClass>
+    <containedPawnsSelectable>true</containedPawnsSelectable>
+    <techLevel>Neolithic</techLevel>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Things/Building/Production/MGB_goblinbeacon/MGB_goblinbeacon_empty</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(3.0,3.0)</drawSize>
+      <shadowData>
+        <volume>(2.8,0.35,0.59)</volume>
+        <offset>(0,0,0.08)</offset>
+      </shadowData>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <size>(2,2)</size>
+    <rotatable>false</rotatable>
+    <tickerType>Normal</tickerType>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <altitudeLayer>Building</altitudeLayer>
+    <fillPercent>0.2</fillPercent>
+    <pathCost>0</pathCost>
+    <passability>PassThroughOnly</passability>
+    <useHitPoints>true</useHitPoints>
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <!-- Ideology가 활성화되면 별도 패치가 이 값을 Ideology로 교체한다. -->
+    <designationCategory>Misc</designationCategory>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>
+    <building>
+      <preventDeteriorationInside>true</preventDeteriorationInside>
+      <haulToContainerDuration>500</haulToContainerDuration>
+      <fullGraveGraphicData>
+        <texPath>Things/Building/Production/MGB_goblinbeacon/MGB_goblinbeacon_loaded</texPath>
+        <graphicClass>Graphic_Single</graphicClass>
+        <shaderType>CutoutComplex</shaderType>
+        <drawSize>(3.0,3.0)</drawSize>
+      </fullGraveGraphicData>
+      <fixedStorageSettings>
+        <filter>
+          <categories>
+            <li>CorpsesHumanlike</li>
+          </categories>
+        </filter>
+      </fixedStorageSettings>
+      <defaultStorageSettings>
+        <priority>Critical</priority>
+        <filter>
+          <categories>
+            <li>CorpsesHumanlike</li>
+          </categories>
+        </filter>
+      </defaultStorageSettings>
+    </building>
+    <statBases>
+      <MaxHitPoints>300</MaxHitPoints>
+      <WorkToBuild>1800</WorkToBuild>
+      <Mass>28</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>-8</Beauty>
+    </statBases>
+    <costList>
+      <WoodLog>100</WoodLog>
+      <MUGB_Bone>40</MUGB_Bone>
+    </costList>
+    <placeWorkers>
+      <li>MUGB.PlaceWorker_GoblinBeaconNoRoof</li>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+    <comps>
+      <li Class="MUGB.CompProperties_GoblinBeaconMirrorable" />
+      <li Class="CompProperties_Glower">
+        <glowRadius>10</glowRadius>
+        <glowColor>(252,187,113,0)</glowColor>
+      </li>
+    </comps>
+    <inspectorTabs>
+      <li>ITab_Storage</li>
+      <li>ITab_ContentsCasket</li>
+    </inspectorTabs>
+    <socialPropernessMatters>true</socialPropernessMatters>
+  </ThingDef>
+
+  <IncidentDef>
+    <defName>MUGB_GoblinBeaconWanderer</defName>
+    <label>goblin beacon joiners</label>
+    <category>Special</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>MUGB.IncidentWorker_GoblinBeaconJoiners</workerClass>
+    <letterLabel>goblin beacon joiners</letterLabel>
+    <letterText>Goblins have followed the beacon smoke and ask to join your settlement.</letterText>
+    <baseChance>0</baseChance>
+    <minRefireDays>3</minRefireDays>
+    <minGreatestPopulation>12</minGreatestPopulation>
+    <populationEffect>IncreaseEasy</populationEffect>
+  </IncidentDef>
+
+  <IncidentDef>
+    <defName>MUGB_GoblinBeaconHospitalityRefugees</defName>
+    <label>goblin beacon refugees</label>
+    <category>Special</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>MUGB.IncidentWorker_GoblinBeaconHospitalityRefugees</workerClass>
+    <baseChance>0</baseChance>
+    <minRefireDays>3</minRefireDays>
+  </IncidentDef>
+
+  <LetterDef ParentName="CustomChoiceLetterBase">
+    <defName>MUGB_GoblinBeaconJoinersChoice</defName>
+    <letterClass>MUGB.ChoiceLetter_GoblinBeaconJoiners</letterClass>
+  </LetterDef>
+
+  <IncidentDef>
+    <defName>MUGB_GoblinBeaconHumanHunters</defName>
+    <label>goblin hunter reprisal</label>
+    <!-- 한국어 표시명: 고블린 토벌대 습격 -->
+    <!-- 한국어 의도: 별도 인간 사냥꾼 세력에 고정하지 않고, 기존 비고블린 적대 세력 병력을 봉화 토벌대로 재해석한다. -->
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>MUGB.IncidentWorker_GoblinBeaconHumanHunters</workerClass>
+    <baseChance>0</baseChance>
+    <category>ThreatBig</category>
+    <pointsScaleable>true</pointsScaleable>
+    <tale>Raid</tale>
+    <ignoreRecentSelectionWeighting>true</ignoreRecentSelectionWeighting>
+    <canOccurOnAllPlanetLayers>true</canOccurOnAllPlanetLayers>
+  </IncidentDef>
+
+  <ThingDef ParentName="SculptureBase">
+    <defName>MUGB_GoblinSculptureSmall</defName>
+    <label>small goblin sculpture</label>
+    <description>A crude goblin sculpture shaped like a trophy urn. It is ugly, menacing, and disturbingly useful for rituals.</description>
+    <thingClass>MUGB.Building_GoblinSculptureSmall</thingClass>
+    <graphicData>
+      <graphicClass>Graphic_Random</graphicClass>
+      <texPath>Things/Building/Art/MGB_SculptureSmall/Random</texPath>
+    </graphicData>
+    <fillPercent>0.35</fillPercent>
+    <rotatable>true</rotatable>
+    <statBases>
+      <MaxHitPoints>90</MaxHitPoints>
+      <Mass>3</Mass>
+      <Beauty>34</Beauty>
+      <WorkToMake>14400</WorkToMake>
+      <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">8</StyleDominance>
+      <TerrorSource MayRequire="Ludeon.RimWorld.Ideology">28</TerrorSource>
+      <SellPriceFactor>0.73</SellPriceFactor>
+    </statBases>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <tradeTags>
+      <li>Art</li>
+    </tradeTags>
+    <costStuffCount>50</costStuffCount>
+    <comps>
+      <li Class="MUGB.CompProperties_GoblinMirrorable" />
+      <li Class="CompProperties_FacilityQualityBased" MayRequire="Ludeon.RimWorld.Anomaly">
+        <statOffsetsPerQuality>
+          <li>
+            <key>PsychicRitualQuality</key>
+            <value>
+              <li><key>Awful</key><value>0.01</value></li>
+              <li><key>Poor</key><value>0.01</value></li>
+              <li><key>Normal</key><value>0.02</value></li>
+              <li><key>Good</key><value>0.02</value></li>
+              <li><key>Excellent</key><value>0.03</value></li>
+              <li><key>Masterwork</key><value>0.03</value></li>
+              <li><key>Legendary</key><value>0.05</value></li>
+            </value>
+          </li>
+        </statOffsetsPerQuality>
+        <maxSimultaneous>6</maxSimultaneous>
+        <maxDistance>10</maxDistance>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="SculptureBase">
+    <defName>MUGB_GoblinSculptureGrand</defName>
+    <label>grand goblin sculpture</label>
+    <description>A huge goblin sculpture made for feasts, raids, and ugly ritual pride.</description>
+    <thingClass>MUGB.Building_GoblinSculptureGrand</thingClass>
+    <castEdgeShadows>true</castEdgeShadows>
+    <graphicData>
+      <graphicClass>Graphic_Random</graphicClass>
+      <texPath>Things/Building/Art/MGB_GoblinSculptureGrand/AbstractRandom</texPath>
+      <drawSize>(3.2,3.2)</drawSize>
+    </graphicData>
+    <uiIconScale>0.6666</uiIconScale>
+    <fillPercent>0.5</fillPercent>
+    <rotatable>true</rotatable>
+    <size>(2,2)</size>
+    <canOverlapZones>false</canOverlapZones>
+    <statBases>
+      <MaxHitPoints>300</MaxHitPoints>
+      <Beauty>280</Beauty>
+      <Mass>28</Mass>
+      <WorkToMake>84000</WorkToMake>
+      <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">32</StyleDominance>
+      <TerrorSource MayRequire="Ludeon.RimWorld.Ideology">140</TerrorSource>
+      <SellPriceFactor>0.73</SellPriceFactor>
+    </statBases>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <tradeTags>
+      <li>Art</li>
+    </tradeTags>
+    <costStuffCount>400</costStuffCount>
+    <comps>
+      <li Class="MUGB.CompProperties_GoblinMirrorable" />
+      <li Class="CompProperties_FacilityQualityBased" MayRequire="Ludeon.RimWorld.Anomaly">
+        <statOffsetsPerQuality>
+          <li>
+            <key>PsychicRitualQuality</key>
+            <value>
+              <li><key>Awful</key><value>0.05</value></li>
+              <li><key>Poor</key><value>0.05</value></li>
+              <li><key>Normal</key><value>0.10</value></li>
+              <li><key>Good</key><value>0.10</value></li>
+              <li><key>Excellent</key><value>0.15</value></li>
+              <li><key>Masterwork</key><value>0.15</value></li>
+              <li><key>Legendary</key><value>0.25</value></li>
+            </value>
+          </li>
+        </statOffsetsPerQuality>
+        <maxSimultaneous>2</maxSimultaneous>
+        <maxDistance>10</maxDistance>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

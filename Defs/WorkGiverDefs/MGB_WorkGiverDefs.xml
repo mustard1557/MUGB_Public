@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <WorkGiverDef>
+    <defName>MUGB_FillGoblinStewpot</defName>
+    <label>fill goblin stewpot</label>
+    <giverClass>MUGB.WorkGiver_FillGoblinStewpot</giverClass>
+    <workType>Hauling</workType>
+    <verb>deliver</verb>
+    <gerund>delivering stewpot ingredients</gerund>
+    <priorityInType>110</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+
+  <WorkGiverDef>
+    <defName>MUGB_LoadGoblinBeacon</defName>
+    <label>load goblin beacon</label>
+    <giverClass>MUGB.WorkGiver_LoadGoblinBeacon</giverClass>
+    <workType>Hauling</workType>
+    <verb>load</verb>
+    <gerund>loading goblin corpse into beacon</gerund>
+    <priorityInType>109</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+
+</Defs>

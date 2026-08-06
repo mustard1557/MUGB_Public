@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <MUGBTipSwarmPheromone>Goblins are small and weak, but combat pheromones make a gathered mob more dangerous.</MUGBTipSwarmPheromone>
+  <MUGBTipHobgoblin>Hobgoblins are rare elite troops. Give them priority for better equipment and leadership roles.</MUGBTipHobgoblin>
+  <MUGBTipSquadLeader>Goblin squad leaders sustain their squad's morale. Eliminating one early can make the squad rout quickly.</MUGBTipSquadLeader>
+  <MUGBTipButchery>Goblins can butcher humanlike corpses for human bones and useful organs.</MUGBTipButchery>
+  <MUGBTipFleshCraving>Neglected flesh cravings reduce a goblin's mood, consciousness, and movement.</MUGBTipFleshCraving>
+  <MUGBTipCooking>Goblin cooking makes efficient use of guts and body parts.</MUGBTipCooking>
+  <MUGBTipFarming>Goblins tolerate toxic environments but are poor farmers. Plan food production early.</MUGBTipFarming>
+  <MUGBTipBeacon>A goblin beacon burns a goblin corpse to attract the attention of other goblins.</MUGBTipBeacon>
+  <MUGBTipBeaconQuality>The quality of a beacon ritual affects the size and nature of the goblins that answer it.</MUGBTipBeaconQuality>
+  <MUGBTipBeaconRisk>A goblin beacon may attract hostile attention as well as friendly visitors.</MUGBTipBeaconRisk>
+  <MUGBTipSlaveMarriage>Slave marriage is a goblin group ritual that binds the master side and slave side together.</MUGBTipSlaveMarriage>
+  <MUGBTipPheromoneAdaptation>By default, goblin slave marriage requires pheromone adaptation. This requirement can be changed in the mod settings.</MUGBTipPheromoneAdaptation>
+  <MUGBTipConcubinage>Slave marriage creates a concubine relationship separate from formal marriage.</MUGBTipConcubinage>
+  <MUGBTipCentralTunnel>A central tunnel raid opens a cluster of tunnels within one attack area.</MUGBTipCentralTunnel>
+  <MUGBTipTunnelReinforcements>Surviving tunnels release reinforcements over time. Destroy them before the next wave.</MUGBTipTunnelReinforcements>
+  <MUGBTipLargeTunnel>Large tunnels release more troops and continue reinforcing longer than ordinary tunnels.</MUGBTipLargeTunnel>
+  <MUGBTipMortarSiege>Goblin mortar raids build field fortifications and prepare a bombardment. Cutting off the supply tunnels makes a long siege easier.</MUGBTipMortarSiege>
+  <MUGBTipBoomstickSappers>Boomstick sappers blast through walls with explosives. Narrow passages are especially dangerous.</MUGBTipBoomstickSappers>
+  <MUGBTipBaseTunnel>Defensive tunnels may activate as the defenders of a goblin base are depleted.</MUGBTipBaseTunnel>
+  <MUGBTipCaravanAmbush>Goblin ambushes can target caravans on the world map. Take extra care near hostile goblin settlements.</MUGBTipCaravanAmbush>
+  <MUGBTipSpecialWeapons>Special weapons can be obtained as rare squad-leader loot, quest rewards, and ideology relics.</MUGBTipSpecialWeapons>
+  <MUGBTipSculptures>Goblin sculptures improve Children of Blinia ideology rituals.</MUGBTipSculptures>
+  <MUGBTipGrowth>Pure goblins mature rapidly. A newborn goblin soon becomes useful manpower.</MUGBTipGrowth>
+  <MUGBTipThinAndHob>Thin goblins suit cheap labor and massed troops, while hobgoblins excel in elite roles.</MUGBTipThinAndHob>
+</LanguageData>

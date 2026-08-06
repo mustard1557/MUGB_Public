@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThoughtDef>
+    <defName>MUGB_AteGoblinPepperCheese</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <showBubble>true</showBubble>
+    <icon>Things/Mote/ThoughtSymbol/Food</icon>
+    <durationDays>0.3333333</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>ate goblin pepper cheese</label>
+        <description>That rich pheromone aroma is fun! Kishishit!</description>
+        <baseMoodEffect>1</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>MUGB_AteGoblinPepperCheeseNonGoblin</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <showBubble>true</showBubble>
+    <icon>Things/Mote/ThoughtSymbol/Food</icon>
+    <durationDays>0.3333333</durationDays>
+    <stackLimit>2</stackLimit>
+    <stages>
+      <li>
+        <label>ate disgusting goblin pepper cheese</label>
+        <description>What is this revolting food that smells like rotten squid? It cannot be... can it? Uuurgh!</description>
+        <baseMoodEffect>-2</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+</Defs>

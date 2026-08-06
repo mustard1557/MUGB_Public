@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <!-- Keep butchery above cooking on MUGB_cookstation. -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="ButcherCorpseFlesh" and not(displayPriority)]</xpath>
+    <value>
+      <displayPriority>5</displayPriority>
+    </value>
+  </Operation>
+
+  <!-- Put smelting at the top of bill menus on MUGB_smithbench without duplicating recipes. -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="ExtractMetalFromSlag" and not(displayPriority)]</xpath>
+    <value>
+      <displayPriority>5</displayPriority>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="SmeltOrDestroyThing" and not(displayPriority)]</xpath>
+    <value>
+      <displayPriority>6</displayPriority>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="SmeltWeapon" and not(displayPriority)]</xpath>
+    <value>
+      <displayPriority>7</displayPriority>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="SmeltApparel" and not(displayPriority)]</xpath>
+    <value>
+      <displayPriority>8</displayPriority>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="DestroyWeapon" and not(displayPriority)]</xpath>
+    <value>
+      <displayPriority>9</displayPriority>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="DestroyApparel" and not(displayPriority)]</xpath>
+    <value>
+      <displayPriority>10</displayPriority>
+    </value>
+  </Operation>
+
+</Patch>

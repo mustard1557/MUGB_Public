@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    [파일 개요]
+    고블린 전용 머리 타입입니다.
+    의도:
+    - 고블린 머리 타입은 1개만 둡니다.
+    - randomChosen=false와 C# 보정을 함께 사용해 비고블린이 무작위로 가져가는 일을 막습니다.
+    - selectionWeight는 0이면 바닐라 forcedHeadTypes 선택도 실패하므로 1로 둡니다.
+  -->
+
+  <HeadTypeDef ParentName="AverageBase">
+    <defName>MUGB_GoblinHead</defName>
+    <graphicPath>Things/Pawn/MGBlike/Heads/MGB_Head1</graphicPath>
+    <gender>None</gender>
+    <randomChosen>false</randomChosen>
+    <selectionWeight>1</selectionWeight>
+  </HeadTypeDef>
+
+</Defs>

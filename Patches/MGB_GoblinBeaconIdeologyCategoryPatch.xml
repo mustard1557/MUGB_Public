@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Ideology</li>
+    </mods>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="MUGB_goblinbeacon"]/designationCategory</xpath>
+      <value>
+        <designationCategory>Ideology</designationCategory>
+      </value>
+    </match>
+  </Operation>
+</Patch>

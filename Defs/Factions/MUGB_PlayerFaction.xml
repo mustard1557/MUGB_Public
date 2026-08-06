@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    [파일 개요]
+    플레이어가 조작하는 고블린 무리 전용 팩션입니다.
+
+    의도:
+    - 시작 시나리오는 시작 폰의 제노타입만 지정했기 때문에, 플레이어 팩션 자체는 바닐라 인간
+      팩션이었습니다. 그래서 나중에 합류하는 폰과 캐릭터 에디터 기본값이 전부 인간이었습니다.
+
+    주의(중요):
+    - 여기에 xenotypeSet을 넣으면 안 됩니다. 바닐라 PlayerFactionBase에 다음 주석이 있습니다.
+        "Player factions lack a xenotype set. Player pawns have their xenotypes set by the player/scenario."
+      실제로 넣어봤더니 폰 생성이 실패해 콜로니스트가 0명이 되고, 그 결과 정착지가 격파로 처리되어
+      새 게임 시작 자체가 깨졌습니다(TaleData_Pawn NRE, HistoryAutoRecorder 빈 시퀀스 예외).
+    - 그래서 합류 폰의 제노타입은 이 파일이 아니라 PawnGenerationPatches에서 코드로 지정합니다.
+  -->
+
+  <FactionDef ParentName="PlayerFactionBase">
+    <defName>MUGB_PlayerGoblinFaction</defName>
+    <label>independent goblins</label>
+    <description>A mob of goblins carving out its own territory. They breed fast, fight dirty, and answer to no one.</description>
+    <isPlayer>true</isPlayer>
+    <categoryTag>Tribal</categoryTag>
+    <pawnSingular>goblin</pawnSingular>
+    <pawnsPlural>goblins</pawnsPlural>
+    <basicMemberKind>Tribesperson</basicMemberKind>
+    <techLevel>Medieval</techLevel>
+    <factionNameMaker>NamerFactionTribal</factionNameMaker>
+    <settlementNameMaker>NamerSettlementTribal</settlementNameMaker>
+    <allowedCultures>
+      <li>Corunan</li>
+    </allowedCultures>
+    <backstoryFilters>
+      <li>
+        <categories>
+          <li>Tribal</li>
+        </categories>
+      </li>
+    </backstoryFilters>
+    <factionIconPath>World/WorldObjects/Expanding/Village</factionIconPath>
+    <settlementTexturePath>World/WorldObjects/TribalSettlement</settlementTexturePath>
+    <startingResearchTags>
+      <li>TribalStart</li>
+    </startingResearchTags>
+    <startingTechprintsResearchTags>
+      <li>TribalStart</li>
+      <li>TribalStartTechprints</li>
+    </startingTechprintsResearchTags>
+    <apparelStuffFilter>
+      <thingDefs>
+        <li>Cloth</li>
+      </thingDefs>
+    </apparelStuffFilter>
+  </FactionDef>
+
+</Defs>

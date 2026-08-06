@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <LetterDef ParentName="CustomChoiceLetterBase">
+    <defName>MUGB_GoblinSlaveChildStatusChoice</defName>
+    <letterClass>MUGB.Patches.ChoiceLetter_GoblinSlaveChildStatus</letterClass>
+  </LetterDef>
+</Defs>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    고블린 세력 이름 생성 규칙입니다.
+    이름 구조는 [optional adjective] + [core word] + [faction suffix].
+    DefName 접두사는 내부 표준인 MUGB_를 유지한다.
+  -->
+
+  <RulePackDef>
+    <defName>NamerFactionMUGB_GoblinShared</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>mugbCore->Bone</li>
+        <li>mugbCore->Iron</li>
+        <li>mugbCore->Steel</li>
+        <li>mugbCore->Alloy</li>
+        <li>mugbCore->Crucible</li>
+        <li>mugbCore->Furnace</li>
+        <li>mugbCore->Shaper</li>
+        <li>mugbCore->Perfected One</li>
+        <li>mugbCore->Revelation</li>
+        <li>mugbCore->Atonement</li>
+        <li>mugbCore->Ashwind</li>
+        <li>mugbCore->Char</li>
+        <li>mugbCore->Ember</li>
+        <li>mugbCore->Ash</li>
+        <li>mugbCore->Grime</li>
+        <li>mugbCore->Mud</li>
+        <li>mugbCore->Bog</li>
+        <li>mugbCore->Moss</li>
+        <li>mugbCore->Mold</li>
+        <li>mugbCore->Miasma</li>
+        <li>mugbCore->Slag</li>
+        <li>mugbCore->Blood</li>
+        <li>mugbCore->Wail</li>
+        <li>mugbCore->Scream</li>
+        <li>mugbCore->Chain</li>
+        <li>mugbCore->Snare</li>
+        <li>mugbCore->Trap</li>
+        <li>mugbCore->Plague</li>
+        <li>mugbCore->Henhouse</li>
+        <li>mugbCore->Assei</li>
+        <li>mugbCore->Brotherhood</li>
+        <li>mugbCore->Human Flesh</li>
+        <li>mugbCore->Guts</li>
+        <li>mugbCore->Marrow</li>
+        <li>mugbCore->Rib</li>
+        <li>mugbCore->Spine</li>
+        <li>mugbCore->Eyeball</li>
+        <li>mugbCore->Skull</li>
+        <li>mugbCore->Armpit</li>
+        <li>mugbCore->Crotch</li>
+        <li>mugbCore->Anus</li>
+        <li>mugbCore->Groin</li>
+        <li>mugbCore->Belly-fat</li>
+        <li>mugbCore->Nostril</li>
+        <li>mugbCore->Toe</li>
+        <li>mugbCore->Pit-hair</li>
+        <li>mugbCore->Navel</li>
+        <li>mugbCore->Rear</li>
+        <li>mugbCore->Shin</li>
+        <li>mugbCore->Jowl</li>
+        <li>mugbCore->Uvula</li>
+        <li>mugbCore->Sweat</li>
+        <li>mugbCore->Spit</li>
+        <li>mugbCore->Snot</li>
+        <li>mugbCore->Fart</li>
+        <li>mugbCore->Foot-stink</li>
+
+        <li>mugbAdj->Musty</li>
+        <li>mugbAdj->Sour</li>
+        <li>mugbAdj->Reeking</li>
+        <li>mugbAdj->Rotting</li>
+        <li>mugbAdj->Moldy</li>
+        <li>mugbAdj->Rank</li>
+        <li>mugbAdj->Fishy</li>
+        <li>mugbAdj->Rancid</li>
+        <li>mugbAdj->Grimy</li>
+        <li>mugbAdj->Sallow</li>
+        <li>mugbAdj->Blotchy</li>
+        <li>mugbAdj->Scabbed</li>
+        <li>mugbAdj->Festering</li>
+        <li>mugbAdj->Blistered</li>
+        <li>mugbAdj->Chafed</li>
+        <li>mugbAdj->Bloated</li>
+        <li>mugbAdj->Pus-covered</li>
+        <li>mugbAdj->Drooling</li>
+        <li>mugbAdj->Snot-caked</li>
+        <li>mugbAdj->Oozing</li>
+        <li>mugbAdj->Sticky</li>
+        <li>mugbAdj->Dank</li>
+        <li>mugbAdj->Wrinkled</li>
+        <li>mugbAdj->Squishy</li>
+        <li>mugbAdj->Flabby</li>
+        <li>mugbAdj->Mashed</li>
+        <li>mugbAdj->Warty</li>
+        <li>mugbAdj->Spirited</li>
+        <li>mugbAdj->Fervent</li>
+        <li>mugbAdj->Piss-reeking</li>
+        <li>mugbAdj->Chestnut-blossom-reeking</li>
+
+        <li>mugbCommonSuffix->Love Corps</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+  <RulePackDef>
+    <defName>NamerFactionMUGB_Tribe</defName>
+    <include>
+      <li>NamerFactionMUGB_GoblinShared</li>
+    </include>
+    <rulePack>
+      <rulesStrings>
+        <li>r_name(p=7)->[mugbAdj] [mugbCore] [mugbPrimitiveSuffix]</li>
+        <li>r_name(p=3)->[mugbCore] [mugbPrimitiveSuffix]</li>
+        <li>mugbPrimitiveSuffix->Horde</li>
+        <li>mugbPrimitiveSuffix->Swarm</li>
+        <li>mugbPrimitiveSuffix->Den</li>
+        <li>mugbPrimitiveSuffix->Warren</li>
+        <li>mugbPrimitiveSuffix->Tribe</li>
+        <li>mugbPrimitiveSuffix->Clan</li>
+        <li>mugbPrimitiveSuffix->Hamlet</li>
+        <li>mugbPrimitiveSuffix->Nest</li>
+        <li>mugbPrimitiveSuffix->[mugbCommonSuffix]</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+  <RulePackDef>
+    <defName>NamerFactionMUGB_SavageTribe</defName>
+    <include>
+      <li>NamerFactionMUGB_GoblinShared</li>
+    </include>
+    <rulePack>
+      <rulesStrings>
+        <li>r_name(p=7)->[mugbAdj] [mugbCore] [mugbSavageSuffix]</li>
+        <li>r_name(p=3)->[mugbCore] [mugbSavageSuffix]</li>
+        <li>mugbSavageSuffix->Cabal</li>
+        <li>mugbSavageSuffix->Gang</li>
+        <li>mugbSavageSuffix->Rabble</li>
+        <li>mugbSavageSuffix->Frenzy Band</li>
+        <li>mugbSavageSuffix->Sect</li>
+        <li>mugbSavageSuffix->Remnant</li>
+        <li>mugbSavageSuffix->[mugbCommonSuffix]</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+  <RulePackDef>
+    <defName>NamerFactionMUGB_Medieval</defName>
+    <include>
+      <li>NamerFactionMUGB_GoblinShared</li>
+    </include>
+    <rulePack>
+      <rulesStrings>
+        <li>r_name(p=5)->[mugbAdj] [mugbCore] [mugbMedievalSuffix]</li>
+        <li>r_name(p=5)->[mugbCore] [mugbMedievalSuffix]</li>
+        <li>mugbMedievalSuffix->Compact</li>
+        <li>mugbMedievalSuffix->Alliance</li>
+        <li>mugbMedievalSuffix->Coalition</li>
+        <li>mugbMedievalSuffix->Guild</li>
+        <li>mugbMedievalSuffix->Order</li>
+        <li>mugbMedievalSuffix->Union</li>
+        <li>mugbMedievalSuffix->Circle</li>
+        <li>mugbMedievalSuffix->Academy</li>
+        <li>mugbMedievalSuffix->Comrades' Society</li>
+        <li>mugbMedievalSuffix->[mugbCommonSuffix]</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+  <RulePackDef>
+    <defName>NamerFactionMUGB_SavageMedieval</defName>
+    <include>
+      <li>NamerFactionMUGB_GoblinShared</li>
+    </include>
+    <rulePack>
+      <rulesStrings>
+        <li>r_name(p=5)->[mugbAdj] [mugbCore] [mugbSavageSuffix]</li>
+        <li>r_name(p=5)->[mugbCore] [mugbSavageSuffix]</li>
+        <li>mugbSavageSuffix->Cabal</li>
+        <li>mugbSavageSuffix->Gang</li>
+        <li>mugbSavageSuffix->Rabble</li>
+        <li>mugbSavageSuffix->Frenzy Band</li>
+        <li>mugbSavageSuffix->Sect</li>
+        <li>mugbSavageSuffix->Remnant</li>
+        <li>mugbSavageSuffix->[mugbCommonSuffix]</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+  <RulePackDef>
+    <defName>NamerFactionMUGB_Cultist</defName>
+    <include>
+      <li>NamerFactionMUGB_GoblinShared</li>
+    </include>
+    <rulePack>
+      <rulesStrings>
+        <li>r_name(p=3)->[mugbAdj] [mugbCore] [mugbCultistSuffix]</li>
+        <li>r_name(p=7)->[mugbCore] [mugbCultistSuffix]</li>
+        <li>mugbCultistSuffix->Cult</li>
+        <li>mugbCultistSuffix->Holy Assembly</li>
+        <li>mugbCultistSuffix->Ritual Order</li>
+        <li>mugbCultistSuffix->Faith Society</li>
+        <li>mugbCultistSuffix->Pilgrim Band</li>
+        <li>mugbCultistSuffix->Revelation Order</li>
+        <li>mugbCultistSuffix->[mugbCommonSuffix]</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+</Defs>

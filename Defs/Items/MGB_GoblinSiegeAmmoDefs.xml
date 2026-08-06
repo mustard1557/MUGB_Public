@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 한국어 의도: 고폭탄은 바닐라 고폭탄보다 피해만 20% 낮고 나머지 운용은 비슷하다. -->
+  <ThingDef ParentName="ShellBase">
+    <defName>MUGB_GoblinHighExplosiveShell</defName>
+    <label>goblin high-explosive shell</label>
+    <description>A crude goblin mortar shell. Its blast is a little weaker than a standard high-explosive shell, but it still demolishes anything caught nearby.</description>
+    <techLevel>Medieval</techLevel>
+    <graphicData>
+      <texPath>Things/Item/MGB_Mammo</texPath>
+      <graphicClass>MUGB.Graphic_GoblinTenStackCount</graphicClass>
+      <drawSize>(0.9,0.9)</drawSize>
+    </graphicData>
+    <projectileWhenLoaded>MUGB_GoblinHighExplosiveShellProjectile</projectileWhenLoaded>
+    <statBases><MaxHitPoints>55</MaxHitPoints><MarketValue>46</MarketValue><Mass>1.2</Mass><Flammability>1</Flammability></statBases>
+    <comps>
+      <li Class="CompProperties_Explosive"><explosiveRadius>2.9</explosiveRadius><explosiveDamageType>Bomb</explosiveDamageType><startWickHitPointsPercent>0.7</startWickHitPointsPercent><wickTicks>30~60</wickTicks></li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MUGB_GoblinHighExplosiveShellProjectile</defName>
+    <label>goblin high-explosive shell</label>
+    <thingClass>Projectile_Explosive</thingClass>
+    <graphicData><texPath>Things/Projectile/ShellHighExplosive</texPath><graphicClass>Graphic_Single</graphicClass><shaderType>TransparentPostLight</shaderType></graphicData>
+    <projectile>
+      <damageDef>Bomb</damageDef><damageAmountBase>40</damageAmountBase><speed>41</speed><explosionRadius>2.9</explosionRadius><flyOverhead>true</flyOverhead>
+      <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof><soundExplode>MortarBomb_Explode</soundExplode><soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate><soundAmbient>MortarRound_Ambient</soundAmbient>
+      <preExplosionSpawnSingleThingDef>Filth_BlastMark</preExplosionSpawnSingleThingDef>
+    </projectile>
+  </ThingDef>
+
+  <!-- 한국어 의도: 가스 반경은 폭발 반경과 별개이며, 페르몬등짐과 같은 강도(1.2)와 반경(4칸)을 쓴다. -->
+  <ThingDef ParentName="ShellBase">
+    <defName>MUGB_GoblinStinkMortarShell</defName>
+    <label>goblin sleep-gas shell</label>
+    <description>A mortar shell packed with a sealed goblin sleep-gas bottle. Its small charge breaks the container and spreads a dense cloud of concentrated goblin pheromone.</description>
+    <techLevel>Medieval</techLevel>
+    <graphicData>
+      <texPath>Things/Item/MGB_GoblinStinkMortarShell</texPath>
+      <graphicClass>MUGB.Graphic_GoblinTenStackCount</graphicClass>
+      <drawSize>(0.9,0.9)</drawSize>
+    </graphicData>
+    <projectileWhenLoaded>MUGB_GoblinStinkMortarShellProjectile</projectileWhenLoaded>
+    <statBases><MaxHitPoints>48</MaxHitPoints><MarketValue>52</MarketValue><Mass>1.1</Mass><Flammability>1</Flammability></statBases>
+    <comps>
+      <li Class="CompProperties_Explosive"><explosiveRadius>1.45</explosiveRadius><explosiveDamageType>Bomb</explosiveDamageType><startWickHitPointsPercent>0.7</startWickHitPointsPercent><wickTicks>30~60</wickTicks></li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MUGB_GoblinStinkMortarShellProjectile</defName>
+    <label>goblin sleep-gas shell</label>
+    <thingClass>MUGB.Projectile_GoblinStinkMortarShell</thingClass>
+    <graphicData><texPath>Things/Projectile/ShellHighExplosive</texPath><graphicClass>Graphic_Single</graphicClass><shaderType>TransparentPostLight</shaderType></graphicData>
+    <projectile>
+      <damageDef>Bomb</damageDef><damageAmountBase>32</damageAmountBase><speed>41</speed><explosionRadius>1.45</explosionRadius><flyOverhead>true</flyOverhead>
+      <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof><soundExplode>Explosion_Smoke</soundExplode><soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate><soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>MUGB_GoblinHeavyBolt</defName>
+    <label>goblin heavy bolt</label>
+    <description>A heavy alloy-tipped bolt for the goblin repeater ballista. The head punches through armor and breaks into dangerous fragments on impact.</description>
+    <techLevel>Medieval</techLevel>
+    <stackLimit>40</stackLimit>
+    <graphicData>
+      <texPath>Things/Item/MGB_GoblinHeavyBolt</texPath>
+      <graphicClass>MUGB.Graphic_GoblinTenStackCount</graphicClass>
+      <drawSize>(0.9,0.9)</drawSize>
+    </graphicData>
+    <statBases><MaxHitPoints>35</MaxHitPoints><MarketValue>9</MarketValue><Mass>0.4</Mass><Flammability>0.5</Flammability></statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MUGB_GoblinHeavyBoltProjectile</defName>
+    <label>goblin heavy bolt</label>
+    <thingClass>MUGB.Projectile_GoblinHeavyBolt</thingClass>
+    <graphicData><texPath>Things/Weapons/projectile/MGB_boltB</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1.05,1.05)</drawSize></graphicData>
+    <projectile>
+      <damageDef>Stab</damageDef><damageAmountBase>30</damageAmountBase><armorPenetrationBase>0.20</armorPenetrationBase><stoppingPower>1.7</stoppingPower><speed>65</speed>
+    </projectile>
+  </ThingDef>
+</Defs>

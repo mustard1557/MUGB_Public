@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+  KO intent: 블리니아의 자손들 밈을 가진 이념만 사용하는 고블린 봉화 점화 의식.
+  콜로니에 고블린이 있어야 밈/의식을 고를 수 있다는 추가 제한은 두지 않는다.
+  실제 대상 조건은 C#에서 '고블린 시체 적재됨 + 아직 점화되지 않음'으로 확인한다.
+  -->
+  <RitualObligationTargetFilterDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_GoblinBeaconLoaded</defName>
+    <workerClass>MUGB.RitualObligationTargetWorker_GoblinBeacon</workerClass>
+    <thingDefs>
+      <li>MUGB_goblinbeacon</li>
+    </thingDefs>
+  </RitualObligationTargetFilterDef>
+
+  <RitualBehaviorDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_GoblinBeaconSignal</defName>
+    <workerClass>MUGB.RitualBehaviorWorker_GoblinBeaconSignal</workerClass>
+    <durationTicks>1750</durationTicks>
+    <roles>
+      <li Class="MUGB.RitualRole_GoblinBeaconCaller">
+        <label>signal caller</label>
+        <id>caller</id>
+        <required>true</required>
+        <substitutable>true</substitutable>
+        <maxCount>1</maxCount>
+        <countsAsParticipant>false</countsAsParticipant>
+        <allowChild>false</allowChild>
+        <mustBeAbleToReachTarget>true</mustBeAbleToReachTarget>
+      </li>
+    </roles>
+    <spectatorsLabel>participants</spectatorsLabel>
+    <spectatorGerund>participate</spectatorGerund>
+    <stages>
+      <li>
+        <defaultDuty>Spectate</defaultDuty>
+        <essential>true</essential>
+        <endTriggers>
+          <li Class="StageEndTrigger_DurationPercentage">
+            <percentage>1</percentage>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>caller</roleId>
+            <dutyDef>SpeakOnCellFacingSpectators</dutyDef>
+            <speakerInteraction>Speech_DateRitual</speakerInteraction>
+            <customPositions>
+              <li Class="RitualPosition_BesideThing" />
+            </customPositions>
+          </li>
+        </roleBehaviors>
+      </li>
+    </stages>
+  </RitualBehaviorDef>
+
+  <RitualOutcomeEffectDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_GoblinBeaconSignal</defName>
+    <description>Ritual quality determines how strongly the signal carries. Better signals more often draw friendly goblins, while poor signals attract more danger.</description>
+    <workerClass>MUGB.RitualOutcomeEffectWorker_GoblinBeaconSignal</workerClass>
+    <startingQuality>0.25</startingQuality>
+    <minQuality>0</minQuality>
+    <maxQuality>1</maxQuality>
+    <comps>
+      <li Class="RitualOutcomeComp_ParticipantCount">
+        <label>participant count</label>
+        <curve>
+          <points>
+            <li>(1, 0.00)</li>
+            <li>(3, 0.15)</li>
+            <li>(5, 0.30)</li>
+            <li>(7, 0.40)</li>
+            <li>(10, 0.60)</li>
+          </points>
+        </curve>
+      </li>
+      <li Class="MUGB.RitualOutcomeComp_GoblinSculptures">
+        <label>nearby goblin sculptures</label>
+        <maxDistance>10</maxDistance>
+        <maxSmall>6</maxSmall>
+        <maxGrand>2</maxGrand>
+        <maxQualityOffset>0.25</maxQualityOffset>
+      </li>
+    </comps>
+  </RitualOutcomeEffectDef>
+
+  <RitualPatternDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_GoblinBeaconSignal</defName>
+    <nameMaker>NamerRitualFestival</nameMaker>
+    <shortDescOverride>goblin beacon lighting</shortDescOverride>
+    <descOverride>A goblin corpse is burned in a beacon while participants call the pheromone signal into the distance. The ritual's quality affects what answers the signal.</descOverride>
+    <iconPathOverride>UI/Icons/Rituals/MGB_GoblinBeaconRitual</iconPathOverride>
+    <canStartAnytime>true</canStartAnytime>
+    <alwaysStartAnytime>true</alwaysStartAnytime>
+    <ritualObligationTargetFilter>MUGB_GoblinBeaconLoaded</ritualObligationTargetFilter>
+    <ritualBehavior>MUGB_GoblinBeaconSignal</ritualBehavior>
+    <ritualOutcomeEffect>MUGB_GoblinBeaconSignal</ritualOutcomeEffect>
+    <playsIdeoMusic>false</playsIdeoMusic>
+  </RitualPatternDef>
+
+  <PreceptDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_GoblinBeaconSignal</defName>
+    <label>goblin beacon lighting</label>
+    <description>Burn a loaded goblin beacon to send a pheromone signal through the region. A strong ritual is more likely to call goblin allies and less likely to draw hostile attention.</description>
+    <issue>Ritual</issue>
+    <impact>Medium</impact>
+    <iconPath>UI/Icons/Rituals/MGB_GoblinBeaconRitual</iconPath>
+    <preceptClass>Precept_Ritual</preceptClass>
+    <ritualPatternBase>MUGB_GoblinBeaconSignal</ritualPatternBase>
+    <allowDuplicates>false</allowDuplicates>
+    <countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>
+    <selectionWeight>0</selectionWeight>
+    <receivesExpectationsQualityOffset>true</receivesExpectationsQualityOffset>
+    <associatedMemes>
+      <li>MUGB_ChildrenOfBlinia</li>
+    </associatedMemes>
+  </PreceptDef>
+
+</Defs>

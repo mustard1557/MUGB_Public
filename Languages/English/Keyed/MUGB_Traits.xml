@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <MUGB_SettingsTraitsHeader>Traits</MUGB_SettingsTraitsHeader>
+  <MUGB_EnableFeminineTraitLabel>Enable natural spawning of the Feminine trait</MUGB_EnableFeminineTraitLabel>
+  <MUGB_EnableFeminineTraitDesc>When disabled, newly generated pawns will never roll the Feminine trait. Pawns that already have the trait keep it, and pawns whose kind forces the trait (e.g. scenario NPCs) are unaffected. Can be toggled mid-game.</MUGB_EnableFeminineTraitDesc>
+  <MUGB_AdjustFemaleBodyTypeChancesLabel>Adjust female pawn body type chances</MUGB_AdjustFemaleBodyTypeChancesLabel>
+  <MUGB_AdjustFemaleBodyTypeChancesDesc>Adjusts body type chances for female pawns.</MUGB_AdjustFemaleBodyTypeChancesDesc>
+  <MUGB_AmericanBeautyStandardLabel>American Beauty Standard</MUGB_AmericanBeautyStandardLabel>
+</LanguageData>

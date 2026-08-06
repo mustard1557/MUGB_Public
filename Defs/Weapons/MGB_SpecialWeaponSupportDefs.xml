@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ToolCapacityDef>
+    <defName>MUGB_BoomstickIgnite</defName>
+    <label>boom</label>
+  </ToolCapacityDef>
+
+  <ManeuverDef>
+    <defName>MUGB_BoomstickIgnite</defName>
+    <requiredCapacity>MUGB_BoomstickIgnite</requiredCapacity>
+    <verb>
+      <verbClass>MUGB.Verb_BoomstickMelee</verbClass>
+      <meleeDamageDef>Blunt</meleeDamageDef>
+      <ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+    </verb>
+    <logEntryDef>MeleeAttack</logEntryDef>
+    <combatLogRulesHit>Maneuver_Smash_MeleeHit</combatLogRulesHit>
+    <combatLogRulesDeflect>Maneuver_Smash_MeleeDeflect</combatLogRulesDeflect>
+    <combatLogRulesMiss>Maneuver_Smash_MeleeMiss</combatLogRulesMiss>
+    <combatLogRulesDodge>Maneuver_Smash_MeleeDodge</combatLogRulesDodge>
+  </ManeuverDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>MUGB_GoblinBoomstickWick</defName>
+    <label>lit goblin boomstick</label>
+    <thingClass>MUGB.GoblinBoomstickWick</thingClass>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <graphicData>
+      <texPath>Things/Special/BurningWickA</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.55</drawSize>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>MUGB_FlintlockMuzzleFlash</defName>
+    <thingClass>MoteThrown</thingClass>
+    <label>flintlock muzzle flash</label>
+    <category>Mote</category>
+    <graphicData>
+      <texPath>Things/Mote/MGB_MuzzleFlash</texPath>
+      <graphicClass>Graphic_Mote</graphicClass>
+      <shaderType>Mote</shaderType>
+      <color>(1, 1, 1, 1)</color>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <tickerType>Normal</tickerType>
+    <useHitPoints>false</useHitPoints>
+    <isSaveable>false</isSaveable>
+    <rotatable>false</rotatable>
+    <mote>
+      <fadeInTime>0.02</fadeInTime>
+      <solidTime>0.05</solidTime>
+      <fadeOutTime>0.12</fadeOutTime>
+      <growthRate>-0.35</growthRate>
+      <collide>false</collide>
+      <speedPerTime>0</speedPerTime>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>MUGB_GoblinStaffMobileShield</defName>
+    <label>goblin moving low-shield</label>
+    <thingClass>MUGB.GoblinStaffMobileShield</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <drawOffscreen>true</drawOffscreen>
+    <seeThroughFog>true</seeThroughFog>
+    <selectable>false</selectable>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Mote/Transparent</texPath>
+      <drawSize>0.01</drawSize>
+      <color>(1,1,1,0)</color>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_ProjectileInterceptor">
+        <radius>4.0</radius>
+        <interceptGroundProjectiles>true</interceptGroundProjectiles>
+        <interceptNonHostileProjectiles>true</interceptNonHostileProjectiles>
+        <interceptOutgoingProjectiles>false</interceptOutgoingProjectiles>
+        <color>(0.58, 0.63, 0.82)</color>
+        <idlePulseSpeed>3</idlePulseSpeed>
+        <minIdleAlpha>0.05</minIdleAlpha>
+        <drawWithNoSelection>true</drawWithNoSelection>
+        <disarmedByEmpForTicks>600</disarmedByEmpForTicks>
+        <hitPoints>300</hitPoints>
+        <activeSound>BulletShield_Ambience</activeSound>
+        <interceptEffect>MUGB_Interceptor_BlockedProjectileGoblinShield</interceptEffect>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <DamageDef ParentName="Bomb">
+    <defName>MUGB_HandcannonBombDamage</defName>
+    <buildingDamageFactorImpassable>1.8</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>0.9</buildingDamageFactorPassable>
+  </DamageDef>
+
+  <DamageDef>
+    <defName>MUGB_StinkGasDamage</defName>
+    <label>stink gas</label>
+    <canInterruptJobs>false</canInterruptJobs>
+    <makesBlood>false</makesBlood>
+    <externalViolence>false</externalViolence>
+    <harmAllLayersUntilOutside>false</harmAllLayersUntilOutside>
+    <defaultDamage>1</defaultDamage>
+    <impactSoundType>Toxic</impactSoundType>
+    <damageEffecter>Impact_Toxic</damageEffecter>
+    <explosionCellFleck>BlastExtinguisher</explosionCellFleck>
+    <explosionColorEdge>(0.49, 0.72, 0.31, 0.08)</explosionColorEdge>
+    <soundExplosion>Explosion_Smoke</soundExplosion>
+    <combatLogRules>Damage_Smoke</combatLogRules>
+  </DamageDef>
+
+  <DamageDef ParentName="Arrow">
+    <defName>MUGB_GoblinDartDamage</defName>
+    <label>goblin dart</label>
+    <impactSoundType>Toxic</impactSoundType>
+    <damageEffecter>Impact_Toxic</damageEffecter>
+  </DamageDef>
+
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>MUGB_StinkGasCloud</defName>
+    <label>stink gas cloud</label>
+    <thingClass>MUGB.GoblinStinkGasCloud</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <drawOffscreen>true</drawOffscreen>
+    <seeThroughFog>true</seeThroughFog>
+    <selectable>false</selectable>
+    <neverMultiSelect>true</neverMultiSelect>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Mote/Transparent</texPath>
+      <drawSize>0.01</drawSize>
+      <color>(1,1,1,0)</color>
+    </graphicData>
+  </ThingDef>
+
+  <EffecterDef>
+    <defName>MUGB_Interceptor_BlockedProjectileGoblinShield</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>EnergyShield_AbsorbDamage</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>ExplosionFlash</fleckDef>
+        <burstCount>1</burstCount>
+        <scale>1.2~1.6</scale>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>SparkFlash</fleckDef>
+        <burstCount>1</burstCount>
+        <scale>1.0~1.4</scale>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <EffecterDef>
+    <defName>MUGB_ShieldBreakLarge</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>EnergyShield_Broken</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>FlashShieldBreak</moteDef>
+        <scale>3.8</scale>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+        <attachToSpawnThing>true</attachToSpawnThing>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>CracksShieldBreak</moteDef>
+        <scale>3.8</scale>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+        <attachToSpawnThing>true</attachToSpawnThing>
+      </li>
+    </children>
+  </EffecterDef>
+
+</Defs>

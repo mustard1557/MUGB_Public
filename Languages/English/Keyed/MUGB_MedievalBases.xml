@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <MUGB_BaseTunnelWarning>Movement is building beneath the goblin tunnel. Reinforcements will emerge in about one hour.</MUGB_BaseTunnelWarning>
+  <MUGB_BaseExternalWarning>Another goblin stronghold is sending reinforcements! You can already smell the stench.</MUGB_BaseExternalWarning>
+  <MUGB_BaseExternalArrived>Goblin reinforcements have arrived from outside the map!</MUGB_BaseExternalArrived>
+  <MUGB_BaseTunnelDormant>Defense tunnel: dormant</MUGB_BaseTunnelDormant>
+  <MUGB_BaseTunnelNoWaves>Defense tunnel: reserves exhausted</MUGB_BaseTunnelNoWaves>
+  <MUGB_BaseTunnelStatus>Next reinforcement: {0}\nRemaining reinforcement waves: {1}</MUGB_BaseTunnelStatus>
+  <MUGB_BaseLullLetterLabel>Threats remain at the goblin stronghold</MUGB_BaseLullLetterLabel>
+  <MUGB_BaseLullLetterText>The fighting has quieted, but the stronghold has not been completely cleared. If you withdraw now, the goblins will soon rebuild this place through their tunnel.</MUGB_BaseLullLetterText>
+  <MUGB_ReleaseRestraintOption>Release {0} from restraints</MUGB_ReleaseRestraintOption>
+  <MUGB_CannotReleaseRestraint>Cannot release {0}: {1}</MUGB_CannotReleaseRestraint>
+  <MUGB_CannotReleaseRestraint_Incapable>the releaser is incapable right now</MUGB_CannotReleaseRestraint_Incapable>
+  <MUGB_CannotReleaseRestraint_NoPath>no path to reach</MUGB_CannotReleaseRestraint_NoPath>
+  <MUGB_CannotReleaseRestraint_Reserved>someone else is already handling this</MUGB_CannotReleaseRestraint_Reserved>
+</LanguageData>

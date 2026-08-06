@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <MUGB_GoblinSlaveChildStatusLetterLabel>{PAWN_labelShort}'s place in the colony</MUGB_GoblinSlaveChildStatusLetterLabel>
+  <MUGB_GoblinSlaveChildStatusLetterText>{PAWN_labelShort} has reached the age when a goblin is expected to take a place in the colony. Born to a captive mother, {PAWN_pronoun} has been raised as a slave. Decide whether {PAWN_pronoun} will remain a slave, be accepted as a free colonist, or be sent away.</MUGB_GoblinSlaveChildStatusLetterText>
+  <MUGB_GoblinSlaveChildKeepSlave>Keep {PAWN_labelShort} as a slave</MUGB_GoblinSlaveChildKeepSlave>
+  <MUGB_GoblinSlaveChildAcceptColonist>Accept {PAWN_labelShort} as a colonist</MUGB_GoblinSlaveChildAcceptColonist>
+  <MUGB_GoblinSlaveChildRelease>Send {PAWN_labelShort} away</MUGB_GoblinSlaveChildRelease>
+  <MUGB_GoblinSlaveChildReleaseConfirm>Send {PAWN_labelShort} away from the colony? This cannot be undone.</MUGB_GoblinSlaveChildReleaseConfirm>
+  <MUGB_GoblinSlaveChildKeptSlaveMessage>{PAWN_labelShort} will remain a slave.</MUGB_GoblinSlaveChildKeptSlaveMessage>
+  <MUGB_GoblinSlaveChildAcceptedMessage>{PAWN_labelShort} has been accepted as a free colonist.</MUGB_GoblinSlaveChildAcceptedMessage>
+  <MUGB_GoblinSlaveChildReleasedMessage>{PAWN_labelShort} has been sent away from the colony.</MUGB_GoblinSlaveChildReleasedMessage>
+</LanguageData>

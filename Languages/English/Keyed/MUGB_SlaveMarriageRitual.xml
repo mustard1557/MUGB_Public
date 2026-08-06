@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <MUGB_SlaveMarriageNeedLivingHumanlike>The target must be a living humanlike.</MUGB_SlaveMarriageNeedLivingHumanlike>
+  <MUGB_SlaveMarriageNeedColonySlave>{SLAVE_labelShort} must be a colony slave.</MUGB_SlaveMarriageNeedColonySlave>
+  <MUGB_SlaveMarriageNeedAdult>{PAWN_labelShort} has not reached the romance-capable age for their species.</MUGB_SlaveMarriageNeedAdult>
+  <MUGB_SlaveMarriageUnavailableNow>{PAWN_labelShort} cannot participate right now.</MUGB_SlaveMarriageUnavailableNow>
+  <MUGB_SlaveMarriageAlreadyMarried>{MASTER_labelShort} and {SLAVE_labelShort} are already married.</MUGB_SlaveMarriageAlreadyMarried>
+  <MUGB_SlaveMarriageAlreadyRegularSpouse>{MASTER_labelShort} and {SLAVE_labelShort} already have a regular marriage.</MUGB_SlaveMarriageAlreadyRegularSpouse>
+  <MUGB_SlaveMarriageIdeologyRequired>{MASTER_labelShort}'s ideoligion must approve both slavery and slave marriage.</MUGB_SlaveMarriageIdeologyRequired>
+  <MUGB_SlaveMarriageNeedPheromonePreference>{PAWN_labelShort} needs goblin pheromone preference for this mixed goblin marriage.</MUGB_SlaveMarriageNeedPheromonePreference>
+  <MUGB_SlaveMarriageSettingsHeader>Slave marriage</MUGB_SlaveMarriageSettingsHeader>
+  <MUGB_RequireSlaveMarriagePheromonePreferenceLabel>Require pheromone preference for slave marriage</MUGB_RequireSlaveMarriagePheromonePreferenceLabel>
+  <MUGB_RequireSlaveMarriagePheromonePreferenceDesc>When enabled, the non-goblin participant in a goblin/non-goblin slave marriage must have goblin pheromone preference. This affects new manual proclamations and collective slave marriage ceremonies only.</MUGB_RequireSlaveMarriagePheromonePreferenceDesc>
+  <MUGB_SlaveMarriageProclaimed>{MASTER_labelShort} has taken the slave {SLAVE_labelShort} as a concubine.</MUGB_SlaveMarriageProclaimed>
+  <MUGB_SlaveMarriageRitualCooldown>The slave marriage ceremony can be held again in {0}.</MUGB_SlaveMarriageRitualCooldown>
+  <MUGB_SlaveMarriageRitualIdeologyRequired>This ideoligion must approve both slavery and slave marriage.</MUGB_SlaveMarriageRitualIdeologyRequired>
+  <MUGB_SlaveMarriageRitualNeedSpace>There is not enough clear space for the two marriage lines.</MUGB_SlaveMarriageRitualNeedSpace>
+  <MUGB_SlaveMarriageRitualNeedNewPair>At least one new slave-marriage pairing is required.</MUGB_SlaveMarriageRitualNeedNewPair>
+  <MUGB_SlaveMarriageRitualInvalidPair>{0} and {1} cannot be joined: {2}</MUGB_SlaveMarriageRitualInvalidPair>
+  <MUGB_SlaveMarriageRitualCompletedLabel>Collective slave marriage completed</MUGB_SlaveMarriageRitualCompletedLabel>
+  <MUGB_SlaveMarriageRitualCompletedText>The officiant bound {0} colonist(s) and {1} slave(s) into {2} slave-marriage relation(s).\n\nRitual quality: {3}</MUGB_SlaveMarriageRitualCompletedText>
+  <MUGB_SlaveMarriageRitualFailed>The collective slave marriage could not be completed because a required participant was no longer eligible.</MUGB_SlaveMarriageRitualFailed>
+  <MUGB_SlaveMarriageRitualNeedOfficiant>A conscious adult leader or moral guide is required to officiate.</MUGB_SlaveMarriageRitualNeedOfficiant>
+  <MUGB_SlaveMarriageRitualNeedGroups>Assign between one and three free colonists and between one and three colony slaves.</MUGB_SlaveMarriageRitualNeedGroups>
+  <MUGB_SlaveMarriageNeedAdultFreeColonist>{PAWN_labelShort} must be an available free colonist of romance-capable age.</MUGB_SlaveMarriageNeedAdultFreeColonist>
+  <MUGB_SlaveMarriageNeedAdultColonySlave>{PAWN_labelShort} must be an available colony slave of romance-capable age.</MUGB_SlaveMarriageNeedAdultColonySlave>
+  <MUGB_SlaveMarriageDebugNeedRitual>Add the collective slave marriage ritual to the player's ideoligion before using this test.</MUGB_SlaveMarriageDebugNeedRitual>
+  <MUGB_SlaveMarriageDebugNeedColonist>A free colonist is required to organize the ritual.</MUGB_SlaveMarriageDebugNeedColonist>
+  <MUGB_SlaveMarriageRelationMaster>master</MUGB_SlaveMarriageRelationMaster>
+  <MUGB_SlaveMarriageRelationConcubine>concubine</MUGB_SlaveMarriageRelationConcubine>
+  <MUGB_SlaveMarriageRelationGeneric>slave marriage</MUGB_SlaveMarriageRelationGeneric>
+</LanguageData>

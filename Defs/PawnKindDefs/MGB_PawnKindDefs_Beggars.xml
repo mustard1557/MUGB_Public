@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    Korean source intent: 영구중립 거지무리 세력용 1차 PawnKind.
+    월드맵 세력/상단이 아니라 향후 구걸, 피난민, 비고블린 중립 접촉 이벤트에 쓰는 낮은 예산 인간형 폰이다.
+    HAR 종족 혼합은 2차에서 전용 incident worker가 다른 인간형 세력 PawnKind를 빌려 생성하는 방식으로 확장한다.
+  -->
+
+  <PawnKindDef Name="MUGB_BeggarBandBase" Abstract="True">
+    <race>Human</race>
+    <defaultFactionDef>MUGB_NeutralBeggarBand</defaultFactionDef>
+    <combatPower>24</combatPower>
+    <isFighter>false</isFighter>
+    <invNutrition>0.6</invNutrition>
+    <gearHealthRange>0.2~0.7</gearHealthRange>
+    <itemQuality>Awful</itemQuality>
+    <apparelMoney>45~160</apparelMoney>
+    <apparelAllowHeadgearChance>0.12</apparelAllowHeadgearChance>
+    <apparelTags>
+      <li>Neolithic</li>
+      <li>IndustrialBasic</li>
+    </apparelTags>
+    <weaponMoney>0~50</weaponMoney>
+    <techHediffsMoney>0~0</techHediffsMoney>
+    <techHediffsChance>0</techHediffsChance>
+    <chemicalAddictionChance>0.08</chemicalAddictionChance>
+    <backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
+    <initialWillRange>0~1</initialWillRange>
+    <initialResistanceRange>5~12</initialResistanceRange>
+    <inventoryOptions>
+      <skipChance>0.65</skipChance>
+      <subOptionsChooseOne>
+        <li>
+          <thingDef>MealSimple</thingDef>
+          <countRange>1</countRange>
+        </li>
+        <li>
+          <thingDef>MedicineHerbal</thingDef>
+          <countRange>1</countRange>
+        </li>
+        <li>
+          <thingDef>Silver</thingDef>
+          <countRange>3~18</countRange>
+        </li>
+      </subOptionsChooseOne>
+    </inventoryOptions>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_BeggarBandBase">
+    <defName>MUGB_BeggarDrifter</defName>
+    <label>beggar drifter</label>
+    <combatPower>20</combatPower>
+    <weaponMoney>0</weaponMoney>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_BeggarBandBase">
+    <defName>MUGB_BeggarScavenger</defName>
+    <label>beggar scavenger</label>
+    <combatPower>28</combatPower>
+    <isFighter>true</isFighter>
+    <weaponMoney>40~120</weaponMoney>
+    <weaponTags>
+      <li>NeolithicMeleeBasic</li>
+      <li>MedievalMeleeBasic</li>
+    </weaponTags>
+    <apparelMoney>80~200</apparelMoney>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_BeggarBandBase">
+    <defName>MUGB_BeggarLookout</defName>
+    <label>beggar lookout</label>
+    <combatPower>32</combatPower>
+    <isFighter>true</isFighter>
+    <weaponMoney>65~170</weaponMoney>
+    <weaponTags>
+      <li>NeolithicRangedBasic</li>
+      <li>NeolithicRangedDecent</li>
+    </weaponTags>
+    <apparelMoney>90~220</apparelMoney>
+  </PawnKindDef>
+
+</Defs>

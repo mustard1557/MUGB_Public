@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThoughtDef>
+    <defName>MUGB_WearingGoblinApparel</defName>
+    <thoughtClass>Thought_Situational</thoughtClass>
+    <workerClass>MUGB.ThoughtWorker_WearingGoblinApparel</workerClass>
+    <stages>
+      <li>
+        <label>using goblin gear</label>
+        <description>This reeks of human hide, old marrow, and goblin craft. I can feel every filthy stitch.</description>
+        <baseMoodEffect>-4</baseMoodEffect>
+      </li>
+      <li>
+        <label>using goblin gear</label>
+        <description>Too much goblin-made gear. The smell of human hide and stale scraps follows me everywhere.</description>
+        <baseMoodEffect>-8</baseMoodEffect>
+      </li>
+      <li>
+        <label>using goblin gear</label>
+        <description>I am wrapped in goblin-made trophies and cured human skin. This is disgusting.</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+      <li>
+        <label>using goblin gear</label>
+        <description>It is filthy goblin gear, but that hardly bothers me.</description>
+        <baseMoodEffect>-2</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+</Defs>

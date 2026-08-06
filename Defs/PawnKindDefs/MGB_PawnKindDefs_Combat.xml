@@ -1,0 +1,1184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    고블린 폰카인드 & 장비 시스템 설계 최종문서 기준 1차 구현.
+    범위: 문서 7절(원시/중세일반/분대장/광신도/특수공통) 38종.
+    이번 라운드에서 제외한 것 (별도 후속 작업 필요):
+    - 9절 비고블린 세력(고블린토벌대/고블린사냥꾼) 전용 FactionDef/PawnKindDef.
+    - MUGB_GoblinTribe/MUGB_GoblinCivilTribe의 pawnGroupMakers는 2026-07-04에 1차 연결 완료.
+      추후 부족/중세/광신도 세력 분화 시 각 세력별 풀을 더 세분화해야 함.
+    - apparelRequired의 확률(chance) 착용 — 바닐라/현재 C#에 해당 필드 없음. 방패는 apparelTags 풀 혼합으로 근사.
+    - 샤먼 어빌리티, Shell 레이어 강제 차단, 인피망토 날씨무관 착용 — 전용 C# 필요, 미구현.
+    - "바닐라 무기 소수 혼합" 문구는 정확한 바닐라 weaponTags 값을 확인 못해 이번엔 생략.
+  -->
+
+  <PawnKindDef ParentName="TribalBase" Name="MUGB_GoblinCombatBase" Abstract="True">
+    <race>Human</race>
+    <defaultFactionDef>MUGB_GoblinTribe</defaultFactionDef>
+    <canBeSapper>false</canBeSapper>
+    <minGenerationAge>13</minGenerationAge>
+    <maxGenerationAge>32</maxGenerationAge>
+    <techHediffsMoney>0~0</techHediffsMoney>
+    <techHediffsChance>0</techHediffsChance>
+    <gearHealthRange>0.8~1.4</gearHealthRange>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <requiredWorkTags>
+      <li>Violent</li>
+    </requiredWorkTags>
+    <xenotypeSet>
+      <xenotypeChances>
+        <MUGB_Goblin>85</MUGB_Goblin>
+        <MUGB_Hobgoblin>15</MUGB_Hobgoblin>
+        <Baseliner>0</Baseliner>
+      </xenotypeChances>
+    </xenotypeSet>
+    <initialWillRange>1~3</initialWillRange>
+    <initialResistanceRange>6~12</initialResistanceRange>
+    <!-- Korean source intent: 바닐라 적대 NPC처럼 전투 직전 약물을 들고/먹는 흐름을 타게 한다. MUGB 고블린 약물 보장은 C# 후처리에서 부족할 때만 보정한다. -->
+    <combatEnhancingDrugsChance>0.08</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>0~1</combatEnhancingDrugsCount>
+  </PawnKindDef>
+
+  <!-- 홉고블린 비중이 높은 지휘/엘리트 계열용 -->
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase" Name="MUGB_GoblinEliteBase" Abstract="True">
+    <maxGenerationAge>40</maxGenerationAge>
+    <xenotypeSet>
+      <xenotypeChances>
+        <MUGB_Goblin>30</MUGB_Goblin>
+        <MUGB_Hobgoblin>70</MUGB_Hobgoblin>
+        <Baseliner>0</Baseliner>
+      </xenotypeChances>
+    </xenotypeSet>
+    <initialWillRange>2~4</initialWillRange>
+    <initialResistanceRange>12~20</initialResistanceRange>
+    <combatEnhancingDrugsChance>0.35</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>0~2</combatEnhancingDrugsCount>
+  </PawnKindDef>
+
+  <!-- ==================== 7-1. 원시 테크 (6종, 홉고블린분대장 근접/원거리 포함 7개 Def) ==================== -->
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_PrimitiveMelee</defName>
+    <label>goblin skirmisher</label>
+    <combatPower>32</combatPower>
+    <weaponMoney>70~150</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinMeleePrimitive</li>
+    </weaponTags>
+    <apparelMoney>120~240</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorPrimitive</li>
+      <li>MUGB_GoblinHelmetPrimitive</li>
+      <li>MUGB_GoblinShieldLight</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_PrimitiveSpear</defName>
+    <label>goblin spear-skirmisher</label>
+    <combatPower>34</combatPower>
+    <weaponMoney>140~260</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinBoneSpear</li>
+    </weaponTags>
+    <apparelMoney>120~220</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorPrimitive</li>
+      <li>MUGB_GoblinHelmetPrimitive</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_PrimitiveShock</defName>
+    <label>goblin shock-skirmisher</label>
+    <combatPower>36</combatPower>
+    <weaponMoney>70~160</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinMeleePrimitive</li>
+    </weaponTags>
+    <apparelMoney>120~240</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorPrimitive</li>
+      <li>MUGB_GoblinHelmetPrimitive</li>
+      <li>MUGB_GoblinShieldLight</li>
+      <li>MUGB_GoblinShieldHeavy</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_PrimitiveRanged</defName>
+    <label>goblin hunter</label>
+    <combatPower>34</combatPower>
+    <weaponMoney>140~180</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinRangedPrimitive</li>
+    </weaponTags>
+    <apparelMoney>110~220</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorPrimitive</li>
+      <li>MUGB_GoblinHelmetPrimitive</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <!-- 노획/잡동사니 설정: 자체 제작 무기 대신 바닐라 최하급 원거리무기(단궁 등)를 들고 나오는 버전.
+       weaponTags에 MUGB 커스텀 태그를 넣지 않고 NeolithicRangedBasic만 사용 — 이 태그가 실제로
+       리커브보우/투창다발까지 포함하는지는 게임 내에서 확인 필요. -->
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_PrimitiveRangedScavenger</defName>
+    <label>goblin scavenger hunter</label>
+    <combatPower>28</combatPower>
+    <weaponMoney>60~140</weaponMoney>
+    <weaponTags>
+      <li>NeolithicRangedBasic</li>
+    </weaponTags>
+    <apparelMoney>110~220</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorPrimitive</li>
+      <li>MUGB_GoblinHelmetPrimitive</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <!-- 노획 설정, 낮은 등장비중 -->
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_PrimitiveGunner</defName>
+    <label>goblin looted gunner</label>
+    <combatPower>40</combatPower>
+    <weaponMoney>300~400</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinGunpowder</li>
+    </weaponTags>
+    <apparelMoney>110~220</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorPrimitive</li>
+      <li>MUGB_GoblinHelmetPrimitive</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinEliteBase">
+    <defName>MUGB_GoblinKind_PrimitiveChiefMelee</defName>
+    <label>hobgoblin war-chief</label>
+    <minGenerationAge>18</minGenerationAge>
+    <combatPower>65</combatPower>
+    <xenotypeSet>
+      <xenotypeChances><MUGB_Goblin>0</MUGB_Goblin><MUGB_Hobgoblin>99999</MUGB_Hobgoblin><Baseliner>0</Baseliner></xenotypeChances>
+    </xenotypeSet>
+    <weaponMoney>200~320</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinMeleePrimitive</li>
+    </weaponTags>
+    <apparelMoney>270~420</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorPrimitive</li>
+      <li>MUGB_GoblinHelmetPrimitive</li>
+      <li>MUGB_GoblinShieldLight</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+    <apparelRequired>
+      <li>MUGB_Apparel_GoblinSkullHelmet</li>
+    </apparelRequired>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinEliteBase">
+    <defName>MUGB_GoblinKind_PrimitiveChiefRanged</defName>
+    <label>hobgoblin war-chief</label>
+    <minGenerationAge>18</minGenerationAge>
+    <combatPower>65</combatPower>
+    <xenotypeSet>
+      <xenotypeChances><MUGB_Goblin>0</MUGB_Goblin><MUGB_Hobgoblin>99999</MUGB_Hobgoblin><Baseliner>0</Baseliner></xenotypeChances>
+    </xenotypeSet>
+    <weaponMoney>250~350</weaponMoney>
+    <weaponTags>
+      <li>NeolithicRangedChief</li>
+    </weaponTags>
+    <apparelMoney>270~420</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorPrimitive</li>
+      <li>MUGB_GoblinHelmetPrimitive</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+    <apparelRequired>
+      <li>MUGB_Apparel_GoblinSkullHelmet</li>
+    </apparelRequired>
+  </PawnKindDef>
+
+  <!-- ==================== 7-2. 중세 테크 — 일반병 (9종) ==================== -->
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_MedievalLowSoldier</defName>
+    <label>goblin footman</label>
+    <combatPower>38</combatPower>
+    <weaponMoney>250~460</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinMeleeMedieval</li>
+    </weaponTags>
+    <apparelMoney>270~440</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorMedieval</li>
+      <li>MUGB_GoblinArmorPrimitive</li>
+      <li>MUGB_GoblinHelmetMedieval</li>
+      <li>MUGB_GoblinHelmetPrimitive</li>
+      <li>MUGB_GoblinShieldLight</li>
+      <li>MUGB_GoblinShieldHeavy</li>
+      <li>MUGB_GoblinBackpack</li>
+      <li>MUGB_GoblinBanner</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_MedievalHighSoldier</defName>
+    <label>goblin man-at-arms</label>
+    <combatPower>48</combatPower>
+    <weaponMoney>420~650</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinMeleeMedieval</li>
+    </weaponTags>
+    <apparelMoney>440~620</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorMedieval</li>
+      <li>MUGB_GoblinHelmetMedieval</li>
+      <li>MUGB_GoblinShieldHeavy</li>
+      <li>MUGB_GoblinBackpack</li>
+      <li>MUGB_GoblinBanner</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <!-- Korean source intent: 고블린/미디블 장비 후보를 함께 사용하는 하급 중세 보병 변형. -->
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_MedievalFootman</defName>
+    <label>goblin medieval footman</label>
+    <combatPower>38</combatPower>
+    <weaponMoney>270~480</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinMeleeMedieval</li>
+      <li>MedievalMilitaryDecent</li>
+      <li>MedievalMeleeDecent</li>
+    </weaponTags>
+    <apparelMoney>290~460</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <!-- Korean source intent: 하이솔저 상위 변형. 고급 고블린/미디블 장비 후보를 자연스럽게 혼합한다. -->
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_MedievalAdvancedFootman</defName>
+    <label>goblin advanced footman</label>
+    <combatPower>48</combatPower>
+    <weaponMoney>440~670</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinMeleeMedieval</li>
+      <li>MedievalMilitaryDecent</li>
+      <li>MedievalMeleeDecent</li>
+    </weaponTags>
+    <apparelMoney>460~640</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinEliteBase">
+    <defName>MUGB_GoblinKind_ShockElite</defName>
+    <label>goblin shock trooper</label>
+    <combatPower>68</combatPower>
+    <weaponMoney>520~760</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinShockWeapon</li>
+    </weaponTags>
+    <apparelMoney>670~920</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorElite</li>
+      <li>MUGB_GoblinHelmetElite</li>
+      <li>MUGB_GoblinShieldHeavy</li>
+      <li>MUGB_GoblinBackpack</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+    <apparelRequired>
+      <!-- Korean source intent: 충격보병은 방패를 보장하되, 등짐은 엘리트 예산 후보로만 둔다. -->
+      <li>MUGB_Apparel_ReinforcedBoardShield</li>
+    </apparelRequired>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_MedievalSpear</defName>
+    <label>goblin spearman</label>
+    <combatPower>42</combatPower>
+    <weaponMoney>180~450</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinSpear</li>
+    </weaponTags>
+    <apparelMoney>320~470</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorMedieval</li>
+      <li>MUGB_GoblinHelmetMedieval</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinEliteBase">
+    <defName>MUGB_GoblinKind_EliteSpear</defName>
+    <label>goblin elite spearman</label>
+    <combatPower>62</combatPower>
+    <weaponMoney>350~750</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinSpearElite</li>
+    </weaponTags>
+    <apparelMoney>670~920</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorElite</li>
+      <li>MUGB_GoblinHelmetElite</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_MedievalRanged</defName>
+    <label>goblin crossbowman</label>
+    <combatPower>42</combatPower>
+    <weaponMoney>300~520</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinRangedMedieval</li>
+    </weaponTags>
+    <apparelMoney>320~470</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorMedieval</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+    <apparelRequired>
+      <li>MUGB_Apparel_KettleHelmetA</li>
+    </apparelRequired>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinEliteBase">
+    <defName>MUGB_GoblinKind_EliteMarksman</defName>
+    <label>goblin marksman</label>
+    <combatPower>64</combatPower>
+    <weaponMoney>500~760</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinRepeatingCrossbow</li>
+    </weaponTags>
+    <apparelMoney>670~920</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorElite</li>
+      <li>MUGB_GoblinHelmetElite</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_MedievalGunner</defName>
+    <label>goblin gunner</label>
+    <combatPower>46</combatPower>
+    <weaponMoney>450~900</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinGunpowderBasic</li>
+      <li>MUGB_GoblinGunpowderAdvanced</li>
+    </weaponTags>
+    <apparelMoney>370~520</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorMedieval</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+    <apparelRequired>
+      <li>MUGB_Apparel_KettleHelmetA</li>
+    </apparelRequired>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinEliteBase">
+    <defName>MUGB_GoblinKind_Handcannoneer</defName>
+    <label>goblin handcannoneer</label>
+    <combatPower>62</combatPower>
+    <weaponMoney>1000~1000</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinHandcannon</li>
+    </weaponTags>
+    <apparelMoney>670~920</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorElite</li>
+      <li>MUGB_GoblinHelmetElite</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+    <apparelRequired>
+      <li>MUGB_Apparel_GoblinWarBanner</li>
+    </apparelRequired>
+  </PawnKindDef>
+
+  <!-- ==================== 7-3. 중세 테크 — 분대장 (5종, 수치는 문서 표 그대로) ==================== -->
+
+  <PawnKindDef ParentName="MUGB_GoblinEliteBase" Name="MUGB_GoblinSquadLeaderBase" Abstract="True">
+    <minGenerationAge>18</minGenerationAge>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorElite</li>
+      <li>MUGB_GoblinHelmetElite</li>
+      <li>MUGB_GoblinShieldHeavy</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+    <apparelRequired>
+      <li>MUGB_Apparel_GoblinWarBanner</li>
+    </apparelRequired>
+  </PawnKindDef>
+
+  <!-- Bow-focused tribal archer. Most members use primitive goblin equipment. -->
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_PrimitiveArcher</defName>
+    <label>goblin archer</label>
+    <combatPower>38</combatPower>
+    <weaponMoney>180~520</weaponMoney>
+    <weaponTags><li>MUGB_PrimitiveArcherBow</li></weaponTags>
+    <apparelMoney>120~260</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorPrimitive</li>
+      <li>MUGB_GoblinHelmetPrimitive</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <!-- Occasional better-equipped archer mixed into primitive archer squads. -->
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_PrimitiveArcherMedievalGear</defName>
+    <label>goblin archer</label>
+    <combatPower>43</combatPower>
+    <weaponMoney>220~560</weaponMoney>
+    <weaponTags><li>MUGB_PrimitiveArcherBow</li></weaponTags>
+    <apparelMoney>280~430</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorMedieval</li>
+      <li>MUGB_GoblinHelmetMedieval</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinEliteBase">
+    <defName>MUGB_GoblinKind_PrimitiveArcherChief</defName>
+    <label>hobgoblin archer chief</label>
+    <minGenerationAge>18</minGenerationAge>
+    <combatPower>62</combatPower>
+    <xenotypeSet>
+      <xenotypeChances><MUGB_Goblin>0</MUGB_Goblin><MUGB_Hobgoblin>99999</MUGB_Hobgoblin><Baseliner>0</Baseliner></xenotypeChances>
+    </xenotypeSet>
+    <weaponMoney>280~600</weaponMoney>
+    <weaponTags><li>MUGB_PrimitiveArcherBow</li></weaponTags>
+    <apparelMoney>280~460</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorPrimitive</li>
+      <li>MUGB_GoblinHelmetPrimitive</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+    <apparelRequired><li>MUGB_Apparel_GoblinSkullHelmet</li></apparelRequired>
+  </PawnKindDef>
+
+  <!-- Korean source intent: 중세군에 간간이 섞이는 전쟁활/장궁 보조병. 원시 복장은 사용하지 않는다. -->
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_MedievalArcher</defName>
+    <label>goblin medieval archer</label>
+    <combatPower>40</combatPower>
+    <weaponMoney>300~520</weaponMoney>
+    <weaponTags><li>MUGB_MedievalArcherBow</li></weaponTags>
+    <apparelMoney>300~450</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorMedieval</li>
+      <li>MUGB_GoblinHelmetMedieval</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <!-- Dedicated medieval ranged line using the exact mixed weapon pool requested for its squad. -->
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_MedievalRangedLine</defName>
+    <label>goblin medieval ranged soldier</label>
+    <combatPower>45</combatPower>
+    <weaponMoney>300~900</weaponMoney>
+    <weaponTags><li>MUGB_MedievalRangedSquadWeapon</li></weaponTags>
+    <apparelMoney>340~540</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorMedieval</li>
+      <li>MUGB_GoblinHelmetMedieval</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <!-- Keep the displayed squad-leader kind aligned with the pawn's actual xenotype. -->
+  <PawnKindDef ParentName="MUGB_GoblinSquadLeaderBase" Name="MUGB_ThinGoblinSquadLeaderBase" Abstract="True">
+    <xenotypeSet>
+      <xenotypeChances>
+        <MUGB_Goblin>99999</MUGB_Goblin>
+        <MUGB_Hobgoblin>0</MUGB_Hobgoblin>
+        <Baseliner>0</Baseliner>
+      </xenotypeChances>
+    </xenotypeSet>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinSquadLeaderBase" Name="MUGB_HobgoblinSquadLeaderBase" Abstract="True">
+    <xenotypeSet>
+      <xenotypeChances>
+        <MUGB_Goblin>0</MUGB_Goblin>
+        <MUGB_Hobgoblin>99999</MUGB_Hobgoblin>
+        <Baseliner>0</Baseliner>
+      </xenotypeChances>
+    </xenotypeSet>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_ThinGoblinSquadLeaderBase">
+    <defName>MUGB_GoblinKind_SquadLeaderEarlyMelee</defName>
+    <label>thin goblin early melee squad leader</label>
+    <combatPower>55</combatPower>
+    <weaponMoney>300~520</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinMeleeMedieval</li>
+      <li>MUGB_GoblinSpearLeader</li>
+    </weaponTags>
+    <apparelMoney>320~470</apparelMoney>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_ThinGoblinSquadLeaderBase">
+    <defName>MUGB_GoblinKind_SquadLeaderEarlyRanged</defName>
+    <label>thin goblin early ranged squad leader</label>
+    <combatPower>55</combatPower>
+    <weaponMoney>350~580</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinRangedMedieval</li>
+    </weaponTags>
+    <apparelMoney>270~420</apparelMoney>
+  </PawnKindDef>
+
+  <!-- Low-budget hobgoblin leaders use the same equipment tier as their thin-goblin counterparts. -->
+  <PawnKindDef ParentName="MUGB_HobgoblinSquadLeaderBase">
+    <defName>MUGB_GoblinKind_HobSquadLeaderEarlyMelee</defName>
+    <label>hobgoblin early melee squad leader</label>
+    <combatPower>55</combatPower>
+    <weaponMoney>300~520</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinMeleeMedieval</li>
+      <li>MUGB_GoblinSpearLeader</li>
+    </weaponTags>
+    <apparelMoney>320~470</apparelMoney>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_HobgoblinSquadLeaderBase">
+    <defName>MUGB_GoblinKind_HobSquadLeaderEarlyRanged</defName>
+    <label>hobgoblin early ranged squad leader</label>
+    <combatPower>55</combatPower>
+    <weaponMoney>350~580</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinRangedMedieval</li>
+    </weaponTags>
+    <apparelMoney>270~420</apparelMoney>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_HobgoblinSquadLeaderBase">
+    <defName>MUGB_GoblinKind_SquadLeaderLateMelee</defName>
+    <label>hobgoblin late melee squad leader</label>
+    <combatPower>75</combatPower>
+    <weaponMoney>450~700</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinMeleeMedieval</li>
+      <li>MUGB_GoblinSpearLeader</li>
+    </weaponTags>
+    <apparelMoney>520~770</apparelMoney>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_HobgoblinSquadLeaderBase">
+    <defName>MUGB_GoblinKind_SquadLeaderLateRangedBolt</defName>
+    <label>hobgoblin late bolt squad leader</label>
+    <combatPower>75</combatPower>
+    <weaponMoney>500~760</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinRangedMedieval</li>
+    </weaponTags>
+    <apparelMoney>470~720</apparelMoney>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_HobgoblinSquadLeaderBase">
+    <defName>MUGB_GoblinKind_SquadLeaderLateGunpowder</defName>
+    <label>hobgoblin late gunpowder squad leader</label>
+    <combatPower>75</combatPower>
+    <weaponMoney>550~850</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinGunpowder</li>
+    </weaponTags>
+    <apparelMoney>470~720</apparelMoney>
+  </PawnKindDef>
+
+  <!-- Late-game thin-goblin leaders mirror the hobgoblin equipment and weapon budgets. -->
+  <PawnKindDef ParentName="MUGB_ThinGoblinSquadLeaderBase">
+    <defName>MUGB_GoblinKind_ThinSquadLeaderLateMelee</defName>
+    <label>thin goblin late melee squad leader</label>
+    <combatPower>75</combatPower>
+    <weaponMoney>450~700</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinMeleeMedieval</li>
+      <li>MUGB_GoblinSpearLeader</li>
+    </weaponTags>
+    <apparelMoney>520~770</apparelMoney>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_ThinGoblinSquadLeaderBase">
+    <defName>MUGB_GoblinKind_ThinSquadLeaderLateRangedBolt</defName>
+    <label>thin goblin late bolt squad leader</label>
+    <combatPower>75</combatPower>
+    <weaponMoney>500~760</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinRangedMedieval</li>
+    </weaponTags>
+    <apparelMoney>470~720</apparelMoney>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_ThinGoblinSquadLeaderBase">
+    <defName>MUGB_GoblinKind_ThinSquadLeaderLateGunpowder</defName>
+    <label>thin goblin late gunpowder squad leader</label>
+    <combatPower>75</combatPower>
+    <weaponMoney>550~850</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinGunpowder</li>
+    </weaponTags>
+    <apparelMoney>470~720</apparelMoney>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_HobgoblinSquadLeaderBase">
+    <defName>MUGB_GoblinKind_MedievalRangedLeader</defName>
+    <label>hobgoblin ranged squad leader</label>
+    <combatPower>72</combatPower>
+    <weaponMoney>400~900</weaponMoney>
+    <weaponTags><li>MUGB_MedievalRangedSquadWeapon</li></weaponTags>
+    <apparelMoney>470~720</apparelMoney>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_ThinGoblinSquadLeaderBase">
+    <defName>MUGB_GoblinKind_ThinMedievalRangedLeader</defName>
+    <label>thin goblin ranged squad leader</label>
+    <combatPower>65</combatPower>
+    <weaponMoney>350~850</weaponMoney>
+    <weaponTags><li>MUGB_MedievalRangedSquadWeapon</li></weaponTags>
+    <apparelMoney>400~620</apparelMoney>
+  </PawnKindDef>
+
+  <!-- ==================== 7-4. 광신도 세력 (11종) ==================== -->
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase" Name="MUGB_GoblinCultistBase" Abstract="True">
+    <combatEnhancingDrugsChance>0.30</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>0~2</combatEnhancingDrugsCount>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+    <apparelRequired>
+      <li>MUGB_Apparel_HumanHideMantle</li>
+    </apparelRequired>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCultistBase">
+    <defName>MUGB_GoblinKind_CultistLowSoldier</defName>
+    <label>cultist goblin footman</label>
+    <combatPower>40</combatPower>
+    <weaponMoney>250~460</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinMeleeMedieval</li>
+    </weaponTags>
+    <apparelMoney>270~470</apparelMoney>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCultistBase">
+    <defName>MUGB_GoblinKind_CultistHighSoldier</defName>
+    <label>cultist goblin man-at-arms</label>
+    <combatPower>50</combatPower>
+    <weaponMoney>420~650</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinMeleeMedieval</li>
+    </weaponTags>
+    <apparelMoney>440~640</apparelMoney>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCultistBase">
+    <defName>MUGB_GoblinKind_CultistSpear</defName>
+    <label>cultist goblin spearman</label>
+    <combatPower>44</combatPower>
+    <weaponMoney>180~450</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinSpear</li>
+    </weaponTags>
+    <apparelMoney>320~480</apparelMoney>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCultistBase">
+    <defName>MUGB_GoblinKind_CultistGunner</defName>
+    <label>cultist goblin gunner</label>
+    <combatPower>48</combatPower>
+    <weaponMoney>450~720</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinGunpowderBasic</li>
+      <li>MUGB_GoblinGunpowderAdvanced</li>
+    </weaponTags>
+    <apparelMoney>370~530</apparelMoney>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCultistBase">
+    <defName>MUGB_GoblinKind_CultistRanged</defName>
+    <label>cultist goblin crossbowman</label>
+    <combatPower>44</combatPower>
+    <weaponMoney>300~520</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinRangedMedieval</li>
+    </weaponTags>
+    <apparelMoney>320~480</apparelMoney>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCultistBase">
+    <defName>MUGB_GoblinKind_CultistShock</defName>
+    <label>cultist goblin shock-skirmisher</label>
+    <combatPower>38</combatPower>
+    <weaponMoney>70~160</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinMeleePrimitive</li>
+    </weaponTags>
+    <apparelMoney>120~250</apparelMoney>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinEliteBase">
+    <defName>MUGB_GoblinKind_CultistSquadLeader</defName>
+    <label>cultist hobgoblin squad leader</label>
+    <minGenerationAge>18</minGenerationAge>
+    <combatPower>78</combatPower>
+    <xenotypeSet>
+      <xenotypeChances><MUGB_Goblin>0</MUGB_Goblin><MUGB_Hobgoblin>99999</MUGB_Hobgoblin><Baseliner>0</Baseliner></xenotypeChances>
+    </xenotypeSet>
+    <weaponMoney>450~700</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinMeleeMedieval</li>
+      <li>MUGB_GoblinSpearLeader</li>
+      <li>MUGB_GoblinGunpowderSpecial</li>
+    </weaponTags>
+    <apparelMoney>520~770</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorElite</li>
+      <li>MUGB_GoblinShieldHeavy</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+    <apparelRequired>
+      <li>MUGB_Apparel_HumanHideMantle</li>
+    </apparelRequired>
+  </PawnKindDef>
+
+  <!-- Korean source intent: 광신도 전용 분대장급 특수 폰카인드. 전설급 지팡이를 들고 나오므로 저점수 습격에는 드물어야 한다. -->
+  <PawnKindDef ParentName="MUGB_GoblinEliteBase">
+    <defName>MUGB_GoblinKind_CultistShaman</defName>
+    <label>goblin shaman</label>
+    <combatPower>82</combatPower>
+    <isGoodPsychicRitualInvoker>true</isGoodPsychicRitualInvoker>
+    <disallowedTraitsWithDegree>
+      <PsychicSensitivity>-2</PsychicSensitivity>
+    </disallowedTraitsWithDegree>
+    <weaponMoney>1000~1000</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinShamanStaff</li>
+    </weaponTags>
+    <!-- Clothing is assigned from the shaman-only pool after generation. -->
+    <apparelMoney>0~0</apparelMoney>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_CultistCaptor</defName>
+    <label>cultist goblin captor</label>
+    <combatPower>36</combatPower>
+    <weaponMoney>160~300</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinCapture</li>
+    </weaponTags>
+    <apparelMoney>170~320</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorPrimitive</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+    <apparelRequired>
+      <li>MUGB_Apparel_HumanHideMantle</li>
+    </apparelRequired>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinEliteBase">
+    <defName>MUGB_GoblinKind_CultistHandcannoneer</defName>
+    <label>cultist goblin handcannoneer</label>
+    <combatPower>60</combatPower>
+    <weaponMoney>1000~1000</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinHandcannon</li>
+    </weaponTags>
+    <apparelMoney>0~0</apparelMoney>
+    <apparelRequired>
+      <li>MUGB_Apparel_HumanHideMantle</li>
+      <li>MUGB_Apparel_GoblinWarBanner</li>
+    </apparelRequired>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinEliteBase">
+    <defName>MUGB_GoblinKind_CultistBomber</defName>
+    <label>cultist goblin bomber</label>
+    <combatPower>110</combatPower>
+    <weaponMoney>1000~1000</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinBoomstick</li>
+    </weaponTags>
+    <apparelMoney>670~920</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorElite</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+    <apparelRequired>
+      <li>MUGB_Apparel_HumanHideMantle</li>
+    </apparelRequired>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_CultistBomberNaked</defName>
+    <label>naked cultist goblin bomber</label>
+    <combatPower>85</combatPower>
+    <weaponMoney>1000~1000</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinBoomstick</li>
+    </weaponTags>
+    <combatEnhancingDrugsChance>0</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>0~0</combatEnhancingDrugsCount>
+    <apparelMoney>0~0</apparelMoney>
+    <apparelIgnoreSeasons>true</apparelIgnoreSeasons>
+    <apparelIgnorePollution>true</apparelIgnorePollution>
+    <apparelRequired>
+      <li>MUGB_Apparel_GoblinLoincloth</li>
+      <li>MUGB_Apparel_GoblinWarBanner</li>
+    </apparelRequired>
+  </PawnKindDef>
+
+  <!-- ==================== 7-5. 특수·공통 (테크 무관, 7종) ==================== -->
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_SlaveBomber</defName>
+    <label>slave bomber</label>
+    <combatPower>90</combatPower>
+    <weaponMoney>1000~1000</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinBoomstick</li>
+    </weaponTags>
+    <apparelMoney>0~0</apparelMoney>
+    <apparelIgnoreSeasons>true</apparelIgnoreSeasons>
+    <apparelIgnorePollution>true</apparelIgnorePollution>
+    <apparelRequired>
+      <li>MUGB_Apparel_GoblinLoincloth</li>
+    </apparelRequired>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinEliteBase">
+    <defName>MUGB_GoblinKind_HeavyBomber</defName>
+    <label>heavy goblin bomber</label>
+    <combatPower>125</combatPower>
+    <weaponMoney>1000~1000</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinBoomstick</li>
+    </weaponTags>
+    <apparelMoney>0~0</apparelMoney>
+    <apparelRequired>
+      <li>MUGB_Apparel_GoblinPlateArmorA</li>
+      <li>MUGB_Apparel_HammerHelmet</li>
+    </apparelRequired>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_Captor</defName>
+    <label>goblin captor</label>
+    <combatPower>30</combatPower>
+    <weaponMoney>160~300</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinCapture</li>
+    </weaponTags>
+    <apparelMoney>120~220</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+    <apparelRequired>
+      <li>MUGB_Apparel_GoblinBodyWrap</li>
+    </apparelRequired>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinEliteBase">
+    <defName>MUGB_GoblinKind_CultistCaptorLeader</defName>
+    <label>cultist hobgoblin captor leader</label>
+    <minGenerationAge>18</minGenerationAge>
+    <combatPower>64</combatPower>
+    <xenotypeSet>
+      <xenotypeChances><MUGB_Goblin>0</MUGB_Goblin><MUGB_Hobgoblin>99999</MUGB_Hobgoblin><Baseliner>0</Baseliner></xenotypeChances>
+    </xenotypeSet>
+    <weaponMoney>240~440</weaponMoney>
+    <weaponTags><li>MUGB_GoblinCapture</li></weaponTags>
+    <apparelMoney>420~640</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorMedieval</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+    <apparelRequired><li>MUGB_Apparel_HumanHideMantle</li></apparelRequired>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_PrimitiveCaptor</defName>
+    <label>tribal goblin captor</label>
+    <combatPower>30</combatPower>
+    <weaponMoney>160~300</weaponMoney>
+    <weaponTags><li>MUGB_GoblinCapture</li></weaponTags>
+    <apparelMoney>120~240</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorPrimitive</li>
+      <li>MUGB_GoblinHelmetPrimitive</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+    <apparelRequired><li>MUGB_Apparel_GoblinBodyWrap</li></apparelRequired>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_MedievalCaptor</defName>
+    <label>medieval goblin captor</label>
+    <combatPower>36</combatPower>
+    <weaponMoney>180~340</weaponMoney>
+    <weaponTags><li>MUGB_GoblinCapture</li></weaponTags>
+    <apparelMoney>280~440</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorMedieval</li>
+      <li>MUGB_GoblinHelmetMedieval</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinEliteBase">
+    <defName>MUGB_GoblinKind_PrimitiveCaptorLeader</defName>
+    <label>tribal hobgoblin captor leader</label>
+    <minGenerationAge>18</minGenerationAge>
+    <combatPower>52</combatPower>
+    <xenotypeSet>
+      <xenotypeChances><MUGB_Goblin>0</MUGB_Goblin><MUGB_Hobgoblin>99999</MUGB_Hobgoblin><Baseliner>0</Baseliner></xenotypeChances>
+    </xenotypeSet>
+    <weaponMoney>220~380</weaponMoney>
+    <weaponTags><li>MUGB_GoblinCapture</li></weaponTags>
+    <apparelMoney>240~400</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorPrimitive</li>
+      <li>MUGB_GoblinHelmetPrimitive</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinEliteBase">
+    <defName>MUGB_GoblinKind_MedievalCaptorLeader</defName>
+    <label>medieval hobgoblin captor leader</label>
+    <minGenerationAge>18</minGenerationAge>
+    <combatPower>62</combatPower>
+    <xenotypeSet>
+      <xenotypeChances><MUGB_Goblin>0</MUGB_Goblin><MUGB_Hobgoblin>99999</MUGB_Hobgoblin><Baseliner>0</Baseliner></xenotypeChances>
+    </xenotypeSet>
+    <weaponMoney>240~420</weaponMoney>
+    <weaponTags><li>MUGB_GoblinCapture</li></weaponTags>
+    <apparelMoney>440~650</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorMedieval</li>
+      <li>MUGB_GoblinHelmetMedieval</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_Beggar</defName>
+    <label>goblin beggar</label>
+    <combatPower>8</combatPower>
+    <isFighter>false</isFighter>
+    <weaponMoney>0~0</weaponMoney>
+    <combatEnhancingDrugsChance>0</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>0~0</combatEnhancingDrugsCount>
+    <apparelMoney>0~70</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinBeggarApparel</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <!-- Korean source intent: 봉화 합류자는 임시 방문객이 아니라 수락 시 영구 합류하는 고블린이다.
+       맨몸 전투병이 아닌 가벼운 기본복만 가진 생존자이며, 전투 장비는 보장하지 않는다. -->
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_BeaconRefugee</defName>
+    <label>goblin beacon joiner</label>
+    <combatPower>12</combatPower>
+    <weaponMoney>0~0</weaponMoney>
+    <apparelMoney>20~100</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_HospitalityRefugee</defName>
+    <label>goblin refugee</label>
+    <combatPower>12</combatPower>
+    <weaponMoney>0~0</weaponMoney>
+    <apparelMoney>20~100</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_Slave</defName>
+    <label>goblin slave</label>
+    <combatPower>5</combatPower>
+    <isFighter>false</isFighter>
+    <weaponMoney>0~0</weaponMoney>
+    <combatEnhancingDrugsChance>0</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>0~0</combatEnhancingDrugsCount>
+    <apparelMoney>0~0</apparelMoney>
+    <apparelRequired>
+      <li>MUGB_Apparel_GoblinLoincloth</li>
+    </apparelRequired>
+    <!-- SlaveCollar/SlaveBodyStrap occasional 착용은 별도 C#/PawnGenerator 후처리 필요 -->
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_TunnelSlave</defName>
+    <label>goblin tunnel slave</label>
+    <combatPower>18</combatPower>
+    <!-- Equipped explicitly after generation so squad upgrades can never replace the pick with leader weapons. -->
+    <weaponMoney>0~0</weaponMoney>
+    <combatEnhancingDrugsChance>0</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>0~0</combatEnhancingDrugsCount>
+    <apparelMoney>0~60</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinShieldLight</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_TunnelVanguard</defName>
+    <label>goblin tunnel vanguard</label>
+    <combatPower>36</combatPower>
+    <weaponMoney>150~280</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinMeleeMedieval</li>
+      <li MayRequire="DankPyon.Medieval.Overhaul">DankPyon_MilitaryPick</li>
+    </weaponTags>
+    <apparelMoney>0~90</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinShieldLight</li>
+    </apparelTags>
+    <apparelRequired>
+      <li>MUGB_Apparel_GoblinLoincloth</li>
+      <li>MUGB_Apparel_GoblinPheromonePack</li>
+    </apparelRequired>
+  </PawnKindDef>
+
+  <!-- Korean source intent: 전용 공병 습격에서만 편성되는 굴착병. 곡괭이는 생성 후처리로 보장한다. -->
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_Sapper</defName>
+    <label>goblin sapper</label>
+    <combatPower>42</combatPower>
+    <canBeSapper>true</canBeSapper>
+    <weaponMoney>0~0</weaponMoney>
+    <apparelMoney>40~140</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+    <skills>
+      <li><skill>Mining</skill><range>6~10</range></li>
+      <li><skill>Melee</skill><range>4~8</range></li>
+    </skills>
+  </PawnKindDef>
+
+  <!-- Korean source intent: 붐스틱 공병 분대의 소모성 충격보병. 한 번에 한 명씩 공병 목표에 투입된다. -->
+  <PawnKindDef ParentName="MUGB_GoblinEliteBase">
+    <defName>MUGB_GoblinKind_BoomstickShockEliteSapper</defName>
+    <label>boomstick sapper shock trooper</label>
+    <combatPower>110</combatPower>
+    <!-- Selected as the active sapper by the dedicated suicide-raid worker only. -->
+    <canBeSapper>false</canBeSapper>
+    <weaponMoney>1000~1000</weaponMoney>
+    <weaponTags><li>MUGB_GoblinBoomstick</li></weaponTags>
+    <apparelMoney>670~920</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorElite</li>
+      <li>MUGB_GoblinHelmetElite</li>
+      <li>MUGB_GoblinShieldHeavy</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+    <apparelRequired><li>MUGB_Apparel_ReinforcedBoardShield</li></apparelRequired>
+    <skills>
+      <li><skill>Mining</skill><range>4~8</range></li>
+      <li><skill>Melee</skill><range>6~10</range></li>
+    </skills>
+  </PawnKindDef>
+
+  <!-- Korean source intent: 전용 자폭공병 습격에서만 쓰는 헐벗은 노예 돌파병. -->
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_SlaveBoomstickSapper</defName>
+    <label>slave boomstick sapper</label>
+    <combatPower>90</combatPower>
+    <canBeSapper>false</canBeSapper>
+    <weaponMoney>1000~1000</weaponMoney>
+    <weaponTags><li>MUGB_GoblinBoomstick</li></weaponTags>
+    <apparelMoney>0~0</apparelMoney>
+    <apparelIgnoreSeasons>true</apparelIgnoreSeasons>
+    <apparelIgnorePollution>true</apparelIgnorePollution>
+    <apparelRequired><li>MUGB_Apparel_GoblinLoincloth</li></apparelRequired>
+    <skills>
+      <li><skill>Mining</skill><range>4~8</range></li>
+      <li><skill>Melee</skill><range>3~7</range></li>
+    </skills>
+  </PawnKindDef>
+
+  <!-- Korean source intent: shared mortar crew; lightly armed workers rather than a free elite combat squad. -->
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_SiegeCrew</defName>
+    <label>goblin mortar crew</label>
+    <combatPower>24</combatPower>
+    <weaponMoney>65~110</weaponMoney>
+    <weaponTags><li>MUGB_GoblinMeleePrimitive</li></weaponTags>
+    <apparelMoney>30~100</apparelMoney>
+    <apparelTags><li>MUGB_GoblinApparel</li><li>MedievalBasic</li></apparelTags>
+    <apparelRequired><li>MUGB_Apparel_GoblinLoincloth</li></apparelRequired>
+  </PawnKindDef>
+
+</Defs>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <NeedDef>
+    <defName>MUGB_FleshCraving</defName>
+    <needClass>MUGB.Need_FleshCraving</needClass>
+    <label>flesh craving</label>
+    <description>Goblin cells demand humanlike flesh. As this need falls, the goblin becomes irritable and physically sluggish.</description>
+    <baseLevel>1</baseLevel>
+    <minIntelligence>Humanlike</minIntelligence>
+    <colonistAndPrisonersOnly>false</colonistAndPrisonersOnly>
+    <onlyIfCausedByGene>true</onlyIfCausedByGene>
+    <listPriority>650</listPriority>
+    <showForCaravanMembers>true</showForCaravanMembers>
+    <major>true</major>
+    <developmentalStageFilter>Adult</developmentalStageFilter>
+  </NeedDef>
+
+</Defs>

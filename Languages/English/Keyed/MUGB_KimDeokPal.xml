@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <MUGB_KimDeokPalPawnLossAdaptationButton>Kim Deok-pal colonist-loss raid adaptation: {0}%</MUGB_KimDeokPalPawnLossAdaptationButton>
+  <MUGB_KimDeokPalPawnLossAdaptationDescription>Used only while the Kim Deok-pal storyteller is active. 0%: no relief. 50%: half relief. 100%: vanilla.</MUGB_KimDeokPalPawnLossAdaptationDescription>
+</LanguageData>

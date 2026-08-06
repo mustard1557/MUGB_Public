@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <DesignatorDropdownGroupDef>
+    <defName>MUGB_BoneWalls</defName>
+    <label>bone walls</label>
+  </DesignatorDropdownGroupDef>
+
+  <ThingDef ParentName="Wall" Name="MUGB_BoneWallBase">
+    <defName>MUGB_Wall_Bone</defName>
+    <label>human-bone wall</label>
+    <description>A crude goblin wall made from stacked humanlike bones and a little timber binding. It is tougher and far less flammable than a plain wooden wall, but still clearly improvised.</description>
+    <graphicData>
+      <texPath>Things/Building/Linked/MGB_Wall_Bone</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <linkType>CornerFiller</linkType>
+      <linkFlags>
+        <li>Wall</li>
+        <li>Rock</li>
+      </linkFlags>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+        <edgeTop>Damage/Edge</edgeTop>
+        <edgeBot>Damage/Edge</edgeBot>
+        <edgeLeft>Damage/Edge</edgeLeft>
+        <edgeRight>Damage/Edge</edgeRight>
+      </damageData>
+    </graphicData>
+    <uiIconPath>Things/Building/Linked/MGB_Wall_Bone_MenuIcon</uiIconPath>
+    <uiIconPathsStuff Inherit="False" />
+    <soundImpactDefault>BulletImpact_Wood</soundImpactDefault>
+    <statBases>
+      <MaxHitPoints>280</MaxHitPoints>
+      <WorkToBuild>170</WorkToBuild>
+      <Flammability>0.05</Flammability>
+      <MeditationFocusStrength>0.18</MeditationFocusStrength>
+    </statBases>
+    <costList>
+      <MUGB_Bone>6</MUGB_Bone>
+      <WoodLog>2</WoodLog>
+    </costList>
+    <costStuffCount>0</costStuffCount>
+    <stuffCategories Inherit="False" />
+    <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <designationCategory>Structure</designationCategory>
+    <designatorDropdown>MUGB_BoneWalls</designatorDropdown>
+    <uiOrder>2005</uiOrder>
+    <building>
+      <paintable>false</paintable>
+      <isInert>true</isInert>
+      <isWall>true</isWall>
+      <isPlaceOverableWall>true</isPlaceOverableWall>
+      <ai_chillDestination>false</ai_chillDestination>
+      <supportsWallAttachments>true</supportsWallAttachments>
+      <isAirtight>true</isAirtight>
+      <isStuffableAirtight>false</isStuffableAirtight>
+    </building>
+    <researchPrerequisites>
+      <li>MUGB_Research_BoneRendering</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- 2026-07-10: MUGB_Wall_BoneCommon(미디블 동물뼈 벽) 삭제.
+       사유: ①"뼈벽은 인골(MUGB_Bone)만" 합의 위반 ②DankPyon_Bone 하드 참조로
+       미디블 미설치 시 참조 에러. 동물뼈 벽이 다시 필요하면
+       Patches\MedievalOverhaul 조건부 추가로 구현할 것. -->
+
+</Defs>

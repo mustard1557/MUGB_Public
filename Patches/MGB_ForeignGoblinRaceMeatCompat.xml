@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <!--
+    [파일 개요]
+    defName이 정확히 "Goblin"인 종족을 추가하는 다른 모드와의 def 이름 충돌을 막습니다.
+
+    [문제]
+    RimWorld는 종족마다 고기 def를 자동 생성하며, 그 이름은 "Meat_" + 종족 defName 입니다.
+    (RimWorld.ThingDefGenerator_Meat.ImpliedMeatDefs)
+
+    MUGB의 고블린은 Human의 유전자형(xenotype)이라 고기가 자동 생성되지 않으므로,
+    Defs/Items/MGB_FoodIngredientDefs.xml 에서 Meat_Goblin을 직접 정의하고 있습니다.
+
+    그래서 종족 이름을 "Goblin"으로 지은 모드가 함께 켜지면 이름이 겹칩니다.
+    바닐라는 이 상황에서 죽지는 않지만, 아래처럼 처리합니다.
+    (Verse.DefDatabase<T>.Add)
+
+        while (defsByName.ContainsKey(def.defName)) {
+            Log.Error("Adding duplicate ...");
+            def.defName += Mathf.RoundToInt(Rand.Value * 1000f);   // 난수 접미사
+        }
+
+    결과적으로 상대 종족의 고기는 Meat_Goblin356 같은 이름이 되는데,
+    이 숫자는 실행할 때마다 바뀌므로 그 고기를 저장해두면 다음 실행에 사라집니다.
+    또한 def 생성 지점을 하모니로 패치해 자체 목록을 만드는 모드(HAR 계열 등)는
+    이 중복을 허용하지 않아, 그쪽에서 예외가 나면 def 로딩 전체가 중단됩니다.
+
+    [해결]
+    바닐라가 제공하는 공식 탈출구인 specificMeatDef를 지정합니다.
+
+      - ThingDefGenerator_Meat.ImpliedMeatDefs 는 specificMeatDef가 있으면 생성을 건너뜁니다.
+      - RaceProperties.ResolveReferences 는 specificMeatDef를 그대로 meatDef로 씁니다.
+
+    즉 고기를 새로 만들지 않고 MUGB의 Meat_Goblin을 쓰게 합니다.
+    상대 모드 고블린을 도축하면 MUGB 고블린고기가 나오며, 고블린 살점 갈망과
+    관련 생각(thought)도 동일하게 적용됩니다. 고블린은 고블린이므로 어색하지 않습니다.
+
+    [안전성]
+    - MUGB의 Meat_Goblin def 자체는 전혀 건드리지 않습니다. defName이 그대로이므로
+      기존 세이브의 참조가 깨지지 않습니다.
+    - 패치 연산 한 번으로 끝나며 런타임에 도는 코드가 없습니다.
+    - 충돌 모드가 없으면 xpath가 아무 노드도 잡지 못해 그대로 무동작입니다.
+      xpath가 빗나가도 결과는 "지금과 동일"이지 "더 나빠짐"이 아닙니다.
+
+    [xpath 조건 설명]
+    /Defs/*                 ThingDef 외에 AlienRace.ThingDef_AlienRace 등 파생 def도 포함합니다.
+    [defName="Goblin"]      Meat_Goblin을 만들어내는 이름은 이것 하나뿐입니다.
+    race[*]                 자식 요소가 있는 race 블록, 즉 RaceProperties만 고릅니다.
+                            PawnKindDef의 <race>Foo</race> 는 텍스트뿐이라 여기서 제외됩니다.
+                            (이 조건이 없으면 PawnKindDef의 종족 참조를 망가뜨립니다.)
+    [not(specificMeatDef)]  상대가 이미 지정해 두었으면 존중합니다.
+    [not(useMeatFrom)]      이미 다른 종족 고기를 쓰고 있으면 애초에 생성되지 않으므로 둡니다.
+                            (둘 다 설정하면 바닐라가 config error를 남깁니다.)
+
+    [알려진 한계]
+    패치 연산은 XML 상속이 풀리기 전에 돌기 때문에, 상대 종족 def가 자기 <race> 블록 없이
+    추상 부모에서 통째로 상속받는 구조라면 이 xpath가 잡지 못합니다.
+    실제 종족 모드는 body/baseBodySize/foodType 등을 자기 <race>에 적는 것이 일반적이라
+    대부분 걸리지만, 잡히지 않는 사례가 보고되면 그때 해당 구조에 맞춰 확장하면 됩니다.
+    그 경우에도 결과는 이 패치 도입 전과 동일합니다. -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/*[defName="Goblin"]/race[*][not(specificMeatDef)][not(useMeatFrom)]</xpath>
+    <value>
+      <specificMeatDef>Meat_Goblin</specificMeatDef>
+    </value>
+    <success>Always</success>
+  </Operation>
+
+</Patch>

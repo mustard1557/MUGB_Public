@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Medieval Overhaul</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="MUGB_cookstation"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs[not(li="WoodLog")]</xpath>
+          <match Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="MUGB_cookstation"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+            <value>
+              <li>WoodLog</li>
+            </value>
+          </match>
+        </li>
+
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="MUGB_cookstation"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs[not(li="DankPyon_Coal")]</xpath>
+          <match Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="MUGB_cookstation"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+            <value>
+              <li>DankPyon_Coal</li>
+            </value>
+          </match>
+        </li>
+
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="MUGB_cookstation"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li[.="DankPyon_Tar"]</xpath>
+          <match Class="PatchOperationRemove">
+            <xpath>Defs/ThingDef[defName="MUGB_cookstation"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li[.="DankPyon_Tar"]</xpath>
+          </match>
+        </li>
+
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="MUGB_cookstation"]/comps/li[@Class="MedievalOverhaul.CompProperties_StoreFuelThing"]</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="MUGB_cookstation"]/comps</xpath>
+            <value>
+              <li Class="MedievalOverhaul.CompProperties_StoreFuelThing"/>
+            </value>
+          </nomatch>
+        </li>
+
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="MUGB_smithbench"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs[not(li="WoodLog")]</xpath>
+          <match Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="MUGB_smithbench"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+            <value>
+              <li>WoodLog</li>
+            </value>
+          </match>
+        </li>
+
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="MUGB_smithbench"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs[not(li="DankPyon_Coal")]</xpath>
+          <match Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="MUGB_smithbench"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+            <value>
+              <li>DankPyon_Coal</li>
+            </value>
+          </match>
+        </li>
+
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="MUGB_smithbench"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li[.="DankPyon_Tar"]</xpath>
+          <match Class="PatchOperationRemove">
+            <xpath>Defs/ThingDef[defName="MUGB_smithbench"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li[.="DankPyon_Tar"]</xpath>
+          </match>
+        </li>
+
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="MUGB_smithbench"]/comps/li[@Class="MedievalOverhaul.CompProperties_StoreFuelThing"]</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="MUGB_smithbench"]/comps</xpath>
+            <value>
+              <li Class="MedievalOverhaul.CompProperties_StoreFuelThing"/>
+            </value>
+          </nomatch>
+        </li>
+
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="MUGB_bigpot"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs[not(li="WoodLog")]</xpath>
+          <match Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="MUGB_bigpot"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+            <value>
+              <li>WoodLog</li>
+            </value>
+          </match>
+        </li>
+
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="MUGB_bigpot"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs[not(li="DankPyon_Coal")]</xpath>
+          <match Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="MUGB_bigpot"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+            <value>
+              <li>DankPyon_Coal</li>
+            </value>
+          </match>
+        </li>
+
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="MUGB_bigpot"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li[.="DankPyon_Tar"]</xpath>
+          <match Class="PatchOperationRemove">
+            <xpath>Defs/ThingDef[defName="MUGB_bigpot"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li[.="DankPyon_Tar"]</xpath>
+          </match>
+        </li>
+
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="MUGB_bigpot"]/comps/li[@Class="MedievalOverhaul.CompProperties_StoreFuelThing"]</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="MUGB_bigpot"]/comps</xpath>
+            <value>
+              <li Class="MedievalOverhaul.CompProperties_StoreFuelThing"/>
+            </value>
+          </nomatch>
+        </li>
+
+        <!--
+          한국어 의도: 화로도 나머지 작업대와 동일하게 미디블 연료 체계로 맞춥니다.
+          화로만 빠지면 아래에서 우리 연료 탭을 제거했을 때 연료를 조절할 UI가 사라집니다.
+        -->
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="MUGB_fireplace"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs[not(li="DankPyon_Coal")]</xpath>
+          <match Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="MUGB_fireplace"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+            <value>
+              <li>DankPyon_Coal</li>
+            </value>
+          </match>
+        </li>
+
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="MUGB_fireplace"]/comps/li[@Class="MedievalOverhaul.CompProperties_StoreFuelThing"]</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="MUGB_fireplace"]/comps</xpath>
+            <value>
+              <li Class="MedievalOverhaul.CompProperties_StoreFuelThing"/>
+            </value>
+          </nomatch>
+        </li>
+
+        <!--
+          한국어 의도: 연료 탭 통합.
+          미디블이 있으면 고블린 연료 탭을 빼고 미디블 연료 탭으로 일원화합니다.
+          두 탭이 각자 다른 필터를 들고 있으면 유저가 어느 쪽에서 고른 설정이 실제로
+          적용되는지 알 수 없기 때문에, 미디블의 CompStoreFuelThing 하나만 기준으로 둡니다.
+          탭을 넣기 전에 반드시 우리 탭을 먼저 제거해 중복 노출을 막습니다.
+        -->
+        <li Class="PatchOperationRemove">
+          <xpath>Defs/ThingDef[defName="MUGB_cookstation" or defName="MUGB_smithbench" or defName="MUGB_bigpot" or defName="MUGB_fireplace"]/inspectorTabs/li[.="MUGB.ITab_GoblinFuel"]</xpath>
+          <success>Normal</success>
+        </li>
+
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="MUGB_cookstation"]/inspectorTabs/li[.="MedievalOverhaul.ITab_Fuel"]</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="MUGB_cookstation"]/inspectorTabs</xpath>
+            <value>
+              <li>MedievalOverhaul.ITab_Fuel</li>
+            </value>
+          </nomatch>
+        </li>
+
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="MUGB_smithbench"]/inspectorTabs/li[.="MedievalOverhaul.ITab_Fuel"]</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="MUGB_smithbench"]/inspectorTabs</xpath>
+            <value>
+              <li>MedievalOverhaul.ITab_Fuel</li>
+            </value>
+          </nomatch>
+        </li>
+
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="MUGB_bigpot"]/inspectorTabs/li[.="MedievalOverhaul.ITab_Fuel"]</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="MUGB_bigpot"]/inspectorTabs</xpath>
+            <value>
+              <li>MedievalOverhaul.ITab_Fuel</li>
+            </value>
+          </nomatch>
+        </li>
+
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="MUGB_fireplace"]/inspectorTabs/li[.="MedievalOverhaul.ITab_Fuel"]</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="MUGB_fireplace"]/inspectorTabs</xpath>
+            <value>
+              <li>MedievalOverhaul.ITab_Fuel</li>
+            </value>
+          </nomatch>
+        </li>
+
+      </operations>
+    </match>
+  </Operation>
+
+</Patch>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- Korean source intent: a lightweight decorative building, not a real corpse Pawn. -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>MUGB_GoblinWarRemains</defName>
+    <thingClass>MUGB.Building_GoblinWarRemains</thingClass>
+    <label>remains of a goblin war</label>
+    <description>The old remains of a soldier who fell fighting goblins. The bones and scraps of crude alloy can still be recovered.</description>
+    <category>Building</category>
+    <drawerType>MapMeshOnly</drawerType>
+    <graphicData>
+      <texPath>Things/Building/Ruins/GoblinBattlefieldRemains/MGB_Battleremain_1</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.45,1.45)</drawSize>
+    </graphicData>
+    <size>(1,1)</size>
+    <randomizeRotationOnSpawn>true</randomizeRotationOnSpawn>
+    <rotatable>true</rotatable>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>35</pathCost>
+    <fillPercent>0.2</fillPercent>
+    <useHitPoints>true</useHitPoints>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <WorkToBuild>500</WorkToBuild>
+      <Flammability>0.25</Flammability>
+      <Beauty>-8</Beauty>
+    </statBases>
+    <costList>
+      <MUGB_Bone>5</MUGB_Bone>
+      <MUGB_CrudeGoblinAlloy>5</MUGB_CrudeGoblinAlloy>
+    </costList>
+    <building>
+      <claimable>false</claimable>
+      <deconstructible>true</deconstructible>
+      <alwaysDeconstructible>true</alwaysDeconstructible>
+      <isEdifice>false</isEdifice>
+    </building>
+  </ThingDef>
+</Defs>

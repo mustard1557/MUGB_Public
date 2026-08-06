@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef>
+    <defName>MUGB_GBroodSac</defName>
+    <label>goblin reproductive sac</label>
+    <description>A harvested goblin reproductive sac. It carries information from the donor goblin and can be used in later goblin embryo work.</description>
+    <thingClass>ThingWithComps</thingClass>
+    <selectable>true</selectable>
+    <category>Item</category>
+    <drawerType>MapMeshOnly</drawerType>
+    <tickerType>Rare</tickerType>
+    <rotatable>false</rotatable>
+    <altitudeLayer>Item</altitudeLayer>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <stackLimit>1</stackLimit>
+    <alwaysHaulable>true</alwaysHaulable>
+    <tradeability>All</tradeability>
+    <pathCost>14</pathCost>
+    <thingCategories>
+      <li>MUGB_GoblinReproductionCategory</li>
+    </thingCategories>
+    <statBases>
+      <MaxHitPoints>35</MaxHitPoints>
+      <DeteriorationRate>6</DeteriorationRate>
+      <Mass>0.25</Mass>
+      <Flammability>0.5</Flammability>
+      <MarketValue>30</MarketValue>
+    </statBases>
+    <graphicData>
+      <texPath>Things/Item/MGB_GBroodSac</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(0.75,0.75)</drawSize>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_Forbiddable" />
+      <li Class="MUGB.CompProperties_GoblinReproductiveSac" />
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>4</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef>
+    <defName>MUGB_Gfetus</defName>
+    <label>goblin embryo</label>
+    <description>An unstable goblin embryo prepared from a reproductive sac, herbal medicine, and human viscera. It can be implanted into a living female humanlike.</description>
+    <thingClass>ThingWithComps</thingClass>
+    <selectable>true</selectable>
+    <category>Item</category>
+    <drawerType>MapMeshOnly</drawerType>
+    <tickerType>Rare</tickerType>
+    <rotatable>false</rotatable>
+    <altitudeLayer>Item</altitudeLayer>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <stackLimit>1</stackLimit>
+    <alwaysHaulable>true</alwaysHaulable>
+    <tradeability>All</tradeability>
+    <pathCost>14</pathCost>
+    <thingCategories>
+      <li>MUGB_GoblinReproductionCategory</li>
+    </thingCategories>
+    <statBases>
+      <MaxHitPoints>30</MaxHitPoints>
+      <DeteriorationRate>6</DeteriorationRate>
+      <Mass>0.15</Mass>
+      <Flammability>0.5</Flammability>
+      <MarketValue>55</MarketValue>
+    </statBases>
+    <graphicData>
+      <texPath>Things/Item/MGB_Gfetus</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(0.65,0.65)</drawSize>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_Forbiddable" />
+      <li Class="MUGB.CompProperties_GoblinReproductiveSac" />
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>2</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

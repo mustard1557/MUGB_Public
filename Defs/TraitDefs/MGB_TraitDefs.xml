@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  [파일 개요]
+  MUGB 일반 특성 정의입니다.
+  - MGB_Feminine(여성스러움): 살림(요리/사교/제작/원예/간호)에 유리하고 전투에 불리한 내치용 특성입니다.
+  - 바닐라 DislikesMen/DislikesWomen과 같은 방식으로 commonalityFemale을 사용해 여성에게 더 흔하게 출현합니다(여성 0.7, 남성 0.1).
+  - 모드 설정의 토글을 끄면 자연 출현만 차단됩니다(GoblinTraitPatches.cs 참고). 폰카인드 forcedTraits와 이미 특성을 가진 폰은 영향을 받지 않습니다.
+  - 고통 역치 감소(-0.40)는 엄살쟁이(-0.50)보다 한 단계 완화된 값입니다. 엄살쟁이와 중첩되면 역치가 사실상 0이 되므로 충돌 특성으로 지정합니다.
+-->
+<Defs>
+
+  <TraitDef>
+    <defName>MGB_Feminine</defName>
+    <commonality>0.1</commonality>
+    <commonalityFemale>0.7</commonalityFemale>
+    <degreeDatas>
+      <li>
+        <label>feminine</label>
+        <description>{PAWN_nameDef} has a warm, domestic temperament. {PAWN_pronoun} excels at cooking, gentle company, and tending to others, but shrinks from violence and handles pain poorly.</description>
+        <statOffsets>
+          <PainShockThreshold>-0.40</PainShockThreshold>
+          <MeleeDodgeChance>-8</MeleeDodgeChance>
+          <MeleeHitChance>-3</MeleeHitChance>
+          <AimingDelayFactor>0.25</AimingDelayFactor>
+          <CookSpeed>0.12</CookSpeed>
+          <SocialImpact>0.10</SocialImpact>
+          <GeneralLaborSpeed>0.04</GeneralLaborSpeed>
+          <PlantWorkSpeed>0.05</PlantWorkSpeed>
+          <MedicalTendQuality>0.05</MedicalTendQuality>
+        </statOffsets>
+      </li>
+    </degreeDatas>
+    <conflictingTraits>
+      <li>Wimp</li>
+      <li>Brawler</li>
+    </conflictingTraits>
+  </TraitDef>
+
+</Defs>

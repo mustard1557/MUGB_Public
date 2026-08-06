@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  [파일 개요]
+  MUGB Goblin 모드의 메타데이터입니다.
+  - Biotech 기반 유전자 종족으로 구현합니다.
+  - VEF는 몸 크기/드로우 크기 및 근접 사거리 같은 안정적인 확장 StatDef를 쓰기 위한 선행입니다.
+  - Medieval Overhaul은 권장 선행입니다. 없어도 돌아가지만, 있으면 고블린의 중세 제작·자원
+    체인과 기지·마을이 원래 설계대로 나옵니다. 미디블 전용 내용은 Compatibility/MedievalOverhaul
+    폴더에 모아 두고 LoadFolders.xml에서 그 모드가 켜져 있을 때만 읽습니다.
+-->
+<ModMetaData>
+  <name>MUGB Goblin</name>
+  <author>mustard1557</author>
+  <packageId>mustard1557.mugb.goblin</packageId>
+  <modIconPath IgnoreIfNoMatchingField="True">UI/MUGBModIcon</modIconPath>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077</steamWorkshopUrl>
+    </li>
+    <li>
+      <packageId>Ludeon.RimWorld.Biotech</packageId>
+      <displayName>Biotech</displayName>
+    </li>
+    <li>
+      <packageId>Ludeon.RimWorld.Ideology</packageId>
+      <displayName>Ideology</displayName>
+    </li>
+    <li>
+      <packageId>OskarPotocki.VanillaFactionsExpanded.Core</packageId>
+      <displayName>Vanilla Expanded Framework</displayName>
+      <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2023507013</steamWorkshopUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>Ludeon.RimWorld.Ideology</li>
+    <li>OskarPotocki.VanillaFactionsExpanded.Core</li>
+    <li>DankPyon.Medieval.Overhaul</li>
+    <li>rim.job.world</li>
+  </loadAfter>
+  <description>
+Version: 0.5.4
+
+Adds a Biotech-based goblin xenotype designed around small, numerous, rough-edged goblins and rarer stronger hobgoblins.
+
+바이오테크 기반의 고블린 종족을 추가합니다. 작은 체구와 거친 외형의 다수 고블린과 드물게 등장하는 강력한 홉고블린을 중심으로 변방계를 공포에 몰아넣어보세요!
+  </description>
+</ModMetaData>

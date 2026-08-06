@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    Goblin caravan trader pawns, pass 1.
+    Korean source intent: 상단 5종을 먼저 안정적으로 뜨게 하는 용도. 실제 상인 성격/특수 노예 선별은 2차에서 확장.
+  -->
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_PrimitiveTrader</defName>
+    <label>goblin trader</label>
+    <trader>true</trader>
+    <isFighter>false</isFighter>
+    <combatPower>28</combatPower>
+    <weaponMoney>70~150</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinMeleePrimitive</li>
+    </weaponTags>
+    <apparelMoney>120~260</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorPrimitive</li>
+      <li>MUGB_GoblinHelmetPrimitive</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+    <combatEnhancingDrugsChance>0</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>0~0</combatEnhancingDrugsCount>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinCombatBase">
+    <defName>MUGB_GoblinKind_MedievalTrader</defName>
+    <label>goblin merchant</label>
+    <trader>true</trader>
+    <isFighter>false</isFighter>
+    <combatPower>34</combatPower>
+    <weaponMoney>150~260</weaponMoney>
+    <weaponTags>
+      <li>MUGB_GoblinMeleeMedieval</li>
+    </weaponTags>
+    <apparelMoney>220~420</apparelMoney>
+    <apparelTags>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmorMedieval</li>
+      <li>MUGB_GoblinHelmetMedieval</li>
+      <li>MUGB_GoblinBackpack</li>
+      <li>MedievalBasic</li>
+    </apparelTags>
+    <combatEnhancingDrugsChance>0</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>0~0</combatEnhancingDrugsCount>
+  </PawnKindDef>
+
+</Defs>

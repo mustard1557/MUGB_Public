@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <MUGB_GoblinThought_AteLavishMeal>Delicious! Me eat until belly nearly burst! Human food tastes good! Kishishit!</MUGB_GoblinThought_AteLavishMeal>
+  <MUGB_GoblinThought_AteFineMeal>Tasty meat food! Feels damn good! Chomp chomp!</MUGB_GoblinThought_AteFineMeal>
+  <MUGB_GoblinThought_AteRawFood>Me eat it raw! No fire needed. Blood taste, meat taste, best taste! Goblins like raw food!</MUGB_GoblinThought_AteRawFood>
+  <MUGB_GoblinThought_AteKibble>Me ate beast food... Tastes like dog feed. At least belly full. Ugh...</MUGB_GoblinThought_AteKibble>
+  <MUGB_GoblinThought_AteCorpse>Me tore into corpse! Teeth hurt chewing bones, but blood dripped everywhere. Very good! Kishishit!</MUGB_GoblinThought_AteCorpse>
+  <MUGB_GoblinThought_AteHumanlikeMeatDirect>Human meat fresh! Veins chewy and tasty! Is this what humans call raw beef? Me want more!</MUGB_GoblinThought_AteHumanlikeMeatDirect>
+  <MUGB_GoblinThought_AteHumanlikeMeatAsIngredient>Cooked human meat! Humans really are tastiest thing in world! Me want it every day!</MUGB_GoblinThought_AteHumanlikeMeatAsIngredient>
+  <MUGB_GoblinThought_AteInsectMeatDirect>Bug meat chewy. Gray juice squirted out. A little fishy... Me want human meat.</MUGB_GoblinThought_AteInsectMeatDirect>
+  <MUGB_GoblinThought_AteInsectMeatAsIngredient>Bug meat warmed by fire. No gray juice! Boss is clever! Ooh!</MUGB_GoblinThought_AteInsectMeatAsIngredient>
+  <MUGB_GoblinThought_AteRottenFood>Ugh... Me ate rotting meat. Sour and strange. Going to make bad poop... Hate it...</MUGB_GoblinThought_AteRottenFood>
+  <MUGB_GoblinThought_NeedRest>Kishishit... Boss... Eyes closing... Marching hard...</MUGB_GoblinThought_NeedRest>
+  <MUGB_GoblinThought_SleptOnGround>Me snored on dirt! Back hurts! Feels like playing with females too much.</MUGB_GoblinThought_SleptOnGround>
+  <MUGB_GoblinThought_SleptInCold>Too cold! No fire? Goblin almost froze! Other goblins eat frozen goblin, so be careful!</MUGB_GoblinThought_SleptInCold>
+  <MUGB_GoblinThought_SleptInHeat>Warm and damp, like being inside human female belly! Me miss female who birthed me... Ate her when hungry, so cannot see her now...</MUGB_GoblinThought_SleptInHeat>
+  <MUGB_GoblinThought_SleepDisturbed>Who stepped on me while me snoring? Me pull sausage out through their bellybutton!</MUGB_GoblinThought_SleepDisturbed>
+  <MUGB_GoblinThought_AteWithoutTable>Table? What is table, human? Human trying to trick goblin again! Want fingers cut off again? Goblin not stupid!</MUGB_GoblinThought_AteWithoutTable>
+  <MUGB_GoblinThought_EnvironmentDark>Very dark! Cannot see anything! Feels like being inside human female belly!</MUGB_GoblinThought_EnvironmentDark>
+  <MUGB_GoblinThought_NeedBeautyUgly>Base dirty? Lots of trash? Bones rolling around? That makes it properly goblin! Feels secure!</MUGB_GoblinThought_NeedBeautyUgly>
+  <MUGB_GoblinThought_NeedBeautyBeautiful>Looks grand! Like where humans live! No dung, no stink! This is a human house!</MUGB_GoblinThought_NeedBeautyBeautiful>
+  <MUGB_GoblinThought_NeedRoomSizeCramped>Room small! But narrow dark burrow feels cozy.</MUGB_GoblinThought_NeedRoomSizeCramped>
+  <MUGB_GoblinThought_KnowColonistDied>Friend dead... Sad... But curious! What friend meat taste like? Bet it tasty!</MUGB_GoblinThought_KnowColonistDied>
+  <MUGB_GoblinThought_ColonistBanished>Deh-heh-heh! That one only ate our food anyway! Get lost!</MUGB_GoblinThought_ColonistBanished>
+  <MUGB_GoblinThought_WitnessedDeathAlly>Goblin head came right off in front of me! Wow! So much blood! Kishishit! Weak runt!</MUGB_GoblinThought_WitnessedDeathAlly>
+  <MUGB_GoblinThought_WitnessedDeathNonAlly>Kishishit! That weakling died! Me saw it! Serves them right! Now me taste the meat!</MUGB_GoblinThought_WitnessedDeathNonAlly>
+  <MUGB_GoblinThought_ObservedLayingCorpse>Ooh! Uncut human corpse on ground! Meat lying around! Eat before it rots!</MUGB_GoblinThought_ObservedLayingCorpse>
+  <MUGB_GoblinThought_ObservedLayingRottingCorpse>Waste! Edible corpse rotted! White worms everywhere. Cannot eat it or decorate with it! Aaagh!</MUGB_GoblinThought_ObservedLayingRottingCorpse>
+  <MUGB_GoblinThought_ButcheredHumanlikeCorpse>Me sliced human with knife! Stripped bones and pulled guts! Lots of tasty meat! Kishishit!</MUGB_GoblinThought_ButcheredHumanlikeCorpse>
+  <MUGB_GoblinThought_KnowButcheredHumanlikeCorpse>Boss! We really eating human meat today? Me excited! Kishashashat!</MUGB_GoblinThought_KnowButcheredHumanlikeCorpse>
+  <MUGB_GoblinThought_PawnWithGoodOpinionDied>Goblin I played with is dead. Things might get a little boring, but that's fine! There are plenty more goblins!</MUGB_GoblinThought_PawnWithGoodOpinionDied>
+  <MUGB_GoblinThought_PawnWithBadOpinionDied>Rotten one who always fought me is dead! Kahaha! Serves them right! My fists were stronger! Me win!</MUGB_GoblinThought_PawnWithBadOpinionDied>
+  <MUGB_GoblinThought_MyChildDied>My runt died... Ugh, fine! Weak runts not needed! Make more runts! Catch human female and make lots more! Kishishit!</MUGB_GoblinThought_MyChildDied>
+  <MUGB_GoblinThought_MySpouseDied>My toy died! Little sad. Cannot make babies with it now... Ugh.</MUGB_GoblinThought_MySpouseDied>
+  <MUGB_GoblinThought_MyFatherDied>Old goblin who looked like me went stiff! Kishishit! Weak thing was useless!</MUGB_GoblinThought_MyFatherDied>
+  <MUGB_GoblinThought_MyMotherDied>Human female who birthed me died! Always cried about going home. Now she is dinner!</MUGB_GoblinThought_MyMotherDied>
+  <MUGB_GoblinThought_MySiblingDied>Littermate died... We rolled in same pit... Little sad. But goblins make many more, so me not worry!</MUGB_GoblinThought_MySiblingDied>
+  <MUGB_GoblinThought_ApparelDamaged>Big holes in clothes! Air flows and it feels light! Goblins do not care about fashion!</MUGB_GoblinThought_ApparelDamaged>
+  <MUGB_GoblinThought_DeadMansApparel>Stole dead one's clothes! Free loot! Blood and sweat smell, but free clothes best!</MUGB_GoblinThought_DeadMansApparel>
+  <MUGB_GoblinThought_HumanLeatherApparel>Wearing human-skin clothes! Do me look human now?</MUGB_GoblinThought_HumanLeatherApparel>
+  <MUGB_GoblinThought_GotSomeLovin>Me played with female! Body all loose and feels good! Want to make babies again!</MUGB_GoblinThought_GotSomeLovin>
+  <MUGB_GoblinThought_RebuffedMyRomanceAttempt>Me talked and got ignored! Think me ugly? Maybe smash head! Grrr!</MUGB_GoblinThought_RebuffedMyRomanceAttempt>
+  <MUGB_GoblinThought_WasEnslaved>They put dog collar on me! Goblin should fight and raid, not be slave! Me angry! Kill all and escape!</MUGB_GoblinThought_WasEnslaved>
+  <MUGB_GoblinThought_ObservedTerror>Me saw black monster! Spooky... But if we put it in pot, does it make meat soup? Yum?</MUGB_GoblinThought_ObservedTerror>
+</LanguageData>

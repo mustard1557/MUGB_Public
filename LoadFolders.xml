@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  [파일 개요]
+  림월드 버전별 로드 폴더를 지정합니다.
+  현재는 1.6 전용으로 시작해 구조를 단순하게 유지합니다.
+-->
+<loadFolders>
+  <v1.6>
+    <li>/</li>
+    <li IfModActive="Ludeon.RimWorld.Anomaly">Compatibility/Anomaly</li>
+    <li IfModActive="Ludeon.RimWorld.Odyssey">Compatibility/Odyssey</li>
+    <!--
+      미디블 오버홀이 켜져 있을 때만 읽는 폴더입니다.
+      기본 Defs에는 미디블 없이도 도는 바닐라판을 두고, 여기서 같은 defName으로
+      덮어써서 미디블판을 복원합니다. 나중에 읽는 폴더가 이깁니다.
+    -->
+    <li IfModActive="DankPyon.Medieval.Overhaul">Compatibility/MedievalOverhaul</li>
+  </v1.6>
+</loadFolders>

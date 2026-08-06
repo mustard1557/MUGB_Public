@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <MUGB_GoblinBeaconBurnedOut>The goblin beacon has burned out.</MUGB_GoblinBeaconBurnedOut>
+  <MUGB_GoblinBeaconLoadCorpse>Load goblin corpse</MUGB_GoblinBeaconLoadCorpse>
+  <MUGB_GoblinBeaconCancelLoad>Cancel corpse loading</MUGB_GoblinBeaconCancelLoad>
+  <MUGB_GoblinBeaconLoadCorpseDesc>Allow haulers to load a reachable goblin corpse into this beacon, or cancel this beacon's current loading request.</MUGB_GoblinBeaconLoadCorpseDesc>
+  <MUGB_GoblinBeaconIgnite>Ignite goblin beacon</MUGB_GoblinBeaconIgnite>
+  <MUGB_GoblinBeaconIgniteDesc>Burn the loaded goblin corpse to send a signal. The beacon is consumed and draws attention to the colony.</MUGB_GoblinBeaconIgniteDesc>
+  <MUGB_GoblinBeaconStateBurning>Burning</MUGB_GoblinBeaconStateBurning>
+  <MUGB_GoblinBeaconStateLoaded>Loaded with a goblin corpse</MUGB_GoblinBeaconStateLoaded>
+  <MUGB_GoblinBeaconStateEmpty>Empty</MUGB_GoblinBeaconStateEmpty>
+  <MUGB_GoblinBeaconInspectState>Beacon state: {0}</MUGB_GoblinBeaconInspectState>
+  <MUGB_GoblinBeaconInspectBurnTime>Burn time left: {0}</MUGB_GoblinBeaconInspectBurnTime>
+  <MUGB_GoblinBeaconLoadCanceled>Goblin corpse loading canceled for this beacon.</MUGB_GoblinBeaconLoadCanceled>
+  <MUGB_GoblinBeaconLoadEnabled>This beacon will accept a reachable goblin corpse.</MUGB_GoblinBeaconLoadEnabled>
+  <MUGB_GoblinBeaconNeedCorpse>A goblin corpse must be loaded first.</MUGB_GoblinBeaconNeedCorpse>
+  <MUGB_GoblinBeaconRequiresBlinia>Requires a primary ideology with the Children of Blinia meme.</MUGB_GoblinBeaconRequiresBlinia>
+  <MUGB_GoblinBeaconDialogTitle>Ignite goblin beacon</MUGB_GoblinBeaconDialogTitle>
+  <MUGB_GoblinBeaconDialogText>Burning the goblin corpse releases a pheromone signal from the beacon and carries it far from the colony.\n\nThat smell may call allies to you, but it can also become a marker for something terrible.\n\nLured groups:\n  - Goblins seeking to join and goblin caravans\n  - Goblin refugees seeking temporary shelter (requires Royalty)\n  - Hostile goblin raiders\n  - Vengeful human goblin hunters</MUGB_GoblinBeaconDialogText>
+  <MUGB_GoblinBeaconDialogAccept>Come 'ere!</MUGB_GoblinBeaconDialogAccept>
+  <MUGB_GoblinBeaconDialogCancel>Cancel</MUGB_GoblinBeaconDialogCancel>
+  <MUGB_GoblinBeaconRitualAlreadyBurning>This goblin beacon is already burning.</MUGB_GoblinBeaconRitualAlreadyBurning>
+  <MUGB_GoblinBeaconRitualNeedCaller>Only the ideology's leader or moral guide can call the goblin beacon signal. A lone colonist is exempt.</MUGB_GoblinBeaconRitualNeedCaller>
+  <MUGB_GoblinBeaconRitualOutcomeLabel>Goblin beacon signal sent</MUGB_GoblinBeaconRitualOutcomeLabel>
+  <MUGB_GoblinBeaconRitualOutcomeText>The ritual sends a {0} signal across the region.\n\nRitual quality: {1}</MUGB_GoblinBeaconRitualOutcomeText>
+  <MUGB_GoblinBeaconSignalQualityPoor>poor</MUGB_GoblinBeaconSignalQualityPoor>
+  <MUGB_GoblinBeaconSignalQualityNormal>normal</MUGB_GoblinBeaconSignalQualityNormal>
+  <MUGB_GoblinBeaconSignalQualityGood>good</MUGB_GoblinBeaconSignalQualityGood>
+  <MUGB_GoblinBeaconSignalQualityExcellent>excellent</MUGB_GoblinBeaconSignalQualityExcellent>
+  <MUGB_GoblinBeaconJoinersLetterLabel>Goblin joiners ({0})</MUGB_GoblinBeaconJoinersLetterLabel>
+  <MUGB_GoblinBeaconJoinersLetterText>{0} goblins followed the beacon's smoke and scent. They want to join your mob permanently. Will you accept them?</MUGB_GoblinBeaconJoinersLetterText>
+  <MUGB_GoblinBeaconJoinersAcceptedLabel>Goblins joined ({0})</MUGB_GoblinBeaconJoinersAcceptedLabel>
+  <MUGB_GoblinBeaconJoinersAcceptedText>{0} goblins who followed the beacon have joined your mob.</MUGB_GoblinBeaconJoinersAcceptedText>
+  <MUGB_GoblinBeaconJoinersNoMap>There is no player settlement map for the joiners to enter.</MUGB_GoblinBeaconJoinersNoMap>
+  <MUGB_GoblinBeaconJoinersSpawnFailed>The goblin joiners could not find a reachable map-edge entry.</MUGB_GoblinBeaconJoinersSpawnFailed>
+  <MUGB_GoblinBeaconJoinersRejected>The goblin joiners were turned away.</MUGB_GoblinBeaconJoinersRejected>
+  <MUGB_GoblinBeaconHospitalityQuestName>Goblin beacon refugees</MUGB_GoblinBeaconHospitalityQuestName>
+  <MUGB_GoblinBeaconHospitalityWarning>Goblins rarely reveal their true intentions even when asking for help. These refugees are more likely to betray their hosts than ordinary travelers, so keeping watch would be wise.</MUGB_GoblinBeaconHospitalityWarning>
+  <MUGB_GoblinBeaconRefugeeBetrayalLabel>Goblin refugee betrayal</MUGB_GoblinBeaconRefugeeBetrayalLabel>
+  <MUGB_GoblinBeaconRefugeeBetrayalText>The goblin refugees who followed the beacon have revealed their true intentions. They were waiting for a chance to strike from inside the colony!</MUGB_GoblinBeaconRefugeeBetrayalText>
+  <MUGB_GoblinRefugeeBetrayalLabel>Goblin refugee betrayal</MUGB_GoblinRefugeeBetrayalLabel>
+  <MUGB_GoblinRefugeeBetrayalText>The goblin refugees who asked for shelter have revealed their true intentions. They were waiting for a chance to strike from inside the colony!</MUGB_GoblinRefugeeBetrayalText>
+  <MUGB_GoblinStewpotLadle>Ladle gut stew</MUGB_GoblinStewpotLadle>
+  <MUGB_GoblinStewpotLadleDesc>Dispense one gut stew meal from stored ingredients.</MUGB_GoblinStewpotLadleDesc>
+  <MUGB_GoblinStewpotLadleFive>Ladle 5 gut stews</MUGB_GoblinStewpotLadleFive>
+  <MUGB_GoblinStewpotLadleFiveDesc>Ladle five gut stew meals at once when all five servings are available.</MUGB_GoblinStewpotLadleFiveDesc>
+  <MUGB_GoblinStewpotCannotUseNoPath>Cannot use goblin stewpot: no path.</MUGB_GoblinStewpotCannotUseNoPath>
+  <MUGB_GoblinStewpotLoadIngredient>Load goblin stewpot ingredient</MUGB_GoblinStewpotLoadIngredient>
+  <MUGB_GoblinStewpotCannotLoadNoIngredient>Cannot load goblin stewpot: no reachable humanlike meat or guts.</MUGB_GoblinStewpotCannotLoadNoIngredient>
+  <MUGB_GoblinStewpotCannotLadle>Cannot ladle gut stew: {0}</MUGB_GoblinStewpotCannotLadle>
+  <MUGB_GoblinStewpotUseType>Use: {0}</MUGB_GoblinStewpotUseType>
+  <MUGB_GoblinStewpotUseColonists>colonists</MUGB_GoblinStewpotUseColonists>
+  <MUGB_GoblinStewpotUsePrisoners>prisoners</MUGB_GoblinStewpotUsePrisoners>
+  <MUGB_GoblinStewpotStoredNutrition>Stored stew nutrition: {0} / {1}</MUGB_GoblinStewpotStoredNutrition>
+  <MUGB_GoblinStewpotStoredGuts>Stored guts: {0} / {1}</MUGB_GoblinStewpotStoredGuts>
+  <MUGB_GoblinStewpotAvailableServings>Gut stew servings: {0}</MUGB_GoblinStewpotAvailableServings>
+  <MUGB_GoblinStewpotAutoFill>Auto-fill goblin stewpot</MUGB_GoblinStewpotAutoFill>
+  <MUGB_GoblinStewpotAutoFillDesc>Allow haulers to automatically bring guts and meat to this stewpot.</MUGB_GoblinStewpotAutoFillDesc>
+  <MUGB_GoblinStewpotAllowHumanGuts>Allow human guts</MUGB_GoblinStewpotAllowHumanGuts>
+  <MUGB_GoblinStewpotAllowHumanGutsDesc>Allow human guts as the required gut component for this stewpot.</MUGB_GoblinStewpotAllowHumanGutsDesc>
+  <MUGB_GoblinStewpotAllowGoblinGuts>Allow goblin guts</MUGB_GoblinStewpotAllowGoblinGuts>
+  <MUGB_GoblinStewpotAllowGoblinGutsDesc>Allow goblin guts as the required gut component for this stewpot.</MUGB_GoblinStewpotAllowGoblinGutsDesc>
+  <MUGB_GoblinStewpotAllowHumanMeat>Allow humanlike meat</MUGB_GoblinStewpotAllowHumanMeat>
+  <MUGB_GoblinStewpotAllowHumanMeatDesc>Allow humanlike meat and human flesh chunks as nutrition for this stewpot.</MUGB_GoblinStewpotAllowHumanMeatDesc>
+  <MUGB_GoblinStewpotAllowGoblinMeat>Allow goblin meat</MUGB_GoblinStewpotAllowGoblinMeat>
+  <MUGB_GoblinStewpotAllowGoblinMeatDesc>Allow goblin meat and goblin flesh chunks as nutrition for this stewpot.</MUGB_GoblinStewpotAllowGoblinMeatDesc>
+  <MUGB_GoblinStewpotAllowOtherMeat>Allow other meat</MUGB_GoblinStewpotAllowOtherMeat>
+  <MUGB_GoblinStewpotAllowOtherMeatDesc>Allow ordinary animal meat as nutrition for this stewpot.</MUGB_GoblinStewpotAllowOtherMeatDesc>
+  <MUGB_DeployGoblinPheromonePackLabel>Deploy pheromone pack</MUGB_DeployGoblinPheromonePackLabel>
+  <MUGB_DeployGoblinPheromonePackDesc>Crack the pack's jar open and release concentrated goblin pheromone gas around the wearer. It works like goblin stinkbomb gas, but hits non-goblins harder.</MUGB_DeployGoblinPheromonePackDesc>
+  <MUGB_GoblinPheromonePackSpent>Pheromone pack: empty</MUGB_GoblinPheromonePackSpent>
+  <MUGB_ReloadGoblinPheromonePackLabel>Reload pheromone pack</MUGB_ReloadGoblinPheromonePackLabel>
+  <MUGB_ReloadGoblinPheromonePackDesc>Refill the empty pheromone pack with {0} goblin guts.</MUGB_ReloadGoblinPheromonePackDesc>
+  <MUGB_NoGoblinGutToReloadPack>No stack with {0} goblin guts is reachable for reloading.</MUGB_NoGoblinGutToReloadPack>
+  <MUGB_GoblinPheromonePackReloaded>The pheromone pack has been refilled.</MUGB_GoblinPheromonePackReloaded>
+  <MUGB_StinkGasCloudMouseover>Goblin sleep-gas {0}%</MUGB_StinkGasCloudMouseover>
+  <MUGB_StinkGasCloudInspect>Goblin sleep-gas concentration: {0}%\nEffect radius: {1} cells</MUGB_StinkGasCloudInspect>
+  <MUGB_GoblinBeaconHumanHuntersLetterLabel>Goblin hunters: {0}</MUGB_GoblinBeaconHumanHuntersLetterLabel>
+  <MUGB_GoblinBeaconHumanHuntersLetterText>The goblin beacon's scent has attracted more than allies.\n\nA hunting party from {0} has followed the beacon's smoke and stench to this place. They seem accustomed to tracking goblins and have taken the beacon as a mark of a goblin mob.</MUGB_GoblinBeaconHumanHuntersLetterText>
+</LanguageData>

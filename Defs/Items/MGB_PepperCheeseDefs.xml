@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>MUGB_GoblinPepperCheese</defName>
+    <label>goblin pepper cheese</label>
+    <description>A goblin delicacy made by processing protein- and fat-rich goblin reproductive sacs and fermenting them inside fiery peppers until they resemble cheese. The stench of concentrated goblin pheromones assaults the nose.</description>
+    <tradeability>All</tradeability>
+    <stackLimit>20</stackLimit>
+    <graphicData>
+      <texPath>Things/Item/Food/MGB_peppercheese</texPath>
+      <graphicClass>MUGB.Graphic_GoblinFiveStackCount</graphicClass>
+      <drawSize>0.88</drawSize>
+    </graphicData>
+    <soundInteract>Standard_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <tickerType>Rare</tickerType>
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <statBases>
+      <MaxHitPoints>55</MaxHitPoints>
+      <MarketValue>18</MarketValue>
+      <Mass>0.10</Mass>
+      <Flammability>1.0</Flammability>
+      <DeteriorationRate>6</DeteriorationRate>
+      <Nutrition>0.20</Nutrition>
+    </statBases>
+    <!-- 기호품이지만 고블린이 만드는 음식이므로 다른 고블린 요리와 같은 곳에 둡니다. -->
+    <thingCategories>
+      <li>MUGB_GoblinFoodCategory</li>
+    </thingCategories>
+    <ingestible>
+      <preferability>DesperateOnly</preferability>
+      <foodType>Processed</foodType>
+      <joy>0.10</joy>
+      <joyKind>Gluttonous</joyKind>
+      <maxNumToIngestAtOnce>1</maxNumToIngestAtOnce>
+      <defaultNumToIngestAtOnce>1</defaultNumToIngestAtOnce>
+      <ingestSound>Meal_Eat</ingestSound>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>20</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    [파일 개요]
+    미디블 오버홀(MO)이 없어도 고블린 중세 기지(MUGB_MedievalBaseA/B)가 제대로 지어지도록,
+    레이아웃이 참조하는 MO 심볼을 대신 정의합니다.
+
+    동작 방식:
+    - thing에는 MO 원본 이름을, replacementDef에는 코어 대체품을 적습니다.
+      MO가 있으면 thing이 해석되어 원본이 나오고, 없으면 KCSG가 replacementDef로 넘어갑니다.
+      (KCSG.SymbolDef.ResolveReferences)
+    - stuff는 반드시 코어에 있는 재료로 적습니다. MO 전용 재료(DankPyon_RawWood 등)를 적으면
+      MO가 없을 때 stuff가 null이 되고, KCSG가 무작위 재료를 골라 벽이 얼룩덜룩해집니다.
+      기존 MUGB_MedievalBaseSymbols.xml의 Frame_Log/LogBench도 같은 이유로 WoodLog를 씁니다.
+    - 대체품은 전부 코어 def입니다. 바이오테크/이데올로기 DLC에 의존하지 않습니다.
+
+    범위:
+    - 여기 있는 심볼은 전부 MUGB_MedievalBaseA/B가 실제로 쓰는 것만 넣었습니다.
+      MUGB_GoblinHideouts.xml의 은신처 레이아웃은 어디서도 참조되지 않는 더미라서 제외했습니다.
+      나중에 은신처를 실제로 쓰게 되면 그때 같은 방식으로 추가하면 됩니다.
+  -->
+
+  <!--
+    [1] 이름 그대로 조회되는 심볼
+
+    KCSG가 defName으로 바로 찾습니다. 없으면 로그에 "Missing symbol"로 남고 그 칸이 빕니다.
+  -->
+  <KCSG.SymbolDef>
+    <defName>DankPyon_LogWall_DankPyon_RawWood</defName>
+    <thing>DankPyon_LogWall</thing>
+    <stuff>WoodLog</stuff>
+    <replacementDef>Wall</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_CastleWall_BlocksSlate</defName>
+    <thing>DankPyon_CastleWall</thing>
+    <stuff>BlocksSlate</stuff>
+    <replacementDef>Wall</replacementDef>
+  </KCSG.SymbolDef>
+  <!--
+    시작 마을(MUGB_StartVillage1~3)이 쓰는 두 심볼입니다. 은신처 레이아웃을 걷어낸 뒤
+    마지막까지 "Missing symbol"로 남아 있던 것들이라 여기에 채웁니다.
+  -->
+  <KCSG.SymbolDef>
+    <defName>DankPyon_CastleWall_BlocksGranite</defName>
+    <thing>DankPyon_CastleWall</thing>
+    <stuff>BlocksGranite</stuff>
+    <replacementDef>Wall</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_LogColumn_DankPyon_RawWood</defName>
+    <thing>DankPyon_LogColumn</thing>
+    <stuff>WoodLog</stuff>
+    <replacementDef>Column</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_Palisade_DankPyon_RawWood</defName>
+    <thing>DankPyon_Palisade</thing>
+    <stuff>WoodLog</stuff>
+    <replacementDef>Wall</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_EmbPalisade_DankPyon_RawWood</defName>
+    <thing>DankPyon_EmbPalisade</thing>
+    <stuff>WoodLog</stuff>
+    <replacementDef>Barricade</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_CavalrySpike_DankPyon_RawWood</defName>
+    <thing>DankPyon_CavalrySpike</thing>
+    <stuff>WoodLog</stuff>
+    <replacementDef>Barricade</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_RusticDoor_WoodLog</defName>
+    <thing>DankPyon_RusticDoor</thing>
+    <stuff>WoodLog</stuff>
+    <replacementDef>Door</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_Gate_DankPyon_IronIngot</defName>
+    <thing>DankPyon_Gate</thing>
+    <stuff>Steel</stuff>
+    <replacementDef>Door</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_QuenchingBucket_WoodLog</defName>
+    <thing>DankPyon_QuenchingBucket</thing>
+    <!-- 대체품(ChunkSlagSteel)은 재료를 받지 않습니다. 미디블이 있을 때만 재료를 되돌립니다. -->
+    <replacementDef>ChunkSlagSteel</replacementDef>
+  </KCSG.SymbolDef>
+
+  <!--
+    [2] 회전본의 원본이 되는 심볼
+
+    레이아웃은 _North / _East / _South / _West가 붙은 이름을 씁니다.
+    KCSG는 그런 이름을 못 찾으면 접미사를 뗀 이름의 심볼을 복사해 회전본을 만듭니다
+    (StructureLayoutDef.HotGenerateRotationSymbols).
+
+    주의할 점: 이 함수는 원본을 못 찾아도 null이 아니라 "속이 빈 심볼"을 돌려줍니다.
+    그래서 로그에 Missing symbol로 잡히지 않고, 대신 그 칸이 조용히 비워집니다.
+    MO 없이 기지를 지었을 때 성문/문/침대가 통째로 사라지던 원인이 이것이었습니다.
+    아래 무회전 원본을 정의해 두면 회전본이 이 정의를 복사해 제대로 만들어집니다.
+  -->
+  <KCSG.SymbolDef>
+    <defName>DankPyon_RuinedBonePile1x1c</defName>
+    <thing>DankPyon_RuinedBonePile1x1c</thing>
+    <replacementDef>MUGB_GoblinWarRemains</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_RuinedBonePile1x2c</defName>
+    <thing>DankPyon_RuinedBonePile1x2c</thing>
+    <replacementDef>MUGB_GoblinWarRemains</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_RuinedBonePile2x2c</defName>
+    <thing>DankPyon_RuinedBonePile2x2c</thing>
+    <replacementDef>MUGB_GoblinWarRemains</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_AncientFootman</defName>
+    <thing>DankPyon_AncientFootman</thing>
+    <replacementDef>MUGB_GoblinWarRemains</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_ReinfocedLogGate_DankPyon_RawWood</defName>
+    <thing>DankPyon_ReinfocedLogGate</thing>
+    <stuff>WoodLog</stuff>
+    <replacementDef>Door</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_BedWicker_WoodLog</defName>
+    <thing>DankPyon_BedWicker</thing>
+    <stuff>WoodLog</stuff>
+    <replacementDef>Bed</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_Crate1x1c_WoodLog</defName>
+    <thing>DankPyon_Crate1x1c</thing>
+    <stuff>WoodLog</stuff>
+    <replacementDef>Shelf</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_RusticBarrelClosed_WoodLog</defName>
+    <thing>DankPyon_RusticBarrelClosed</thing>
+    <stuff>WoodLog</stuff>
+    <replacementDef>Shelf</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_RusticChest_WoodLog</defName>
+    <thing>DankPyon_RusticChest</thing>
+    <stuff>WoodLog</stuff>
+    <replacementDef>Shelf</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_BarrelWater_WoodLog</defName>
+    <thing>DankPyon_BarrelWater</thing>
+    <stuff>WoodLog</stuff>
+    <replacementDef>Shelf</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_RackMixed_WoodLog</defName>
+    <thing>DankPyon_RackMixed</thing>
+    <stuff>WoodLog</stuff>
+    <replacementDef>Shelf</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_ToolRack_WoodLog</defName>
+    <thing>DankPyon_ToolRack</thing>
+    <stuff>WoodLog</stuff>
+    <replacementDef>Shelf</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_ButchersBlock_WoodLog</defName>
+    <thing>DankPyon_ButchersBlock</thing>
+    <stuff>WoodLog</stuff>
+    <replacementDef>TableButcher</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_RusticCookingTools_WoodLog</defName>
+    <thing>DankPyon_RusticCookingTools</thing>
+    <stuff>WoodLog</stuff>
+    <replacementDef>FueledStove</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_RuinedStewPot_DankPyon_IronIngot</defName>
+    <thing>DankPyon_RuinedStewPot</thing>
+    <stuff>Steel</stuff>
+    <replacementDef>FueledStove</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_IronIngots1x1c</defName>
+    <thing>DankPyon_IronIngots1x1c</thing>
+    <replacementDef>Steel</replacementDef>
+  </KCSG.SymbolDef>
+  <KCSG.SymbolDef>
+    <defName>DankPyon_Bricks1x1c_BlocksGranite</defName>
+    <thing>DankPyon_Bricks1x1c</thing>
+    <!-- 대체품(ChunkSlagSteel)은 재료를 받지 않습니다. 미디블이 있을 때만 재료를 되돌립니다. -->
+    <replacementDef>ChunkSlagSteel</replacementDef>
+  </KCSG.SymbolDef>
+
+</Defs>

@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HediffDef>
+    <defName>MUGB_GoblinDartPoison</defName>
+    <label>goblin dart poison</label>
+    <description>Layered goblin dart toxin. Several embedded doses can force the victim into unconsciousness.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <maxSeverity>5</maxSeverity>
+    <stages>
+      <li>
+        <label>x1</label>
+        <minSeverity>1</minSeverity>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>-0.06</offset></li>
+        </capMods>
+      </li>
+      <li>
+        <label>x2</label>
+        <minSeverity>2</minSeverity>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>-0.14</offset></li>
+        </capMods>
+      </li>
+      <li>
+        <label>x3</label>
+        <minSeverity>3</minSeverity>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>-0.24</offset></li>
+        </capMods>
+      </li>
+      <li>
+        <label>x4</label>
+        <minSeverity>4</minSeverity>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>-0.38</offset></li>
+        </capMods>
+      </li>
+      <li>
+        <label>x5</label>
+        <minSeverity>5</minSeverity>
+        <capMods>
+          <li><capacity>Consciousness</capacity><setMax>0.1</setMax></li>
+        </capMods>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>60000</disappearsAfterTicks>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>MUGB_ChainSnare</defName>
+    <label>chain snare</label>
+    <description>Heavy chain wrapped around the limbs, slowing movement and making fine manipulation clumsy.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <maxSeverity>4</maxSeverity>
+    <stages>
+      <li>
+        <label>snared</label>
+        <minSeverity>1</minSeverity>
+        <statOffsets><MoveSpeed>-0.15</MoveSpeed></statOffsets>
+        <capMods><li><capacity>Manipulation</capacity><offset>-0.10</offset></li></capMods>
+      </li>
+      <li>
+        <label>bound</label>
+        <minSeverity>2</minSeverity>
+        <statOffsets><MoveSpeed>-0.30</MoveSpeed></statOffsets>
+        <capMods><li><capacity>Manipulation</capacity><offset>-0.20</offset></li></capMods>
+      </li>
+      <li>
+        <label>entangled</label>
+        <minSeverity>3</minSeverity>
+        <statOffsets><MoveSpeed>-0.45</MoveSpeed></statOffsets>
+        <capMods><li><capacity>Manipulation</capacity><offset>-0.30</offset></li></capMods>
+      </li>
+      <li>
+        <label>trussed</label>
+        <minSeverity>4</minSeverity>
+        <statOffsets><MoveSpeed>-0.60</MoveSpeed></statOffsets>
+        <capMods><li><capacity>Manipulation</capacity><offset>-0.40</offset></li></capMods>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>30000</disappearsAfterTicks>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>MUGB_StaffAwakened</defName>
+    <label>goblin roused</label>
+    <description>Crude goblin rites have forced this body back into battle. The wounds are sealed, not truly healed.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <stages>
+      <li>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>0.35</offset></li>
+          <li><capacity>Moving</capacity><offset>0.20</offset></li>
+        </capMods>
+        <statOffsets>
+          <MoveSpeed>0.15</MoveSpeed>
+        </statOffsets>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>15000</disappearsAfterTicks>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>MUGB_StaffRousedFervor</defName>
+    <label>rousing fervor</label>
+    <description>The staff's frenzy lingers, making retreat feel distant and shameful.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <stages>
+      <li>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>0.05</offset></li>
+        </capMods>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>10000</disappearsAfterTicks>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>MUGB_StaffShieldCohesion</defName>
+    <label>shield cohesion</label>
+    <description>Warriors gathered beneath the staff's shield feel secure enough to focus a little more clearly on their attacks.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <tendable>false</tendable>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <stages>
+      <li>
+        <statFactors>
+          <MeleeHitChance>1.02</MeleeHitChance>
+          <ShootingAccuracyPawn>1.02</ShootingAccuracyPawn>
+          <AimingDelayFactor>0.97</AimingDelayFactor>
+        </statFactors>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>120</disappearsAfterTicks>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>MUGB_StinkGasClouded</defName>
+    <label>inside stink gas</label>
+    <description>Dense goblin pheromone gas clings to the eyes and lungs, making movement sluggish and aim unreliable while the victim stays inside the cloud.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <stages>
+      <li>
+        <label>goblin-tolerable</label>
+        <minSeverity>0.01</minSeverity>
+        <statOffsets>
+          <MoveSpeed>-0.03</MoveSpeed>
+          <ShootingAccuracyPawn>-0.04</ShootingAccuracyPawn>
+        </statOffsets>
+      </li>
+      <li>
+        <label>engulfed</label>
+        <minSeverity>0.99</minSeverity>
+        <statOffsets>
+          <MoveSpeed>-0.15</MoveSpeed>
+          <ShootingAccuracyPawn>-0.20</ShootingAccuracyPawn>
+        </statOffsets>
+      </li>
+    </stages>
+    <comps>
+      <li Class="MUGB.HediffCompProperties_GoblinGasPresence">
+        <defaultDurationTicks>45</defaultDurationTicks>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>MUGB_StinkGasExposure</defName>
+    <label>sleep-gas exposure</label>
+    <description>Concentrated goblin pheromone gas is flooding the body. Conscious thought and fine motor control collapse quickly under continued exposure, though the effect clears once clean air is found.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <initialSeverity>0.1</initialSeverity>
+    <maxSeverity>1.0</maxSeverity>
+    <stages>
+      <li>
+        <label>1/10</label>
+        <minSeverity>0.1</minSeverity>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>-0.03</offset></li>
+          <li><capacity>Manipulation</capacity><offset>-0.03</offset></li>
+        </capMods>
+      </li>
+      <li>
+        <label>2/10</label>
+        <minSeverity>0.2</minSeverity>
+        <vomitMtbDays>2.5</vomitMtbDays>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>-0.06</offset></li>
+          <li><capacity>Manipulation</capacity><offset>-0.06</offset></li>
+        </capMods>
+      </li>
+      <li>
+        <label>3/10</label>
+        <minSeverity>0.3</minSeverity>
+        <vomitMtbDays>2.0</vomitMtbDays>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>-0.09</offset></li>
+          <li><capacity>Manipulation</capacity><offset>-0.09</offset></li>
+        </capMods>
+      </li>
+      <li>
+        <label>4/10</label>
+        <minSeverity>0.4</minSeverity>
+        <vomitMtbDays>1.5</vomitMtbDays>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>-0.12</offset></li>
+          <li><capacity>Manipulation</capacity><offset>-0.12</offset></li>
+        </capMods>
+      </li>
+      <li>
+        <label>5/10</label>
+        <minSeverity>0.5</minSeverity>
+        <vomitMtbDays>1.2</vomitMtbDays>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>-0.15</offset></li>
+          <li><capacity>Manipulation</capacity><offset>-0.15</offset></li>
+        </capMods>
+      </li>
+      <li>
+        <label>6/10</label>
+        <minSeverity>0.6</minSeverity>
+        <vomitMtbDays>1.0</vomitMtbDays>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>-0.18</offset></li>
+          <li><capacity>Manipulation</capacity><offset>-0.18</offset></li>
+        </capMods>
+      </li>
+      <li>
+        <label>7/10</label>
+        <minSeverity>0.7</minSeverity>
+        <vomitMtbDays>0.8</vomitMtbDays>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>-0.22</offset></li>
+          <li><capacity>Manipulation</capacity><offset>-0.22</offset></li>
+        </capMods>
+      </li>
+      <li>
+        <label>8/10</label>
+        <minSeverity>0.8</minSeverity>
+        <vomitMtbDays>0.65</vomitMtbDays>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>-0.26</offset></li>
+          <li><capacity>Manipulation</capacity><offset>-0.26</offset></li>
+        </capMods>
+      </li>
+      <li>
+        <label>9/10</label>
+        <minSeverity>0.9</minSeverity>
+        <vomitMtbDays>0.5</vomitMtbDays>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>-0.30</offset></li>
+          <li><capacity>Manipulation</capacity><offset>-0.30</offset></li>
+        </capMods>
+      </li>
+      <li>
+        <label>10/10</label>
+        <minSeverity>1.0</minSeverity>
+        <vomitMtbDays>0.4</vomitMtbDays>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>-0.35</offset></li>
+          <li><capacity>Manipulation</capacity><offset>-0.35</offset></li>
+        </capMods>
+      </li>
+    </stages>
+    <comps>
+      <li Class="MUGB.HediffCompProperties_GoblinGasRecovery">
+        <recoveryPerSecond>0.02</recoveryPerSecond>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>MUGB_CorrosiveGoblinGiblets</defName>
+    <label>corrosive goblin giblets</label>
+    <description>Rotting goblin viscera and alchemical slurry are stuck across the body, slowing movement and making work clumsy until the muck dries off.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <forceRenderTreeRecache>true</forceRenderTreeRecache>
+    <stages>
+      <li>
+        <statOffsets>
+          <MoveSpeed>-0.03</MoveSpeed>
+        </statOffsets>
+        <capMods>
+          <li><capacity>Manipulation</capacity><offset>-0.03</offset></li>
+        </capMods>
+      </li>
+    </stages>
+    <renderNodeProperties>
+      <li Class="MUGB.PawnRenderNodeProperties_GoblinSplatterOverlay">
+        <debugLabel>Goblin bile splatter</debugLabel>
+        <workerClass>MUGB.PawnRenderNodeWorker_GoblinSplatterOverlay</workerClass>
+        <texPathRoot>BileOverlay/BileOverlay</texPathRoot>
+        <variantCount>4</variantCount>
+        <addonScale>1</addonScale>
+        <baseLayer>30</baseLayer>
+        <pawnType>HumanlikeOnly</pawnType>
+      </li>
+    </renderNodeProperties>
+    <comps>
+      <li Class="MUGB.HediffCompProperties_GoblinGasPresence">
+        <defaultDurationTicks>1200</defaultDurationTicks>
+      </li>
+    </comps>
+  </HediffDef>
+
+</Defs>

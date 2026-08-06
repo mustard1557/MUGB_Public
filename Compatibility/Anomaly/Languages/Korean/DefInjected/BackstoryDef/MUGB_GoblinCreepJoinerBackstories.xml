@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <MUGB_Backstory_Child_CreepMachineMotherWhelp.title>기계 엄마의 새끼</MUGB_Backstory_Child_CreepMachineMotherWhelp.title>
+  <MUGB_Backstory_Child_CreepMachineMotherWhelp.titleShort>기계 엄마의 새끼</MUGB_Backstory_Child_CreepMachineMotherWhelp.titleShort>
+  <MUGB_Backstory_Child_CreepMachineMotherWhelp.description>[PAWN_nameDef]은(는) 아주 오래전 정체 모를 배양시설에서 태어났다고 합니다. 태어나자마자 32사단에 배속되어 우주해병처럼 강하했다는 둥, 알 수 없는 헛소리를 늘어놓습니다.</MUGB_Backstory_Child_CreepMachineMotherWhelp.description>
+
+  <MUGB_Backstory_Child_CreepDampCaveOrphan.title>축축한 굴속의 고아</MUGB_Backstory_Child_CreepDampCaveOrphan.title>
+  <MUGB_Backstory_Child_CreepDampCaveOrphan.titleShort>축축한 굴속의 고아</MUGB_Backstory_Child_CreepDampCaveOrphan.titleShort>
+  <MUGB_Backstory_Child_CreepDampCaveOrphan.description>[PAWN_nameDef]은(는) 좁고 축축한 동굴 속 바위틈에서 태어났다고 합니다. 동굴을 누비다 노란색 철제 통이 가득한 공간을 발견했고, 그 통에는 '방사선 폐기물'이라는 알 수 없는 말이 쓰여 있었다고 합니다.</MUGB_Backstory_Child_CreepDampCaveOrphan.description>
+
+  <MUGB_Backstory_Child_CreepRabbitShrineMaidenChild.title>토끼무녀의 자식</MUGB_Backstory_Child_CreepRabbitShrineMaidenChild.title>
+  <MUGB_Backstory_Child_CreepRabbitShrineMaidenChild.titleShort>토끼무녀의 자식</MUGB_Backstory_Child_CreepRabbitShrineMaidenChild.titleShort>
+  <MUGB_Backstory_Child_CreepRabbitShrineMaidenChild.description>[PAWN_nameDef]은(는) 토끼무녀의 자식으로 태어났다고 합니다. 토끼무녀였던 어미는 신비로운 힘으로 고블린들과 싸웠으나 결국 그 수에 밀려 고기주머니로 전락했고, '죽인 만큼 낳아라'라는 형벌 아래 [PAWN_nameDef]을(를) 낳다 죽었습니다. 어미는 죽었지만 그 신비로운 힘이 [PAWN_nameDef]에게 약간이나마 깃든 것 같습니다.</MUGB_Backstory_Child_CreepRabbitShrineMaidenChild.description>
+
+  <MUGB_Backstory_Child_CreepFleshbeastChild.title>살짐승의 아이</MUGB_Backstory_Child_CreepFleshbeastChild.title>
+  <MUGB_Backstory_Child_CreepFleshbeastChild.titleShort>살짐승의 아이</MUGB_Backstory_Child_CreepFleshbeastChild.titleShort>
+  <MUGB_Backstory_Child_CreepFleshbeastChild.description>[PAWN_nameDef]의 부락은 살짐승들에게 공격받아 멸망했다고 합니다. 그런데 [PAWN_nameDef]이(가) 말하는 장소에는 고블린 부락이 있었던 적이 한 번도 없습니다. [PAWN_nameDef]이(가) 고블린이라 단순히 거짓말을 하는 걸까요?</MUGB_Backstory_Child_CreepFleshbeastChild.description>
+
+  <MUGB_Backstory_Child_CreepDiscardedTestSubject.title>폐기된 실험체</MUGB_Backstory_Child_CreepDiscardedTestSubject.title>
+  <MUGB_Backstory_Child_CreepDiscardedTestSubject.titleShort>폐기된 실험체</MUGB_Backstory_Child_CreepDiscardedTestSubject.titleShort>
+  <MUGB_Backstory_Child_CreepDiscardedTestSubject.description>[PAWN_nameDef]은(는) 흰색 가운을 입은 인간들에게 붙잡혀 정체 모를 실험을 당했다고 합니다. 무슨 실험이었을까요?</MUGB_Backstory_Child_CreepDiscardedTestSubject.description>
+
+  <MUGB_Backstory_Child_CreepMegaspider.title>메가스파이더</MUGB_Backstory_Child_CreepMegaspider.title>
+  <MUGB_Backstory_Child_CreepMegaspider.titleShort>메가스파이더</MUGB_Backstory_Child_CreepMegaspider.titleShort>
+  <MUGB_Backstory_Child_CreepMegaspider.description>[PAWN_nameDef]은(는) 자신이 메가스파이더의 산란관에서 태어났으며, 사실 메가스파이더라고 주장합니다. 정말 고블린답게 멍청하고 말도 안 되는 소리네요.</MUGB_Backstory_Child_CreepMegaspider.description>
+
+  <MUGB_Backstory_Adult_CreepWanderingGoblinShaman.title>떠돌이 고블린 무당</MUGB_Backstory_Adult_CreepWanderingGoblinShaman.title>
+  <MUGB_Backstory_Adult_CreepWanderingGoblinShaman.titleShort>떠돌이 무당</MUGB_Backstory_Adult_CreepWanderingGoblinShaman.titleShort>
+  <MUGB_Backstory_Adult_CreepWanderingGoblinShaman.description>[PAWN_nameDef]은(는) 여러 고블린 마을을 돌며 '기적'을 행했다고 합니다. 정말 그 기적의 무당이 [PAWN_nameDef]일까요? 아니면 단순한 허풍일까요?</MUGB_Backstory_Adult_CreepWanderingGoblinShaman.description>
+
+  <MUGB_Backstory_Adult_CreepTaciturnGoblin.title>과묵한 고블린</MUGB_Backstory_Adult_CreepTaciturnGoblin.title>
+  <MUGB_Backstory_Adult_CreepTaciturnGoblin.titleShort>과묵한 고블린</MUGB_Backstory_Adult_CreepTaciturnGoblin.titleShort>
+  <MUGB_Backstory_Adult_CreepTaciturnGoblin.description>[PAWN_nameDef]은(는) 이상할 정도로 과묵합니다. 고블린답지 않게 차분하고 점잖습니다. 소름이 돋을 정도로 말이죠...</MUGB_Backstory_Adult_CreepTaciturnGoblin.description>
+
+  <MUGB_Backstory_Adult_CreepWrigglingLoincloth.title>꿈틀거리는 가랑이</MUGB_Backstory_Adult_CreepWrigglingLoincloth.title>
+  <MUGB_Backstory_Adult_CreepWrigglingLoincloth.titleShort>꿈틀거리는 가랑이</MUGB_Backstory_Adult_CreepWrigglingLoincloth.titleShort>
+  <MUGB_Backstory_Adult_CreepWrigglingLoincloth.description>[PAWN_nameDef]의 훈도시 아래가 계속 꿈틀거리는 듯합니다. 도대체 무엇을 의미하는 걸까요? 무엇인지는 몰라도 다른 고블린들은 [PAWN_nameDef]을(를) 이상한 눈으로 바라보며 피합니다.</MUGB_Backstory_Adult_CreepWrigglingLoincloth.description>
+
+  <MUGB_Backstory_Adult_CreepEerieGoblinWanderer.title>기이한 고블린 방랑자</MUGB_Backstory_Adult_CreepEerieGoblinWanderer.title>
+  <MUGB_Backstory_Adult_CreepEerieGoblinWanderer.titleShort>기이한 방랑자</MUGB_Backstory_Adult_CreepEerieGoblinWanderer.titleShort>
+  <MUGB_Backstory_Adult_CreepEerieGoblinWanderer.description>[PAWN_nameDef]은(는) 정말 늙어 보입니다. 마치 50년은 산 고블린처럼 말이죠. 그리고 굉장히 조용합니다.</MUGB_Backstory_Adult_CreepEerieGoblinWanderer.description>
+
+  <MUGB_Backstory_Adult_CreepFleshWhisperer.title>살덩이와 대화하는 자</MUGB_Backstory_Adult_CreepFleshWhisperer.title>
+  <MUGB_Backstory_Adult_CreepFleshWhisperer.titleShort>살덩이와 대화하는 자</MUGB_Backstory_Adult_CreepFleshWhisperer.titleShort>
+  <MUGB_Backstory_Adult_CreepFleshWhisperer.description>[PAWN_nameDef]은(는) 자신이 살덩이 괴수와 대화할 수 있다고 주장합니다.</MUGB_Backstory_Adult_CreepFleshWhisperer.description>
+</LanguageData>

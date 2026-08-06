@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <!--
+    한국어 의도: 고블린에게서 인육 혐오 생각을 아예 뜨지 않게 합니다.
+
+    기존에는 GoblinFoodReactionPatches가 "먹고 난 뒤에 기억을 지우는" 방식이었습니다.
+    기분은 안 깎였지만, 음식을 고르는 계산(FoodUtility.FoodOptimality)은 폰의 기억이 아니라
+    "이 음식을 먹으면 어떤 생각이 뜰까"를 def에서 미리 조회하기 때문에 선택 단계에는 아무
+    효과가 없었습니다. 결과적으로 고블린은 인육 요리를 앞에 두고도 일반 식사를 먹었습니다.
+
+    수치로 보면:
+      AteHumanlikeMeatDirect       기분 -20 -> 점수 -156
+      AteHumanlikeMeatAsIngredient 기분 -15 -> 점수 -128
+    FoodOptimality에서 거리 1칸이 1점이니, 인육 요리는 "128칸 더 가까워야 겨우 동점"인
+    상태였습니다. 사실상 절대 선택되지 않습니다.
+
+    ThoughtDef의 nullifyingGenes를 쓰면 특정 유전자 보유자에게만 그 생각을 끌 수 있습니다.
+    바닐라도 같은 방식을 씁니다(AteRawFood를 Biotech의 RobustDigestion 유전자가 무효화).
+
+    대상 유전자 MUGB_Gene_GoblinFleshCraving은 신규가 아니라 이미 있는 유전자이고,
+    띤고블린(MUGB_Goblin)과 홉고블린(MUGB_Hobgoblin) 양쪽 제노타입이 모두 갖고 있습니다.
+    유전자 def 자체는 건드리지 않습니다. 이 유전자가 없는 폰은 전혀 영향받지 않습니다.
+
+    시체를 뜯을 때 뜨는 AteCorpse(-12)는 일부러 남겨 둡니다. 이게 남아 있어야 시체가
+    "다른 먹을 것이 없을 때의 최후 후보" 자리를 지킵니다.
+
+    다른 모드가 이미 nullifyingGenes를 추가했을 수도 있어서, 노드가 있으면 항목만 넣고
+    없으면 노드째 만드는 조건부 패치로 씁니다.
+  -->
+
+  <!-- 생 인육을 직접 먹었을 때 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThoughtDef[defName="AteHumanlikeMeatDirect"]/nullifyingGenes</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThoughtDef[defName="AteHumanlikeMeatDirect"]/nullifyingGenes</xpath>
+      <value>
+        <li>MUGB_Gene_GoblinFleshCraving</li>
+      </value>
+      <success>Always</success>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>/Defs/ThoughtDef[defName="AteHumanlikeMeatDirect"]</xpath>
+      <value>
+        <nullifyingGenes>
+          <li>MUGB_Gene_GoblinFleshCraving</li>
+        </nullifyingGenes>
+      </value>
+      <success>Always</success>
+    </nomatch>
+  </Operation>
+
+  <!-- 인육이 재료로 들어간 요리를 먹었을 때 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThoughtDef[defName="AteHumanlikeMeatAsIngredient"]/nullifyingGenes</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThoughtDef[defName="AteHumanlikeMeatAsIngredient"]/nullifyingGenes</xpath>
+      <value>
+        <li>MUGB_Gene_GoblinFleshCraving</li>
+      </value>
+      <success>Always</success>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>/Defs/ThoughtDef[defName="AteHumanlikeMeatAsIngredient"]</xpath>
+      <value>
+        <nullifyingGenes>
+          <li>MUGB_Gene_GoblinFleshCraving</li>
+        </nullifyingGenes>
+      </value>
+      <success>Always</success>
+    </nomatch>
+  </Operation>
+
+</Patch>

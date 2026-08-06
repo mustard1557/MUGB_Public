@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <MUGB_GoblinStaffShieldLabel>Deploy low-shield</MUGB_GoblinStaffShieldLabel>
+  <MUGB_GoblinStaffShieldDesc>Deploy a mobile low-angle shield around the wielder for 40 seconds. It follows the wielder, blocks incoming ground projectiles, and breaks after taking enough damage.</MUGB_GoblinStaffShieldDesc>
+  <MUGB_GoblinStaffShieldUnavailable>Shield deployment is unavailable.</MUGB_GoblinStaffShieldUnavailable>
+  <MUGB_GoblinStaffShieldMustBeDrafted>Must be drafted.</MUGB_GoblinStaffShieldMustBeDrafted>
+  <MUGB_GoblinStaffShieldAlreadyActive>A staff shield is already active.</MUGB_GoblinStaffShieldAlreadyActive>
+  <MUGB_GoblinStaffShieldRecharging>Recharging: {0}</MUGB_GoblinStaffShieldRecharging>
+  <MUGB_GoblinStaffShieldStatus>Staff shield</MUGB_GoblinStaffShieldStatus>
+  <MUGB_GoblinStaffShieldStatusTip>Current shield durability. Time remaining: {0}</MUGB_GoblinStaffShieldStatusTip>
+  <MUGB_SpearChargeLabel>Spear charge</MUGB_SpearChargeLabel>
+  <MUGB_SpearChargeDesc>Charge quickly toward the chosen cell. The first hostile target in the path is stabbed and briefly staggered, but the wielder is also stunned for a moment after the rush.</MUGB_SpearChargeDesc>
+
+  <!-- Relic staff shared failure reasons -->
+  <MUGB_StaffAbilityUnavailable>Unavailable right now.</MUGB_StaffAbilityUnavailable>
+  <MUGB_StaffAbilityMustBeDrafted>Must be drafted.</MUGB_StaffAbilityMustBeDrafted>
+  <MUGB_StaffAbilityRecharging>Recharging: {0}</MUGB_StaffAbilityRecharging>
+  <MUGB_StaffAbilityBadTarget>Invalid target.</MUGB_StaffAbilityBadTarget>
+  <MUGB_StaffAbilityOutOfRange>Out of range.</MUGB_StaffAbilityOutOfRange>
+  <MUGB_StaffAbilityNoLineOfSight>No line of sight.</MUGB_StaffAbilityNoLineOfSight>
+
+  <!-- Relic A: maddening rapture -->
+  <MUGB_StaffKwaerakLabel>maddening rapture</MUGB_StaffKwaerakLabel>
+  <MUGB_StaffKwaerakDesc>Goblin pheromone particles overstimulate the target's senses or sensors, overloading the brain's circuits into psychic shock. The victim's face looks blissful, but is said to be in agony.</MUGB_StaffKwaerakDesc>
+
+  <!-- Relic B: pheromone release -->
+  <MUGB_StaffPheromoneBurstLabel>pheromone release</MUGB_StaffPheromoneBurstLabel>
+  <MUGB_StaffPheromoneBurstDesc>Rapidly compresses and detonates absorbed goblin pheromone particles at the chosen spot. Friction between the particles releases a strong electromagnetic pulse and a cloud of toxic gas.</MUGB_StaffPheromoneBurstDesc>
+
+  <!-- Relic B: pheromone absorption -->
+  <MUGB_StaffPheromoneAbsorbLabel>pheromone absorption</MUGB_StaffPheromoneAbsorbLabel>
+  <MUGB_StaffPheromoneAbsorbDesc>Neutralizes the pheromone particles in the body and reprograms the immune system. The target becomes immune to goblin toxic pheromones for 15 days.</MUGB_StaffPheromoneAbsorbDesc>
+  <MUGB_StaffPheromoneAbsorbApplied>{0} is now immune to goblin toxic pheromones for 15 days.</MUGB_StaffPheromoneAbsorbApplied>
+</LanguageData>

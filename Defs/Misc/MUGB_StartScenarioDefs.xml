@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ScenPartDef>
+    <defName>MUGB_StartScenarioController</defName>
+    <label>goblin start scenario controller</label>
+    <description>Runs the one-time setup and scheduled story events for a goblin start scenario.</description>
+    <scenPartClass>MUGB.ScenPart_MUGB_StartScenarioController</scenPartClass>
+    <category>Fixed</category>
+    <selectionWeight>0</selectionWeight>
+    <summaryPriority>-999</summaryPriority>
+    <canBeRandomlyAdded>false</canBeRandomlyAdded>
+    <canBePlayerAddedRemoved>false</canBePlayerAddedRemoved>
+  </ScenPartDef>
+
+  <ScenarioDef ParentName="ScenarioBase">
+    <defName>MUGB_ExiledGoblinStart</defName>
+    <label>Exiled goblin</label>
+    <description>A lone thin goblin fled its old warren after a joke involving a knife went considerably too far. Malnourished and hunted, it enters from the map edge with a good repeating crossbow, meager clothing, a little pemmican, and stolen weapons.
+
+Four poorly equipped thin-goblin trackers arrive on the third day. This is a harsh solo start about surviving long enough to build a new mob from nothing.</description>
+    <scenario>
+      <!-- 한국어 의도: 플레이어 세력을 고블린 무리로 바꿉니다.
+           playerFaction은 parts 안의 li가 아니라 scenario 바로 아래의 별도 요소입니다.
+           parts에 넣으면 시나리오 구성이 깨져 폰이 생성되지 않고 정착지가 격파로 처리됩니다. -->
+      <playerFaction>
+        <def>PlayerFaction</def>
+        <factionDef>MUGB_PlayerGoblinFaction</factionDef>
+      </playerFaction>
+      <summary>One malnourished goblin at the map edge. Four trackers arrive on day three.</summary>
+      <parts>
+        <li Class="MUGB.ScenPart_MUGB_GoblinStartMarker"><def>MUGB_GoblinStartMarker</def><visible>false</visible></li>
+        <li Class="ScenPart_ConfigPage_ConfigureStartingPawns_Xenotypes">
+          <def>ConfigurePawnsXenotypes</def>
+          <pawnChoiceCount>6</pawnChoiceCount>
+          <xenotypeCounts>
+            <li><xenotype>MUGB_Goblin</xenotype><count>1</count><description>adult goblin</description><requiredAtStart>true</requiredAtStart><allowedDevelopmentalStages>Adult</allowedDevelopmentalStages></li>
+          </xenotypeCounts>
+        </li>
+        <li Class="VEF.Planet.ScenPart_ArriveAtEdge"><def>VFEC_PlayerPawnsArriveMethodEdge</def><method>Standing</method><visible>false</visible></li>
+        <li Class="MUGB.ScenPart_MUGB_StartScenarioController"><def>MUGB_StartScenarioController</def><scenarioKind>Exile</scenarioKind><visible>false</visible></li>
+        <li Class="ScenPart_ForcedHediff">
+          <def>ForcedHediff</def><hediff>Malnutrition</hediff><severityRange>0.05~0.15</severityRange><chance>1</chance><context>PlayerStarter</context>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined"><def>StartingThing_Defined</def><thingDef>Pemmican</thingDef><count>35</count></li>
+      </parts>
+    </scenario>
+  </ScenarioDef>
+
+  <ScenarioDef ParentName="ScenarioBase">
+    <defName>MUGB_StrandedGoblinSquadStart</defName>
+    <label>Stranded goblin squad</label>
+    <description>A battered squad of one hobgoblin and four thin goblins escaped an ambush only to find its home burned behind it. They enter from the map edge with randomized goblin weapons and armor, a warg, food, silver, alloy, wood, and basic components.
+
+A hostile human village is generated once on the starting map. Its fighting men are away, but they will return after the village is attacked or left alone for too long. This is the main goblin start: a prepared raiding party, an immediate target, and consequences that arrive later.</description>
+    <scenario>
+      <!-- 한국어 의도: 플레이어 세력을 고블린 무리로 바꿉니다.
+           playerFaction은 parts 안의 li가 아니라 scenario 바로 아래의 별도 요소입니다.
+           parts에 넣으면 시나리오 구성이 깨져 폰이 생성되지 않고 정착지가 격파로 처리됩니다. -->
+      <playerFaction>
+        <def>PlayerFaction</def>
+        <factionDef>MUGB_PlayerGoblinFaction</factionDef>
+      </playerFaction>
+      <summary>Five equipped goblins enter at the map edge beside a one-time hostile village.</summary>
+      <parts>
+        <li Class="MUGB.ScenPart_MUGB_GoblinStartMarker"><def>MUGB_GoblinStartMarker</def><visible>false</visible></li>
+        <li Class="ScenPart_ConfigPage_ConfigureStartingPawns_Xenotypes">
+          <def>ConfigurePawnsXenotypes</def>
+          <pawnChoiceCount>10</pawnChoiceCount>
+          <xenotypeCounts>
+            <li><xenotype>MUGB_Goblin</xenotype><count>4</count><description>adult goblin</description><requiredAtStart>true</requiredAtStart><allowedDevelopmentalStages>Adult</allowedDevelopmentalStages></li>
+            <li><xenotype>MUGB_Hobgoblin</xenotype><count>1</count><description>adult hobgoblin</description><requiredAtStart>true</requiredAtStart><allowedDevelopmentalStages>Adult</allowedDevelopmentalStages></li>
+          </xenotypeCounts>
+        </li>
+        <li Class="VEF.Planet.ScenPart_ArriveAtEdge"><def>VFEC_PlayerPawnsArriveMethodEdge</def><method>Standing</method><visible>false</visible></li>
+        <li Class="MUGB.ScenPart_MUGB_StartScenarioController"><def>MUGB_StartScenarioController</def><scenarioKind>StrandedSquad</scenarioKind><visible>false</visible></li>
+        <li Class="ScenPart_StartingAnimal"><def>StartingAnimal</def><animalKind>Warg</animalKind><count>1</count><bondToRandomPlayerPawnChance>0.35</bondToRandomPlayerPawnChance></li>
+        <li Class="ScenPart_StartingThing_Defined"><def>StartingThing_Defined</def><thingDef>Silver</thingDef><count>200</count></li>
+        <li Class="ScenPart_StartingThing_Defined"><def>StartingThing_Defined</def><thingDef>MUGB_GoblinAlloy</thingDef><count>100</count></li>
+        <li Class="ScenPart_StartingThing_Defined"><def>StartingThing_Defined</def><thingDef>ComponentIndustrial</thingDef><count>10</count></li>
+        <li Class="ScenPart_StartingThing_Defined"><def>StartingThing_Defined</def><thingDef>WoodLog</thingDef><count>200</count></li>
+        <li Class="ScenPart_StartingThing_Defined"><def>StartingThing_Defined</def><thingDef>Pemmican</thingDef><count>175</count></li>
+      </parts>
+    </scenario>
+  </ScenarioDef>
+
+  <ScenarioDef ParentName="ScenarioBase">
+    <defName>MUGB_GoldenGoblinStart</defName>
+    <label>Golden goblins</label>
+    <description>A tribute caravan of three hobgoblins and three thin goblins swallowed its courage, stole its own cargo, and changed course. It enters from the map edge with goblin equipment, two muffalo, a warg, 500 gold, and a large food supply.
+
+Human raiders arrive within four to six days, and one carries a rare, finely made weapon. This is a wealthy and comparatively forgiving start, but all that stolen gold raises the colony's value from the first day.</description>
+    <scenario>
+      <!-- 한국어 의도: 플레이어 세력을 고블린 무리로 바꿉니다.
+           playerFaction은 parts 안의 li가 아니라 scenario 바로 아래의 별도 요소입니다.
+           parts에 넣으면 시나리오 구성이 깨져 폰이 생성되지 않고 정착지가 격파로 처리됩니다. -->
+      <playerFaction>
+        <def>PlayerFaction</def>
+        <factionDef>MUGB_PlayerGoblinFaction</factionDef>
+      </playerFaction>
+      <summary>Six equipped goblins with a rich caravan. Raiders arrive within six days.</summary>
+      <parts>
+        <li Class="MUGB.ScenPart_MUGB_GoblinStartMarker"><def>MUGB_GoblinStartMarker</def><visible>false</visible></li>
+        <li Class="ScenPart_ConfigPage_ConfigureStartingPawns_Xenotypes">
+          <def>ConfigurePawnsXenotypes</def>
+          <pawnChoiceCount>10</pawnChoiceCount>
+          <xenotypeCounts>
+            <li><xenotype>MUGB_Goblin</xenotype><count>3</count><description>adult goblin</description><requiredAtStart>true</requiredAtStart><allowedDevelopmentalStages>Adult</allowedDevelopmentalStages></li>
+            <li><xenotype>MUGB_Hobgoblin</xenotype><count>3</count><description>adult hobgoblin</description><requiredAtStart>true</requiredAtStart><allowedDevelopmentalStages>Adult</allowedDevelopmentalStages></li>
+          </xenotypeCounts>
+        </li>
+        <li Class="VEF.Planet.ScenPart_ArriveAtEdge"><def>VFEC_PlayerPawnsArriveMethodEdge</def><method>Standing</method><visible>false</visible></li>
+        <li Class="MUGB.ScenPart_MUGB_StartScenarioController"><def>MUGB_StartScenarioController</def><scenarioKind>GoldenCaravan</scenarioKind><visible>false</visible></li>
+        <li Class="ScenPart_StartingAnimal"><def>StartingAnimal</def><animalKind>Muffalo</animalKind><count>2</count><bondToRandomPlayerPawnChance>0.15</bondToRandomPlayerPawnChance></li>
+        <li Class="ScenPart_StartingAnimal"><def>StartingAnimal</def><animalKind>Warg</animalKind><count>1</count><bondToRandomPlayerPawnChance>0.35</bondToRandomPlayerPawnChance></li>
+        <li Class="ScenPart_StartingThing_Defined"><def>StartingThing_Defined</def><thingDef>Gold</thingDef><count>500</count></li>
+        <li Class="ScenPart_StartingThing_Defined"><def>StartingThing_Defined</def><thingDef>Pemmican</thingDef><count>600</count></li>
+      </parts>
+    </scenario>
+  </ScenarioDef>
+
+</Defs>

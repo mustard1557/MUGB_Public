@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <IncidentDef>
+    <defName>MUGB_GoblinCaravanAmbush</defName>
+    <label>goblin caravan ambush</label>
+    <category>MUGB_GoblinCaravanAmbush</category>
+    <targetTags>
+      <li>Caravan</li>
+    </targetTags>
+    <workerClass>MUGB.IncidentWorker_GoblinCaravanAmbush</workerClass>
+    <baseChance>1</baseChance>
+    <pointsScaleable>true</pointsScaleable>
+    <minRefireDays>2</minRefireDays>
+    <letterText>{0} has been ambushed by {1} from {2}!</letterText>
+    <letterLabel>Goblin caravan ambush</letterLabel>
+    <letterDef>ThreatBig</letterDef>
+    <tale>CaravanAmbushedByHumanlike</tale>
+    <canOccurOnAllPlanetLayers>true</canOccurOnAllPlanetLayers>
+    <!-- Baseline values away from hostile goblin settlements. The dedicated storyteller
+         comp halves these values within seven world tiles and applies caravan visibility. -->
+    <mtbDaysByBiome>
+      <TemperateForest>9</TemperateForest>
+      <BorealForest>9</BorealForest>
+      <TropicalRainforest>9</TropicalRainforest>
+      <AridShrubland>9</AridShrubland>
+      <Desert>12</Desert>
+      <Tundra>12</Tundra>
+      <TropicalSwamp>12</TropicalSwamp>
+      <TemperateSwamp>12</TemperateSwamp>
+      <ColdBog>16</ColdBog>
+      <ExtremeDesert>16</ExtremeDesert>
+      <IceSheet>16</IceSheet>
+      <SeaIce>20</SeaIce>
+    </mtbDaysByBiome>
+  </IncidentDef>
+</Defs>

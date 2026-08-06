@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HediffDef>
+    <defName>MUGB_GoblinPheromoneConditioning</defName>
+    <label>goblin pheromone conditioning</label>
+    <description>Repeated exposure to goblin food and gut-heavy meals is dulling the natural disgust response.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <isBad>true</isBad>
+    <tendable>false</tendable>
+    <initialSeverity>0.001</initialSeverity>
+    <maxSeverity>24</maxSeverity>
+    <comps>
+      <li Class="MUGB.HediffCompProperties_GoblinPheromoneConditioning" />
+    </comps>
+    <stages>
+      <li>
+        <label>conditioning</label>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>MUGB_GoblinPheromonePreference</defName>
+    <label>goblin pheromone adaptation</label>
+    <description>Long exposure has settled the stomach and the nerves alike: goblin musk, goblin food, and everything that comes with them now register as ordinary.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <isBad>true</isBad>
+    <tendable>false</tendable>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <comps>
+      <li Class="MUGB.HediffCompProperties_GoblinPheromonePreference" />
+    </comps>
+    <stages>
+      <li>
+        <label>adapted</label>
+        <statFactors>
+          <SocialImpact>0.75</SocialImpact>
+          <NegotiationAbility>0.75</NegotiationAbility>
+          <ConversionPower MayRequire="Ludeon.RimWorld.Ideology">0.75</ConversionPower>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+</Defs>

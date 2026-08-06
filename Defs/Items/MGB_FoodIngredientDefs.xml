@@ -1,0 +1,578 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef>
+    <defName>Meat_Goblin</defName>
+    <label>goblin meat</label>
+    <description>Raw meat carved from goblin flesh. It is treated much like human meat by most people, but goblins crave it more strongly than ordinary humanlike meat.</description>
+    <thingClass>ThingWithComps</thingClass>
+    <selectable>true</selectable>
+    <category>Item</category>
+    <drawerType>MapMeshOnly</drawerType>
+    <tickerType>Rare</tickerType>
+    <rotatable>false</rotatable>
+    <altitudeLayer>Item</altitudeLayer>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <stackLimit>75</stackLimit>
+    <alwaysHaulable>true</alwaysHaulable>
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <tradeability>All</tradeability>
+    <pathCost>14</pathCost>
+    <statBases>
+      <MaxHitPoints>60</MaxHitPoints>
+      <Beauty>-6</Beauty>
+      <DeteriorationRate>6</DeteriorationRate>
+      <Mass>0.03</Mass>
+      <Flammability>0.5</Flammability>
+      <Nutrition>0.055</Nutrition>
+      <FoodPoisonChanceFixedHuman>0.02</FoodPoisonChanceFixedHuman>
+      <MarketValue>0.7</MarketValue>
+    </statBases>
+    <graphicData>
+      <texPath>Things/Item/Food/Meat_Goblin</texPath>
+      <graphicClass>MUGB.Graphic_GoblinThreeStageStackCount</graphicClass>
+      <drawSize>(0.765,0.765)</drawSize>
+    </graphicData>
+    <thingCategories>
+      <li>MUGB_HumanlikeMeatCategory</li>
+    </thingCategories>
+    <ingredient>
+      <mergeCompatibilityTags>
+        <li>GoblinMeat</li>
+      </mergeCompatibilityTags>
+    </ingredient>
+    <ingestible>
+      <foodType>Meat</foodType>
+      <preferability>RawBad</preferability>
+      <ingestEffect>EatMeat</ingestEffect>
+      <ingestSound>RawMeat_Eat</ingestSound>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Forbiddable" />
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>2</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef Name="MUGB_RawGoblinFoodIngredientBase" Abstract="True">
+    <thingClass>ThingWithComps</thingClass>
+    <selectable>true</selectable>
+    <category>Item</category>
+    <drawerType>MapMeshOnly</drawerType>
+    <tickerType>Rare</tickerType>
+    <rotatable>false</rotatable>
+    <altitudeLayer>Item</altitudeLayer>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <stackLimit>75</stackLimit>
+    <alwaysHaulable>true</alwaysHaulable>
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <tradeability>All</tradeability>
+    <pathCost>14</pathCost>
+    <statBases>
+      <MaxHitPoints>55</MaxHitPoints>
+      <Beauty>-5</Beauty>
+      <DeteriorationRate>6</DeteriorationRate>
+      <Mass>0.03</Mass>
+      <Flammability>0.5</Flammability>
+      <MarketValue>0.8</MarketValue>
+      <FoodPoisonChanceFixedHuman>0.02</FoodPoisonChanceFixedHuman>
+    </statBases>
+    <thingCategories>
+      <li>MUGB_HumanlikeMeatCategory</li>
+    </thingCategories>
+    <ingestible>
+      <foodType>Meat</foodType>
+      <preferability>RawBad</preferability>
+      <ingestEffect>EatMeat</ingestEffect>
+      <ingestSound>RawMeat_Eat</ingestSound>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Forbiddable" />
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>2</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_RawGoblinFoodIngredientBase">
+    <defName>MUGB_Hchunk</defName>
+    <label>human flesh chunk</label>
+    <description>A dense lump of humanlike meat bound with bone scraps. It is meant for goblin cooking, not civilized meals.</description>
+    <tradeability>All</tradeability>
+    <stackLimit>25</stackLimit>
+    <statBases>
+      <Nutrition>0.65</Nutrition>
+      <Mass>0.45</Mass>
+      <MarketValue>5.5</MarketValue>
+      <Beauty>-8</Beauty>
+    </statBases>
+    <graphicData>
+      <texPath>Things/Item/Food/MGB_Hchunk</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(0.765,0.765)</drawSize>
+    </graphicData>
+    <ingredient>
+      <mergeCompatibilityTags>
+        <li>HumanFleshChunk</li>
+      </mergeCompatibilityTags>
+    </ingredient>
+    <ingestible>
+      <specialThoughtDirect>AteHumanlikeMeatDirect</specialThoughtDirect>
+      <specialThoughtAsIngredient>AteHumanlikeMeatAsIngredient</specialThoughtAsIngredient>
+    </ingestible>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_RawGoblinFoodIngredientBase">
+    <defName>MUGB_Gchunk</defName>
+    <label>goblin flesh chunk</label>
+    <description>A dense lump of goblin meat bound with bone scraps. Goblins find it especially satisfying.</description>
+    <tradeability>All</tradeability>
+    <stackLimit>25</stackLimit>
+    <statBases>
+      <Nutrition>0.72</Nutrition>
+      <Mass>0.45</Mass>
+      <MarketValue>6</MarketValue>
+      <Beauty>-10</Beauty>
+    </statBases>
+    <graphicData>
+      <texPath>Things/Item/Food/MGB_Gchunk</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(0.765,0.765)</drawSize>
+    </graphicData>
+    <ingredient>
+      <mergeCompatibilityTags>
+        <li>GoblinFleshChunk</li>
+      </mergeCompatibilityTags>
+    </ingredient>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_RawGoblinFoodIngredientBase">
+    <defName>MUGB_Hgut</defName>
+    <label>human guts</label>
+    <description>Cleaned humanlike entrails used in goblin cooking and crude medicines.</description>
+    <tradeability>All</tradeability>
+    <statBases>
+      <Nutrition>0.04</Nutrition>
+      <Mass>0.03</Mass>
+      <MarketValue>0.9</MarketValue>
+      <Beauty>-7</Beauty>
+    </statBases>
+    <graphicData>
+      <texPath>Things/Item/Food/MGB_Hgut</texPath>
+      <graphicClass>MUGB.Graphic_GoblinGutStackCount</graphicClass>
+      <drawSize>(0.765,0.765)</drawSize>
+    </graphicData>
+    <ingredient>
+      <mergeCompatibilityTags>
+        <li>HumanGut</li>
+      </mergeCompatibilityTags>
+    </ingredient>
+    <ingestible>
+      <specialThoughtDirect>AteHumanlikeMeatDirect</specialThoughtDirect>
+      <specialThoughtAsIngredient>AteHumanlikeMeatAsIngredient</specialThoughtAsIngredient>
+    </ingestible>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_RawGoblinFoodIngredientBase">
+    <defName>MUGB_Ggut</defName>
+    <label>goblin guts</label>
+    <description>Cleaned goblin entrails with a sharp, gamey smell prized in goblin kitchens.</description>
+    <tradeability>All</tradeability>
+    <statBases>
+      <Nutrition>0.045</Nutrition>
+      <Mass>0.03</Mass>
+      <MarketValue>1</MarketValue>
+      <Beauty>-9</Beauty>
+    </statBases>
+    <graphicData>
+      <texPath>Things/Item/Food/MGB_Ggut</texPath>
+      <graphicClass>MUGB.Graphic_GoblinGutStackCount</graphicClass>
+      <drawSize>(0.765,0.765)</drawSize>
+    </graphicData>
+    <ingredient>
+      <mergeCompatibilityTags>
+        <li>GoblinGut</li>
+      </mergeCompatibilityTags>
+    </ingredient>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_RawGoblinFoodIngredientBase">
+    <defName>MUGB_heart</defName>
+    <label>heart</label>
+    <description>A prepared heart used as a potent goblin ingredient.</description>
+    <tradeability>All</tradeability>
+    <stackLimit>25</stackLimit>
+    <statBases>
+      <Nutrition>0.15</Nutrition>
+      <Mass>0.18</Mass>
+      <MarketValue>8</MarketValue>
+      <Beauty>-8</Beauty>
+    </statBases>
+    <graphicData>
+      <texPath>Things/Item/Food/MGB_heart</texPath>
+      <graphicClass>MUGB.Graphic_GoblinThreeStageStackCount</graphicClass>
+      <drawSize>(0.765,0.765)</drawSize>
+    </graphicData>
+    <ingredient>
+      <mergeCompatibilityTags>
+        <li>HumanlikeOrgan</li>
+        <li>Heart</li>
+      </mergeCompatibilityTags>
+    </ingredient>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_RawGoblinFoodIngredientBase">
+    <defName>MUGB_brain</defName>
+    <label>brain</label>
+    <description>A prepared brain used in goblin food and stimulants.</description>
+    <tradeability>All</tradeability>
+    <stackLimit>25</stackLimit>
+    <statBases>
+      <Nutrition>0.08</Nutrition>
+      <Mass>0.12</Mass>
+      <MarketValue>10</MarketValue>
+      <Beauty>-8</Beauty>
+    </statBases>
+    <graphicData>
+      <texPath>Things/Item/Food/MGB_brain</texPath>
+      <graphicClass>MUGB.Graphic_GoblinTwoStageStackCount</graphicClass>
+      <drawSize>(0.765,0.765)</drawSize>
+    </graphicData>
+    <ingredient>
+      <mergeCompatibilityTags>
+        <li>HumanlikeOrgan</li>
+        <li>Brain</li>
+      </mergeCompatibilityTags>
+    </ingredient>
+  </ThingDef>
+
+  <ThingDef ParentName="MealBaseIngredientless">
+    <defName>MUGB_gutstew</defName>
+    <label>gut stew</label>
+    <!-- 이 음식만 고블린 요리 공용 부모를 쓰지 않고 바닐라 부모를 직접 상속하므로 개별로 지정합니다. -->
+    <thingCategories Inherit="False">
+      <li>MUGB_GoblinFoodCategory</li>
+    </thingCategories>
+    <description>A thick goblin stew made from entrails and meat. Goblins consider it practical comfort food; most others consider it a mistake with steam.</description>
+    <tradeability>All</tradeability>
+    <graphicData>
+      <texPath>Things/Item/Food/MGB_gutstew</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(0.765,0.765)</drawSize>
+    </graphicData>
+    <statBases>
+      <MarketValue>11</MarketValue>
+      <WorkToMake>220</WorkToMake>
+      <Nutrition>0.9</Nutrition>
+    </statBases>
+    <stackLimit>20</stackLimit>
+    <ingestible>
+      <preferability>MealSimple</preferability>
+      <ingestEffect>EatMeat</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+      <optimalityOffsetFeedingAnimals>-25</optimalityOffsetFeedingAnimals>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Ingredients">
+        <splitTransferableFoodKind>true</splitTransferableFoodKind>
+      </li>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>2.5</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="MealBaseIngredientless" Name="MUGB_GoblinCookedMealBase" Abstract="True">
+    <!--
+      Inherit="False"가 반드시 필요합니다. 목록형 항목은 이 표시가 없으면 부모(FoodMeals)의
+      목록에 이어붙어서, 저장구역 필터에 같은 음식이 식사 아래와 고블린 요리 아래 두 번
+      나타납니다. MUGB_GoblinFoodCategory의 부모가 FoodMeals이므로 교체해도 자리는 그대로입니다.
+    -->
+    <thingCategories Inherit="False">
+      <li>MUGB_GoblinFoodCategory</li>
+    </thingCategories>
+    <thingClass>ThingWithComps</thingClass>
+    <selectable>true</selectable>
+    <category>Item</category>
+    <drawerType>MapMeshOnly</drawerType>
+    <tickerType>Rare</tickerType>
+    <rotatable>false</rotatable>
+    <altitudeLayer>Item</altitudeLayer>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <stackLimit>10</stackLimit>
+    <alwaysHaulable>true</alwaysHaulable>
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <tradeability>All</tradeability>
+    <pathCost>14</pathCost>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <DeteriorationRate>6</DeteriorationRate>
+      <Mass>0.25</Mass>
+      <Flammability>0.5</Flammability>
+      <FoodPoisonChanceFixedHuman>0.02</FoodPoisonChanceFixedHuman>
+      <MarketValue>12</MarketValue>
+      <Nutrition>0.9</Nutrition>
+    </statBases>
+    <ingestible>
+      <foodType>Meal</foodType>
+      <preferability>MealSimple</preferability>
+      <ingestEffect>EatMeat</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+      <optimalityOffsetFeedingAnimals>-25</optimalityOffsetFeedingAnimals>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Ingredients">
+        <splitTransferableFoodKind>true</splitTransferableFoodKind>
+      </li>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>10</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="MealBaseIngredientless" Name="MUGB_GoblinPreservedCookedMealBase" Abstract="True">
+    <thingCategories Inherit="False">
+      <li>MUGB_GoblinFoodCategory</li>
+    </thingCategories>
+    <thingClass>ThingWithComps</thingClass>
+    <selectable>true</selectable>
+    <category>Item</category>
+    <drawerType>MapMeshOnly</drawerType>
+    <tickerType>Rare</tickerType>
+    <rotatable>false</rotatable>
+    <altitudeLayer>Item</altitudeLayer>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <stackLimit>10</stackLimit>
+    <alwaysHaulable>true</alwaysHaulable>
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <tradeability>All</tradeability>
+    <pathCost>14</pathCost>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <DeteriorationRate>6</DeteriorationRate>
+      <Mass>0.25</Mass>
+      <Flammability>0.5</Flammability>
+      <FoodPoisonChanceFixedHuman>0.02</FoodPoisonChanceFixedHuman>
+      <MarketValue>12</MarketValue>
+      <Nutrition>0.9</Nutrition>
+    </statBases>
+    <ingestible>
+      <foodType>Meal</foodType>
+      <preferability>MealSimple</preferability>
+      <ingestEffect>EatMeat</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+      <optimalityOffsetFeedingAnimals>-25</optimalityOffsetFeedingAnimals>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Ingredients">
+        <splitTransferableFoodKind>true</splitTransferableFoodKind>
+      </li>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>20</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinPreservedCookedMealBase">
+    <defName>MUGB_HBBQ</defName>
+    <label>human flesh barbecue</label>
+    <description>Smoked slabs of prepared humanlike flesh. It is efficient trail food for goblins and a moral disaster for most others.</description>
+    <tradeability>All</tradeability>
+    <graphicData>
+      <texPath>Things/Item/Food/MGB_BBQ/MGB_HBBQ</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(0.765,0.765)</drawSize>
+    </graphicData>
+    <statBases>
+      <MarketValue>16</MarketValue>
+      <Nutrition>1.05</Nutrition>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinPreservedCookedMealBase">
+    <defName>MUGB_GBBQ</defName>
+    <label>goblin flesh barbecue</label>
+    <description>Smoked goblin flesh, prepared for goblin appetites. It satisfies the craving better than ordinary humanlike meat.</description>
+    <tradeability>All</tradeability>
+    <graphicData>
+      <texPath>Things/Item/Food/MGB_BBQ/MGB_GBBQ</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(0.765,0.765)</drawSize>
+    </graphicData>
+    <statBases>
+      <MarketValue>18</MarketValue>
+      <Nutrition>1.12</Nutrition>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinCookedMealBase">
+    <defName>MUGB_gutsausage</defName>
+    <label>gut sausage</label>
+    <description>A dense sausage made from minced entrails and meat. It hides the worst shapes, but not the smell.</description>
+    <tradeability>All</tradeability>
+    <graphicData>
+      <texPath>Things/Item/Food/MGB_sausage/MGB_gutsausage</texPath>
+      <graphicClass>MUGB.Graphic_GoblinTwoStageStackCount</graphicClass>
+      <drawSize>(0.765,0.765)</drawSize>
+    </graphicData>
+    <statBases>
+      <MarketValue>13</MarketValue>
+      <Nutrition>0.85</Nutrition>
+    </statBases>
+    <ingestible>
+      <foodType>Meal</foodType>
+      <preferability>MealFine</preferability>
+      <ingestEffect>EatMeat</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+      <optimalityOffsetFeedingAnimals>-25</optimalityOffsetFeedingAnimals>
+    </ingestible>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinCookedMealBase">
+    <defName>MUGB_Brainstew</defName>
+    <label>brain stew</label>
+    <description>A rich stew of brain, entrails, and flesh. Goblins prize it as thinking food.</description>
+    <tradeability>All</tradeability>
+    <graphicData>
+      <texPath>Things/Item/Food/MGB_Brainstew</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(0.765,0.765)</drawSize>
+    </graphicData>
+    <statBases>
+      <MarketValue>25</MarketValue>
+      <Nutrition>1.05</Nutrition>
+    </statBases>
+    <ingestible>
+      <foodType>Meal</foodType>
+      <preferability>MealLavish</preferability>
+      <ingestEffect>EatMeat</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+      <optimalityOffsetFeedingAnimals>-25</optimalityOffsetFeedingAnimals>
+    </ingestible>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinPreservedCookedMealBase">
+    <defName>MUGB_legHBBQ</defName>
+    <label>roasted human leg</label>
+    <description>A heavy roasted cut of humanlike flesh, cooked around the bone.</description>
+    <tradeability>All</tradeability>
+    <graphicData>
+      <texPath>Things/Item/Food/MGB_legBBQ/MGB_legHBBQ</texPath>
+      <graphicClass>MUGB.Graphic_GoblinTwoStageStackCount</graphicClass>
+      <drawSize>(0.765,0.765)</drawSize>
+    </graphicData>
+    <statBases>
+      <MarketValue>14</MarketValue>
+      <Nutrition>0.95</Nutrition>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinPreservedCookedMealBase">
+    <defName>MUGB_legGBBQ</defName>
+    <label>roasted goblin leg</label>
+    <description>A heavy roasted cut of goblin flesh, cooked around the bone.</description>
+    <tradeability>All</tradeability>
+    <graphicData>
+      <texPath>Things/Item/Food/MGB_legBBQ/MGB_legGBBQ</texPath>
+      <graphicClass>MUGB.Graphic_GoblinTwoStageStackCount</graphicClass>
+      <drawSize>(0.765,0.765)</drawSize>
+    </graphicData>
+    <statBases>
+      <MarketValue>15</MarketValue>
+      <Nutrition>1.0</Nutrition>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinPreservedCookedMealBase">
+    <defName>MUGB_armHBBQ</defName>
+    <label>roasted human arm</label>
+    <description>A roasted humanlike arm padded with extra meat scraps.</description>
+    <tradeability>All</tradeability>
+    <graphicData>
+      <texPath>Things/Item/Food/MGB_armBBQ/MGB_armHBBQ</texPath>
+      <graphicClass>MUGB.Graphic_GoblinThreeStageStackCount</graphicClass>
+      <drawSize>(0.765,0.765)</drawSize>
+    </graphicData>
+    <statBases>
+      <MarketValue>14</MarketValue>
+      <Nutrition>0.95</Nutrition>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinPreservedCookedMealBase">
+    <defName>MUGB_armGBBQ</defName>
+    <label>roasted goblin arm</label>
+    <description>A roasted goblin arm padded with extra goblin meat scraps.</description>
+    <tradeability>All</tradeability>
+    <graphicData>
+      <texPath>Things/Item/Food/MGB_armBBQ/MGB_armGBBQ</texPath>
+      <graphicClass>MUGB.Graphic_GoblinThreeStageStackCount</graphicClass>
+      <drawSize>(0.765,0.765)</drawSize>
+    </graphicData>
+    <statBases>
+      <MarketValue>15</MarketValue>
+      <Nutrition>1.0</Nutrition>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinPreservedCookedMealBase">
+    <defName>MUGB_excHBBQ</defName>
+    <label>lavish human flesh platter</label>
+    <description>A lavish goblin platter of smoked humanlike flesh, bone-roasted cuts, and rich scraps.</description>
+    <tradeability>All</tradeability>
+    <graphicData>
+      <texPath>Things/Item/Food/MGB_excBBQ/MGB_excHBBQ</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(0.765,0.765)</drawSize>
+    </graphicData>
+    <statBases>
+      <MarketValue>24</MarketValue>
+      <Nutrition>1.12</Nutrition>
+    </statBases>
+    <ingestible>
+      <foodType>Meal</foodType>
+      <preferability>MealLavish</preferability>
+      <ingestEffect>EatMeat</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+      <optimalityOffsetFeedingAnimals>-25</optimalityOffsetFeedingAnimals>
+    </ingestible>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinPreservedCookedMealBase">
+    <defName>MUGB_excGBBQ</defName>
+    <label>lavish goblin flesh platter</label>
+    <description>A lavish goblin platter centered on goblin flesh. It is the most satisfying of the current craving foods.</description>
+    <tradeability>All</tradeability>
+    <graphicData>
+      <texPath>Things/Item/Food/MGB_excBBQ/MGB_excGBBQ</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(0.765,0.765)</drawSize>
+    </graphicData>
+    <statBases>
+      <MarketValue>27</MarketValue>
+      <Nutrition>1.2</Nutrition>
+    </statBases>
+    <ingestible>
+      <foodType>Meal</foodType>
+      <preferability>MealLavish</preferability>
+      <ingestEffect>EatMeat</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+      <optimalityOffsetFeedingAnimals>-25</optimalityOffsetFeedingAnimals>
+    </ingestible>
+  </ThingDef>
+
+</Defs>

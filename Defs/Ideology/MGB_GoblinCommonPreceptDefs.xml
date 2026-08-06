@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    KO intent: 고블린 세력 이념에서 "곤충고기 신경쓰지 않음"으로 보이게 하기 위한 무효 precept입니다.
+    바닐라 Ideology에는 곤충고기 "선호/사랑"만 있고 신경쓰지 않음 단계가 없어 고블린 전용으로 추가합니다.
+  -->
+  <PreceptDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_InsectMeatEating_DontCare</defName>
+    <issue>InsectMeat</issue>
+    <label>don't care</label>
+    <description>Insect meat is just another ugly protein. Goblins do not bother making a doctrine out of it.</description>
+    <impact>Low</impact>
+    <displayOrderInIssue>20</displayOrderInIssue>
+    <defaultSelectionWeight>0</defaultSelectionWeight>
+  </PreceptDef>
+
+  <!--
+    KO intent: 고블린 세력은 버섯섭취를 신경쓰지 않음으로 처리합니다.
+    바닐라 FungusEating_Preferred는 Tunneler/Darkness 선행 밈을 요구하므로, 고블린 세력 전용 무효 precept를 둡니다.
+  -->
+  <PreceptDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_FungusEating_DontCare</defName>
+    <issue>FungusEating</issue>
+    <label>don't care</label>
+    <description>Fungus is food if it fills the stomach. Goblins care more about meat, guts, and survival.</description>
+    <impact>Low</impact>
+    <displayOrderInIssue>20</displayOrderInIssue>
+    <defaultSelectionWeight>0</defaultSelectionWeight>
+  </PreceptDef>
+
+</Defs>

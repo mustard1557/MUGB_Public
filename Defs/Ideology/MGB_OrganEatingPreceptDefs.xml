@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+  내장섭취 이데올로기 이슈입니다.
+  아이콘은 MGB_organeat.png를 사용합니다.
+  이 단계는 이슈/프리셉트 뼈대만 추가하며, 실제 섭취 무드/행동 로직은 별도 패치에서 연결합니다.
+  -->
+  <IssueDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_OrganEating</defName>
+    <label>organ eating</label>
+    <iconPath>UI/Icons/MGB_organeat</iconPath>
+  </IssueDef>
+
+  <PreceptDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_OrganEating_Forbidden</defName>
+    <issue>MUGB_OrganEating</issue>
+    <label>forbidden</label>
+    <description>Eating prepared viscera is taboo. Organs and guts belong outside the kitchen.</description>
+    <impact>Low</impact>
+    <displayOrderInIssue>30</displayOrderInIssue>
+    <displayOrderInImpact>300</displayOrderInImpact>
+    <defaultSelectionWeight>1</defaultSelectionWeight>
+    <comps />
+  </PreceptDef>
+
+  <PreceptDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_OrganEating_Acceptable</defName>
+    <issue>MUGB_OrganEating</issue>
+    <label>acceptable</label>
+    <description>Prepared viscera are unpleasant to some, but there is no moral problem with eating them.</description>
+    <impact>Low</impact>
+    <displayOrderInIssue>20</displayOrderInIssue>
+    <displayOrderInImpact>200</displayOrderInImpact>
+    <defaultSelectionWeight>0.35</defaultSelectionWeight>
+    <comps />
+  </PreceptDef>
+
+  <PreceptDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_OrganEating_Preferred</defName>
+    <issue>MUGB_OrganEating</issue>
+    <label>preferred</label>
+    <description>Viscera are valued as strengthening food. A meal with organs in it is better than ordinary fare.</description>
+    <impact>Low</impact>
+    <displayOrderInIssue>10</displayOrderInIssue>
+    <displayOrderInImpact>100</displayOrderInImpact>
+    <defaultSelectionWeight>0</defaultSelectionWeight>
+    <associatedMemes>
+      <li>MUGB_ChildrenOfBlinia</li>
+      <li>Cannibal</li>
+    </associatedMemes>
+    <comps />
+  </PreceptDef>
+
+  <PreceptDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_OrganEating_Important</defName>
+    <issue>MUGB_OrganEating</issue>
+    <label>important</label>
+    <description>Organs and viscera are sacred nourishment. Eating them is a proper and important part of life.</description>
+    <impact>Medium</impact>
+    <displayOrderInIssue>0</displayOrderInIssue>
+    <displayOrderInImpact>0</displayOrderInImpact>
+    <defaultSelectionWeight>0</defaultSelectionWeight>
+    <associatedMemes>
+      <li>MUGB_ChildrenOfBlinia</li>
+      <li>Cannibal</li>
+    </associatedMemes>
+    <comps />
+  </PreceptDef>
+
+</Defs>

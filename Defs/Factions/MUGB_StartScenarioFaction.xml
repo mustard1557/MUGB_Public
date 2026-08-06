@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <FactionDef ParentName="FactionBase">
+    <defName>MUGB_StartVillageFaction</defName>
+    <label>isolated villagers</label>
+    <description>The inhabitants and absent defenders of a small isolated human village.</description>
+    <pawnSingular>villager</pawnSingular>
+    <pawnsPlural>villagers</pawnsPlural>
+    <fixedName>Isolated village</fixedName>
+    <basicMemberKind>MUGB_StartVillageReturner</basicMemberKind>
+    <humanlikeFaction>true</humanlikeFaction>
+    <techLevel>Medieval</techLevel>
+    <requiredCountAtGameStart>0</requiredCountAtGameStart>
+    <maxConfigurableAtWorldCreation>0</maxConfigurableAtWorldCreation>
+    <displayInFactionSelection>false</displayInFactionSelection>
+    <settlementGenerationWeight>0</settlementGenerationWeight>
+    <canMakeRandomly>false</canMakeRandomly>
+    <canGenerateQuestSites>false</canGenerateQuestSites>
+    <hidden>true</hidden>
+    <permanentEnemy>true</permanentEnemy>
+    <autoFlee>false</autoFlee>
+    <factionIconPath>World/WorldObjects/Expanding/Sites/DownedRefugee</factionIconPath>
+    <backstoryFilters>
+      <li>
+        <categories>
+          <li>Outlander</li>
+          <li>Tribal</li>
+        </categories>
+      </li>
+    </backstoryFilters>
+  </FactionDef>
+
+</Defs>

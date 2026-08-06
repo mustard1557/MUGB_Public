@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <MUGB_SpecialWeaponLabel>custom {0}</MUGB_SpecialWeaponLabel>
+  <MUGB_SpecialWeaponOptions>Special traits: {0}</MUGB_SpecialWeaponOptions>
+  <MUGB_BoneStockLabel>thighbone stock</MUGB_BoneStockLabel><MUGB_BoneStockDesc>A broad thighbone stock makes the weapon faster and more brutal in close combat.</MUGB_BoneStockDesc>
+  <MUGB_SkullBayonetLabel>biting bayonet</MUGB_SkullBayonetLabel><MUGB_SkullBayonetDesc>A jaw-like bayonet tears into anything close enough to reach.</MUGB_SkullBayonetDesc>
+  <MUGB_LongBarrelLabel>extended barrel</MUGB_LongBarrelLabel><MUGB_LongBarrelDesc>An improbably long barrel extends the weapon's effective range.</MUGB_LongBarrelDesc>
+  <MUGB_BladedLimbsLabel>bladed limbs</MUGB_BladedLimbsLabel><MUGB_BladedLimbsDesc>Blades fixed to the bow limbs make it dangerous in melee.</MUGB_BladedLimbsDesc>
+  <MUGB_TalkingHeadLabel>talking head</MUGB_TalkingHeadLabel><MUGB_TalkingHeadDesc>A preserved head improves neither aim nor judgment, but collectors pay well for it.</MUGB_TalkingHeadDesc>
+  <MUGB_PreviousOwnerLabel>previous owner included</MUGB_PreviousOwnerLabel><MUGB_PreviousOwnerDesc>Parts of the previous owner serve as surprisingly effective aiming references.</MUGB_PreviousOwnerDesc>
+  <MUGB_BoneGripLabel>shinbone grip</MUGB_BoneGripLabel><MUGB_BoneGripDesc>A fitted shinbone grip steadies the weapon at close range.</MUGB_BoneGripDesc>
+  <MUGB_FingerCrankLabel>fingerbone crank</MUGB_FingerCrankLabel><MUGB_FingerCrankDesc>A nimble fingerbone mechanism cycles the repeating crossbow faster.</MUGB_FingerCrankDesc>
+  <MUGB_OverchargedShotLabel>roaring muzzle</MUGB_OverchargedShotLabel><MUGB_OverchargedShotDesc>An overcharged shell travels farther and produces a larger but less accurate blast.</MUGB_OverchargedShotDesc>
+  <MUGB_BoneSightLabel>bone sight</MUGB_BoneSightLabel><MUGB_BoneSightDesc>A carefully aligned bone sight improves aim and doubles as a close-combat spike.</MUGB_BoneSightDesc>
+  <MUGB_ToxTipLabel>filth-poison ammunition</MUGB_ToxTipLabel><MUGB_ToxTipDesc>A toxic goblin mixture contaminates targets struck by the projectile.</MUGB_ToxTipDesc>
+  <MUGB_FireTipLabel>fireplay ammunition</MUGB_FireTipLabel><MUGB_FireTipDesc>Unstable incendiary material may ignite the impact area.</MUGB_FireTipDesc>
+  <MUGB_PiercingTipLabel>head-opener ammunition</MUGB_PiercingTipLabel><MUGB_PiercingTipDesc>Dense, narrow points improve armor penetration.</MUGB_PiercingTipDesc>
+  <MUGB_PrecisionTipLabel>precision point</MUGB_PrecisionTipLabel><MUGB_PrecisionTipDesc>Carefully shaped points improve accuracy at medium and long range.</MUGB_PrecisionTipDesc>
+  <MUGB_OverloadPowderLabel>eyeballed powder charge</MUGB_OverloadPowderLabel><MUGB_OverloadPowderDesc>An excessive powder charge hits harder and penetrates better, at the cost of accuracy.</MUGB_OverloadPowderDesc>
+  <MUGB_ScattershotTeethLabel>handful of teeth</MUGB_ScattershotTeethLabel><MUGB_ScattershotTeethDesc>Two reduced-power shots leave almost together, with poor performance at distance.</MUGB_ScattershotTeethDesc>
+  <MUGB_TwinNockLabel>two arrows in the teeth</MUGB_TwinNockLabel><MUGB_TwinNockDesc>Two reduced-power arrows are loosed in rapid succession, sacrificing accuracy.</MUGB_TwinNockDesc>
+  <MUGB_RifledBarrelLabel>rifled barrel</MUGB_RifledBarrelLabel><MUGB_RifledBarrelDesc>Crude rifling improves accuracy at medium and long range.</MUGB_RifledBarrelDesc>
+  <MUGB_GutStringLabel>tough gut string</MUGB_GutStringLabel><MUGB_GutStringDesc>A tightly twisted gut string increases range.</MUGB_GutStringDesc>
+  <MUGB_QuickReloadLabel>tooth-torn cartridge</MUGB_QuickReloadLabel><MUGB_QuickReloadDesc>Prepared ammunition reloads faster but slightly reduces accuracy.</MUGB_QuickReloadDesc>
+
+  <!-- Procedural name: [flavor] [option adjective] weapon [epithet]. Epithet word order handled by this key. -->
+  <MUGB_WeaponNameEpithet>{0}'s {1}</MUGB_WeaponNameEpithet>
+
+  <!-- Option adjectives (paired with option labels) -->
+  <MUGB_BoneStockAdjective>bone-stocked</MUGB_BoneStockAdjective>
+  <MUGB_SkullBayonetAdjective>biting</MUGB_SkullBayonetAdjective>
+  <MUGB_LongBarrelAdjective>long</MUGB_LongBarrelAdjective>
+  <MUGB_BladedLimbsAdjective>bladed</MUGB_BladedLimbsAdjective>
+  <MUGB_TalkingHeadAdjective>babbling</MUGB_TalkingHeadAdjective>
+  <MUGB_PreviousOwnerAdjective>well-worn</MUGB_PreviousOwnerAdjective>
+  <MUGB_BoneGripAdjective>shinbone</MUGB_BoneGripAdjective>
+  <MUGB_FingerCrankAdjective>fingerbone</MUGB_FingerCrankAdjective>
+  <MUGB_OverchargedShotAdjective>roaring</MUGB_OverchargedShotAdjective>
+  <MUGB_BoneSightAdjective>keen-eyed</MUGB_BoneSightAdjective>
+  <MUGB_ToxTipAdjective>reeking</MUGB_ToxTipAdjective>
+  <MUGB_FireTipAdjective>burning</MUGB_FireTipAdjective>
+  <MUGB_PiercingTipAdjective>splitting</MUGB_PiercingTipAdjective>
+  <MUGB_PrecisionTipAdjective>aimed</MUGB_PrecisionTipAdjective>
+  <MUGB_OverloadPowderAdjective>blind</MUGB_OverloadPowderAdjective>
+  <MUGB_ScattershotTeethAdjective>gnashing</MUGB_ScattershotTeethAdjective>
+  <MUGB_TwinNockAdjective>twin-biting</MUGB_TwinNockAdjective>
+  <MUGB_RifledBarrelAdjective>grooved</MUGB_RifledBarrelAdjective>
+  <MUGB_GutStringAdjective>gut-strung</MUGB_GutStringAdjective>
+  <MUGB_QuickReloadAdjective>hasty</MUGB_QuickReloadAdjective>
+
+  <!-- Epithets (2 options) -->
+  <MUGB_Epithet_Breath>Breath</MUGB_Epithet_Breath>
+  <MUGB_Epithet_Feast>Feast</MUGB_Epithet_Feast>
+  <MUGB_Epithet_Shadow>Shadow</MUGB_Epithet_Shadow>
+  <!-- Epithets (3 options) -->
+  <MUGB_Epithet_LastWords>Last Words</MUGB_Epithet_LastWords>
+  <MUGB_Epithet_Dirge>Dirge</MUGB_Epithet_Dirge>
+  <MUGB_Epithet_Promise>Promise</MUGB_Epithet_Promise>
+  <MUGB_Epithet_Night>Night</MUGB_Epithet_Night>
+
+  <!-- Random flavor adjectives (option-independent, 25% chance) -->
+  <MUGB_Flavor_Screaming>screaming</MUGB_Flavor_Screaming>
+  <MUGB_Flavor_Panting>panting</MUGB_Flavor_Panting>
+  <MUGB_Flavor_Spirited>spirited</MUGB_Flavor_Spirited>
+  <MUGB_Flavor_Moldy>mold-caked</MUGB_Flavor_Moldy>
+  <MUGB_Flavor_Musty>musty</MUGB_Flavor_Musty>
+  <MUGB_Flavor_NightBloom>musky</MUGB_Flavor_NightBloom>
+  <MUGB_Flavor_Sticky>sticky</MUGB_Flavor_Sticky>
+  <MUGB_Flavor_Alluring>seductive</MUGB_Flavor_Alluring>
+  <MUGB_Flavor_Throbbing>throbbing</MUGB_Flavor_Throbbing>
+</LanguageData>

@@ -1,0 +1,1641 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- Goblin clothing stays on tailoring benches; metal armor and helmets are locked to the goblin smithbench. -->
+
+  <ThingDef Name="MUGB_GoblinClothingBase" ParentName="ApparelMakeableBase" Abstract="True">
+    <techLevel>Neolithic</techLevel>
+    <thingCategories>
+      <li>ApparelMisc</li>
+      <li>MUGB_GoblinApparelCategory</li>
+    </thingCategories>
+    <tradeTags>
+      <li>Clothing</li>
+      <li>MUGB_GoblinApparel</li>
+    </tradeTags>
+    <statBases>
+      <MaxHitPoints>90</MaxHitPoints>
+      <WorkToMake>900</WorkToMake>
+      <Mass>0.4</Mass>
+      <EquipDelay>1.2</EquipDelay>
+      <StuffEffectMultiplierArmor>0.08</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.25</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.18</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <recipeMaker>
+      <recipeUsers>
+        <li>ElectricTailoringBench</li>
+        <li>HandTailoringBench</li>
+        <li>CraftingSpot</li>
+      </recipeUsers>
+      <useIngredientsForColor>false</useIngredientsForColor>
+      <displayPriority>320</displayPriority>
+    </recipeMaker>
+    <apparel>
+      <defaultOutfitTags>
+        <li>Worker</li>
+        <li>Soldier</li>
+      </defaultOutfitTags>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+      </tags>
+    </apparel>
+    <colorGenerator Class="ColorGenerator_Single">
+      <color>(1,1,1)</color>
+    </colorGenerator>
+  </ThingDef>
+
+  <ThingDef Name="MUGB_GoblinArmorBase" ParentName="ApparelMakeableBase" Abstract="True">
+    <techLevel>Medieval</techLevel>
+    <thingCategories>
+      <li>ApparelArmor</li>
+      <li>MUGB_GoblinApparelCategory</li>
+    </thingCategories>
+    <tradeTags>
+      <li>Clothing</li>
+      <li>Armor</li>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmor</li>
+    </tradeTags>
+    <stuffCategories>
+      <li>MUGB_GoblinAlloyMetallic</li>
+    </stuffCategories>
+    <costStuffCount>45</costStuffCount>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <WorkToMake>2600</WorkToMake>
+      <Mass>4.2</Mass>
+      <EquipDelay>1.8</EquipDelay>
+      <StuffEffectMultiplierArmor>0.55</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.18</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.05</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <recipeMaker>
+      <recipeUsers Inherit="False">
+        <li>MUGB_smithbench</li>
+      </recipeUsers>
+      <useIngredientsForColor>false</useIngredientsForColor>
+      <displayPriority>330</displayPriority>
+    </recipeMaker>
+    <apparel>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <defaultOutfitTags>
+        <li>Soldier</li>
+      </defaultOutfitTags>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinArmor</li>
+      </tags>
+    </apparel>
+    <colorGenerator Class="ColorGenerator_Single">
+      <color>(1,1,1)</color>
+    </colorGenerator>
+  </ThingDef>
+
+  <ThingDef Name="MUGB_GoblinHelmetBase" ParentName="ArmorHelmetMakeableBase" Abstract="True">
+    <techLevel>Medieval</techLevel>
+    <thingCategories>
+      <li>Headgear</li>
+      <li>MUGB_GoblinApparelCategory</li>
+    </thingCategories>
+    <tradeTags>
+      <li>Clothing</li>
+      <li>Armor</li>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmor</li>
+      <li>MUGB_GoblinHeadgear</li>
+    </tradeTags>
+    <stuffCategories>
+      <li>MUGB_GoblinAlloyMetallic</li>
+    </stuffCategories>
+    <costStuffCount>25</costStuffCount>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToMake>3000</WorkToMake>
+      <Mass>1.5</Mass>
+      <EquipDelay>1.3</EquipDelay>
+      <StuffEffectMultiplierArmor>0.48</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.12</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <recipeMaker>
+      <recipeUsers Inherit="False">
+        <li>MUGB_smithbench</li>
+      </recipeUsers>
+      <useIngredientsForColor>false</useIngredientsForColor>
+      <displayPriority>340</displayPriority>
+    </recipeMaker>
+    <apparel>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <bodyPartGroups>
+        <li>UpperHead</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Overhead</li>
+      </layers>
+      <defaultOutfitTags>
+        <li>Soldier</li>
+      </defaultOutfitTags>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinHelmet</li>
+      </tags>
+    </apparel>
+    <colorGenerator Class="ColorGenerator_Single">
+      <color>(1,1,1)</color>
+    </colorGenerator>
+  </ThingDef>
+
+  <!-- Primitive clothing -->
+
+  <ThingDef ParentName="MUGB_GoblinClothingBase">
+    <defName>MUGB_Apparel_GoblinLoincloth</defName>
+    <label>goblin loincloth</label>
+    <description>A crude loincloth. It barely counts as clothing, which is exactly the point.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Primitive/MGB_loin/loin</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <stuffCategories>
+      <li>Leathery</li>
+      <li>Fabric</li>
+    </stuffCategories>
+    <costStuffCount>18</costStuffCount>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToMake>220</WorkToMake>
+      <Mass>0.10</Mass>
+      <ArmorRating_Sharp>0.02</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.01</ArmorRating_Blunt>
+      <Insulation_Cold>12</Insulation_Cold>
+      <Insulation_Heat>2</Insulation_Heat>
+      <StuffEffectMultiplierArmor>0.04</StuffEffectMultiplierArmor>
+    </statBases>
+    <apparel>
+      <bodyPartGroups>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Apparel/Primitive/MGB_loin/loin</wornGraphicPath>
+      <layers>
+        <li>OnSkin</li>
+      </layers>
+      <tags>
+        <li>MUGB_GoblinBasicApparel</li>
+        <li>MUGB_GoblinBeggarApparel</li>
+      </tags>
+    </apparel>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinClothingBase">
+    <defName>MUGB_Apparel_GoblinBodyWrap</defName>
+    <label>goblin rag wrap</label>
+    <description>A ragged body wrap used by goblins as everyday clothing.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Primitive/MGB_tribal/tribal</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <stuffCategories>
+      <li>Leathery</li>
+      <li>Fabric</li>
+    </stuffCategories>
+    <costStuffCount>38</costStuffCount>
+    <statBases>
+      <MaxHitPoints>105</MaxHitPoints>
+      <WorkToMake>700</WorkToMake>
+      <Mass>0.28</Mass>
+      <ArmorRating_Sharp>0.04</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.02</ArmorRating_Blunt>
+      <ArmorRating_Heat>0.01</ArmorRating_Heat>
+      <Insulation_Cold>17</Insulation_Cold>
+      <Insulation_Heat>4</Insulation_Heat>
+      <StuffEffectMultiplierArmor>0.06</StuffEffectMultiplierArmor>
+    </statBases>
+    <apparel>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Apparel/Primitive/MGB_tribal/tribal</wornGraphicPath>
+      <layers>
+        <li>OnSkin</li>
+      </layers>
+      <tags>
+        <li>MUGB_GoblinBasicApparel</li>
+        <li>MUGB_GoblinBeggarApparel</li>
+      </tags>
+    </apparel>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinClothingBase">
+    <defName>MUGB_Apparel_HumanHideCapeB</defName>
+    <label>goblin ritual shroud</label>
+    <description>A ritual shroud of cured human leather, wood splints, and bone charms.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Primitive/MGB_HmantleA/HcapeB_Thin_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costList>
+      <Leather_Human>50</Leather_Human>
+      <WoodLog>10</WoodLog>
+      <MUGB_Bone>10</MUGB_Bone>
+    </costList>
+    <statBases>
+      <MaxHitPoints>90</MaxHitPoints>
+      <WorkToMake>1800</WorkToMake>
+      <Mass>0.9</Mass>
+      <Insulation_Cold>36</Insulation_Cold>
+      <Insulation_Heat>5</Insulation_Heat>
+      <StuffEffectMultiplierInsulation_Cold>0.30</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.22</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.01</MoveSpeed>
+    </equippedStatOffsets>
+    <apparel>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Shoulders</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Apparel/Primitive/MGB_HmantleA/HcapeB</wornGraphicPath>
+      <anyTechLevelCanUseForWarmth>true</anyTechLevelCanUseForWarmth>
+      <layers>
+        <li>Shell</li>
+      </layers>
+    </apparel>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinClothingBase">
+    <defName>MUGB_Apparel_HumanHideMantle</defName>
+    <label>goblin furry human-skin cloak</label>
+    <description>A heavier human-skin cloak padded with rough fur and trophy scraps.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Primitive/MGB_HcapeB/HmantleB_Thin_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <stuffCategories>
+      <li>Leathery</li>
+    </stuffCategories>
+    <costStuffCount>55</costStuffCount>
+    <costList>
+      <Leather_Human>20</Leather_Human>
+      <MUGB_Bone>8</MUGB_Bone>
+    </costList>
+    <statBases>
+      <MaxHitPoints>110</MaxHitPoints>
+      <WorkToMake>3200</WorkToMake>
+      <Mass>1.5</Mass>
+      <Insulation_Cold>42</Insulation_Cold>
+      <Insulation_Heat>2</Insulation_Heat>
+      <StuffEffectMultiplierInsulation_Cold>0.95</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.18</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <recipeMaker>
+      <recipeUsers>
+        <li>ElectricTailoringBench</li>
+        <li>HandTailoringBench</li>
+        <li>CraftingSpot</li>
+      </recipeUsers>
+      <useIngredientsForColor>true</useIngredientsForColor>
+      <displayPriority>320</displayPriority>
+    </recipeMaker>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.02</MoveSpeed>
+    </equippedStatOffsets>
+    <apparel>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Shoulders</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Apparel/Primitive/MGB_HcapeB/HmantleB</wornGraphicPath>
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <anyTechLevelCanUseForWarmth>true</anyTechLevelCanUseForWarmth>
+      <layers>
+        <li>Shell</li>
+      </layers>
+    </apparel>
+  </ThingDef>
+
+  <!-- Primitive armor -->
+
+  <ThingDef ParentName="MUGB_GoblinClothingBase">
+    <defName>MUGB_Apparel_BoneArmGuard</defName>
+    <!-- 뼈 정제 이후에 제작할 수 있게 합니다. 부모가 비(非)뼈 장비와 공유되어 개별 지정합니다. -->
+    <recipeMaker>
+      <researchPrerequisite>MUGB_Research_BoneRendering</researchPrerequisite>
+    </recipeMaker>
+    <label>goblin bone armor</label>
+    <description>Bone plates tied over the arms and chest. Light, ugly, and better than skin.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Primitive/MGB_boneArm/boneArm</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costList>
+      <MUGB_Bone>28</MUGB_Bone>
+      <Leather_Human>12</Leather_Human>
+    </costList>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToMake>2200</WorkToMake>
+      <Mass>1.2</Mass>
+      <ArmorRating_Sharp>0.16</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.08</ArmorRating_Blunt>
+      <ArmorRating_Heat>0.04</ArmorRating_Heat>
+      <Insulation_Cold>5</Insulation_Cold>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.06</MoveSpeed>
+    </equippedStatOffsets>
+    <apparel>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Arms</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Apparel/Primitive/MGB_boneArm/boneArm</wornGraphicPath>
+      <layers>
+        <li>Middle</li>
+      </layers>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinArmorPrimitive</li>
+      </tags>
+    </apparel>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinClothingBase">
+    <defName>MUGB_Apparel_WoodArmorA</defName>
+    <label>goblin wood light armor</label>
+    <description>Rough wooden armor bound with leather straps.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Primitive/MGB_woodAA/woodAA_Thin_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costList>
+      <WoodLog>45</WoodLog>
+      <Leather_Human>10</Leather_Human>
+      <MUGB_Bone>6</MUGB_Bone>
+    </costList>
+    <statBases>
+      <MaxHitPoints>110</MaxHitPoints>
+      <WorkToMake>3000</WorkToMake>
+      <Mass>1.8</Mass>
+      <ArmorRating_Sharp>0.18</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.10</ArmorRating_Blunt>
+      <ArmorRating_Heat>0.00</ArmorRating_Heat>
+      <Insulation_Cold>5</Insulation_Cold>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.08</MoveSpeed>
+    </equippedStatOffsets>
+    <apparel>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Arms</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Apparel/Primitive/MGB_woodAA/woodAA</wornGraphicPath>
+      <layers>
+        <li>Middle</li>
+      </layers>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinArmorPrimitive</li>
+      </tags>
+    </apparel>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinClothingBase">
+    <defName>MUGB_Apparel_WoodArmorB</defName>
+    <label>goblin wood heavy armor</label>
+    <description>Heavier wooden armor with crude reinforcement plates.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Primitive/MGB_woodAB/woodAB_Thin_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costList>
+      <WoodLog>60</WoodLog>
+      <Leather_Human>14</Leather_Human>
+      <MUGB_Bone>10</MUGB_Bone>
+    </costList>
+    <statBases>
+      <MaxHitPoints>125</MaxHitPoints>
+      <WorkToMake>3600</WorkToMake>
+      <Mass>2.4</Mass>
+      <ArmorRating_Sharp>0.24</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.13</ArmorRating_Blunt>
+      <ArmorRating_Heat>0.00</ArmorRating_Heat>
+      <Insulation_Cold>5</Insulation_Cold>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.11</MoveSpeed>
+    </equippedStatOffsets>
+    <apparel>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Arms</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Apparel/Primitive/MGB_woodAB/woodAB</wornGraphicPath>
+      <layers>
+        <li>Middle</li>
+      </layers>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinArmorPrimitive</li>
+      </tags>
+    </apparel>
+  </ThingDef>
+
+  <!-- Medieval armor -->
+
+  <ThingDef ParentName="MUGB_GoblinArmorBase">
+    <defName>MUGB_Apparel_GoblinChainArmor</defName>
+    <label>goblin chain-lamellar</label>
+    <description>Chain and lamellar plates made for quick goblin fighters.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Armor/MGB_chain/chainA_Thin_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>40</costStuffCount>
+    <costList>
+      <Leather_Human>15</Leather_Human>
+      <MUGB_BoneDust>6</MUGB_BoneDust>
+    </costList>
+    <statBases>
+      <MaxHitPoints>180</MaxHitPoints>
+      <Mass>4.2</Mass>
+      <WorkToMake>15600</WorkToMake>
+      <Insulation_Cold>5</Insulation_Cold>
+      <StuffEffectMultiplierArmor>0.58</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.10</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.00</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.10</MoveSpeed>
+    </equippedStatOffsets>
+    <apparel>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Arms</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Apparel/Armor/MGB_chain/chainA</wornGraphicPath>
+      <layers>
+        <li>Middle</li>
+      </layers>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinArmor</li>
+        <li>MUGB_GoblinArmorMedieval</li>
+      </tags>
+    </apparel>
+      <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinArmorBase">
+    <defName>MUGB_Apparel_GoblinChestplate</defName>
+    <label>goblin chestplate</label>
+    <description>A compact chestplate that favors torso protection over coverage.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Armor/MGB_chest/chestA_Thin_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>35</costStuffCount>
+    <costList>
+      <Leather_Human>10</Leather_Human>
+      <MUGB_BoneDust>5</MUGB_BoneDust>
+    </costList>
+    <statBases>
+      <MaxHitPoints>190</MaxHitPoints>
+      <Mass>3.6</Mass>
+      <WorkToMake>16000</WorkToMake>
+      <Insulation_Cold>1</Insulation_Cold>
+      <StuffEffectMultiplierArmor>0.70</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.18</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.00</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.09</MoveSpeed>
+    </equippedStatOffsets>
+    <apparel>
+      <bodyPartGroups>
+        <li>Torso</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Apparel/Armor/MGB_chest/chestA</wornGraphicPath>
+      <layers>
+        <li>Middle</li>
+      </layers>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinArmor</li>
+        <li>MUGB_GoblinArmorMedieval</li>
+      </tags>
+    </apparel>
+      <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinArmorBase">
+    <defName>MUGB_Apparel_GoblinScaleArmor</defName>
+    <label>goblin lamellar armor</label>
+    <description>Overlapping alloy scales. Flexible enough for raiders who still need to move.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Armor/MGB_scale/scaleA_Thin_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>55</costStuffCount>
+    <costList>
+      <Leather_Human>18</Leather_Human>
+      <MUGB_BoneDust>8</MUGB_BoneDust>
+    </costList>
+    <statBases>
+      <MaxHitPoints>210</MaxHitPoints>
+      <Mass>5.0</Mass>
+      <WorkToMake>16400</WorkToMake>
+      <Insulation_Cold>5</Insulation_Cold>
+      <StuffEffectMultiplierArmor>0.62</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.24</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.04</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.11</MoveSpeed>
+    </equippedStatOffsets>
+    <apparel>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Arms</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Apparel/Armor/MGB_scale/scaleA</wornGraphicPath>
+      <layers>
+        <li>Middle</li>
+      </layers>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinArmor</li>
+        <li>MUGB_GoblinArmorMedieval</li>
+      </tags>
+    </apparel>
+      <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinArmorBase">
+    <defName>MUGB_Apparel_GoblinPlateArmorA</defName>
+    <label>goblin butcher plate</label>
+    <description>Brutish plate armor for close assault troops and butchers.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Armor/MGB_plateA/plateAA_Thin_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>70</costStuffCount>
+    <costList>
+      <Leather_Human>22</Leather_Human>
+      <MUGB_BoneDust>10</MUGB_BoneDust>
+    </costList>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <Mass>6.4</Mass>
+      <WorkToMake>18800</WorkToMake>
+      <Insulation_Cold>1</Insulation_Cold>
+      <StuffEffectMultiplierArmor>0.77</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.35</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.02</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.21</MoveSpeed>
+    </equippedStatOffsets>
+    <apparel>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Neck</li>
+        <li>Shoulders</li>
+        <li>Arms</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Apparel/Armor/MGB_plateA/plateAA</wornGraphicPath>
+      <layers>
+        <li>Middle</li>
+      </layers>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinArmor</li>
+        <li>MUGB_GoblinArmorElite</li>
+      </tags>
+    </apparel>
+      <recipeMaker>
+      <researchPrerequisite>MUGB_Research_EliteForging</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinArmorBase">
+    <defName>MUGB_Apparel_GoblinPlateArmorB</defName>
+    <label>goblin composite armor</label>
+    <description>A patched composite armor meant for goblins who still need to move under fire.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Armor/MGB_plateB/plateAB_Thin_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>62</costStuffCount>
+    <costList>
+      <Leather_Human>18</Leather_Human>
+      <MUGB_BoneDust>9</MUGB_BoneDust>
+    </costList>
+    <statBases>
+      <MaxHitPoints>230</MaxHitPoints>
+      <Mass>5.4</Mass>
+      <WorkToMake>17600</WorkToMake>
+      <Insulation_Cold>5</Insulation_Cold>
+      <StuffEffectMultiplierArmor>0.72</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.28</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.02</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.19</MoveSpeed>
+    </equippedStatOffsets>
+    <apparel>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Shoulders</li>
+        <li>Arms</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Apparel/Armor/MGB_plateB/plateAB</wornGraphicPath>
+      <layers>
+        <li>Middle</li>
+      </layers>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinArmor</li>
+        <li>MUGB_GoblinArmorElite</li>
+      </tags>
+    </apparel>
+      <recipeMaker>
+      <researchPrerequisite>MUGB_Research_EliteForging</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinArmorBase">
+    <defName>MUGB_Apparel_GoblinTorsoArmorA</defName>
+    <label>goblin iron cuirass</label>
+    <description>Simple torso armor that trades arm coverage for low weight.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Armor/MGB_torsoA/torsoA_Thin_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>45</costStuffCount>
+    <costList>
+      <Leather_Human>12</Leather_Human>
+      <MUGB_BoneDust>6</MUGB_BoneDust>
+    </costList>
+    <statBases>
+      <MaxHitPoints>170</MaxHitPoints>
+      <Mass>3.8</Mass>
+      <WorkToMake>13600</WorkToMake>
+      <Insulation_Cold>1</Insulation_Cold>
+      <StuffEffectMultiplierArmor>0.63</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.18</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.00</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.12</MoveSpeed>
+    </equippedStatOffsets>
+    <apparel>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Apparel/Armor/MGB_torsoA/torsoA</wornGraphicPath>
+      <layers>
+        <li>Middle</li>
+      </layers>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinArmor</li>
+        <li>MUGB_GoblinArmorMedieval</li>
+        <li>MUGB_GoblinArmorElite</li>
+      </tags>
+    </apparel>
+      <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinArmorBase">
+    <defName>MUGB_Apparel_GoblinTorsoArmorB</defName>
+    <label>goblin heavy iron cuirass</label>
+    <description>Reinforced torso armor for raiders expected to hold the center.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Armor/MGB_torsoB/torsoB_Thin_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>55</costStuffCount>
+    <costList>
+      <Leather_Human>16</Leather_Human>
+      <MUGB_BoneDust>8</MUGB_BoneDust>
+    </costList>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Mass>4.6</Mass>
+      <WorkToMake>15200</WorkToMake>
+      <Insulation_Cold>1</Insulation_Cold>
+      <StuffEffectMultiplierArmor>0.67</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.24</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.02</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.15</MoveSpeed>
+    </equippedStatOffsets>
+    <apparel>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Apparel/Armor/MGB_torsoB/torsoB</wornGraphicPath>
+      <layers>
+        <li>Middle</li>
+      </layers>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinArmor</li>
+        <li>MUGB_GoblinArmorMedieval</li>
+        <li>MUGB_GoblinArmorElite</li>
+      </tags>
+    </apparel>
+      <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+  <!-- Utility apparel -->
+
+  <ThingDef ParentName="MUGB_GoblinClothingBase">
+    <defName>MUGB_Apparel_GoblinFramePack</defName>
+    <label>goblin human-skin frame</label>
+    <description>A narrow wooden carrying frame used by goblin haulers and raiders.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Backpacks/MGB_gigae/MGB_gigae_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costList>
+      <WoodLog>40</WoodLog>
+      <Leather_Human>8</Leather_Human>
+    </costList>
+    <statBases>
+      <MaxHitPoints>80</MaxHitPoints>
+      <WorkToMake>1250</WorkToMake>
+      <Mass>1.8</Mass>
+    </statBases>
+    <equippedStatOffsets>
+      <CarryingCapacity>18</CarryingCapacity>
+      <MoveSpeed>-0.02</MoveSpeed>
+    </equippedStatOffsets>
+    <thingCategories>
+      <li>ApparelUtility</li>
+    </thingCategories>
+    <apparel>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <bodyPartGroups>
+        <li>Waist</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Apparel/Backpacks/MGB_gigae/MGB_gigae</wornGraphicPath>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinBackpack</li>
+      </tags>
+      <wornGraphicData>
+        <renderUtilityAsPack>true</renderUtilityAsPack>
+        <north>
+          <offset>(0,-0.15)</offset>
+        </north>
+        <south>
+          <offset>(0,0.1)</offset>
+          <scale>(1.3,1)</scale>
+        </south>
+        <east>
+          <offset>(-0.35,-0.05)</offset>
+          <thin><offset>(0.05,0)</offset></thin>
+          <hulk><offset>(-0.1,0)</offset></hulk>
+          <fat><offset>(-0.15,0)</offset></fat>
+        </east>
+        <west>
+          <offset>(0.35,-0.05)</offset>
+          <thin><offset>(-0.05,0)</offset></thin>
+          <hulk><offset>(0.1,0)</offset></hulk>
+          <fat><offset>(0.15,0)</offset></fat>
+        </west>
+        <male><scale>(0.75,0.75)</scale></male>
+        <female><scale>(0.75,0.75)</scale></female>
+      </wornGraphicData>
+      <layers>
+        <li>Belt</li>
+      </layers>
+    </apparel>
+      <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+  <!-- Korean source intent: 페르몬등짐(가방). 독소등짐과 유사하나 숙성시킨 고블린내장과 고기가 담긴 항아리를 깨서 고농축 고블린페르몬/잘자가스를 퍼뜨리는 등짐. -->
+  <ThingDef ParentName="MUGB_GoblinClothingBase">
+    <defName>MUGB_Apparel_GoblinPheromonePack</defName>
+    <label>goblin pheromone pack</label>
+    <description>A back-mounted jar frame packed with aged goblin guts and meat. When cracked open, it releases dense goblin pheromone gas. It is similar to goblin stinkbomb gas, but much stronger against non-goblins.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Backpacks/MGB_gasBP/MGB_gasBP_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costList>
+      <WoodLog>15</WoodLog>
+      <MUGB_GoblinStinkbomb>2</MUGB_GoblinStinkbomb>
+    </costList>
+    <statBases>
+      <MaxHitPoints>70</MaxHitPoints>
+      <WorkToMake>1800</WorkToMake>
+      <Mass>2.6</Mass>
+      <Flammability>0.8</Flammability>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.02</MoveSpeed>
+    </equippedStatOffsets>
+    <thingCategories>
+      <li>ApparelUtility</li>
+    </thingCategories>
+    <recipeMaker>
+      <researchPrerequisite>MUGB_Research_PheromoneCraft</researchPrerequisite>
+      <recipeUsers Inherit="False">
+        <li>MUGB_druglab</li>
+      </recipeUsers>
+      <unfinishedThingDef>UnfinishedApparel</unfinishedThingDef>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Cook</effectWorking>
+      <soundWorking>Recipe_CookMeal</soundWorking>
+      <skillRequirements>
+        <Crafting>5</Crafting>
+        <Medicine>3</Medicine>
+      </skillRequirements>
+      <useIngredientsForColor>false</useIngredientsForColor>
+      <displayPriority>324</displayPriority>
+    </recipeMaker>
+    <apparel>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <bodyPartGroups>
+        <li>Waist</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Apparel/Backpacks/MGB_gasBP/MGB_gasBP</wornGraphicPath>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinPheromonePack</li>
+      </tags>
+      <wornGraphicData>
+        <renderUtilityAsPack>true</renderUtilityAsPack>
+        <north>
+          <offset>(0,-0.15)</offset>
+        </north>
+        <south>
+          <offset>(0,0.1)</offset>
+          <scale>(1.3,1)</scale>
+        </south>
+        <east>
+          <offset>(-0.35,-0.05)</offset>
+          <thin><offset>(0.05,0)</offset></thin>
+          <hulk><offset>(-0.1,0)</offset></hulk>
+          <fat><offset>(-0.15,0)</offset></fat>
+        </east>
+        <west>
+          <offset>(0.35,-0.05)</offset>
+          <thin><offset>(-0.05,0)</offset></thin>
+          <hulk><offset>(0.1,0)</offset></hulk>
+          <fat><offset>(0.15,0)</offset></fat>
+        </west>
+        <male><scale>(0.75,0.75)</scale></male>
+        <female><scale>(0.75,0.75)</scale></female>
+      </wornGraphicData>
+      <layers>
+        <li>Belt</li>
+      </layers>
+    </apparel>
+    <comps>
+      <li Class="MUGB.CompProperties_GoblinPheromonePack">
+        <gasPower>1.2</gasPower>
+        <radius>6</radius>
+        <fullDurationTicks>1800</fullDurationTicks>
+        <fadeDurationTicks>300</fadeDurationTicks>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinClothingBase">
+    <defName>MUGB_Apparel_GoblinWarBanner</defName>
+    <label>goblin squad banner</label>
+    <description>A back-mounted banner for squad leaders and oath-bound raiders.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Backpacks/MGB_banner/MGB_bannerA_south</texPath>
+      <graphicClass>MUGB.Graphic_GoblinApparelVariant</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <stuffCategories>
+      <li>Fabric</li>
+    </stuffCategories>
+    <costStuffCount>30</costStuffCount>
+    <costList>
+      <WoodLog>25</WoodLog>
+      <Leather_Human>16</Leather_Human>
+      <MUGB_Bone>8</MUGB_Bone>
+    </costList>
+    <recipeMaker>
+      <researchPrerequisite>MUGB_Research_EliteForging</researchPrerequisite>
+      <useIngredientsForColor>true</useIngredientsForColor>
+    </recipeMaker>
+    <statBases>
+      <MaxHitPoints>75</MaxHitPoints>
+      <WorkToMake>1400</WorkToMake>
+      <Mass>1.2</Mass>
+    </statBases>
+    <equippedStatOffsets>
+      <SocialImpact>0.05</SocialImpact>
+      <MoveSpeed>-0.02</MoveSpeed>
+    </equippedStatOffsets>
+    <thingCategories>
+      <li>ApparelUtility</li>
+    </thingCategories>
+    <apparel>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <bodyPartGroups>
+        <li>Waist</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Apparel/Backpacks/MGB_banner/MGB_bannerA</wornGraphicPath>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinBanner</li>
+      </tags>
+      <wornGraphicData>
+        <renderUtilityAsPack>true</renderUtilityAsPack>
+        <north>
+          <offset>(0,-0.15)</offset>
+        </north>
+        <south>
+          <offset>(0,0.1)</offset>
+          <scale>(1.3,1)</scale>
+        </south>
+        <east>
+          <offset>(-0.35,-0.05)</offset>
+          <thin><offset>(0.05,0)</offset></thin>
+          <hulk><offset>(-0.1,0)</offset></hulk>
+          <fat><offset>(-0.15,0)</offset></fat>
+        </east>
+        <west>
+          <offset>(0.35,-0.05)</offset>
+          <thin><offset>(-0.05,0)</offset></thin>
+          <hulk><offset>(0.1,0)</offset></hulk>
+          <fat><offset>(0.15,0)</offset></fat>
+        </west>
+        <male><scale>(0.75,0.75)</scale></male>
+        <female><scale>(0.75,0.75)</scale></female>
+      </wornGraphicData>
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <layers>
+        <li>Belt</li>
+      </layers>
+    </apparel>
+    <comps>
+      <li Class="MUGB.CompProperties_GoblinApparelVariant">
+        <texPaths>
+          <li>Things/Apparel/Backpacks/MGB_banner/MGB_bannerA_south</li>
+          <li>Things/Apparel/Backpacks/MGB_banner/MGB_bannerB_south</li>
+        </texPaths>
+        <wornGraphicPaths>
+          <li>Things/Apparel/Backpacks/MGB_banner/MGB_bannerA</li>
+          <li>Things/Apparel/Backpacks/MGB_banner/MGB_bannerB</li>
+        </wornGraphicPaths>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Primitive headgear -->
+
+  
+
+  <ThingDef ParentName="MUGB_GoblinHelmetBase">
+    <defName>MUGB_Apparel_CultSkinMask</defName>
+    <label>goblin cultist skin mask</label>
+    <description>A crude ritual mask made to unsettle captives and impress other goblins.</description>
+    <graphicData>
+      <texPath>Things/Headgear/Primitive/MGB_cultmask/Skinmask_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>0</costStuffCount>
+    <stuffCategories Inherit="False" />
+    <costList>
+      <Leather_Human>25</Leather_Human>
+      <WoodLog>10</WoodLog>
+      <MUGB_Bone>5</MUGB_Bone>
+    </costList>
+    <statBases>
+      <MaxHitPoints>65</MaxHitPoints>
+      <WorkToMake>1200</WorkToMake>
+      <Mass>0.6</Mass>
+      <Insulation_Cold>1</Insulation_Cold>
+      <ArmorRating_Sharp>0.06</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.03</ArmorRating_Blunt>
+      <ArmorRating_Heat>0.00</ArmorRating_Heat>
+    </statBases>
+    <recipeMaker>
+      <!--
+        연구 조건 없음. 가죽을 벗겨 쓰는 단순한 물건이라 육체세공 연구를 요구할 만한
+        기술적 도약이 아니었습니다. 재봉대에서 바로 만들 수 있게 둡니다.
+      -->
+      <recipeUsers Inherit="False">
+        <li>CraftingSpot</li>
+        <li>HandTailoringBench</li>
+        <li>ElectricTailoringBench</li>
+      </recipeUsers>
+      <useIngredientsForColor>false</useIngredientsForColor>
+      <displayPriority>326</displayPriority>
+    </recipeMaker>
+    <apparel>
+      <bodyPartGroups>
+        <li>FullHead</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Headgear/Primitive/MGB_cultmask/Skinmask</wornGraphicPath>
+      <tags>
+        <li>MUGB_GoblinHelmetCultist</li>
+      </tags>
+    </apparel>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinHelmetBase">
+    <defName>MUGB_Apparel_GoblinSkullHelmet</defName>
+    <!-- 뼈 정제 이후에 제작할 수 있게 합니다. 부모가 비(非)뼈 장비와 공유되어 개별 지정합니다. -->
+    <recipeMaker>
+      <researchPrerequisite>MUGB_Research_BoneRendering</researchPrerequisite>
+    </recipeMaker>
+    <label>goblin skull mask</label>
+    <description>A skull mask tied together with scraps of leather and wire.</description>
+    <graphicData>
+      <texPath>Things/Headgear/Primitive/MGB_skullhelmA/Skullhelm_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>0</costStuffCount>
+    <stuffCategories Inherit="False" />
+    <costList>
+      <MUGB_Bone>28</MUGB_Bone>
+      <Leather_Human>4</Leather_Human>
+    </costList>
+    <statBases>
+      <MaxHitPoints>80</MaxHitPoints>
+      <WorkToMake>1600</WorkToMake>
+      <Mass>0.85</Mass>
+      <Insulation_Cold>1</Insulation_Cold>
+      <ArmorRating_Sharp>0.12</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.07</ArmorRating_Blunt>
+      <ArmorRating_Heat>0.00</ArmorRating_Heat>
+    </statBases>
+    <recipeMaker>
+      <recipeUsers Inherit="False">
+        <li>CraftingSpot</li>
+        <li>HandTailoringBench</li>
+        <li>ElectricTailoringBench</li>
+      </recipeUsers>
+      <useIngredientsForColor>false</useIngredientsForColor>
+      <displayPriority>327</displayPriority>
+    </recipeMaker>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.04</MoveSpeed>
+    </equippedStatOffsets>
+    <apparel>
+      <wornGraphicPath>Things/Headgear/Primitive/MGB_skullhelmA/Skullhelm</wornGraphicPath>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinHelmet</li>
+        <li>MUGB_GoblinHelmetPrimitive</li>
+        <li>MUGB_GoblinBeggarApparel</li>
+      </tags>
+    </apparel>
+  </ThingDef>
+
+  
+
+  <ThingDef ParentName="MUGB_GoblinHelmetBase">
+    <defName>MUGB_Apparel_AnimalSkullHelmet</defName>
+    <!-- 뼈 정제 이후에 제작할 수 있게 합니다. 부모가 비(非)뼈 장비와 공유되어 개별 지정합니다. -->
+    <recipeMaker>
+      <researchPrerequisite>MUGB_Research_BoneRendering</researchPrerequisite>
+    </recipeMaker>
+    <label>goblin bone helmet</label>
+    <description>A heavier bone helmet assembled from scavenged bones.</description>
+    <graphicData>
+      <texPath>Things/Headgear/Primitive/MGB_skullhelmB/Animalskullhelm_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>0</costStuffCount>
+    <stuffCategories Inherit="False" />
+    <costList>
+      <MUGB_Bone>38</MUGB_Bone>
+      <Leather_Human>6</Leather_Human>
+    </costList>
+    <statBases>
+      <MaxHitPoints>95</MaxHitPoints>
+      <WorkToMake>2200</WorkToMake>
+      <Mass>1.15</Mass>
+      <Insulation_Cold>1</Insulation_Cold>
+      <ArmorRating_Sharp>0.18</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.10</ArmorRating_Blunt>
+      <ArmorRating_Heat>0.00</ArmorRating_Heat>
+    </statBases>
+    <recipeMaker>
+      <recipeUsers Inherit="False">
+        <li>CraftingSpot</li>
+        <li>HandTailoringBench</li>
+        <li>ElectricTailoringBench</li>
+      </recipeUsers>
+      <useIngredientsForColor>false</useIngredientsForColor>
+      <displayPriority>327</displayPriority>
+    </recipeMaker>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.04</MoveSpeed>
+    </equippedStatOffsets>
+    <apparel>
+      <wornGraphicPath>Things/Headgear/Primitive/MGB_skullhelmB/Animalskullhelm</wornGraphicPath>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinHelmet</li>
+        <li>MUGB_GoblinHelmetPrimitive</li>
+        <li>MUGB_GoblinBeggarApparel</li>
+      </tags>
+    </apparel>
+  </ThingDef>
+
+  <!-- Medieval headgear -->
+
+  
+
+  <ThingDef ParentName="MUGB_GoblinHelmetBase">
+    <defName>MUGB_Apparel_BirdHelmetA</defName>
+    <!--
+      다른 고블린 투구(망치/솥/스파이크/전투 투구)와 동일하게 갑주 단조 연구를 요구합니다.
+      부모 MUGB_GoblinHelmetBase에는 연구 조건이 없어서, 이 투구들만 연구 없이 바로
+      만들 수 있는 상태였습니다.
+    -->
+    <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+    </recipeMaker>
+    <label>goblin bird helmet A</label>
+    <description>A bird-like goblin helmet with a narrow beak-shaped face guard.</description>
+    <graphicData>
+      <texPath>Things/Headgear/Medieval/MGB_Bird/A/MGB_BirdA</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>24</costStuffCount>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <WorkToMake>14850</WorkToMake>
+      <Mass>3.4</Mass>
+      <Insulation_Cold>1</Insulation_Cold>
+      <StuffEffectMultiplierArmor>0.56</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.15</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.00</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.04</MoveSpeed>
+    </equippedStatOffsets>
+    <apparel>
+      <bodyPartGroups>
+        <li>FullHead</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Headgear/Medieval/MGB_Bird/A/MGB_BirdA</wornGraphicPath>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinHelmet</li>
+        <li>MUGB_GoblinHelmetMedieval</li>
+      </tags>
+    </apparel>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinHelmetBase">
+    <defName>MUGB_Apparel_BirdHelmetB</defName>
+    <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+    </recipeMaker>
+    <label>goblin bird helmet B</label>
+    <description>A reinforced bird helm with broader face protection.</description>
+    <graphicData>
+      <texPath>Things/Headgear/Medieval/MGB_Bird/B/MGB_BirdB</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>26</costStuffCount>
+    <statBases>
+      <MaxHitPoints>115</MaxHitPoints>
+      <WorkToMake>13500</WorkToMake>
+      <Mass>3.0</Mass>
+      <Insulation_Cold>1</Insulation_Cold>
+      <StuffEffectMultiplierArmor>0.52</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.15</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.00</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <apparel>
+      <bodyPartGroups>
+        <li>UpperHead</li>
+        <li>Eyes</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Headgear/Medieval/MGB_Bird/B/MGB_BirdB</wornGraphicPath>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinHelmet</li>
+        <li>MUGB_GoblinHelmetMedieval</li>
+      </tags>
+    </apparel>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.04</MoveSpeed>
+    </equippedStatOffsets>
+  </ThingDef>
+
+  
+
+  <ThingDef ParentName="MUGB_GoblinHelmetBase">
+    <defName>MUGB_Apparel_CrudeHelmetA</defName>
+    <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+    </recipeMaker>
+    <label>goblin crude helmet A</label>
+    <description>A crude metal helmet hammered into shape without much patience.</description>
+    <graphicData>
+      <texPath>Things/Headgear/Medieval/MGB_Crude/MGB_crudeA/MGB_CrudehelmetA</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>24</costStuffCount>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToMake>8100</WorkToMake>
+      <Mass>2.2</Mass>
+      <Insulation_Cold>1</Insulation_Cold>
+      <StuffEffectMultiplierArmor>0.34</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.10</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.00</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.04</MoveSpeed>
+    </equippedStatOffsets>
+    <apparel>
+      <wornGraphicPath>Things/Headgear/Medieval/MGB_Crude/MGB_crudeA/MGB_CrudehelmetA</wornGraphicPath>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinHelmet</li>
+        <li>MUGB_GoblinHelmetMedieval</li>
+      </tags>
+    </apparel>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinHelmetBase">
+    <defName>MUGB_Apparel_CrudeHelmetB</defName>
+    <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+    </recipeMaker>
+    <label>goblin crude helmet B</label>
+    <description>A heavier crude helmet with more metal around the face.</description>
+    <graphicData>
+      <texPath>Things/Headgear/Medieval/MGB_Crude/MGB_crudeB/CrudehelmetB</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>28</costStuffCount>
+    <statBases>
+      <MaxHitPoints>110</MaxHitPoints>
+      <WorkToMake>9900</WorkToMake>
+      <Mass>2.6</Mass>
+      <Insulation_Cold>1</Insulation_Cold>
+      <StuffEffectMultiplierArmor>0.38</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.10</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.00</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <apparel>
+      <bodyPartGroups>
+        <li>UpperHead</li>
+        <li>Eyes</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Headgear/Medieval/MGB_Crude/MGB_crudeB/CrudehelmetB</wornGraphicPath>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinHelmet</li>
+        <li>MUGB_GoblinHelmetMedieval</li>
+      </tags>
+    </apparel>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.04</MoveSpeed>
+    </equippedStatOffsets>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinHelmetBase">
+    <defName>MUGB_Apparel_FrogHelmet</defName>
+    <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+    </recipeMaker>
+    <label>goblin frogmouth helmet</label>
+    <description>A squat helmet with a narrow slit, good for keeping arrows out and sightlines terrible.</description>
+    <graphicData>
+      <texPath>Things/Headgear/Medieval/MGB_Froghelmet/Froghelmet</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>30</costStuffCount>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <WorkToMake>12600</WorkToMake>
+      <Mass>3.1</Mass>
+      <Insulation_Cold>1</Insulation_Cold>
+      <StuffEffectMultiplierArmor>0.50</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.15</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.00</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.04</MoveSpeed>
+      <ShootingAccuracyPawn>-0.015</ShootingAccuracyPawn>
+    </equippedStatOffsets>
+    <apparel>
+      <bodyPartGroups>
+        <li>FullHead</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Headgear/Medieval/MGB_Froghelmet/Froghelmet</wornGraphicPath>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinHelmet</li>
+        <li>MUGB_GoblinHelmetMedieval</li>
+      </tags>
+    </apparel>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinHelmetBase">
+    <defName>MUGB_Apparel_HammerHelmet</defName>
+    <label>goblin hammer helmet</label>
+    <description>A helmet with a heavy brow and blunt impact plates.</description>
+    <graphicData>
+      <texPath>Things/Headgear/Medieval/MGB_Hammer/Hammerhelmet</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>32</costStuffCount>
+    <statBases>
+      <MaxHitPoints>135</MaxHitPoints>
+      <WorkToMake>16200</WorkToMake>
+      <Mass>4.1</Mass>
+      <Insulation_Cold>1</Insulation_Cold>
+      <StuffEffectMultiplierArmor>0.62</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.18</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.00</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.09</MoveSpeed>
+    </equippedStatOffsets>
+    <apparel>
+      <bodyPartGroups>
+        <li>FullHead</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Headgear/Medieval/MGB_Hammer/Hammerhelmet</wornGraphicPath>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinHelmet</li>
+        <li>MUGB_GoblinHelmetElite</li>
+      </tags>
+    </apparel>
+      <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+  
+
+  <ThingDef ParentName="MUGB_GoblinHelmetBase">
+    <defName>MUGB_Apparel_KettleHelmetA</defName>
+    <label>goblin kettle helmet A</label>
+    <description>A simple kettle helmet shaped for goblin heads.</description>
+    <graphicData>
+      <texPath>Things/Headgear/Medieval/MGB_Kettle/A/MGB_KettlehelmetA</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>24</costStuffCount>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToMake>9000</WorkToMake>
+      <Mass>2.5</Mass>
+      <Insulation_Cold>1</Insulation_Cold>
+      <StuffEffectMultiplierArmor>0.40</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.15</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.00</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.04</MoveSpeed>
+    </equippedStatOffsets>
+    <apparel>
+      <wornGraphicPath>Things/Headgear/Medieval/MGB_Kettle/A/MGB_KettlehelmetA</wornGraphicPath>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinHelmet</li>
+        <li>MUGB_GoblinHelmetMedieval</li>
+      </tags>
+    </apparel>
+      <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinHelmetBase">
+    <defName>MUGB_Apparel_KettleHelmetB</defName>
+    <label>goblin kettle helmet B</label>
+    <description>A heavier kettle helmet with extra plates around the brow.</description>
+    <graphicData>
+      <texPath>Things/Headgear/Medieval/MGB_Kettle/B/MGB_KettlehelmetB</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>26</costStuffCount>
+    <statBases>
+      <MaxHitPoints>110</MaxHitPoints>
+      <WorkToMake>10800</WorkToMake>
+      <Mass>2.9</Mass>
+      <Insulation_Cold>1</Insulation_Cold>
+      <StuffEffectMultiplierArmor>0.44</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.15</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.00</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <apparel>
+      <bodyPartGroups>
+        <li>UpperHead</li>
+        <li>Eyes</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Headgear/Medieval/MGB_Kettle/B/MGB_KettlehelmetB</wornGraphicPath>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinHelmet</li>
+        <li>MUGB_GoblinHelmetMedieval</li>
+      </tags>
+    </apparel>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.04</MoveSpeed>
+    </equippedStatOffsets>
+      <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+  
+
+  <ThingDef ParentName="MUGB_GoblinHelmetBase">
+    <defName>MUGB_Apparel_KettleHelmetC</defName>
+    <label>reinforced goblin kettle helmet</label>
+    <description>A reinforced kettle helmet for goblin line fighters.</description>
+    <graphicData>
+      <texPath>Things/Headgear/Medieval/MGB_Kettle/C/MGB_KettlehelmetC</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>28</costStuffCount>
+    <statBases>
+      <MaxHitPoints>115</MaxHitPoints>
+      <WorkToMake>11700</WorkToMake>
+      <Mass>3.0</Mass>
+      <Insulation_Cold>1</Insulation_Cold>
+      <StuffEffectMultiplierArmor>0.47</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.15</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.00</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <apparel>
+      <bodyPartGroups>
+        <li>UpperHead</li>
+        <li>Eyes</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Headgear/Medieval/MGB_Kettle/C/MGB_KettlehelmetC</wornGraphicPath>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinHelmet</li>
+        <li>MUGB_GoblinHelmetMedieval</li>
+      </tags>
+    </apparel>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.04</MoveSpeed>
+    </equippedStatOffsets>
+      <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinHelmetBase">
+    <defName>MUGB_Apparel_SpikeHelmet</defName>
+    <label>goblin spike helmet</label>
+    <description>A spiked helmet meant to make charges look worse than they are.</description>
+    <graphicData>
+      <texPath>Things/Headgear/Medieval/MGB_spike/MGB_Spikehelmet</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>30</costStuffCount>
+    <costList>
+      <MUGB_Bone>8</MUGB_Bone>
+    </costList>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <WorkToMake>11700</WorkToMake>
+      <Mass>2.8</Mass>
+      <Insulation_Cold>1</Insulation_Cold>
+      <StuffEffectMultiplierArmor>0.49</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.15</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.00</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.04</MoveSpeed>
+    </equippedStatOffsets>
+    <apparel>
+      <bodyPartGroups>
+        <li>FullHead</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Headgear/Medieval/MGB_spike/MGB_Spikehelmet</wornGraphicPath>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinHelmet</li>
+        <li>MUGB_GoblinHelmetElite</li>
+      </tags>
+    </apparel>
+      <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinHelmetBase">
+    <defName>MUGB_Apparel_WarHelmetA</defName>
+    <label>goblin war helmet A</label>
+    <description>A close-assault helmet with aggressive face protection and poor sightlines.</description>
+    <graphicData>
+      <texPath>Things/Headgear/Medieval/MGB_War/WarA/MGB_WarA</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>34</costStuffCount>
+    <statBases>
+      <MaxHitPoints>130</MaxHitPoints>
+      <WorkToMake>15300</WorkToMake>
+      <Mass>3.6</Mass>
+      <Insulation_Cold>1</Insulation_Cold>
+      <StuffEffectMultiplierArmor>0.60</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.18</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.00</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.10</MoveSpeed>
+      <ShootingAccuracyPawn>-0.025</ShootingAccuracyPawn>
+      <AimingDelayFactor>0.08</AimingDelayFactor>
+    </equippedStatOffsets>
+    <apparel>
+      <bodyPartGroups>
+        <li>FullHead</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Headgear/Medieval/MGB_War/WarA/MGB_WarA</wornGraphicPath>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinHelmet</li>
+        <li>MUGB_GoblinHelmetElite</li>
+      </tags>
+    </apparel>
+      <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinHelmetBase">
+    <defName>MUGB_Apparel_WarHelmetB</defName>
+    <label>goblin war helmet B</label>
+    <description>A lighter war helmet that keeps more visibility for shooters.</description>
+    <graphicData>
+      <texPath>Things/Headgear/Medieval/MGB_War/WarB/MGB_WarB</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>30</costStuffCount>
+    <statBases>
+      <MaxHitPoints>125</MaxHitPoints>
+      <WorkToMake>13500</WorkToMake>
+      <Mass>3.2</Mass>
+      <Insulation_Cold>1</Insulation_Cold>
+      <StuffEffectMultiplierArmor>0.55</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.15</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.00</StuffEffectMultiplierInsulation_Heat>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.08</MoveSpeed>
+      <ShootingAccuracyPawn>-0.008</ShootingAccuracyPawn>
+      <AimingDelayFactor>0.02</AimingDelayFactor>
+    </equippedStatOffsets>
+    <apparel>
+      <bodyPartGroups>
+        <li>FullHead</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Headgear/Medieval/MGB_War/WarB/MGB_WarB</wornGraphicPath>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinHelmet</li>
+        <li>MUGB_GoblinHelmetElite</li>
+      </tags>
+    </apparel>
+      <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+</Defs>

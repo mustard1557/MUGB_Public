@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <JobDef>
+    <defName>MUGB_LoadStewpotIngredient</defName>
+    <driverClass>MUGB.JobDriver_LoadStewpotIngredient</driverClass>
+    <reportString>loading TargetA into TargetB.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+
+  <JobDef>
+    <defName>MUGB_DispenseStewpotMeal</defName>
+    <driverClass>MUGB.JobDriver_DispenseStewpotMeal</driverClass>
+    <reportString>ladling gut stew from TargetA.</reportString>
+    <casualInterruptible>true</casualInterruptible>
+  </JobDef>
+
+  <JobDef>
+    <defName>MUGB_ThrowSpear</defName>
+    <driverClass>MUGB.JobDriver_ThrowGoblinSpear</driverClass>
+    <reportString>throwing spear at TargetA.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+
+  <JobDef>
+    <defName>MUGB_SpearCharge</defName>
+    <driverClass>MUGB.JobDriver_GoblinSpearCharge</driverClass>
+    <reportString>charging at TargetA.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+
+  <JobDef>
+    <defName>MUGB_ReloadGoblinPheromonePack</defName>
+    <driverClass>MUGB.JobDriver_ReloadGoblinPheromonePack</driverClass>
+    <reportString>reloading pheromone pack.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+
+  <JobDef>
+    <defName>MUGB_ProclaimSlaveMarriage</defName>
+    <driverClass>MUGB.JobDriver_ProclaimSlaveMarriage</driverClass>
+    <!-- ko-KR 의도 메모: "{정착민}가 {노예}에게 자신의 첩이 될 것을 강요함." 계열 문구 -->
+    <reportString>claiming TargetA as a slave spouse.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+
+  <JobDef>
+    <defName>MUGB_NotifySlaveDivorce</defName>
+    <driverClass>MUGB.JobDriver_NotifySlaveDivorce</driverClass>
+    <reportString>informing TargetA of divorce.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+
+  <JobDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_StandAtSlaveMarriage</defName>
+    <driverClass>JobDriver_Wait</driverClass>
+    <reportString>standing in the slave-marriage formation.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+
+  <!-- 고블린 기지 포로에게 걸린 MUGB_Restrained(구속) 헤디프를 풀어주는 작업입니다.
+       포로에게 다가가 잠깐 작업한 뒤 헤디프를 제거합니다. -->
+  <JobDef>
+    <defName>MUGB_ReleaseRestraint</defName>
+    <driverClass>MUGB.Patches.JobDriver_ReleaseRestraint</driverClass>
+    <reportString>releasing TargetA from restraints.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+
+  <!-- 유물 지팡이 능력 시전: 사거리·시야가 확보되는 칸까지 이동 → 짧게 조준 → 발동. -->
+  <JobDef>
+    <defName>MUGB_UseStaffAbility</defName>
+    <driverClass>MUGB.JobDriver_UseStaffAbility</driverClass>
+    <reportString>using a staff ability.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+
+</Defs>

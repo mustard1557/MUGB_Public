@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    Korean source intent: 이데올로기 작업장(WorkSite)에 이 모드가 얹는 잡부들.
+    바닐라가 만드는 정규 인력·경비는 그대로 두고, 그 위에 4~5명을 더 붙인다.
+    전투를 어렵게 만들려는 게 아니라 초반 고블린의 인육 수급처를 넓히는 게 목적이므로
+    무장은 맨손 또는 나무 곤봉 수준까지만 주고, 전투 스킬은 GenStep에서 따로 0~2로 깎는다.
+  -->
+
+  <PawnKindDef Name="MUGB_WorkSiteStragglerBase" Abstract="True">
+    <race>Human</race>
+    <isFighter>false</isFighter>
+    <combatPower>15</combatPower>
+    <invNutrition>0.4</invNutrition>
+    <gearHealthRange>0.15~0.5</gearHealthRange>
+    <itemQuality>Awful</itemQuality>
+    <apparelMoney>30~110</apparelMoney>
+    <apparelAllowHeadgearChance>0.1</apparelAllowHeadgearChance>
+    <apparelTags>
+      <li>Neolithic</li>
+      <li>IndustrialBasic</li>
+    </apparelTags>
+    <weaponMoney>0</weaponMoney>
+    <techHediffsMoney>0~0</techHediffsMoney>
+    <techHediffsChance>0</techHediffsChance>
+    <backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
+    <initialWillRange>0~1</initialWillRange>
+    <initialResistanceRange>4~10</initialResistanceRange>
+    <backstoryFilters>
+      <li>
+        <categories>
+          <li>Outlander</li>
+          <li>Tribal</li>
+        </categories>
+      </li>
+    </backstoryFilters>
+  </PawnKindDef>
+
+  <!-- 맨손. 도구는 두고 왔거나 애초에 없었다. -->
+  <PawnKindDef ParentName="MUGB_WorkSiteStragglerBase">
+    <defName>MUGB_WorkSiteLaborer</defName>
+    <label>work site laborer</label>
+    <combatPower>14</combatPower>
+    <forcedTraits>
+      <li><def>Wimp</def></li>
+    </forcedTraits>
+  </PawnKindDef>
+
+  <!-- 나무 곤봉이나 식칼 정도. 무기라기보단 손에 잡힌 물건에 가깝다. -->
+  <PawnKindDef ParentName="MUGB_WorkSiteStragglerBase">
+    <defName>MUGB_WorkSiteHand</defName>
+    <label>work site hand</label>
+    <combatPower>20</combatPower>
+    <!--
+      최소값은 40 아래로 내리지 않습니다. NeolithicMeleeBasic에 걸리는 가장 싼 무기가
+      약 38.7이라, 그보다 낮게 잡으면 예산이 모자라 맨손으로 튀어나올 수 있습니다.
+      (게임이 시작 시 설정 오류로 잡아줍니다.)
+      같은 태그를 쓰는 MUGB_BeggarScavenger도 최소 40으로 맞춰져 있습니다.
+    -->
+    <weaponMoney>40~55</weaponMoney>
+    <weaponTags>
+      <li>NeolithicMeleeBasic</li>
+    </weaponTags>
+  </PawnKindDef>
+
+</Defs>

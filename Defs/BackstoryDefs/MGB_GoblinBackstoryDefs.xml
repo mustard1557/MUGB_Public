@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    PawnKind 병종 연결에 필요한 핵심 고블린 백스토리입니다.
+  -->
+
+  <BackStoryDef Abstract="True" Name="MUGB_GoblinBackstoryBase">
+    <shuffleable>false</shuffleable>
+    <spawnCategories>
+      <li>Tribal</li>
+    </spawnCategories>
+  </BackStoryDef>
+
+  <BackStoryDef Abstract="True" Name="MUGB_BeaconHunterBackstoryBase">
+    <shuffleable>false</shuffleable>
+    <spawnCategories>
+      <li>Tribal</li>
+      <li>Outlander</li>
+    </spawnCategories>
+  </BackStoryDef>
+
+  <!-- Childhood -->
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_GrowingGoblin</defName>
+    <slot>Childhood</slot>
+    <title>goblin child</title>
+    <titleShort>goblin child</titleShort>
+    <description>[PAWN_nameDef] is a newly born goblin already scrambling toward maturity. [PAWN_pronoun] has not lived long enough to earn a proper childhood story yet.</description>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_TribeBorn</defName>
+    <slot>Childhood</slot>
+    <title>tribe-born</title>
+    <titleShort>tribe-born</titleShort>
+    <description>[PAWN_nameDef] was born from a brood female owned by a goblin tribe. Like the father, not a trace of the mother can be found - just ugly goblin blood, all the way down.</description>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_PitBorn</defName>
+    <slot>Childhood</slot>
+    <title>pit-born</title>
+    <titleShort>pit-born</titleShort>
+    <description>[PAWN_nameDef] spent the first day crammed into a breeding pit, tangled up with other newborns in the corner of a raiding camp. Nobody bothered to figure out who was whose sibling.</description>
+    <skillGains>
+      <Mining>2</Mining>
+      <Social>-2</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_QuarryPup</defName>
+    <slot>Childhood</slot>
+    <title>quarry pup</title>
+    <titleShort>quarry pup</titleShort>
+    <description>[PAWN_nameDef] opened [PAWN_possessive] eyes in a pit beside a quarry. Before learning to walk, [PAWN_pronoun] had already learned to feel out cracks in stone with [PAWN_possessive] fingertips.</description>
+    <skillGains>
+      <Mining>3</Mining>
+    </skillGains>
+    <forcedTraits>
+      <Undergrounder>0</Undergrounder>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_CauldronSideRunt</defName>
+    <slot>Childhood</slot>
+    <title>cauldron-side runt</title>
+    <titleShort>cauldron runt</titleShort>
+    <description>[PAWN_nameDef] grew up helping out around the cauldron fire. The smell of hot steam and charred meat is the most familiar scent [PAWN_pronoun] has ever known.</description>
+    <skillGains>
+      <Cooking>2</Cooking>
+      <Construction>1</Construction>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_SlaughterhouseAssistant</defName>
+    <slot>Childhood</slot>
+    <title>slaughterhouse assistant</title>
+    <titleShort>slaughter aide</titleShort>
+    <description>[PAWN_nameDef] grew up playing with severed scraps from the slaughterhouse. Picked up some basic anatomy along the way. Hard to say whether the knife work came from cooking or something else.</description>
+    <skillGains>
+      <Medicine>2</Medicine>
+      <Cooking>1</Cooking>
+      <Melee>1</Melee>
+      <Shooting>-1</Shooting>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_ArrowBait</defName>
+    <slot>Childhood</slot>
+    <title>arrow bait</title>
+    <titleShort>arrow bait</titleShort>
+    <description>[PAWN_nameDef] was part of a group of young goblins used as arrow fodder to probe enemy defenses. Everyone else caught something - an arrow, a bolt, a spear. [PAWN_nameDef] was just fast enough.</description>
+    <skillGains>
+      <Shooting>-3</Shooting>
+      <Melee>-1</Melee>
+    </skillGains>
+    <workDisables>Caring, Cooking, Hauling</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_ShamansAide</defName>
+    <slot>Childhood</slot>
+    <title>shaman's aide</title>
+    <titleShort>shaman aide</titleShort>
+    <description>[PAWN_nameDef] assisted the priest of the flesh-consuming faith from an early age, learning the doctrine before most goblins had even heard of it. [PAWN_pronoun] was the first to believe - truly believe - that it was possible to become human.</description>
+    <skillGains>
+      <Intellectual>2</Intellectual>
+      <Social>1</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_ChildSlave</defName>
+    <slot>Childhood</slot>
+    <title>child slave</title>
+    <titleShort>child slave</titleShort>
+    <description>[PAWN_nameDef]'s tribe was raided by another goblin faction not long after birth. Young goblins usually get abandoned or eaten - but [PAWN_nameDef] was lucky enough to end up as a slave instead.</description>
+    <skillGains>
+      <Construction>1</Construction>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_YoungRaider</defName>
+    <slot>Childhood</slot>
+    <title>young raider</title>
+    <titleShort>young raider</titleShort>
+    <description>[PAWN_nameDef] is the survivor of a group of young goblins sent as arrow fodder to test enemy defenses. Most got caught between the enemy in front and their own kin behind. [PAWN_nameDef] was lucky.</description>
+    <skillGains>
+      <Melee>1</Melee>
+      <Shooting>1</Shooting>
+    </skillGains>
+    <workDisables>PlantWork, Intellectual</workDisables>
+  </BackstoryDef>
+
+  <!-- Adulthood -->
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinSpearman</defName>
+    <slot>Adulthood</slot>
+    <title>goblin spearman</title>
+    <titleShort>spearman</titleShort>
+    <description>[PAWN_nameDef] holds the front line, reach weapon forward. Specializes in stopping cavalry charges from Mousie knight orders.</description>
+    <skillGains>
+      <Melee>4</Melee>
+      <Construction>2</Construction>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinLightInfantry</defName>
+    <slot>Adulthood</slot>
+    <title>goblin light infantry</title>
+    <titleShort>light infantry</titleShort>
+    <description>[PAWN_nameDef] served in the raiding parties as light infantry - flanking runs, line bypasses, hit-and-loot. Travel light, hit fast.</description>
+    <skillGains>
+      <Melee>2</Melee>
+      <Shooting>-2</Shooting>
+      <Crafting>-3</Crafting>
+      <Plants>-3</Plants>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinMeatShield</defName>
+    <slot>Adulthood</slot>
+    <title>goblin meat shield</title>
+    <titleShort>meat shield</titleShort>
+    <description>[PAWN_nameDef] was trained to hold a line and absorb hits with a cheap blade and a shoddy shield. That's the whole job.</description>
+    <skillGains>
+      <Melee>1</Melee>
+      <Social>-1</Social>
+    </skillGains>
+    <workDisables>Crafting, PlantWork, Intellectual, Animals</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinSwordsman</defName>
+    <slot>Adulthood</slot>
+    <title>goblin swordsman</title>
+    <titleShort>swordsman</titleShort>
+    <description>[PAWN_nameDef] takes pride in the blade. Any fool who challenged [PAWN_pronoun] to a duel got a split skull. No card tricks. No ceremony.</description>
+    <skillGains>
+      <Melee>5</Melee>
+      <Social>1</Social>
+    </skillGains>
+    <workDisables>Crafting, PlantWork, Intellectual, Animals</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_CrossbowShooter</defName>
+    <slot>Adulthood</slot>
+    <title>crossbow shooter</title>
+    <titleShort>crossbowman</titleShort>
+    <description>[PAWN_nameDef] handles ranged duty. Happy to prove the point in person.</description>
+    <skillGains>
+      <Shooting>4</Shooting>
+      <Social>-3</Social>
+    </skillGains>
+    <workDisables>Crafting</workDisables>
+    <forcedTraits>
+      <ShootingAccuracy>-1</ShootingAccuracy>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinMusketeer</defName>
+    <slot>Adulthood</slot>
+    <title>goblin musketeer</title>
+    <titleShort>musketeer</titleShort>
+    <description>[PAWN_nameDef] served in the line infantry, firing in controlled volleys on the signal pheromone from the range coordinator.</description>
+    <skillGains>
+      <Shooting>5</Shooting>
+      <Melee>1</Melee>
+      <Construction>-2</Construction>
+      <Cooking>-4</Cooking>
+      <Plants>-3</Plants>
+    </skillGains>
+    <forcedTraits>
+      <ShootingAccuracy>1</ShootingAccuracy>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_FirearmTinkerer</defName>
+    <slot>Adulthood</slot>
+    <title>firearm tinkerer</title>
+    <titleShort>tinkerer</titleShort>
+    <description>[PAWN_nameDef] maintains and loads the early firearms. Small hands turn out to be useful for precision part work.</description>
+    <skillGains>
+      <Shooting>2</Shooting>
+      <Crafting>3</Crafting>
+    </skillGains>
+    <workDisables>PlantWork, Intellectual, Cooking</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinPowderMiner</defName>
+    <slot>Adulthood</slot>
+    <title>goblin powder miner</title>
+    <titleShort>powder miner</titleShort>
+    <description>[PAWN_nameDef] handles blast mining full-time.</description>
+    <skillGains>
+      <Mining>5</Mining>
+      <Construction>2</Construction>
+      <Crafting>1</Crafting>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinHeavyInfantry</defName>
+    <slot>Adulthood</slot>
+    <title>goblin heavy infantry</title>
+    <titleShort>heavy infantry</titleShort>
+    <description>[PAWN_nameDef] was part of the heavy infantry corps - well-equipped and drilled. Held position when the retreat pheromones sent everyone else scrambling.</description>
+    <skillGains>
+      <Melee>4</Melee>
+      <Shooting>-1</Shooting>
+      <Social>-1</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_RaidingVanguard</defName>
+    <slot>Adulthood</slot>
+    <title>raiding vanguard</title>
+    <titleShort>vanguard</titleShort>
+    <description>[PAWN_nameDef] hits the enemy formation first, before anyone else. Rotates out often. The record is the most decorated in the squad.</description>
+    <skillGains>
+      <Melee>3</Melee>
+      <Shooting>-1</Shooting>
+      <Social>-1</Social>
+    </skillGains>
+    <forcedTraits>
+      <Bloodlust>0</Bloodlust>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinKidnapper</defName>
+    <slot>Adulthood</slot>
+    <title>goblin kidnapper</title>
+    <titleShort>kidnapper</titleShort>
+    <description>[PAWN_nameDef] always half-participated in the raid and spent the real effort scouting kidnap targets. Always ran first. Still alive.</description>
+    <skillGains>
+      <Melee>-1</Melee>
+      <Shooting>-2</Shooting>
+      <Mining>1</Mining>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_HumanHunter</defName>
+    <slot>Adulthood</slot>
+    <title>human hunter</title>
+    <titleShort>human hunter</titleShort>
+    <description>[PAWN_nameDef] tracked escapees and hidden females through the forest on scent alone. Didn't miss often.</description>
+    <skillGains>
+      <Shooting>3</Shooting>
+      <Melee>-4</Melee>
+      <Construction>-3</Construction>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_TunnelConstructionSlave</defName>
+    <slot>Adulthood</slot>
+    <title>tunnel construction slave</title>
+    <titleShort>tunnel slave</titleShort>
+    <description>[PAWN_nameDef] was taken captive by a rival goblin mob and put to work as a tunnel slave - digging the shaft and being the first one shoved into it when it was ready.</description>
+    <skillGains>
+      <Construction>3</Construction>
+      <Mining>2</Mining>
+      <Crafting>-4</Crafting>
+      <Plants>-3</Plants>
+      <Melee>-1</Melee>
+      <Shooting>-4</Shooting>
+    </skillGains>
+    <workDisables>Social, Intellectual</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinSlaveSoldier</defName>
+    <slot>Adulthood</slot>
+    <title>goblin slave soldier</title>
+    <titleShort>slave soldier</titleShort>
+    <description>[PAWN_nameDef] was pressed into another mob's raids as a slave soldier. Sometimes offered freedom as the condition for a suicide run.</description>
+    <skillGains>
+      <Melee>1</Melee>
+      <Shooting>-3</Shooting>
+    </skillGains>
+    <workDisables>Cleaning, Crafting, PlantWork, Intellectual, Artistic</workDisables>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_RaidSquadLeader</defName>
+    <slot>Adulthood</slot>
+    <title>raid squad leader</title>
+    <titleShort>squad leader</titleShort>
+    <description>[PAWN_nameDef] commands a squad of five to seven. Every one of their lives depends on [PAWN_possessive] next call.</description>
+    <skillGains>
+      <Melee>5</Melee>
+      <Social>3</Social>
+      <Shooting>-1</Shooting>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_SkinMaskShaman</defName>
+    <slot>Adulthood</slot>
+    <title>skin mask shaman</title>
+    <titleShort>skin shaman</titleShort>
+    <description>[PAWN_nameDef] presides over the flesh-consuming rites wearing a mask made from human skin. Leads the ceremony.</description>
+    <skillGains>
+      <Intellectual>5</Intellectual>
+      <Social>4</Social>
+      <Melee>-2</Melee>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_HumanMimicker</defName>
+    <slot>Adulthood</slot>
+    <title>human mimicker</title>
+    <titleShort>mimicker</titleShort>
+    <description>[PAWN_nameDef] is completely consumed by the belief that becoming human is possible. Questions that belief at your own risk.</description>
+    <skillGains>
+      <Social>2</Social>
+      <Melee>2</Melee>
+      <Intellectual>-2</Intellectual>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_BeaconPilgrim</defName>
+    <slot>Adulthood</slot>
+    <title>beacon pilgrim</title>
+    <titleShort>pilgrim</titleShort>
+    <description>[PAWN_nameDef] travels from beacon ceremony to beacon ceremony and won't settle anywhere. Doesn't take instructions to stay.</description>
+    <skillGains>
+      <Social>1</Social>
+      <Intellectual>1</Intellectual>
+      <Melee>1</Melee>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_StabStabGoblin</defName>
+    <slot>Adulthood</slot>
+    <title>stab stab goblin</title>
+    <titleShort>stab-stab</titleShort>
+    <description>[PAWN_nameDef] stabs once. If the target doesn't go down, [PAWN_pronoun] stabs again. No other tactical knowledge. Doesn't need it.</description>
+    <skillGains>
+      <Melee>2</Melee>
+      <Intellectual>-2</Intellectual>
+    </skillGains>
+    <forcedTraits>
+      <Tough>0</Tough>
+    </forcedTraits>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_LaughsWhileRunning</defName>
+    <slot>Adulthood</slot>
+    <title>laughs while running</title>
+    <titleShort>laugh runner</titleShort>
+    <description>'WHY LAUGHING?? RUNNING IS FUN!! IF YOU GET CAUGHT YOU STOP LAUGHING SO I DON'T GET CAUGHT!! KISHI-SSIT!!'</description>
+    <skillGains>
+      <Melee>-1</Melee>
+      <Social>1</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_SmellsBloodFirst</defName>
+    <slot>Adulthood</slot>
+    <title>smells blood first</title>
+    <titleShort>blood nose</titleShort>
+    <description>[PAWN_nameDef] picks up the scent of the wounded and the dead before anyone else in the mob. Finds the dropped loot the same way.</description>
+    <skillGains>
+      <Animals>1</Animals>
+      <Medicine>1</Medicine>
+      <Social>-1</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <!-- Beacon human hunter adulthood backstories -->
+
+  <BackstoryDef ParentName="MUGB_BeaconHunterBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinHunter</defName>
+    <slot>Adulthood</slot>
+    <title>goblin hunter</title>
+    <titleShort>goblin hunter</titleShort>
+    <!-- 한국어 원문 의도: 봉화 냄새를 따라온 비고블린 토벌대용 백스토리. 고블린에게 가족이나 마을을 잃고 사냥꾼이 된 인물. -->
+    <description>[PAWN_nameDef] learned to recognize goblin spoor, greasy camp smoke, and the sour stench of their cookfires. When a beacon burns, [PAWN_pronoun] knows what it means.</description>
+    <skillGains>
+      <Shooting>2</Shooting>
+      <Melee>1</Melee>
+      <Animals>-2</Animals>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_BeaconHunterBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinRaidSurvivor</defName>
+    <slot>Adulthood</slot>
+    <title>goblin raid survivor</title>
+    <titleShort>raid survivor</titleShort>
+    <!-- 한국어 원문 의도: 고블린 습격 생존자. 봉화를 보면 공포보다 복수심이 먼저 올라오는 인물. -->
+    <description>[PAWN_nameDef] survived a goblin raid and remembered every scream, every filthy laugh, and every stolen body. The memory hardened into a habit of vengeance.</description>
+    <skillGains>
+      <Shooting>2</Shooting>
+      <Melee>2</Melee>
+      <Social>-2</Social>
+    </skillGains>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_BeaconHunterBackstoryBase">
+    <defName>MUGB_Backstory_Adult_GoblinExterminator</defName>
+    <slot>Adulthood</slot>
+    <title>goblin exterminator</title>
+    <titleShort>exterminator</titleShort>
+    <!-- 한국어 원문 의도: 직업적 고블린 토벌꾼. 기존 세력의 병사가 봉화 이벤트 때 토벌대처럼 보이도록 하는 분위기용 백스토리. -->
+    <description>[PAWN_nameDef] joined punitive expeditions against goblin warrens, learning how to burn burrows, break crude shields, and keep moving when the little things start swarming.</description>
+    <skillGains>
+      <Shooting>2</Shooting>
+      <Melee>2</Melee>
+      <Mining>1</Mining>
+    </skillGains>
+  </BackstoryDef>
+
+</Defs>

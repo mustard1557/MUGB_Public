@@ -1,0 +1,14 @@
+# Local build output
+Source/bin/
+Source/obj/
+Source/.vs/
+*.user
+*.suo
+
+# Local reports and temporary files
+*.log
+BuildTemp/
+TempAssembly/
+tools/
+오류/
+

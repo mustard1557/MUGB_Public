@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <MUGB_SettingsOpenVisualTuning>Open visual tuning</MUGB_SettingsOpenVisualTuning>
+  <MUGB_SettingsEnableDraftedWeaponPoseOffsetsLabel>Use drafted goblin weapon pose adjustments</MUGB_SettingsEnableDraftedWeaponPoseOffsetsLabel>
+  <MUGB_SettingsEnableDraftedWeaponPoseOffsetsDesc>When disabled, drafted pawns at rest use vanilla weapon positioning. Attack poses, spear thrusts, throws and charges are unchanged.</MUGB_SettingsEnableDraftedWeaponPoseOffsetsDesc>
+  <MUGB_SettingsStorytellerHeader>Storyteller</MUGB_SettingsStorytellerHeader>
+  <MUGB_SettingsPassingGroupFrequencyLabel>Passing group frequency: {0}%</MUGB_SettingsPassingGroupFrequencyLabel>
+  <MUGB_SettingsPassingGroupFrequencyDesc>Adjusts the frequency of traveler groups and MUGB wandering beggars. Kim Deok-pal produces them slightly more often.</MUGB_SettingsPassingGroupFrequencyDesc>
+  <MUGB_SettingsPawnLossAdaptationButton>Pawn-loss raid adaptation: {0}%</MUGB_SettingsPawnLossAdaptationButton>
+  <MUGB_SettingsPawnLossAdaptationDescription>0%: no colonist-loss raid relief. 50%: half vanilla relief. 100%: vanilla.</MUGB_SettingsPawnLossAdaptationDescription>
+  <MUGB_SettingsRaidsHeader>Raids</MUGB_SettingsRaidsHeader>
+  <MUGB_SettingsEnableGoblinSquadSystemLabel>Enable goblin squad raid composition</MUGB_SettingsEnableGoblinSquadSystemLabel>
+  <MUGB_SettingsEnableGoblinSquadSystemDesc>Uses squad templates to compose regular goblin raids while preserving their selected raid strategy and arrival mode.</MUGB_SettingsEnableGoblinSquadSystemDesc>
+  <MUGB_SettingsEnableGoblinCompositeRaidsLabel>Enable goblin combined-tactics raids</MUGB_SettingsEnableGoblinCompositeRaidsLabel>
+  <MUGB_SettingsEnableGoblinCompositeRaidsDesc>Allows large goblin raids to split into a sapper force and a conventional assault force approaching from two directions.</MUGB_SettingsEnableGoblinCompositeRaidsDesc>
+  <MUGB_SettingsCompatHeader>Mod compatibility</MUGB_SettingsCompatHeader>
+  <MUGB_AllowFacialAnimationForGoblinsLabel>Allow Facial Animation on goblins</MUGB_AllowFacialAnimationForGoblinsLabel>
+  <MUGB_AllowFacialAnimationForGoblinsDesc>Off by default. When off, goblins are excluded from [NL] Facial Animation's face replacement and keep their goblin faces. When on, Facial Animation replaces goblin faces with its humanlike animated faces, which may look broken.</MUGB_AllowFacialAnimationForGoblinsDesc>
+  <MUGB_TuningOpenApparel>Open apparel tuning</MUGB_TuningOpenApparel>
+  <MUGB_TuningUseTextureColors>Use texture colors without skin tint</MUGB_TuningUseTextureColors>
+  <MUGB_TuningUseTextureColorsDesc>Enable this when the body, head, and ear textures already contain their intended colors. Disabling it reapplies the vanilla skin tint.</MUGB_TuningUseTextureColorsDesc>
+  <MUGB_TuningMoveHeadgear>Move headgear with tuned head position</MUGB_TuningMoveHeadgear>
+  <MUGB_TuningMoveHeadgearDesc>Applies the tuned head position to vanilla and modded headgear as well.</MUGB_TuningMoveHeadgearDesc>
+  <MUGB_TuningForceBald>Force goblins bald and beardless</MUGB_TuningForceBald>
+  <MUGB_TuningForceBaldDesc>Hides goblin hair and beards. Disable this to allow players to assign hair or beards to goblins.</MUGB_TuningForceBaldDesc>
+  <MUGB_TuningHarHeadExemption>Keep goblin head size fixed</MUGB_TuningHarHeadExemption>
+  <MUGB_TuningHarHeadExemptionDesc>Goblins keep their intended head size even when a mod that resizes human heads (such as Hooman cute) is active. Goblin face parts are positioned for the original head size, so leaving this on is recommended.</MUGB_TuningHarHeadExemptionDesc>
+  <MUGB_TuningAddonFollowHead>Move face parts with head size</MUGB_TuningAddonFollowHead>
+  <MUGB_TuningAddonFollowHeadDesc>Used when the head size lock above is off. Ears, eyes, nose and mouth move by the same amount the head was resized, preserving their proportions. Has no effect while the head size lock is on.</MUGB_TuningAddonFollowHeadDesc>
+  <MUGB_TuningRenderScale>Render scale</MUGB_TuningRenderScale>
+  <MUGB_TuningRenderScaleDesc>VEF render scale. This changes the pawn render scale path, not the raw texture graphic size.</MUGB_TuningRenderScaleDesc>
+  <MUGB_TuningHeadBodyGlobal>Head / body global</MUGB_TuningHeadBodyGlobal>
+  <MUGB_TuningHeadBodyGlobalDesc>Adjust these first, then use small directional corrections only when needed.</MUGB_TuningHeadBodyGlobalDesc>
+  <MUGB_TuningHeadGlobal>Head global</MUGB_TuningHeadGlobal>
+  <MUGB_TuningBodyGlobal>Body global</MUGB_TuningBodyGlobal>
+  <MUGB_TuningPawnAltitude>Pawn draw altitude</MUGB_TuningPawnAltitude>
+  <MUGB_TuningPawnAltitudeDesc>Advanced: adjusts the entire goblin render root relative to other pawns.</MUGB_TuningPawnAltitudeDesc>
+  <MUGB_TuningAddonGlobal>Add-on global</MUGB_TuningAddonGlobal>
+  <MUGB_TuningAddonGlobalDesc>Adjust these before per-part or per-form tuning.</MUGB_TuningAddonGlobalDesc>
+  <MUGB_TuningDirectionalFine>Directional fine tuning</MUGB_TuningDirectionalFine>
+  <MUGB_TuningDirectionalFineDesc>Select a form, part, and direction below. West is separate when west-facing textures exist.</MUGB_TuningDirectionalFineDesc>
+  <MUGB_TuningOverview>Overview</MUGB_TuningOverview>
+  <MUGB_TuningSelectRacePawn>Selected-race tuning: select an adult non-HAR humanlike pawn.</MUGB_TuningSelectRacePawn>
+  <MUGB_TuningSelectedRace>Selected race: {0} ({1})</MUGB_TuningSelectedRace>
+  <MUGB_TuningCopyVisual>Copy visual tuning to clipboard</MUGB_TuningCopyVisual>
+  <MUGB_TuningVisualCopied>MUGB visual tuning copied to clipboard.</MUGB_TuningVisualCopied>
+  <MUGB_TuningExportVisual>Export visual tuning to TXT</MUGB_TuningExportVisual>
+  <MUGB_TuningResetAllVisual>Reset all visual tuning</MUGB_TuningResetAllVisual>
+  <MUGB_TuningVisualExported>MUGB visual tuning exported: {0}</MUGB_TuningVisualExported>
+  <MUGB_TuningApparelExported>MUGB apparel tuning exported: {0}</MUGB_TuningApparelExported>
+  <MUGB_TuningApparelIntro>Tune wearable headgear or apparel by ThingDef. Values are saved in mod settings.</MUGB_TuningApparelIntro>
+  <MUGB_TuningApparelPreviewDesc>The preview can temporarily display equipment the selected pawn does not own or wear.</MUGB_TuningApparelPreviewDesc>
+  <MUGB_TuningRaceProfile>Race profile: {0} ({1})</MUGB_TuningRaceProfile>
+  <MUGB_TuningNoDefinitions>No {0} definitions were found.</MUGB_TuningNoDefinitions>
+  <MUGB_TuningApplyScaleAll>Apply scale to all directions</MUGB_TuningApplyScaleAll>
+  <MUGB_TuningApplyScaleAllDesc>Applies only equipment scale to south, north, east, and west at once. Position and layer remain direction-specific.</MUGB_TuningApplyScaleAllDesc>
+  <MUGB_TuningMirrorEastWest>Mirror east and west</MUGB_TuningMirrorEastWest>
+  <MUGB_TuningMirrorEastWestDesc>When tuning east or west, saves the opposite direction with mirrored X and matching Y, scale, and layer values.</MUGB_TuningMirrorEastWestDesc>
+  <MUGB_TuningPawn>Pawn: {0}</MUGB_TuningPawn>
+  <MUGB_TuningTarget>Target: {0} ({1})</MUGB_TuningTarget>
+  <MUGB_TuningSourceMod>Source mod: {0}</MUGB_TuningSourceMod>
+  <MUGB_TuningResetSelected>Reset selected: {0}</MUGB_TuningResetSelected>
+  <MUGB_TuningCopySelectedApparel>Copy selected item tuning to clipboard</MUGB_TuningCopySelectedApparel>
+  <MUGB_TuningSelectedApparelCopied>MUGB selected apparel tuning copied to clipboard.</MUGB_TuningSelectedApparelCopied>
+  <MUGB_TuningCopyAllApparel>Copy all apparel tuning to clipboard</MUGB_TuningCopyAllApparel>
+  <MUGB_TuningAllApparelCopied>MUGB apparel tuning copied to clipboard.</MUGB_TuningAllApparelCopied>
+  <MUGB_TuningExportAllApparel>Export all apparel tuning to TXT</MUGB_TuningExportAllApparel>
+  <MUGB_TuningTargetPawn>Target pawn: {0} · {1}</MUGB_TuningTargetPawn>
+  <MUGB_TuningDirectionValue>Direction: {0}</MUGB_TuningDirectionValue>
+  <MUGB_TuningPreviousDirection>Previous direction</MUGB_TuningPreviousDirection>
+  <MUGB_TuningNextDirection>Next direction</MUGB_TuningNextDirection>
+  <MUGB_TuningZoomOut>Zoom out</MUGB_TuningZoomOut>
+  <MUGB_TuningZoomReset>Reset preview zoom</MUGB_TuningZoomReset>
+  <MUGB_TuningZoomIn>Zoom in</MUGB_TuningZoomIn>
+  <MUGB_TuningCore>Core</MUGB_TuningCore>
+  <MUGB_TuningStandard>Standard</MUGB_TuningStandard>
+  <MUGB_TuningStyle>Style: {0}</MUGB_TuningStyle>
+  <MUGB_TuningGroupedOverview>Grouped overview for {0}</MUGB_TuningGroupedOverview>
+  <MUGB_TuningAllAddons>All add-ons</MUGB_TuningAllAddons>
+  <MUGB_TuningEditing>Editing: {0} / {1}</MUGB_TuningEditing>
+  <MUGB_TuningDirectionalPart>{0} directional tuning</MUGB_TuningDirectionalPart>
+  <MUGB_TuningDirectionalPosition>{0} directional position</MUGB_TuningDirectionalPosition>
+  <MUGB_TuningEarLayerOffset>Ear layer offset</MUGB_TuningEarLayerOffset>
+  <MUGB_TuningEyeLayerOffset>Eye layer offset</MUGB_TuningEyeLayerOffset>
+  <MUGB_TuningMouthLayerOffset>Mouth layer offset</MUGB_TuningMouthLayerOffset>
+  <MUGB_TuningNoseLayerOffset>Nose layer offset</MUGB_TuningNoseLayerOffset>
+  <MUGB_TuningBodyVisualScale>Body VEF visual scale</MUGB_TuningBodyVisualScale>
+  <MUGB_TuningHeadVisualScale>Head VEF visual scale</MUGB_TuningHeadVisualScale>
+  <MUGB_TuningGoblinGlobalScale>Goblin global render scale</MUGB_TuningGoblinGlobalScale>
+  <MUGB_TuningJuvenileEarlyScale>Juvenile scale (age 13-16)</MUGB_TuningJuvenileEarlyScale>
+  <MUGB_TuningJuvenileLateScale>Juvenile scale (age 16-18)</MUGB_TuningJuvenileLateScale>
+  <MUGB_TuningVisualWindowTitle>MUGB goblin visual tuning</MUGB_TuningVisualWindowTitle>
+  <MUGB_TuningApparelWindowTitle>MUGB apparel tuning</MUGB_TuningApparelWindowTitle>
+  <MUGB_TuningTokenGoblin>Goblin</MUGB_TuningTokenGoblin>
+  <MUGB_TuningTokenHobgoblin>Hobgoblin</MUGB_TuningTokenHobgoblin>
+  <MUGB_TuningTokenGoblinCrossEyed>Goblin (cross-eyed)</MUGB_TuningTokenGoblinCrossEyed>
+  <MUGB_TuningTokenHobgoblinCrossEyed>Hobgoblin (cross-eyed)</MUGB_TuningTokenHobgoblinCrossEyed>
+  <MUGB_TuningTokenGoblinChild>Goblin child</MUGB_TuningTokenGoblinChild>
+  <MUGB_TuningTokenGoblinChildCrossEyed>Goblin child (cross-eyed)</MUGB_TuningTokenGoblinChildCrossEyed>
+  <MUGB_TuningTokenHobgoblinChild>Hobgoblin child</MUGB_TuningTokenHobgoblinChild>
+  <MUGB_TuningTokenHobgoblinChildCrossEyed>Hobgoblin child (cross-eyed)</MUGB_TuningTokenHobgoblinChildCrossEyed>
+  <MUGB_TuningTokenGoblinDessicated>Goblin (dessicated)</MUGB_TuningTokenGoblinDessicated>
+  <MUGB_TuningTokenHobgoblinDessicated>Hobgoblin (dessicated)</MUGB_TuningTokenHobgoblinDessicated>
+  <MUGB_TuningTokenForm>Form</MUGB_TuningTokenForm>
+  <MUGB_TuningTokenPart>Part</MUGB_TuningTokenPart>
+  <MUGB_TuningTokenDirection>Direction</MUGB_TuningTokenDirection>
+  <MUGB_TuningTokenCategory>Category</MUGB_TuningTokenCategory>
+  <MUGB_TuningTokenHead>Head</MUGB_TuningTokenHead>
+  <MUGB_TuningTokenBody>Body</MUGB_TuningTokenBody>
+  <MUGB_TuningTokenEarLeft>Left ear</MUGB_TuningTokenEarLeft>
+  <MUGB_TuningTokenEarRight>Right ear</MUGB_TuningTokenEarRight>
+  <MUGB_TuningTokenEyeLeft>Left eye</MUGB_TuningTokenEyeLeft>
+  <MUGB_TuningTokenEyeRight>Right eye</MUGB_TuningTokenEyeRight>
+  <MUGB_TuningTokenEars>Ears</MUGB_TuningTokenEars>
+  <MUGB_TuningTokenEyes>Eyes</MUGB_TuningTokenEyes>
+  <MUGB_TuningTokenNose>Nose</MUGB_TuningTokenNose>
+  <MUGB_TuningTokenMouth>Mouth</MUGB_TuningTokenMouth>
+  <MUGB_TuningTokenAll>All</MUGB_TuningTokenAll>
+  <MUGB_TuningTokenHeadgear>Headgear</MUGB_TuningTokenHeadgear>
+  <MUGB_TuningTokenClothing>Clothing</MUGB_TuningTokenClothing>
+  <MUGB_TuningTokenArmor>Armor</MUGB_TuningTokenArmor>
+  <MUGB_TuningTokenOuterwear>Outerwear</MUGB_TuningTokenOuterwear>
+  <MUGB_TuningTokenUtility>Utility</MUGB_TuningTokenUtility>
+  <MUGB_TuningTokenShield>Shield</MUGB_TuningTokenShield>
+  <MUGB_TuningTokenNorth>North</MUGB_TuningTokenNorth>
+  <MUGB_TuningTokenSouth>South</MUGB_TuningTokenSouth>
+  <MUGB_TuningTokenEast>East</MUGB_TuningTokenEast>
+  <MUGB_TuningTokenWest>West</MUGB_TuningTokenWest>
+  <MUGB_SettingsCheatHeader>CHEAT MOD</MUGB_SettingsCheatHeader>
+  <MUGB_DisableToxicPheromonesCheatLabel>Disable goblin toxic pheromones</MUGB_DisableToxicPheromonesCheatLabel>
+  <MUGB_DisableToxicPheromonesCheatDesc>Disables goblin toxic pheromones. Non-goblins are unaffected and performance improves very slightly. Relic staves are the intended solution.</MUGB_DisableToxicPheromonesCheatDesc>
+  <MUGB_SettingsReproductionHeader>Reproduction</MUGB_SettingsReproductionHeader>
+  <MUGB_SettingsGoblinLitterSizeLabel>Goblin litter size: {0}%</MUGB_SettingsGoblinLitterSizeLabel>
+  <MUGB_SettingsGoblinLitterSizeExpected>Expected litter - Thin father: {0}, Hob father: {1}</MUGB_SettingsGoblinLitterSizeExpected>
+  <MUGB_SettingsGoblinLitterSizeRange>{0}-{1}</MUGB_SettingsGoblinLitterSizeRange>
+  <MUGB_SettingsGoblinLitterSizeDesc>Applies when a new pregnancy begins. Existing pregnancies keep their current litter.</MUGB_SettingsGoblinLitterSizeDesc>
+  <MUGB_SettingsGoblinChildStageDaysButton>Goblin child stage: {0}</MUGB_SettingsGoblinChildStageDaysButton>
+  <MUGB_SettingsGoblinChildStageDaysValue>{0} days</MUGB_SettingsGoblinChildStageDaysValue>
+  <MUGB_SettingsGoblinChildStageDaysDesc>Time for a pure goblin child to reach age 13. Zero skips the child stage.</MUGB_SettingsGoblinChildStageDaysDesc>
+  <MUGB_SettingsGoblinBirthStrainButton>Goblin birth strain limit: {0}</MUGB_SettingsGoblinBirthStrainButton>
+  <MUGB_SettingsGoblinBirthStrainCount>{0} births</MUGB_SettingsGoblinBirthStrainCount>
+  <MUGB_SettingsGoblinBirthStrainDisabled>Disabled</MUGB_SettingsGoblinBirthStrainDisabled>
+  <MUGB_SettingsGoblinBirthStrainDesc>Number of goblin litters a non-goblin mother can deliver before the strain kills her. Lowering the limit never kills a pawn immediately.</MUGB_SettingsGoblinBirthStrainDesc>
+</LanguageData>

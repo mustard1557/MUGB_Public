@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <!--
+    [파일 개요]
+    미디블 오버홀이 켜져 있을 때만 읽히는 폴더입니다(LoadFolders.xml 참고).
+
+    미디블을 필수에서 권장으로 바꾸면서, 기본 Defs 쪽은 미디블 없이도 돌도록
+    바닐라 재료/연구로 적어 두었습니다. 문제는 그 상태 그대로면 미디블을 켠 사람도
+    바닐라판을 보게 된다는 것입니다. 그래서 여기서 원래 미디블 내용으로 되돌립니다.
+
+    즉 미디블 활성 환경에서는 기존 동작을 그대로 유지하고,
+    달라지는 건 미디블이 없을 때뿐입니다.
+
+    Def를 통째로 복사하지 않고 패치로 필요한 부분만 되돌립니다.
+    이 폴더 자체가 미디블이 있을 때만 로드되므로 별도 모드 검사는 필요 없습니다.
+  -->
+
+  <!-- ===== 연구 선행: DrugProduction -> DankPyon_Alchemy =====
+       원래 설계(연구트리 설계지침 v1.4)가 의도적으로 고른 값입니다.
+       산업 탭으로 점프하지 않고, 중세 세력 비용 1.5배 할증도 피하며, 연금술 테마가 맞습니다. -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="MUGB_Research_Blackpowder"]/prerequisites/li[text()="DrugProduction"]</xpath>
+    <value>
+      <li>DankPyon_Alchemy</li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="MUGB_Research_WarBrews"]/prerequisites/li[text()="DrugProduction"]</xpath>
+    <value>
+      <li>DankPyon_Alchemy</li>
+    </value>
+  </Operation>
+
+  <!-- ===== 공성 레시피 재료: 바닐라 부품 -> 미디블 기본 부품 =====
+       미디블이 없으면 바닐라 부품(ComponentIndustrial)을 씁니다. -->
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MUGB_MakeGoblinHighExplosiveShell"]/ingredients/li/filter/thingDefs/li[text()="ComponentIndustrial"]</xpath>
+    <value>
+      <li>DankPyon_ComponentBasic</li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MUGB_MakeGoblinHighExplosiveShell"]/fixedIngredientFilter/thingDefs/li[text()="ComponentIndustrial"]</xpath>
+    <value>
+      <li>DankPyon_ComponentBasic</li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MUGB_MakeGoblinStinkMortarShell"]/ingredients/li/filter/thingDefs/li[text()="ComponentIndustrial"]</xpath>
+    <value>
+      <li>DankPyon_ComponentBasic</li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MUGB_MakeGoblinStinkMortarShell"]/fixedIngredientFilter/thingDefs/li[text()="ComponentIndustrial"]</xpath>
+    <value>
+      <li>DankPyon_ComponentBasic</li>
+    </value>
+  </Operation>
+
+  <!-- ===== 시작 물자: 미디블 부품과 원목으로 되돌리기 =====
+       조난 분대 시나리오만 해당합니다. -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ScenarioDef[defName="MUGB_StrandedGoblinSquadStart"]/scenario/parts/li/thingDef[text()="ComponentIndustrial"]</xpath>
+    <value>
+      <thingDef>DankPyon_ComponentBasic</thingDef>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ScenarioDef[defName="MUGB_StrandedGoblinSquadStart"]/scenario/parts/li[thingDef="WoodLog" and count="200"]/thingDef</xpath>
+    <value>
+      <thingDef>DankPyon_RawWood</thingDef>
+    </value>
+  </Operation>
+
+  <!-- ===== 재료를 못 받는 대체품을 쓰는 심볼: 미디블이 있을 때만 재료 복원 =====
+       ChunkSlagSteel과 WoodLog는 재료로 만드는 물건이 아닙니다. 그래서 기본 Defs에서는
+       재료를 비워 두었습니다. 안 그러면 미디블이 없을 때
+       "MakeThing error: ChunkSlagSteel is not madeFromStuff but stuff=..." 오류가 납니다.
+       미디블이 있으면 thing이 원래 물건으로 해석되므로 재료가 다시 필요합니다. -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/KCSG.SymbolDef[defName="DankPyon_Grinder_BlocksGranite_East"]</xpath>
+    <value><stuff>BlocksGranite</stuff></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/KCSG.SymbolDef[defName="DankPyon_MiningTools_Steel"]</xpath>
+    <value><stuff>Steel</stuff></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/KCSG.SymbolDef[defName="DankPyon_RuinedAnvil_DankPyon_IronIngot_North"]</xpath>
+    <value><stuff>DankPyon_IronIngot</stuff></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/KCSG.SymbolDef[defName="DankPyon_RuinedGate_Plasteel_North"]</xpath>
+    <value><stuff>Plasteel</stuff></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/KCSG.SymbolDef[defName="DankPyon_Well_BlocksGranite_East"]</xpath>
+    <value><stuff>BlocksGranite</stuff></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/KCSG.SymbolDef[defName="DankPyon_QuenchingBucket_WoodLog"]</xpath>
+    <value><stuff>WoodLog</stuff></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/KCSG.SymbolDef[defName="DankPyon_Bricks1x1c_BlocksGranite"]</xpath>
+    <value><stuff>BlocksGranite</stuff></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/KCSG.SymbolDef[defName="DankPyon_WoodLogs1x2c_DankPyon_RawWood"]</xpath>
+    <value><stuff>DankPyon_RawWood</stuff></value>
+  </Operation>
+
+  <!-- ===== 시작 마을 심볼 재료: 미디블 목재/철괴로 되돌리기 =====
+       미디블이 있으면 마을이 예전처럼 미디블 재질로 지어져야 합니다. -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/KCSG.SymbolDef[@Name="MUGB_StartSymbol_DankPyon_RawWood"]/stuff</xpath>
+    <value>
+      <stuff>DankPyon_RawWood</stuff>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/KCSG.SymbolDef[@Name="MUGB_StartSymbol_DankPyon_RawDarkWood"]/stuff</xpath>
+    <value>
+      <stuff>DankPyon_RawDarkWood</stuff>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/KCSG.SymbolDef[@Name="MUGB_StartSymbol_DankPyon_IronIngot"]/stuff</xpath>
+    <value>
+      <stuff>DankPyon_IronIngot</stuff>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/KCSG.SymbolDef[defName="Fence_DankPyon_RawWood"]/stuff</xpath>
+    <value>
+      <stuff>DankPyon_RawWood</stuff>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/KCSG.SymbolDef[defName="DankPyon_LogColumn_DankPyon_RawDarkWood"]/stuff</xpath>
+    <value>
+      <stuff>DankPyon_RawDarkWood</stuff>
+    </value>
+  </Operation>
+
+  <!-- ===== 시작 마을 주민: 미디블 장비로 복원 =====
+       주의: 같은 모드 안에서는 폴더가 달라도 같은 defName을 두 번 정의할 수 없습니다.
+       림월드가 "has multiple PawnKindDefs named ... Skipping." 오류를 내고 한쪽을 버립니다.
+       그래서 Def를 복사하지 않고 패치로 필요한 부분만 되돌립니다. -->
+
+  <!-- 아낙네: 몸싸개 + 전쟁 베일 -> 미디블 자루천 옷 -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/PawnKindDef[defName="MUGB_StartVillageWoman"]/apparelRequired</xpath>
+    <value>
+      <apparelRequired Inherit="False">
+        <li>DankPyon_Apparel_Sackcloth</li>
+      </apparelRequired>
+    </value>
+  </Operation>
+
+  <!-- 자루천 옷은 머리 장비가 아니므로 원래대로 머리 장비를 막습니다. -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/PawnKindDef[defName="MUGB_StartVillageWoman"]/apparelAllowHeadgearChance</xpath>
+    <value>
+      <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
+    </value>
+  </Operation>
+
+  <!-- 마을장정: 부모를 미디블 정착지 경비병으로 되돌립니다.
+       패치는 Def가 만들어지기 전 XML 단계에서 적용되므로 상속도 이 값으로 풀립니다. -->
+  <Operation Class="PatchOperationAttributeSet">
+    <xpath>Defs/PawnKindDef[defName="MUGB_StartVillageReturner"]</xpath>
+    <attribute>ParentName</attribute>
+    <value>DankPyon_SettlementGuard</value>
+  </Operation>
+
+  <!-- 마을장정 무기: 바닐라 활 -> 미디블 석궁 -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/PawnKindDef[defName="MUGB_StartVillageReturner"]/weaponTags/li[text()="NeolithicRangedHeavy"]</xpath>
+    <value>
+      <li>DankPyon_Crossbow</li>
+    </value>
+  </Operation>
+
+</Patch>

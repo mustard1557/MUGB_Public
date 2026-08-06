@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    [파일 개요]
+    시작 시나리오의 마을 주민입니다. 여기 있는 건 "미디블 오버홀이 없을 때" 쓰는 바닐라판입니다.
+
+    미디블이 켜져 있으면 Compatibility/MedievalOverhaul 폴더의 같은 defName 정의가
+    이 내용을 덮어써서 원래 미디블 장비(자루천 옷, 정착지 경비병, 석궁)로 돌아갑니다.
+    로드 순서는 LoadFolders.xml에서 지정합니다.
+
+    주의: ParentName에 미디블 PawnKind를 쓰면 그 모드가 없을 때 def 자체가 로드에 실패합니다.
+    그래서 바닐라판은 반드시 바닐라 부모(VillagerBase)를 써야 합니다.
+  -->
+
+  <PawnKindDef ParentName="VillagerBase">
+    <defName>MUGB_StartVillageWoman</defName>
+    <label>village woman</label>
+    <race>Human</race>
+    <combatPower>18</combatPower>
+    <fixedGender>Female</fixedGender>
+    <isFighter>false</isFighter>
+    <canBeSapper>false</canBeSapper>
+    <minGenerationAge>16</minGenerationAge>
+    <maxGenerationAge>35</maxGenerationAge>
+    <itemQuality>Poor</itemQuality>
+    <gearHealthRange>0.6~1</gearHealthRange>
+    <weaponMoney>0</weaponMoney>
+    <weaponTags Inherit="False" />
+    <apparelMoney>0</apparelMoney>
+    <apparelTags Inherit="False" />
+    <!-- 미디블의 자루천 옷 대신 바닐라 몸싸개 + 전쟁 베일로 맞춥니다. 둘 다 코어입니다.
+         몸싸개는 몸통과 다리를, 전쟁 베일은 머리를 덮어서 부위가 겹치지 않습니다.
+         바지는 쓰지 않습니다. -->
+    <apparelRequired Inherit="False">
+      <li>Apparel_TribalA</li>
+      <li>Apparel_WarVeil</li>
+    </apparelRequired>
+    <!-- 전쟁 베일이 머리 장비라, 머리 장비 허용치를 0으로 두면 헷갈립니다.
+         apparelTags가 비어 있어 무작위 머리 장비가 붙을 일은 없습니다. -->
+    <apparelAllowHeadgearChance>1</apparelAllowHeadgearChance>
+    <overrideDeathOnDownedChance>0.15</overrideDeathOnDownedChance>
+    <initialWillRange>0~1</initialWillRange>
+    <initialResistanceRange>7~14</initialResistanceRange>
+  </PawnKindDef>
+
+  <!-- 한국어 의도: 부모가 미디블 오버홀 PawnKind면 그 모드가 없을 때 def 자체가 로드에 실패합니다.
+       마을 주민은 바닐라 VillagerBase를 상속하고, 장비는 바닐라 중세 무기로 맞춥니다. -->
+  <PawnKindDef ParentName="VillagerBase">
+    <defName>MUGB_StartVillageReturner</defName>
+    <label>returning village fighter</label>
+    <race>Human</race>
+    <combatPower>65</combatPower>
+    <fixedGender>Male</fixedGender>
+    <minGenerationAge>20</minGenerationAge>
+    <maxGenerationAge>48</maxGenerationAge>
+    <itemQuality>Good</itemQuality>
+    <gearHealthRange>0.75~1</gearHealthRange>
+    <weaponMoney>350~700</weaponMoney>
+    <weaponTags Inherit="False">
+      <li>MedievalMeleeBasic</li>
+      <li>NeolithicRangedHeavy</li>
+    </weaponTags>
+  </PawnKindDef>
+
+</Defs>

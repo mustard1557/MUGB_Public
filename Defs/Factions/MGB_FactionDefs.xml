@@ -1,0 +1,800 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    [파일 개요]
+    고블린 전용 세력 정의입니다.
+
+    원칙:
+    - 내부 DefName은 MUGB_ 접두사를 유지합니다.
+    - 기존 MUGB_GoblinTribe / MUGB_GoblinCivilTribe defName은 참조와 세이브 호환을 위해 유지합니다.
+    - 일반 부족/야만 부족은 기존 두 Def를 정리해서 사용하고, 중세/광신도/사냥꾼단은 새 Def로 분리합니다.
+    - 1차 구현에서는 정밀한 "플레이어에게만 중립" 관계 패치를 하지 않고 바닐라 세력 관계 흐름을 따릅니다.
+      한국어 의도: 고블린 시작 시 일반 고블린은 낮은 중립, 비고블린 시작 시 일반 고블린도 적대.
+  -->
+
+  <FactionDef ParentName="TribeRoughBase">
+    <defName>MUGB_GoblinTribe</defName>
+    <raidLootMaker>MUGB_GoblinRaidLootMaker</raidLootMaker>
+    <label>savage goblin tribe</label>
+    <!-- 한국어 표시명: 야만 부족고블린 -->
+    <description>A savage tribe of compact green-skinned goblins. They lack advanced technology and raw physical reach, but they survive through numbers, stubborn toxic resilience, and a willingness to swarm threats before those threats can settle in.</description>
+    <pawnSingular>goblin</pawnSingular>
+    <pawnsPlural>goblins</pawnsPlural>
+    <leaderTitle>boss</leaderTitle>
+    <factionNameMaker>NamerFactionMUGB_SavageTribe</factionNameMaker>
+    <basicMemberKind>MUGB_GoblinKind_PrimitiveMelee</basicMemberKind>
+    <fixedLeaderKinds>
+      <li>MUGB_GoblinKind_PrimitiveChiefMelee</li>
+      <li>MUGB_GoblinKind_SquadLeaderEarlyMelee</li>
+    </fixedLeaderKinds>
+    <factionIconPath>World/WorldObjects/MUGB/FactionIcons/MGB_HTribeA</factionIconPath>
+    <settlementTexturePath>World/WorldObjects/TribalSettlement</settlementTexturePath>
+    <settlementGenerationWeight>1</settlementGenerationWeight>
+    <requiredCountAtGameStart>1</requiredCountAtGameStart>
+    <maxConfigurableAtWorldCreation>3</maxConfigurableAtWorldCreation>
+    <configurationListOrderPriority>42</configurationListOrderPriority>
+    <classicIdeo>true</classicIdeo>
+    <requiredMemes>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MUGB_ChildrenOfBlinia</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MUGB_GoblinSupremacy</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Cannibal</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Raider</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MaleSupremacy</li>
+    </requiredMemes>
+    <caravanTraderKinds Inherit="False" />
+    <visitorTraderKinds Inherit="False" />
+    <baseTraderKinds Inherit="False" />
+    <colorSpectrum Inherit="False">
+      <li>(1, 1, 1)</li>
+      <li>(1, 1, 1)</li>
+    </colorSpectrum>
+    <xenotypeSet Inherit="False">
+      <xenotypeChances>
+        <MUGB_Goblin>900</MUGB_Goblin>
+        <MUGB_Hobgoblin>100</MUGB_Hobgoblin>
+      </xenotypeChances>
+    </xenotypeSet>
+    <pawnGroupMakers Inherit="False">
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>70</commonality>
+        <!-- KO intent: 1차 습격/분대 시스템. 별도 AI 없이 바닐라 Combat 그룹을 여러 편성으로 나눠 원시 고블린 무리감을 만든다. -->
+        <options>
+          <MUGB_GoblinKind_PrimitiveMelee>22</MUGB_GoblinKind_PrimitiveMelee>
+          <MUGB_GoblinKind_PrimitiveSpear>18</MUGB_GoblinKind_PrimitiveSpear>
+          <MUGB_GoblinKind_PrimitiveShock>10</MUGB_GoblinKind_PrimitiveShock>
+          <MUGB_GoblinKind_PrimitiveRanged>16</MUGB_GoblinKind_PrimitiveRanged>
+          <MUGB_GoblinKind_Captor>2</MUGB_GoblinKind_Captor>
+          <MUGB_GoblinKind_PrimitiveChiefMelee>1</MUGB_GoblinKind_PrimitiveChiefMelee>
+          <MUGB_GoblinKind_PrimitiveChiefRanged>1</MUGB_GoblinKind_PrimitiveChiefRanged>
+        </options>
+      </li>
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>22</commonality>
+        <!-- KO intent: 포획조/노예자폭병이 섞인 원시 고블린 습격. -->
+        <options>
+          <MUGB_GoblinKind_PrimitiveMelee>14</MUGB_GoblinKind_PrimitiveMelee>
+          <MUGB_GoblinKind_PrimitiveShock>12</MUGB_GoblinKind_PrimitiveShock>
+          <MUGB_GoblinKind_PrimitiveRanged>10</MUGB_GoblinKind_PrimitiveRanged>
+          <MUGB_GoblinKind_Captor>8</MUGB_GoblinKind_Captor>
+          <MUGB_GoblinKind_PrimitiveChiefMelee>1</MUGB_GoblinKind_PrimitiveChiefMelee>
+        </options>
+      </li>
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>8</commonality>
+        <!-- KO intent: 노획 화기/원거리 비중이 높은 드문 원시 고블린 습격. -->
+        <options>
+          <MUGB_GoblinKind_PrimitiveMelee>12</MUGB_GoblinKind_PrimitiveMelee>
+          <MUGB_GoblinKind_PrimitiveSpear>8</MUGB_GoblinKind_PrimitiveSpear>
+          <MUGB_GoblinKind_PrimitiveRanged>18</MUGB_GoblinKind_PrimitiveRanged>
+          <MUGB_GoblinKind_PrimitiveGunner>10</MUGB_GoblinKind_PrimitiveGunner>
+          <MUGB_GoblinKind_Captor>2</MUGB_GoblinKind_Captor>
+          <MUGB_GoblinKind_PrimitiveChiefRanged>1</MUGB_GoblinKind_PrimitiveChiefRanged>
+        </options>
+      </li>
+      <li>
+        <kindDef>Peaceful</kindDef>
+        <options>
+          <MUGB_GoblinKind_Beggar>4</MUGB_GoblinKind_Beggar>
+          <MUGB_GoblinKind_Slave>4</MUGB_GoblinKind_Slave>
+          <MUGB_GoblinKind_PrimitiveMelee>8</MUGB_GoblinKind_PrimitiveMelee>
+          <MUGB_GoblinKind_PrimitiveRanged>5</MUGB_GoblinKind_PrimitiveRanged>
+          <MUGB_GoblinKind_Captor>2</MUGB_GoblinKind_Captor>
+        </options>
+      </li>
+      <li>
+        <kindDef>Settlement</kindDef>
+        <options>
+          <MUGB_GoblinKind_PrimitiveMelee>18</MUGB_GoblinKind_PrimitiveMelee>
+          <MUGB_GoblinKind_PrimitiveSpear>16</MUGB_GoblinKind_PrimitiveSpear>
+          <MUGB_GoblinKind_PrimitiveRanged>16</MUGB_GoblinKind_PrimitiveRanged>
+          <MUGB_GoblinKind_PrimitiveShock>10</MUGB_GoblinKind_PrimitiveShock>
+          <MUGB_GoblinKind_Captor>3</MUGB_GoblinKind_Captor>
+          <MUGB_GoblinKind_PrimitiveChiefMelee>1</MUGB_GoblinKind_PrimitiveChiefMelee>
+        </options>
+      </li>
+    </pawnGroupMakers>
+  </FactionDef>
+
+  <FactionDef ParentName="TribeBase">
+    <defName>MUGB_GoblinCivilTribe</defName>
+    <raidLootMaker>MUGB_GoblinRaidLootMaker</raidLootMaker>
+    <label>goblin tribe</label>
+    <!-- 한국어 표시명: 부족 고블린 -->
+    <description>A cautious goblin tribe that has learned to survive through trade, tribute, and careful distance from larger peoples. They are still strange and difficult neighbors, but they are not committed enemies.</description>
+    <pawnSingular>goblin</pawnSingular>
+    <pawnsPlural>goblins</pawnsPlural>
+    <leaderTitle>boss</leaderTitle>
+    <factionNameMaker>NamerFactionMUGB_Tribe</factionNameMaker>
+    <basicMemberKind>MUGB_GoblinKind_PrimitiveMelee</basicMemberKind>
+    <fixedLeaderKinds>
+      <li>MUGB_GoblinKind_PrimitiveChiefMelee</li>
+      <li>MUGB_GoblinKind_SquadLeaderEarlyMelee</li>
+    </fixedLeaderKinds>
+    <factionIconPath>World/WorldObjects/MUGB/FactionIcons/MGB_TribeA</factionIconPath>
+    <settlementTexturePath>World/WorldObjects/TribalSettlement</settlementTexturePath>
+    <settlementGenerationWeight>1</settlementGenerationWeight>
+    <requiredCountAtGameStart>1</requiredCountAtGameStart>
+    <maxConfigurableAtWorldCreation>3</maxConfigurableAtWorldCreation>
+    <configurationListOrderPriority>41</configurationListOrderPriority>
+    <classicIdeo>true</classicIdeo>
+    <caravanTraderKinds Inherit="False">
+      <li>MUGB_Caravan_GoblinPrimitiveArms</li>
+      <li>MUGB_Caravan_GoblinRawMaterials</li>
+      <li>MUGB_Caravan_GoblinBlackMarket</li>
+      <li>MUGB_Caravan_GoblinLivestock</li>
+    </caravanTraderKinds>
+    <visitorTraderKinds Inherit="False" />
+    <baseTraderKinds Inherit="False">
+      <li>MUGB_Caravan_GoblinPrimitiveArms</li>
+      <li>MUGB_Caravan_GoblinRawMaterials</li>
+      <li>MUGB_Caravan_GoblinBlackMarket</li>
+      <li>MUGB_Caravan_GoblinLivestock</li>
+    </baseTraderKinds>
+    <colorSpectrum Inherit="False">
+      <li>(1, 1, 1)</li>
+      <li>(1, 1, 1)</li>
+    </colorSpectrum>
+    <requiredMemes>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MUGB_ChildrenOfBlinia</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Cannibal</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MaleSupremacy</li>
+    </requiredMemes>
+    <xenotypeSet Inherit="False">
+      <xenotypeChances>
+        <MUGB_Goblin>900</MUGB_Goblin>
+        <MUGB_Hobgoblin>100</MUGB_Hobgoblin>
+      </xenotypeChances>
+    </xenotypeSet>
+    <pawnGroupMakers Inherit="False">
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>28</commonality>
+        <!-- KO intent: 중립 부족 고블린의 기본 방어/약탈 편성. -->
+        <options>
+          <MUGB_GoblinKind_PrimitiveMelee>20</MUGB_GoblinKind_PrimitiveMelee>
+          <MUGB_GoblinKind_PrimitiveSpear>16</MUGB_GoblinKind_PrimitiveSpear>
+          <MUGB_GoblinKind_PrimitiveRanged>16</MUGB_GoblinKind_PrimitiveRanged>
+          <MUGB_GoblinKind_PrimitiveShock>6</MUGB_GoblinKind_PrimitiveShock>
+          <MUGB_GoblinKind_Captor>2</MUGB_GoblinKind_Captor>
+          <MUGB_GoblinKind_PrimitiveChiefMelee>1</MUGB_GoblinKind_PrimitiveChiefMelee>
+        </options>
+      </li>
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>9</commonality>
+        <!-- KO intent: 중립 부족 고블린도 적대 시 포획조가 섞일 수 있지만 야만 부족보다 낮은 빈도. -->
+        <options>
+          <MUGB_GoblinKind_PrimitiveMelee>14</MUGB_GoblinKind_PrimitiveMelee>
+          <MUGB_GoblinKind_PrimitiveShock>8</MUGB_GoblinKind_PrimitiveShock>
+          <MUGB_GoblinKind_PrimitiveRanged>10</MUGB_GoblinKind_PrimitiveRanged>
+          <MUGB_GoblinKind_Captor>6</MUGB_GoblinKind_Captor>
+          <MUGB_GoblinKind_PrimitiveChiefMelee>1</MUGB_GoblinKind_PrimitiveChiefMelee>
+        </options>
+      </li>
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>3</commonality>
+        <!-- KO intent: 아주 드문 노획 화기/원거리 편성. -->
+        <options>
+          <MUGB_GoblinKind_PrimitiveMelee>10</MUGB_GoblinKind_PrimitiveMelee>
+          <MUGB_GoblinKind_PrimitiveSpear>8</MUGB_GoblinKind_PrimitiveSpear>
+          <MUGB_GoblinKind_PrimitiveRanged>18</MUGB_GoblinKind_PrimitiveRanged>
+          <MUGB_GoblinKind_PrimitiveGunner>8</MUGB_GoblinKind_PrimitiveGunner>
+          <MUGB_GoblinKind_PrimitiveChiefRanged>1</MUGB_GoblinKind_PrimitiveChiefRanged>
+        </options>
+      </li>
+      <li>
+        <kindDef>Peaceful</kindDef>
+        <options>
+          <MUGB_GoblinKind_Beggar>10</MUGB_GoblinKind_Beggar>
+          <MUGB_GoblinKind_Slave>6</MUGB_GoblinKind_Slave>
+          <MUGB_GoblinKind_PrimitiveMelee>6</MUGB_GoblinKind_PrimitiveMelee>
+          <MUGB_GoblinKind_PrimitiveRanged>4</MUGB_GoblinKind_PrimitiveRanged>
+          <MUGB_GoblinKind_Captor>1</MUGB_GoblinKind_Captor>
+        </options>
+      </li>
+      <li>
+        <kindDef>Trader</kindDef>
+        <traders>
+          <MUGB_GoblinKind_PrimitiveTrader>1</MUGB_GoblinKind_PrimitiveTrader>
+        </traders>
+        <carriers>
+          <Muffalo>5</Muffalo>
+          <Dromedary>3</Dromedary>
+          <Alpaca>3</Alpaca>
+          <Donkey>3</Donkey>
+        </carriers>
+        <guards>
+          <!-- KO intent: 상단 프레임드랍을 줄이기 위해 인간형 호위 비중은 낮추고 짐꾼동물 비중을 높인다. -->
+          <MUGB_GoblinKind_PrimitiveMelee>2</MUGB_GoblinKind_PrimitiveMelee>
+          <MUGB_GoblinKind_PrimitiveRanged>1</MUGB_GoblinKind_PrimitiveRanged>
+          <MUGB_GoblinKind_Captor>1</MUGB_GoblinKind_Captor>
+        </guards>
+      </li>
+      <li>
+        <kindDef>Settlement</kindDef>
+        <options>
+          <MUGB_GoblinKind_Beggar>4</MUGB_GoblinKind_Beggar>
+          <MUGB_GoblinKind_Slave>3</MUGB_GoblinKind_Slave>
+          <MUGB_GoblinKind_PrimitiveMelee>16</MUGB_GoblinKind_PrimitiveMelee>
+          <MUGB_GoblinKind_PrimitiveSpear>12</MUGB_GoblinKind_PrimitiveSpear>
+          <MUGB_GoblinKind_PrimitiveRanged>14</MUGB_GoblinKind_PrimitiveRanged>
+          <MUGB_GoblinKind_PrimitiveShock>5</MUGB_GoblinKind_PrimitiveShock>
+          <MUGB_GoblinKind_Captor>2</MUGB_GoblinKind_Captor>
+          <MUGB_GoblinKind_PrimitiveChiefMelee>1</MUGB_GoblinKind_PrimitiveChiefMelee>
+        </options>
+      </li>
+    </pawnGroupMakers>
+  </FactionDef>
+
+  <FactionDef ParentName="TribeBase">
+    <defName>MUGB_GoblinCivilMedieval</defName>
+    <raidLootMaker>MUGB_GoblinRaidLootMaker</raidLootMaker>
+    <label>medieval goblins</label>
+    <!-- 한국어 표시명: 중세 고블린 -->
+    <description>A more organized goblin host with crude medieval workshops, trade customs, and enough discipline to bargain before biting. Their friendship is thin, but their caravans can keep a goblin colony supplied.</description>
+    <pawnSingular>goblin</pawnSingular>
+    <pawnsPlural>goblins</pawnsPlural>
+    <leaderTitle>boss</leaderTitle>
+    <factionNameMaker>NamerFactionMUGB_Medieval</factionNameMaker>
+    <basicMemberKind>MUGB_GoblinKind_MedievalLowSoldier</basicMemberKind>
+    <fixedLeaderKinds>
+      <li>MUGB_GoblinKind_SquadLeaderEarlyMelee</li>
+      <li>MUGB_GoblinKind_SquadLeaderLateMelee</li>
+      <li>MUGB_GoblinKind_SquadLeaderLateGunpowder</li>
+    </fixedLeaderKinds>
+    <factionIconPath>World/WorldObjects/MUGB/FactionIcons/MGB_medievalA</factionIconPath>
+    <settlementTexturePath>World/WorldObjects/DefaultSettlement</settlementTexturePath>
+    <settlementGenerationWeight>1</settlementGenerationWeight>
+    <requiredCountAtGameStart>1</requiredCountAtGameStart>
+    <maxConfigurableAtWorldCreation>3</maxConfigurableAtWorldCreation>
+    <configurationListOrderPriority>43</configurationListOrderPriority>
+    <classicIdeo>true</classicIdeo>
+    <techLevel>Medieval</techLevel>
+    <requiredMemes>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MUGB_ChildrenOfBlinia</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Cannibal</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MaleSupremacy</li>
+    </requiredMemes>
+    <caravanTraderKinds Inherit="False">
+      <li>MUGB_Caravan_GoblinPrimitiveArms</li>
+      <li>MUGB_Caravan_GoblinMedievalArms</li>
+      <li>MUGB_Caravan_GoblinRawMaterials</li>
+      <li>MUGB_Caravan_GoblinBlackMarket</li>
+      <li>MUGB_Caravan_GoblinLivestock</li>
+    </caravanTraderKinds>
+    <visitorTraderKinds Inherit="False" />
+    <baseTraderKinds Inherit="False">
+      <li>MUGB_Caravan_GoblinPrimitiveArms</li>
+      <li>MUGB_Caravan_GoblinMedievalArms</li>
+      <li>MUGB_Caravan_GoblinRawMaterials</li>
+      <li>MUGB_Caravan_GoblinBlackMarket</li>
+      <li>MUGB_Caravan_GoblinLivestock</li>
+    </baseTraderKinds>
+    <colorSpectrum Inherit="False">
+      <li>(1, 1, 1)</li>
+      <li>(1, 1, 1)</li>
+    </colorSpectrum>
+    <xenotypeSet Inherit="False">
+      <xenotypeChances>
+        <MUGB_Goblin>820</MUGB_Goblin>
+        <MUGB_Hobgoblin>180</MUGB_Hobgoblin>
+      </xenotypeChances>
+    </xenotypeSet>
+    <pawnGroupMakers Inherit="False">
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>28</commonality>
+        <!-- KO intent: 중세 고블린 기본 전열. 창/근접/사격/소수 화기를 같이 섞는다. -->
+        <options>
+          <MUGB_GoblinKind_MedievalLowSoldier>18</MUGB_GoblinKind_MedievalLowSoldier>
+          <MUGB_GoblinKind_MedievalHighSoldier>8</MUGB_GoblinKind_MedievalHighSoldier>
+          <MUGB_GoblinKind_MedievalSpear>14</MUGB_GoblinKind_MedievalSpear>
+          <MUGB_GoblinKind_MedievalRanged>12</MUGB_GoblinKind_MedievalRanged>
+          <MUGB_GoblinKind_MedievalGunner>6</MUGB_GoblinKind_MedievalGunner>
+          <MUGB_GoblinKind_Captor>2</MUGB_GoblinKind_Captor>
+          <MUGB_GoblinKind_SquadLeaderEarlyMelee>1</MUGB_GoblinKind_SquadLeaderEarlyMelee>
+          <MUGB_GoblinKind_SquadLeaderLateMelee>1</MUGB_GoblinKind_SquadLeaderLateMelee>
+        </options>
+      </li>
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>12</commonality>
+        <!-- KO intent: 석궁/연노/화승총 지원조. -->
+        <options>
+          <MUGB_GoblinKind_MedievalLowSoldier>10</MUGB_GoblinKind_MedievalLowSoldier>
+          <MUGB_GoblinKind_MedievalSpear>8</MUGB_GoblinKind_MedievalSpear>
+          <MUGB_GoblinKind_MedievalRanged>18</MUGB_GoblinKind_MedievalRanged>
+          <MUGB_GoblinKind_EliteMarksman>3</MUGB_GoblinKind_EliteMarksman>
+          <MUGB_GoblinKind_MedievalGunner>10</MUGB_GoblinKind_MedievalGunner>
+          <MUGB_GoblinKind_SquadLeaderLateRangedBolt>1</MUGB_GoblinKind_SquadLeaderLateRangedBolt>
+          <MUGB_GoblinKind_SquadLeaderLateGunpowder>1</MUGB_GoblinKind_SquadLeaderLateGunpowder>
+        </options>
+      </li>
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>7</commonality>
+        <!-- KO intent: 방패/둔기/붐스틱 중심의 충격조. -->
+        <options>
+          <MUGB_GoblinKind_MedievalLowSoldier>12</MUGB_GoblinKind_MedievalLowSoldier>
+          <MUGB_GoblinKind_MedievalHighSoldier>10</MUGB_GoblinKind_MedievalHighSoldier>
+          <MUGB_GoblinKind_ShockElite>5</MUGB_GoblinKind_ShockElite>
+          <MUGB_GoblinKind_Captor>4</MUGB_GoblinKind_Captor>
+          <MUGB_GoblinKind_HeavyBomber>1</MUGB_GoblinKind_HeavyBomber>
+          <MUGB_GoblinKind_SquadLeaderLateMelee>1</MUGB_GoblinKind_SquadLeaderLateMelee>
+        </options>
+      </li>
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>3</commonality>
+        <!-- KO intent: 드문 중화기 편성. -->
+        <options>
+          <MUGB_GoblinKind_MedievalHighSoldier>8</MUGB_GoblinKind_MedievalHighSoldier>
+          <MUGB_GoblinKind_EliteSpear>4</MUGB_GoblinKind_EliteSpear>
+          <MUGB_GoblinKind_MedievalGunner>12</MUGB_GoblinKind_MedievalGunner>
+          <MUGB_GoblinKind_Handcannoneer>2</MUGB_GoblinKind_Handcannoneer>
+          <MUGB_GoblinKind_SquadLeaderLateGunpowder>1</MUGB_GoblinKind_SquadLeaderLateGunpowder>
+        </options>
+      </li>
+      <li>
+        <kindDef>Peaceful</kindDef>
+        <options>
+          <MUGB_GoblinKind_Beggar>8</MUGB_GoblinKind_Beggar>
+          <MUGB_GoblinKind_Slave>5</MUGB_GoblinKind_Slave>
+          <MUGB_GoblinKind_MedievalLowSoldier>8</MUGB_GoblinKind_MedievalLowSoldier>
+          <MUGB_GoblinKind_MedievalRanged>4</MUGB_GoblinKind_MedievalRanged>
+          <MUGB_GoblinKind_Captor>2</MUGB_GoblinKind_Captor>
+        </options>
+      </li>
+      <li>
+        <kindDef>Trader</kindDef>
+        <traders>
+          <MUGB_GoblinKind_MedievalTrader>1</MUGB_GoblinKind_MedievalTrader>
+        </traders>
+        <carriers>
+          <Muffalo>5</Muffalo>
+          <Dromedary>3</Dromedary>
+          <Alpaca>2</Alpaca>
+          <Donkey>3</Donkey>
+          <Elephant>1</Elephant>
+        </carriers>
+        <guards>
+          <!-- KO intent: 중세 상단도 전투원 수를 줄이고 운반 동물로 물량을 담당하게 한다. -->
+          <MUGB_GoblinKind_MedievalLowSoldier>2</MUGB_GoblinKind_MedievalLowSoldier>
+          <MUGB_GoblinKind_MedievalRanged>1</MUGB_GoblinKind_MedievalRanged>
+          <MUGB_GoblinKind_MedievalGunner>1</MUGB_GoblinKind_MedievalGunner>
+          <MUGB_GoblinKind_Captor>1</MUGB_GoblinKind_Captor>
+        </guards>
+      </li>
+      <li>
+        <kindDef>Settlement</kindDef>
+        <options>
+          <MUGB_GoblinKind_Beggar>3</MUGB_GoblinKind_Beggar>
+          <MUGB_GoblinKind_Slave>3</MUGB_GoblinKind_Slave>
+          <MUGB_GoblinKind_MedievalLowSoldier>18</MUGB_GoblinKind_MedievalLowSoldier>
+          <MUGB_GoblinKind_MedievalHighSoldier>8</MUGB_GoblinKind_MedievalHighSoldier>
+          <MUGB_GoblinKind_MedievalSpear>12</MUGB_GoblinKind_MedievalSpear>
+          <MUGB_GoblinKind_MedievalRanged>12</MUGB_GoblinKind_MedievalRanged>
+          <MUGB_GoblinKind_MedievalGunner>6</MUGB_GoblinKind_MedievalGunner>
+        </options>
+      </li>
+    </pawnGroupMakers>
+    <modExtensions>
+      <li Class="KCSG.CustomGenOption">
+        <preventBridgeable>true</preventBridgeable>
+        <tryFindFreeArea>true</tryFindFreeArea>
+        <fullClear>true</fullClear>
+        <chooseFromlayouts>
+          <li>MUGB_MedievalBaseA</li>
+          <li>MUGB_MedievalBaseB</li>
+        </chooseFromlayouts>
+      </li>
+    </modExtensions>
+  </FactionDef>
+
+  <FactionDef ParentName="TribeRoughBase">
+    <defName>MUGB_GoblinSavageMedieval</defName>
+    <raidLootMaker>MUGB_GoblinRaidLootMaker</raidLootMaker>
+    <label>savage medieval goblins</label>
+    <!-- 한국어 표시명: 야만 중세고블린 -->
+    <description>A hard-bitten medieval goblin host that has wrapped its swarm instincts in iron, shields, black powder, and ugly discipline. They are not cultists, but they raid as if mercy were a manufacturing defect.</description>
+    <pawnSingular>goblin</pawnSingular>
+    <pawnsPlural>goblins</pawnsPlural>
+    <leaderTitle>boss</leaderTitle>
+    <factionNameMaker>NamerFactionMUGB_SavageMedieval</factionNameMaker>
+    <basicMemberKind>MUGB_GoblinKind_MedievalLowSoldier</basicMemberKind>
+    <fixedLeaderKinds>
+      <li>MUGB_GoblinKind_SquadLeaderLateMelee</li>
+      <li>MUGB_GoblinKind_SquadLeaderLateRangedBolt</li>
+      <li>MUGB_GoblinKind_SquadLeaderLateGunpowder</li>
+    </fixedLeaderKinds>
+    <factionIconPath>World/WorldObjects/MUGB/FactionIcons/MGB_HmedievalA</factionIconPath>
+    <settlementTexturePath>World/WorldObjects/DefaultSettlement</settlementTexturePath>
+    <settlementGenerationWeight>1</settlementGenerationWeight>
+    <requiredCountAtGameStart>1</requiredCountAtGameStart>
+    <maxConfigurableAtWorldCreation>3</maxConfigurableAtWorldCreation>
+    <configurationListOrderPriority>44</configurationListOrderPriority>
+    <classicIdeo>true</classicIdeo>
+    <techLevel>Medieval</techLevel>
+    <canSiege>true</canSiege>
+    <requiredMemes>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MUGB_ChildrenOfBlinia</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MUGB_GoblinSupremacy</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Cannibal</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Raider</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MaleSupremacy</li>
+    </requiredMemes>
+    <caravanTraderKinds Inherit="False" />
+    <visitorTraderKinds Inherit="False" />
+    <baseTraderKinds Inherit="False" />
+    <colorSpectrum Inherit="False">
+      <li>(1, 1, 1)</li>
+      <li>(1, 1, 1)</li>
+    </colorSpectrum>
+    <xenotypeSet Inherit="False">
+      <xenotypeChances>
+        <MUGB_Goblin>760</MUGB_Goblin>
+        <MUGB_Hobgoblin>240</MUGB_Hobgoblin>
+      </xenotypeChances>
+    </xenotypeSet>
+    <pawnGroupMakers Inherit="False">
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>45</commonality>
+        <!-- KO intent: 야만 중세 고블린 기본 전투무리. 중립 중세보다 고급병 비중이 높다. -->
+        <options>
+          <MUGB_GoblinKind_MedievalLowSoldier>18</MUGB_GoblinKind_MedievalLowSoldier>
+          <MUGB_GoblinKind_MedievalHighSoldier>10</MUGB_GoblinKind_MedievalHighSoldier>
+          <MUGB_GoblinKind_ShockElite>4</MUGB_GoblinKind_ShockElite>
+          <MUGB_GoblinKind_MedievalSpear>12</MUGB_GoblinKind_MedievalSpear>
+          <MUGB_GoblinKind_EliteSpear>3</MUGB_GoblinKind_EliteSpear>
+          <MUGB_GoblinKind_MedievalRanged>10</MUGB_GoblinKind_MedievalRanged>
+          <MUGB_GoblinKind_EliteMarksman>3</MUGB_GoblinKind_EliteMarksman>
+          <MUGB_GoblinKind_MedievalGunner>9</MUGB_GoblinKind_MedievalGunner>
+          <MUGB_GoblinKind_Handcannoneer>1</MUGB_GoblinKind_Handcannoneer>
+          <MUGB_GoblinKind_Captor>3</MUGB_GoblinKind_Captor>
+          <MUGB_GoblinKind_TunnelVanguard>2</MUGB_GoblinKind_TunnelVanguard>
+          <MUGB_GoblinKind_TunnelSlave>2</MUGB_GoblinKind_TunnelSlave>
+          <MUGB_GoblinKind_SquadLeaderLateMelee>1</MUGB_GoblinKind_SquadLeaderLateMelee>
+          <MUGB_GoblinKind_SquadLeaderLateGunpowder>1</MUGB_GoblinKind_SquadLeaderLateGunpowder>
+        </options>
+      </li>
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>25</commonality>
+        <!-- KO intent: 땅굴 계열 1차. 실제 지하/굴파기 AI는 아직 아니며, 땅굴쟁이 PawnKind가 많이 섞이는 편성이다. -->
+        <options>
+          <MUGB_GoblinKind_TunnelVanguard>16</MUGB_GoblinKind_TunnelVanguard>
+          <MUGB_GoblinKind_TunnelSlave>14</MUGB_GoblinKind_TunnelSlave>
+          <MUGB_GoblinKind_MedievalLowSoldier>10</MUGB_GoblinKind_MedievalLowSoldier>
+          <MUGB_GoblinKind_MedievalGunner>6</MUGB_GoblinKind_MedievalGunner>
+          <MUGB_GoblinKind_Captor>5</MUGB_GoblinKind_Captor>
+          <MUGB_GoblinKind_SlaveBomber>1</MUGB_GoblinKind_SlaveBomber>
+          <MUGB_GoblinKind_SquadLeaderLateMelee>1</MUGB_GoblinKind_SquadLeaderLateMelee>
+        </options>
+      </li>
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>10</commonality>
+        <!-- KO intent: 충격/돌파 편성. 방패병, 둔기병, 붐스틱이 더 자주 섞인다. -->
+        <options>
+          <MUGB_GoblinKind_MedievalHighSoldier>14</MUGB_GoblinKind_MedievalHighSoldier>
+          <MUGB_GoblinKind_ShockElite>10</MUGB_GoblinKind_ShockElite>
+          <MUGB_GoblinKind_EliteSpear>6</MUGB_GoblinKind_EliteSpear>
+          <MUGB_GoblinKind_Captor>4</MUGB_GoblinKind_Captor>
+          <MUGB_GoblinKind_HeavyBomber>1</MUGB_GoblinKind_HeavyBomber>
+          <MUGB_GoblinKind_SquadLeaderLateMelee>1</MUGB_GoblinKind_SquadLeaderLateMelee>
+        </options>
+      </li>
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>10</commonality>
+        <!-- KO intent: 화약/정예 사격 편성. -->
+        <options>
+          <MUGB_GoblinKind_MedievalHighSoldier>8</MUGB_GoblinKind_MedievalHighSoldier>
+          <MUGB_GoblinKind_MedievalRanged>10</MUGB_GoblinKind_MedievalRanged>
+          <MUGB_GoblinKind_EliteMarksman>6</MUGB_GoblinKind_EliteMarksman>
+          <MUGB_GoblinKind_MedievalGunner>14</MUGB_GoblinKind_MedievalGunner>
+          <MUGB_GoblinKind_Handcannoneer>3</MUGB_GoblinKind_Handcannoneer>
+          <MUGB_GoblinKind_SquadLeaderLateRangedBolt>1</MUGB_GoblinKind_SquadLeaderLateRangedBolt>
+          <MUGB_GoblinKind_SquadLeaderLateGunpowder>1</MUGB_GoblinKind_SquadLeaderLateGunpowder>
+        </options>
+      </li>
+      <li>
+        <kindDef>Settlement</kindDef>
+        <options>
+          <MUGB_GoblinKind_MedievalLowSoldier>18</MUGB_GoblinKind_MedievalLowSoldier>
+          <MUGB_GoblinKind_MedievalHighSoldier>12</MUGB_GoblinKind_MedievalHighSoldier>
+          <MUGB_GoblinKind_ShockElite>4</MUGB_GoblinKind_ShockElite>
+          <MUGB_GoblinKind_MedievalSpear>12</MUGB_GoblinKind_MedievalSpear>
+          <MUGB_GoblinKind_MedievalRanged>10</MUGB_GoblinKind_MedievalRanged>
+          <MUGB_GoblinKind_MedievalGunner>8</MUGB_GoblinKind_MedievalGunner>
+          <MUGB_GoblinKind_Captor>3</MUGB_GoblinKind_Captor>
+          <MUGB_GoblinKind_TunnelVanguard>2</MUGB_GoblinKind_TunnelVanguard>
+        </options>
+      </li>
+    </pawnGroupMakers>
+    <modExtensions>
+      <li Class="KCSG.CustomGenOption">
+        <preventBridgeable>true</preventBridgeable>
+        <tryFindFreeArea>true</tryFindFreeArea>
+        <fullClear>true</fullClear>
+        <chooseFromlayouts>
+          <li>MUGB_MedievalBaseA</li>
+          <li>MUGB_MedievalBaseB</li>
+        </chooseFromlayouts>
+      </li>
+    </modExtensions>
+  </FactionDef>
+
+  <FactionDef ParentName="TribeRoughBase">
+    <defName>MUGB_GoblinCultists</defName>
+    <raidLootMaker>MUGB_GoblinRaidLootMaker</raidLootMaker>
+    <label>goblin cultists</label>
+    <!-- 한국어 표시명: 고블린 광신도 -->
+    <description>A hidden goblin cult that treats fire, meat, and ruin as scripture. They are not a normal neighbor faction; they are the shape a disaster takes when it learns to chant.</description>
+    <pawnSingular>goblin cultist</pawnSingular>
+    <pawnsPlural>goblin cultists</pawnsPlural>
+    <categoryTag>Tribal</categoryTag>
+    <hidden>true</hidden>
+    <permanentEnemy>true</permanentEnemy>
+    <canSiege>false</canSiege>
+    <canPsychicRitualSiege>true</canPsychicRitualSiege>
+    <canStageAttacks>true</canStageAttacks>
+    <leaderTitle>cult boss</leaderTitle>
+    <factionNameMaker>NamerFactionMUGB_Cultist</factionNameMaker>
+    <basicMemberKind>MUGB_GoblinKind_CultistLowSoldier</basicMemberKind>
+    <fixedLeaderKinds>
+      <li>MUGB_GoblinKind_CultistSquadLeader</li>
+      <li>MUGB_GoblinKind_CultistShaman</li>
+    </fixedLeaderKinds>
+    <factionIconPath>World/WorldObjects/MUGB/FactionIcons/MGB_CultistA</factionIconPath>
+    <settlementTexturePath>World/WorldObjects/TribalSettlement</settlementTexturePath>
+    <settlementGenerationWeight>0</settlementGenerationWeight>
+    <requiredCountAtGameStart>1</requiredCountAtGameStart>
+    <maxConfigurableAtWorldCreation>1</maxConfigurableAtWorldCreation>
+    <classicIdeo>true</classicIdeo>
+    <techLevel>Medieval</techLevel>
+    <requiredMemes>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MUGB_ChildrenOfBlinia</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MUGB_GoblinSupremacy</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Cannibal</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Raider</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MaleSupremacy</li>
+    </requiredMemes>
+    <caravanTraderKinds Inherit="False" />
+    <visitorTraderKinds Inherit="False" />
+    <baseTraderKinds Inherit="False" />
+    <colorSpectrum Inherit="False">
+      <li>(1, 1, 1)</li>
+      <li>(1, 1, 1)</li>
+    </colorSpectrum>
+    <xenotypeSet Inherit="False">
+      <xenotypeChances>
+        <MUGB_Goblin>700</MUGB_Goblin>
+        <MUGB_Hobgoblin>300</MUGB_Hobgoblin>
+      </xenotypeChances>
+    </xenotypeSet>
+    <pawnGroupMakers Inherit="False">
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>45</commonality>
+        <!-- KO intent: 광신도 기본 전투무리. -->
+        <options>
+          <MUGB_GoblinKind_CultistLowSoldier>16</MUGB_GoblinKind_CultistLowSoldier>
+          <MUGB_GoblinKind_CultistHighSoldier>10</MUGB_GoblinKind_CultistHighSoldier>
+          <MUGB_GoblinKind_CultistSpear>12</MUGB_GoblinKind_CultistSpear>
+          <MUGB_GoblinKind_CultistGunner>6</MUGB_GoblinKind_CultistGunner>
+          <MUGB_GoblinKind_CultistRanged>8</MUGB_GoblinKind_CultistRanged>
+          <MUGB_GoblinKind_CultistShock>8</MUGB_GoblinKind_CultistShock>
+          <MUGB_GoblinKind_CultistCaptor>3</MUGB_GoblinKind_CultistCaptor>
+          <MUGB_GoblinKind_CultistShaman>1</MUGB_GoblinKind_CultistShaman>
+          <MUGB_GoblinKind_CultistHandcannoneer>1</MUGB_GoblinKind_CultistHandcannoneer>
+          <MUGB_GoblinKind_CultistBomber>1</MUGB_GoblinKind_CultistBomber>
+          <MUGB_GoblinKind_SlaveBomber>1</MUGB_GoblinKind_SlaveBomber>
+          <MUGB_GoblinKind_CultistSquadLeader>1</MUGB_GoblinKind_CultistSquadLeader>
+        </options>
+      </li>
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>6</commonality>
+        <!-- KO intent: 광신도 폭탄/자폭 편성. -->
+        <options>
+          <MUGB_GoblinKind_CultistLowSoldier>10</MUGB_GoblinKind_CultistLowSoldier>
+          <MUGB_GoblinKind_CultistShock>10</MUGB_GoblinKind_CultistShock>
+          <MUGB_GoblinKind_CultistBomber>3</MUGB_GoblinKind_CultistBomber>
+          <MUGB_GoblinKind_CultistBomberNaked>2</MUGB_GoblinKind_CultistBomberNaked>
+          <MUGB_GoblinKind_SlaveBomber>2</MUGB_GoblinKind_SlaveBomber>
+          <MUGB_GoblinKind_CultistSquadLeader>1</MUGB_GoblinKind_CultistSquadLeader>
+        </options>
+      </li>
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>20</commonality>
+        <!-- KO intent: 광신도 주술/포획 편성. -->
+        <options>
+          <MUGB_GoblinKind_CultistLowSoldier>12</MUGB_GoblinKind_CultistLowSoldier>
+          <MUGB_GoblinKind_CultistSpear>10</MUGB_GoblinKind_CultistSpear>
+          <MUGB_GoblinKind_CultistCaptor>8</MUGB_GoblinKind_CultistCaptor>
+          <MUGB_GoblinKind_CultistShaman>4</MUGB_GoblinKind_CultistShaman>
+          <MUGB_GoblinKind_CultistSquadLeader>1</MUGB_GoblinKind_CultistSquadLeader>
+        </options>
+      </li>
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>10</commonality>
+        <!-- KO intent: 광신도 정예/화기 편성. -->
+        <options>
+          <MUGB_GoblinKind_CultistHighSoldier>14</MUGB_GoblinKind_CultistHighSoldier>
+          <MUGB_GoblinKind_CultistSpear>8</MUGB_GoblinKind_CultistSpear>
+          <MUGB_GoblinKind_CultistGunner>10</MUGB_GoblinKind_CultistGunner>
+          <MUGB_GoblinKind_CultistRanged>8</MUGB_GoblinKind_CultistRanged>
+          <MUGB_GoblinKind_CultistHandcannoneer>3</MUGB_GoblinKind_CultistHandcannoneer>
+          <MUGB_GoblinKind_CultistShaman>2</MUGB_GoblinKind_CultistShaman>
+          <MUGB_GoblinKind_CultistSquadLeader>1</MUGB_GoblinKind_CultistSquadLeader>
+        </options>
+      </li>
+      <li MayRequire="Ludeon.RimWorld.Anomaly">
+        <!-- KO intent: 도약 납치 의식공성은 샤먼 한 명이 의식을 주도하고 포획병과 전투병이 방어한다. -->
+        <kindDef>PsychicRitualSiege</kindDef>
+        <commonality>100</commonality>
+        <options>
+          <MUGB_GoblinKind_CultistShaman>8</MUGB_GoblinKind_CultistShaman>
+          <MUGB_GoblinKind_CultistCaptor>12</MUGB_GoblinKind_CultistCaptor>
+          <MUGB_GoblinKind_CultistLowSoldier>14</MUGB_GoblinKind_CultistLowSoldier>
+          <MUGB_GoblinKind_CultistHighSoldier>8</MUGB_GoblinKind_CultistHighSoldier>
+          <MUGB_GoblinKind_CultistSpear>8</MUGB_GoblinKind_CultistSpear>
+          <MUGB_GoblinKind_CultistRanged>6</MUGB_GoblinKind_CultistRanged>
+          <MUGB_GoblinKind_CultistGunner>5</MUGB_GoblinKind_CultistGunner>
+          <MUGB_GoblinKind_CultistSquadLeader>2</MUGB_GoblinKind_CultistSquadLeader>
+        </options>
+      </li>
+    </pawnGroupMakers>
+  </FactionDef>
+
+  <FactionDef ParentName="OutlanderRoughBase">
+    <defName>MUGB_GoblinHunters</defName>
+    <label>goblin hunters</label>
+    <!-- 한국어 표시명: 고블린 사냥꾼단 -->
+    <description>A loose band of human hunters, punishers, and bounty-takers who specialize in tracking goblins. They do not come to trade; they come to make examples.</description>
+    <pawnSingular>goblin hunter</pawnSingular>
+    <pawnsPlural>goblin hunters</pawnsPlural>
+    <hidden>true</hidden>
+    <permanentEnemy>true</permanentEnemy>
+    <canSiege>false</canSiege>
+    <canStageAttacks>true</canStageAttacks>
+    <leaderTitle>captain</leaderTitle>
+    <basicMemberKind>MUGB_HumanKind_GoblinHunter</basicMemberKind>
+    <fixedLeaderKinds>
+      <li>MUGB_HumanKind_GoblinPunitiveCaptain</li>
+      <li>MUGB_HumanKind_GoblinHunterBoss</li>
+    </fixedLeaderKinds>
+    <factionIconPath>World/WorldObjects/Expanding/TownRough</factionIconPath>
+    <settlementTexturePath>World/WorldObjects/DefaultSettlement</settlementTexturePath>
+    <settlementGenerationWeight>0</settlementGenerationWeight>
+    <requiredCountAtGameStart>0</requiredCountAtGameStart>
+    <maxConfigurableAtWorldCreation>0</maxConfigurableAtWorldCreation>
+    <classicIdeo>true</classicIdeo>
+    <techLevel>Industrial</techLevel>
+    <caravanTraderKinds Inherit="False" />
+    <visitorTraderKinds Inherit="False" />
+    <baseTraderKinds Inherit="False" />
+    <colorSpectrum Inherit="False">
+      <li>(1, 1, 1)</li>
+      <li>(1, 1, 1)</li>
+    </colorSpectrum>
+    <pawnGroupMakers Inherit="False">
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>100</commonality>
+        <options>
+          <MUGB_HumanKind_GoblinPunitiveInfantry>10</MUGB_HumanKind_GoblinPunitiveInfantry>
+          <MUGB_HumanKind_GoblinPunitiveShooter>8</MUGB_HumanKind_GoblinPunitiveShooter>
+          <MUGB_HumanKind_GoblinHunter>10</MUGB_HumanKind_GoblinHunter>
+          <MUGB_HumanKind_GoblinHunterCrossbowman>6</MUGB_HumanKind_GoblinHunterCrossbowman>
+          <MUGB_HumanKind_GoblinHunterMusketeer>5</MUGB_HumanKind_GoblinHunterMusketeer>
+          <MUGB_HumanKind_GoblinHunterCaptor>4</MUGB_HumanKind_GoblinHunterCaptor>
+          <MUGB_HumanKind_GoblinPunitiveCaptain>1</MUGB_HumanKind_GoblinPunitiveCaptain>
+          <MUGB_HumanKind_GoblinHunterBoss>1</MUGB_HumanKind_GoblinHunterBoss>
+        </options>
+      </li>
+    </pawnGroupMakers>
+  </FactionDef>
+
+  <FactionDef ParentName="FactionBase">
+    <defName>MUGB_NeutralBeggarBand</defName>
+    <label>neutral beggar band</label>
+    <!-- 한국어 표시명: 떠돌이 거지무리 -->
+    <!-- 한국어 의도: 바닐라 거지 퀘스트처럼 방문 때만 생성되는 숨김 임시 세력의 틀. 월드에 영구 인스턴스를 만들지 않는다. -->
+    <description>A hidden, temporary population of beggars, displaced travelers, and camp followers. They have no settlements, territory, or persistent diplomatic presence.</description>
+    <pawnSingular>beggar</pawnSingular>
+    <pawnsPlural>beggars</pawnsPlural>
+    <hidden>true</hidden>
+    <fixedName>Passing beggars</fixedName>
+    <displayInFactionSelection>false</displayInFactionSelection>
+    <settlementGenerationWeight>0</settlementGenerationWeight>
+    <requiredCountAtGameStart>0</requiredCountAtGameStart>
+    <maxConfigurableAtWorldCreation>0</maxConfigurableAtWorldCreation>
+    <canGenerateQuestSites>false</canGenerateQuestSites>
+    <canSiege>false</canSiege>
+    <canStageAttacks>false</canStageAttacks>
+    <raidsForbidden>true</raidsForbidden>
+    <autoFlee>true</autoFlee>
+    <rescueesCanJoin>true</rescueesCanJoin>
+    <classicIdeo>true</classicIdeo>
+    <techLevel>Neolithic</techLevel>
+    <basicMemberKind>MUGB_BeggarDrifter</basicMemberKind>
+    <factionIconPath>World/WorldObjects/MUGB/FactionIcons/MGB_Begger</factionIconPath>
+    <settlementTexturePath>World/WorldObjects/DefaultSettlement</settlementTexturePath>
+    <caravanTraderKinds Inherit="False" />
+    <visitorTraderKinds Inherit="False" />
+    <baseTraderKinds Inherit="False" />
+    <backstoryFilters>
+      <li>
+        <categories>
+          <li>Outlander</li>
+          <li>Tribal</li>
+        </categories>
+      </li>
+    </backstoryFilters>
+    <xenotypeSet>
+      <xenotypeChances>
+        <Baseliner>0.78</Baseliner>
+        <Dirtmole MayRequire="Ludeon.RimWorld.Biotech">0.06</Dirtmole>
+        <Impid MayRequire="Ludeon.RimWorld.Biotech">0.04</Impid>
+        <Yttakin MayRequire="Ludeon.RimWorld.Biotech">0.04</Yttakin>
+        <Pigskin MayRequire="Ludeon.RimWorld.Biotech">0.04</Pigskin>
+        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.04</Neanderthal>
+      </xenotypeChances>
+    </xenotypeSet>
+    <maxPawnCostPerTotalPointsCurve>
+      <points>
+        <li>(0,35)</li>
+        <li>(200,45)</li>
+        <li>(1000,60)</li>
+      </points>
+    </maxPawnCostPerTotalPointsCurve>
+    <raidCommonalityFromPointsCurve>
+      <points>
+        <li>(0, 0)</li>
+      </points>
+    </raidCommonalityFromPointsCurve>
+    <pawnGroupMakers>
+      <li>
+        <kindDef>Peaceful</kindDef>
+        <commonality>100</commonality>
+        <options>
+          <MUGB_BeggarDrifter>12</MUGB_BeggarDrifter>
+          <MUGB_BeggarScavenger>5</MUGB_BeggarScavenger>
+          <MUGB_BeggarLookout>2</MUGB_BeggarLookout>
+        </options>
+      </li>
+    </pawnGroupMakers>
+  </FactionDef>
+
+</Defs>
+

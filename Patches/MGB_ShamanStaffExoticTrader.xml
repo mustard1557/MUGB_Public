@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <!--
+    한국어 의도: 바닐라 희귀품 상인도 고블린 샤먼 지팡이를 드물게 들여옵니다.
+
+    지팡이는 제작이 불가능해서 상인이 사실상 유일한 구매 경로입니다. 고블린 상인만
+    취급하면 고블린과 사이가 틀어진 판에서는 영영 구할 수 없으므로, 외부 경로를
+    하나 열어 둡니다. 희귀품 상인은 진기한 물건을 다루는 쪽이라 자리가 맞습니다.
+
+    빈도는 고블린 중세 무기상과 같은 -4~1(약 1/6)로 잡아 가장 드문 축에 둡니다.
+    고블린 쪽에서 사는 게 여전히 확실한 경로가 되도록 하기 위함입니다.
+
+    지팡이의 tradeTags를 전용 태그 하나로 막아 두었기 때문에 태그 기반 재고
+    생성기에는 걸리지 않습니다. 그래서 이렇게 def를 직접 지정해야 합니다.
+
+    바닐라에는 "희귀품 상인"(exotic goods trader) 이름을 쓰는 상인이 둘 있지만,
+    지상 대상인 Caravan_Outlander_Exotic에만 넣습니다. 궤도 상인(Orbital_Exotic)은
+    우주 기술 상인이라 고블린 뼈지팡이를 싣고 오는 게 어울리지 않습니다.
+  -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/TraderKindDef[defName="Caravan_Outlander_Exotic"]/stockGenerators</xpath>
+    <value>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>MUGB_GoblinShamanStaff</thingDef>
+        <countRange>-4~1</countRange>
+      </li>
+    </value>
+    <success>Always</success>
+  </Operation>
+
+</Patch>

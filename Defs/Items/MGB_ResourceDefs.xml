@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <StuffCategoryDef>
+    <defName>MUGB_GoblinAlloyMetallic</defName>
+    <label>goblin alloy metallic</label>
+  </StuffCategoryDef>
+
+  <StuffCategoryDef>
+    <defName>MUGB_BoneStuff</defName>
+    <label>humanlike bone</label>
+  </StuffCategoryDef>
+
+  <ThingDef ParentName="LeatherBase">
+    <defName>MUGB_Gskin</defName>
+    <label>goblin leather</label>
+    <description>Tanned goblin skin. It is disturbing to most people, but goblins treat it as a practical ritual material.</description>
+    <graphicData>
+      <texPath>Things/Item/Resources/MGB_Gskin</texPath>
+      <graphicClass>MUGB.Graphic_GoblinTwoStageStackCount</graphicClass>
+      <drawSize>(0.85,0.85)</drawSize>
+    </graphicData>
+    <statBases>
+      <MarketValue>4.0</MarketValue>
+      <StuffPower_Armor_Sharp>0.62</StuffPower_Armor_Sharp>
+      <StuffPower_Insulation_Cold>10</StuffPower_Insulation_Cold>
+      <StuffPower_Insulation_Heat>10</StuffPower_Insulation_Heat>
+    </statBases>
+    <stuffProps>
+      <color>(151,128,92)</color>
+      <commonality>0.0025</commonality>
+    </stuffProps>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>MUGB_Bone</defName>
+    <label>humanlike bone</label>
+    <description>A cleaned bone taken from a butchered humanlike. Goblins use humanlike bones as food stock, weapon material, building material, and ritual crafting stock.</description>
+    <graphicData>
+      <texPath>Things/Item/Resources/MGB_Bone</texPath>
+      <graphicClass>MUGB.Graphic_GoblinPercentStackCount</graphicClass>
+    </graphicData>
+    <soundInteract>ChunkRock_Drop</soundInteract>
+    <soundDrop>ChunkRock_Drop</soundDrop>
+    <statBases>
+      <MarketValue>0.5</MarketValue>
+      <Mass>0.15</Mass>
+      <MaxHitPoints>60</MaxHitPoints>
+      <Flammability>0.2</Flammability>
+      <StuffPower_Armor_Sharp>0.50</StuffPower_Armor_Sharp>
+      <StuffPower_Armor_Blunt>0.46</StuffPower_Armor_Blunt>
+      <StuffPower_Armor_Heat>0.70</StuffPower_Armor_Heat>
+      <StuffPower_Insulation_Cold>6</StuffPower_Insulation_Cold>
+      <StuffPower_Insulation_Heat>3</StuffPower_Insulation_Heat>
+      <MeleeWeapon_CooldownMultiplier>1.8</MeleeWeapon_CooldownMultiplier>
+      <SharpDamageMultiplier>0.75</SharpDamageMultiplier>
+      <BluntDamageMultiplier>0.28</BluntDamageMultiplier>
+      <DeteriorationRate>1</DeteriorationRate>
+      <Nutrition>0.01</Nutrition>
+    </statBases>
+    <stuffProps>
+      <stuffAdjective>human-bone</stuffAdjective>
+      <categories>
+        <li>MUGB_BoneStuff</li>
+      </categories>
+      <commonality>1.0</commonality>
+      <color>(199,181,129)</color>
+      <constructEffect>ConstructWood</constructEffect>
+      <appearance>Planks</appearance>
+      <soundImpactBullet>BulletImpact_Wood</soundImpactBullet>
+      <soundMeleeHitSharp>MeleeHit_Wood</soundMeleeHitSharp>
+      <soundMeleeHitBlunt>MeleeHit_Wood</soundMeleeHitBlunt>
+      <soundImpactMelee>Pawn_Melee_Punch_HitBuilding_Wood</soundImpactMelee>
+      <statFactors>
+        <MaxHitPoints>0.35</MaxHitPoints>
+        <Beauty>0.8</Beauty>
+        <Flammability>0.15</Flammability>
+        <WorkToMake>0.85</WorkToMake>
+        <WorkToBuild>0.85</WorkToBuild>
+        <DoorOpenSpeed>1.08</DoorOpenSpeed>
+        <MeleeWeapon_CooldownMultiplier>0.95</MeleeWeapon_CooldownMultiplier>
+      </statFactors>
+    </stuffProps>
+    <ingestible>
+      <preferability>NeverForNutrition</preferability>
+      <foodType>CarnivoreAnimalStrict</foodType>
+      <sourceDef>Human</sourceDef>
+      <specialThoughtDirect>AteHumanlikeMeatDirect</specialThoughtDirect>
+      <specialThoughtAsIngredient>AteHumanlikeMeatAsIngredient</specialThoughtAsIngredient>
+      <canAutoSelectAsFoodForCaravan>false</canAutoSelectAsFoodForCaravan>
+      <showIngestFloatOption>false</showIngestFloatOption>
+      <optimalityOffsetHumanlikes>-20</optimalityOffsetHumanlikes>
+      <optimalityOffsetFeedingAnimals>-10</optimalityOffsetFeedingAnimals>
+      <ingestEffect>EatMeat</ingestEffect>
+      <ingestSound>RawMeat_Eat</ingestSound>
+    </ingestible>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <stackLimit>150</stackLimit>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>MUGB_BoneDust</defName>
+    <label>bone dust</label>
+    <description>Ground bone mixed with a little stone grit. It is used as a stabilizer in goblin alloy work.</description>
+    <graphicData>
+      <texPath>Things/Item/Resources/MGB_BoneDust</texPath>
+      <graphicClass>MUGB.Graphic_GoblinPercentStackCount</graphicClass>
+    </graphicData>
+    <soundInteract>Standard_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <statBases>
+      <MarketValue>0.25</MarketValue>
+      <Mass>0.02</Mass>
+      <MaxHitPoints>25</MaxHitPoints>
+      <Flammability>0.8</Flammability>
+    </statBases>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <stackLimit>200</stackLimit>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>MUGB_CrudeGoblinAlloy</defName>
+    <label>crude goblin alloy</label>
+    <description>A dirty goblin alloy made from poor metals, steel, and a heavy dose of bone dust. It is usable, but unreliable.</description>
+    <graphicData>
+      <texPath>Things/Item/Resources/MGB_CrudeGoblinAlloy</texPath>
+      <graphicClass>MUGB.Graphic_GoblinAlloyStackCount</graphicClass>
+      <drawSize>(0.9,0.9)</drawSize>
+    </graphicData>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <statBases>
+      <MarketValue>1.6</MarketValue>
+      <Mass>0.55</Mass>
+      <StuffPower_Armor_Sharp>0.84</StuffPower_Armor_Sharp>
+      <StuffPower_Armor_Blunt>0.42</StuffPower_Armor_Blunt>
+      <StuffPower_Armor_Heat>0.52</StuffPower_Armor_Heat>
+      <SharpDamageMultiplier>0.95</SharpDamageMultiplier>
+      <BluntDamageMultiplier>1.0</BluntDamageMultiplier>
+    </statBases>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <stackLimit>90</stackLimit>
+    <burnableByRecipe>false</burnableByRecipe>
+    <smeltable>true</smeltable>
+    <stuffProps>
+      <stuffAdjective>crude goblin-alloy</stuffAdjective>
+      <categories>
+        <li>Metallic</li>
+        <li>MUGB_GoblinAlloyMetallic</li>
+      </categories>
+      <appearance>Metal</appearance>
+      <commonality>0.35</commonality>
+      <constructEffect>ConstructMetal</constructEffect>
+      <isAirtight>true</isAirtight>
+      <color>(199,195,164)</color>
+      <soundImpactBullet>BulletImpact_Metal</soundImpactBullet>
+      <soundMeleeHitSharp>MeleeHit_Metal_Sharp</soundMeleeHitSharp>
+      <soundMeleeHitBlunt>MeleeHit_Metal_Blunt</soundMeleeHitBlunt>
+      <soundImpactMelee>Pawn_Melee_Punch_HitBuilding_Metal</soundImpactMelee>
+      <statFactors>
+        <MaxHitPoints>0.85</MaxHitPoints>
+        <Beauty>0.65</Beauty>
+        <Flammability>0.45</Flammability>
+        <WorkToMake>1.05</WorkToMake>
+        <WorkToBuild>1.05</WorkToBuild>
+      </statFactors>
+    </stuffProps>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>MUGB_GoblinAlloy</defName>
+    <label>goblin alloy</label>
+    <description>A practical goblin alloy made from steel, metal, and bone dust. It is slightly better than plain steel as armor stock.</description>
+    <graphicData>
+      <texPath>Things/Item/Resources/MGB_GoblinAlloy</texPath>
+      <graphicClass>MUGB.Graphic_GoblinAlloyStackCount</graphicClass>
+      <drawSize>(0.9,0.9)</drawSize>
+    </graphicData>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <statBases>
+      <MarketValue>2.4</MarketValue>
+      <Mass>0.52</Mass>
+      <StuffPower_Armor_Sharp>0.96</StuffPower_Armor_Sharp>
+      <StuffPower_Armor_Blunt>0.48</StuffPower_Armor_Blunt>
+      <StuffPower_Armor_Heat>0.62</StuffPower_Armor_Heat>
+      <SharpDamageMultiplier>1.03</SharpDamageMultiplier>
+      <BluntDamageMultiplier>1.02</BluntDamageMultiplier>
+    </statBases>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <stackLimit>90</stackLimit>
+    <burnableByRecipe>false</burnableByRecipe>
+    <smeltable>true</smeltable>
+    <stuffProps>
+      <stuffAdjective>goblin-alloy</stuffAdjective>
+      <categories>
+        <li>Metallic</li>
+        <li>MUGB_GoblinAlloyMetallic</li>
+      </categories>
+      <appearance>Metal</appearance>
+      <commonality>0.6</commonality>
+      <constructEffect>ConstructMetal</constructEffect>
+      <isAirtight>true</isAirtight>
+      <color>(192,181,178)</color>
+      <soundImpactBullet>BulletImpact_Metal</soundImpactBullet>
+      <soundMeleeHitSharp>MeleeHit_Metal_Sharp</soundMeleeHitSharp>
+      <soundMeleeHitBlunt>MeleeHit_Metal_Blunt</soundMeleeHitBlunt>
+      <soundImpactMelee>Pawn_Melee_Punch_HitBuilding_Metal</soundImpactMelee>
+      <statFactors>
+        <MaxHitPoints>1.15</MaxHitPoints>
+        <Beauty>0.75</Beauty>
+        <Flammability>0.35</Flammability>
+        <WorkToMake>1.15</WorkToMake>
+        <WorkToBuild>1.15</WorkToBuild>
+      </statFactors>
+    </stuffProps>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>MUGB_FineGoblinAlloy</defName>
+    <label>superior goblin alloy</label>
+    <description>A higher grade goblin alloy stabilized with bone dust. It is strong, but still worse than the best metals used to create it.</description>
+    <graphicData>
+      <texPath>Things/Item/Resources/MGB_FineGoblinAlloy</texPath>
+      <graphicClass>MUGB.Graphic_GoblinAlloyStackCount</graphicClass>
+      <drawSize>(0.9,0.9)</drawSize>
+    </graphicData>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <statBases>
+      <MarketValue>4.8</MarketValue>
+      <Mass>0.45</Mass>
+      <StuffPower_Armor_Sharp>1.09</StuffPower_Armor_Sharp>
+      <StuffPower_Armor_Blunt>0.52</StuffPower_Armor_Blunt>
+      <StuffPower_Armor_Heat>0.64</StuffPower_Armor_Heat>
+      <SharpDamageMultiplier>1.08</SharpDamageMultiplier>
+      <BluntDamageMultiplier>1.08</BluntDamageMultiplier>
+    </statBases>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <stackLimit>90</stackLimit>
+    <burnableByRecipe>false</burnableByRecipe>
+    <smeltable>true</smeltable>
+    <stuffProps>
+      <stuffAdjective>superior goblin-alloy</stuffAdjective>
+      <categories>
+        <li>Metallic</li>
+        <li>MUGB_GoblinAlloyMetallic</li>
+      </categories>
+      <appearance>Metal</appearance>
+      <commonality>0.12</commonality>
+      <constructEffect>ConstructMetal</constructEffect>
+      <isAirtight>true</isAirtight>
+      <color>(200,206,206)</color>
+      <soundImpactBullet>BulletImpact_Metal</soundImpactBullet>
+      <soundMeleeHitSharp>MeleeHit_Metal_Sharp</soundMeleeHitSharp>
+      <soundMeleeHitBlunt>MeleeHit_Metal_Blunt</soundMeleeHitBlunt>
+      <soundImpactMelee>Pawn_Melee_Punch_HitBuilding_Metal</soundImpactMelee>
+      <statFactors>
+        <MaxHitPoints>1.95</MaxHitPoints>
+        <Beauty>0.85</Beauty>
+        <Flammability>0.15</Flammability>
+        <WorkToMake>1.65</WorkToMake>
+        <WorkToBuild>1.65</WorkToBuild>
+      </statFactors>
+    </stuffProps>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,1265 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <RecipeDef>
+    <defName>MUGB_MakeGoblinEmbryo</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>make goblin embryo</label>
+    <description>Prepare a goblin embryo from a stored reproductive sac, herbal medicine, and human viscera.</description>
+    <workerClass>MUGB.Recipe_MakeGoblinEmbryo</workerClass>
+    <jobString>Making goblin embryo.</jobString>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Drug</soundWorking>
+    <workAmount>5000</workAmount>
+    <workSkill>Crafting</workSkill>
+    <displayPriority>10</displayPriority>
+    <uiIconThing>MUGB_Gfetus</uiIconThing>
+    <recipeUsers>
+      <li>MUGB_druglab</li>
+      <li>DrugLab</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>MUGB_GBroodSac</li></thingDefs></filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>MedicineHerbal</li></thingDefs></filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>MUGB_Hgut</li></thingDefs></filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>MUGB_GBroodSac</li>
+        <li>MedicineHerbal</li>
+        <li>MUGB_Hgut</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>MUGB_MakeGloopJuice</defName>
+    <researchPrerequisite>MUGB_Research_WarBrews</researchPrerequisite>
+    <label>make gloopy juice</label>
+    <!-- Odyssey compatibility replaces the herbal medicine with 9 psilocaps when that DLC is active. -->
+    <description>Ferment viscera, herbal medicine, and raw fungus into a crude goblin combat stimulant.</description>
+    <jobString>Making gloopy juice.</jobString>
+    <workSpeedStat>DrugSynthesisSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Drug</soundWorking>
+    <workAmount>900</workAmount>
+    <workSkill>Medicine</workSkill>
+    <displayPriority>20</displayPriority>
+    <recipeUsers>
+      <li>MUGB_druglab</li>
+    </recipeUsers>
+    <skillRequirements>
+      <Medicine>5</Medicine>
+    </skillRequirements>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter>
+        <count>6</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>RawFungus</li></thingDefs></filter>
+        <count>2</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>MedicineHerbal</li></thingDefs></filter>
+        <count>6</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>MUGB_Hgut</li>
+        <li>MUGB_Ggut</li>
+        <li>RawFungus</li>
+        <li>MedicineHerbal</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <MUGB_GloopJuice>1</MUGB_GloopJuice>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>MUGB_MakeSpermJuice</defName>
+    <researchPrerequisite>MUGB_Research_WarBrews</researchPrerequisite>
+    <label>make tadpole vigor juice</label>
+    <!-- Odyssey compatibility replaces the herbal medicine with 6 psilocaps when that DLC is active. -->
+    <description>Process a goblin reproductive sac with herbal medicine and fungus into a crude work and fertility stimulant.</description>
+    <jobString>Making tadpole vigor juice.</jobString>
+    <workSpeedStat>DrugSynthesisSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Drug</soundWorking>
+    <workAmount>700</workAmount>
+    <workSkill>Medicine</workSkill>
+    <displayPriority>21</displayPriority>
+    <recipeUsers>
+      <li>MUGB_druglab</li>
+    </recipeUsers>
+    <skillRequirements>
+      <Medicine>3</Medicine>
+    </skillRequirements>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>MUGB_GBroodSac</li></thingDefs></filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>RawFungus</li></thingDefs></filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>MedicineHerbal</li></thingDefs></filter>
+        <count>4</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>MUGB_GBroodSac</li>
+        <li>RawFungus</li>
+        <li>MedicineHerbal</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <MUGB_SpermJuice>1</MUGB_SpermJuice>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>MUGB_MakeSmartyoil</defName>
+    <researchPrerequisite>MUGB_Research_WarBrews</researchPrerequisite>
+    <label>make smarty-oil</label>
+    <description>Render brains, herbal medicine, and viscera into a permanent goblin cognitive treatment.</description>
+    <jobString>Making smarty-oil.</jobString>
+    <workSpeedStat>DrugSynthesisSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Drug</soundWorking>
+    <workAmount>1200</workAmount>
+    <workSkill>Medicine</workSkill>
+    <displayPriority>22</displayPriority>
+    <recipeUsers>
+      <li>MUGB_druglab</li>
+    </recipeUsers>
+    <skillRequirements>
+      <Medicine>5</Medicine>
+    </skillRequirements>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>MUGB_brain</li></thingDefs></filter>
+        <count>10</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>MedicineHerbal</li></thingDefs></filter>
+        <count>10</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter>
+        <count>2</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>MUGB_brain</li>
+        <li>MedicineHerbal</li>
+        <li>MUGB_Hgut</li>
+        <li>MUGB_Ggut</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <MUGB_Smartyoil>1</MUGB_Smartyoil>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef Name="MUGB_GoblinButcheryBase" Abstract="True">
+    <description>Butcher a humanlike or animal corpse at a goblin cookstation.</description>
+    <workerCounterClass>RecipeWorkerCounter_ButcherAnimals</workerCounterClass>
+    <jobString>Butchering at the goblin cookstation.</jobString>
+    <workAmount>450</workAmount>
+    <workSpeedStat>ButcheryFleshSpeed</workSpeedStat>
+    <workSkill>Cooking</workSkill>
+    <efficiencyStat>ButcheryFleshEfficiency</efficiencyStat>
+    <effectWorking>ButcherFlesh</effectWorking>
+    <soundWorking>Recipe_ButcherCorpseFlesh</soundWorking>
+    <interruptIfIngredientIsRotting>true</interruptIfIngredientIsRotting>
+    <uiIconThing>Meat_Goblin</uiIconThing>
+    <displayPriority>5</displayPriority>
+    <forceHiddenSpecialFilters>
+      <li>AllowFresh</li>
+    </forceHiddenSpecialFilters>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Corpses</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <specialProducts>
+      <li>Butchery</li>
+    </specialProducts>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Corpses</li>
+      </categories>
+      <disallowedCategories>
+        <li>CorpsesMechanoid</li>
+        <li MayRequire="Ludeon.RimWorld.Odyssey">CorpsesDrone</li>
+      </disallowedCategories>
+      <specialFiltersToDisallow>
+        <li>AllowRotten</li>
+      </specialFiltersToDisallow>
+      <disallowDoesntProduceMeat>true</disallowDoesntProduceMeat>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <categories>
+        <li>Corpses</li>
+      </categories>
+    </defaultIngredientFilter>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_GoblinButcheryBase">
+    <defName>MUGB_ButcherCorpseGoblinCookstation</defName>
+    <label>goblin butchery</label>
+    <description>Butcher a corpse at the goblin cookstation, producing the normal butchery products plus guts from humanlike bodies.</description>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_GoblinButcheryBase">
+    <defName>MUGB_SavorHumanDisassembly</defName>
+    <researchPrerequisite>MUGB_Research_FineButchery</researchPrerequisite>
+    <label>savor humanlike disassembly</label>
+    <description>Carefully break down a humanlike corpse for goblin cooking. This takes longer, but extracts more usable flesh and always takes the skull if the head is present.</description>
+    <jobString>Savoring humanlike disassembly.</jobString>
+    <workAmount>720</workAmount>
+    <uiIconThing>Skull</uiIconThing>
+    <displayPriority>6</displayPriority>
+    <fixedIngredientFilter>
+      <categories>
+        <li>CorpsesHumanlike</li>
+      </categories>
+      <specialFiltersToDisallow>
+        <li>AllowRotten</li>
+      </specialFiltersToDisallow>
+      <disallowDoesntProduceMeat>true</disallowDoesntProduceMeat>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <categories>
+        <li>CorpsesHumanlike</li>
+      </categories>
+    </defaultIngredientFilter>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>MUGB_ExtractVisceraFromCorpse</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>extract viscera from corpse</label>
+    <!-- 한국어 의도: 시체에서 내장 꺼내기. 고블린 조리대 도축과 달리 고기/가죽/뼈는 얻지 않고 인간형 시체에서 내장만 적게 꺼내는 야매 해체 레시피입니다. -->
+    <description>Cut open a humanlike corpse and pull out usable viscera. This crude method yields only a small amount of guts and destroys the rest of the body instead of producing proper butcher products.</description>
+    <workerClass>MUGB.Recipe_ExtractVisceraFromCorpse</workerClass>
+    <workerCounterClass>RecipeWorkerCounter_ButcherAnimals</workerCounterClass>
+    <jobString>Extracting viscera from corpse.</jobString>
+    <workAmount>300</workAmount>
+    <workSpeedStat>ButcheryFleshSpeed</workSpeedStat>
+    <workSkill>Cooking</workSkill>
+    <efficiencyStat>ButcheryFleshEfficiency</efficiencyStat>
+    <effectWorking>ButcherFlesh</effectWorking>
+    <soundWorking>Recipe_ButcherCorpseFlesh</soundWorking>
+    <interruptIfIngredientIsRotting>true</interruptIfIngredientIsRotting>
+    <uiIconThing>MUGB_Hgut</uiIconThing>
+    <displayPriority>4</displayPriority>
+    <recipeUsers>
+      <li>ButcherSpot</li>
+      <li>TableButcher</li>
+    </recipeUsers>
+    <forceHiddenSpecialFilters>
+      <li>AllowFresh</li>
+    </forceHiddenSpecialFilters>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>CorpsesHumanlike</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>CorpsesHumanlike</li>
+      </categories>
+      <specialFiltersToDisallow>
+        <li>AllowRotten</li>
+      </specialFiltersToDisallow>
+      <disallowDoesntProduceMeat>true</disallowDoesntProduceMeat>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <categories>
+        <li>CorpsesHumanlike</li>
+      </categories>
+    </defaultIngredientFilter>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>MUGB_ExtractBonesFromCorpse</defName>
+    <label>salvage bone</label>
+    <!-- 한국어 의도: 시체에서 뼈 추출하기. 썩거나 백골화되어 도축이 안 되는 인간형 시체에서
+         인골만 뽑아냅니다. 시체는 이 과정에서 파괴됩니다. 신선한 시체는 대상에서 제외해
+         (그건 도축으로 고기·인골을 함께 얻는 편이 낫습니다) 버려진 시체 회수 용도로만 씁니다.
+         산출량은 고정 5개이며 작업대별 차이는 두지 않습니다. -->
+    <description>Salvage usable bone from a rotting or skeletal humanlike corpse. Fresh corpses can't be salvaged here — butcher those instead to get meat and bone together.</description>
+    <jobString>Salvaging bone from corpse.</jobString>
+    <workAmount>280</workAmount>
+    <workSpeedStat>ButcheryFleshSpeed</workSpeedStat>
+    <workSkill>Cooking</workSkill>
+    <workSkillLearnFactor>0.25</workSkillLearnFactor>
+    <efficiencyStat>ButcheryFleshEfficiency</efficiencyStat>
+    <effectWorking>ButcherFlesh</effectWorking>
+    <soundWorking>Recipe_ButcherCorpseFlesh</soundWorking>
+    <uiIconThing>MUGB_Bone</uiIconThing>
+    <displayPriority>3</displayPriority>
+    <recipeUsers>
+      <li>ButcherSpot</li>
+      <li>TableButcher</li>
+      <li>MUGB_cookstation</li>
+    </recipeUsers>
+    <products>
+      <MUGB_Bone>5</MUGB_Bone>
+    </products>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>CorpsesHumanlike</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>CorpsesHumanlike</li>
+      </categories>
+      <disallowedCategories>
+        <li>CorpsesMechanoid</li>
+        <li MayRequire="Ludeon.RimWorld.Odyssey">CorpsesDrone</li>
+      </disallowedCategories>
+      <!-- 신선한 시체는 제외: 썩음/백골 상태만 잡힙니다(백골은 고기를 안 내므로 도축 불가). -->
+      <specialFiltersToDisallow>
+        <li>AllowFresh</li>
+      </specialFiltersToDisallow>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <categories>
+        <li>CorpsesHumanlike</li>
+      </categories>
+    </defaultIngredientFilter>
+  </RecipeDef>
+
+  <RecipeDef Abstract="True" Name="MUGB_GrindBoneDustBase">
+    <description>Grind bones with a little stone grit into bone dust.</description>
+    <jobString>Grinding bones.</jobString>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>CutStone</effectWorking>
+    <soundWorking>Recipe_MakeStoneBlocks</soundWorking>
+    <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>0.25</workSkillLearnFactor>
+    <targetCountAdjustment>20</targetCountAdjustment>
+    <recipeUsers>
+      <li>MUGB_Basin</li>
+      <li>TableStonecutter</li>
+    </recipeUsers>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>MUGB_Bone</li>
+        <li MayRequire="DankPyon.Medieval.Overhaul">DankPyon_Bone</li>
+      </thingDefs>
+      <categories>
+        <li>StoneBlocks</li>
+      </categories>
+    </fixedIngredientFilter>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_GrindBoneDustBase">
+    <defName>MUGB_GrindBoneDust</defName>
+    <researchPrerequisite>MUGB_Research_BoneRendering</researchPrerequisite>
+    <label>grind bone dust</label>
+    <description>Grind bones with a little stone grit into bone dust.</description>
+    <jobString>Grinding bones.</jobString>
+    <workAmount>900</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>MUGB_Bone</li>
+            <li MayRequire="DankPyon.Medieval.Overhaul">DankPyon_Bone</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
+      </li>
+      <li>
+        <filter>
+          <categories>
+            <li>StoneBlocks</li>
+          </categories>
+        </filter>
+        <count>2</count>
+      </li>
+    </ingredients>
+    <products>
+      <MUGB_BoneDust>20</MUGB_BoneDust>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_GrindBoneDustBase">
+    <defName>MUGB_GrindBoneDustBulk4</defName>
+    <researchPrerequisite>MUGB_Research_BoneRendering</researchPrerequisite>
+    <label>grind bone dust x4</label>
+    <workAmount>3000</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>MUGB_Bone</li>
+            <li MayRequire="DankPyon.Medieval.Overhaul">DankPyon_Bone</li>
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+      <li>
+        <filter>
+          <categories>
+            <li>StoneBlocks</li>
+          </categories>
+        </filter>
+        <count>8</count>
+      </li>
+    </ingredients>
+    <products>
+      <MUGB_BoneDust>80</MUGB_BoneDust>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_GrindBoneDustBase">
+    <defName>MUGB_GrindBoneDustBulk16</defName>
+    <researchPrerequisite>MUGB_Research_BoneRendering</researchPrerequisite>
+    <label>grind bone dust x16</label>
+    <workAmount>10500</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>MUGB_Bone</li>
+            <li MayRequire="DankPyon.Medieval.Overhaul">DankPyon_Bone</li>
+          </thingDefs>
+        </filter>
+        <count>160</count>
+      </li>
+      <li>
+        <filter>
+          <categories>
+            <li>StoneBlocks</li>
+          </categories>
+        </filter>
+        <count>32</count>
+      </li>
+    </ingredients>
+    <products>
+      <MUGB_BoneDust>320</MUGB_BoneDust>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef Abstract="True" Name="MUGB_MakeGoblinAlloyBase">
+    <description>Forge raw metal, steel, and bone dust into goblin alloy. The output grade is decided by the armor quality of the variable metals used.</description>
+    <jobString>Forging goblin alloy.</jobString>
+    <workSpeedStat>SmeltingSpeed</workSpeedStat>
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Smelt</soundWorking>
+    <workSkill>Crafting</workSkill>
+    <displayPriority>50</displayPriority>
+    <recipeUsers>
+      <li>MUGB_smithbench</li>
+      <!-- 한국어 의도: 미디블 선행 후에는 철괴를 만드는 미디블 작업대에서도 합금만 제작 가능. 고블린 무기/갑옷은 넣지 않는다. -->
+      <li MayRequire="DankPyon.Medieval.Overhaul">DankPyon_Workbench</li>
+    </recipeUsers>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>MUGB_BoneDust</li>
+        <li>Steel</li>
+      </thingDefs>
+      <categories>
+        <li>ResourcesRaw</li>
+      </categories>
+    </fixedIngredientFilter>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_MakeGoblinAlloyBase">
+    <defName>MUGB_MakeGoblinAlloy</defName>
+    <researchPrerequisite>MUGB_Research_Alloying</researchPrerequisite>
+    <label>make goblin alloy x5</label>
+    <jobString>Forging goblin alloy.</jobString>
+    <workAmount>600</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_BoneDust</li></thingDefs></filter><count>2</count></li>
+      <li><filter><thingDefs><li>Steel</li></thingDefs></filter><count>1</count></li>
+      <li><filter><categories><li>ResourcesRaw</li></categories></filter><count>4</count></li>
+    </ingredients>
+    <products>
+      <MUGB_GoblinAlloy>5</MUGB_GoblinAlloy>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_MakeGoblinAlloyBase">
+    <defName>MUGB_MakeGoblinAlloyBulk50</defName>
+    <researchPrerequisite>MUGB_Research_Alloying</researchPrerequisite>
+    <label>make goblin alloy x50</label>
+    <workAmount>4800</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_BoneDust</li></thingDefs></filter><count>20</count></li>
+      <li><filter><thingDefs><li>Steel</li></thingDefs></filter><count>10</count></li>
+      <li><filter><categories><li>ResourcesRaw</li></categories></filter><count>40</count></li>
+    </ingredients>
+    <products>
+      <MUGB_GoblinAlloy>50</MUGB_GoblinAlloy>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_MakeGoblinAlloyBase">
+    <defName>MUGB_MakeGoblinAlloyBulk100</defName>
+    <researchPrerequisite>MUGB_Research_Alloying</researchPrerequisite>
+    <label>make goblin alloy x100</label>
+    <workAmount>9000</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_BoneDust</li></thingDefs></filter><count>40</count></li>
+      <li><filter><thingDefs><li>Steel</li></thingDefs></filter><count>20</count></li>
+      <li><filter><categories><li>ResourcesRaw</li></categories></filter><count>80</count></li>
+    </ingredients>
+    <products>
+      <MUGB_GoblinAlloy>100</MUGB_GoblinAlloy>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef Abstract="True" Name="MUGB_PrepareGoblinFoodIngredientBase">
+    <description>Prepare crude goblin cooking ingredients.</description>
+    <jobString>Preparing goblin ingredients.</jobString>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_ButcherCorpseFlesh</soundWorking>
+    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+    <workSkill>Cooking</workSkill>
+    <workSkillLearnFactor>0.35</workSkillLearnFactor>
+    <displayPriority>50</displayPriority>
+    <recipeUsers>
+      <li>MUGB_cookstation</li>
+    </recipeUsers>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Meat_Human</li>
+        <li>Meat_Goblin</li>
+        <li>MUGB_Bone</li>
+        <li>MUGB_Hgut</li>
+        <li>MUGB_Ggut</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_PrepareGoblinFoodIngredientBase">
+    <defName>MUGB_MakeHumanFleshChunk</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>make human flesh chunk</label>
+    <workAmount>180</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Meat_Human</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>MUGB_Bone</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <MUGB_Hchunk>1</MUGB_Hchunk>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_PrepareGoblinFoodIngredientBase">
+    <defName>MUGB_MakeHumanFleshChunkBulk4</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>make human flesh chunk x4</label>
+    <workAmount>600</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>Meat_Human</li></thingDefs></filter><count>3</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>1</count></li>
+    </ingredients>
+    <products>
+      <MUGB_Hchunk>4</MUGB_Hchunk>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_PrepareGoblinFoodIngredientBase">
+    <defName>MUGB_MakeHumanFleshChunkBulk8</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>make human flesh chunk x8</label>
+    <workAmount>1080</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>Meat_Human</li></thingDefs></filter><count>5</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>1</count></li>
+    </ingredients>
+    <products>
+      <MUGB_Hchunk>8</MUGB_Hchunk>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_PrepareGoblinFoodIngredientBase">
+    <defName>MUGB_MakeGoblinFleshChunk</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>make goblin flesh chunk</label>
+    <workAmount>180</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Meat_Goblin</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>MUGB_Bone</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <MUGB_Gchunk>1</MUGB_Gchunk>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_PrepareGoblinFoodIngredientBase">
+    <defName>MUGB_MakeGoblinFleshChunkBulk4</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>make goblin flesh chunk x4</label>
+    <workAmount>600</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>Meat_Goblin</li></thingDefs></filter><count>3</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>1</count></li>
+    </ingredients>
+    <products>
+      <MUGB_Gchunk>4</MUGB_Gchunk>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_PrepareGoblinFoodIngredientBase">
+    <defName>MUGB_MakeGoblinFleshChunkBulk8</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>make goblin flesh chunk x8</label>
+    <workAmount>1080</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>Meat_Goblin</li></thingDefs></filter><count>6</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>1</count></li>
+    </ingredients>
+    <products>
+      <MUGB_Gchunk>8</MUGB_Gchunk>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_PrepareGoblinFoodIngredientBase">
+    <defName>MUGB_MakeHeart</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>prepare heart</label>
+    <workAmount>320</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>MUGB_Hgut</li>
+            <li>MUGB_Ggut</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Meat_Human</li>
+            <li>Meat_Goblin</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+    </ingredients>
+    <products>
+      <MUGB_heart>1</MUGB_heart>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_PrepareGoblinFoodIngredientBase">
+    <defName>MUGB_MakeHeartBulk4</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>prepare heart x4</label>
+    <workAmount>1080</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter><count>20</count></li>
+      <li><filter><thingDefs><li>Meat_Human</li><li>Meat_Goblin</li></thingDefs></filter><count>80</count></li>
+    </ingredients>
+    <products>
+      <MUGB_heart>4</MUGB_heart>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_PrepareGoblinFoodIngredientBase">
+    <defName>MUGB_MakeHeartBulk8</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>prepare heart x8</label>
+    <workAmount>1920</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter><count>40</count></li>
+      <li><filter><thingDefs><li>Meat_Human</li><li>Meat_Goblin</li></thingDefs></filter><count>160</count></li>
+    </ingredients>
+    <products>
+      <MUGB_heart>8</MUGB_heart>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_PrepareGoblinFoodIngredientBase">
+    <defName>MUGB_MakeBrain</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>prepare brain</label>
+    <workAmount>420</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>MUGB_Hgut</li>
+            <li>MUGB_Ggut</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Meat_Human</li>
+            <li>Meat_Goblin</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <MUGB_brain>1</MUGB_brain>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_PrepareGoblinFoodIngredientBase">
+    <defName>MUGB_MakeBrainBulk4</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>prepare brain x4</label>
+    <workAmount>1440</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter><count>4</count></li>
+      <li><filter><thingDefs><li>Meat_Human</li><li>Meat_Goblin</li></thingDefs></filter><count>1</count></li>
+    </ingredients>
+    <products>
+      <MUGB_brain>4</MUGB_brain>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_PrepareGoblinFoodIngredientBase">
+    <defName>MUGB_MakeBrainBulk8</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>prepare brain x8</label>
+    <workAmount>2520</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter><count>8</count></li>
+      <li><filter><thingDefs><li>Meat_Human</li><li>Meat_Goblin</li></thingDefs></filter><count>1</count></li>
+    </ingredients>
+    <products>
+      <MUGB_brain>8</MUGB_brain>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef Abstract="True" Name="MUGB_CookGoblinMealBase">
+    <description>Cook goblin food at a goblin cookstation.</description>
+    <jobString>Cooking goblin food.</jobString>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <workSkill>Cooking</workSkill>
+    <displayPriority>100</displayPriority>
+    <recipeUsers>
+      <li>MUGB_cookstation</li>
+    </recipeUsers>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>MUGB_Hgut</li>
+        <li>MUGB_Ggut</li>
+        <li>MUGB_Hchunk</li>
+        <li>MUGB_Gchunk</li>
+        <li>MUGB_brain</li>
+        <li>MUGB_Bone</li>
+        <li>Meat_Human</li>
+        <li>Meat_Goblin</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookGutStew</defName>
+    <label>cook gut stew</label>
+    <workAmount>240</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>MUGB_Hgut</li>
+            <li>MUGB_Ggut</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+    </ingredients>
+    <products>
+      <MUGB_gutstew>1</MUGB_gutstew>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookGutStewBulk4</defName>
+    <label>cook gut stew x4</label>
+    <workAmount>960</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter><count>20</count></li>
+    </ingredients>
+    <products>
+      <MUGB_gutstew>4</MUGB_gutstew>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookGutStewBulk8</defName>
+    <label>cook gut stew x8</label>
+    <workAmount>1920</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter><count>40</count></li>
+    </ingredients>
+    <products>
+      <MUGB_gutstew>8</MUGB_gutstew>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookHumanFleshBBQ</defName>
+    <label>cook human flesh barbecue</label>
+    <workAmount>240</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Hchunk</li></thingDefs></filter><count>2</count></li>
+    </ingredients>
+    <products>
+      <MUGB_HBBQ>1</MUGB_HBBQ>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookHumanFleshBBQBulk4</defName>
+    <label>cook human flesh barbecue x4</label>
+    <workAmount>960</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Hchunk</li></thingDefs></filter><count>8</count></li>
+    </ingredients>
+    <products>
+      <MUGB_HBBQ>4</MUGB_HBBQ>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookHumanFleshBBQBulk8</defName>
+    <label>cook human flesh barbecue x8</label>
+    <workAmount>1920</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Hchunk</li></thingDefs></filter><count>16</count></li>
+    </ingredients>
+    <products>
+      <MUGB_HBBQ>8</MUGB_HBBQ>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookGoblinFleshBBQ</defName>
+    <label>cook goblin flesh barbecue</label>
+    <workAmount>240</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Gchunk</li></thingDefs></filter><count>2</count></li>
+    </ingredients>
+    <products>
+      <MUGB_GBBQ>1</MUGB_GBBQ>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookGoblinFleshBBQBulk4</defName>
+    <label>cook goblin flesh barbecue x4</label>
+    <workAmount>960</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Gchunk</li></thingDefs></filter><count>8</count></li>
+    </ingredients>
+    <products>
+      <MUGB_GBBQ>4</MUGB_GBBQ>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookGoblinFleshBBQBulk8</defName>
+    <label>cook goblin flesh barbecue x8</label>
+    <workAmount>1920</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Gchunk</li></thingDefs></filter><count>16</count></li>
+    </ingredients>
+    <products>
+      <MUGB_GBBQ>8</MUGB_GBBQ>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookGutSausage</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook gut sausage</label>
+    <workAmount>360</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter><count>10</count></li>
+      <li><filter><thingDefs><li>Meat_Human</li><li>Meat_Goblin</li></thingDefs></filter><count>20</count></li>
+    </ingredients>
+    <products>
+      <MUGB_gutsausage>1</MUGB_gutsausage>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookGutSausageBulk4</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook gut sausage x4</label>
+    <workAmount>1440</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter><count>40</count></li>
+      <li><filter><thingDefs><li>Meat_Human</li><li>Meat_Goblin</li></thingDefs></filter><count>80</count></li>
+    </ingredients>
+    <products>
+      <MUGB_gutsausage>4</MUGB_gutsausage>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookGutSausageBulk8</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook gut sausage x8</label>
+    <workAmount>2880</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter><count>80</count></li>
+      <li><filter><thingDefs><li>Meat_Human</li><li>Meat_Goblin</li></thingDefs></filter><count>160</count></li>
+    </ingredients>
+    <products>
+      <MUGB_gutsausage>8</MUGB_gutsausage>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookBrainStew</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook brain stew</label>
+    <workAmount>640</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_brain</li></thingDefs></filter><count>5</count></li>
+      <li><filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter><count>3</count></li>
+      <li><filter><thingDefs><li>Meat_Human</li><li>Meat_Goblin</li></thingDefs></filter><count>10</count></li>
+    </ingredients>
+    <products>
+      <MUGB_Brainstew>1</MUGB_Brainstew>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookBrainStewBulk4</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook brain stew x4</label>
+    <workAmount>2560</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_brain</li></thingDefs></filter><count>20</count></li>
+      <li><filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter><count>12</count></li>
+      <li><filter><thingDefs><li>Meat_Human</li><li>Meat_Goblin</li></thingDefs></filter><count>40</count></li>
+    </ingredients>
+    <products>
+      <MUGB_Brainstew>4</MUGB_Brainstew>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookBrainStewBulk8</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook brain stew x8</label>
+    <workAmount>5120</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_brain</li></thingDefs></filter><count>40</count></li>
+      <li><filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter><count>24</count></li>
+      <li><filter><thingDefs><li>Meat_Human</li><li>Meat_Goblin</li></thingDefs></filter><count>80</count></li>
+    </ingredients>
+    <products>
+      <MUGB_Brainstew>8</MUGB_Brainstew>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookHumanLegBBQ</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook roasted human leg</label>
+    <workAmount>240</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Hchunk</li></thingDefs></filter><count>1</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>2</count></li>
+    </ingredients>
+    <products>
+      <MUGB_legHBBQ>1</MUGB_legHBBQ>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookHumanLegBBQBulk4</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook roasted human leg x4</label>
+    <workAmount>960</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Hchunk</li></thingDefs></filter><count>4</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>8</count></li>
+    </ingredients>
+    <products>
+      <MUGB_legHBBQ>4</MUGB_legHBBQ>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookHumanLegBBQBulk8</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook roasted human leg x8</label>
+    <workAmount>1920</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Hchunk</li></thingDefs></filter><count>8</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>16</count></li>
+    </ingredients>
+    <products>
+      <MUGB_legHBBQ>8</MUGB_legHBBQ>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookGoblinLegBBQ</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook roasted goblin leg</label>
+    <workAmount>240</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Gchunk</li></thingDefs></filter><count>1</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>2</count></li>
+    </ingredients>
+    <products>
+      <MUGB_legGBBQ>1</MUGB_legGBBQ>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookGoblinLegBBQBulk4</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook roasted goblin leg x4</label>
+    <workAmount>960</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Gchunk</li></thingDefs></filter><count>4</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>8</count></li>
+    </ingredients>
+    <products>
+      <MUGB_legGBBQ>4</MUGB_legGBBQ>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookGoblinLegBBQBulk8</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook roasted goblin leg x8</label>
+    <workAmount>1920</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Gchunk</li></thingDefs></filter><count>8</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>16</count></li>
+    </ingredients>
+    <products>
+      <MUGB_legGBBQ>8</MUGB_legGBBQ>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookHumanArmBBQ</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook roasted human arm</label>
+    <workAmount>240</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Hchunk</li></thingDefs></filter><count>1</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>1</count></li>
+      <li><filter><thingDefs><li>Meat_Human</li></thingDefs></filter><count>4</count></li>
+    </ingredients>
+    <products>
+      <MUGB_armHBBQ>1</MUGB_armHBBQ>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookHumanArmBBQBulk4</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook roasted human arm x4</label>
+    <workAmount>960</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Hchunk</li></thingDefs></filter><count>4</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>4</count></li>
+      <li><filter><thingDefs><li>Meat_Human</li></thingDefs></filter><count>16</count></li>
+    </ingredients>
+    <products>
+      <MUGB_armHBBQ>4</MUGB_armHBBQ>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookHumanArmBBQBulk8</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook roasted human arm x8</label>
+    <workAmount>1920</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Hchunk</li></thingDefs></filter><count>8</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>8</count></li>
+      <li><filter><thingDefs><li>Meat_Human</li></thingDefs></filter><count>32</count></li>
+    </ingredients>
+    <products>
+      <MUGB_armHBBQ>8</MUGB_armHBBQ>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookGoblinArmBBQ</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook roasted goblin arm</label>
+    <workAmount>240</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Gchunk</li></thingDefs></filter><count>1</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>1</count></li>
+      <li><filter><thingDefs><li>Meat_Goblin</li></thingDefs></filter><count>4</count></li>
+    </ingredients>
+    <products>
+      <MUGB_armGBBQ>1</MUGB_armGBBQ>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookGoblinArmBBQBulk4</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook roasted goblin arm x4</label>
+    <workAmount>960</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Gchunk</li></thingDefs></filter><count>4</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>4</count></li>
+      <li><filter><thingDefs><li>Meat_Goblin</li></thingDefs></filter><count>16</count></li>
+    </ingredients>
+    <products>
+      <MUGB_armGBBQ>4</MUGB_armGBBQ>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookGoblinArmBBQBulk8</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook roasted goblin arm x8</label>
+    <workAmount>1920</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Gchunk</li></thingDefs></filter><count>8</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>8</count></li>
+      <li><filter><thingDefs><li>Meat_Goblin</li></thingDefs></filter><count>32</count></li>
+    </ingredients>
+    <products>
+      <MUGB_armGBBQ>8</MUGB_armGBBQ>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookLavishHumanFleshPlatterSingle</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook lavish human flesh platter</label>
+    <workAmount>640</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Hchunk</li></thingDefs></filter><count>6</count></li>
+      <li><filter><thingDefs><li>Meat_Human</li></thingDefs></filter><count>5</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>5</count></li>
+    </ingredients>
+    <products>
+      <MUGB_excHBBQ>1</MUGB_excHBBQ>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookLavishHumanFleshPlatter</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook lavish human flesh platter x4</label>
+    <workAmount>2560</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Hchunk</li></thingDefs></filter><count>6</count></li>
+      <li><filter><thingDefs><li>Meat_Human</li></thingDefs></filter><count>5</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>5</count></li>
+    </ingredients>
+    <products>
+      <MUGB_excHBBQ>4</MUGB_excHBBQ>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookLavishGoblinFleshPlatterSingle</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook lavish goblin flesh platter</label>
+    <workAmount>640</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Gchunk</li></thingDefs></filter><count>6</count></li>
+      <li><filter><thingDefs><li>Meat_Goblin</li></thingDefs></filter><count>5</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>5</count></li>
+    </ingredients>
+    <products>
+      <MUGB_excGBBQ>1</MUGB_excGBBQ>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_CookGoblinMealBase">
+    <defName>MUGB_CookLavishGoblinFleshPlatter</defName>
+    <researchPrerequisite>MUGB_Research_Cuisine</researchPrerequisite>
+    <label>cook lavish goblin flesh platter x4</label>
+    <workAmount>2560</workAmount>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_Gchunk</li></thingDefs></filter><count>6</count></li>
+      <li><filter><thingDefs><li>Meat_Goblin</li></thingDefs></filter><count>5</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>5</count></li>
+    </ingredients>
+    <products>
+      <MUGB_excGBBQ>4</MUGB_excGBBQ>
+    </products>
+  </RecipeDef>
+
+</Defs>

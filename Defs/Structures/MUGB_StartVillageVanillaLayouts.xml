@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    [파일 개요]
+    미디블 오버홀이 없을 때 쓰는 시작 마을 레이아웃입니다.
+
+    의도:
+    - 원래 시작 마을(MUGB_StartVillage1~3)은 미디블 오버홀 심볼에 의존해 그 모드가 없으면
+      레이아웃 자체가 로드되지 않고 마을이 생성되지 않습니다.
+    - 이 레이아웃은 코어 물건만 사용합니다. 오두막 네 채와 중앙 모닥불로 구성했고,
+      침대는 잠자리, 가구는 식탁과 의자 정도로 단순하게 두었습니다.
+    - 시나리오 코드가 원래 레이아웃을 못 찾으면 이 레이아웃으로 대신 마을을 세웁니다.
+  -->
+
+  <KCSG.StructureLayoutDef>
+    <defName>MUGB_StartVillageVanilla1</defName>
+    <isStorage>false</isStorage>
+    <spawnConduits>false</spawnConduits>
+    <layouts>
+      <li>
+        <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+        <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+        <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+        <li>.,.,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,.,.,.</li>
+        <li>.,.,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,.,.,.</li>
+        <li>.,.,MUGB_VanVillage_Wall,.,MUGB_VanVillage_Bedroll,.,MUGB_VanVillage_Bedroll,.,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,.,MUGB_VanVillage_Bedroll,.,MUGB_VanVillage_Bedroll,.,MUGB_VanVillage_Wall,.,.,.</li>
+        <li>.,.,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,.,.,.</li>
+        <li>.,.,MUGB_VanVillage_Wall,.,MUGB_VanVillage_Bedroll,.,.,MUGB_VanVillage_Shelf,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,.,.,.,MUGB_VanVillage_Bedroll,.,MUGB_VanVillage_Wall,.,.,.</li>
+        <li>.,.,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,.,.,.</li>
+        <li>.,.,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Door,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Torch,.,.,.,MUGB_VanVillage_Torch,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Door,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,.,.,.</li>
+        <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+        <li>.,.,.,.,.,.,.,.,.,.,.,MUGB_VanVillage_Campfire,.,.,.,.,.,.,.,.,.,.,.,.</li>
+        <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+        <li>.,.,.,.,.,.,.,.,.,MUGB_VanVillage_Torch,.,.,.,MUGB_VanVillage_Torch,.,.,.,.,.,.,.,.,.,.</li>
+        <li>.,.,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Door,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Door,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,.,.</li>
+        <li>.,.,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,.,.,.,.,.,.,MUGB_VanVillage_Wall,.,.</li>
+        <li>.,.,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,.,MUGB_VanVillage_Shelf,.,.,.,.,MUGB_VanVillage_Wall,.,.</li>
+        <li>.,.,MUGB_VanVillage_Wall,.,MUGB_VanVillage_Bedroll,.,MUGB_VanVillage_Bedroll,.,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,.,.,MUGB_VanVillage_Table,MUGB_VanVillage_Table,.,.,MUGB_VanVillage_Wall,.,.</li>
+        <li>.,.,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,.,.,MUGB_VanVillage_Chair,MUGB_VanVillage_Chair,.,.,MUGB_VanVillage_Wall,.,.</li>
+        <li>.,.,MUGB_VanVillage_Wall,.,MUGB_VanVillage_Bedroll,.,.,MUGB_VanVillage_Shelf,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,.,.,.,.,.,.,MUGB_VanVillage_Wall,.,.</li>
+        <li>.,.,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,.,.,.,.,.,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,.,.</li>
+        <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+        <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+        <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      </li>
+    </layouts>
+    <roofGrid>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,1,1,1,1,1,1,1,.,.,.,.,.,1,1,1,1,1,1,1,.,.,.</li>
+      <li>.,.,1,1,1,1,1,1,1,.,.,.,.,.,1,1,1,1,1,1,1,.,.,.</li>
+      <li>.,.,1,1,1,1,1,1,1,.,.,.,.,.,1,1,1,1,1,1,1,.,.,.</li>
+      <li>.,.,1,1,1,1,1,1,1,.,.,.,.,.,1,1,1,1,1,1,1,.,.,.</li>
+      <li>.,.,1,1,1,1,1,1,1,.,.,.,.,.,1,1,1,1,1,1,1,.,.,.</li>
+      <li>.,.,1,1,1,1,1,1,1,.,.,.,.,.,1,1,1,1,1,1,1,.,.,.</li>
+      <li>.,.,1,1,1,1,1,1,1,.,.,.,.,.,1,1,1,1,1,1,1,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,1,1,1,1,1,1,1,.,.,.,.,.,1,1,1,1,1,1,1,1,.,.</li>
+      <li>.,.,1,1,1,1,1,1,1,.,.,.,.,.,1,1,1,1,1,1,1,1,.,.</li>
+      <li>.,.,1,1,1,1,1,1,1,.,.,.,.,.,1,1,1,1,1,1,1,1,.,.</li>
+      <li>.,.,1,1,1,1,1,1,1,.,.,.,.,.,1,1,1,1,1,1,1,1,.,.</li>
+      <li>.,.,1,1,1,1,1,1,1,.,.,.,.,.,1,1,1,1,1,1,1,1,.,.</li>
+      <li>.,.,1,1,1,1,1,1,1,.,.,.,.,.,1,1,1,1,1,1,1,1,.,.</li>
+      <li>.,.,1,1,1,1,1,1,1,.,.,.,.,.,1,1,1,1,1,1,1,1,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+    </roofGrid>
+    <terrainGrid>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,.,.,.,.,.,.,.,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,.,.,.,.</li>
+      <li>.,.,.,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,.,.,.,.,.,.,.,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,.,.,.,.</li>
+      <li>.,.,.,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,.,.,.,.,.,.,.,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,.,.,.,.</li>
+      <li>.,.,.,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,.,.,.,.,.,.,.,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,.,.,.,.</li>
+      <li>.,.,.,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,.,.,.,.,.,.,.,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,.,.,.,.,.,.,.,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,.,.,.</li>
+      <li>.,.,.,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,.,.,.,.,.,.,.,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,.,.,.</li>
+      <li>.,.,.,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,.,.,.,.,.,.,.,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,.,.,.</li>
+      <li>.,.,.,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,.,.,.,.,.,.,.,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,.,.,.</li>
+      <li>.,.,.,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,.,.,.,.,.,.,.,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,WoodPlankFloor,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+    </terrainGrid>
+    <forceGenerateRoof>true</forceGenerateRoof>
+    <needRoofClearance>true</needRoofClearance>
+  </KCSG.StructureLayoutDef>
+
+</Defs>

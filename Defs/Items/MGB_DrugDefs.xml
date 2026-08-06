@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="DrugBase">
+    <defName>MUGB_GloopJuice</defName>
+    <label>gloopy juice</label>
+    <description>A fermented goblin combat drug made by grinding viscera with herbs and raw fungus. It numbs the brain until pain becomes a distant itch, but leaves the user dull and clumsy when the rush ends.\n\n"Na! Strong now! Arrow no hurt! Keeshishit, tickles!"</description>
+    <graphicData>
+      <texPath>Things/Item/MGB_GloopJuice</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <rotatable>false</rotatable>
+    <statBases>
+      <MarketValue>38</MarketValue>
+      <Mass>0.1</Mass>
+    </statBases>
+    <ingestible>
+      <joyKind>Chemical</joyKind>
+      <joy>0.30</joy>
+      <drugCategory>Hard</drugCategory>
+      <foodType>Processed, Fluid</foodType>
+      <baseIngestTicks>80</baseIngestTicks>
+      <ingestSound>Ingest_Inject</ingestSound>
+      <ingestCommandString>Inject {0}</ingestCommandString>
+      <ingestReportString>Injecting {0}.</ingestReportString>
+      <useEatingSpeedStat>false</useEatingSpeedStat>
+      <chairSearchRadius>0</chairSearchRadius>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>MUGB_GloopJuiceHigh</hediffDef>
+          <severity>1</severity>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Drug">
+        <listOrder>220</listOrder>
+        <overdoseSeverityOffset>0.08~0.16</overdoseSeverityOffset>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="DrugPillBase">
+    <defName>MUGB_SpermJuice</defName>
+    <label>tadpole vigor juice</label>
+    <description>Goblin superstition says eating a body part lets you steal what it was good at. This foul stimulant makes the body restless, fertile, and eager to work.\n\n"Ugh! Is this supposed to be the goblins' workshop? Why the hell does it reek of Bradford pears in here? Gross... Instead of actually working the line, what the hell were they doing?!"</description>
+    <graphicData>
+      <texPath>Things/Item/MGB_SpermJuice</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <rotatable>false</rotatable>
+    <statBases>
+      <MarketValue>42</MarketValue>
+      <Mass>0.03</Mass>
+    </statBases>
+    <ingestible>
+      <joyKind>Chemical</joyKind>
+      <joy>0.30</joy>
+      <drugCategory>Hard</drugCategory>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>MUGB_SpermJuiceHigh</hediffDef>
+          <severity>1</severity>
+        </li>
+        <li Class="IngestionOutcomeDoer_OffsetNeed">
+          <need>Rest</need>
+          <offset>0.8</offset>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Drug">
+        <listOrder>230</listOrder>
+        <overdoseSeverityOffset>0.06~0.12</overdoseSeverityOffset>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="DrugBase">
+    <defName>MUGB_Smartyoil</defName>
+    <label>smarty-oil</label>
+    <description>A thick brain oil squeezed from carefully(?) mashed fresh memories. It helps reconnect goblin synapses, but to anyone else it is only a savage and revolting grease.\n\n"You! Peanut... dat your name? Keeshishish! How me know? You Friend's memories in me head now! Me smarty-pants. So me do, Cap'n!"</description>
+    <graphicData>
+      <texPath>Things/Item/MGB_Smartyoil</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <rotatable>false</rotatable>
+    <statBases>
+      <MarketValue>95</MarketValue>
+      <Mass>0.05</Mass>
+    </statBases>
+    <ingestible>
+      <joyKind>Chemical</joyKind>
+      <joy>0.05</joy>
+      <drugCategory>Medical</drugCategory>
+      <foodType>Processed, Fluid</foodType>
+      <baseIngestTicks>100</baseIngestTicks>
+      <ingestSound>Ingest_Pill</ingestSound>
+      <ingestCommandString>Take {0}</ingestCommandString>
+      <ingestReportString>Taking {0}.</ingestReportString>
+      <useEatingSpeedStat>false</useEatingSpeedStat>
+      <chairSearchRadius>0</chairSearchRadius>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Drug">
+        <listOrder>1015</listOrder>
+        <overdoseSeverityOffset>0.02~0.06</overdoseSeverityOffset>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

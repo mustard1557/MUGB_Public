@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- Alternative alloy inputs require explicit RecipeDefs. RecipeMakerProperties
+       cannot declare ingredients or fixedIngredientFilter. -->
+  <RecipeDef>
+    <defName>MUGB_MakeGoblinHighExplosiveShell</defName>
+    <label>make goblin high-explosive shell</label>
+    <jobString>Making goblin high-explosive shell.</jobString>
+    <workAmount>1000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Smith</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <workSkill>Crafting</workSkill>
+    <displayPriority>92</displayPriority>
+    <recipeUsers><li>MUGB_smithbench</li></recipeUsers>
+    <researchPrerequisite>MUGB_GoblinSiegecraft</researchPrerequisite>
+    <skillRequirements><Crafting>4</Crafting></skillRequirements>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_CrudeGoblinAlloy</li><li>MUGB_GoblinAlloy</li><li>MUGB_FineGoblinAlloy</li></thingDefs></filter><count>30</count></li>
+      <li><filter><thingDefs><li>MUGB_BoneDust</li></thingDefs></filter><count>10</count></li>
+      <li><filter><thingDefs><li>ComponentIndustrial</li></thingDefs></filter><count>1</count></li>
+    </ingredients>
+    <fixedIngredientFilter><thingDefs><li>MUGB_CrudeGoblinAlloy</li><li>MUGB_GoblinAlloy</li><li>MUGB_FineGoblinAlloy</li><li>MUGB_BoneDust</li><li>ComponentIndustrial</li></thingDefs></fixedIngredientFilter>
+    <products><MUGB_GoblinHighExplosiveShell>1</MUGB_GoblinHighExplosiveShell></products>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>MUGB_MakeGoblinStinkMortarShell</defName>
+    <label>make goblin sleep-gas shell</label>
+    <jobString>Making goblin sleep-gas shell.</jobString>
+    <workAmount>850</workAmount>
+    <workSpeedStat>DrugSynthesisSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Drug</soundWorking>
+    <workSkill>Crafting</workSkill>
+    <displayPriority>93</displayPriority>
+    <recipeUsers><li>MUGB_druglab</li></recipeUsers>
+    <researchPrerequisite>MUGB_GoblinSiegecraft</researchPrerequisite>
+    <skillRequirements><Crafting>5</Crafting></skillRequirements>
+    <ingredients>
+      <li><filter><thingDefs><li>MUGB_GoblinStinkbomb</li></thingDefs></filter><count>1</count></li>
+      <li><filter><thingDefs><li>MUGB_CrudeGoblinAlloy</li><li>MUGB_GoblinAlloy</li><li>MUGB_FineGoblinAlloy</li></thingDefs></filter><count>20</count></li>
+      <li><filter><thingDefs><li>ComponentIndustrial</li></thingDefs></filter><count>1</count></li>
+    </ingredients>
+    <fixedIngredientFilter><thingDefs><li>MUGB_GoblinStinkbomb</li><li>MUGB_CrudeGoblinAlloy</li><li>MUGB_GoblinAlloy</li><li>MUGB_FineGoblinAlloy</li><li>ComponentIndustrial</li></thingDefs></fixedIngredientFilter>
+    <products><MUGB_GoblinStinkMortarShell>1</MUGB_GoblinStinkMortarShell></products>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>MUGB_MakeGoblinHeavyBolt</defName>
+    <label>make goblin heavy bolt</label>
+    <jobString>Making goblin heavy bolt.</jobString>
+    <workAmount>180</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Smith</effectWorking>
+    <soundWorking>Recipe_Smith</soundWorking>
+    <workSkill>Crafting</workSkill>
+    <displayPriority>94</displayPriority>
+    <recipeUsers><li>MUGB_smithbench</li></recipeUsers>
+    <researchPrerequisite>MUGB_GoblinSiegecraft</researchPrerequisite>
+    <skillRequirements><Crafting>5</Crafting></skillRequirements>
+    <ingredients>
+      <li><filter><thingDefs><li>WoodLog</li></thingDefs></filter><count>10</count></li>
+      <li><filter><thingDefs><li>MUGB_CrudeGoblinAlloy</li><li>MUGB_GoblinAlloy</li><li>MUGB_FineGoblinAlloy</li></thingDefs></filter><count>10</count></li>
+      <li><filter><categories><li>Leathers</li></categories></filter><count>3</count></li>
+    </ingredients>
+    <fixedIngredientFilter><thingDefs><li>WoodLog</li><li>MUGB_CrudeGoblinAlloy</li><li>MUGB_GoblinAlloy</li><li>MUGB_FineGoblinAlloy</li></thingDefs><categories><li>Leathers</li></categories></fixedIngredientFilter>
+    <products><MUGB_GoblinHeavyBolt>1</MUGB_GoblinHeavyBolt></products>
+  </RecipeDef>
+</Defs>

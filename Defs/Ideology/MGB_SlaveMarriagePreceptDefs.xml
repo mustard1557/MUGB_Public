@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+  노예혼제도/첩제도 이데올로기 이슈입니다.
+  고블린 세력은 기본적으로 허용 이상을 사용하고, 야만/광신도는 선호/중요시됨 쪽으로 보정합니다.
+  -->
+  <IssueDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_SlaveMarriage</defName>
+    <label>slave marriage</label>
+    <iconPath>UI/Icons/MGB_slavemarriageicon</iconPath>
+  </IssueDef>
+
+  <PreceptDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_SlaveMarriage_Forbidden</defName>
+    <issue>MUGB_SlaveMarriage</issue>
+    <label>forbidden</label>
+    <description>Taking slaves as forced spouses is a corrupt and shameful practice.</description>
+    <impact>Low</impact>
+    <displayOrderInIssue>30</displayOrderInIssue>
+    <displayOrderInImpact>300</displayOrderInImpact>
+    <defaultSelectionWeight>1</defaultSelectionWeight>
+    <comps />
+  </PreceptDef>
+
+  <PreceptDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_SlaveMarriage_Acceptable</defName>
+    <issue>MUGB_SlaveMarriage</issue>
+    <label>acceptable</label>
+    <description>Slave marriage is an ordinary extension of ownership and household order.</description>
+    <impact>Low</impact>
+    <displayOrderInIssue>20</displayOrderInIssue>
+    <displayOrderInImpact>200</displayOrderInImpact>
+    <defaultSelectionWeight>0.25</defaultSelectionWeight>
+    <associatedMemes>
+      <li>MUGB_ChildrenOfBlinia</li>
+      <li>Supremacist</li>
+      <li>MUGB_GoblinSupremacy</li>
+    </associatedMemes>
+    <comps />
+  </PreceptDef>
+
+  <PreceptDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_SlaveMarriage_Preferred</defName>
+    <issue>MUGB_SlaveMarriage</issue>
+    <label>preferred</label>
+    <description>A useful slave should be bound into the household and used as the master sees fit.</description>
+    <impact>Low</impact>
+    <displayOrderInIssue>10</displayOrderInIssue>
+    <displayOrderInImpact>100</displayOrderInImpact>
+    <defaultSelectionWeight>0</defaultSelectionWeight>
+    <associatedMemes>
+      <li>MUGB_ChildrenOfBlinia</li>
+      <li>Supremacist</li>
+      <li>MUGB_GoblinSupremacy</li>
+      <li>Raider</li>
+    </associatedMemes>
+    <comps />
+  </PreceptDef>
+
+  <PreceptDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_SlaveMarriage_Important</defName>
+    <issue>MUGB_SlaveMarriage</issue>
+    <label>important</label>
+    <description>Forcing slaves into marriage is a rightful sign of mastery, fertility, and domination.</description>
+    <impact>Medium</impact>
+    <displayOrderInIssue>0</displayOrderInIssue>
+    <displayOrderInImpact>0</displayOrderInImpact>
+    <defaultSelectionWeight>0</defaultSelectionWeight>
+    <associatedMemes>
+      <li>MUGB_ChildrenOfBlinia</li>
+      <li>MUGB_GoblinSupremacy</li>
+      <li>Raider</li>
+    </associatedMemes>
+    <comps />
+  </PreceptDef>
+
+</Defs>

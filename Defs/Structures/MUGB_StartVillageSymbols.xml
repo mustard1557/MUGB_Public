@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- KCSG only implies stuffed symbols for official-game materials. The exported
+       Medieval Overhaul layouts use these modded materials, so provide the exact
+       base symbols that its rotation fallback expects. -->
+  <KCSG.SymbolDef Name="MUGB_StartSymbol_WoodLog" Abstract="True">
+    <stuff>WoodLog</stuff>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef Name="MUGB_StartSymbol_DankPyon_RawWood" Abstract="True">
+    <stuff>WoodLog</stuff>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef Name="MUGB_StartSymbol_DankPyon_RawDarkWood" Abstract="True">
+    <stuff>WoodLog</stuff>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef Name="MUGB_StartSymbol_DankPyon_IronIngot" Abstract="True">
+    <stuff>Steel</stuff>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_WoodLog">
+    <defName>Campfire_WoodLog_Fuel79</defName>
+    <thing>Campfire</thing>
+    <fuelPercent>0.79</fuelPercent>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_DankPyon_RawWood">
+    <defName>DankPyon_BedLog_DankPyon_RawWood</defName>
+    <thing>DankPyon_BedLog</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_WoodLog">
+    <defName>DankPyon_Crate2x2c_WoodLog</defName>
+    <thing>DankPyon_Crate2x2c</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_DankPyon_RawWood">
+    <defName>DankPyon_DryingRack_Small_DankPyon_RawWood</defName>
+    <thing>DankPyon_DryingRack_Small</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_DankPyon_RawWood">
+    <defName>DankPyon_Frame_Log_DankPyon_RawWood</defName>
+    <thing>DankPyon_Frame_Log</thing>
+    <replacementDef>Wall</replacementDef>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_WoodLog">
+    <defName>DankPyon_LampPost_WoodLog_Fuel99</defName>
+    <thing>DankPyon_LampPost</thing>
+    <fuelPercent>0.99</fuelPercent>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_DankPyon_RawDarkWood">
+    <defName>DankPyon_LogChair_DankPyon_RawDarkWood</defName>
+    <thing>DankPyon_LogChair</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_DankPyon_RawWood">
+    <defName>DankPyon_LogTable1x2c_DankPyon_RawWood</defName>
+    <thing>DankPyon_LogTable1x2c</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_WoodLog">
+    <defName>DankPyon_OnTop_Kitchen_Bowl_WoodLog</defName>
+    <thing>DankPyon_OnTop_Kitchen_Bowl</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_DankPyon_IronIngot">
+    <defName>DankPyon_OnTop_Kitchen_CookingPot_DankPyon_IronIngot</defName>
+    <thing>DankPyon_OnTop_Kitchen_CookingPot</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_DankPyon_IronIngot">
+    <defName>DankPyon_OnTop_Kitchen_Cup_DankPyon_IronIngot</defName>
+    <thing>DankPyon_OnTop_Kitchen_Cup</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_WoodLog">
+    <defName>DankPyon_OnTop_Kitchen_Cup_WoodLog</defName>
+    <thing>DankPyon_OnTop_Kitchen_Cup</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_DankPyon_IronIngot">
+    <defName>DankPyon_OnTop_Kitchen_Plate_DankPyon_IronIngot</defName>
+    <thing>DankPyon_OnTop_Kitchen_Plate</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_WoodLog">
+    <defName>DankPyon_RusticDoor1x2c_WoodLog</defName>
+    <thing>DankPyon_RusticDoor1x2c</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_WoodLog">
+    <defName>DankPyon_RusticEmptyShelf1x2c_WoodLog</defName>
+    <thing>DankPyon_RusticEmptyShelf1x2c</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_WoodLog">
+    <defName>DankPyon_RusticTallEndTable_WoodLog</defName>
+    <thing>DankPyon_RusticTallEndTable</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_WoodLog">
+    <defName>DankPyon_RusticThickRoomDivider_Closed1x2c_WoodLog</defName>
+    <thing>DankPyon_RusticThickRoomDivider_Closed1x2c</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_WoodLog">
+    <defName>DankPyon_ShelfEmpty_WoodLog</defName>
+    <thing>DankPyon_ShelfEmpty</thing>
+    <replacementDef>Shelf</replacementDef>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_WoodLog">
+    <defName>DankPyon_SpinningWheel_WoodLog</defName>
+    <thing>DankPyon_SpinningWheel</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_WoodLog">
+    <defName>DankPyon_Stall_Empty_WoodLog</defName>
+    <thing>DankPyon_Stall_Empty</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_WoodLog">
+    <defName>DankPyon_WallTorch_WoodLog_Fuel96</defName>
+    <thing>DankPyon_WallTorch</thing>
+    <fuelPercent>0.96</fuelPercent>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_WoodLog">
+    <defName>DankPyon_WallTorch_WoodLog_Fuel98</defName>
+    <thing>DankPyon_WallTorch</thing>
+    <fuelPercent>0.98</fuelPercent>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_WoodLog">
+    <defName>DankPyon_WallTorch_WoodLog_Fuel99</defName>
+    <thing>DankPyon_WallTorch</thing>
+    <fuelPercent>0.99</fuelPercent>
+  </KCSG.SymbolDef>
+
+  <!-- 대체품(WoodLog)은 재료를 받지 않아, 부모의 재료를 물려받지 않도록 떼어 놓았습니다.
+       미디블이 있을 때는 호환 패치가 원래 재료를 다시 넣어 줍니다. -->
+  <KCSG.SymbolDef>
+    <defName>DankPyon_WoodLogs1x2c_DankPyon_RawWood</defName>
+    <thing>DankPyon_WoodLogs1x2c</thing>
+    <replacementDef>WoodLog</replacementDef>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_WoodLog">
+    <defName>Door_WoodLog</defName>
+    <thing>Door</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_WoodLog">
+    <defName>Fence_WoodLog</defName>
+    <thing>Fence</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_WoodLog">
+    <defName>FenceGate_WoodLog</defName>
+    <thing>FenceGate</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef ParentName="MUGB_StartSymbol_WoodLog">
+    <defName>SchoolDesk_WoodLog</defName>
+    <thing>SchoolDesk</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef>
+    <defName>Fence_DankPyon_RawWood</defName>
+    <thing>Fence</thing>
+    <stuff>WoodLog</stuff>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef>
+    <defName>DankPyon_LogColumn_DankPyon_RawDarkWood</defName>
+    <thing>DankPyon_LogColumn</thing>
+    <stuff>WoodLog</stuff>
+    <replacementDef>Column</replacementDef>
+  </KCSG.SymbolDef>
+
+</Defs>

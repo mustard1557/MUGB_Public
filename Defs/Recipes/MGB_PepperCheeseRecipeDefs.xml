@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <RecipeDef>
+    <defName>MUGB_MakeGoblinPepperCheese</defName>
+    <label>make goblin pepper cheese</label>
+    <description>Ferment goblin reproductive sacs with raw plant ingredients into pungent pepper cheese.</description>
+    <jobString>Making goblin pepper cheese.</jobString>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <workAmount>500</workAmount>
+    <workSkill>Cooking</workSkill>
+    <displayPriority>23</displayPriority>
+    <recipeUsers>
+      <li>MUGB_cookstation</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>MUGB_GBroodSac</li></thingDefs></filter>
+        <count>2</count>
+      </li>
+      <li>
+        <filter><categories><li>PlantFoodRaw</li></categories></filter>
+        <count>3</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs><li>MUGB_GBroodSac</li></thingDefs>
+      <categories><li>PlantFoodRaw</li></categories>
+    </fixedIngredientFilter>
+    <products>
+      <MUGB_GoblinPepperCheese>2</MUGB_GoblinPepperCheese>
+    </products>
+  </RecipeDef>
+
+</Defs>

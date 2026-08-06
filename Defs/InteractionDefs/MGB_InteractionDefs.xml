@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <InteractionDef>
+    <defName>MUGB_SlaveMarriageProclamation</defName>
+    <label>slave marriage</label>
+    <symbol>UI/Icons/MGB_slavemarriageicon</symbol>
+    <workerClass>MUGB.InteractionWorker_SlaveMarriageProclamation</workerClass>
+    <ignoreTimeSinceLastInteraction>true</ignoreTimeSinceLastInteraction>
+    <logRulesInitiator>
+      <rulesStrings>
+        <li>r_logentry->[INITIATOR_nameDef] demands that [RECIPIENT_nameDef] attend them at night.</li>
+        <li>r_logentry->[INITIATOR_nameDef] demands that [RECIPIENT_nameDef] become a concubine.</li>
+        <li>r_logentry->[INITIATOR_nameDef] promises [RECIPIENT_nameDef] special treatment.</li>
+        <li>r_logentry->[INITIATOR_nameDef] explains a special way for [RECIPIENT_nameDef] to repent.</li>
+        <li>r_logentry->[INITIATOR_nameDef] shouts that [RECIPIENT_nameDef] must bear as many colonists as [RECIPIENT_nameDef] has killed.</li>
+      </rulesStrings>
+    </logRulesInitiator>
+  </InteractionDef>
+
+</Defs>

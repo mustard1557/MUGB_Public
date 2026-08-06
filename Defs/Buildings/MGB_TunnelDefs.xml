@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>MUGB_GoblinTunnelSpawnerA</defName>
+    <label>goblin tunnel emergence</label>
+    <thingClass>MUGB.MUGB_GoblinTunnelSpawner</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <selectable>true</selectable>
+    <drawOffscreen>true</drawOffscreen>
+    <size>(2,2)</size>
+    <building>
+      <groundSpawnerSustainedEffecter>EmergencePointSustained2X2</groundSpawnerSustainedEffecter>
+      <groundSpawnerCompleteEffecter>EmergencePointComplete2X2</groundSpawnerCompleteEffecter>
+    </building>
+  </ThingDef>
+
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>MUGB_GoblinMortarTunnelSpawner</defName>
+    <label>goblin mortar tunnel emergence</label>
+    <thingClass>MUGB.MUGB_GoblinMortarTunnelSpawner</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <selectable>true</selectable>
+    <drawOffscreen>true</drawOffscreen>
+    <size>(3,3)</size>
+    <building>
+      <groundSpawnerSustainedEffecter>EmergencePointSustained3X3</groundSpawnerSustainedEffecter>
+      <groundSpawnerCompleteEffecter>EmergencePointComplete3X3</groundSpawnerCompleteEffecter>
+    </building>
+  </ThingDef>
+
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>MUGB_GoblinTunnelDiggingFX</defName>
+    <label>goblin tunnel digging</label>
+    <thingClass>MUGB.MUGB_TunnelDiggingFX</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <selectable>false</selectable>
+  </ThingDef>
+
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>MUGB_GoblinTunnelSpawnerB</defName>
+    <label>large goblin tunnel emergence</label>
+    <thingClass>MUGB.MUGB_GoblinTunnelSpawner</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <selectable>true</selectable>
+    <drawOffscreen>true</drawOffscreen>
+    <size>(3,3)</size>
+    <building>
+      <groundSpawnerSustainedEffecter>EmergencePointSustained3X3</groundSpawnerSustainedEffecter>
+      <groundSpawnerCompleteEffecter>EmergencePointComplete3X3</groundSpawnerCompleteEffecter>
+    </building>
+  </ThingDef>
+
+  <ThingDef ParentName="BuildingBase" Name="MUGB_GoblinTunnelBase">
+    <defName>MUGB_GoblinTunnelA</defName>
+    <label>goblin tunnel</label>
+    <description>A crude goblin tunnel mouth. Goblins waiting underground will emerge from it in waves. Destroying it cancels any unreleased wave.</description>
+    <thingClass>MUGB.Building_GoblinTunnel</thingClass>
+    <category>Building</category>
+    <drawerType>MapMeshOnly</drawerType>
+    <tickerType>Normal</tickerType>
+    <selectable>true</selectable>
+    <rotatable>false</rotatable>
+    <useHitPoints>true</useHitPoints>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>Impassable</passability>
+    <fillPercent>0.70</fillPercent>
+    <size>(2,2)</size>
+    <pathCost>80</pathCost>
+    <blockWind>true</blockWind>
+    <blockPlants>true</blockPlants>
+    <!-- Korean source intent: A형 땅굴은 전용 구덩이 텍스처를 2x2 크기로 사용한다. B형 땅굴 추가 시 같은 텍스처를 3x3으로 확대해 쓴다. -->
+    <graphicData>
+      <texPath>Things/Building/Goblin pitgate/MGB_pitgate</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <building>
+      <isEdifice>true</isEdifice>
+      <claimable>false</claimable>
+      <deconstructible>false</deconstructible>
+    </building>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Beauty>-40</Beauty>
+      <Mass>100</Mass>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinTunnelBase">
+    <defName>MUGB_GoblinTunnelB</defName>
+    <label>large goblin tunnel</label>
+    <description>A broad goblin tunnel mouth capable of delivering several squads and sustaining a longer underground supply line.</description>
+    <size>(3,3)</size>
+    <graphicData>
+      <texPath>Things/Building/Goblin pitgate/MGB_pitgate</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3,3)</drawSize>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>350</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Beauty>-60</Beauty>
+      <Mass>220</Mass>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinTunnelBase">
+    <defName>MUGB_GoblinMortarTunnel</defName>
+    <label>goblin mortar supply tunnel</label>
+    <description>A broad supply tunnel feeding a goblin mortar position. Destroying it stops future troops, shells and food from arriving.</description>
+    <thingClass>MUGB.Building_GoblinMortarTunnel</thingClass>
+    <size>(3,3)</size>
+    <graphicData>
+      <texPath>Things/Building/Goblin pitgate/MGB_pitgate</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3,3)</drawSize>
+    </graphicData>
+    <statBases><MaxHitPoints>500</MaxHitPoints><Flammability>0</Flammability><Beauty>-60</Beauty><Mass>200</Mass></statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinTunnelBase">
+    <defName>MUGB_GoblinMortarSupportTunnel</defName>
+    <label>goblin mortar assault tunnel</label>
+    <description>A smaller tunnel assigned to the assault wing of a goblin mortar position. Its reinforcements continue even if the main supply tunnel is destroyed.</description>
+    <thingClass>MUGB.Building_GoblinMortarSupportTunnel</thingClass>
+    <size>(2,2)</size>
+    <graphicData><texPath>Things/Building/Goblin pitgate/MGB_pitgate</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(2,2)</drawSize></graphicData>
+    <statBases><MaxHitPoints>600</MaxHitPoints><Flammability>0</Flammability><Beauty>-40</Beauty><Mass>100</Mass></statBases>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!--
+    Korean source intent:
+    - 투창/스태프슬링/사슬올가미/잘자가스병은 같은 투척음을 공유한다.
+    - 발사와 장전이 한 파일에 들어간 음원은 발사 순간 one-shot으로 시작해 파일 끝까지 재생한다.
+    - 보병 연노와 대형연노는 같은 음원을 쓰되 대형연노만 더 크게 재생한다.
+  -->
+
+  <SoundDef Name="MUGB_GoblinWeaponOneShotBase" Abstract="True">
+    <context>MapOnly</context>
+    <maxSimultaneous>6</maxSimultaneous>
+  </SoundDef>
+
+  <SoundDef ParentName="MUGB_GoblinWeaponOneShotBase">
+    <defName>MUGB_GoblinThrowShared</defName>
+    <subSounds><li><grains><li Class="AudioGrain_Clip"><clipPath>Weapon/Goblin/Thrown/GoblinThrowShared</clipPath></li></grains><volumeRange>40~40</volumeRange><pitchRange>0.97~1.03</pitchRange></li></subSounds>
+  </SoundDef>
+  <SoundDef ParentName="MUGB_GoblinWeaponOneShotBase">
+    <defName>MUGB_GoblinBlowdartFire</defName>
+    <subSounds><li><grains><li Class="AudioGrain_Clip"><clipPath>Weapon/Goblin/Thrown/GoblinBlowdartFire</clipPath></li></grains><volumeRange>40~40</volumeRange><pitchRange>0.98~1.02</pitchRange></li></subSounds>
+  </SoundDef>
+  <SoundDef ParentName="MUGB_GoblinWeaponOneShotBase">
+    <defName>MUGB_GoblinChainSnareProjectile</defName>
+    <subSounds><li><grains><li Class="AudioGrain_Clip"><clipPath>Weapon/Goblin/Thrown/GoblinChainSnareProjectile</clipPath></li></grains><volumeRange>42~42</volumeRange><pitchRange>0.98~1.02</pitchRange></li></subSounds>
+  </SoundDef>
+  <SoundDef ParentName="MUGB_GoblinWeaponOneShotBase">
+    <defName>MUGB_GoblinStinkbombImpact</defName>
+    <subSounds><li><grains><li Class="AudioGrain_Clip"><clipPath>Weapon/Goblin/Thrown/GoblinStinkbombImpact</clipPath></li></grains><volumeRange>45~45</volumeRange><pitchRange>0.97~1.03</pitchRange></li></subSounds>
+  </SoundDef>
+
+  <SoundDef ParentName="MUGB_GoblinWeaponOneShotBase">
+    <defName>MUGB_SpearChargeStart</defName>
+    <subSounds><li><grains><li Class="AudioGrain_Clip"><clipPath>Ability/Goblin/SpearChargeStart</clipPath></li></grains><volumeRange>47~47</volumeRange><pitchRange>0.98~1.02</pitchRange></li></subSounds>
+  </SoundDef>
+  <SoundDef ParentName="MUGB_GoblinWeaponOneShotBase">
+    <defName>MUGB_SpearChargeImpact</defName>
+    <subSounds><li><grains><li Class="AudioGrain_Clip"><clipPath>Ability/Goblin/SpearChargeImpact</clipPath></li></grains><volumeRange>50~50</volumeRange><pitchRange>0.97~1.03</pitchRange></li></subSounds>
+  </SoundDef>
+
+  <SoundDef ParentName="MUGB_GoblinWeaponOneShotBase">
+    <defName>MUGB_GoblinWarbowFireReload</defName>
+    <subSounds><li><grains><li Class="AudioGrain_Clip"><clipPath>Weapon/Goblin/Bows/GoblinWarbowFireReload</clipPath></li></grains><volumeRange>50~50</volumeRange><pitchRange>0.98~1.02</pitchRange></li></subSounds>
+  </SoundDef>
+  <SoundDef ParentName="MUGB_GoblinWeaponOneShotBase">
+    <defName>MUGB_GoblinCrossbowFireReload</defName>
+    <subSounds><li><grains><li Class="AudioGrain_Clip"><clipPath>Weapon/Goblin/Bows/GoblinCrossbowFireReload</clipPath></li></grains><volumeRange>50~50</volumeRange><pitchRange>0.98~1.02</pitchRange></li></subSounds>
+  </SoundDef>
+  <SoundDef ParentName="MUGB_GoblinWeaponOneShotBase">
+    <defName>MUGB_GoblinRepeatingCrossbowFire</defName>
+    <subSounds><li><grains><li Class="AudioGrain_Clip"><clipPath>Weapon/Goblin/Bows/GoblinRepeatingCrossbowFire</clipPath></li></grains><volumeRange>41~41</volumeRange><pitchRange>0.98~1.02</pitchRange></li></subSounds>
+  </SoundDef>
+  <SoundDef ParentName="MUGB_GoblinWeaponOneShotBase">
+    <defName>MUGB_GoblinRepeaterBallistaFire</defName>
+    <subSounds><li><grains><li Class="AudioGrain_Clip"><clipPath>Weapon/Goblin/Bows/GoblinRepeatingCrossbowFire</clipPath></li></grains><volumeRange>57~57</volumeRange><pitchRange>0.91~0.95</pitchRange></li></subSounds>
+  </SoundDef>
+
+  <SoundDef ParentName="MUGB_GoblinWeaponOneShotBase">
+    <defName>MUGB_GoblinArquebusFire</defName>
+    <subSounds><li><grains><li Class="AudioGrain_Clip"><clipPath>Weapon/Goblin/Gunpowder/GoblinArquebusFire</clipPath></li></grains><volumeRange>52~52</volumeRange><pitchRange>0.98~1.02</pitchRange></li></subSounds>
+  </SoundDef>
+  <SoundDef ParentName="MUGB_GoblinWeaponOneShotBase">
+    <defName>MUGB_GoblinMusketFire</defName>
+    <subSounds><li><grains><li Class="AudioGrain_Clip"><clipPath>Weapon/Goblin/Gunpowder/GoblinMusketFire</clipPath></li></grains><volumeRange>54~54</volumeRange><pitchRange>0.98~1.02</pitchRange></li></subSounds>
+  </SoundDef>
+  <SoundDef ParentName="MUGB_GoblinWeaponOneShotBase">
+    <defName>MUGB_GoblinHandgonneFire</defName>
+    <subSounds><li><grains><li Class="AudioGrain_Clip"><clipPath>Weapon/Goblin/Gunpowder/GoblinHandgonneFire</clipPath></li></grains><volumeRange>54~54</volumeRange><pitchRange>0.97~1.03</pitchRange></li></subSounds>
+  </SoundDef>
+  <SoundDef ParentName="MUGB_GoblinWeaponOneShotBase">
+    <defName>MUGB_GoblinHandcannonFire</defName>
+    <subSounds><li><grains><li Class="AudioGrain_Clip"><clipPath>Weapon/Goblin/Gunpowder/GoblinHandcannonFire</clipPath></li></grains><volumeRange>58~58</volumeRange><pitchRange>0.97~1.01</pitchRange></li></subSounds>
+  </SoundDef>
+</Defs>

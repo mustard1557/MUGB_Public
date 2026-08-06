@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Creepjoiner-only flavor. These are assigned directly and never enter normal goblin generation pools. -->
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_CreepMachineMotherWhelp</defName>
+    <slot>Childhood</slot>
+    <title>machine mother's whelp</title>
+    <titleShort>machine-born</titleShort>
+    <description>[PAWN_nameDef] claims to have been born long ago in an unknown cultivation facility. [PAWN_pronoun] also insists that [PAWN_pronoun] was assigned to the 32nd division at birth and dropped like a space marine. None of it makes much sense.</description>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_CreepDampCaveOrphan</defName>
+    <slot>Childhood</slot>
+    <title>orphan of the damp cave</title>
+    <titleShort>damp-cave orphan</titleShort>
+    <description>[PAWN_nameDef] claims to have been born in a crack between rocks deep inside a cramped, damp cave. While exploring, [PAWN_pronoun] found a chamber filled with yellow metal drums marked with the incomprehensible words 'radioactive waste'.</description>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_CreepRabbitShrineMaidenChild</defName>
+    <slot>Childhood</slot>
+    <title>child of the rabbit shrine maiden</title>
+    <titleShort>shrine maiden's child</titleShort>
+    <description>[PAWN_nameDef] claims to be the child of a rabbit shrine maiden. [PAWN_possessive] mother fought goblins with mysterious powers, but their numbers overwhelmed her. Reduced to breeding stock, she was punished under the command to 'birth as many as you killed' until she died giving birth to [PAWN_nameDef]. A faint trace of her strange power seems to remain in [PAWN_objective].</description>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_CreepFleshbeastChild</defName>
+    <slot>Childhood</slot>
+    <title>child of the fleshbeasts</title>
+    <titleShort>fleshbeast child</titleShort>
+    <description>[PAWN_nameDef] says that fleshbeasts destroyed [PAWN_possessive] tribe. Yet there is no record that a goblin settlement ever existed where [PAWN_pronoun] claims it did. Is [PAWN_nameDef] simply lying, as goblins often do?</description>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_CreepDiscardedTestSubject</defName>
+    <slot>Childhood</slot>
+    <title>discarded test subject</title>
+    <titleShort>discarded subject</titleShort>
+    <description>[PAWN_nameDef] claims that humans in white coats captured [PAWN_objective] and performed unknown experiments. What kind of experiments could they have been?</description>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Child_CreepMegaspider</defName>
+    <slot>Childhood</slot>
+    <title>megaspider</title>
+    <titleShort>megaspider</titleShort>
+    <description>[PAWN_nameDef] insists that [PAWN_pronoun] was born from a megaspider's ovipositor and is, in fact, a megaspider. It is an absurdly stupid claim, even for a goblin.</description>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_CreepWanderingGoblinShaman</defName>
+    <slot>Adulthood</slot>
+    <title>wandering goblin shaman</title>
+    <titleShort>wandering shaman</titleShort>
+    <description>[PAWN_nameDef] claims to have wandered between goblin villages performing 'miracles'. Is [PAWN_nameDef] truly the miracle-working shaman from those stories, or merely a braggart?</description>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_CreepTaciturnGoblin</defName>
+    <slot>Adulthood</slot>
+    <title>taciturn goblin</title>
+    <titleShort>taciturn goblin</titleShort>
+    <description>[PAWN_nameDef] is unnaturally quiet. Unlike any proper goblin, [PAWN_pronoun] is calm and composed - disturbingly so.</description>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_CreepWrigglingLoincloth</defName>
+    <slot>Adulthood</slot>
+    <title>wriggling loincloth</title>
+    <titleShort>wriggling loincloth</titleShort>
+    <description>Something under [PAWN_nameDef]'s loincloth always seems to be wriggling. What could it possibly mean? Whatever it is, other goblins give [PAWN_objective] strange looks and keep their distance.</description>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_CreepEerieGoblinWanderer</defName>
+    <slot>Adulthood</slot>
+    <title>eerie goblin wanderer</title>
+    <titleShort>eerie wanderer</titleShort>
+    <description>[PAWN_nameDef] looks terribly old, as though [PAWN_pronoun] has lived for fifty years. [PAWN_pronoun] is also exceptionally quiet.</description>
+  </BackstoryDef>
+
+  <BackstoryDef ParentName="MUGB_GoblinBackstoryBase">
+    <defName>MUGB_Backstory_Adult_CreepFleshWhisperer</defName>
+    <slot>Adulthood</slot>
+    <title>one who speaks with flesh</title>
+    <titleShort>flesh whisperer</titleShort>
+    <description>[PAWN_nameDef] claims that [PAWN_pronoun] can speak with fleshbeasts.</description>
+  </BackstoryDef>
+
+</Defs>

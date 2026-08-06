@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+  KO intent: "블리니아의 자손들".
+  모든 고블린 세력이 공통으로 가지는 낮은 영향력의 고블린 근원/혈통 밈입니다.
+  한국어 핵심 문구: "조형자들조차, 결국엔 블리니아의 자손을 낳게 될 것이다."
+  이 밈은 고블린들이 인간 기준 금기보다 번식, 식인, 내장섭취, 잡식성 생존을 자연스럽게 받아들이는 공통 기반입니다.
+  -->
+  <MemeDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_ChildrenOfBlinia</defName>
+    <label>children of Blinia</label>
+    <description>Even the shapers will one day bear the children of Blinia.</description>
+    <iconPath>UI/Icons/MGB_childrenofBlinia128</iconPath>
+    <impact>1</impact>
+    <randomizationSelectionWeightFactor>0</randomizationSelectionWeightFactor>
+    <consumableBuildings>
+      <li>SacrificialFlag</li>
+    </consumableBuildings>
+    <requireOne>
+      <li>
+        <li>Slavery_Acceptable</li>
+        <li>Slavery_Honorable</li>
+      </li>
+      <li>
+        <li>Execution_Required</li>
+        <li>Execution_RespectedIfGuilty</li>
+        <li>Execution_DontCare</li>
+      </li>
+      <!-- KO intent: 블리니아의 자손들 밈을 고르면 인육 섭취가 강하게 혐오됨으로 남지 않는다.
+           식인 갈망을 강제하는 Cannibal 밈과는 다르게, 최소 수용함 또는 선호함까지만 보장한다. -->
+      <li>
+        <li>Cannibalism_Acceptable</li>
+        <li>Cannibalism_Preferred</li>
+      </li>
+      <li>
+        <li>MUGB_SlaveMarriage_Acceptable</li>
+        <li>MUGB_SlaveMarriage_Preferred</li>
+        <li>MUGB_SlaveMarriage_Important</li>
+      </li>
+      <li>
+        <li>MUGB_OrganEating_Acceptable</li>
+        <li>MUGB_OrganEating_Preferred</li>
+        <li>MUGB_OrganEating_Important</li>
+      </li>
+    </requireOne>
+    <generalRules>
+      <rulesStrings>
+        <li>memeAdjective->Blinian</li>
+        <li>memeAdjective->breeding-minded</li>
+        <li>memeAdjective->green-blooded</li>
+        <li>memeCreed->children of Blinia</li>
+        <li>memeCreed->green legacy</li>
+        <li>memeConcept->breeding</li>
+        <li>memeConcept->bloodline</li>
+        <li>memeConcept->goblin blood</li>
+        <li>memeLeaderNoun->whelp boss</li>
+        <li>memeLeaderNoun->breeding shaman</li>
+      </rulesStrings>
+    </generalRules>
+  </MemeDef>
+
+  <!--
+  KO intent: "고블린 우월주의". 일반 중립 고블린이 아니라 야만/광신도 고블린 세력에 쓰는 공격적 고블린 전용 우월주의 밈입니다.
+  바닐라 Supremacist와 비슷하지만 고블린 문화권의 식인, 내장섭취, 노예혼, 약탈 정체성을 묶는 앵커 밈으로 사용합니다.
+  -->
+  <MemeDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_GoblinSupremacy</defName>
+    <label>goblin supremacy</label>
+    <description>Goblins are the proper masters of the weak. Other peoples are prey, tribute, breeding stock, or meat if they cannot prove useful.</description>
+    <iconPath>UI/Icons/MGB_Goblinsuperior</iconPath>
+    <groupDef>GroupRelation</groupDef>
+    <impact>2</impact>
+    <!-- KO intent: MemeDef에는 밈-밈 선행 필드가 없다.
+         고블린 세력 Def는 블리니아의 자손들과 고블린 우월주의를 함께 requiredMemes로 지정한다.
+         플레이어 이념 화면의 밈 선행 제한은 XML만으로 안전하게 구현할 수 없어 여기서 강제하지 않는다. -->
+    <exclusionTags>
+      <li>GroupRelation</li>
+      <li>SupremacistIndividualist</li>
+    </exclusionTags>
+    <requireOne>
+      <li>
+        <li>Slavery_Acceptable</li>
+        <li>Slavery_Honorable</li>
+      </li>
+      <li>
+        <li>MUGB_SlaveMarriage_Acceptable</li>
+        <li>MUGB_SlaveMarriage_Preferred</li>
+        <li>MUGB_SlaveMarriage_Important</li>
+      </li>
+      <li>
+        <li>MUGB_OrganEating_Acceptable</li>
+        <li>MUGB_OrganEating_Preferred</li>
+        <li>MUGB_OrganEating_Important</li>
+      </li>
+    </requireOne>
+    <generalRules>
+      <rulesStrings>
+        <li>memeAdjective->goblin-supreme</li>
+        <li>memeAdjective->fangbound</li>
+        <li>memeAdjective->green-blooded</li>
+        <li>memeCreed->goblin dominion</li>
+        <li>memeCreed->maw claim</li>
+        <li>memeConcept->dominion</li>
+        <li>memeConcept->right to meat</li>
+        <li>memeConcept->tribute</li>
+        <li>memeLeaderNoun->boss</li>
+        <li>memeLeaderNoun->high boss</li>
+        <li>memeLeaderNoun->meat lord</li>
+      </rulesStrings>
+    </generalRules>
+  </MemeDef>
+
+</Defs>

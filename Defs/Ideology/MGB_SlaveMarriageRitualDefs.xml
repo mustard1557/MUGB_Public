@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <RitualBehaviorDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_SlaveMarriageCeremony</defName>
+    <workerClass>MUGB.RitualBehaviorWorker_SlaveMarriage</workerClass>
+    <durationTicks>3000</durationTicks>
+    <roles>
+      <li Class="MUGB.RitualRole_SlaveMarriageOfficiant">
+        <label>officiant</label>
+        <id>officiant</id>
+        <required>true</required>
+        <substitutable>false</substitutable>
+        <maxCount>1</maxCount>
+        <countsAsParticipant>true</countsAsParticipant>
+        <blocksSocialInteraction>true</blocksSocialInteraction>
+        <allowChild>false</allowChild>
+        <allowOtherIdeos>true</allowOtherIdeos>
+        <mustBeAbleToReachTarget>true</mustBeAbleToReachTarget>
+      </li>
+      <li Class="MUGB.RitualRole_SlaveMarriageMaster">
+        <label>master side</label>
+        <id>masters</id>
+        <required>true</required>
+        <substitutable>false</substitutable>
+        <maxCount>3</maxCount>
+        <countsAsParticipant>true</countsAsParticipant>
+        <blocksSocialInteraction>true</blocksSocialInteraction>
+        <allowChild>false</allowChild>
+        <allowOtherIdeos>true</allowOtherIdeos>
+        <mustBeAbleToReachTarget>true</mustBeAbleToReachTarget>
+      </li>
+      <li Class="MUGB.RitualRole_SlaveMarriageSlave">
+        <label>slave side</label>
+        <id>slaves</id>
+        <required>true</required>
+        <substitutable>false</substitutable>
+        <maxCount>3</maxCount>
+        <countsAsParticipant>true</countsAsParticipant>
+        <blocksSocialInteraction>true</blocksSocialInteraction>
+        <allowChild>false</allowChild>
+        <allowOtherIdeos>true</allowOtherIdeos>
+        <allowDowned>false</allowDowned>
+        <mustBeAbleToReachTarget>true</mustBeAbleToReachTarget>
+      </li>
+    </roles>
+    <spectatorsLabel>guests</spectatorsLabel>
+    <spectatorGerund>attend</spectatorGerund>
+    <stages>
+      <li>
+        <defaultDuty>Spectate</defaultDuty>
+        <endTriggers>
+          <li Class="StageEndTrigger_RolesArrived">
+            <roleIds>
+              <li>officiant</li>
+              <li>masters</li>
+              <li>slaves</li>
+            </roleIds>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>officiant</roleId>
+            <dutyDef>ArriveToCell</dutyDef>
+            <customPositions>
+              <li Class="MUGB.RitualPosition_SlaveMarriageLine" />
+            </customPositions>
+          </li>
+          <li>
+            <roleId>masters</roleId>
+            <dutyDef>ArriveToCell</dutyDef>
+            <customPositions>
+              <li Class="MUGB.RitualPosition_SlaveMarriageLine" />
+            </customPositions>
+          </li>
+          <li>
+            <roleId>slaves</roleId>
+            <dutyDef>ArriveToCell</dutyDef>
+            <customPositions>
+              <li Class="MUGB.RitualPosition_SlaveMarriageLine" />
+            </customPositions>
+          </li>
+        </roleBehaviors>
+      </li>
+      <li>
+        <defaultDuty>Spectate</defaultDuty>
+        <essential>true</essential>
+        <endTriggers>
+          <li Class="StageEndTrigger_DurationPercentage">
+            <percentage>1</percentage>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>officiant</roleId>
+            <dutyDef>SpeakOnCellFacingSpectators</dutyDef>
+            <speakerInteraction>Speech_DateRitual</speakerInteraction>
+            <customPositions>
+              <li Class="MUGB.RitualPosition_SlaveMarriageLine" />
+            </customPositions>
+          </li>
+          <li>
+            <roleId>masters</roleId>
+            <dutyDef>MUGB_StandOnRitualCell</dutyDef>
+            <customPositions>
+              <li Class="MUGB.RitualPosition_SlaveMarriageLine" />
+            </customPositions>
+          </li>
+          <li>
+            <roleId>slaves</roleId>
+            <dutyDef>MUGB_StandOnRitualCell</dutyDef>
+            <customPositions>
+              <li Class="MUGB.RitualPosition_SlaveMarriageLine" />
+            </customPositions>
+          </li>
+        </roleBehaviors>
+      </li>
+    </stages>
+  </RitualBehaviorDef>
+
+  <DutyDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_StandOnRitualCell</defName>
+    <hook>HighPriority</hook>
+    <socialModeMax>Off</socialModeMax>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="JobGiver_GotoTravelDestination">
+          <exactCell>true</exactCell>
+          <locomotionUrgency>Jog</locomotionUrgency>
+          <ritualTagOnArrival>Arrived</ritualTagOnArrival>
+        </li>
+        <li Class="ThinkNode_ConditionalAtDutyLocation">
+          <subNodes>
+            <li Class="MUGB.JobGiver_SlaveMarriageStand" />
+          </subNodes>
+        </li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+
+  <RitualOutcomeEffectDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_SlaveMarriageCeremony</defName>
+    <description>Ritual quality depends modestly on attendance, the room, and the officiant's social presence. Completion always creates every valid selected slave-marriage pairing.</description>
+    <workerClass>MUGB.RitualOutcomeEffectWorker_SlaveMarriage</workerClass>
+    <startingQuality>0.35</startingQuality>
+    <minQuality>0</minQuality>
+    <maxQuality>1</maxQuality>
+    <comps>
+      <li Class="RitualOutcomeComp_ParticipantCount">
+        <label>participant count</label>
+        <curve>
+          <points>
+            <li>(3, 0.00)</li>
+            <li>(6, 0.10)</li>
+            <li>(10, 0.18)</li>
+            <li>(16, 0.22)</li>
+          </points>
+        </curve>
+      </li>
+      <li Class="RitualOutcomeComp_RoomStat">
+        <label>room impressiveness</label>
+        <statDef>Impressiveness</statDef>
+        <curve>
+          <points>
+            <li>0, 0</li>
+            <li>50, 0.08</li>
+            <li>120, 0.16</li>
+          </points>
+        </curve>
+      </li>
+      <li Class="RitualOutcomeComp_PawnStatScaled">
+        <label>{PAWN_labelShort}'s social impact</label>
+        <labelAbstract>Officiant's social impact</labelAbstract>
+        <statDef>SocialImpact</statDef>
+        <roleId>officiant</roleId>
+        <scaledBy>0.15</scaledBy>
+      </li>
+      <li Class="MUGB.RitualOutcomeComp_GoblinSculptures">
+        <label>nearby goblin sculptures</label>
+        <maxDistance>10</maxDistance>
+        <maxSmall>6</maxSmall>
+        <maxGrand>2</maxGrand>
+        <maxQualityOffset>0.25</maxQualityOffset>
+      </li>
+    </comps>
+    <outcomeChances>
+      <li>
+        <label>completed</label>
+        <chance>1</chance>
+        <description>The selected colonists and slaves were bound together.</description>
+        <positivityIndex>0</positivityIndex>
+      </li>
+    </outcomeChances>
+  </RitualOutcomeEffectDef>
+
+  <RitualPatternDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_SlaveMarriageCeremony</defName>
+    <nameMaker>NamerRitualFestival</nameMaker>
+    <shortDescOverride>collective slave marriage</shortDescOverride>
+    <descOverride>A leader or moral guide binds up to three colony slaves as concubines to every selected free colonist. The two groups face one another while the officiant delivers the proclamation.</descOverride>
+    <iconPathOverride>UI/Icons/Rituals/MGB_SlaveMarriageRitual</iconPathOverride>
+    <canStartAnytime>true</canStartAnytime>
+    <alwaysStartAnytime>true</alwaysStartAnytime>
+    <ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
+    <ritualObligationTargetFilter>RitualSpotIdeogramOrAltar</ritualObligationTargetFilter>
+    <ritualBehavior>MUGB_SlaveMarriageCeremony</ritualBehavior>
+    <ritualOutcomeEffect>MUGB_SlaveMarriageCeremony</ritualOutcomeEffect>
+    <playsIdeoMusic>false</playsIdeoMusic>
+  </RitualPatternDef>
+
+  <PreceptDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_SlaveMarriageCeremony</defName>
+    <label>collective slave marriage</label>
+    <description>A formal ceremony in which selected slaves become concubines of every selected free colonist. It requires an ideoligion that approves both slavery and slave marriage.</description>
+    <issue>Ritual</issue>
+    <impact>Medium</impact>
+    <iconPath>UI/Icons/Rituals/MGB_SlaveMarriageRitual</iconPath>
+    <preceptClass>Precept_Ritual</preceptClass>
+    <ritualPatternBase>MUGB_SlaveMarriageCeremony</ritualPatternBase>
+    <allowDuplicates>false</allowDuplicates>
+    <countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>
+    <selectionWeight>0.5</selectionWeight>
+    <receivesExpectationsQualityOffset>false</receivesExpectationsQualityOffset>
+  </PreceptDef>
+
+</Defs>

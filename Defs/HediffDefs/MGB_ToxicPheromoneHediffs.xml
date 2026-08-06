@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HediffDef>
+    <defName>MUGB_ToxicPheromoneExposure</defName>
+    <label>toxic goblin pheromone exposure</label>
+    <description>Long exposure to harmful goblin pheromones is poisoning the nervous system.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <isBad>true</isBad>
+    <tendable>false</tendable>
+    <initialSeverity>0.001</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <stages>
+      <li>
+        <label>1/5</label>
+      </li>
+      <li>
+        <label>2/5</label>
+        <minSeverity>0.20</minSeverity>
+        <capMods>
+          <li><capacity>Consciousness</capacity><postFactor>0.98</postFactor></li>
+        </capMods>
+      </li>
+      <li>
+        <label>3/5</label>
+        <minSeverity>0.45</minSeverity>
+        <capMods>
+          <li><capacity>Consciousness</capacity><postFactor>0.95</postFactor></li>
+          <li><capacity>Moving</capacity><postFactor>0.95</postFactor></li>
+        </capMods>
+      </li>
+      <li>
+        <label>4/5</label>
+        <minSeverity>0.70</minSeverity>
+        <capMods>
+          <li><capacity>Consciousness</capacity><postFactor>0.88</postFactor></li>
+          <li><capacity>Moving</capacity><postFactor>0.90</postFactor></li>
+          <li><capacity>Manipulation</capacity><postFactor>0.95</postFactor></li>
+        </capMods>
+      </li>
+      <li>
+        <label>5/5</label>
+        <minSeverity>0.90</minSeverity>
+        <painOffset>0.20</painOffset>
+        <capMods>
+          <li><capacity>Consciousness</capacity><postFactor>0.70</postFactor></li>
+          <li><capacity>Moving</capacity><postFactor>0.75</postFactor></li>
+          <li><capacity>Manipulation</capacity><postFactor>0.90</postFactor></li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>MUGB_ToxicPheromoneCollapse</defName>
+    <label>toxic pheromone collapse</label>
+    <description>The nervous system is collapsing from prolonged goblin pheromone poisoning.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <isBad>true</isBad>
+    <tendable>false</tendable>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <comps>
+      <li Class="MUGB.HediffCompProperties_ToxicPheromoneCollapse" />
+    </comps>
+    <stages>
+      <li>
+        <label>collapsing</label>
+        <painOffset>0.40</painOffset>
+        <capMods>
+          <li><capacity>Consciousness</capacity><postFactor>0.50</postFactor></li>
+          <li><capacity>Moving</capacity><postFactor>0.50</postFactor></li>
+          <li><capacity>Manipulation</capacity><postFactor>0.75</postFactor></li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- 페로몬 흡수 능력이 부여하는 15일 면역 표식.
+       자체 틱 로직 없이 순수 마커로만 쓰고, 실제 차단은 누적 코드에서 이 헤디프 유무만 봅니다. -->
+  <HediffDef>
+    <defName>MUGB_ToxicPheromoneImmunity</defName>
+    <label>toxic pheromone immunity</label>
+    <description>This pawn's body has been reprogrammed to neutralize goblin toxic pheromones. It takes no toxic pheromone poisoning while this lasts.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <isBad>false</isBad>
+    <maxSeverity>1.0</maxSeverity>
+    <initialSeverity>1.0</initialSeverity>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>900000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+  </HediffDef>
+
+</Defs>

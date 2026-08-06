@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <!--
+    한국어 의도: 고블린 음식과 인간형 유래 재료를 고블린 상인만 취급하게 합니다.
+
+    바닐라 상인(아웃랜더 기지·궤도 상인 등)은 StockGenerator_Category로 FoodMeals와
+    FoodRaw 카테고리에서 재고를 무작위로 뽑습니다. 고블린 요리와 인간형 고기·장기
+    카테고리는 각각 그 하위에 있으므로, 그냥 두면 평범한 아웃랜더 상인이 뇌 스튜나
+    인육 덩어리를 팔러 오게 됩니다. 고블린 음식은 고블린이 파는 게 자연스럽습니다.
+
+    tradeability로는 해결되지 않습니다. 상인 재고 생성은 전부 TraderCanSell() 하나만
+    보기 때문에, 이 값을 낮추면 고블린 상인의 재고 생성기까지 같이 막히고
+    설정 오류로 잡힙니다. 그래서 카테고리 단위 제외로 처리합니다.
+
+    고블린 상인은 이 품목들을 StockGenerator_MultiDef/SingleDef로 def를 하나하나
+    지정해서 취급합니다. 그 방식은 excludedCategories의 영향을 받지 않으므로
+    고블린 상인의 재고는 그대로 유지됩니다.
+    (MUGB 상인이 쓰는 유일한 카테고리 생성기는 Textiles라 음식과 무관합니다.)
+
+    def 이름이 아니라 카테고리로 거르므로, 나중에 고블린 요리를 추가해도
+    카테고리만 붙이면 자동으로 함께 적용됩니다.
+  -->
+
+  <!-- 이미 excludedCategories 가 있는 생성기에는 항목만 덧붙입니다. -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/TraderKindDef/stockGenerators/li[@Class="StockGenerator_Category"]/excludedCategories[not(li="MUGB_GoblinFoodCategory")]</xpath>
+    <value>
+      <li>MUGB_GoblinFoodCategory</li>
+      <li>MUGB_HumanlikeMeatCategory</li>
+    </value>
+    <success>Always</success>
+  </Operation>
+
+  <!-- excludedCategories 가 없는 생성기에는 목록 자체를 만들어 넣습니다. -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/TraderKindDef/stockGenerators/li[@Class="StockGenerator_Category"][not(excludedCategories)]</xpath>
+    <value>
+      <excludedCategories>
+        <li>MUGB_GoblinFoodCategory</li>
+        <li>MUGB_HumanlikeMeatCategory</li>
+      </excludedCategories>
+    </value>
+    <success>Always</success>
+  </Operation>
+
+</Patch>

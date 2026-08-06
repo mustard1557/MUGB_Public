@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <MUGB_KimDeokPalPawnLossAdaptationButton>김덕팔 스토리텔러 정착민 손실 습격 완화: {0}%</MUGB_KimDeokPalPawnLossAdaptationButton>
+  <MUGB_KimDeokPalPawnLossAdaptationDescription>김덕팔 스토리텔러를 선택했을 때만 적용됩니다. 0%: 손실 완화 없음. 50%: 바닐라 완화의 절반. 100%: 바닐라와 같음.</MUGB_KimDeokPalPawnLossAdaptationDescription>
+</LanguageData>

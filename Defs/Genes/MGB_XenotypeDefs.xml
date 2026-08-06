@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    [파일 개요]
+    플레이어가 선택하거나 생성 규칙에서 참조할 고블린 제노타입입니다.
+    의도:
+    - 일반 고블린은 인간보다 작고 약하지만 플레이하기 편한 값으로 시작합니다.
+    - 홉고블린은 별도 XenotypeDef로 둬서 이후 10% 출현 규칙, 세력 구성, 이벤트에서 명확히 제어합니다.
+  -->
+
+  <XenotypeDef>
+    <defName>MUGB_Goblin</defName>
+    <label>goblin</label>
+    <!-- 한국어 설명 참고: 작고 거칠지만 숫자와 적응력으로 버티는 기본 고블린입니다. -->
+    <description>Small, green-skinned humanoids with sharp ears and a rough survival culture. Goblins are weaker than baseliners in direct strength, but they are compact, hardy, numerous, and easier to sustain than their reputation suggests.</description>
+    <descriptionShort>Compact green-skinned humanoids. Weaker than baseliners, but hardy, numerous, and easier to sustain.</descriptionShort>
+    <iconPath>UI/Icons/Xeno/goblin</iconPath>
+    <displayPriority>460</displayPriority>
+    <inheritable>true</inheritable>
+    <!-- 독립 방랑자/무소속 생성에는 섞지 않고, 고블린 세력/명시적 제노타입 선택에서만 쓰는 쪽으로 둡니다. -->
+    <factionlessGenerationWeight>0</factionlessGenerationWeight>
+    <!-- 한국어 의도: GBR 고블린 이름 생성 규칙(Material + Part)을 참고한 MUGB 전용 고블린 이름풀을 사용합니다. -->
+    <nameMaker>NamerPersonMUGB_Goblin</nameMaker>
+    <nameMakerFemale>NamerPersonMUGB_Goblin</nameMakerFemale>
+    <chanceToUseNameMaker>1</chanceToUseNameMaker>
+    <combatPowerFactor>0.85</combatPowerFactor>
+    <doubleXenotypeChances>
+      <!-- 바닐라 XenotypeChance 문법: 태그명이 XenotypeDef, 값이 확률입니다. -->
+      <MUGB_Hobgoblin>0.10</MUGB_Hobgoblin>
+    </doubleXenotypeChances>
+    <genes>
+      <li>MUGB_Gene_GoblinCore</li>
+      <li>MGB_GoblinVoice</li>
+      <li>MUGB_Gene_GoblinInbredStock</li>
+      <li>MUGB_Gene_GoblinSlowLearner</li>
+      <li>MUGB_Gene_GoblinIronStomach</li>
+      <li>MUGB_Gene_GoblinButcherInstinct</li>
+      <li>MUGB_Gene_GoblinToxicResistance</li>
+      <li>MUGB_Gene_GoblinAggression</li>
+      <li>MUGB_Gene_GoblinFleshCraving</li>
+      <li>MUGB_Gene_GoblinStrongToxicPheromone</li>
+      <li>MUGB_Gene_GoblinSwarmPheromone</li>
+      <li>Libido_High</li>
+      <li>Hair_BaldOnly</li>
+      <!-- 보이지 않는 머리색을 고정해 외부 외형 모드에서도 색상이 일관되게 유지되도록 합니다. -->
+      <li>Hair_DarkBlack</li>
+      <li>Beard_NoBeardOnly</li>
+      <li>Beauty_Ugly</li>
+      <li>MaxTemp_SmallIncrease</li>
+      <li>MinTemp_SmallIncrease</li>
+      <li>AptitudePoor_Social</li>
+    </genes>
+  </XenotypeDef>
+
+  <XenotypeDef>
+    <defName>MUGB_Hobgoblin</defName>
+    <label>hobgoblin</label>
+    <!-- 한국어 설명 참고: 일반 고블린보다 드물고 크며 전열 전투에 더 적합한 변종입니다. -->
+    <description>Hobgoblins are the larger and more disciplined expression of goblin stock. They are rarer, stronger, and better suited to direct fighting, while retaining the same goblin head, ears, and green skin.</description>
+    <descriptionShort>Larger, stronger goblins suited to frontline fighting.</descriptionShort>
+    <iconPath>UI/Icons/Xeno/Hobgoblin</iconPath>
+    <displayPriority>459</displayPriority>
+    <inheritable>true</inheritable>
+    <!-- 독립 방랑자/무소속 생성에는 섞지 않고, 고블린 세력/명시적 제노타입 선택에서만 쓰는 쪽으로 둡니다. -->
+    <factionlessGenerationWeight>0</factionlessGenerationWeight>
+    <!-- 한국어 의도: 홉고블린도 같은 고블린식 이름풀을 사용합니다. -->
+    <nameMaker>NamerPersonMUGB_Goblin</nameMaker>
+    <nameMakerFemale>NamerPersonMUGB_Goblin</nameMakerFemale>
+    <chanceToUseNameMaker>1</chanceToUseNameMaker>
+    <combatPowerFactor>1.1</combatPowerFactor>
+    <genes>
+      <li>MUGB_Gene_HobgoblinFrame</li>
+      <li>MGB_GoblinVoice</li>
+      <li>MUGB_Gene_GoblinInbredStock</li>
+      <li>MUGB_Gene_GoblinFastLearner</li>
+      <li>MUGB_Gene_GoblinIronStomach</li>
+      <li>MUGB_Gene_GoblinButcherInstinct</li>
+      <li>MUGB_Gene_GoblinToxicResistance</li>
+      <li>MUGB_Gene_GoblinAggression</li>
+      <li>MUGB_Gene_GoblinFleshCraving</li>
+      <li>MUGB_Gene_GoblinStrongToxicPheromone</li>
+      <li>MUGB_Gene_HobgoblinCommandPheromone</li>
+      <li>MUGB_Gene_HobgoblinTenacity</li>
+      <li>Libido_High</li>
+      <li>Hair_BaldOnly</li>
+      <!-- 보이지 않는 머리색을 고정해 외부 외형 모드에서도 색상이 일관되게 유지되도록 합니다. -->
+      <li>Hair_DarkBlack</li>
+      <li>Beard_NoBeardOnly</li>
+      <li>Beauty_Ugly</li>
+      <li>MaxTemp_SmallIncrease</li>
+      <li>MinTemp_SmallIncrease</li>
+      <li>AptitudeStrong_Melee</li>
+    </genes>
+  </XenotypeDef>
+
+</Defs>

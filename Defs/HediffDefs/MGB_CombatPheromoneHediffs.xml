@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HediffDef>
+    <defName>MUGB_GoblinSwarmPheromoneBuff</defName>
+    <label>goblin swarm pheromone</label>
+    <description>Nearby common goblins are reinforcing each other through low-rank swarm pheromones.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <tendable>false</tendable>
+    <initialSeverity>0.25</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <stages>
+      <li>
+        <label>1/4</label>
+        <statOffsets>
+          <PainShockThreshold>0.03</PainShockThreshold>
+        </statOffsets>
+        <statFactors>
+          <MoveSpeed>1.01</MoveSpeed>
+          <MeleeHitChance>1.02</MeleeHitChance>
+        </statFactors>
+      </li>
+      <li>
+        <label>2/4</label>
+        <minSeverity>0.50</minSeverity>
+        <statOffsets>
+          <PainShockThreshold>0.06</PainShockThreshold>
+        </statOffsets>
+        <statFactors>
+          <MoveSpeed>1.02</MoveSpeed>
+          <MeleeHitChance>1.04</MeleeHitChance>
+          <AimingDelayFactor>0.98</AimingDelayFactor>
+        </statFactors>
+      </li>
+      <li>
+        <label>3/4</label>
+        <minSeverity>0.75</minSeverity>
+        <statOffsets>
+          <PainShockThreshold>0.08</PainShockThreshold>
+        </statOffsets>
+        <statFactors>
+          <MoveSpeed>1.03</MoveSpeed>
+          <MeleeHitChance>1.05</MeleeHitChance>
+          <AimingDelayFactor>0.97</AimingDelayFactor>
+        </statFactors>
+      </li>
+      <li>
+        <label>4/4</label>
+        <minSeverity>1.00</minSeverity>
+        <statOffsets>
+          <PainShockThreshold>0.10</PainShockThreshold>
+        </statOffsets>
+        <statFactors>
+          <MoveSpeed>1.04</MoveSpeed>
+          <MeleeHitChance>1.06</MeleeHitChance>
+          <AimingDelayFactor>0.96</AimingDelayFactor>
+          <MeleeDodgeChance>1.02</MeleeDodgeChance>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>MUGB_HobgoblinCommandPheromoneBuff</defName>
+    <label>hobgoblin command pheromone</label>
+    <description>A nearby hobgoblin is keeping lesser goblins focused with command pheromones.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <tendable>false</tendable>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <stages>
+      <li>
+        <statOffsets>
+          <PainShockThreshold>0.07</PainShockThreshold>
+        </statOffsets>
+        <statFactors>
+          <MoveSpeed>1.01</MoveSpeed>
+          <MeleeHitChance>1.04</MeleeHitChance>
+          <ShootingAccuracyPawn>1.02</ShootingAccuracyPawn>
+          <AimingDelayFactor>0.96</AimingDelayFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+</Defs>

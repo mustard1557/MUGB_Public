@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <MUGB_StartScenarioSummary>Goblin scenario-specific start and story events.</MUGB_StartScenarioSummary>
+  <MUGB_GoblinStartRecommendedMemeTitle>Recommended meme</MUGB_GoblinStartRecommendedMemeTitle>
+  <MUGB_GoblinStartRecommendedMemeWarning>This goblin scenario recommends the Children of Blinia meme. Without it, you will not be able to build or use the goblin beacon. Return to ideology configuration to add the meme, or continue with the current ideology.</MUGB_GoblinStartRecommendedMemeWarning>
+  <MUGB_GoblinStartReturnToIdeo>Return to ideology</MUGB_GoblinStartReturnToIdeo>
+  <MUGB_GoblinStartContinueWithoutMeme>Continue anyway</MUGB_GoblinStartContinueWithoutMeme>
+  <MUGB_ExileStartText>You stabbed a slave claimed by your boss during a knife-based "tickling" joke and pushed the blade much too deep. Your boss tried to put you into a cooking pot alive, and you barely escaped. There is nowhere to return to; your old mob will tear you apart if it finds you. So you have decided to make a new mob of your own. Can a single goblin become a boss?\n\n"Urgh... played with knife, killed boss's female... boss angry! Tried shoot me with fire-stick! Tried put me in pot! Me not go back! Catch humans, make my own mob! Me! Become boss! Kishishishi!"</MUGB_ExileStartText>
+  <MUGB_StrandedStartText>Your mob followed a goblin scout's pheromone trail toward a rich human village. Instead, the main raiding party found the scouts beaten bloody and tied to poles. Horns sounded, arrows and bullets fell, and your squad fled the line. When you returned home, humans had already burned it. After wandering hungry and lost, you found an isolated village inhabited only by human women. Is it a prize after hardship, or another human trap?\n\n"Got us! Cunning humans, kichaaaa! Coward ambush! Burn our village! Now nowhere go! Uu... what that village? Only human females? Another trap? Dunno! Me hungry!"</MUGB_StrandedStartText>
+  <MUGB_GoldenStartText>You were entrusted with carrying tribute to your boss. After several days beneath sacks of gold, somebody asked, "What if we just kept it?" Nobody answered, but the caravan changed direction that night. Your tribe and its boss will be looking for you. That does not matter. You have gold.\n\n"Shiny! All ours! Boss? Boss need not know! Gold boss now! Kishishi! But... somebody smell shiny and follow? Dunno! Run first!"</MUGB_GoldenStartText>
+  <MUGB_ExileTrackersLabel>Goblin trackers</MUGB_ExileTrackersLabel>
+  <MUGB_ExileTrackersText>Your former mob has finally caught your scent. Four poorly equipped goblins are coming to drag you back to the cooking pot.</MUGB_ExileTrackersText>
+  <MUGB_VillageNeutralizedLabel>The village falls silent</MUGB_VillageNeutralizedLabel>
+  <MUGB_VillageNeutralizedText>One of the defeated women curses the goblins and warns that the village's fighting men will soon return. They were part of the force that destroyed your old warren. Prepare: they should arrive within a few days.</MUGB_VillageNeutralizedText>
+  <MUGB_VillageReturnWarningLabel>The villagers are returning</MUGB_VillageReturnWarningLabel>
+  <MUGB_VillageReturnWarningText>Tracks, distant voices, and smoke beyond the hills suggest that the village's fighting men will return within roughly one day.</MUGB_VillageReturnWarningText>
+  <MUGB_VillageReturnRaidLabel>The village fighters return</MUGB_VillageReturnRaidLabel>
+  <MUGB_VillageReturnRaidText>The village's fighting men have returned and are attacking the goblins who occupied their home.</MUGB_VillageReturnRaidText>
+  <MUGB_GoldenRaidMessage>The raiders smelled your gold. One of them carries a custom weapon.</MUGB_GoldenRaidMessage>
+</LanguageData>

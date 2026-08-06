@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    [파일 개요]
+    고블린 전용 BodyTypeDef입니다.
+    의도:
+    - HAR/Character Editor 호환을 위해 현재 story.bodyType에는 바닐라 Thin/Male을 유지합니다.
+    - 이 전용 BodyTypeDef는 기존 저장/실험 호환용으로 남겨 두며, 실제 몸 텍스처는 유전자 렌더 단계에서 교체합니다.
+    - 텍스처 경로는 MUGB 전용 배치/크기를 기준으로 연결합니다.
+      커스텀 텍스처는 같은 경로명으로 교체할 수 있습니다.
+  -->
+
+  <BodyTypeDef>
+    <defName>MUGB_GoblinThin</defName>
+    <label>goblin thin</label>
+    <headOffset>(0.04, 0.34)</headOffset>
+    <bodyNakedGraphicPath>Things/Pawn/MGBlike/Bodies/Naked_Thin</bodyNakedGraphicPath>
+    <bodyDessicatedGraphicPath>Things/Pawn/MGBlike/Bodies/Dessicated/Dessicated_Thin</bodyDessicatedGraphicPath>
+    <bodyGraphicScale>(1, 0.9)</bodyGraphicScale>
+  </BodyTypeDef>
+
+  <BodyTypeDef>
+    <defName>MUGB_HobgoblinMale</defName>
+    <label>hobgoblin male</label>
+    <headOffset>(0.04, 0.34)</headOffset>
+    <bodyNakedGraphicPath>Things/Pawn/MGBlike/Bodies/Naked_Male</bodyNakedGraphicPath>
+    <bodyDessicatedGraphicPath>Things/Pawn/MGBlike/Bodies/Dessicated/Dessicated_Male</bodyDessicatedGraphicPath>
+    <bodyGraphicScale>(1, 0.9)</bodyGraphicScale>
+  </BodyTypeDef>
+
+</Defs>

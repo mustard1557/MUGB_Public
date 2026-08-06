@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <IncidentDef ParentName="AnomalyIncidentBase">
+    <defName>MUGB_GoblinCultistSkipAbduction</defName>
+    <label>goblin cultist skip abduction</label>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>MUGB.IncidentWorker_GoblinCultistSkipAbduction</workerClass>
+    <baseChance>0.4</baseChance>
+    <minAnomalyThreatLevel>0</minAnomalyThreatLevel>
+    <minThreatPoints>850</minThreatPoints>
+    <minRefireDays>6</minRefireDays>
+    <category>ThreatBig</category>
+    <pointsScaleable>true</pointsScaleable>
+    <tale>Raid</tale>
+  </IncidentDef>
+</Defs>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <RaidStrategyDef>
+    <defName>MUGB_GoblinMortarTunnelSiege</defName>
+    <workerClass>MUGB.RaidStrategyWorker_GoblinMortarTunnelSiege</workerClass>
+    <minPawns>3</minPawns>
+    <raidLootValueFactor>0</raidLootValueFactor>
+    <arriveModes><li>MUGB_GoblinMortarTunnelArrival</li></arriveModes>
+    <pointsFactorCurve>
+      <points><li>(0, 1)</li></points>
+    </pointsFactorCurve>
+    <selectionWeightPerPointsCurve>
+      <points>
+        <li>(0, 0)</li><li>(849, 0)</li><li>(850, 0.05)</li><li>(1000, 0.65)</li>
+        <li>(1200, 1.4)</li><li>(1500, 1.8)</li><li>(2000, 2.0)</li>
+      </points>
+    </selectionWeightPerPointsCurve>
+    <letterLabelEnemy>Goblin tunnel mortar siege</letterLabelEnemy>
+    <arrivalTextEnemy>Goblins are opening a supply tunnel and preparing a mortar position near the colony. Destroy the tunnels to stop later troops and supplies.</arrivalTextEnemy>
+    <layerWhitelist><li>Surface</li></layerWhitelist>
+  </RaidStrategyDef>
+
+  <PawnsArrivalModeDef>
+    <defName>MUGB_GoblinMortarTunnelArrival</defName>
+    <workerClass>MUGB.PawnsArrivalModeWorker_GoblinMortarTunnelSiege</workerClass>
+    <selectionWeightCurve><points><li>(0, 1)</li></points></selectionWeightCurve>
+    <pointsFactorCurve><points><li>(0, 1)</li></points></pointsFactorCurve>
+    <textEnemy>A group of {0} from {1} are establishing a tunnel-fed mortar position.</textEnemy>
+    <textWillArrive>{0_pawnsPluralDef} will establish a tunnel-fed mortar position.</textWillArrive>
+    <layerWhitelist><li>Surface</li></layerWhitelist>
+  </PawnsArrivalModeDef>
+</Defs>

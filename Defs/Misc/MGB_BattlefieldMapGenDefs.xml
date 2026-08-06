@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <GenStepDef>
+    <!-- Runs just after Medieval Overhaul's order-750 battlefield scatter when it exists. -->
+    <defName>MUGB_GoblinBattlefieldRemains</defName>
+    <order>751</order>
+    <genStep Class="MUGB.GenStep_GoblinBattlefieldRemains" />
+  </GenStepDef>
+</Defs>

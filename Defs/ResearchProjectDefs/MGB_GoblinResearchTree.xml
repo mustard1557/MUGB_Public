@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    고블린 전용 연구 트리 (설계: 오류\설정모음\연구트리_설계지침.txt v1.4)
+    원칙: 전용 탭 / 외부 선행은 얕게 1단계만(Smithing, Greatbow, DrugProduction).
+    미디블 오버홀은 선택 선행이므로 DankPyon_* 연구를 하드 참조하지 않는다.
+    (v1.4: 전투약물 조제 선행 DrugProduction → DankPyon_Alchemy 교체 —
+     산업 탭 점프와 중세 세력 비용 ×1.5 할증 제거, 연금술 테마 일치)
+  -->
+
+  <ResearchTabDef>
+    <defName>MUGB_GoblinResearchTab</defName>
+    <label>goblin</label>
+    <generalTitle>goblin ingenuity</generalTitle>
+    <generalDescription>Crude but effective goblin crafts: bone, alloy, blackpowder, and flesh. Cheaper than proper scholarship — goblins learn by doing, eating, and exploding.</generalDescription>
+  </ResearchTabDef>
+
+  <!-- ==================== 재료 라인 (Y 0.5) ==================== -->
+
+  <ResearchProjectDef>
+    <defName>MUGB_Research_BoneRendering</defName>
+    <label>bone rendering</label>
+    <description>Grind bones into stabilizer dust, stack humanlike bones into crude but sturdy walls, and shape them into the first goblin weapons and armor. The most basic of goblin material crafts.</description>
+    <!--
+      고블린이 가장 먼저 손대는 기술이고, 뼈 무기·방어구 전반이 여기에 묶여 있어
+      초반에 빠르게 뚫려야 합니다. 그래서 300에서 150으로 낮췄습니다.
+    -->
+    <baseCost>150</baseCost>
+    <techLevel>Medieval</techLevel>
+    <tab>MUGB_GoblinResearchTab</tab>
+    <researchViewX>0</researchViewX>
+    <researchViewY>0.5</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>MUGB_Research_Alloying</defName>
+    <label>goblin alloying</label>
+    <description>Smelt scrap metals with bone dust stabilizer into crude and standard goblin alloys — the backbone of all goblin metalwork.</description>
+    <!-- 바닐라 단조를 선행으로 요구하는 대신 자체 비용을 600에서 300으로 낮춥니다. -->
+    <baseCost>300</baseCost>
+    <techLevel>Medieval</techLevel>
+    <tab>MUGB_GoblinResearchTab</tab>
+    <prerequisites>
+      <li>MUGB_Research_BoneRendering</li>
+      <li>Smithing</li>
+    </prerequisites>
+    <researchViewX>1</researchViewX>
+    <researchViewY>0.5</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>MUGB_Research_Smithcraft</defName>
+    <label>goblin smithcraft</label>
+    <description>Forge goblin-alloy blades, spears, maces and medieval-grade armor at the goblin smithbench.</description>
+    <!--
+      선행은 바닐라 단조와 고블린 합금까지만 둡니다.
+      한때 바닐라 냉병기(LongBlades)도 선행으로 걸었는데, 미디블 오버홀과 함께 플레이하면
+      냉병기가 상당한 고티어에 놓여서 고블린 무기단조까지 지나치게 늦어졌습니다.
+      비용은 그때 낮춘 200을 그대로 유지합니다.
+    -->
+    <baseCost>200</baseCost>
+    <techLevel>Medieval</techLevel>
+    <tab>MUGB_GoblinResearchTab</tab>
+    <prerequisites>
+      <li>Smithing</li>
+      <li>MUGB_Research_Alloying</li>
+    </prerequisites>
+    <researchViewX>2</researchViewX>
+    <researchViewY>0.5</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>MUGB_Research_Armorcraft</defName>
+    <label>goblin armorcraft</label>
+    <description>Hammer goblin alloy into chainmail, breastplates, scale coats, helmets and sturdy shields.</description>
+    <baseCost>600</baseCost>
+    <techLevel>Medieval</techLevel>
+    <tab>MUGB_GoblinResearchTab</tab>
+    <prerequisites>
+      <li>MUGB_Research_Smithcraft</li>
+    </prerequisites>
+    <researchViewX>3</researchViewX>
+    <researchViewY>0.2</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>MUGB_Research_EliteForging</defName>
+    <label>elite forging</label>
+    <description>Refine superior goblin alloy and forge elite war-gear: plate armor, banner spears, reinforced shields, war banners, flails and machetes.</description>
+    <baseCost>600</baseCost>
+    <techLevel>Medieval</techLevel>
+    <tab>MUGB_GoblinResearchTab</tab>
+    <prerequisites>
+      <li>MUGB_Research_Armorcraft</li>
+    </prerequisites>
+    <researchViewX>4</researchViewX>
+    <researchViewY>0.2</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- ==================== 군사 라인: 화약 (Y 1.0~1.4) ==================== -->
+
+  <ResearchProjectDef>
+    <defName>MUGB_Research_Blackpowder</defName>
+    <label>goblin blackpowder</label>
+    <description>Mix volatile goblin blackpowder and fit crude firearms: arquebuses, matchlocks and handgonnes.</description>
+    <baseCost>900</baseCost>
+    <techLevel>Medieval</techLevel>
+    <tab>MUGB_GoblinResearchTab</tab>
+    <prerequisites>
+      <li>MUGB_Research_Smithcraft</li>
+      <li>DrugProduction</li>
+    </prerequisites>
+    <researchViewX>3</researchViewX>
+    <researchViewY>1.0</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>MUGB_Research_AdvGunpowder</defName>
+    <label>advanced gunpowder</label>
+    <description>Stronger charges and heavier barrels: goblin handcannons and advanced gunpowder weaponry.</description>
+    <baseCost>1400</baseCost>
+    <techLevel>Medieval</techLevel>
+    <tab>MUGB_GoblinResearchTab</tab>
+    <prerequisites>
+      <li>MUGB_Research_Blackpowder</li>
+    </prerequisites>
+    <researchViewX>4</researchViewX>
+    <researchViewY>0.6</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>MUGB_Research_Boomsticks</defName>
+    <label>boomsticks</label>
+    <description>Strap a blackpowder charge to a stick. What could go wrong? Unlocks goblin boomstick weapons.</description>
+    <baseCost>800</baseCost>
+    <techLevel>Medieval</techLevel>
+    <tab>MUGB_GoblinResearchTab</tab>
+    <prerequisites>
+      <li>MUGB_Research_Blackpowder</li>
+    </prerequisites>
+    <researchViewX>4</researchViewX>
+    <researchViewY>1.4</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- ==================== 군사 라인: 사격 (Y 2.2) ==================== -->
+
+  <ResearchProjectDef>
+    <defName>MUGB_Research_Crossbows</defName>
+    <label>goblin crossbows</label>
+    <description>Fit a bow sideways onto a stock with a trigger. Unlocks the goblin crossbow.</description>
+    <!--
+      바닐라 장궁과 고블린 무기단조를 선행으로 요구하는 대신 비용을 400에서 200으로 낮춥니다.
+      선행 자체는 기존 장궁(Greatbow)을 그대로 유지합니다.
+    -->
+    <baseCost>200</baseCost>
+    <techLevel>Medieval</techLevel>
+    <tab>MUGB_GoblinResearchTab</tab>
+    <prerequisites>
+      <li>Greatbow</li>
+      <li>MUGB_Research_Smithcraft</li>
+    </prerequisites>
+    <researchViewX>0</researchViewX>
+    <researchViewY>2.2</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>MUGB_Research_RepeatingCrossbow</defName>
+    <label>repeating crossbows</label>
+    <description>A bolt magazine and a lever: the goblin repeating crossbow.</description>
+    <baseCost>500</baseCost>
+    <techLevel>Medieval</techLevel>
+    <tab>MUGB_GoblinResearchTab</tab>
+    <prerequisites>
+      <li>MUGB_Research_Crossbows</li>
+    </prerequisites>
+    <researchViewX>1</researchViewX>
+    <researchViewY>2.2</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- ==================== 음식 라인 (Y 3.0~3.7) ==================== -->
+
+  <ResearchProjectDef>
+    <defName>MUGB_Research_Stewpot</defName>
+    <label>goblin stewpot</label>
+    <description>A great communal pot for simmering stews. Unlocks the goblin stewpot.</description>
+    <baseCost>300</baseCost>
+    <techLevel>Medieval</techLevel>
+    <tab>MUGB_GoblinResearchTab</tab>
+    <researchViewX>0</researchViewX>
+    <researchViewY>3.0</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>MUGB_Research_Cuisine</defName>
+    <label>goblin cuisine</label>
+    <description>Refined goblin cookery: sausages, brain stews, limb roasts and lavish flesh platters that sharpen goblin minds.</description>
+    <baseCost>450</baseCost>
+    <techLevel>Medieval</techLevel>
+    <tab>MUGB_GoblinResearchTab</tab>
+    <prerequisites>
+      <li>MUGB_Research_Stewpot</li>
+    </prerequisites>
+    <researchViewX>1</researchViewX>
+    <researchViewY>3.0</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>MUGB_Research_FineButchery</defName>
+    <label>goblin butchery</label>
+    <description>The savored disassembly of humanlike bodies: better yields of flesh and bone, done with unsettling appreciation.</description>
+    <baseCost>350</baseCost>
+    <techLevel>Medieval</techLevel>
+    <tab>MUGB_GoblinResearchTab</tab>
+    <researchViewX>0</researchViewX>
+    <researchViewY>3.7</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>MUGB_Research_Fleshcraft</defName>
+    <label>fleshcraft</label>
+    <description>Precise extraction of organs, brains and flesh — for the stewpot, the altar, and the skin-mask.</description>
+    <baseCost>450</baseCost>
+    <techLevel>Medieval</techLevel>
+    <tab>MUGB_GoblinResearchTab</tab>
+    <prerequisites>
+      <li>MUGB_Research_FineButchery</li>
+    </prerequisites>
+    <researchViewX>1</researchViewX>
+    <researchViewY>3.7</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- ==================== 생활 라인 (Y 4.5) ==================== -->
+
+  <ResearchProjectDef>
+    <defName>MUGB_Research_PheromoneCraft</defName>
+    <label>pheromone craft</label>
+    <description>Distill goblin gland secretions into combat and toxic pheromones, and the packs that spread them. Requires the goblin alchemy table.</description>
+    <baseCost>400</baseCost>
+    <techLevel>Medieval</techLevel>
+    <tab>MUGB_GoblinResearchTab</tab>
+    <prerequisites>
+      <li>MUGB_Research_WarBrews</li>
+    </prerequisites>
+    <researchViewX>1</researchViewX>
+    <researchViewY>4.5</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>MUGB_Research_WarBrews</defName>
+    <label>goblin war-brews</label>
+    <description>Goblin alchemy: combat drugs, foul concoctions, stink weaponry and the shaman's staff. Unlocks the goblin alchemy table.</description>
+    <baseCost>500</baseCost>
+    <techLevel>Medieval</techLevel>
+    <tab>MUGB_GoblinResearchTab</tab>
+    <prerequisites>
+      <li>DrugProduction</li>
+    </prerequisites>
+    <researchViewX>0</researchViewX>
+    <researchViewY>4.5</researchViewY>
+  </ResearchProjectDef>
+
+</Defs>

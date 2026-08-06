@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <!--
+    한국어 의도: 고블린 고기를 인육·곤충 고기와 같은 취급으로 맞춥니다.
+
+    바닐라는 요리 계획서의 기본 재료 필터(defaultIngredientFilter)와 영양보급기 호퍼의
+    기본 보관 설정(defaultStorageSettings)에서 Meat_Human과 Meat_Megaspider를 빼 둡니다.
+    그래서 계획서를 새로 만들면 인육과 곤충 고기가 처음부터 빠져 있습니다.
+
+    Meat_Goblin은 MeatRaw(→FoodRaw) 카테고리라 이 필터들에 그냥 포함되어 있었고,
+    결과적으로 유저가 요리 계획서를 만들 때마다 손으로 고블린 고기를 빼야 했습니다.
+    고블린 고기 설명이 "대부분의 사람은 인육과 다름없이 취급한다"인데 실제 동작은
+    달랐던 셈입니다.
+
+    def 이름을 하나하나 적는 대신 "인육이 기본 제외되는 자리"를 전부 훑어서 함께 넣습니다.
+    이렇게 하면 바닐라뿐 아니라 다른 모드가 추가한 요리 계획서나 보관 건물에도 같은 규칙이
+    자동으로 따라갑니다. 확인 결과 바닐라의 해당 4개 지점은 모두 기본(default) 필터라
+    고블린 고기가 아예 금지되는 게 아니라 "기본적으로 꺼진" 상태가 됩니다.
+    유저가 필요하면 계획서에서 직접 켤 수 있습니다.
+
+    [not(li="Meat_Goblin")] 조건 덕분에 중복 적용되지 않습니다.
+  -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs//disallowedThingDefs[li="Meat_Human"][not(li="Meat_Goblin")]</xpath>
+    <value>
+      <li>Meat_Goblin</li>
+    </value>
+    <success>Always</success>
+  </Operation>
+
+  <!--
+    한국어 의도: 인간·고블린에서 나온 가공 재료도 같은 취급으로 맞춥니다.
+
+    아래 여섯 가지는 모두 MUGB_RawGoblinFoodIngredientBase를 상속해서 MeatRaw 카테고리와
+    foodType=Meat를 갖습니다. 즉 고블린 고기와 똑같이 요리 계획서 기본 필터에 그냥 포함되어
+    있었습니다. 전부 인간형에게서 얻는 재료이므로 인육과 동일하게 기본 제외해야 합니다.
+
+    MUGB_Hchunk  인육 덩어리      MUGB_Gchunk  고블린 살점 덩어리
+    MUGB_Hgut    인간 내장        MUGB_Ggut    고블린 내장
+    MUGB_heart   심장             MUGB_brain   뇌
+  -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs//disallowedThingDefs[li="Meat_Human"][not(li="MUGB_Gchunk")]</xpath>
+    <value>
+      <li>MUGB_Hchunk</li>
+      <li>MUGB_Gchunk</li>
+      <li>MUGB_Hgut</li>
+      <li>MUGB_Ggut</li>
+      <li>MUGB_heart</li>
+      <li>MUGB_brain</li>
+    </value>
+    <success>Always</success>
+  </Operation>
+
+</Patch>

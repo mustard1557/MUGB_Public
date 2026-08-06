@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="BenchBase">
+    <defName>MUGB_cookstation</defName>
+    <label>goblin cookstation</label>
+    <description>A heavy goblin cooking station for butchery, flesh preparation, and crude meals.</description>
+    <thingClass>Building_WorkTable_HeatPush</thingClass>
+    <graphicData>
+      <texPath>Things/Building/Production/MGB_cookstation/MGB_cookstation</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(3.55,3.55)</drawSize>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+      <drawOffsetWest>(0.35,0,0)</drawOffsetWest>
+      <drawOffsetEast>(-0.3,0,0)</drawOffsetEast>
+      <drawOffsetNorth>(0,0,-0.1)</drawOffsetNorth>
+      <drawOffsetSouth>(0,0,0)</drawOffsetSouth>
+    </graphicData>
+    <tickerType>Normal</tickerType>
+    <castEdgeShadows>true</castEdgeShadows>
+    <staticSunShadowHeight>0.20</staticSunShadowHeight>
+    <costStuffCount>80</costStuffCount>
+    <costList>
+      <WoodLog>30</WoodLog>
+    </costList>
+    <stuffCategories>
+      <li>Stony</li>
+    </stuffCategories>
+    <altitudeLayer>Building</altitudeLayer>
+    <fillPercent>0.5</fillPercent>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>100</MarketValue>
+      <WorkToBuild>2000</WorkToBuild>
+      <MaxHitPoints>180</MaxHitPoints>
+      <Flammability>1</Flammability>
+      <Cleanliness>-2</Cleanliness>
+    </statBases>
+    <size>(3,1)</size>
+    <designationCategory>MUGB_Goblin</designationCategory>
+    <uiOrder>2110</uiOrder>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <surfaceType>Item</surfaceType>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+    <recipes>
+      <li>CookMealSimple</li>
+      <li>CookMealSimpleBulk</li>
+      <li>Make_Kibble</li>
+      <li>MUGB_ButcherCorpseGoblinCookstation</li>
+      <li>MUGB_SavorHumanDisassembly</li>
+    </recipes>
+    <inspectorTabs>
+      <li>ITab_Bills</li>
+      <li>MUGB.ITab_GoblinFuel</li>
+    </inspectorTabs>
+    <comps>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>3</heatPerSecond>
+      </li>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>48</fuelConsumptionRate>
+        <fuelCapacity>20</fuelCapacity>
+        <fuelFilter>
+          <thingDefs>
+            <li>WoodLog</li>
+          </thingDefs>
+        </fuelFilter>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <initialFuelPercent>0</initialFuelPercent>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+        <canEjectFuel>true</canEjectFuel>
+      </li>
+      <li Class="MUGB.CompProperties_GoblinFuelFilter">
+        <showFuelFilterToggles>false</showFuelFilterToggles>
+        <allowWood>true</allowWood>
+        <allowCoal>true</allowCoal>
+      </li>
+      <li Class="MUGB.CompProperties_GoblinFuelGlower">
+        <glowRadius>5.5</glowRadius>
+        <glowColor>(120,60,35,0)</glowColor>
+        <glowOnlyWithFuel>true</glowOnlyWithFuel>
+      </li>
+      <li Class="MUGB.CompProperties_GoblinBuildingFireVisual">
+        <fireSize>0.55</fireSize>
+        <fireOnlyWhenWorking>true</fireOnlyWhenWorking>
+        <throwSmoke>true</throwSmoke>
+        <smokeIntervalTicks>45</smokeIntervalTicks>
+        <smokeSize>0.65</smokeSize>
+        <smokeOffset>(0,0,0.18)</smokeOffset>
+        <southOffset>(0,0,0.18)</southOffset>
+        <northOffset>(0,0,-0.12)</northOffset>
+        <eastOffset>(-0.25,0,0.05)</eastOffset>
+        <westOffset>(0.25,0,0.05)</westOffset>
+      </li>
+    </comps>
+    <building>
+      <isMealSource>true</isMealSource>
+      <heatPerTickWhileWorking>0.10</heatPerTickWhileWorking>
+    </building>
+    <designationHotKey>Misc8</designationHotKey>
+    <placeWorkers>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+  </ThingDef>
+
+  <WorkGiverDef>
+    <defName>MUGB_DoBillsGoblinCooking</defName>
+    <label>use goblin cookstation</label>
+    <giverClass>WorkGiver_DoBill</giverClass>
+    <workType>Cooking</workType>
+    <priorityInType>110</priorityInType>
+    <fixedBillGiverDefs>
+      <li>MUGB_cookstation</li>
+    </fixedBillGiverDefs>
+    <verb>cook at goblin cookstation</verb>
+    <gerund>cooking at goblin cookstation</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+
+  <ThingDef ParentName="BenchBase">
+    <defName>MUGB_smithbench</defName>
+    <label>goblin smithbench</label>
+    <description>A goblin forge-bench for crude alloys, weapons, armor, and trophies.</description>
+    <thingClass>Building_WorkTable</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <tickerType>Normal</tickerType>
+    <graphicData>
+      <texPath>Things/Building/Production/MGB_smithbench/MGB_smithbench</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(4.3785,4.0425)</drawSize>
+      <drawOffset>(0,0,0.1)</drawOffset>
+      <drawOffsetSouth>(0,0,0.15)</drawOffsetSouth>
+      <shadowData>
+        <volume>(2.8, 0.35, 0.59)</volume>
+        <offset>(0, 0, 0.08)</offset>
+      </shadowData>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <costStuffCount>90</costStuffCount>
+    <costList>
+      <Steel>60</Steel>
+      <WoodLog>30</WoodLog>
+    </costList>
+    <stuffCategories>
+      <li>Stony</li>
+    </stuffCategories>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <fillPercent>0.5</fillPercent>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <WorkToBuild>3500</WorkToBuild>
+      <MaxHitPoints>260</MaxHitPoints>
+      <Flammability>0.6</Flammability>
+      <Cleanliness>-3</Cleanliness>
+    </statBases>
+    <size>(3,2)</size>
+    <designationCategory>MUGB_Goblin</designationCategory>
+    <uiOrder>2120</uiOrder>
+    <!--
+      고블린 합금 연구 이후에 지을 수 있게 합니다. 대장간에서 만드는 물건들이
+      합금을 재료로 쓰므로, 합금을 만들 줄 모르는 단계에서 대장간부터 세워지는 건
+      순서가 어긋납니다.
+    -->
+    <researchPrerequisites>
+      <li>MUGB_Research_Alloying</li>
+    </researchPrerequisites>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <surfaceType>Item</surfaceType>
+    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+    <recipes>
+      <li>ExtractMetalFromSlag</li>
+      <li>SmeltOrDestroyThing</li>
+      <li>SmeltWeapon</li>
+      <li>SmeltApparel</li>
+      <li>DestroyWeapon</li>
+      <li>DestroyApparel</li>
+    </recipes>
+    <inspectorTabs>
+      <li>ITab_Bills</li>
+      <li>MUGB.ITab_GoblinFuel</li>
+    </inspectorTabs>
+    <building>
+      <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+      <workTableRoomRole>Workshop</workTableRoomRole>
+      <workTableNotInRoomRoleFactor>0.8</workTableNotInRoomRoleFactor>
+    </building>
+    <comps>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>36</fuelConsumptionRate>
+        <fuelCapacity>120</fuelCapacity>
+        <fuelFilter>
+          <thingDefs>
+            <li>WoodLog</li>
+          </thingDefs>
+        </fuelFilter>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+        <canEjectFuel>true</canEjectFuel>
+      </li>
+      <li Class="MUGB.CompProperties_GoblinFuelFilter">
+        <showFuelFilterToggles>false</showFuelFilterToggles>
+        <allowWood>true</allowWood>
+        <allowCoal>true</allowCoal>
+      </li>
+      <li Class="MUGB.CompProperties_GoblinFuelGlower">
+        <glowRadius>5.5</glowRadius>
+        <glowColor>(120,60,35,0)</glowColor>
+        <glowOnlyWithFuel>true</glowOnlyWithFuel>
+      </li>
+      <li Class="MUGB.CompProperties_GoblinBuildingFireVisual">
+        <fireSize>0.75</fireSize>
+        <fireOnlyWhenWorking>true</fireOnlyWhenWorking>
+        <throwSmoke>true</throwSmoke>
+        <smokeIntervalTicks>45</smokeIntervalTicks>
+        <smokeSize>0.8</smokeSize>
+        <smokeOffset>(0,0,0.22)</smokeOffset>
+        <southOffset>(0,0,0.1)</southOffset>
+        <northOffset>(0,0,-0.12)</northOffset>
+        <eastOffset>(-0.28,0,0.04)</eastOffset>
+        <westOffset>(0.28,0,0.04)</westOffset>
+      </li>
+      <li Class="CompProperties_AffectedByFacilities">
+        <linkableFacilities>
+          <li>ToolCabinet</li>
+        </linkableFacilities>
+      </li>
+    </comps>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+  </ThingDef>
+
+  <WorkGiverDef>
+    <defName>MUGB_DoBillsGoblinSmithing</defName>
+    <label>use goblin smithbench</label>
+    <giverClass>WorkGiver_DoBill</giverClass>
+    <workType>Smithing</workType>
+    <priorityInType>115</priorityInType>
+    <fixedBillGiverDefs>
+      <li>MUGB_smithbench</li>
+    </fixedBillGiverDefs>
+    <verb>use goblin smithbench</verb>
+    <gerund>using goblin smithbench</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+
+  <ThingDef ParentName="BenchBase">
+    <defName>MUGB_Basin</defName>
+    <label>goblin pounding basin</label>
+    <description>A heavy stone basin used to grind bones with stone grit into bone dust.</description>
+    <thingClass>Building_WorkTable</thingClass>
+    <graphicData>
+      <texPath>Things/Building/Production/MGB_Basin/MGB_PoundingBasin</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(1.32,1.32)</drawSize>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <costStuffCount>60</costStuffCount>
+    <costList>
+      <WoodLog>10</WoodLog>
+    </costList>
+    <stuffCategories>
+      <li>Stony</li>
+    </stuffCategories>
+    <altitudeLayer>Building</altitudeLayer>
+    <fillPercent>0.45</fillPercent>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>40</MarketValue>
+      <WorkToBuild>1200</WorkToBuild>
+      <MaxHitPoints>160</MaxHitPoints>
+      <Flammability>0.4</Flammability>
+      <Cleanliness>-2</Cleanliness>
+    </statBases>
+    <size>(1,1)</size>
+    <designationCategory>MUGB_Goblin</designationCategory>
+    <uiOrder>2130</uiOrder>
+    <passability>PassThroughOnly</passability>
+    <pathCost>30</pathCost>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <surfaceType>Item</surfaceType>
+    <inspectorTabs>
+      <li>ITab_Bills</li>
+    </inspectorTabs>
+    <building>
+      <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+      <workTableRoomRole>Workshop</workTableRoomRole>
+      <workTableNotInRoomRoleFactor>0.8</workTableNotInRoomRoleFactor>
+    </building>
+    <placeWorkers>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+  </ThingDef>
+
+  <WorkGiverDef>
+    <defName>MUGB_DoBillsGoblinBasin</defName>
+    <label>use goblin pounding basin</label>
+    <giverClass>WorkGiver_DoBill</giverClass>
+    <workType>Crafting</workType>
+    <priorityInType>95</priorityInType>
+    <fixedBillGiverDefs>
+      <li>MUGB_Basin</li>
+    </fixedBillGiverDefs>
+    <verb>use goblin pounding basin</verb>
+    <gerund>using goblin pounding basin</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+
+  <ThingDef ParentName="BenchBase">
+    <defName>MUGB_druglab</defName>
+    <label>goblin alchemy table</label>
+    <description>A cramped goblin alchemy table for brewing drugs, stimulants, and crude medicines.</description>
+    <thingClass>Building_WorkTable</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Things/Building/Production/MGB_druglab/MGB_druglab</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(3.55,3.55)</drawSize>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <castEdgeShadows>true</castEdgeShadows>
+    <staticSunShadowHeight>0.20</staticSunShadowHeight>
+    <costStuffCount>50</costStuffCount>
+    <costList>
+      <Steel>45</Steel>
+      <WoodLog>25</WoodLog>
+      <!-- ko-KR 의도: 고블린 연금술 테이블은 정밀 부품 대신 뼈로 얼기설기 보강합니다. -->
+      <MUGB_Bone>20</MUGB_Bone>
+    </costList>
+    <stuffCategories>
+      <li>Stony</li>
+    </stuffCategories>
+    <altitudeLayer>Building</altitudeLayer>
+    <fillPercent>0.5</fillPercent>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>160</MarketValue>
+      <WorkToBuild>2600</WorkToBuild>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Flammability>0.8</Flammability>
+      <Cleanliness>-1</Cleanliness>
+      <WorkTableWorkSpeedFactor>0.9</WorkTableWorkSpeedFactor>
+    </statBases>
+    <size>(3,1)</size>
+    <designationCategory>MUGB_Goblin</designationCategory>
+    <uiOrder>2150</uiOrder>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <surfaceType>Item</surfaceType>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+    <inspectorTabs>
+      <li>ITab_Bills</li>
+    </inspectorTabs>
+    <building>
+      <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+      <workTableRoomRole>Laboratory</workTableRoomRole>
+      <workTableNotInRoomRoleFactor>0.8</workTableNotInRoomRoleFactor>
+    </building>
+    <comps>
+      <li Class="CompProperties_AffectedByFacilities">
+        <linkableFacilities>
+          <li>ToolCabinet</li>
+        </linkableFacilities>
+      </li>
+    </comps>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>MUGB_Research_WarBrews</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <WorkGiverDef>
+    <defName>MUGB_DoBillsGoblinAlchemy</defName>
+    <label>use goblin alchemy table</label>
+    <giverClass>WorkGiver_DoBill</giverClass>
+    <workType>Crafting</workType>
+    <workTags>
+      <li>Intellectual</li>
+    </workTags>
+    <priorityInType>95</priorityInType>
+    <fixedBillGiverDefs>
+      <li>MUGB_druglab</li>
+    </fixedBillGiverDefs>
+    <verb>brew drugs at</verb>
+    <gerund>brewing drugs at</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>MUGB_bigpot</defName>
+    <label>goblin stewpot</label>
+    <description>A large fueled goblin stewpot that stores meat and guts, then ladles out gut stew.</description>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <thingClass>MUGB.Building_GoblinStewpot</thingClass>
+    <graphicData>
+      <texPath>Things/Building/Production/MGB_bigpot/GBR_stewpot</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(3.17,3.17)</drawSize>
+      <drawOffset>(0,0,0.32)</drawOffset>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <rotatable>true</rotatable>
+    <tickerType>Normal</tickerType>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <thingCategories>
+      <li>BuildingsProduction</li>
+    </thingCategories>
+    <costStuffCount>100</costStuffCount>
+    <costList>
+      <WoodLog>25</WoodLog>
+    </costList>
+    <stuffCategories>
+      <li>Stony</li>
+    </stuffCategories>
+    <altitudeLayer>Building</altitudeLayer>
+    <fillPercent>1</fillPercent>
+    <blockWind>true</blockWind>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>160</MarketValue>
+      <WorkToBuild>1600</WorkToBuild>
+      <MaxHitPoints>180</MaxHitPoints>
+      <Mass>45</Mass>
+      <Flammability>0.8</Flammability>
+      <Cleanliness>-5</Cleanliness>
+    </statBases>
+    <size>(2,2)</size>
+    <designationCategory>MUGB_Goblin</designationCategory>
+    <uiOrder>2140</uiOrder>
+    <passability>Impassable</passability>
+    <pathCost>50</pathCost>
+    <surfaceType>Item</surfaceType>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <inspectorTabs>
+      <li>ITab_Storage</li>
+      <li>MUGB.ITab_GoblinFuel</li>
+    </inspectorTabs>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>MUGB.CompGoblinAlwaysPowered</compClass>
+        <basePowerConsumption>0</basePowerConsumption>
+        <showPowerNeededIfOff>false</showPowerNeededIfOff>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>3</heatPerSecond>
+      </li>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>18</fuelConsumptionRate>
+        <fuelCapacity>120</fuelCapacity>
+        <fuelFilter>
+          <thingDefs>
+            <li>WoodLog</li>
+          </thingDefs>
+        </fuelFilter>
+        <consumeFuelOnlyWhenUsed>false</consumeFuelOnlyWhenUsed>
+        <initialFuelPercent>0</initialFuelPercent>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+        <canEjectFuel>true</canEjectFuel>
+      </li>
+      <li Class="MUGB.CompProperties_GoblinFuelFilter">
+        <showFuelFilterToggles>false</showFuelFilterToggles>
+        <allowWood>true</allowWood>
+        <allowCoal>true</allowCoal>
+      </li>
+      <li Class="MUGB.CompProperties_GoblinFuelGlower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(150,75,35,0)</glowColor>
+        <glowOnlyWithFuel>true</glowOnlyWithFuel>
+      </li>
+      <li Class="MUGB.CompProperties_GoblinDirectionalFireVisual">
+        <fireSize>0.72</fireSize>
+        <northFireSize>0.576</northFireSize>
+        <southFireSize>0.576</southFireSize>
+        <drawFireOnlySouth>true</drawFireOnlySouth>
+        <offset>(0,0,-0.62)</offset>
+      </li>
+      <li Class="MUGB.CompProperties_GoblinStewpotIngredients">
+        <nutritionCapacity>30</nutritionCapacity>
+        <nutritionCostPerMeal>0.45</nutritionCostPerMeal>
+        <gutUnitsCostPerMeal>0.12</gutUnitsCostPerMeal>
+        <ingredientNutritionEfficiency>1.6</ingredientNutritionEfficiency>
+        <autoFillPercent>1</autoFillPercent>
+        <showAllowAutoFillToggle>true</showAllowAutoFillToggle>
+        <showIngredientFilterToggles>false</showIngredientFilterToggles>
+      </li>
+    </comps>
+    <building>
+      <isMealSource>true</isMealSource>
+      <nutritionCostPerDispense>0.45</nutritionCostPerDispense>
+      <soundDispense>DispensePaste</soundDispense>
+      <heatPerTickWhileWorking>0.10</heatPerTickWhileWorking>
+      <fixedStorageSettings>
+        <priority>Important</priority>
+        <filter>
+          <thingDefs>
+            <li>MUGB_Hgut</li>
+            <li>MUGB_Ggut</li>
+            <li>MUGB_Hchunk</li>
+            <li>MUGB_Gchunk</li>
+            <li>Meat_Human</li>
+            <li>Meat_Goblin</li>
+          </thingDefs>
+        </filter>
+      </fixedStorageSettings>
+      <defaultStorageSettings>
+        <priority>Important</priority>
+        <filter>
+          <thingDefs>
+            <li>MUGB_Hgut</li>
+            <li>MUGB_Ggut</li>
+            <li>MUGB_Hchunk</li>
+            <li>MUGB_Gchunk</li>
+            <li>Meat_Human</li>
+            <li>Meat_Goblin</li>
+          </thingDefs>
+        </filter>
+      </defaultStorageSettings>
+    </building>
+    <placeWorkers>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <researchPrerequisites>
+      <li>MUGB_Research_Stewpot</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+</Defs>

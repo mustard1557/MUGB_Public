@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <PawnsArrivalModeDef>
+    <defName>MUGB_GoblinTunnelArrival</defName>
+    <workerClass>MUGB.PawnsArrivalModeWorker_GoblinTunnel</workerClass>
+    <selectionWeightCurve>
+      <points>
+        <li>(0, 0)</li>
+      </points>
+    </selectionWeightCurve>
+    <selectionWeightCurvesPerFaction>
+      <li>
+        <faction>MUGB_GoblinCivilMedieval</faction>
+        <selectionWeightPerPointsCurve>
+          <points>
+            <li>(0, 0)</li>
+            <li>(300, 0.10)</li>
+            <li>(1200, 0.18)</li>
+            <li>(3000, 0.22)</li>
+          </points>
+        </selectionWeightPerPointsCurve>
+      </li>
+      <li>
+        <faction>MUGB_GoblinSavageMedieval</faction>
+        <selectionWeightPerPointsCurve>
+          <points>
+            <li>(0, 0)</li>
+            <li>(300, 0.18)</li>
+            <li>(1200, 0.28)</li>
+            <li>(3000, 0.34)</li>
+          </points>
+        </selectionWeightPerPointsCurve>
+      </li>
+      <li>
+        <faction>MUGB_GoblinCultists</faction>
+        <selectionWeightPerPointsCurve>
+          <points>
+            <li>(0, 0)</li>
+            <li>(300, 0.16)</li>
+            <li>(1200, 0.24)</li>
+            <li>(3000, 0.30)</li>
+          </points>
+        </selectionWeightPerPointsCurve>
+      </li>
+    </selectionWeightCurvesPerFaction>
+    <pointsFactorCurve>
+      <points>
+        <li>(0, 1)</li>
+      </points>
+    </pointsFactorCurve>
+    <textEnemy>A group of {0} from {1} are emerging from goblin tunnels nearby. Surviving tunnels will release reinforcements; destroy them to stop the later waves.</textEnemy>
+    <textWillArrive>{0_pawnsPluralDef} will emerge from goblin tunnels.</textWillArrive>
+    <layerWhitelist>
+      <li>Surface</li>
+    </layerWhitelist>
+  </PawnsArrivalModeDef>
+
+  <PawnsArrivalModeDef>
+    <defName>MUGB_GoblinTunnelArrivalCenter</defName>
+    <workerClass>MUGB.PawnsArrivalModeWorker_GoblinTunnelCenter</workerClass>
+    <selectionWeightCurve>
+      <points>
+        <li>(0, 0)</li>
+      </points>
+    </selectionWeightCurve>
+    <selectionWeightCurvesPerFaction>
+      <li>
+        <faction>MUGB_GoblinSavageMedieval</faction>
+        <selectionWeightPerPointsCurve>
+          <points>
+            <li>(0, 0)</li>
+            <li>(1000, 0)</li>
+            <li>(1200, 0.07)</li>
+            <li>(3000, 0.15)</li>
+            <li>(6000, 0.16)</li>
+          </points>
+        </selectionWeightPerPointsCurve>
+      </li>
+      <li>
+        <faction>MUGB_GoblinCultists</faction>
+        <selectionWeightPerPointsCurve>
+          <points>
+            <li>(0, 0)</li>
+            <li>(1000, 0)</li>
+            <li>(1200, 0.065)</li>
+            <li>(3000, 0.145)</li>
+            <li>(6000, 0.15)</li>
+          </points>
+        </selectionWeightPerPointsCurve>
+      </li>
+      <li>
+        <faction>MUGB_GoblinCivilMedieval</faction>
+        <selectionWeightPerPointsCurve>
+          <points>
+            <li>(0, 0)</li>
+            <li>(1000, 0)</li>
+            <li>(1200, 0.05)</li>
+            <li>(3000, 0.12)</li>
+            <li>(6000, 0.13)</li>
+          </points>
+        </selectionWeightPerPointsCurve>
+      </li>
+    </selectionWeightCurvesPerFaction>
+    <pointsFactorCurve>
+      <points>
+        <li>(0, 1)</li>
+      </points>
+    </pointsFactorCurve>
+    <textEnemy>A group of {0} from {1} are digging up from a goblin tunnel inside your lines. Surviving tunnels will release reinforcements; destroy them to stop the later waves.</textEnemy>
+    <textWillArrive>{0_pawnsPluralDef} will emerge from a central goblin tunnel.</textWillArrive>
+    <layerWhitelist>
+      <li>Surface</li>
+    </layerWhitelist>
+  </PawnsArrivalModeDef>
+
+</Defs>

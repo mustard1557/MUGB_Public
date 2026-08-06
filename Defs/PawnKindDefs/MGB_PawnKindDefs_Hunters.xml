@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    Goblin hunter / punitive-force PawnKinds.
+    Korean source intent: 고블린 사냥꾼단은 고블린이 아니라 비고블린 인간형 토벌대다.
+    그래서 MUGB_GoblinKind_ 접두사를 쓰지 않아 고블린 제노타입 강제 후처리를 타지 않게 한다.
+  -->
+
+  <PawnKindDef ParentName="MercenaryBase" Name="MUGB_GoblinHunterHumanBase" Abstract="True">
+    <race>Human</race>
+    <defaultFactionDef>MUGB_GoblinHunters</defaultFactionDef>
+    <canBeSapper>true</canBeSapper>
+    <gearHealthRange>0.75~2.2</gearHealthRange>
+    <itemQuality>Normal</itemQuality>
+    <minGenerationAge>18</minGenerationAge>
+    <maxGenerationAge>55</maxGenerationAge>
+    <apparelTags>
+      <li>IndustrialBasic</li>
+      <li>IndustrialAdvanced</li>
+      <li>IndustrialMilitaryBasic</li>
+      <li>IndustrialMilitaryAdvanced</li>
+      <li>BeltDefensePop</li>
+    </apparelTags>
+    <apparelMoney>550~1100</apparelMoney>
+    <apparelAllowHeadgearChance>0.7</apparelAllowHeadgearChance>
+    <techHediffsChance>0.05</techHediffsChance>
+    <techHediffsMoney>100~500</techHediffsMoney>
+    <techHediffsTags>
+      <li>Poor</li>
+      <li>Simple</li>
+    </techHediffsTags>
+    <combatEnhancingDrugsChance>0.10</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>0~1</combatEnhancingDrugsCount>
+    <initialWillRange>2~5</initialWillRange>
+    <initialResistanceRange>14~24</initialResistanceRange>
+    <requiredWorkTags>
+      <li>Violent</li>
+    </requiredWorkTags>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinHunterHumanBase">
+    <defName>MUGB_HumanKind_GoblinPunitiveInfantry</defName>
+    <label>goblin punitive infantry</label>
+    <combatPower>70</combatPower>
+    <weaponMoney>180~450</weaponMoney>
+    <weaponTags>
+      <li>MedievalMeleeDecent</li>
+      <li>MedievalMeleeAdvanced</li>
+    </weaponTags>
+    <skills>
+      <li>
+        <skill>Melee</skill>
+        <range>5~13</range>
+      </li>
+    </skills>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinHunterHumanBase">
+    <defName>MUGB_HumanKind_GoblinPunitiveShooter</defName>
+    <label>goblin punitive shooter</label>
+    <combatPower>75</combatPower>
+    <weaponMoney>260~650</weaponMoney>
+    <weaponTags>
+      <li>Gun</li>
+    </weaponTags>
+    <disallowedTraits>
+      <li>Brawler</li>
+    </disallowedTraits>
+    <skills>
+      <li>
+        <skill>Shooting</skill>
+        <range>5~14</range>
+      </li>
+    </skills>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinHunterHumanBase">
+    <defName>MUGB_HumanKind_GoblinHunter</defName>
+    <label>goblin hunter</label>
+    <combatPower>62</combatPower>
+    <weaponMoney>250~500</weaponMoney>
+    <weaponTags>
+      <li>Gun</li>
+      <li>MedievalRangedDecent</li>
+    </weaponTags>
+    <apparelMoney>450~900</apparelMoney>
+    <disallowedTraits>
+      <li>Brawler</li>
+    </disallowedTraits>
+    <skills>
+      <li>
+        <skill>Shooting</skill>
+        <range>6~15</range>
+      </li>
+      <li>
+        <skill>Animals</skill>
+        <range>0~5</range>
+      </li>
+    </skills>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinHunterHumanBase">
+    <defName>MUGB_HumanKind_GoblinHunterCrossbowman</defName>
+    <label>goblin hunter crossbowman</label>
+    <combatPower>58</combatPower>
+    <weaponMoney>200~420</weaponMoney>
+    <weaponTags>
+      <li>MedievalRangedDecent</li>
+    </weaponTags>
+    <apparelMoney>420~850</apparelMoney>
+    <disallowedTraits>
+      <li>Brawler</li>
+    </disallowedTraits>
+    <skills>
+      <li>
+        <skill>Shooting</skill>
+        <range>5~13</range>
+      </li>
+    </skills>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinHunterHumanBase">
+    <defName>MUGB_HumanKind_GoblinHunterMusketeer</defName>
+    <label>goblin hunter musketeer</label>
+    <combatPower>82</combatPower>
+    <weaponMoney>260~650</weaponMoney>
+    <weaponTags>
+      <li>Gun</li>
+    </weaponTags>
+    <apparelMoney>550~1100</apparelMoney>
+    <disallowedTraits>
+      <li>Brawler</li>
+    </disallowedTraits>
+    <skills>
+      <li>
+        <skill>Shooting</skill>
+        <range>6~15</range>
+      </li>
+    </skills>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinHunterHumanBase">
+    <defName>MUGB_HumanKind_GoblinHunterCaptor</defName>
+    <label>goblin hunter captor</label>
+    <combatPower>60</combatPower>
+    <weaponMoney>180~450</weaponMoney>
+    <weaponTags>
+      <li>MedievalMeleeDecent</li>
+      <li>Gun</li>
+    </weaponTags>
+    <apparelMoney>450~900</apparelMoney>
+    <skills>
+      <li>
+        <skill>Melee</skill>
+        <range>4~12</range>
+      </li>
+      <li>
+        <skill>Shooting</skill>
+        <range>3~10</range>
+      </li>
+    </skills>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinHunterHumanBase">
+    <defName>MUGB_HumanKind_GoblinPunitiveCaptain</defName>
+    <label>goblin punitive captain</label>
+    <labelPlural>goblin punitive captains</labelPlural>
+    <combatPower>110</combatPower>
+    <factionLeader>true</factionLeader>
+    <weaponMoney>400~900</weaponMoney>
+    <weaponTags>
+      <li>Gun</li>
+      <li>MedievalMeleeAdvanced</li>
+    </weaponTags>
+    <apparelMoney>1000~1800</apparelMoney>
+    <apparelAllowHeadgearChance>0.9</apparelAllowHeadgearChance>
+    <skills>
+      <li>
+        <skill>Shooting</skill>
+        <range>8~16</range>
+      </li>
+      <li>
+        <skill>Melee</skill>
+        <range>7~15</range>
+      </li>
+      <li>
+        <skill>Social</skill>
+        <range>5~12</range>
+      </li>
+    </skills>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="MUGB_GoblinHunterHumanBase">
+    <defName>MUGB_HumanKind_GoblinHunterBoss</defName>
+    <label>goblin hunter boss</label>
+    <labelPlural>goblin hunter bosses</labelPlural>
+    <combatPower>125</combatPower>
+    <factionLeader>true</factionLeader>
+    <weaponMoney>500~1000</weaponMoney>
+    <weaponTags>
+      <li>Gun</li>
+      <li>SniperRifle</li>
+      <li>MedievalMeleeAdvanced</li>
+    </weaponTags>
+    <apparelMoney>1200~2200</apparelMoney>
+    <apparelAllowHeadgearChance>0.9</apparelAllowHeadgearChance>
+    <combatEnhancingDrugsChance>0.25</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>0~2</combatEnhancingDrugsCount>
+    <skills>
+      <li>
+        <skill>Shooting</skill>
+        <range>9~17</range>
+      </li>
+      <li>
+        <skill>Melee</skill>
+        <range>7~15</range>
+      </li>
+      <li>
+        <skill>Social</skill>
+        <range>6~13</range>
+      </li>
+    </skills>
+  </PawnKindDef>
+
+</Defs>

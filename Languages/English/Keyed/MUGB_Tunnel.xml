@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <MUGB_GoblinTunnelStoredPawns>Reserved goblins: {0}</MUGB_GoblinTunnelStoredPawns>
+  <MUGB_GoblinTunnelNextWave>Next wave: {0}</MUGB_GoblinTunnelNextWave>
+  <MUGB_GoblinTunnelCollapsing>The tunnel is collapsing</MUGB_GoblinTunnelCollapsing>
+  <MUGB_GoblinTunnelEmpty>Empty tunnel</MUGB_GoblinTunnelEmpty>
+  <MUGB_GoblinTunnelEdgeIncoming>Goblins are digging up from below! Destroy the tunnels to stop later reinforcements.</MUGB_GoblinTunnelEdgeIncoming>
+  <MUGB_GoblinTunnelCenterIncoming>A goblin tunnel is opening inside your lines! Destroy the tunnels to stop later reinforcements.</MUGB_GoblinTunnelCenterIncoming>
+  <MUGB_GoblinTunnelReinforcementWarning>Movement is building beneath the goblin tunnels. Reinforcements will arrive in about one hour. Destroy the tunnels to stop them.</MUGB_GoblinTunnelReinforcementWarning>
+  <MUGB_GoblinTunnelReinforcementsArrived>Reinforcements have emerged from the goblin tunnels!</MUGB_GoblinTunnelReinforcementsArrived>
+  <MUGB_GoblinTunnelNextReinforcement>Next reinforcements: {0}</MUGB_GoblinTunnelNextReinforcement>
+  <MUGB_GoblinTunnelRemainingWaves>Remaining reinforcements: {0}</MUGB_GoblinTunnelRemainingWaves>
+  <MUGB_GoblinTunnelLivingCount>Active tunnels in cluster: {0}</MUGB_GoblinTunnelLivingCount>
+  <MUGB_GoblinTunnelDestroyHint>Destroy this tunnel to stop its unreleased reinforcements.</MUGB_GoblinTunnelDestroyHint>
+  <MUGB_ActiveGoblinTunnelsLabel>Active goblin tunnels: {0}</MUGB_ActiveGoblinTunnelsLabel>
+  <MUGB_ActiveGoblinTunnelsDesc>Hostile goblin tunnels remain. Destroy them to stop unreleased reinforcements.</MUGB_ActiveGoblinTunnelsDesc>
+  <MUGB_ActiveGoblinTunnelsDescTimed>Hostile goblin tunnels remain. The nearest reinforcement is due in {0}. Destroy the tunnels to stop unreleased reinforcements.</MUGB_ActiveGoblinTunnelsDescTimed>
+  <MUGB_GoblinMortarSiegeIncoming>Goblins are digging a mortar supply tunnel! Destroy the tunnels to stop later troops and supplies.</MUGB_GoblinMortarSiegeIncoming>
+  <MUGB_GoblinMortarNextSupply>Next reinforcement and supplies: {0}</MUGB_GoblinMortarNextSupply>
+  <MUGB_GoblinMortarRemainingSupplies>Remaining supply waves: {0}</MUGB_GoblinMortarRemainingSupplies>
+  <MUGB_GoblinMortarSuppliesArrived>Goblin mortar reinforcements and supplies have arrived!</MUGB_GoblinMortarSuppliesArrived>
+</LanguageData>

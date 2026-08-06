@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/StorytellerDef[@Name="BaseStoryteller"]/comps</xpath>
+    <value>
+      <li Class="MUGB.StorytellerCompProperties_MUGBGoblinCaravanAmbush">
+        <incident>MUGB_GoblinCaravanAmbush</incident>
+        <extraMtbFactor>1</extraMtbFactor>
+        <applyCaravanVisibility>true</applyCaravanVisibility>
+        <allowedTargetTags>
+          <li>Caravan</li>
+        </allowedTargetTags>
+      </li>
+    </value>
+  </Operation>
+</Patch>

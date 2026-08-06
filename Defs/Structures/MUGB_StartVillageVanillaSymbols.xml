@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    [파일 개요]
+    미디블 오버홀 없이도 시작 마을을 세우기 위한 바닐라 전용 심볼입니다.
+
+    의도:
+    - 기존 시작 마을 레이아웃은 미디블 오버홀 심볼(통나무 벽, 통나무 침대 등)에 의존합니다.
+      그 모드가 없으면 레이아웃이 통째로 로드되지 않아 마을이 생성되지 않습니다.
+    - 여기서는 코어에만 있는 것으로 오두막을 세울 수 있는 최소한의 심볼만 정의합니다.
+    - 침대는 잠자리(Bedroll), 가구는 식탁과 의자 정도로 단순하게 둡니다.
+    - 바닥재는 심볼로 지정할 수 없습니다. KCSG.SymbolDef에는 지형 필드가 없어서,
+      레이아웃 쪽 terrainGrid로 깔고 있습니다.
+  -->
+
+  <KCSG.SymbolDef>
+    <defName>MUGB_VanVillage_Wall</defName>
+    <thing>Wall</thing>
+    <stuff>WoodLog</stuff>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef>
+    <defName>MUGB_VanVillage_Door</defName>
+    <thing>Door</thing>
+    <stuff>WoodLog</stuff>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef>
+    <defName>MUGB_VanVillage_Bedroll</defName>
+    <thing>Bedroll</thing>
+    <stuff>Cloth</stuff>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef>
+    <defName>MUGB_VanVillage_Table</defName>
+    <thing>Table1x2c</thing>
+    <stuff>WoodLog</stuff>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef>
+    <defName>MUGB_VanVillage_Chair</defName>
+    <thing>DiningChair</thing>
+    <stuff>WoodLog</stuff>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef>
+    <defName>MUGB_VanVillage_Campfire</defName>
+    <thing>Campfire</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef>
+    <defName>MUGB_VanVillage_Torch</defName>
+    <thing>TorchLamp</thing>
+  </KCSG.SymbolDef>
+
+  <KCSG.SymbolDef>
+    <defName>MUGB_VanVillage_Shelf</defName>
+    <thing>ShelfSmall</thing>
+    <stuff>WoodLog</stuff>
+  </KCSG.SymbolDef>
+
+</Defs>

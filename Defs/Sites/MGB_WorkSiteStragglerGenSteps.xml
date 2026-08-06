@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    Korean source intent: 작업장 4종 각각에 잡부 생성 단계를 얹는다.
+    바닐라 GenStep_WorkSitePawns가 order 406이므로 그 직후인 407에 넣어
+    이미 만들어진 방어 Lord에 합류시킨다.
+  -->
+
+  <GenStepDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_WorkSite_Logging_Stragglers</defName>
+    <linkWithSite>WorkSite_Logging</linkWithSite>
+    <order>407</order>
+    <genStep Class="MUGB.GenStep_MUGBWorkSiteStragglers" />
+  </GenStepDef>
+
+  <GenStepDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_WorkSite_Mining_Stragglers</defName>
+    <linkWithSite>WorkSite_Mining</linkWithSite>
+    <order>407</order>
+    <genStep Class="MUGB.GenStep_MUGBWorkSiteStragglers" />
+  </GenStepDef>
+
+  <GenStepDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_WorkSite_Hunting_Stragglers</defName>
+    <linkWithSite>WorkSite_Hunting</linkWithSite>
+    <order>407</order>
+    <genStep Class="MUGB.GenStep_MUGBWorkSiteStragglers" />
+  </GenStepDef>
+
+  <GenStepDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_WorkSite_Farming_Stragglers</defName>
+    <linkWithSite>WorkSite_Farming</linkWithSite>
+    <order>407</order>
+    <genStep Class="MUGB.GenStep_MUGBWorkSiteStragglers" />
+  </GenStepDef>
+
+</Defs>

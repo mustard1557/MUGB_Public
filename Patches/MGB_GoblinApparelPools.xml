@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  <!-- Keep ordinary goblins in a narrow underwear/accessory pool without removing role-specific MUGB armor and helmets. -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Apparel_TribalA"]/apparel/tags</xpath>
+    <value>
+      <li>MUGB_GoblinBasicApparel</li>
+      <li>MUGB_GoblinBeggarApparel</li>
+    </value>
+  </Operation>
+
+  <!-- Medieval Overhaul apparel is optional, so keep those additions behind a mod check. -->
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Medieval Overhaul</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="DankPyon_Apparel_Sackcloth"]/apparel/tags</xpath>
+          <value>
+            <li>MUGB_GoblinBasicApparel</li>
+            <li>MUGB_GoblinBeggarApparel</li>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="DankPyon_Apparel_Padded_Surcoat" or defName="DankPyon_Footwear_BootsLeather" or defName="DankPyon_Footwear_BootsSplinted" or defName="DankPyon_Handwear_GlovesLeather"]/apparel/tags</xpath>
+          <value>
+            <li>MUGB_GoblinBasicApparel</li>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+  <!-- Only the two deliberate mixed-medieval footmen retain the broad MedievalBasic pool. -->
+  <Operation Class="PatchOperationRemove">
+    <xpath>Defs/PawnKindDef[starts-with(defName, "MUGB_GoblinKind_") and not(defName="MUGB_GoblinKind_MedievalFootman") and not(defName="MUGB_GoblinKind_MedievalAdvancedFootman")]/apparelTags/li[text()="MedievalBasic"]</xpath>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/PawnKindDef[starts-with(defName, "MUGB_GoblinKind_") and apparelTags and not(defName="MUGB_GoblinKind_MedievalFootman") and not(defName="MUGB_GoblinKind_MedievalAdvancedFootman") and not(defName="MUGB_GoblinKind_Slave") and not(defName="MUGB_GoblinKind_TunnelSlave") and not(defName="MUGB_GoblinKind_TunnelVanguard") and not(defName="MUGB_GoblinKind_SlaveBomber") and not(defName="MUGB_GoblinKind_SlaveBoomstickSapper") and not(defName="MUGB_GoblinKind_CultistBomberNaked") and not(defName="MUGB_GoblinKind_Beggar")]/apparelTags</xpath>
+    <value>
+      <li>MUGB_GoblinBasicApparel</li>
+    </value>
+  </Operation>
+
+</Patch>

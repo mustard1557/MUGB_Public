@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <MUGB_BeggarTravelersPassing>Wandering beggars are passing through.</MUGB_BeggarTravelersPassing>
+  <MUGB_BeggarTravelersPassingLabel>Beggars passing through</MUGB_BeggarTravelersPassingLabel>
+  <MUGB_BeggarTravelersPassingText>A band of beggars is drifting past the settlement. They belong to no faction, carry no banner, and have no home to return to. Nobody counts them, and nobody is waiting for them.\n\nThe rimworld is a violent place. If they were to disappear here, no one would come looking, and no one would ask.</MUGB_BeggarTravelersPassingText>
+  <MUGB_BeggarTravelersCannotStart>Wandering beggars cannot pass through this map right now.</MUGB_BeggarTravelersCannotStart>
+</LanguageData>

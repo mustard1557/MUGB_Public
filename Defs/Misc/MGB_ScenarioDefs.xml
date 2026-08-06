@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ScenPartDef>
+    <defName>MUGB_GoblinStartMarker</defName>
+    <label>goblin start marker</label>
+    <scenPartClass>MUGB.ScenPart_MUGB_GoblinStartMarker</scenPartClass>
+    <category>Fixed</category>
+    <selectionWeight>0</selectionWeight>
+    <summaryPriority>-1000</summaryPriority>
+    <canBeRandomlyAdded>false</canBeRandomlyAdded>
+    <canBePlayerAddedRemoved>false</canBePlayerAddedRemoved>
+  </ScenPartDef>
+
+  <ScenarioDef ParentName="ScenarioBase">
+    <defName>MUGB_GoblinScoutStart</defName>
+    <label>Goblin feature test</label>
+    <!-- 한국어 표시명: 고블린 기능구현 테스트 -->
+    <description>This scenario exists for testing MUGB features and debugging goblin content. It is not recommended for ordinary play.\n\nA small goblin scouting band starts with rough supplies so faction relations, goblin starting pawns, equipment, and other implemented systems can be checked quickly.</description>
+    <scenario>
+      <summary>Five goblin colonists starting with rough supplies.</summary>
+      <parts>
+
+        <li Class="MUGB.ScenPart_MUGB_GoblinStartMarker">
+          <def>MUGB_GoblinStartMarker</def>
+          <visible>false</visible>
+        </li>
+
+        <li Class="ScenPart_ConfigPage_ConfigureStartingPawns_Xenotypes">
+          <def>ConfigurePawnsXenotypes</def>
+          <pawnChoiceCount>10</pawnChoiceCount>
+          <customSummary>Start with four goblins and one hobgoblin.</customSummary>
+          <xenotypeCounts>
+            <li>
+              <xenotype>MUGB_Goblin</xenotype>
+              <count>4</count>
+              <description>adult goblin</description>
+              <requiredAtStart>true</requiredAtStart>
+              <allowedDevelopmentalStages>Adult</allowedDevelopmentalStages>
+            </li>
+            <li>
+              <xenotype>MUGB_Hobgoblin</xenotype>
+              <count>1</count>
+              <description>adult hobgoblin</description>
+              <requiredAtStart>true</requiredAtStart>
+              <allowedDevelopmentalStages>Adult</allowedDevelopmentalStages>
+            </li>
+          </xenotypeCounts>
+        </li>
+
+        <li Class="ScenPart_PlayerPawnsArriveMethod">
+          <def>PlayerPawnsArriveMethod</def>
+          <method>DropPods</method>
+          <visible>false</visible>
+        </li>
+
+        <li Class="ScenPart_GameStartDialog">
+          <def>GameStartDialog</def>
+          <text>The scouting party tumbles from the sky in a shower of scrap, stink, and panic. The old warrens are far behind. Ahead is a rimworld full of meat, timber, enemies, and problems with legs.\n\nThe ordinary goblin factions may bargain with you. Everyone else is less amused.</text>
+          <closeSound>GameStartSting</closeSound>
+        </li>
+
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>Silver</thingDef>
+          <count>300</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>MUGB_gutstew</thingDef>
+          <count>20</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>MedicineHerbal</thingDef>
+          <count>12</count>
+        </li>
+        <li Class="ScenPart_ScatterThingsNearPlayerStart">
+          <def>ScatterThingsNearPlayerStart</def>
+          <thingDef>WoodLog</thingDef>
+          <count>250</count>
+        </li>
+        <li Class="ScenPart_ScatterThingsNearPlayerStart">
+          <def>ScatterThingsNearPlayerStart</def>
+          <thingDef>MUGB_Bone</thingDef>
+          <count>80</count>
+        </li>
+        <li Class="ScenPart_ScatterThingsNearPlayerStart">
+          <def>ScatterThingsNearPlayerStart</def>
+          <thingDef>MUGB_GoblinAlloy</thingDef>
+          <count>60</count>
+        </li>
+
+      </parts>
+    </scenario>
+  </ScenarioDef>
+
+</Defs>

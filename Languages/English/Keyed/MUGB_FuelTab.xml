@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <MUGB_TabFuel>Fuel</MUGB_TabFuel>
+  <MUGB_FuelTabAllowedFuel>Allowed heat fuel</MUGB_FuelTabAllowedFuel>
+  <MUGB_FuelTabAllowWood>Allow wood fuel</MUGB_FuelTabAllowWood>
+  <MUGB_FuelTabAllowWoodDesc>Allows this goblin building to use wood for automatic and manual refueling.</MUGB_FuelTabAllowWoodDesc>
+  <MUGB_FuelTabAllowCoal>Allow coal fuel</MUGB_FuelTabAllowCoal>
+  <MUGB_FuelTabAllowCoalDesc>Allows this goblin building to use Medieval Overhaul coal for automatic and manual refueling.</MUGB_FuelTabAllowCoalDesc>
+  <MUGB_FuelTabNoFuelWarning>No fuel is allowed. This building will not be refueled.</MUGB_FuelTabNoFuelWarning>
+  <MUGB_FuelTabHint>This setting affects both automatic and manual refueling.</MUGB_FuelTabHint>
+</LanguageData>

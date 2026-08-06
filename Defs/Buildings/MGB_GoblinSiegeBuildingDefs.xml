@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 한국어 의도: 바닐라 박격포처럼 포탄을 골라 장전하는 1x1 유인 박격포. 조작자는 배치 방향의 아래쪽에 선다. -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>MUGB_GoblinMortar</defName>
+    <label>goblin mortar</label>
+    <description>A compact manned mortar assembled from goblin alloy, wood, and bone braces. It fires crude high-explosive or concentrated sleep-gas shells over walls.</description>
+    <thingClass>MUGB.Building_GoblinMannedTurret</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Things/Building/Defensive/GoblinMortar/MGB_GoblinMortarBase</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(2.2735,2.2735)</drawSize>
+    </graphicData>
+    <uiIconPath>Things/Building/Defensive/GoblinMortar/MGB_GoblinMortarMenuIcon</uiIconPath>
+    <size>(1,1)</size>
+    <rotatable>true</rotatable>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.4</fillPercent>
+    <tickerType>Normal</tickerType>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <designationCategory>Security</designationCategory>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+    <researchPrerequisites><li>MUGB_GoblinSiegecraft</li></researchPrerequisites>
+    <statBases>
+      <MaxHitPoints>180</MaxHitPoints>
+      <WorkToBuild>4200</WorkToBuild>
+      <Mass>34</Mass>
+      <Flammability>0.65</Flammability>
+      <Beauty>-15</Beauty>
+    </statBases>
+    <costList>
+      <MUGB_GoblinAlloy>250</MUGB_GoblinAlloy>
+      <WoodLog>50</WoodLog>
+      <MUGB_Bone>10</MUGB_Bone>
+      <DankPyon_ComponentBasic MayRequire="DankPyon.Medieval.Overhaul">20</DankPyon_ComponentBasic>
+    </costList>
+    <inspectorTabs><li>ITab_Shells</li></inspectorTabs>
+    <comps>
+      <li Class="CompProperties_Forbiddable" />
+      <li Class="CompProperties_Mannable"><manWorkType>Violent</manWorkType></li>
+    </comps>
+    <building>
+      <turretGunDef>MUGB_Gun_GoblinMortar</turretGunDef>
+      <turretBurstWarmupTime>4</turretBurstWarmupTime>
+      <turretBurstCooldownTime>28</turretBurstCooldownTime>
+      <turretTopDrawSize>2.0735</turretTopDrawSize>
+      <turretTopOffset>(0,0)</turretTopOffset>
+      <buildingTags><li>Artillery</li></buildingTags>
+    </building>
+    <modExtensions>
+      <li Class="MUGB.GoblinTurretVisualExtension">
+        <!-- 한국어 의도: 원본 포신 PNG는 수정하지 않고, 회전각을 따라 중심만 보정한다. -->
+        <rotatingTopOffset>(0,-0.237)</rotatingTopOffset>
+      </li>
+    </modExtensions>
+    <placeWorkers>
+      <li>PlaceWorker_NotUnderRoof</li>
+      <li>PlaceWorker_TurretTop</li>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseArtilleryWeapon">
+    <defName>MUGB_Gun_GoblinMortar</defName>
+    <label>goblin mortar</label>
+    <description>A short, crude mortar barrel built to throw goblin shells over walls.</description>
+    <graphicData>
+      <texPath>Things/Building/Defensive/GoblinMortar/MGB_GoblinMortarTop</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(2.0735,2.0735)</drawSize>
+    </graphicData>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <forceNormalTimeSpeed>false</forceNormalTimeSpeed>
+        <warmupTime>4</warmupTime>
+        <forcedMissRadius>14</forcedMissRadius>
+        <forcedMissRadiusClassicMortars>14</forcedMissRadiusClassicMortars>
+        <isMortar>true</isMortar>
+        <requireLineOfSight>false</requireLineOfSight>
+        <minRange>15</minRange>
+        <range>500</range>
+        <soundCast>Mortar_LaunchA</soundCast>
+        <muzzleFlashScale>12</muzzleFlashScale>
+        <targetParams><canTargetLocations>true</canTargetLocations></targetParams>
+      </li>
+    </verbs>
+    <comps><li Class="CompProperties_ChangeableProjectile" /></comps>
+    <building>
+      <fixedStorageSettings><filter><thingDefs><li>MUGB_GoblinHighExplosiveShell</li><li>MUGB_GoblinStinkMortarShell</li></thingDefs></filter></fixedStorageSettings>
+      <defaultStorageSettings><filter><thingDefs><li>MUGB_GoblinHighExplosiveShell</li><li>MUGB_GoblinStinkMortarShell</li></thingDefs></filter></defaultStorageSettings>
+    </building>
+  </ThingDef>
+
+  <!-- 한국어 의도: 미디블 Scorpio와 비슷한 크기의 1x1 유인 대형연노. 24발을 적재하고 3점사한다. -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>MUGB_GoblinRepeaterBallista</defName>
+    <label>goblin repeater ballista</label>
+    <description>A huge manned goblin repeating crossbow. Its crew feeds heavy bolts into a wooden magazine and sweeps targets with three-shot bursts.</description>
+    <thingClass>MUGB.Building_GoblinMannedTurret</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Things/Building/Defensive/GoblinRepeaterBallista/MGB_GoblinRepeaterBallistaStand</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(1.925,1.925)</drawSize>
+    </graphicData>
+    <uiIconPath>Things/Building/Defensive/GoblinRepeaterBallista/MGB_GoblinRepeaterBallistaMenuIcon</uiIconPath>
+    <size>(1,1)</size>
+    <rotatable>true</rotatable>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.45</fillPercent>
+    <tickerType>Normal</tickerType>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <designationCategory>Security</designationCategory>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <researchPrerequisites><li>MUGB_GoblinSiegecraft</li></researchPrerequisites>
+    <statBases>
+      <MaxHitPoints>300</MaxHitPoints>
+      <WorkToBuild>9600</WorkToBuild>
+      <Mass>80</Mass>
+      <Flammability>0.8</Flammability>
+      <Beauty>-20</Beauty>
+      <ShootingAccuracyTurret>0.9</ShootingAccuracyTurret>
+    </statBases>
+    <costList>
+      <MUGB_GoblinAlloy>80</MUGB_GoblinAlloy>
+      <WoodLog>200</WoodLog>
+      <DankPyon_ComponentBasic MayRequire="DankPyon.Medieval.Overhaul">10</DankPyon_ComponentBasic>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Mannable"><manWorkType>Violent</manWorkType></li>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Heavy bolts</fuelLabel>
+        <fuelGizmoLabel>Heavy bolts</fuelGizmoLabel>
+        <fuelFilter><thingDefs><li>MUGB_GoblinHeavyBolt</li></thingDefs></fuelFilter>
+        <fuelCapacity>24</fuelCapacity>
+        <fuelMultiplier>1</fuelMultiplier>
+        <fuelConsumptionRate>1</fuelConsumptionRate>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <showFuelGizmo>true</showFuelGizmo>
+        <initialFuelPercent>0</initialFuelPercent>
+        <outOfFuelMessage>Cannot fire: needs goblin heavy bolts.</outOfFuelMessage>
+      </li>
+    </comps>
+    <building>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>MUGB_Gun_GoblinRepeaterBallista</turretGunDef>
+      <turretBurstWarmupTime>2</turretBurstWarmupTime>
+      <turretBurstCooldownTime>3.2</turretBurstCooldownTime>
+      <turretTopDrawSize>1.925</turretTopDrawSize>
+      <turretTopOffset>(0,0)</turretTopOffset>
+    </building>
+    <placeWorkers>
+      <li>PlaceWorker_ShowTurretRadius</li>
+      <li>PlaceWorker_TurretTop</li>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>MUGB_Gun_GoblinRepeaterBallista</defName>
+    <label>goblin repeater ballista</label>
+    <description>A skull-braced repeating crossbow mechanism fixed onto a heavy stand.</description>
+    <graphicData>
+      <texPath>Things/Building/Defensive/GoblinRepeaterBallista/MGB_GoblinRepeaterBallistaTop</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(1.925,1.925)</drawSize>
+    </graphicData>
+    <statBases>
+      <AccuracyTouch>0.60</AccuracyTouch>
+      <AccuracyShort>0.75</AccuracyShort>
+      <AccuracyMedium>0.75</AccuracyMedium>
+      <AccuracyLong>0.66</AccuracyLong>
+      <RangedWeapon_Cooldown>3.2</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MUGB_GoblinHeavyBoltProjectile</defaultProjectile>
+        <warmupTime>2</warmupTime>
+        <minRange>3</minRange>
+        <range>32</range>
+        <burstShotCount>3</burstShotCount>
+        <ticksBetweenBurstShots>30</ticksBetweenBurstShots>
+        <soundCast>MUGB_GoblinRepeaterBallistaFire</soundCast>
+        <muzzleFlashScale>0</muzzleFlashScale>
+        <consumeFuelPerShot>1</consumeFuelPerShot>
+      </li>
+    </verbs>
+  </ThingDef>
+</Defs>

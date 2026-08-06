@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef Name="MUGB_GoblinShieldBase" ParentName="BaseMeleeWeapon_Blunt_Quality" Abstract="True">
+    <thingClass>VEF.Apparels.Apparel_Shield</thingClass>
+    <techLevel>Medieval</techLevel>
+    <relicChance>0</relicChance>
+    <thingCategories Inherit="False">
+      <li>VFEC_Shields</li>
+      <li>MUGB_GoblinApparelCategory</li>
+    </thingCategories>
+    <tradeTags>
+      <li>Armor</li>
+      <li>Clothing</li>
+      <li>MUGB_GoblinApparel</li>
+      <li>MUGB_GoblinArmor</li>
+      <li>MUGB_GoblinShield</li>
+    </tradeTags>
+    <equippedStatOffsets>
+      <ShootingAccuracyPawn>-1</ShootingAccuracyPawn>
+      <MeleeDodgeChance>-3</MeleeDodgeChance>
+    </equippedStatOffsets>
+    <apparel>
+      <defaultOutfitTags>
+        <li>Soldier</li>
+      </defaultOutfitTags>
+      <bodyPartGroups>
+        <li>LeftHand</li>
+      </bodyPartGroups>
+      <layers>
+        <li>VFEC_OuterShell</li>
+      </layers>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinShield</li>
+      </tags>
+    </apparel>
+    <recipeMaker>
+      <unfinishedThingDef>UnfinishedArmor</unfinishedThingDef>
+      <recipeUsers>
+        <li>MUGB_smithbench</li>
+      </recipeUsers>
+      <skillRequirements>
+        <Crafting>3</Crafting>
+      </skillRequirements>
+      <useIngredientsForColor>false</useIngredientsForColor>
+      <displayPriority>360</displayPriority>
+    </recipeMaker>
+    <statBases>
+      <MaxHitPoints>90</MaxHitPoints>
+      <Flammability>0.85</Flammability>
+      <ArmorRating_Sharp>0.16</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.12</ArmorRating_Blunt>
+      <ArmorRating_Heat>0.05</ArmorRating_Heat>
+      <StuffEffectMultiplierArmor>0.18</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Heat>0.05</StuffEffectMultiplierInsulation_Heat>
+      <WorkToMake>1800</WorkToMake>
+      <Mass>2.0</Mass>
+      <EquipDelay>2.0</EquipDelay>
+    </statBases>
+    <comps>
+      <li>
+        <compClass>CompColorable</compClass>
+      </li>
+    </comps>
+    <equippedAngleOffset>-30</equippedAngleOffset>
+    <tools>
+      <li>
+        <label>rim</label>
+        <capacities>
+          <li>Poke</li>
+        </capacities>
+        <power>8</power>
+        <cooldownTime>2.2</cooldownTime>
+      </li>
+      <li>
+        <label>face</label>
+        <labelUsedInLogging>false</labelUsedInLogging>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>9</power>
+        <cooldownTime>2.4</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinShieldBase">
+    <defName>MUGB_Apparel_RoughBoardShield</defName>
+    <label>goblin rough board shield</label>
+    <description>A rough board shield lashed together from wood, bone, and human leather. It is barely more than a portable door, but it catches blows well enough.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Shields/MGB_Shield_RoughBoard/MGB_Shield_RoughBoard_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.2</drawSize>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <apparel>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinShield</li>
+        <li>MUGB_GoblinShieldLight</li>
+      </tags>
+    </apparel>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>40</costStuffCount>
+    <costList>
+      <Leather_Human>4</Leather_Human>
+    </costList>
+    <statBases>
+      <MaxHitPoints>70</MaxHitPoints>
+      <ArmorRating_Sharp>0.12</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.09</ArmorRating_Blunt>
+      <WorkToMake>1000</WorkToMake>
+      <Mass>1.8</Mass>
+    </statBases>
+    <comps>
+      <li Class="VEF.Apparels.CompProperties_Shield">
+        <shieldTags>
+          <li>MUGB_RoughBoardShield</li>
+        </shieldTags>
+        <useDeflectMetalEffect>false</useDeflectMetalEffect>
+        <coveredBodyPartGroups>
+          <li>Neck</li>
+          <li>Torso</li>
+          <li>Arms</li>
+          <li>Hands</li>
+        </coveredBodyPartGroups>
+        <offHandGraphicData>
+          <texPath>Things/Apparel/Shields/MGB_Shield_RoughBoard/MGB_Shield_RoughBoard</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <shaderType>CutoutComplex</shaderType>
+          <drawSize>1.2</drawSize>
+        </offHandGraphicData>
+        <offHandHoldOffset>
+          <northDefault>
+            <offset>(0.08, 0, 0.2)</offset>
+            <behind>true</behind>
+          </northDefault>
+          <east>
+            <offset>(-0.15, 0, 0.2)</offset>
+            <behind>true</behind>
+          </east>
+          <south>
+            <offset>(0.12, -0.047, 0.25)</offset>
+          </south>
+          <west>
+            <offset>(0.15, 0, 0.2)</offset>
+            <behind>false</behind>
+          </west>
+        </offHandHoldOffset>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinShieldBase">
+    <defName>MUGB_Apparel_BoardShield</defName>
+    <label>goblin board shield</label>
+    <description>A reinforced goblin board shield. It is ugly, broad, and heavy enough to make a small fighter feel briefly immortal.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Shields/MGB_Shield_Board/MGB_Shield_Board_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.2</drawSize>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <apparel>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinShield</li>
+        <li>MUGB_GoblinShieldLight</li>
+      </tags>
+    </apparel>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>40</costStuffCount>
+    <costList>
+      <MUGB_Bone>15</MUGB_Bone>
+      <Leather_Human>4</Leather_Human>
+    </costList>
+    <statBases>
+      <MaxHitPoints>110</MaxHitPoints>
+      <ArmorRating_Sharp>0.18</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.14</ArmorRating_Blunt>
+      <WorkToMake>1800</WorkToMake>
+      <Mass>2.2</Mass>
+    </statBases>
+    <comps>
+      <li Class="VEF.Apparels.CompProperties_Shield">
+        <shieldTags>
+          <li>MUGB_BoardShield</li>
+        </shieldTags>
+        <useDeflectMetalEffect>false</useDeflectMetalEffect>
+        <coveredBodyPartGroups>
+          <li>Neck</li>
+          <li>Torso</li>
+          <li>Arms</li>
+          <li>Hands</li>
+        </coveredBodyPartGroups>
+        <offHandGraphicData>
+          <texPath>Things/Apparel/Shields/MGB_Shield_Board/MGB_Shield_Board</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <shaderType>CutoutComplex</shaderType>
+          <drawSize>1.2</drawSize>
+        </offHandGraphicData>
+        <offHandHoldOffset>
+          <northDefault>
+            <offset>(0.08, 0, 0.2)</offset>
+            <behind>true</behind>
+          </northDefault>
+          <east>
+            <offset>(-0.15, 0, 0.2)</offset>
+            <behind>true</behind>
+          </east>
+          <south>
+            <offset>(0.12, -0.047, 0.25)</offset>
+          </south>
+          <west>
+            <offset>(0.15, 0, 0.2)</offset>
+            <behind>false</behind>
+          </west>
+        </offHandHoldOffset>
+      </li>
+    </comps>
+      <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinShieldBase">
+    <defName>MUGB_Apparel_RoundShield</defName>
+    <label>goblin round shield</label>
+    <description>A round goblin shield with a crude metal boss. Its shape sheds glancing blows better than the flat board shields.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Shields/MGB_Shield_Round/MGB_Shield_Round_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.2</drawSize>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <apparel>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinShield</li>
+        <li>MUGB_GoblinShieldLight</li>
+        <li>MUGB_GoblinShieldHeavy</li>
+      </tags>
+    </apparel>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>30</costStuffCount>
+    <costList>
+      <MUGB_Bone>3</MUGB_Bone>
+      <Leather_Human>4</Leather_Human>
+      <MUGB_GoblinAlloy>20</MUGB_GoblinAlloy>
+    </costList>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <ArmorRating_Sharp>0.19</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.16</ArmorRating_Blunt>
+      <WorkToMake>1600</WorkToMake>
+      <Mass>1.8</Mass>
+    </statBases>
+    <comps>
+      <li Class="VEF.Apparels.CompProperties_Shield">
+        <shieldTags>
+          <li>MUGB_RoundShield</li>
+        </shieldTags>
+        <useDeflectMetalEffect>false</useDeflectMetalEffect>
+        <coveredBodyPartGroups>
+          <li>Neck</li>
+          <li>Torso</li>
+          <li>Arms</li>
+          <li>Hands</li>
+        </coveredBodyPartGroups>
+        <offHandGraphicData>
+          <texPath>Things/Apparel/Shields/MGB_Shield_Round/MGB_Shield_Round</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <shaderType>CutoutComplex</shaderType>
+          <drawSize>1.2</drawSize>
+        </offHandGraphicData>
+        <offHandHoldOffset>
+          <northDefault>
+            <offset>(0.08, 0, 0.2)</offset>
+            <behind>true</behind>
+          </northDefault>
+          <east>
+            <offset>(-0.15, 0, 0.2)</offset>
+            <behind>true</behind>
+          </east>
+          <south>
+            <offset>(0.12, -0.047, 0.25)</offset>
+          </south>
+          <west>
+            <offset>(0.15, 0, 0.2)</offset>
+            <behind>false</behind>
+          </west>
+        </offHandHoldOffset>
+      </li>
+    </comps>
+      <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinShieldBase">
+    <defName>MUGB_Apparel_ReinforcedBoardShield</defName>
+    <label>goblin reinforced board shield</label>
+    <description>A thick board shield reinforced with goblin alloy bands and bone braces. It blocks well, but the extra weight drags at the arm.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Shields/MGB_Shield_RBoard/MGB_Shield_RBoard_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.24</drawSize>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <apparel>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinShield</li>
+        <li>MUGB_GoblinShieldHeavy</li>
+      </tags>
+    </apparel>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>40</costStuffCount>
+    <costList>
+      <MUGB_Bone>3</MUGB_Bone>
+      <Leather_Human>4</Leather_Human>
+      <MUGB_GoblinAlloy>30</MUGB_GoblinAlloy>
+    </costList>
+    <statBases>
+      <MaxHitPoints>145</MaxHitPoints>
+      <ArmorRating_Sharp>0.24</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.20</ArmorRating_Blunt>
+      <WorkToMake>2300</WorkToMake>
+      <Mass>2.8</Mass>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.02</MoveSpeed>
+    </equippedStatOffsets>
+    <comps>
+      <li Class="VEF.Apparels.CompProperties_Shield">
+        <shieldTags>
+          <li>MUGB_ReinforcedBoardShield</li>
+        </shieldTags>
+        <useDeflectMetalEffect>false</useDeflectMetalEffect>
+        <coveredBodyPartGroups>
+          <li>Neck</li>
+          <li>Torso</li>
+          <li>Arms</li>
+          <li>Hands</li>
+        </coveredBodyPartGroups>
+        <offHandGraphicData>
+          <texPath>Things/Apparel/Shields/MGB_Shield_RBoard/MGB_Shield_RBoard</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <shaderType>CutoutComplex</shaderType>
+          <drawSize>1.24</drawSize>
+        </offHandGraphicData>
+        <offHandHoldOffset>
+          <northDefault>
+            <offset>(0.08, 0, 0.2)</offset>
+            <behind>true</behind>
+          </northDefault>
+          <east>
+            <offset>(-0.15, 0, 0.2)</offset>
+            <behind>true</behind>
+          </east>
+          <south>
+            <offset>(0.12, -0.047, 0.25)</offset>
+          </south>
+          <west>
+            <offset>(0.15, 0, 0.2)</offset>
+            <behind>false</behind>
+          </west>
+        </offHandHoldOffset>
+      </li>
+    </comps>
+      <recipeMaker>
+      <researchPrerequisite>MUGB_Research_EliteForging</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinShieldBase">
+    <defName>MUGB_Apparel_KiteShield</defName>
+    <label>goblin kite shield</label>
+    <description>A tall goblin shield for heavily armed raiders. It protects more of the body, but it is tiring to carry.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Shields/MGB_Shield_Kite/MGB_Shield_Kite_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.3</drawSize>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <apparel>
+      <tags>
+        <li>MUGB_GoblinApparel</li>
+        <li>MUGB_GoblinShield</li>
+        <li>MUGB_GoblinShieldHeavy</li>
+      </tags>
+    </apparel>
+    <stuffCategories Inherit="False">
+      <li>MUGB_GoblinAlloyMetallic</li>
+    </stuffCategories>
+    <costStuffCount>40</costStuffCount>
+    <costList>
+      <Leather_Human>4</Leather_Human>
+    </costList>
+    <statBases>
+      <MaxHitPoints>180</MaxHitPoints>
+      <ArmorRating_Sharp>0.29</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.23</ArmorRating_Blunt>
+      <WorkToMake>2600</WorkToMake>
+      <Mass>3.2</Mass>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.02</MoveSpeed>
+    </equippedStatOffsets>
+    <comps>
+      <li Class="VEF.Apparels.CompProperties_Shield">
+        <shieldTags>
+          <li>MUGB_KiteShield</li>
+        </shieldTags>
+        <useDeflectMetalEffect>false</useDeflectMetalEffect>
+        <coveredBodyPartGroups>
+          <li>Neck</li>
+          <li>Torso</li>
+          <li>Arms</li>
+          <li>Hands</li>
+          <li>Legs</li>
+        </coveredBodyPartGroups>
+        <offHandGraphicData>
+          <texPath>Things/Apparel/Shields/MGB_Shield_Kite/MGB_Shield_Kite</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <shaderType>CutoutComplex</shaderType>
+          <drawSize>1.3</drawSize>
+        </offHandGraphicData>
+        <offHandHoldOffset>
+          <northDefault>
+            <offset>(0.08, 0, 0.2)</offset>
+            <behind>true</behind>
+          </northDefault>
+          <east>
+            <offset>(-0.15, 0, 0.2)</offset>
+            <behind>true</behind>
+          </east>
+          <south>
+            <offset>(0.12, -0.047, 0.25)</offset>
+          </south>
+          <west>
+            <offset>(0.15, 0, 0.2)</offset>
+            <behind>false</behind>
+          </west>
+        </offHandHoldOffset>
+      </li>
+    </comps>
+      <recipeMaker>
+      <researchPrerequisite>MUGB_Research_EliteForging</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+</Defs>

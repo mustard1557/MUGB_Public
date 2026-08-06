@@ -1,0 +1,1925 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    First-pass goblin weapon defs.
+    XML-only weapons are implemented here; ammo counters, delayed explosions,
+    poison stacks, gas clouds, and thrown-weapon destruction are tracked in the
+    implementation checklist for a later C# pass.
+  -->
+
+  <ThingDef Name="MUGB_GoblinBoneMeleeBase" ParentName="BaseMeleeWeapon_Blunt_Quality" Abstract="True">
+    <thingClass>MUGB.ThingWithComps_GoblinWeaponVariant</thingClass>
+    <techLevel>Neolithic</techLevel>
+    <relicChance>0</relicChance>
+    <thingCategories>
+      <li>MUGB_GoblinWeaponCategory</li>
+    </thingCategories>
+    <weaponTags>
+      <li>NeolithicMeleeBasic</li>
+      <li>MUGB_GoblinWeapon</li>
+    </weaponTags>
+    <weaponClasses>
+      <li>Melee</li>
+      <li>Neolithic</li>
+    </weaponClasses>
+    <tradeTags>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_GoblinPrimitiveWeapon</li>
+    </tradeTags>
+    <soundInteract>Metal_Drop</soundInteract>
+    <costList>
+      <MUGB_Bone>20</MUGB_Bone>
+      <Leather_Human>8</Leather_Human>
+    </costList>
+    <statBases>
+      <MaxHitPoints>90</MaxHitPoints>
+      <WorkToMake>1800</WorkToMake>
+      <Mass>1.4</Mass>
+    </statBases>
+    <recipeMaker>
+      <!--
+        뼈 무기 4종(뼈망치·뼈뭉둥이·뼈도끼·뼈단창)이 이 부모를 공유하므로 여기 한 번만 겁니다.
+        뼈를 다룰 줄 알아야 뼈 무기를 만드는 게 순서에 맞습니다.
+        같은 부모를 쓰는 샤먼 지팡이는 recipeMaker를 IsNull로 지워 제작이 막혀 있어
+        이 조건과 무관합니다.
+      -->
+      <researchPrerequisite>MUGB_Research_BoneRendering</researchPrerequisite>
+      <recipeUsers>
+        <li>CraftingSpot</li>
+        <li>ElectricSmithy</li>
+        <li>FueledSmithy</li>
+      </recipeUsers>
+      <skillRequirements>
+        <Crafting>2</Crafting>
+      </skillRequirements>
+      <displayPriority>331</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+
+  <ThingDef Name="MUGB_GoblinAlloyMeleeBase" ParentName="BaseMeleeWeapon_Sharp_Quality" Abstract="True">
+    <thingClass>MUGB.ThingWithComps_GoblinWeaponVariant</thingClass>
+    <techLevel>Medieval</techLevel>
+    <relicChance>0</relicChance>
+    <thingCategories>
+      <li>MUGB_GoblinWeaponCategory</li>
+    </thingCategories>
+    <weaponTags>
+      <li>MedievalMeleeDecent</li>
+      <li>MUGB_GoblinWeapon</li>
+    </weaponTags>
+    <weaponClasses>
+      <li>Melee</li>
+    </weaponClasses>
+    <tradeTags>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_GoblinMedievalWeapon</li>
+    </tradeTags>
+    <stuffCategories>
+      <li>MUGB_GoblinAlloyMetallic</li>
+    </stuffCategories>
+    <costStuffCount>35</costStuffCount>
+    <costList>
+      <MUGB_Bone>5</MUGB_Bone>
+      <Leather_Human>5</Leather_Human>
+    </costList>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <WorkToMake>6000</WorkToMake>
+      <Mass>1.4</Mass>
+    </statBases>
+    <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Smithcraft</researchPrerequisite>
+      <recipeUsers Inherit="False">
+        <li>MUGB_smithbench</li>
+      </recipeUsers>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+      <displayPriority>335</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+
+  <ThingDef Name="MUGB_GoblinRangedBase" ParentName="BaseWeaponNeolithic" Abstract="True">
+    <thingClass>MUGB.ThingWithComps_GoblinWeaponVariant</thingClass>
+    <techLevel>Neolithic</techLevel>
+    <relicChance>0</relicChance>
+    <thingCategories>
+      <li>MUGB_GoblinWeaponCategory</li>
+    </thingCategories>
+    <weaponTags>
+      <li>NeolithicRangedDecent</li>
+      <li>MUGB_GoblinWeapon</li>
+    </weaponTags>
+    <weaponClasses>
+      <li>Ranged</li>
+    </weaponClasses>
+    <tradeTags>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_GoblinPrimitiveWeapon</li>
+    </tradeTags>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+    </statBases>
+    <recipeMaker>
+      <recipeUsers>
+        <li>CraftingSpot</li>
+        <li>ElectricSmithy</li>
+        <li>FueledSmithy</li>
+      </recipeUsers>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+      <displayPriority>520</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+
+  <ThingDef Name="MUGB_GoblinGunBase" ParentName="BaseMakeableGun" Abstract="True">
+    <thingClass>MUGB.ThingWithComps_GoblinWeaponVariant</thingClass>
+    <techLevel>Medieval</techLevel>
+    <relicChance>0</relicChance>
+    <thingCategories>
+      <li>MUGB_GoblinWeaponCategory</li>
+    </thingCategories>
+    <weaponTags>
+      <li>Gun</li>
+      <li>MUGB_GoblinWeapon</li>
+    </weaponTags>
+    <weaponClasses>
+      <li>Ranged</li>
+    </weaponClasses>
+    <tradeTags>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_GoblinMedievalWeapon</li>
+      <li>MUGB_GoblinGunpowderWeapon</li>
+    </tradeTags>
+    <stuffCategories>
+      <li>MUGB_GoblinAlloyMetallic</li>
+    </stuffCategories>
+    <costStuffCount>35</costStuffCount>
+    <costList>
+      <MUGB_Bone>10</MUGB_Bone>
+      <Leather_Human>1</Leather_Human>
+      <WoodLog>30</WoodLog>
+      <ComponentIndustrial>1</ComponentIndustrial>
+    </costList>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <WorkToMake>9000</WorkToMake>
+      <Mass>3.0</Mass>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <recipeMaker>
+      <recipeUsers Inherit="False">
+        <li>MUGB_smithbench</li>
+      </recipeUsers>
+      <researchPrerequisite>MUGB_Research_Blackpowder</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>5</Crafting>
+      </skillRequirements>
+      <displayPriority>540</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+
+  <!-- Projectiles -->
+
+  <ThingDef ParentName="BaseProjectileNeolithic">
+    <defName>MUGB_SlingStone</defName>
+    <label>sling stone</label>
+    <graphicData>
+      <texPath>Things/Weapons/projectile/MGB_stoneprojec</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>Blunt</damageDef>
+      <damageAmountBase>14</damageAmountBase>
+      <armorPenetrationBase>0.25</armorPenetrationBase>
+      <stoppingPower>1.2</stoppingPower>
+      <speed>34</speed>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseProjectileNeolithic">
+    <defName>MUGB_WarbowArrow</defName>
+    <label>goblin war arrow</label>
+    <graphicData>
+      <texPath>Things/Weapons/projectile/MGB_arrowB</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.6</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>Arrow</damageDef>
+      <damageAmountBase>24</damageAmountBase>
+      <armorPenetrationBase>0.18</armorPenetrationBase>
+      <stoppingPower>1.2</stoppingPower>
+      <speed>49</speed>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseProjectileNeolithic">
+    <defName>MUGB_GoblinBoneSpearThrow</defName>
+    <label>thrown goblin bone spear</label>
+    <graphicData>
+      <texPath>Things/Weapons/projectile/MGB_Bspearprojec</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>2.0</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>RangedStab</damageDef>
+      <damageAmountBase>22</damageAmountBase>
+      <armorPenetrationBase>0.35</armorPenetrationBase>
+      <stoppingPower>1.8</stoppingPower>
+      <speed>20</speed>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseProjectileNeolithic">
+    <defName>MUGB_GoblinSpearThrow</defName>
+    <label>thrown goblin spear</label>
+    <graphicData>
+      <texPath>Things/Weapons/projectile/MGB_spearprojec</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>2.08</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>RangedStab</damageDef>
+      <damageAmountBase>26</damageAmountBase>
+      <armorPenetrationBase>0.45</armorPenetrationBase>
+      <stoppingPower>2</stoppingPower>
+      <speed>20</speed>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseProjectileNeolithic">
+    <defName>MUGB_CrossbowBolt</defName>
+    <label>goblin crossbow bolt</label>
+    <graphicData>
+      <texPath>Things/Weapons/projectile/MGB_boltB</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>RangedStab</damageDef>
+      <damageAmountBase>18</damageAmountBase>
+      <armorPenetrationBase>0.25</armorPenetrationBase>
+      <stoppingPower>1.35</stoppingPower>
+      <speed>55</speed>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseProjectileNeolithic">
+    <defName>MUGB_RepeatingCrossbowBolt</defName>
+    <label>goblin repeating crossbow bolt</label>
+    <graphicData>
+      <texPath>Things/Weapons/projectile/MGB_boltB</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>RangedStab</damageDef>
+      <damageAmountBase>7</damageAmountBase>
+      <armorPenetrationBase>0.10</armorPenetrationBase>
+      <stoppingPower>0.6</stoppingPower>
+      <speed>52</speed>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MUGB_ArquebusBullet</defName>
+    <label>goblin arquebus ball</label>
+    <graphicData>
+      <texPath>Things/Weapons/projectile/MGB_mbulletA</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.08</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>16</damageAmountBase>
+      <armorPenetrationBase>0.25</armorPenetrationBase>
+      <stoppingPower>0.8</stoppingPower>
+      <speed>55</speed>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MUGB_MusketBullet</defName>
+    <label>goblin musket ball</label>
+    <graphicData>
+      <texPath>Things/Weapons/projectile/MGB_mbullet</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.08</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>22</damageAmountBase>
+      <armorPenetrationBase>0.36</armorPenetrationBase>
+      <stoppingPower>1.6</stoppingPower>
+      <speed>68</speed>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MUGB_HandgonneShot</defName>
+    <label>goblin handgonne shot</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Shotgun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>16</damageAmountBase>
+      <armorPenetrationBase>0.18</armorPenetrationBase>
+      <stoppingPower>2</stoppingPower>
+      <speed>55</speed>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseGrenadeProjectile">
+    <defName>MUGB_HandcannonBomb</defName>
+    <label>goblin handcannon bomb</label>
+    <thingClass>MUGB.Projectile_GoblinHandcannonBomb</thingClass>
+    <graphicData>
+      <texPath>Things/Weapons/projectile/MGB_bombprojec</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.77</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>MUGB_HandcannonBombDamage</damageDef>
+      <damageAmountBase>45</damageAmountBase>
+      <armorPenetrationBase>0.10</armorPenetrationBase>
+      <explosionRadius>1.2</explosionRadius>
+      <explosionDelay>60</explosionDelay>
+      <speed>24</speed>
+      <arcHeightFactor>1.1</arcHeightFactor>
+      <shadowSize>0.4</shadowSize>
+    </projectile>
+  </ThingDef>
+
+  <!-- Primitive melee weapons -->
+
+  <ThingDef ParentName="MUGB_GoblinBoneMeleeBase">
+    <defName>MUGB_GoblinBoneHammer</defName>
+    <label>goblin bone hammer</label>
+    <description>A simple hammer made from a dense bone bound in human leather. It is crude, ugly, and useful for hitting both people and loose fittings.</description>
+    <graphicData>
+      <texPath>Things/Weapons/melee/MGB_bonehammer/MGB_bonehammerA</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.85</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>NeolithicMeleeBasic</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_GoblinMeleePrimitive</li>
+    </weaponTags>
+    <costList>
+      <MUGB_Bone>30</MUGB_Bone>
+      <Leather_Human>10</Leather_Human>
+    </costList>
+    <statBases>
+      <WorkToMake>1700</WorkToMake>
+      <Mass>1.8</Mass>
+    </statBases>
+    <equippedStatOffsets>
+      <ConstructionSpeed>0.03</ConstructionSpeed>
+    </equippedStatOffsets>
+    <tools>
+      <li>
+        <label>head</label>
+        <capacities><li>Blunt</li></capacities>
+        <power>16</power>
+        <armorPenetration>0.22</armorPenetration>
+        <cooldownTime>2.2</cooldownTime>
+      </li>
+      <li>
+        <label>handle</label>
+        <capacities><li>Blunt</li></capacities>
+        <power>9</power>
+        <armorPenetration>0.10</armorPenetration>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinBoneMeleeBase">
+    <defName>MUGB_GoblinBoneClub</defName>
+    <label>goblin bone club</label>
+    <description>A wooden club edged with sharpened bones. It bruises, tears, and leaves ugly wounds even when the blow itself is clumsy.</description>
+    <graphicData>
+      <texPath>Things/Weapons/melee/MGB_boneclub/MGB_boneclubA</texPath>
+      <graphicClass>MUGB.Graphic_GoblinWeaponVariant</graphicClass>
+      <drawSize>0.85</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>NeolithicMeleeBasic</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_GoblinMeleePrimitive</li>
+    </weaponTags>
+    <costList>
+      <MUGB_Bone>20</MUGB_Bone>
+      <Leather_Human>10</Leather_Human>
+      <WoodLog>20</WoodLog>
+    </costList>
+    <statBases>
+      <WorkToMake>1900</WorkToMake>
+      <Mass>1.7</Mass>
+    </statBases>
+    <tools>
+      <li>
+        <label>serrated bones</label>
+        <capacities><li>Cut</li></capacities>
+        <power>14</power>
+        <armorPenetration>0.20</armorPenetration>
+        <cooldownTime>2.3</cooldownTime>
+      </li>
+      <li>
+        <label>head</label>
+        <capacities><li>Blunt</li></capacities>
+        <power>14</power>
+        <armorPenetration>0.15</armorPenetration>
+        <cooldownTime>2.5</cooldownTime>
+      </li>
+      <li>
+        <label>handle</label>
+        <capacities><li>Poke</li></capacities>
+        <power>10</power>
+        <armorPenetration>0.10</armorPenetration>
+        <cooldownTime>2.2</cooldownTime>
+      </li>
+    </tools>
+      <comps>
+      <li Class="MUGB.CompProperties_GoblinWeaponVariant">
+        <texPaths>
+          <li>Things/Weapons/melee/MGB_boneclub/MGB_boneclubA</li>
+          <li>Things/Weapons/melee/MGB_boneclub/MGB_boneclubB</li>
+        </texPaths>
+      </li>
+    </comps></ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinBoneMeleeBase">
+    <defName>MUGB_GoblinBoneAxe</defName>
+    <label>goblin bone axe</label>
+    <description>A jawbone worked into an axe blade. It is light for an axe and can chop wood, doors, or limbs with equal enthusiasm.</description>
+    <graphicData>
+      <texPath>Things/Weapons/melee/MGB_boneaxe/MGB_boneaxeA</texPath>
+      <graphicClass>MUGB.Graphic_GoblinWeaponVariant</graphicClass>
+      <drawSize>0.765</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>NeolithicMeleeBasic</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_GoblinMeleePrimitive</li>
+    </weaponTags>
+    <costList>
+      <MUGB_Bone>50</MUGB_Bone>
+      <Leather_Human>10</Leather_Human>
+      <WoodLog>15</WoodLog>
+    </costList>
+    <statBases>
+      <WorkToMake>2400</WorkToMake>
+      <Mass>1.6</Mass>
+    </statBases>
+    <equippedStatOffsets>
+      <PlantWorkSpeed>0.04</PlantWorkSpeed>
+    </equippedStatOffsets>
+    <tools>
+      <li>
+        <label>jaw blade</label>
+        <capacities><li>Cut</li></capacities>
+        <power>16</power>
+        <armorPenetration>0.24</armorPenetration>
+        <cooldownTime>2.4</cooldownTime>
+      </li>
+      <li>
+        <label>back</label>
+        <capacities><li>Blunt</li></capacities>
+        <power>16</power>
+        <armorPenetration>0.24</armorPenetration>
+        <cooldownTime>2.4</cooldownTime>
+      </li>
+      <li>
+        <label>handle</label>
+        <capacities><li>Blunt</li></capacities>
+        <power>9</power>
+        <armorPenetration>0.10</armorPenetration>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
+      <comps>
+      <li Class="MUGB.CompProperties_GoblinWeaponVariant">
+        <texPaths>
+          <li>Things/Weapons/melee/MGB_boneaxe/MGB_boneaxeA</li>
+          <li>Things/Weapons/melee/MGB_boneaxe/MGB_boneaxeB</li>
+        </texPaths>
+      </li>
+    </comps></ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinBoneMeleeBase">
+    <defName>MUGB_GoblinBoneSpear</defName>
+    <label>goblin bone spear</label>
+    <description>A sharpened bone point fixed to a long shaft. It gives small fighters just enough reach to feel brave.</description>
+    <graphicData>
+      <texPath>Things/Weapons/melee/MGB_bonespear/MGB_bonespearA</texPath>
+      <graphicClass>MUGB.Graphic_GoblinWeaponVariant</graphicClass>
+      <drawSize>1.54</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>NeolithicMeleeAdvanced</li>
+      <li>Spear</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_ShieldForbidden</li>
+      <li>MUGB_GoblinMeleePrimitive</li>
+      <li>MUGB_GoblinBoneSpear</li>
+    </weaponTags>
+    <costList>
+      <MUGB_Bone>20</MUGB_Bone>
+      <Leather_Human>15</Leather_Human>
+      <WoodLog>40</WoodLog>
+    </costList>
+    <statBases>
+      <WorkToMake>3200</WorkToMake>
+      <Mass>4</Mass>
+      <VEF_MeleeWeaponRange>2.2</VEF_MeleeWeaponRange>
+    </statBases>
+    <equippedAngleOffset>-25</equippedAngleOffset>
+    <tools>
+      <li>
+        <label>bone point</label>
+        <capacities><li>Stab</li></capacities>
+        <power>20</power>
+        <armorPenetration>0.40</armorPenetration>
+        <cooldownTime>2.4</cooldownTime>
+      </li>
+      <li>
+        <label>shaft</label>
+        <capacities><li>Blunt</li></capacities>
+        <power>10</power>
+        <cooldownTime>2.6</cooldownTime>
+      </li>
+    </tools>
+    <comps>
+      <li Class="MUGB.CompProperties_GoblinWeaponVariant">
+        <texPaths>
+          <li>Things/Weapons/melee/MGB_bonespear/MGB_bonespearA</li>
+        </texPaths>
+      </li>
+      <li Class="MUGB.CompProperties_ThrownSpearAbility">
+        <projectileDef>MUGB_GoblinBoneSpearThrow</projectileDef>
+        <cooldownTicks>10800</cooldownTicks>
+        <warmupTicks>90</warmupTicks>
+        <range>7</range>
+        <baseHitChance>0.6</baseHitChance>
+        <missRadius>2</missRadius>
+        <soundCast>MUGB_GoblinThrowShared</soundCast>
+        <iconPath>Things/Weapons/projectile/MGB_Bspearprojec</iconPath>
+        <label>Throw bone spear</label>
+        <description>Throw the bone spear at a target. The spear remains equipped, but the throw takes time to recover from.</description>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Medieval melee weapons -->
+
+  <ThingDef ParentName="MUGB_GoblinAlloyMeleeBase">
+    <defName>MUGB_GoblinDagger</defName>
+    <label>goblin dagger</label>
+    <description>A short goblin-alloy knife with a bone grip. It is not elegant, but it is fast and mean.</description>
+    <graphicData>
+      <texPath>Things/Weapons/melee/MGB_dagger/MGB_daggerA</texPath>
+      <graphicClass>MUGB.Graphic_GoblinWeaponVariant</graphicClass>
+      <drawSize>0.8</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>MedievalMeleeDecent</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_GoblinMeleePrimitive</li>
+      <li>MUGB_GoblinMeleeMedieval</li>
+    </weaponTags>
+    <costStuffCount>35</costStuffCount>
+    <costList>
+      <MUGB_Bone>3</MUGB_Bone>
+      <Leather_Human>5</Leather_Human>
+    </costList>
+    <statBases>
+      <WorkToMake>4800</WorkToMake>
+      <Mass>0.55</Mass>
+    </statBases>
+    <tools>
+      <li><label>blade</label><capacities><li>Cut</li></capacities><power>12</power><armorPenetration>0.10</armorPenetration><cooldownTime>1.9</cooldownTime></li>
+      <li><label>point</label><capacities><li>Stab</li></capacities><power>12</power><armorPenetration>0.20</armorPenetration><cooldownTime>1.4</cooldownTime></li>
+      <li><label>handle</label><capacities><li>Poke</li></capacities><power>9</power><armorPenetration>0.12</armorPenetration><cooldownTime>2.3</cooldownTime></li>
+    </tools>
+      <comps>
+      <li Class="MUGB.CompProperties_GoblinWeaponVariant">
+        <texPaths>
+          <li>Things/Weapons/melee/MGB_dagger/MGB_daggerA</li>
+          <li>Things/Weapons/melee/MGB_dagger/MGB_daggerB</li>
+          <li>Things/Weapons/melee/MGB_dagger/MGB_daggerC</li>
+        </texPaths>
+      </li>
+    </comps></ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinAlloyMeleeBase">
+    <defName>MUGB_GoblinCleaver</defName>
+    <label>goblin cleaver</label>
+    <description>A broad one-handed blade made for butchery first and swordplay second. Goblins rarely care about the distinction.</description>
+    <graphicData>
+      <texPath>Things/Weapons/melee/MGB_sword/MGB_swordA</texPath>
+      <graphicClass>MUGB.Graphic_GoblinWeaponVariant</graphicClass>
+      <drawSize>0.9</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>MedievalMeleeDecent</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_GoblinMeleeMedieval</li>
+      <li>MUGB_GoblinShockWeapon</li>
+    </weaponTags>
+    <costStuffCount>60</costStuffCount>
+    <statBases>
+      <WorkToMake>8800</WorkToMake>
+      <Mass>1.15</Mass>
+    </statBases>
+    <tools>
+      <li><label>handle</label><capacities><li>Blunt</li></capacities><power>9</power><armorPenetration>0.13</armorPenetration><cooldownTime>2.1</cooldownTime></li>
+      <li><label>point</label><capacities><li>Stab</li></capacities><power>18</power><armorPenetration>0.22</armorPenetration><cooldownTime>2</cooldownTime></li>
+      <li><label>edge</label><capacities><li>Cut</li></capacities><power>18</power><armorPenetration>0.10</armorPenetration><cooldownTime>2.00</cooldownTime></li>
+    </tools>
+      <comps>
+      <li Class="MUGB.CompProperties_GoblinWeaponVariant">
+        <texPaths>
+          <li>Things/Weapons/melee/MGB_sword/MGB_swordA</li>
+          <li>Things/Weapons/melee/MGB_sword/MGB_swordB</li>
+        </texPaths>
+      </li>
+    </comps></ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinAlloyMeleeBase">
+    <defName>MUGB_GoblinCurvedBlade</defName>
+    <label>goblin curved blade</label>
+    <description>A hooked field blade adapted into a weapon. Its edge is made for harvesting, whether the crop is grain or a throat.</description>
+    <graphicData>
+      <texPath>Things/Weapons/melee/MGB_curved/MGB_curvedA</texPath>
+      <graphicClass>MUGB.Graphic_GoblinWeaponVariant</graphicClass>
+      <drawSize>0.792</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>MedievalMeleeDecent</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_GoblinMeleeMedieval</li>
+    </weaponTags>
+    <costStuffCount>60</costStuffCount>
+    <statBases>
+      <WorkToMake>10400</WorkToMake>
+      <Mass>1.2</Mass>
+    </statBases>
+    <equippedStatOffsets>
+      <PlantWorkSpeed>0.10</PlantWorkSpeed>
+    </equippedStatOffsets>
+    <tools>
+      <li><label>handle</label><capacities><li>Blunt</li></capacities><power>9</power><armorPenetration>0.13</armorPenetration><cooldownTime>2.1</cooldownTime></li>
+      <li><label>point</label><capacities><li>Stab</li></capacities><power>16</power><armorPenetration>0.22</armorPenetration><cooldownTime>2</cooldownTime></li>
+      <li><label>curved edge</label><capacities><li>Cut</li></capacities><power>20</power><armorPenetration>0.20</armorPenetration><cooldownTime>2.1</cooldownTime></li>
+    </tools>
+      <comps>
+      <li Class="MUGB.CompProperties_GoblinWeaponVariant">
+        <texPaths>
+          <li>Things/Weapons/melee/MGB_curved/MGB_curvedA</li>
+          <li>Things/Weapons/melee/MGB_curved/MGB_curvedB</li>
+        </texPaths>
+      </li>
+    </comps></ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinAlloyMeleeBase">
+    <defName>MUGB_GoblinAxe</defName>
+    <label>goblin axe</label>
+    <description>A crude metal axe with a back spike. It is comfortable around doors, trees, armor plates, and other things that need ruining.</description>
+    <graphicData>
+      <texPath>Things/Weapons/melee/MGB_axe/MGB_axeA</texPath>
+      <graphicClass>MUGB.Graphic_GoblinWeaponVariant</graphicClass>
+      <drawSize>0.81</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>MedievalMeleeDecent</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_GoblinMeleeMedieval</li>
+    </weaponTags>
+    <costStuffCount>90</costStuffCount>
+    <statBases>
+      <WorkToMake>9600</WorkToMake>
+      <Mass>1.9</Mass>
+    </statBases>
+    <tools>
+      <li><label>handle</label><capacities><li>Poke</li></capacities><power>9</power><armorPenetration>0.11</armorPenetration><cooldownTime>2.2</cooldownTime></li>
+      <li><label>spike</label><capacities><li>Stab</li></capacities><power>21</power><armorPenetration>0.20</armorPenetration><cooldownTime>2.6</cooldownTime></li>
+      <li><label>axe blade</label><capacities><li>Cut</li></capacities><power>18</power><armorPenetration>0.18</armorPenetration><cooldownTime>2.1</cooldownTime></li>
+      <li><label>axe blade</label><capacities><li>Demolish</li></capacities><power>5</power><cooldownTime>4.5</cooldownTime></li>
+    </tools>
+      <comps>
+      <li Class="MUGB.CompProperties_GoblinWeaponVariant">
+        <texPaths>
+          <li>Things/Weapons/melee/MGB_axe/MGB_axeA</li>
+          <li>Things/Weapons/melee/MGB_axe/MGB_axeB</li>
+          <li>Things/Weapons/melee/MGB_axe/MGB_axeC</li>
+        </texPaths>
+      </li>
+    </comps></ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinAlloyMeleeBase">
+    <defName>MUGB_GoblinSpear</defName>
+    <label>goblin spear</label>
+    <description>A simple goblin-alloy spear. It is cheap, cruelly practical, and just long enough to let an untrained fighter become a problem.</description>
+    <graphicData>
+      <texPath>Things/Weapons/melee/MGB_spear/MGB_spearA</texPath>
+      <graphicClass>MUGB.Graphic_GoblinWeaponVariant</graphicClass>
+      <drawSize>1.54</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>NeolithicMeleeAdvanced</li>
+      <li>MedievalMeleeAdvanced</li>
+      <li>Spear</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_ShieldForbidden</li>
+      <li>MUGB_GoblinMeleeMedieval</li>
+      <li>MUGB_GoblinSpearElite</li>
+      <li>MUGB_GoblinSpear</li>
+    </weaponTags>
+    <costStuffCount>20</costStuffCount>
+    <costList>
+      <MUGB_Bone>5</MUGB_Bone>
+      <Leather_Human>3</Leather_Human>
+      <WoodLog>50</WoodLog>
+    </costList>
+    <statBases>
+      <WorkToMake>7200</WorkToMake>
+      <Mass>4</Mass>
+      <VEF_MeleeWeaponRange>2.5</VEF_MeleeWeaponRange>
+    </statBases>
+    <equippedAngleOffset>-25</equippedAngleOffset>
+    <tools>
+      <li><label>shaft</label><capacities><li>Blunt</li></capacities><power>13</power><armorPenetration>0.15</armorPenetration><cooldownTime>2.6</cooldownTime></li>
+      <li><label>handle</label><capacities><li>Poke</li></capacities><power>10</power><armorPenetration>0.15</armorPenetration><cooldownTime>2.6</cooldownTime></li>
+      <li><label>point</label><capacities><li>Stab</li></capacities><power>24</power><armorPenetration>0.50</armorPenetration><cooldownTime>2.6</cooldownTime></li>
+    </tools>
+      <comps>
+      <li Class="MUGB.CompProperties_GoblinWeaponVariant">
+        <texPaths>
+          <li>Things/Weapons/melee/MGB_spear/MGB_spearA</li>
+          <li>Things/Weapons/melee/MGB_spear/MGB_spearB</li>
+          <li>Things/Weapons/melee/MGB_spear/MGB_spearC</li>
+          <li>Things/Weapons/melee/MGB_spear/MGB_spearD</li>
+        </texPaths>
+      </li>
+      <!-- Korean source intent: 창은 투창 대신 4칸 돌진. 대상 Pawn의 현재 셀을 고정 목표로 삼고, 첫 충돌 적대 폰 1명만 찌른 뒤 시전자가 잠깐 스턴됨. -->
+      <li Class="MUGB.CompProperties_SpearChargeAbility">
+        <cooldownTicks>3600</cooldownTicks>
+        <range>5</range>
+        <soundStart>MUGB_SpearChargeStart</soundStart>
+        <soundImpact>MUGB_SpearChargeImpact</soundImpact>
+        <!-- 한국어 의도: 실제 초당 12칸 수준의 짧고 강한 돌진. 최대 5칸을 약 0.4초에 통과한다. -->
+        <chargeCellsPerSecond>12</chargeCellsPerSecond>
+        <damageAmount>35</damageAmount>
+        <armorPenetration>0.70</armorPenetration>
+        <targetStunTicks>90</targetStunTicks>
+        <selfStunTicks>75</selfStunTicks>
+        <iconPath>Things/Weapons/melee/MGB_spear/MGB_spearA</iconPath>
+        <label>MUGB_SpearChargeLabel</label>
+        <description>MUGB_SpearChargeDesc</description>
+      </li>
+    </comps></ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinAlloyMeleeBase">
+    <defName>MUGB_GoblinBannerSpear</defName>
+    <label>goblin banner spear</label>
+    <description>A goblin-alloy spear with a ragged banner tied beneath the point. It fights like a spear, but announces the mob before the mob arrives.</description>
+    <graphicData>
+      <texPath>Things/Weapons/melee/MGB_BannerSpear/MGB_BannerSpear</texPath>
+      <graphicClass>MUGB.Graphic_GoblinWeaponVariant</graphicClass>
+      <drawSize>1.54</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_ShieldForbidden</li>
+      <li>MUGB_GoblinSpearLeader</li>
+    </weaponTags>
+    <costStuffCount>20</costStuffCount>
+    <costList>
+      <MUGB_Bone>5</MUGB_Bone>
+      <Leather_Human>3</Leather_Human>
+      <WoodLog>50</WoodLog>
+      <Cloth>30</Cloth>
+    </costList>
+    <statBases>
+      <WorkToMake>7600</WorkToMake>
+      <Mass>4</Mass>
+      <VEF_MeleeWeaponRange>2.5</VEF_MeleeWeaponRange>
+    </statBases>
+    <equippedAngleOffset>-25</equippedAngleOffset>
+    <tools>
+      <li><label>shaft</label><capacities><li>Blunt</li></capacities><power>13</power><armorPenetration>0.15</armorPenetration><cooldownTime>2.6</cooldownTime></li>
+      <li><label>handle</label><capacities><li>Poke</li></capacities><power>10</power><armorPenetration>0.15</armorPenetration><cooldownTime>2.6</cooldownTime></li>
+      <li><label>point</label><capacities><li>Stab</li></capacities><power>24</power><armorPenetration>0.50</armorPenetration><cooldownTime>2.6</cooldownTime></li>
+    </tools>
+    <comps>
+      <li Class="MUGB.CompProperties_GoblinWeaponVariant">
+        <texPaths>
+          <li>Things/Weapons/melee/MGB_BannerSpear/MGB_BannerSpear</li>
+        </texPaths>
+      </li>
+      <!-- Korean source intent: 깃창도 일반 창과 같은 돌진. 깃창은 창 스펙 기반이라 어빌리티도 동일하게 맞춤. -->
+      <li Class="MUGB.CompProperties_SpearChargeAbility">
+        <cooldownTicks>3600</cooldownTicks>
+        <range>5</range>
+        <soundStart>MUGB_SpearChargeStart</soundStart>
+        <soundImpact>MUGB_SpearChargeImpact</soundImpact>
+        <!-- 한국어 의도: 일반 창과 같은 짧고 강한 돌진 속도. -->
+        <chargeCellsPerSecond>12</chargeCellsPerSecond>
+        <damageAmount>35</damageAmount>
+        <armorPenetration>0.70</armorPenetration>
+        <targetStunTicks>90</targetStunTicks>
+        <selfStunTicks>75</selfStunTicks>
+        <iconPath>Things/Weapons/melee/MGB_BannerSpear/MGB_BannerSpear</iconPath>
+        <label>MUGB_SpearChargeLabel</label>
+        <description>MUGB_SpearChargeDesc</description>
+      </li>
+    </comps>
+      <recipeMaker>
+      <researchPrerequisite>MUGB_Research_EliteForging</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinAlloyMeleeBase">
+    <defName>MUGB_GoblinMace</defName>
+    <label>goblin mace</label>
+    <description>A heavy goblin-alloy mace decorated with a skull. It is inelegant, but armor does not stay elegant after meeting it either.</description>
+    <graphicData>
+      <texPath>Things/Weapons/melee/MGB_mace/MGB_maceA</texPath>
+      <graphicClass>MUGB.Graphic_GoblinWeaponVariant</graphicClass>
+      <drawSize>0.855</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>MedievalMeleeDecent</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_GoblinMeleeMedieval</li>
+    </weaponTags>
+    <costStuffCount>110</costStuffCount>
+    <costList>
+      <Leather_Human>5</Leather_Human>
+      <Skull>1</Skull>
+    </costList>
+    <statBases>
+      <WorkToMake>9000</WorkToMake>
+      <Mass>2.3</Mass>
+    </statBases>
+    <tools>
+      <li><label>handle</label><capacities><li>Poke</li></capacities><power>10</power><armorPenetration>0.15</armorPenetration><cooldownTime>2.2</cooldownTime></li>
+      <li><label>head</label><capacities><li>Blunt</li></capacities><power>19</power><armorPenetration>0.30</armorPenetration><cooldownTime>2.3</cooldownTime></li>
+      <li><label>head</label><capacities><li>Demolish</li></capacities><power>5</power><armorPenetration>0.11</armorPenetration><cooldownTime>3</cooldownTime></li>
+    </tools>
+      <comps>
+      <li Class="MUGB.CompProperties_GoblinWeaponVariant">
+        <texPaths>
+          <li>Things/Weapons/melee/MGB_mace/MGB_maceA</li>
+          <li>Things/Weapons/melee/MGB_mace/MGB_maceB</li>
+          <li>Things/Weapons/melee/MGB_mace/MGB_maceC</li>
+        </texPaths>
+      </li>
+    </comps></ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinAlloyMeleeBase">
+    <defName>MUGB_GoblinFlail</defName>
+    <!-- 정예 단조 연구보상으로 지정합니다. 부모(고블린 무기단조)보다 늦게 열립니다. -->
+    <recipeMaker>
+      <researchPrerequisite>MUGB_Research_EliteForging</researchPrerequisite>
+    </recipeMaker>
+    <label>goblin flail</label>
+    <description>A threshing tool turned into a battlefield hazard. It is awkward with shields, but it has a talent for finding bones behind armor.</description>
+    <graphicData>
+      <texPath>Things/Weapons/melee/MGB_flail/MGB_flailA</texPath>
+      <graphicClass>MUGB.Graphic_GoblinWeaponVariant</graphicClass>
+      <drawSize>1.23</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>MedievalMeleeDecent</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_GoblinMeleeMedieval</li>
+      <!-- Korean source intent: 충격보병은 방패 보장 + 둔기류(편곤 포함) + 붐스틱 후보. 그래서 편곤은 충격보병 풀에서 방패와 같이 나올 수 있어야 함. -->
+      <li>MUGB_GoblinShockWeapon</li>
+    </weaponTags>
+    <costStuffCount>95</costStuffCount>
+    <costList>
+      <Leather_Human>5</Leather_Human>
+      <WoodLog>40</WoodLog>
+    </costList>
+    <statBases>
+      <WorkToMake>9600</WorkToMake>
+      <Mass>2.4</Mass>
+      <VEF_MeleeWeaponRange>2.1</VEF_MeleeWeaponRange>
+    </statBases>
+    <tools>
+      <li><label>shaft</label><capacities><li>Blunt</li></capacities><power>13</power><armorPenetration>0.11</armorPenetration><cooldownTime>2.6</cooldownTime></li>
+      <li><label>handle</label><capacities><li>Poke</li></capacities><power>10</power><armorPenetration>0.15</armorPenetration><cooldownTime>2.6</cooldownTime></li>
+      <li><label>flail head</label><capacities><li>Blunt</li></capacities><power>25</power><armorPenetration>0.32</armorPenetration><cooldownTime>2.6</cooldownTime></li>
+    </tools>
+      <comps>
+      <li Class="MUGB.CompProperties_GoblinWeaponVariant">
+        <texPaths>
+          <li>Things/Weapons/melee/MGB_flail/MGB_flailA</li>
+          <li>Things/Weapons/melee/MGB_flail/MGB_flailB</li>
+          <li>Things/Weapons/melee/MGB_flail/MGB_flailC</li>
+        </texPaths>
+      </li>
+    </comps></ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinAlloyMeleeBase">
+    <defName>MUGB_GoblinMachete</defName>
+    <!-- 정예 단조 연구보상으로 지정합니다. 부모(고블린 무기단조)보다 늦게 열립니다. -->
+    <recipeMaker>
+      <researchPrerequisite>MUGB_Research_EliteForging</researchPrerequisite>
+    </recipeMaker>
+    <label>goblin machete</label>
+    <description>A large, crude blade carried by goblin shock troops. It is front-heavy, ugly, and very persuasive.</description>
+    <graphicData>
+      <texPath>Things/Weapons/melee/MGB_bigsword/MGB_bigswordA</texPath>
+      <graphicClass>MUGB.Graphic_GoblinWeaponVariant</graphicClass>
+      <drawSize>1.0</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>MedievalMeleeDecent</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_GoblinMeleeMedieval</li>
+    </weaponTags>
+    <costStuffCount>95</costStuffCount>
+    <costList>
+      <Leather_Human>10</Leather_Human>
+    </costList>
+    <statBases>
+      <WorkToMake>9000</WorkToMake>
+      <Mass>2.6</Mass>
+    </statBases>
+    <tools>
+      <li><label>blade</label><capacities><li>Cut</li></capacities><power>25</power><armorPenetration>0.25</armorPenetration><cooldownTime>2.43</cooldownTime></li>
+      <li><label>point</label><capacities><li>Stab</li></capacities><power>20</power><armorPenetration>0.34</armorPenetration><cooldownTime>2.7</cooldownTime></li>
+      <li><label>handle</label><capacities><li>Poke</li></capacities><power>10</power><armorPenetration>0.15</armorPenetration><cooldownTime>2.7</cooldownTime></li>
+    </tools>
+      <comps>
+      <li Class="MUGB.CompProperties_GoblinWeaponVariant">
+        <texPaths>
+          <li>Things/Weapons/melee/MGB_bigsword/MGB_bigswordA</li>
+          <li>Things/Weapons/melee/MGB_bigsword/MGB_bigswordB</li>
+        </texPaths>
+      </li>
+    </comps></ThingDef>
+
+  <!-- Ranged weapons -->
+
+  <ThingDef ParentName="MUGB_GoblinRangedBase">
+    <defName>MUGB_GoblinStaffSling</defName>
+    <label>goblin staff sling</label>
+    <description>A staff sling made from wood and human leather. It throws large stones slowly, loudly, and with a worrying amount of joy.</description>
+    <graphicData>
+      <texPath>Things/Weapons/ranged/MGB_sling/MGB_slingA</texPath>
+      <graphicClass>MUGB.Graphic_GoblinWeaponVariant</graphicClass>
+      <drawSize>1.25</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>NeolithicRangedBasic</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_ShieldForbidden</li>
+      <li>MUGB_GoblinRangedPrimitive</li>
+    </weaponTags>
+    <costList>
+      <WoodLog>20</WoodLog>
+      <Leather_Human>25</Leather_Human>
+    </costList>
+    <statBases>
+      <WorkToMake>2600</WorkToMake>
+      <Mass>1.5</Mass>
+      <AccuracyTouch>0.875</AccuracyTouch>
+      <AccuracyShort>0.78</AccuracyShort>
+      <AccuracyMedium>0.67</AccuracyMedium>
+      <AccuracyLong>0.61</AccuracyLong>
+      <RangedWeapon_Cooldown>2.2</RangedWeapon_Cooldown>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MUGB_SlingStone</defaultProjectile>
+        <warmupTime>1.8</warmupTime>
+        <range>19.9</range>
+        <soundCast>MUGB_GoblinThrowShared</soundCast>
+      </li>
+    </verbs>
+    <equippedAngleOffset>48</equippedAngleOffset>
+    <tools>
+      <li><label>staff</label><capacities><li>Blunt</li></capacities><power>9</power><armorPenetration>0.12</armorPenetration><cooldownTime>2.3</cooldownTime></li>
+      <li><label>handle</label><capacities><li>Poke</li></capacities><power>9</power><armorPenetration>0.12</armorPenetration><cooldownTime>2.3</cooldownTime></li>
+    </tools>
+    <comps>
+      <li Class="MUGB.CompProperties_GoblinWeaponVariant">
+        <texPaths>
+          <li>Things/Weapons/ranged/MGB_sling/MGB_slingA</li>
+          <li>Things/Weapons/ranged/MGB_sling/MGB_slingB</li>
+        </texPaths>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinRangedBase">
+    <defName>MUGB_GoblinWarbow</defName>
+    <relicChance>1</relicChance>
+    <label>goblin warbow</label>
+    <description>A heavy composite bow built from bone and wood. It hits harder than most bows, but pulling it is slow work.</description>
+    <graphicData>
+      <texPath>Things/Weapons/ranged/MGB_warbow/MGB_warbowA</texPath>
+      <graphicClass>MUGB.Graphic_GoblinWeaponVariant</graphicClass>
+      <drawSize>1.0</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>NeolithicRangedHeavy</li>
+      <li>NeolithicRangedChief</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_ShieldForbidden</li>
+      <li>MUGB_GoblinRangedPrimitive</li>
+      <li>MUGB_GoblinWarbow</li>
+      <li>MUGB_MedievalArcherBow</li>
+      <li>MUGB_MedievalRangedSquadWeapon</li>
+    </weaponTags>
+    <costList>
+      <MUGB_Bone>15</MUGB_Bone>
+      <MUGB_Hgut>1</MUGB_Hgut>
+      <Leather_Human>10</Leather_Human>
+      <WoodLog>45</WoodLog>
+    </costList>
+    <statBases>
+      <WorkToMake>10000</WorkToMake>
+      <Mass>3.3</Mass>
+      <AccuracyTouch>0.70</AccuracyTouch>
+      <AccuracyShort>0.88</AccuracyShort>
+      <AccuracyMedium>0.78</AccuracyMedium>
+      <AccuracyLong>0.63</AccuracyLong>
+      <RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
+    </statBases>
+    <recipeMaker>
+      <researchPrerequisite>Greatbow</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>6</Crafting>
+      </skillRequirements>
+    </recipeMaker>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MUGB_WarbowArrow</defaultProjectile>
+        <warmupTime>3.4</warmupTime>
+        <range>32</range>
+        <soundCast>MUGB_GoblinWarbowFireReload</soundCast>
+      </li>
+    </verbs>
+    <equippedAngleOffset>48</equippedAngleOffset>
+    <tools>
+      <li><label>limb</label><capacities><li>Blunt</li><li>Poke</li></capacities><power>9</power><cooldownTime>2</cooldownTime></li>
+    </tools>
+      <comps>
+      <li Class="MUGB.CompProperties_GoblinWeaponVariant">
+        <texPaths>
+          <li>Things/Weapons/ranged/MGB_warbow/MGB_warbow</li>
+          <li>Things/Weapons/ranged/MGB_warbow/MGB_warbowA</li>
+          <li>Things/Weapons/ranged/MGB_warbow/MGB_warbowB</li>
+        </texPaths>
+      </li>
+      <li Class="MUGB.CompProperties_MUGBSpecialWeapon" />
+    </comps></ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinRangedBase">
+    <defName>MUGB_GoblinCrossbow</defName>
+    <relicChance>1</relicChance>
+    <label>goblin crossbow</label>
+    <description>A middle-weight crossbow with a blade fixed under the stock. It is simple to aim and unpleasant to be near.</description>
+    <graphicData>
+      <texPath>Things/Weapons/ranged/MGB_crossbow/MGB_crossbowA</texPath>
+      <graphicClass>MUGB.Graphic_GoblinWeaponVariant</graphicClass>
+      <drawSize>0.9</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>MedievalRangedDecent</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_ShieldForbidden</li>
+      <li>MUGB_GoblinRangedMedieval</li>
+      <li>MUGB_GoblinRepeatingCrossbow</li>
+      <li>MUGB_MedievalRangedSquadWeapon</li>
+    </weaponTags>
+    <stuffCategories>
+      <li>MUGB_GoblinAlloyMetallic</li>
+    </stuffCategories>
+    <costStuffCount>35</costStuffCount>
+    <costList>
+      <MUGB_Bone>10</MUGB_Bone>
+      <Leather_Human>1</Leather_Human>
+      <WoodLog>30</WoodLog>
+      <ComponentIndustrial>1</ComponentIndustrial>
+    </costList>
+    <statBases>
+      <WorkToMake>8200</WorkToMake>
+      <Mass>2.6</Mass>
+      <AccuracyTouch>0.85</AccuracyTouch>
+      <AccuracyShort>0.90</AccuracyShort>
+      <AccuracyMedium>0.80</AccuracyMedium>
+      <AccuracyLong>0.55</AccuracyLong>
+      <RangedWeapon_Cooldown>3.2</RangedWeapon_Cooldown>
+    </statBases>
+    <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Crossbows</researchPrerequisite>
+      <recipeUsers>
+        <li>MUGB_smithbench</li>
+      </recipeUsers>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+      <displayPriority>520</displayPriority>
+    </recipeMaker>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MUGB_CrossbowBolt</defaultProjectile>
+        <warmupTime>1</warmupTime>
+        <range>23</range>
+        <soundCast>MUGB_GoblinCrossbowFireReload</soundCast>
+      </li>
+    </verbs>
+    <equippedAngleOffset>48</equippedAngleOffset>
+    <tools>
+      <li><label>bayonet</label><capacities><li>Stab</li></capacities><power>13</power><armorPenetration>0.18</armorPenetration><cooldownTime>2</cooldownTime></li>
+      <li><label>stock</label><capacities><li>Blunt</li></capacities><power>9</power><armorPenetration>0.12</armorPenetration><cooldownTime>2.3</cooldownTime></li>
+    </tools>
+      <comps>
+      <li Class="MUGB.CompProperties_GoblinWeaponVariant">
+        <texPaths>
+          <li>Things/Weapons/ranged/MGB_crossbow/MGB_crossbowA</li>
+          <li>Things/Weapons/ranged/MGB_crossbow/MGB_crossbowB</li>
+          <li>Things/Weapons/ranged/MGB_crossbow/MGB_crossbowC</li>
+        </texPaths>
+      </li>
+      <li Class="MUGB.CompProperties_MUGBSpecialWeapon" />
+    </comps></ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinRangedBase">
+    <defName>MUGB_GoblinRepeatingCrossbow</defName>
+    <relicChance>1</relicChance>
+    <label>goblin repeating crossbow</label>
+    <description>A lever-fed crossbow that trades power and range for a nervous stream of bolts.</description>
+    <graphicData>
+      <texPath>Things/Weapons/ranged/MGB_Rcross/MGB_RcrossA</texPath>
+      <graphicClass>MUGB.Graphic_GoblinWeaponVariant</graphicClass>
+      <drawSize>0.9</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>MedievalRangedDecent</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_ShieldForbidden</li>
+      <li>MUGB_GoblinRangedMedieval</li>
+      <li>MUGB_MedievalRangedSquadWeapon</li>
+    </weaponTags>
+    <stuffCategories>
+      <li>MUGB_GoblinAlloyMetallic</li>
+    </stuffCategories>
+    <costStuffCount>45</costStuffCount>
+    <costList>
+      <MUGB_Bone>10</MUGB_Bone>
+      <Leather_Human>1</Leather_Human>
+      <WoodLog>40</WoodLog>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <statBases>
+      <WorkToMake>9200</WorkToMake>
+      <Mass>2.8</Mass>
+      <AccuracyTouch>0.62</AccuracyTouch>
+      <AccuracyShort>0.70</AccuracyShort>
+      <AccuracyMedium>0.55</AccuracyMedium>
+      <AccuracyLong>0.25</AccuracyLong>
+      <RangedWeapon_Cooldown>2.0</RangedWeapon_Cooldown>
+    </statBases>
+    <recipeMaker>
+      <researchPrerequisite>MUGB_Research_RepeatingCrossbow</researchPrerequisite>
+      <recipeUsers>
+        <li>MUGB_smithbench</li>
+      </recipeUsers>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+      <displayPriority>520</displayPriority>
+    </recipeMaker>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MUGB_RepeatingCrossbowBolt</defaultProjectile>
+        <warmupTime>0.8</warmupTime>
+        <range>20</range>
+        <burstShotCount>4</burstShotCount>
+        <ticksBetweenBurstShots>30</ticksBetweenBurstShots>
+        <soundCast>MUGB_GoblinRepeatingCrossbowFire</soundCast>
+      </li>
+    </verbs>
+    <equippedAngleOffset>48</equippedAngleOffset>
+    <tools>
+      <li><label>stock</label><capacities><li>Blunt</li></capacities><power>9</power><armorPenetration>0.12</armorPenetration><cooldownTime>2.3</cooldownTime></li>
+    </tools>
+      <comps>
+      <li Class="MUGB.CompProperties_GoblinWeaponVariant">
+        <texPaths>
+          <li>Things/Weapons/ranged/MGB_Rcross/MGB_RcrossA</li>
+          <li>Things/Weapons/ranged/MGB_Rcross/MGB_RcrossB</li>
+          <li>Things/Weapons/ranged/MGB_Rcross/MGB_RcrossC</li>
+          <li>Things/Weapons/ranged/MGB_Rcross/MGB_RcrossD</li>
+        </texPaths>
+      </li>
+      <li Class="MUGB.CompProperties_MUGBSpecialWeapon" />
+    </comps></ThingDef>
+
+  <!-- Early firearms -->
+
+  <ThingDef ParentName="MUGB_GoblinGunBase">
+    <defName>MUGB_GoblinArquebus</defName>
+    <label>goblin arquebus</label>
+    <description>A shortened matchlock that can be fired with one hand. It is loud, smoky, inaccurate, and still dangerous.</description>
+    <graphicData>
+      <texPath>Things/Weapons/ranged/MGB_arquebus/MGB_arquebusA</texPath>
+      <graphicClass>MUGB.Graphic_GoblinWeaponVariant</graphicClass>
+      <drawSize>1.0</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>Gun</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_GoblinGunpowder</li>
+      <li>MUGB_GoblinGunpowderBasic</li>
+      <li>MUGB_MedievalRangedSquadWeapon</li>
+    </weaponTags>
+    <costStuffCount>55</costStuffCount>
+    <statBases>
+      <WorkToMake>9500</WorkToMake>
+      <Mass>2.4</Mass>
+      <AccuracyTouch>0.80</AccuracyTouch>
+      <AccuracyShort>0.65</AccuracyShort>
+      <AccuracyMedium>0.50</AccuracyMedium>
+      <AccuracyLong>0.25</AccuracyLong>
+      <RangedWeapon_Cooldown>3.0</RangedWeapon_Cooldown>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>MUGB.Verb_GoblinSmokeShoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MUGB_ArquebusBullet</defaultProjectile>
+        <warmupTime>1.3</warmupTime>
+        <range>22</range>
+        <soundCast>MUGB_GoblinArquebusFire</soundCast>
+        <muzzleFlashScale>7</muzzleFlashScale>
+      </li>
+    </verbs>
+    <equippedAngleOffset>48</equippedAngleOffset>
+    <tools>
+      <li><label>stock</label><capacities><li>Blunt</li></capacities><power>9</power><armorPenetration>0.13</armorPenetration><cooldownTime>2</cooldownTime></li>
+      <li><label>bayonet</label><capacities><li>Stab</li></capacities><power>11</power><armorPenetration>0.18</armorPenetration><cooldownTime>1.8</cooldownTime></li>
+    </tools>
+      <comps>
+      <li Class="MUGB.CompProperties_GoblinWeaponVariant">
+        <texPaths>
+          <li>Things/Weapons/ranged/MGB_arquebus/MGB_arquebusA</li>
+          <li>Things/Weapons/ranged/MGB_arquebus/MGB_arquebusB</li>
+          <li>Things/Weapons/ranged/MGB_arquebus/MGB_arquebusC</li>
+        </texPaths>
+      </li>
+    </comps></ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinGunBase">
+    <defName>MUGB_GoblinMusket</defName>
+    <relicChance>1</relicChance>
+    <label>goblin matchlock</label>
+    <description>A full-sized goblin matchlock with a fixed blade. It reloads slowly, but the ball hits far harder than its crude barrel deserves.</description>
+    <graphicData>
+      <texPath>Things/Weapons/ranged/MGB_matchlock/MGB_matchlockA</texPath>
+      <graphicClass>MUGB.Graphic_GoblinWeaponVariant</graphicClass>
+      <drawSize>1.1</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>Gun</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_ShieldForbidden</li>
+      <li>MUGB_GoblinGunpowder</li>
+      <li>MUGB_GoblinGunpowderAdvanced</li>
+      <li>MUGB_MedievalRangedSquadWeapon</li>
+    </weaponTags>
+    <costStuffCount>85</costStuffCount>
+    <costList>
+      <MUGB_Bone>15</MUGB_Bone>
+      <Leather_Human>1</Leather_Human>
+      <WoodLog>40</WoodLog>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <statBases>
+      <WorkToMake>11500</WorkToMake>
+      <Mass>3.6</Mass>
+      <AccuracyTouch>0.73</AccuracyTouch>
+      <AccuracyShort>0.87</AccuracyShort>
+      <AccuracyMedium>0.90</AccuracyMedium>
+      <AccuracyLong>0.63</AccuracyLong>
+      <RangedWeapon_Cooldown>3.3</RangedWeapon_Cooldown>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>MUGB.Verb_GoblinSmokeShoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MUGB_MusketBullet</defaultProjectile>
+        <warmupTime>1.7</warmupTime>
+        <range>28</range>
+        <soundCast>MUGB_GoblinMusketFire</soundCast>
+        <muzzleFlashScale>9</muzzleFlashScale>
+      </li>
+    </verbs>
+    <equippedAngleOffset>48</equippedAngleOffset>
+    <tools>
+      <li><label>stock</label><capacities><li>Blunt</li></capacities><power>9</power><armorPenetration>0.13</armorPenetration><cooldownTime>2</cooldownTime></li>
+      <li><label>bayonet</label><capacities><li>Stab</li></capacities><power>14</power><armorPenetration>0.22</armorPenetration><cooldownTime>2</cooldownTime></li>
+    </tools>
+      <comps>
+      <li Class="MUGB.CompProperties_GoblinWeaponVariant">
+        <texPaths>
+          <li>Things/Weapons/ranged/MGB_matchlock/MGB_matchlockA</li>
+          <li>Things/Weapons/ranged/MGB_matchlock/MGB_matchlockB</li>
+          <li>Things/Weapons/ranged/MGB_matchlock/MGB_matchlockC</li>
+        </texPaths>
+      </li>
+      <li Class="MUGB.CompProperties_MUGBSpecialWeapon" />
+    </comps></ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinGunBase">
+    <defName>MUGB_GoblinHandgonne</defName>
+    <label>goblin handgonne</label>
+    <description>A basic gunpowder weapon made by binding three barrels to the end of a wooden pole. Goblins usually pack it with shot to make up for its poor accuracy. "Uuh... heavy... loud stick heavy..."</description>
+    <graphicData>
+      <texPath>Things/Weapons/ranged/MGB_handgonne</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.35</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>Gun</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_GoblinGunpowder</li>
+      <li>MUGB_GoblinGunpowderBasic</li>
+      <li>MUGB_MedievalRangedSquadWeapon</li>
+    </weaponTags>
+    <costStuffCount>40</costStuffCount>
+    <costList>
+      <MUGB_Bone>2</MUGB_Bone>
+      <Leather_Human>3</Leather_Human>
+      <WoodLog>40</WoodLog>
+    </costList>
+    <statBases>
+      <WorkToMake>12500</WorkToMake>
+      <Mass>4.2</Mass>
+      <AccuracyTouch>0.67</AccuracyTouch>
+      <AccuracyShort>0.63</AccuracyShort>
+      <AccuracyMedium>0.47</AccuracyMedium>
+      <AccuracyLong>0.27</AccuracyLong>
+      <RangedWeapon_Cooldown>5.1</RangedWeapon_Cooldown>
+      <VEF_MeleeWeaponRange>2.2</VEF_MeleeWeaponRange>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>MUGB.Verb_GoblinSmokeShoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MUGB_HandgonneShot</defaultProjectile>
+        <warmupTime>2.3</warmupTime>
+        <range>11</range>
+        <burstShotCount>3</burstShotCount>
+        <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+        <soundCast>MUGB_GoblinHandgonneFire</soundCast>
+        <muzzleFlashScale>9</muzzleFlashScale>
+      </li>
+    </verbs>
+    <equippedAngleOffset>48</equippedAngleOffset>
+    <tools>
+      <li><label>shaft</label><capacities><li>Blunt</li></capacities><power>13</power><armorPenetration>0.15</armorPenetration><cooldownTime>2.6</cooldownTime></li>
+      <li><label>handle</label><capacities><li>Poke</li></capacities><power>10</power><armorPenetration>0.15</armorPenetration><cooldownTime>2.6</cooldownTime></li>
+      <li><label>barrel bundle</label><capacities><li>Blunt</li></capacities><power>16</power><armorPenetration>0.22</armorPenetration><cooldownTime>3.1</cooldownTime></li>
+    </tools>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinGunBase">
+    <defName>MUGB_GoblinHandcannon</defName>
+    <relicChance>1</relicChance>
+    <label>goblin handcannon</label>
+    <description>A short, ugly bomb thrower built like a firearm. It is meant for breaking cover, doors, and plans.</description>
+    <graphicData>
+      <texPath>Things/Weapons/ranged/MGB_handcannon/MGB_HcannonA</texPath>
+      <graphicClass>MUGB.Graphic_GoblinWeaponVariant</graphicClass>
+      <drawSize>0.95</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>Gun</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_ShieldForbidden</li>
+      <li>MUGB_GoblinGunpowder</li>
+      <li>MUGB_GoblinGunpowderSpecial</li>
+      <li>MUGB_GoblinHandcannon</li>
+    </weaponTags>
+    <costStuffCount>110</costStuffCount>
+    <costList>
+      <MUGB_Bone>25</MUGB_Bone>
+      <Leather_Human>1</Leather_Human>
+      <WoodLog>40</WoodLog>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <statBases>
+      <WorkToMake>14000</WorkToMake>
+      <Mass>5.0</Mass>
+      <AccuracyTouch>0.50</AccuracyTouch>
+      <AccuracyShort>0.60</AccuracyShort>
+      <AccuracyMedium>0.47</AccuracyMedium>
+      <AccuracyLong>0.25</AccuracyLong>
+      <RangedWeapon_Cooldown>5</RangedWeapon_Cooldown>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.08</MoveSpeed>
+    </equippedStatOffsets>
+    <verbs>
+      <li>
+        <verbClass>MUGB.Verb_GoblinSmokeLaunchProjectile</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MUGB_HandcannonBomb</defaultProjectile>
+        <warmupTime>3.3</warmupTime>
+        <range>20</range>
+        <forcedMissRadius>1</forcedMissRadius>
+        <ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+        <soundCast>MUGB_GoblinHandcannonFire</soundCast>
+        <muzzleFlashScale>10</muzzleFlashScale>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+      </li>
+    </verbs>
+    <equippedAngleOffset>48</equippedAngleOffset>
+    <tools>
+      <li><label>stock</label><capacities><li>Blunt</li></capacities><power>9</power><armorPenetration>0.13</armorPenetration><cooldownTime>4</cooldownTime></li>
+      <li><label>barrel</label><capacities><li>Poke</li></capacities><power>9</power><armorPenetration>0.13</armorPenetration><cooldownTime>3</cooldownTime></li>
+    </tools>
+      <comps>
+      <li Class="MUGB.CompProperties_GoblinWeaponVariant">
+        <texPaths>
+          <li>Things/Weapons/ranged/MGB_handcannon/MGB_HcannonA</li>
+          <li>Things/Weapons/ranged/MGB_handcannon/MGB_HcannonB</li>
+        </texPaths>
+      </li>
+      <li Class="MUGB.CompProperties_MUGBSpecialWeapon" />
+    </comps>    <recipeMaker>
+      <researchPrerequisite>MUGB_Research_AdvGunpowder</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+  <!-- Special weapons -->
+
+  <ThingDef ParentName="BaseProjectileNeolithic">
+    <defName>MUGB_GoblinDart</defName>
+    <label>goblin dart</label>
+    <thingClass>MUGB.Projectile_GoblinDart</thingClass>
+    <graphicData>
+      <texPath>Things/Weapons/projectile/MGB_Pdart</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>MUGB_GoblinDartDamage</damageDef>
+      <damageAmountBase>2</damageAmountBase>
+      <armorPenetrationBase>0.60</armorPenetrationBase>
+      <stoppingPower>0.8</stoppingPower>
+      <speed>44</speed>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseProjectileNeolithic">
+    <defName>MUGB_ChainSnareProjectile</defName>
+    <label>chain snare</label>
+    <thingClass>MUGB.Projectile_ChainSnare</thingClass>
+    <graphicData>
+      <texPath>Things/Weapons/projectile/chain</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.1</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>Blunt</damageDef>
+      <damageAmountBase>6</damageAmountBase>
+      <armorPenetrationBase>0.01</armorPenetrationBase>
+      <stoppingPower>3</stoppingPower>
+      <speed>25</speed>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseGrenadeProjectile">
+    <defName>MUGB_StinkbombProjectile</defName>
+    <label>goblin stinkbomb</label>
+    <thingClass>MUGB.Projectile_GoblinStinkbomb</thingClass>
+    <graphicData>
+      <texPath>Things/Weapons/projectile/stinkbomb_c</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.85</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <damageAmountBase>5</damageAmountBase>
+      <explosionRadius>1.5</explosionRadius>
+      <explosionRadiusDisplayPadding>2</explosionRadiusDisplayPadding>
+      <speed>12</speed>
+      <arcHeightFactor>1.8</arcHeightFactor>
+      <shadowSize>0.35</shadowSize>
+      <screenShakeFactor>0.2</screenShakeFactor>
+      <soundExplode>Explosion_Smoke</soundExplode>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseMakeableGrenade">
+    <defName>MUGB_GoblinStinkbomb</defName>
+    <label>goblin sleep-gas bottle</label>
+    <description>A sealed bottle of goblin meat, guts, herbs, and bone dust left to ferment until the slurry becomes violently reactive. When it shatters, the compressed stink blooms into a choking sleep-gas cloud that goblins tolerate better than anyone else.\n\n"Here! Me dad in bottle! Made from dad guts! Humans sniff and go coco-sleep!"</description>
+    <thingClass>MUGB.ThingWithComps_GoblinWeaponVariant</thingClass>
+    <tickerType>Normal</tickerType>
+    <graphicData>
+      <texPath>Things/Weapons/ranged/MGB_stinkbomb</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <uiIconScale>1.25</uiIconScale>
+    <soundInteract>Interact_MolotovCocktail</soundInteract>
+    <techLevel>Neolithic</techLevel>
+    <thingCategories>
+      <li>Grenades</li>
+      <li>MUGB_GoblinWeaponCategory</li>
+    </thingCategories>
+    <statBases>
+      <Mass>0.7</Mass>
+      <RangedWeapon_Cooldown>3.54</RangedWeapon_Cooldown>
+      <WorkToMake>8000</WorkToMake>
+      <AccuracyTouch>1</AccuracyTouch>
+      <AccuracyShort>1</AccuracyShort>
+      <AccuracyMedium>1</AccuracyMedium>
+      <AccuracyLong>1</AccuracyLong>
+    </statBases>
+    <costList>
+      <MUGB_Ggut>10</MUGB_Ggut>
+      <Meat_Goblin>10</Meat_Goblin>
+      <MedicineHerbal>3</MedicineHerbal>
+      <MUGB_BoneDust>10</MUGB_BoneDust>
+    </costList>
+    <recipeMaker>
+      <workSpeedStat>DrugSynthesisSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Cook</effectWorking>
+      <soundWorking>Recipe_Drug</soundWorking>
+      <recipeUsers Inherit="False">
+        <li>MUGB_druglab</li>
+      </recipeUsers>
+      <unfinishedThingDef>UnfinishedGun</unfinishedThingDef>
+      <displayPriority>26</displayPriority>
+      <researchPrerequisite>MUGB_Research_WarBrews</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+        <Medicine>3</Medicine>
+      </skillRequirements>
+    </recipeMaker>
+    <weaponTags>
+      <li>GrenadeSmoke</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_ShieldForbidden</li>
+      <li>MUGB_GoblinCapture</li>
+    </weaponTags>
+    <verbs>
+      <li>
+        <label>throw sleep-gas bottle</label>
+        <verbClass>Verb_LaunchProjectile</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <range>8.6</range>
+        <forcedMissRadius>1.9</forcedMissRadius>
+        <warmupTime>2.8</warmupTime>
+        <noiseRadius>4</noiseRadius>
+        <ai_IsBuildingDestroyer>false</ai_IsBuildingDestroyer>
+        <soundCast>MUGB_GoblinThrowShared</soundCast>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+        <defaultProjectile>MUGB_StinkbombProjectile</defaultProjectile>
+        <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+      </li>
+    </verbs>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinRangedBase">
+    <defName>MUGB_GoblinBlowdart</defName>
+    <label>goblin blowdart</label>
+    <description>A narrow wooden tube for firing poisoned darts. Its wounds are tiny; the toxin is the point.</description>
+    <graphicData>
+      <texPath>Things/Weapons/ranged/MGB_blowdart/MGB_blowdartA</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.75</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_ShieldForbidden</li>
+      <li>MUGB_GoblinCapture</li>
+    </weaponTags>
+    <costList>
+      <WoodLog>20</WoodLog>
+      <Leather_Human>15</Leather_Human>
+      <MUGB_Hgut>5</MUGB_Hgut>
+    </costList>
+    <statBases>
+      <WorkToMake>3200</WorkToMake>
+      <Mass>0.8</Mass>
+      <AccuracyTouch>0.725</AccuracyTouch>
+      <AccuracyShort>0.65</AccuracyShort>
+      <AccuracyMedium>0.60</AccuracyMedium>
+      <AccuracyLong>0.25</AccuracyLong>
+      <RangedWeapon_Cooldown>2.5</RangedWeapon_Cooldown>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>MUGB.Verb_LimitedShoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MUGB_GoblinDart</defaultProjectile>
+        <warmupTime>3</warmupTime>
+        <range>19</range>
+        <soundCast>MUGB_GoblinBlowdartFire</soundCast>
+      </li>
+    </verbs>
+    <equippedAngleOffset>48</equippedAngleOffset>
+    <tools>
+      <li><label>tube</label><capacities><li>Blunt</li></capacities><power>9</power><armorPenetration>0.12</armorPenetration><cooldownTime>2.3</cooldownTime></li>
+      <li><label>handle</label><capacities><li>Poke</li></capacities><power>9</power><armorPenetration>0.12</armorPenetration><cooldownTime>2.3</cooldownTime></li>
+    </tools>
+    <comps>
+      <li Class="MUGB.CompProperties_LimitedShots">
+        <maxShots>12</maxShots>
+        <ammoLabel>dart ammo</ammoLabel>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinAlloyMeleeBase">
+    <defName>MUGB_GoblinChainSnare</defName>
+    <label>goblin chain snare</label>
+    <description>A hooked chain for dragging and hobbling enemies. It can still be swung like a crude flail in close quarters.</description>
+    <graphicData>
+      <texPath>Things/Weapons/MGB_chain/MGB_chainA</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.1</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>MedievalRangedDecent</li>
+      <li>MedievalMeleeDecent</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_GoblinCapture</li>
+    </weaponTags>
+    <costStuffCount>55</costStuffCount>
+    <costList>
+      <Leather_Human>5</Leather_Human>
+    </costList>
+    <statBases>
+      <WorkToMake>7600</WorkToMake>
+      <Mass>2.2</Mass>
+      <AccuracyTouch>0.60</AccuracyTouch>
+      <AccuracyShort>0.65</AccuracyShort>
+      <AccuracyMedium>0.50</AccuracyMedium>
+      <AccuracyLong>0.30</AccuracyLong>
+      <RangedWeapon_Cooldown>3.4</RangedWeapon_Cooldown>
+      <VEF_MeleeWeaponRange>0.75</VEF_MeleeWeaponRange>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>MUGB.Verb_LimitedShoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MUGB_ChainSnareProjectile</defaultProjectile>
+        <warmupTime>1.8</warmupTime>
+        <range>15</range>
+        <soundCast>MUGB_GoblinThrowShared</soundCast>
+      </li>
+    </verbs>
+    <equippedAngleOffset>48</equippedAngleOffset>
+    <tools>
+      <li><label>chain</label><capacities><li>Blunt</li></capacities><power>13</power><armorPenetration>0.13</armorPenetration><cooldownTime>2.6</cooldownTime></li>
+      <li><label>hook</label><capacities><li>Poke</li></capacities><power>9</power><armorPenetration>0.12</armorPenetration><cooldownTime>2.4</cooldownTime></li>
+    </tools>
+    <comps>
+      <li Class="MUGB.CompProperties_LimitedShots">
+        <maxShots>10</maxShots>
+        <ammoLabel>chain ammo</ammoLabel>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinBoneMeleeBase">
+    <defName>MUGB_GoblinShamanStaff</defName>
+    <!-- 기본형 지팡이는 유물에서 제외합니다. 유물은 능력이 붙은 A/B 변형만 담당합니다.
+         (부모 BoneMeleeBase가 이미 relicChance=0이라 별도 지정 없이 상속받습니다.) -->
+    <label>goblin shaman staff</label>
+    <description>A bone-tipped ritual staff. It can deploy a mobile low-angle shield that helps nearby allies focus their attacks.</description>
+    <graphicData>
+      <texPath>Things/Weapons/MGB_staff/MGB_staffA</texPath>
+      <graphicClass>MUGB.Graphic_GoblinWeaponVariant</graphicClass>
+      <drawSize>0.95</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_GoblinShamanStaff</li>
+    </weaponTags>
+    <!--
+      Inherit="False"가 반드시 필요합니다. 부모에서 물려받는 거래 태그가
+      WeaponMelee, MUGB_GoblinWeapon, MUGB_GoblinPrimitiveWeapon인데,
+      이걸 그대로 두면 원시 무기상·중세 무기상·가축상까지 지팡이를 들여옵니다.
+
+      어느 상인 재고 생성기도 쓰지 않는 전용 태그만 남겨서, 취급 상인을 아래 두 곳으로
+      정확히 통제합니다. (암시장 = 자주, 중세 무기상 = 드물게 — 상인 def에 직접 지정)
+    -->
+    <tradeTags Inherit="False">
+      <li>MUGB_GoblinShamanStaff</li>
+    </tradeTags>
+    <costList>
+      <MUGB_Bone>20</MUGB_Bone>
+      <MUGB_BoneDust>10</MUGB_BoneDust>
+      <Leather_Human>10</Leather_Human>
+      <WoodLog>35</WoodLog>
+    </costList>
+    <statBases>
+      <WorkToMake>7200</WorkToMake>
+      <Mass>1.8</Mass>
+      <VEF_MeleeWeaponRange>0.65</VEF_MeleeWeaponRange>
+      <!--
+        제작이 막혔으므로 재료비에서 자동 계산되던 값 대신 가격을 직접 지정합니다.
+        고블린 상인에게서만 살 수 있는 물건이라 비싸게 잡았습니다.
+      -->
+      <MarketValue>500</MarketValue>
+    </statBases>
+    <tools>
+      <li><label>bone point</label><capacities><li>Stab</li></capacities><power>17</power><armorPenetration>0.24</armorPenetration><cooldownTime>2.5</cooldownTime></li>
+      <li><label>shaft</label><capacities><li>Blunt</li></capacities><power>10</power><armorPenetration>0.12</armorPenetration><cooldownTime>2.2</cooldownTime></li>
+      <li><label>butt</label><capacities><li>Poke</li></capacities><power>8</power><armorPenetration>0.10</armorPenetration><cooldownTime>2</cooldownTime></li>
+    </tools>
+    <comps>
+      <li Class="MUGB.CompProperties_GoblinWeaponVariant">
+        <texPaths>
+          <li>Things/Weapons/MGB_staff/MGB_staffA</li>
+        </texPaths>
+      </li>
+      <li Class="MUGB.CompProperties_GoblinShamanStaff">
+        <radius>6</radius>
+      </li>
+    </comps>
+    <!--
+      제작 불가. 고블린 상인에게 사거나 적 샤먼이 떨어뜨린 것을 줍는 방법뿐입니다.
+      (유물 A/B는 이데올로기 유물 경로 전용이라 이미 제작·거래가 막혀 있습니다.)
+      예전에는 전투약물조제 연구로 만들 수 있었는데, 주제도 맞지 않고 유물판과 달리
+      기본형만 제작이 열려 있어 앞뒤가 맞지 않았습니다.
+      위 costList는 제작이 없어져 쓰이지 않지만, 되살릴 때를 위해 남겨둡니다.
+    -->
+    <recipeMaker IsNull="True" />
+  </ThingDef>
+
+  <!-- ============================================================
+       유물 지팡이 A/B — 이데올로기 유물로만 등장(제작 불가, weaponTags 없음 → AI가 안 듦).
+       둘 다 기본 이동식 저각 보호막(CompGoblinShamanStaff)을 갖고, 능력이 하나씩 더 붙습니다.
+       텍스처는 기본 지팡이를 복사해 둔 것이라, 나중에 그 PNG만 교체하면 외형이 바뀝니다.
+       ============================================================ -->
+
+  <!-- 유물 A: 이동식 쉴드 + 쾌락절정(정신충격 기절). 능력 버튼 2개. -->
+  <ThingDef ParentName="BaseMeleeWeapon_Blunt_Quality">
+    <defName>MUGB_GoblinShamanStaffRelicA</defName>
+    <relicChance>1</relicChance>
+    <tradeability>None</tradeability>
+    <smeltable>false</smeltable>
+    <recipeMaker IsNull="True" />
+    <techLevel>Neolithic</techLevel>
+    <thingCategories>
+      <li>MUGB_GoblinWeaponCategory</li>
+    </thingCategories>
+    <label>staff of maddening rapture</label>
+    <description>A blessed goblin shaman staff. It carries the base moving low-shield, and can overload a target's mind into psychic shock — the victim's face looks blissful, though it is anything but.</description>
+    <graphicData Inherit="False">
+      <texPath>Things/Weapons/MGB_staff/MGB_staffRelicA</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+      <drawSize>0.95</drawSize>
+    </graphicData>
+    <statBases>
+      <Mass>1.8</Mass>
+      <VEF_MeleeWeaponRange>0.65</VEF_MeleeWeaponRange>
+    </statBases>
+    <tools>
+      <li><label>bone point</label><capacities><li>Stab</li></capacities><power>17</power><armorPenetration>0.24</armorPenetration><cooldownTime>2.5</cooldownTime></li>
+      <li><label>shaft</label><capacities><li>Blunt</li></capacities><power>10</power><armorPenetration>0.12</armorPenetration><cooldownTime>2.2</cooldownTime></li>
+      <li><label>butt</label><capacities><li>Poke</li></capacities><power>8</power><armorPenetration>0.10</armorPenetration><cooldownTime>2</cooldownTime></li>
+    </tools>
+    <comps>
+      <li Class="MUGB.CompProperties_GoblinShamanStaff">
+        <radius>6</radius>
+      </li>
+      <li Class="MUGB.CompProperties_StaffPsychicShock">
+        <label>MUGB_StaffKwaerakLabel</label>
+        <description>MUGB_StaffKwaerakDesc</description>
+        <iconPath>Things/Item/Artifact/PsychicShockLance/PsychicShockLance</iconPath>
+        <maxCharges>3</maxCharges>
+        <perChargeRegenTicks>90000</perChargeRegenTicks>
+        <range>31</range>
+        <requireLineOfSight>true</requireLineOfSight>
+        <warmupTicks>120</warmupTicks>
+        <brainDamageChance>0.1</brainDamageChance>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- 유물 B: 이동식 쉴드 + 페로몬 흡수 + 페로몬 방출(독가스+EMP). 능력 버튼 3개. -->
+  <ThingDef ParentName="BaseMeleeWeapon_Blunt_Quality">
+    <defName>MUGB_GoblinShamanStaffRelicB</defName>
+    <relicChance>1</relicChance>
+    <tradeability>None</tradeability>
+    <smeltable>false</smeltable>
+    <recipeMaker IsNull="True" />
+    <techLevel>Neolithic</techLevel>
+    <thingCategories>
+      <li>MUGB_GoblinWeaponCategory</li>
+    </thingCategories>
+    <label>staff of the seething gland</label>
+    <description>A blessed goblin shaman staff. It carries the base moving low-shield, can purge goblin toxic pheromones from an ally, and can violently release absorbed pheromone particles as a burst of gas and electromagnetic force.</description>
+    <graphicData Inherit="False">
+      <texPath>Things/Weapons/MGB_staff/MGB_staffRelicB</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+      <drawSize>0.95</drawSize>
+    </graphicData>
+    <statBases>
+      <Mass>1.8</Mass>
+      <VEF_MeleeWeaponRange>0.65</VEF_MeleeWeaponRange>
+    </statBases>
+    <tools>
+      <li><label>bone point</label><capacities><li>Stab</li></capacities><power>17</power><armorPenetration>0.24</armorPenetration><cooldownTime>2.5</cooldownTime></li>
+      <li><label>shaft</label><capacities><li>Blunt</li></capacities><power>10</power><armorPenetration>0.12</armorPenetration><cooldownTime>2.2</cooldownTime></li>
+      <li><label>butt</label><capacities><li>Poke</li></capacities><power>8</power><armorPenetration>0.10</armorPenetration><cooldownTime>2</cooldownTime></li>
+    </tools>
+    <comps>
+      <li Class="MUGB.CompProperties_GoblinShamanStaff">
+        <radius>6</radius>
+      </li>
+      <li Class="MUGB.CompProperties_StaffPheromoneBurst">
+        <label>MUGB_StaffPheromoneBurstLabel</label>
+        <description>MUGB_StaffPheromoneBurstDesc</description>
+        <iconPath>UI/Icons/Genes/MGB_HobgoblinPheromoneGland</iconPath>
+        <maxCharges>10</maxCharges>
+        <fullRefillTicks>120000</fullRefillTicks>
+        <range>35</range>
+        <requireLineOfSight>true</requireLineOfSight>
+        <warmupTicks>30</warmupTicks>
+        <gasRadius>2.9</gasRadius>
+        <gasDensity>220</gasDensity>
+        <empRadius>3.4</empRadius>
+      </li>
+      <li Class="MUGB.CompProperties_StaffPheromoneAbsorb">
+        <label>MUGB_StaffPheromoneAbsorbLabel</label>
+        <description>MUGB_StaffPheromoneAbsorbDesc</description>
+        <iconPath>UI/Icons/Genes/Gene_WoundHealingRateFast</iconPath>
+        <maxCharges>1</maxCharges>
+        <fullRefillTicks>180000</fullRefillTicks>
+        <range>20</range>
+        <requireLineOfSight>false</requireLineOfSight>
+        <warmupTicks>30</warmupTicks>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="MUGB_GoblinAlloyMeleeBase">
+    <defName>MUGB_GoblinBoomstick</defName>
+    <label>goblin boomstick</label>
+    <description>A crude bomb lashed to a stick. Sometimes the fuse catches, and then everyone nearby learns about goblin engineering.</description>
+    <graphicData>
+      <texPath>Things/Weapons/melee/MGB_boomstick</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.95</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>MedievalMeleeDecent</li>
+      <li>MUGB_GoblinWeapon</li>
+      <li>MUGB_GoblinBoomstick</li>
+      <li>MUGB_GoblinShockWeapon</li>
+    </weaponTags>
+    <costStuffCount>40</costStuffCount>
+    <costList>
+      <Leather_Human>5</Leather_Human>
+      <WoodLog>10</WoodLog>
+    </costList>
+    <statBases>
+      <WorkToMake>6400</WorkToMake>
+      <Mass>2.1</Mass>
+      <VEF_MeleeWeaponRange>0.55</VEF_MeleeWeaponRange>
+    </statBases>
+    <tools>
+      <li><label>stock</label><capacities><li>Blunt</li></capacities><power>9</power><armorPenetration>0.13</armorPenetration><cooldownTime>2</cooldownTime></li>
+      <li><label>bomb head</label><capacities><li>Blunt</li></capacities><power>13</power><armorPenetration>0.15</armorPenetration><cooldownTime>2</cooldownTime></li>
+      <li><label>boom</label><capacities><li>MUGB_BoomstickIgnite</li></capacities><power>9</power><armorPenetration>0.13</armorPenetration><cooldownTime>2</cooldownTime><chanceFactor>0.75</chanceFactor></li>
+    </tools>
+      <recipeMaker>
+      <researchPrerequisite>MUGB_Research_Boomsticks</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+</Defs>

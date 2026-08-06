@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[recipeMaker/recipeUsers/li="DrugLab" and not(recipeMaker/recipeUsers/li="MUGB_druglab")]/recipeMaker/recipeUsers</xpath>
+    <value>
+      <li>MUGB_druglab</li>
+    </value>
+  </Operation>
+
+</Patch>

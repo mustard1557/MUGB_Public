@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingSetMakerDef>
+    <defName>MUGB_GoblinRaidLootMaker</defName>
+    <root Class="MUGB.MUGBThingSetMaker_GoblinRaidLoot">
+      <totalValueFactor>1.10</totalValueFactor>
+      <minimumGold>10</minimumGold>
+      <minimumFineAlloy>20</minimumFineAlloy>
+      <baseLootMaker Class="ThingSetMaker_MarketValue">
+        <fixedParams>
+          <filter>
+            <thingDefs>
+              <li>Silver</li>
+              <li>Jade</li>
+              <li>MedicineHerbal</li>
+              <li>Pemmican</li>
+            </thingDefs>
+          </filter>
+        </fixedParams>
+      </baseLootMaker>
+    </root>
+  </ThingSetMakerDef>
+</Defs>

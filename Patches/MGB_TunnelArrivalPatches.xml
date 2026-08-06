@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  <!-- Korean source intent: 고블린 땅굴은 드랍포드 대체용 도착 방식이다. 1차 구현에서는 일반 즉시공격에만 붙인다. -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/RaidStrategyDef[defName="ImmediateAttack"]/arriveModes</xpath>
+    <value>
+      <li>MUGB_GoblinTunnelArrival</li>
+      <li>MUGB_GoblinTunnelArrivalCenter</li>
+    </value>
+  </Operation>
+</Patch>

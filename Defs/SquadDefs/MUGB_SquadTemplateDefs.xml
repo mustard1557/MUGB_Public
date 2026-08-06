@@ -1,0 +1,815 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- Korean source intent: 분대시스템 P1. 바닐라 습격/Lord/도착은 유지하고, PawnKind 편성만 분대 템플릿으로 보정한다. -->
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_PrimitiveMixed</defName>
+    <label>mixed primitive squad</label>
+    <weight>40</weight>
+    <sizeRange>3~6</sizeRange>
+    <minBudget>160</minBudget>
+    <allowedFactions>
+      <li>MUGB_GoblinTribe</li>
+      <li>MUGB_GoblinCivilTribe</li>
+    </allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_PrimitiveChiefMelee</kind><budgetThreshold>0</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveChiefRanged</kind><budgetThreshold>0</budgetThreshold></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_PrimitiveMelee</kind><weight>18</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveSpear</kind><weight>14</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveRanged</kind><weight>14</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveShock</kind><weight>8</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveGunner</kind><weight>2</weight><maxCount>1</maxCount></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveCaptor</kind><weight>2</weight><maxCount>1</maxCount></li>
+    </memberOptions>
+    <upgradePairs>
+      <li><from>MUGB_GoblinKind_PrimitiveMelee</from><to>MUGB_GoblinKind_PrimitiveChiefMelee</to></li>
+      <li><from>MUGB_GoblinKind_PrimitiveSpear</from><to>MUGB_GoblinKind_PrimitiveChiefMelee</to></li>
+      <li><from>MUGB_GoblinKind_PrimitiveRanged</from><to>MUGB_GoblinKind_PrimitiveChiefRanged</to></li>
+    </upgradePairs>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_PrimitiveCharge</defName>
+    <label>primitive assault squad</label>
+    <weight>15</weight>
+    <sizeRange>3~6</sizeRange>
+    <minBudget>160</minBudget>
+    <allowedFactions>
+      <li>MUGB_GoblinTribe</li>
+      <li>MUGB_GoblinCivilTribe</li>
+    </allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_PrimitiveChiefMelee</kind><budgetThreshold>0</budgetThreshold></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_PrimitiveMelee</kind><weight>18</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveShock</kind><weight>14</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveSpear</kind><weight>6</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveCaptor</kind><weight>2</weight><maxCount>1</maxCount></li>
+    </memberOptions>
+    <upgradePairs>
+      <li><from>MUGB_GoblinKind_PrimitiveMelee</from><to>MUGB_GoblinKind_PrimitiveChiefMelee</to></li>
+      <li><from>MUGB_GoblinKind_PrimitiveShock</from><to>MUGB_GoblinKind_PrimitiveChiefMelee</to></li>
+    </upgradePairs>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_PrimitiveArchers</defName>
+    <label>primitive ranged squad</label>
+    <weight>10</weight>
+    <sizeRange>3~6</sizeRange>
+    <minBudget>160</minBudget>
+    <allowedFactions>
+      <li>MUGB_GoblinTribe</li>
+      <li>MUGB_GoblinCivilTribe</li>
+    </allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_PrimitiveChiefRanged</kind><budgetThreshold>0</budgetThreshold></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_PrimitiveRanged</kind><weight>20</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveSpear</kind><weight>6</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveMelee</kind><weight>6</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveGunner</kind><weight>2</weight><maxCount>1</maxCount></li>
+    </memberOptions>
+    <upgradePairs>
+      <li><from>MUGB_GoblinKind_PrimitiveRanged</from><to>MUGB_GoblinKind_PrimitiveChiefRanged</to></li>
+    </upgradePairs>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_PrimitiveBowArchers</defName>
+    <label>primitive archer squad</label>
+    <weight>10</weight>
+    <sizeRange>3~6</sizeRange>
+    <minBudget>180</minBudget>
+    <allowedFactions>
+      <li>MUGB_GoblinTribe</li>
+      <li>MUGB_GoblinCivilTribe</li>
+    </allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_PrimitiveArcherChief</kind><budgetThreshold>0</budgetThreshold></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_PrimitiveArcher</kind><weight>18</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveArcherMedievalGear</kind><weight>4</weight><maxCount>2</maxCount></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_PrimitiveSlaveMob</defName>
+    <label>primitive slave screen</label>
+    <weight>8</weight>
+    <sizeRange>4~6</sizeRange>
+    <minBudget>120</minBudget>
+    <maxNonFighterRatio>0.5</maxNonFighterRatio>
+    <allowedFactions>
+      <li>MUGB_GoblinTribe</li>
+      <li>MUGB_GoblinCivilTribe</li>
+    </allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_PrimitiveChiefMelee</kind><budgetThreshold>0</budgetThreshold></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_Slave</kind><weight>12</weight><maxCount>4</maxCount></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveMelee</kind><weight>5</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveCaptor</kind><weight>2</weight><maxCount>1</maxCount></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_PrimitiveCaptors</defName>
+    <label>tribal captor squad</label>
+    <weight>7</weight>
+    <maxSquadsPerRaid>1</maxSquadsPerRaid>
+    <sizeRange>4~5</sizeRange>
+    <minBudget>160</minBudget>
+    <allowedFactions>
+      <li>MUGB_GoblinTribe</li>
+      <li>MUGB_GoblinCivilTribe</li>
+    </allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_PrimitiveCaptorLeader</kind><budgetThreshold>0</budgetThreshold></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_PrimitiveCaptor</kind><weight>6</weight><maxCount>1</maxCount></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveMelee</kind><weight>18</weight><maxCount>3</maxCount></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_MedievalMixed</defName>
+    <label>mixed medieval squad</label>
+    <weight>40</weight>
+    <selectionWeightFactorByRaidPoints>
+      <points><li>(0, 1.15)</li><li>(600, 1.08)</li><li>(1000, 1.0)</li><li>(1500, 0.95)</li><li>(2500, 0.85)</li><li>(4000, 0.70)</li><li>(6000, 0.60)</li></points>
+    </selectionWeightFactorByRaidPoints>
+    <sizeRange>3~6</sizeRange>
+    <minBudget>180</minBudget>
+    <allowedFactions>
+      <li>MUGB_GoblinCivilMedieval</li>
+      <li>MUGB_GoblinSavageMedieval</li>
+    </allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_SquadLeaderEarlyMelee</kind><weight>3</weight><budgetThreshold>0</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_SquadLeaderEarlyRanged</kind><weight>3</weight><budgetThreshold>0</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_HobSquadLeaderEarlyMelee</kind><weight>7</weight><budgetThreshold>0</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_HobSquadLeaderEarlyRanged</kind><weight>7</weight><budgetThreshold>0</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_SquadLeaderLateMelee</kind><weight>7</weight><budgetThreshold>300</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_SquadLeaderLateRangedBolt</kind><weight>7</weight><budgetThreshold>300</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_SquadLeaderLateGunpowder</kind><weight>7</weight><budgetThreshold>300</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_ThinSquadLeaderLateMelee</kind><weight>3</weight><budgetThreshold>300</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_ThinSquadLeaderLateRangedBolt</kind><weight>3</weight><budgetThreshold>300</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_ThinSquadLeaderLateGunpowder</kind><weight>3</weight><budgetThreshold>300</budgetThreshold></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_MedievalLowSoldier</kind><weight>18</weight></li>
+      <li><kind>MUGB_GoblinKind_MedievalFootman</kind><weight>3</weight><maxCount>2</maxCount></li>
+      <li><kind>MUGB_GoblinKind_MedievalSpear</kind><weight>12</weight></li>
+      <li><kind>MUGB_GoblinKind_MedievalRanged</kind><weight>12</weight></li>
+      <li><kind>MUGB_GoblinKind_MedievalGunner</kind><weight>14</weight><maxCount>2</maxCount></li>
+      <li><kind>MUGB_GoblinKind_MedievalHighSoldier</kind><weight>5</weight><maxCount>2</maxCount><budgetThreshold>260</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_MedievalAdvancedFootman</kind><weight>3</weight><maxCount>2</maxCount><budgetThreshold>300</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_MedievalArcher</kind><weight>3</weight><maxCount>2</maxCount></li>
+      <li><kind>MUGB_GoblinKind_MedievalCaptor</kind><weight>2</weight><maxCount>1</maxCount></li>
+    </memberOptions>
+    <upgradePairs>
+      <li><from>MUGB_GoblinKind_MedievalLowSoldier</from><to>MUGB_GoblinKind_MedievalHighSoldier</to></li>
+      <li><from>MUGB_GoblinKind_MedievalRanged</from><to>MUGB_GoblinKind_EliteMarksman</to></li>
+      <li><from>MUGB_GoblinKind_MedievalSpear</from><to>MUGB_GoblinKind_EliteSpear</to></li>
+    </upgradePairs>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_MedievalAssault</defName>
+    <label>medieval assault squad</label>
+    <weight>15</weight>
+    <sizeRange>3~6</sizeRange>
+    <minBudget>180</minBudget>
+    <allowedFactions>
+      <li>MUGB_GoblinCivilMedieval</li>
+      <li>MUGB_GoblinSavageMedieval</li>
+    </allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_SquadLeaderEarlyMelee</kind><weight>3</weight><budgetThreshold>0</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_HobSquadLeaderEarlyMelee</kind><weight>7</weight><budgetThreshold>0</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_SquadLeaderLateMelee</kind><weight>7</weight><budgetThreshold>300</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_ThinSquadLeaderLateMelee</kind><weight>3</weight><budgetThreshold>300</budgetThreshold></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_MedievalLowSoldier</kind><weight>18</weight></li>
+      <li><kind>MUGB_GoblinKind_MedievalFootman</kind><weight>3</weight><maxCount>2</maxCount></li>
+      <li><kind>MUGB_GoblinKind_MedievalHighSoldier</kind><weight>12</weight></li>
+      <li><kind>MUGB_GoblinKind_MedievalAdvancedFootman</kind><weight>3</weight><maxCount>2</maxCount><budgetThreshold>300</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_ShockElite</kind><weight>3</weight><maxCount>2</maxCount></li>
+      <li><kind>MUGB_GoblinKind_MedievalCaptor</kind><weight>2</weight><maxCount>1</maxCount></li>
+    </memberOptions>
+    <upgradePairs>
+      <li><from>MUGB_GoblinKind_MedievalLowSoldier</from><to>MUGB_GoblinKind_MedievalHighSoldier</to></li>
+      <li><from>MUGB_GoblinKind_MedievalHighSoldier</from><to>MUGB_GoblinKind_ShockElite</to></li>
+    </upgradePairs>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_MedievalHeavyInfantry</defName>
+    <label>heavy infantry squad</label>
+    <weight>12</weight>
+    <selectionWeightFactorByRaidPoints>
+      <points><li>(0, 0.50)</li><li>(600, 0.70)</li><li>(1000, 0.90)</li><li>(1500, 1.10)</li><li>(2500, 1.40)</li><li>(4000, 1.65)</li><li>(6000, 1.80)</li></points>
+    </selectionWeightFactorByRaidPoints>
+    <sizeRange>3~5</sizeRange>
+    <minBudget>260</minBudget>
+    <allowedFactions>
+      <li>MUGB_GoblinCivilMedieval</li>
+      <li>MUGB_GoblinSavageMedieval</li>
+    </allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_SquadLeaderLateMelee</kind><weight>7</weight><budgetThreshold>0</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_ThinSquadLeaderLateMelee</kind><weight>3</weight><budgetThreshold>0</budgetThreshold></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_MedievalHighSoldier</kind><weight>18</weight></li>
+      <li><kind>MUGB_GoblinKind_ShockElite</kind><weight>5</weight><maxCount>2</maxCount></li>
+      <li><kind>MUGB_GoblinKind_HeavyBomber</kind><weight>1</weight><maxCount>1</maxCount><budgetThreshold>650</budgetThreshold></li>
+    </memberOptions>
+    <upgradePairs>
+      <li><from>MUGB_GoblinKind_MedievalHighSoldier</from><to>MUGB_GoblinKind_ShockElite</to></li>
+    </upgradePairs>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_MedievalSpears</defName>
+    <label>spear squad</label>
+    <weight>10</weight>
+    <sizeRange>3~6</sizeRange>
+    <minBudget>180</minBudget>
+    <allowedFactions>
+      <li>MUGB_GoblinCivilMedieval</li>
+      <li>MUGB_GoblinSavageMedieval</li>
+    </allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_SquadLeaderEarlyMelee</kind><weight>3</weight><budgetThreshold>0</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_HobSquadLeaderEarlyMelee</kind><weight>7</weight><budgetThreshold>0</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_SquadLeaderLateMelee</kind><weight>7</weight><budgetThreshold>300</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_ThinSquadLeaderLateMelee</kind><weight>3</weight><budgetThreshold>300</budgetThreshold></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_MedievalSpear</kind><weight>20</weight></li>
+      <li><kind>MUGB_GoblinKind_EliteSpear</kind><weight>3</weight><maxCount>2</maxCount></li>
+      <li><kind>MUGB_GoblinKind_MedievalLowSoldier</kind><weight>5</weight></li>
+    </memberOptions>
+    <upgradePairs>
+      <li><from>MUGB_GoblinKind_MedievalSpear</from><to>MUGB_GoblinKind_EliteSpear</to></li>
+    </upgradePairs>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_MedievalCrossbows</defName>
+    <label>crossbow squad</label>
+    <weight>10</weight>
+    <selectionWeightFactorByRaidPoints>
+      <points><li>(0, 1.15)</li><li>(600, 1.10)</li><li>(1000, 1.0)</li><li>(1500, 0.95)</li><li>(2500, 0.85)</li><li>(4000, 0.75)</li><li>(6000, 0.70)</li></points>
+    </selectionWeightFactorByRaidPoints>
+    <sizeRange>3~6</sizeRange>
+    <minBudget>180</minBudget>
+    <allowedFactions>
+      <li>MUGB_GoblinCivilMedieval</li>
+      <li>MUGB_GoblinSavageMedieval</li>
+    </allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_SquadLeaderEarlyRanged</kind><weight>3</weight><budgetThreshold>0</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_HobSquadLeaderEarlyRanged</kind><weight>7</weight><budgetThreshold>0</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_SquadLeaderLateRangedBolt</kind><weight>7</weight><budgetThreshold>300</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_ThinSquadLeaderLateRangedBolt</kind><weight>3</weight><budgetThreshold>300</budgetThreshold></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_MedievalRanged</kind><weight>20</weight></li>
+      <li><kind>MUGB_GoblinKind_EliteMarksman</kind><weight>3</weight><maxCount>2</maxCount></li>
+      <li><kind>MUGB_GoblinKind_MedievalArcher</kind><weight>3</weight><maxCount>2</maxCount></li>
+      <li><kind>MUGB_GoblinKind_MedievalSpear</kind><weight>5</weight></li>
+    </memberOptions>
+    <upgradePairs>
+      <li><from>MUGB_GoblinKind_MedievalRanged</from><to>MUGB_GoblinKind_EliteMarksman</to></li>
+    </upgradePairs>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_MedievalGunners</defName>
+    <label>gunner squad</label>
+    <weight>20</weight>
+    <selectionWeightFactorByRaidPoints>
+      <points><li>(0, 0.65)</li><li>(600, 0.85)</li><li>(1000, 1.0)</li><li>(1500, 1.15)</li><li>(2500, 1.40)</li><li>(4000, 1.60)</li><li>(6000, 1.75)</li></points>
+    </selectionWeightFactorByRaidPoints>
+    <sizeRange>3~5</sizeRange>
+    <minBudget>180</minBudget>
+    <allowedFactions>
+      <li>MUGB_GoblinCivilMedieval</li>
+      <li>MUGB_GoblinSavageMedieval</li>
+    </allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_SquadLeaderLateGunpowder</kind><weight>7</weight><budgetThreshold>0</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_ThinSquadLeaderLateGunpowder</kind><weight>3</weight><budgetThreshold>0</budgetThreshold></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_MedievalGunner</kind><weight>20</weight></li>
+      <li><kind>MUGB_GoblinKind_Handcannoneer</kind><weight>2</weight><maxCount>1</maxCount></li>
+      <li><kind>MUGB_GoblinKind_MedievalLowSoldier</kind><weight>5</weight></li>
+    </memberOptions>
+    <upgradePairs>
+      <li><from>MUGB_GoblinKind_MedievalGunner</from><to>MUGB_GoblinKind_Handcannoneer</to></li>
+    </upgradePairs>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_MedievalRangedLine</defName>
+    <label>medieval ranged squad</label>
+    <weight>12</weight>
+    <sizeRange>3~6</sizeRange>
+    <minBudget>200</minBudget>
+    <allowedFactions>
+      <li>MUGB_GoblinCivilMedieval</li>
+      <li>MUGB_GoblinSavageMedieval</li>
+    </allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_MedievalRangedLeader</kind><weight>7</weight><budgetThreshold>0</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_ThinMedievalRangedLeader</kind><weight>3</weight><budgetThreshold>0</budgetThreshold></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_MedievalRangedLine</kind><weight>20</weight></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_MedievalCaptors</defName>
+    <label>medieval captor squad</label>
+    <weight>4</weight>
+    <maxSquadsPerRaid>1</maxSquadsPerRaid>
+    <sizeRange>4~5</sizeRange>
+    <minBudget>200</minBudget>
+    <allowedFactions>
+      <li>MUGB_GoblinCivilMedieval</li>
+      <li>MUGB_GoblinSavageMedieval</li>
+    </allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_MedievalCaptorLeader</kind><budgetThreshold>0</budgetThreshold></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_MedievalCaptor</kind><weight>6</weight><maxCount>1</maxCount></li>
+      <li><kind>MUGB_GoblinKind_MedievalLowSoldier</kind><weight>18</weight><maxCount>3</maxCount></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_SavageTunnelScreen</defName>
+    <label>tunnel slave screen</label>
+    <weight>10</weight>
+    <sizeRange>4~6</sizeRange>
+    <minBudget>150</minBudget>
+    <maxNonFighterRatio>0.5</maxNonFighterRatio>
+    <allowedFactions>
+      <li>MUGB_GoblinSavageMedieval</li>
+    </allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_SquadLeaderLateMelee</kind><weight>7</weight><budgetThreshold>0</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_ThinSquadLeaderLateMelee</kind><weight>3</weight><budgetThreshold>0</budgetThreshold></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_TunnelSlave</kind><weight>12</weight></li>
+      <li><kind>MUGB_GoblinKind_TunnelVanguard</kind><weight>10</weight><maxCount>3</maxCount></li>
+      <li><kind>MUGB_GoblinKind_SlaveBomber</kind><weight>1</weight><maxCount>1</maxCount><budgetThreshold>450</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_Slave</kind><weight>4</weight><maxCount>2</maxCount></li>
+      <li><kind>MUGB_GoblinKind_MedievalCaptor</kind><weight>3</weight><maxCount>1</maxCount></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_CultistMixed</defName>
+    <label>cultist squad</label>
+    <weight>40</weight>
+    <sizeRange>3~6</sizeRange>
+    <minBudget>200</minBudget>
+    <allowedFactions>
+      <li>MUGB_GoblinCultists</li>
+    </allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_CultistSquadLeader</kind><budgetThreshold>0</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_CultistSquadLeader</kind><budgetThreshold>650</budgetThreshold><weight>7</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistShaman</kind><budgetThreshold>650</budgetThreshold><weight>2</weight></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_CultistLowSoldier</kind><weight>16</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistHighSoldier</kind><weight>10</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistSpear</kind><weight>10</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistRanged</kind><weight>7</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistGunner</kind><weight>5</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistBomber</kind><weight>0.25</weight><maxCount>1</maxCount><budgetThreshold>550</budgetThreshold></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_CultistBombers</defName>
+    <label>cultist bomber squad</label>
+    <weight>4</weight>
+    <sizeRange>3~6</sizeRange>
+    <minBudget>550</minBudget>
+    <allowedFactions>
+      <li>MUGB_GoblinCultists</li>
+    </allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_CultistSquadLeader</kind><budgetThreshold>0</budgetThreshold></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_CultistShock</kind><weight>12</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistBomber</kind><weight>3</weight><maxCount>2</maxCount></li>
+      <li><kind>MUGB_GoblinKind_CultistBomberNaked</kind><weight>2</weight><maxCount>2</maxCount></li>
+      <li><kind>MUGB_GoblinKind_SlaveBomber</kind><weight>2</weight><maxCount>2</maxCount></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_CultistRitual</defName>
+    <label>cultist ritual squad</label>
+    <weight>10</weight>
+    <sizeRange>3~5</sizeRange>
+    <minBudget>220</minBudget>
+    <allowedFactions>
+      <li>MUGB_GoblinCultists</li>
+    </allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_CultistSquadLeader</kind><budgetThreshold>0</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_CultistSquadLeader</kind><budgetThreshold>550</budgetThreshold><weight>5</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistShaman</kind><budgetThreshold>550</budgetThreshold><weight>3</weight></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_CultistCaptor</kind><weight>12</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistSpear</kind><weight>6</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistLowSoldier</kind><weight>6</weight></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_CultistCaptors</defName>
+    <label>cultist captor squad</label>
+    <weight>9</weight>
+    <maxSquadsPerRaid>1</maxSquadsPerRaid>
+    <sizeRange>4~5</sizeRange>
+    <minBudget>200</minBudget>
+    <allowedFactions><li>MUGB_GoblinCultists</li></allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_CultistCaptorLeader</kind><budgetThreshold>0</budgetThreshold></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_CultistCaptor</kind><weight>6</weight><maxCount>1</maxCount></li>
+      <li><kind>MUGB_GoblinKind_CultistLowSoldier</kind><weight>18</weight><maxCount>3</maxCount></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_CultistGunners</defName>
+    <label>cultist gunner squad</label>
+    <weight>8</weight>
+    <sizeRange>3~5</sizeRange>
+    <minBudget>240</minBudget>
+    <allowedFactions>
+      <li>MUGB_GoblinCultists</li>
+    </allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_CultistSquadLeader</kind><budgetThreshold>0</budgetThreshold></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_CultistGunner</kind><weight>14</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistRanged</kind><weight>8</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistHandcannoneer</kind><weight>3</weight><maxCount>2</maxCount></li>
+      <li><kind>MUGB_GoblinKind_CultistHighSoldier</kind><weight>5</weight></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <!-- Korean source intent: 공병 전략은 일반 습격보다 수가 적고 장비가 좋다. 비공병 분대도 전용 호위 편성을 쓴다. -->
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_PrimitiveSapperEscort</defName>
+    <label>primitive sapper escort</label>
+    <weight>10</weight>
+    <sizeRange>3~5</sizeRange>
+    <minBudget>200</minBudget>
+    <lordJobKind>SapperEscort</lordJobKind>
+    <allowedRaidStrategies><li>MUGB_GoblinSapperRaid</li></allowedRaidStrategies>
+    <allowedArrivalModes><li>EdgeWalkIn</li></allowedArrivalModes>
+    <allowedFactions><li>MUGB_GoblinTribe</li><li>MUGB_GoblinCivilTribe</li></allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_PrimitiveChiefMelee</kind><weight>4</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveChiefRanged</kind><weight>1</weight></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_PrimitiveShock</kind><weight>10</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveSpear</kind><weight>8</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveRanged</kind><weight>6</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveMelee</kind><weight>4</weight></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_MedievalSapperEscort</defName>
+    <label>medieval sapper escort</label>
+    <weight>10</weight>
+    <sizeRange>3~5</sizeRange>
+    <minBudget>240</minBudget>
+    <lordJobKind>SapperEscort</lordJobKind>
+    <allowedRaidStrategies><li>MUGB_GoblinSapperRaid</li></allowedRaidStrategies>
+    <allowedArrivalModes><li>EdgeWalkIn</li></allowedArrivalModes>
+    <allowedFactions><li>MUGB_GoblinCivilMedieval</li><li>MUGB_GoblinSavageMedieval</li></allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_SquadLeaderEarlyMelee</kind><weight>3</weight><budgetThreshold>0</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_HobSquadLeaderEarlyMelee</kind><weight>7</weight><budgetThreshold>0</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_SquadLeaderLateMelee</kind><weight>7</weight><budgetThreshold>300</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_ThinSquadLeaderLateMelee</kind><weight>3</weight><budgetThreshold>300</budgetThreshold></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_MedievalHighSoldier</kind><weight>10</weight></li>
+      <li><kind>MUGB_GoblinKind_ShockElite</kind><weight>4</weight></li>
+      <li><kind>MUGB_GoblinKind_EliteSpear</kind><weight>6</weight></li>
+      <li><kind>MUGB_GoblinKind_EliteMarksman</kind><weight>4</weight></li>
+      <li><kind>MUGB_GoblinKind_MedievalGunner</kind><weight>9</weight></li>
+      <li><kind>MUGB_GoblinKind_Handcannoneer</kind><weight>2</weight><maxCount>1</maxCount><budgetThreshold>420</budgetThreshold></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_CultistSapperEscort</defName>
+    <label>cultist sapper escort</label>
+    <weight>10</weight>
+    <sizeRange>3~5</sizeRange>
+    <minBudget>250</minBudget>
+    <lordJobKind>SapperEscort</lordJobKind>
+    <allowedRaidStrategies><li>MUGB_GoblinSapperRaid</li></allowedRaidStrategies>
+    <allowedArrivalModes><li>EdgeWalkIn</li></allowedArrivalModes>
+    <allowedFactions><li>MUGB_GoblinCultists</li></allowedFactions>
+    <leaderOptions><li><kind>MUGB_GoblinKind_CultistSquadLeader</kind><weight>5</weight></li></leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_CultistHighSoldier</kind><weight>10</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistShock</kind><weight>5</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistSpear</kind><weight>7</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistGunner</kind><weight>9</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistRanged</kind><weight>5</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistHandcannoneer</kind><weight>2</weight><maxCount>1</maxCount><budgetThreshold>420</budgetThreshold></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <!-- Only the selected breaching squads receive an actual sapper PawnKind. -->
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_PrimitiveSappers</defName>
+    <label>primitive sapper squad</label>
+    <weight>10</weight>
+    <sizeRange>3~5</sizeRange>
+    <minBudget>160</minBudget>
+    <lordJobKind>Sapper</lordJobKind>
+    <sapperSquad>true</sapperSquad>
+    <sapperKind>MUGB_GoblinKind_Sapper</sapperKind>
+    <allowedRaidStrategies><li>MUGB_GoblinSapperRaid</li></allowedRaidStrategies>
+    <allowedArrivalModes><li>EdgeWalkIn</li></allowedArrivalModes>
+    <allowedFactions>
+      <li>MUGB_GoblinTribe</li>
+      <li>MUGB_GoblinCivilTribe</li>
+    </allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_PrimitiveChiefMelee</kind><weight>4</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveChiefRanged</kind><weight>1</weight></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_PrimitiveShock</kind><weight>10</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveSpear</kind><weight>8</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveRanged</kind><weight>6</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveMelee</kind><weight>4</weight></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_MedievalSappers</defName>
+    <label>medieval sapper squad</label>
+    <weight>10</weight>
+    <sizeRange>3~5</sizeRange>
+    <minBudget>180</minBudget>
+    <lordJobKind>Sapper</lordJobKind>
+    <sapperSquad>true</sapperSquad>
+    <sapperKind>MUGB_GoblinKind_Sapper</sapperKind>
+    <allowedRaidStrategies><li>MUGB_GoblinSapperRaid</li></allowedRaidStrategies>
+    <allowedArrivalModes><li>EdgeWalkIn</li></allowedArrivalModes>
+    <allowedFactions>
+      <li>MUGB_GoblinCivilMedieval</li>
+      <li>MUGB_GoblinSavageMedieval</li>
+    </allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_SquadLeaderEarlyMelee</kind><weight>3</weight><budgetThreshold>0</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_HobSquadLeaderEarlyMelee</kind><weight>7</weight><budgetThreshold>0</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_SquadLeaderLateMelee</kind><weight>7</weight><budgetThreshold>300</budgetThreshold></li>
+      <li><kind>MUGB_GoblinKind_ThinSquadLeaderLateMelee</kind><weight>3</weight><budgetThreshold>300</budgetThreshold></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_MedievalHighSoldier</kind><weight>10</weight></li>
+      <li><kind>MUGB_GoblinKind_ShockElite</kind><weight>4</weight></li>
+      <li><kind>MUGB_GoblinKind_EliteSpear</kind><weight>6</weight></li>
+      <li><kind>MUGB_GoblinKind_EliteMarksman</kind><weight>4</weight></li>
+      <li><kind>MUGB_GoblinKind_MedievalGunner</kind><weight>9</weight></li>
+      <li><kind>MUGB_GoblinKind_Handcannoneer</kind><weight>2</weight><maxCount>1</maxCount><budgetThreshold>420</budgetThreshold></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_CultistSappers</defName>
+    <label>cultist sapper squad</label>
+    <weight>10</weight>
+    <sizeRange>3~5</sizeRange>
+    <minBudget>200</minBudget>
+    <lordJobKind>Sapper</lordJobKind>
+    <sapperSquad>true</sapperSquad>
+    <sapperKind>MUGB_GoblinKind_Sapper</sapperKind>
+    <allowedRaidStrategies><li>MUGB_GoblinSapperRaid</li></allowedRaidStrategies>
+    <allowedArrivalModes><li>EdgeWalkIn</li></allowedArrivalModes>
+    <allowedFactions><li>MUGB_GoblinCultists</li></allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_CultistSquadLeader</kind><weight>5</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistShaman</kind><weight>1</weight><budgetThreshold>550</budgetThreshold></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_CultistHighSoldier</kind><weight>10</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistShock</kind><weight>5</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistSpear</kind><weight>7</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistGunner</kind><weight>9</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistRanged</kind><weight>5</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistHandcannoneer</kind><weight>2</weight><maxCount>1</maxCount><budgetThreshold>420</budgetThreshold></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <!-- Dedicated suicide-sapper raid cores. One bomber at a time receives vanilla sapper duty. -->
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_PrimitiveSlaveSuicideSappers</defName>
+    <label>slave boomstick sapper squad</label>
+    <weight>10</weight><sizeRange>3~5</sizeRange><minBudget>260</minBudget>
+    <lordJobKind>SuicideSapper</lordJobKind><sapperSquad>true</sapperSquad>
+    <sapperKind>MUGB_GoblinKind_SlaveBoomstickSapper</sapperKind>
+    <allowedRaidStrategies><li>MUGB_GoblinSuicideSapperRaid</li></allowedRaidStrategies>
+    <allowedArrivalModes><li>EdgeWalkIn</li></allowedArrivalModes>
+    <allowedFactions><li>MUGB_GoblinTribe</li><li>MUGB_GoblinCivilTribe</li></allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_PrimitiveChiefMelee</kind><weight>4</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveChiefRanged</kind><weight>1</weight></li>
+    </leaderOptions>
+    <memberOptions><li><kind>MUGB_GoblinKind_SlaveBoomstickSapper</kind><weight>1</weight></li></memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_MedievalSlaveSuicideSappers</defName>
+    <label>medieval slave boomstick sapper squad</label>
+    <weight>6</weight><sizeRange>3~5</sizeRange><minBudget>260</minBudget>
+    <lordJobKind>SuicideSapper</lordJobKind><sapperSquad>true</sapperSquad>
+    <sapperKind>MUGB_GoblinKind_SlaveBoomstickSapper</sapperKind>
+    <allowedRaidStrategies><li>MUGB_GoblinSuicideSapperRaid</li></allowedRaidStrategies>
+    <allowedArrivalModes><li>EdgeWalkIn</li></allowedArrivalModes>
+    <allowedFactions><li>MUGB_GoblinCivilMedieval</li><li>MUGB_GoblinSavageMedieval</li></allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_SquadLeaderLateMelee</kind><weight>7</weight></li>
+      <li><kind>MUGB_GoblinKind_ThinSquadLeaderLateMelee</kind><weight>3</weight></li>
+    </leaderOptions>
+    <memberOptions><li><kind>MUGB_GoblinKind_SlaveBoomstickSapper</kind><weight>1</weight></li></memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_MedievalBoomstickSappers</defName>
+    <label>boomstick shock sapper squad</label>
+    <weight>4</weight><sizeRange>3~5</sizeRange><minBudget>300</minBudget>
+    <lordJobKind>SuicideSapper</lordJobKind><sapperSquad>true</sapperSquad>
+    <sapperKind>MUGB_GoblinKind_BoomstickShockEliteSapper</sapperKind>
+    <allowedRaidStrategies><li>MUGB_GoblinSuicideSapperRaid</li></allowedRaidStrategies>
+    <allowedArrivalModes><li>EdgeWalkIn</li></allowedArrivalModes>
+    <allowedFactions><li>MUGB_GoblinCivilMedieval</li><li>MUGB_GoblinSavageMedieval</li></allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_SquadLeaderLateMelee</kind><weight>7</weight></li>
+      <li><kind>MUGB_GoblinKind_ThinSquadLeaderLateMelee</kind><weight>3</weight></li>
+    </leaderOptions>
+    <memberOptions><li><kind>MUGB_GoblinKind_BoomstickShockEliteSapper</kind><weight>1</weight></li></memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_CultistBoomstickSappers</defName>
+    <label>cultist boomstick shock sapper squad</label>
+    <weight>10</weight><sizeRange>3~5</sizeRange><minBudget>300</minBudget>
+    <lordJobKind>SuicideSapper</lordJobKind><sapperSquad>true</sapperSquad>
+    <sapperKind>MUGB_GoblinKind_BoomstickShockEliteSapper</sapperKind>
+    <allowedRaidStrategies><li>MUGB_GoblinSuicideSapperRaid</li></allowedRaidStrategies>
+    <allowedArrivalModes><li>EdgeWalkIn</li></allowedArrivalModes>
+    <allowedFactions><li>MUGB_GoblinCultists</li></allowedFactions>
+    <leaderOptions><li><kind>MUGB_GoblinKind_CultistSquadLeader</kind><weight>1</weight></li></leaderOptions>
+    <memberOptions><li><kind>MUGB_GoblinKind_BoomstickShockEliteSapper</kind><weight>1</weight></li></memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_PrimitiveSuicideEscort</defName>
+    <label>suicide sapper primitive escort</label>
+    <weight>10</weight><sizeRange>3~6</sizeRange><minBudget>180</minBudget>
+    <lordJobKind>SuicideEscort</lordJobKind>
+    <allowedRaidStrategies><li>MUGB_GoblinSuicideSapperRaid</li></allowedRaidStrategies>
+    <allowedArrivalModes><li>EdgeWalkIn</li></allowedArrivalModes>
+    <allowedFactions><li>MUGB_GoblinTribe</li><li>MUGB_GoblinCivilTribe</li></allowedFactions>
+    <leaderOptions><li><kind>MUGB_GoblinKind_PrimitiveChiefMelee</kind><weight>1</weight></li></leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_PrimitiveShock</kind><weight>10</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveSpear</kind><weight>8</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveRanged</kind><weight>5</weight></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_MedievalSuicideEscort</defName>
+    <label>suicide sapper medieval escort</label>
+    <weight>10</weight><sizeRange>3~6</sizeRange><minBudget>220</minBudget>
+    <lordJobKind>SuicideEscort</lordJobKind>
+    <allowedRaidStrategies><li>MUGB_GoblinSuicideSapperRaid</li></allowedRaidStrategies>
+    <allowedArrivalModes><li>EdgeWalkIn</li></allowedArrivalModes>
+    <allowedFactions><li>MUGB_GoblinCivilMedieval</li><li>MUGB_GoblinSavageMedieval</li></allowedFactions>
+    <leaderOptions>
+      <li><kind>MUGB_GoblinKind_SquadLeaderLateMelee</kind><weight>7</weight></li>
+      <li><kind>MUGB_GoblinKind_ThinSquadLeaderLateMelee</kind><weight>3</weight></li>
+    </leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_MedievalHighSoldier</kind><weight>12</weight></li>
+      <li><kind>MUGB_GoblinKind_ShockElite</kind><weight>6</weight><maxCount>2</maxCount></li>
+      <li><kind>MUGB_GoblinKind_EliteSpear</kind><weight>7</weight></li>
+      <li><kind>MUGB_GoblinKind_MedievalGunner</kind><weight>10</weight></li>
+      <li><kind>MUGB_GoblinKind_Handcannoneer</kind><weight>2</weight><maxCount>1</maxCount></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_CultistSuicideEscort</defName>
+    <label>suicide sapper cultist escort</label>
+    <weight>10</weight><sizeRange>3~6</sizeRange><minBudget>230</minBudget>
+    <lordJobKind>SuicideEscort</lordJobKind>
+    <allowedRaidStrategies><li>MUGB_GoblinSuicideSapperRaid</li></allowedRaidStrategies>
+    <allowedArrivalModes><li>EdgeWalkIn</li></allowedArrivalModes>
+    <allowedFactions><li>MUGB_GoblinCultists</li></allowedFactions>
+    <leaderOptions><li><kind>MUGB_GoblinKind_CultistSquadLeader</kind><weight>1</weight></li></leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_CultistHighSoldier</kind><weight>12</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistShock</kind><weight>6</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistSpear</kind><weight>7</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistGunner</kind><weight>10</weight></li>
+      <li><kind>MUGB_GoblinKind_CultistHandcannoneer</kind><weight>2</weight><maxCount>1</maxCount></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <!-- Used only when the storyteller generated fewer than 200 caravan threat points. -->
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_CaravanAmbushWeakPrimitive</defName>
+    <label>desperate primitive ambushers</label>
+    <weight>10</weight>
+    <sizeRange>3~4</sizeRange>
+    <minBudget>120</minBudget>
+    <caravanAmbushOnly>true</caravanAmbushOnly>
+    <weakCaravanAmbush>true</weakCaravanAmbush>
+    <allowedRaidStrategies><li>ImmediateAttack</li></allowedRaidStrategies>
+    <allowedArrivalModes><li>EdgeWalkIn</li></allowedArrivalModes>
+    <allowedFactions><li>MUGB_GoblinTribe</li><li>MUGB_GoblinCivilTribe</li></allowedFactions>
+    <leaderOptions><li><kind>MUGB_GoblinKind_PrimitiveChiefMelee</kind></li></leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_PrimitiveMelee</kind><weight>4</weight></li>
+      <li><kind>MUGB_GoblinKind_PrimitiveSpear</kind><weight>2</weight></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_CaravanAmbushWeakMedieval</defName>
+    <label>desperate medieval ambushers</label>
+    <weight>10</weight>
+    <sizeRange>3~4</sizeRange>
+    <minBudget>120</minBudget>
+    <caravanAmbushOnly>true</caravanAmbushOnly>
+    <weakCaravanAmbush>true</weakCaravanAmbush>
+    <allowedRaidStrategies><li>ImmediateAttack</li></allowedRaidStrategies>
+    <allowedArrivalModes><li>EdgeWalkIn</li></allowedArrivalModes>
+    <allowedFactions><li>MUGB_GoblinCivilMedieval</li><li>MUGB_GoblinSavageMedieval</li></allowedFactions>
+    <leaderOptions><li><kind>MUGB_GoblinKind_SquadLeaderEarlyMelee</kind></li></leaderOptions>
+    <memberOptions>
+      <li><kind>MUGB_GoblinKind_MedievalLowSoldier</kind><weight>5</weight></li>
+      <li><kind>MUGB_GoblinKind_MedievalSpear</kind><weight>2</weight></li>
+    </memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+  <MUGB.Squads.MUGB_SquadTemplateDef>
+    <defName>MUGB_Squad_CaravanAmbushWeakCultist</defName>
+    <label>desperate cultist ambushers</label>
+    <weight>10</weight>
+    <sizeRange>3~4</sizeRange>
+    <minBudget>150</minBudget>
+    <caravanAmbushOnly>true</caravanAmbushOnly>
+    <weakCaravanAmbush>true</weakCaravanAmbush>
+    <allowedRaidStrategies><li>ImmediateAttack</li></allowedRaidStrategies>
+    <allowedArrivalModes><li>EdgeWalkIn</li></allowedArrivalModes>
+    <allowedFactions><li>MUGB_GoblinCultists</li></allowedFactions>
+    <leaderOptions><li><kind>MUGB_GoblinKind_CultistSquadLeader</kind></li></leaderOptions>
+    <memberOptions><li><kind>MUGB_GoblinKind_CultistLowSoldier</kind><weight>1</weight></li></memberOptions>
+  </MUGB.Squads.MUGB_SquadTemplateDef>
+
+</Defs>
