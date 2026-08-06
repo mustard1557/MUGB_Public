@@ -13,9 +13,8 @@ RimWorld installation and `HARMONY_PATH` to `0Harmony.dll` before building.
 
 ## License
 
-See `LICENSE` for the code license. Asset reuse terms should be confirmed with
-the project owner before redistribution.
+Original code and assets owned by mustard1557 are licensed under
+CC BY-NC-SA 4.0. See `LICENSE` for scope, third-party exclusions, and terms.
 
 Public-only documents can be kept in `PublicDocs`. The development-to-public
 sync does not replace that directory.
-
