@@ -1255,7 +1255,7 @@
     </weaponTags>
     <costStuffCount>55</costStuffCount>
     <statBases>
-      <WorkToMake>9500</WorkToMake>
+      <WorkToMake>10500</WorkToMake>
       <Mass>2.4</Mass>
       <AccuracyTouch>0.80</AccuracyTouch>
       <AccuracyShort>0.65</AccuracyShort>
@@ -1315,7 +1315,7 @@
       <ComponentIndustrial>2</ComponentIndustrial>
     </costList>
     <statBases>
-      <WorkToMake>11500</WorkToMake>
+      <WorkToMake>12500</WorkToMake>
       <Mass>3.6</Mass>
       <AccuracyTouch>0.73</AccuracyTouch>
       <AccuracyShort>0.87</AccuracyShort>
@@ -1429,7 +1429,7 @@
       <ComponentIndustrial>3</ComponentIndustrial>
     </costList>
     <statBases>
-      <WorkToMake>14000</WorkToMake>
+      <WorkToMake>15500</WorkToMake>
       <Mass>5.0</Mass>
       <AccuracyTouch>0.50</AccuracyTouch>
       <AccuracyShort>0.60</AccuracyShort>
