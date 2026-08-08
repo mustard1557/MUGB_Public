@@ -364,7 +364,9 @@ namespace MUGB
                 && def.IsMetal
                 && def.category == ThingCategory.Item
                 && def.thingCategories != null
-                && def.thingCategories.Contains(ThingCategoryDefOf.ResourcesRaw)
+                && def.thingCategories.Any(category =>
+                    category == ThingCategoryDefOf.ResourcesRaw
+                    || category.Parents.Contains(ThingCategoryDefOf.ResourcesRaw))
                 && def != MUGBDefOf.MUGB_CrudeGoblinAlloy
                 && def != MUGBDefOf.MUGB_GoblinAlloy
                 && def != MUGBDefOf.MUGB_FineGoblinAlloy;
