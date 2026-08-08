@@ -33,6 +33,24 @@
     </value>
   </Operation>
 
+  <!-- ===== 고블린 화약무기 재료: 바닐라 부품 -> 미디블 기본 부품 =====
+       공통 부모와 부품 수를 덮어쓰는 하위 무기를 함께 바꿉니다.
+       이 폴더는 미디블 활성 환경에서만 로드되므로 기본판은 계속 바닐라 부품을 씁니다. -->
+  <Operation Class="PatchOperationSetName">
+    <xpath>Defs/ThingDef[@Name="MUGB_GoblinGunBase"]/costList/ComponentIndustrial</xpath>
+    <name>DankPyon_ComponentBasic</name>
+  </Operation>
+
+  <Operation Class="PatchOperationSetName">
+    <xpath>Defs/ThingDef[defName="MUGB_GoblinMusket"]/costList/ComponentIndustrial</xpath>
+    <name>DankPyon_ComponentBasic</name>
+  </Operation>
+
+  <Operation Class="PatchOperationSetName">
+    <xpath>Defs/ThingDef[defName="MUGB_GoblinHandcannon"]/costList/ComponentIndustrial</xpath>
+    <name>DankPyon_ComponentBasic</name>
+  </Operation>
+
   <!-- ===== 공성 레시피 재료: 바닐라 부품 -> 미디블 기본 부품 =====
        미디블이 없으면 바닐라 부품(ComponentIndustrial)을 씁니다. -->
 
