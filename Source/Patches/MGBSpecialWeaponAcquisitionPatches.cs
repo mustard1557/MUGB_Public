@@ -10,6 +10,12 @@ namespace MUGB
     [HarmonyPatch(typeof(PreceptWorker), nameof(PreceptWorker.ThingDefsForIdeo), new System.Type[] { typeof(Ideo), typeof(FactionDef) })]
     public static class MUGB_ChildrenOfBliniaRelicChoicesPatch
     {
+        private static readonly HashSet<string> GoblinRelicDefNames = new HashSet<string>
+        {
+            "MUGB_GoblinShamanStaffRelicA",
+            "MUGB_GoblinShamanStaffRelicB"
+        };
+
         public static void Postfix(PreceptWorker __instance, Ideo ideo, ref IEnumerable<PreceptThingChance> __result)
         {
             if (!(__instance is PreceptWorker_Relic)
@@ -21,7 +27,8 @@ namespace MUGB
 
             List<PreceptThingChance> goblinRelics = __result
                 .Where(choice => choice.def?.relicChance > 0f
-                    && choice.def.weaponTags?.Contains("MUGB_GoblinWeapon") == true)
+                    && (choice.def.weaponTags?.Contains("MUGB_GoblinWeapon") == true
+                        || GoblinRelicDefNames.Contains(choice.def.defName)))
                 .ToList();
             if (goblinRelics.Count > 0)
             {
