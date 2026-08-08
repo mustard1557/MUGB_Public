@@ -87,7 +87,7 @@
   <ResearchProjectDef>
     <defName>MUGB_Research_EliteForging</defName>
     <label>elite forging</label>
-    <description>Refine superior goblin alloy and forge elite war-gear: plate armor, banner spears, reinforced shields, war banners, flails and machetes.</description>
+    <description>Refine superior goblin alloy and forge elite war-gear, including heavy iron cuirasses, assault helmets, hammer helmets, and fully enclosed bird helmets.</description>
     <baseCost>600</baseCost>
     <techLevel>Medieval</techLevel>
     <tab>MUGB_GoblinResearchTab</tab>
@@ -103,7 +103,7 @@
   <ResearchProjectDef>
     <defName>MUGB_Research_Blackpowder</defName>
     <label>goblin blackpowder</label>
-    <description>Mix volatile goblin blackpowder and fit crude firearms: arquebuses, matchlocks and handgonnes.</description>
+    <description>Goblin attempts to brew aphrodisiacs from dried urine, ground leg hair, and other ingredients accidentally produced a potent blackpowder. It is unstable, yet somehow reacts more violently than smokeless powder.</description>
     <baseCost>900</baseCost>
     <techLevel>Medieval</techLevel>
     <tab>MUGB_GoblinResearchTab</tab>

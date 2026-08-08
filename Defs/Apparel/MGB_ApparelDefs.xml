@@ -745,7 +745,7 @@
       <Mass>4.6</Mass>
       <WorkToMake>15200</WorkToMake>
       <Insulation_Cold>1</Insulation_Cold>
-      <StuffEffectMultiplierArmor>0.67</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierArmor>0.70</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.24</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.02</StuffEffectMultiplierInsulation_Heat>
     </statBases>
@@ -769,7 +769,7 @@
       </tags>
     </apparel>
       <recipeMaker>
-      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+      <researchPrerequisite>MUGB_Research_EliteForging</researchPrerequisite>
     </recipeMaker>
   </ThingDef>
 
@@ -1180,12 +1180,11 @@
   <ThingDef ParentName="MUGB_GoblinHelmetBase">
     <defName>MUGB_Apparel_BirdHelmetA</defName>
     <!--
-      다른 고블린 투구(망치/솥/스파이크/전투 투구)와 동일하게 갑주 단조 연구를 요구합니다.
-      부모 MUGB_GoblinHelmetBase에는 연구 조건이 없어서, 이 투구들만 연구 없이 바로
-      만들 수 있는 상태였습니다.
+      전면을 완전히 덮는 A형은 정예 단조 연구를 요구합니다. B형보다 보호 부위가 넓고
+      방어 성능도 높습니다.
     -->
     <recipeMaker>
-      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+      <researchPrerequisite>MUGB_Research_EliteForging</researchPrerequisite>
     </recipeMaker>
     <label>goblin bird helmet A</label>
     <description>A bird-like goblin helmet with a narrow beak-shaped face guard.</description>
@@ -1193,13 +1192,14 @@
       <texPath>Things/Headgear/Medieval/MGB_Bird/A/MGB_BirdA</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
+    <uiIconPath>Things/Headgear/Medieval/MGB_Bird/A/MGB_BirdA</uiIconPath>
     <costStuffCount>24</costStuffCount>
     <statBases>
       <MaxHitPoints>120</MaxHitPoints>
       <WorkToMake>14850</WorkToMake>
       <Mass>3.4</Mass>
       <Insulation_Cold>1</Insulation_Cold>
-      <StuffEffectMultiplierArmor>0.56</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierArmor>0.59</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.15</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.00</StuffEffectMultiplierInsulation_Heat>
     </statBases>
@@ -1230,6 +1230,7 @@
       <texPath>Things/Headgear/Medieval/MGB_Bird/B/MGB_BirdB</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
+    <uiIconPath>Things/Headgear/Medieval/MGB_Bird/B/MGB_BirdB</uiIconPath>
     <costStuffCount>26</costStuffCount>
     <statBases>
       <MaxHitPoints>115</MaxHitPoints>
@@ -1383,7 +1384,7 @@
       <WorkToMake>16200</WorkToMake>
       <Mass>4.1</Mass>
       <Insulation_Cold>1</Insulation_Cold>
-      <StuffEffectMultiplierArmor>0.62</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierArmor>0.65</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.18</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.00</StuffEffectMultiplierInsulation_Heat>
     </statBases>
@@ -1402,7 +1403,7 @@
       </tags>
     </apparel>
       <recipeMaker>
-      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+      <researchPrerequisite>MUGB_Research_EliteForging</researchPrerequisite>
     </recipeMaker>
   </ThingDef>
 
@@ -1574,7 +1575,7 @@
       <WorkToMake>15300</WorkToMake>
       <Mass>3.6</Mass>
       <Insulation_Cold>1</Insulation_Cold>
-      <StuffEffectMultiplierArmor>0.60</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierArmor>0.63</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.18</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.00</StuffEffectMultiplierInsulation_Heat>
     </statBases>
@@ -1595,7 +1596,7 @@
       </tags>
     </apparel>
       <recipeMaker>
-      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+      <researchPrerequisite>MUGB_Research_EliteForging</researchPrerequisite>
     </recipeMaker>
   </ThingDef>
 
@@ -1613,7 +1614,7 @@
       <WorkToMake>13500</WorkToMake>
       <Mass>3.2</Mass>
       <Insulation_Cold>1</Insulation_Cold>
-      <StuffEffectMultiplierArmor>0.55</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierArmor>0.58</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.15</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.00</StuffEffectMultiplierInsulation_Heat>
     </statBases>
@@ -1634,7 +1635,7 @@
       </tags>
     </apparel>
       <recipeMaker>
-      <researchPrerequisite>MUGB_Research_Armorcraft</researchPrerequisite>
+      <researchPrerequisite>MUGB_Research_EliteForging</researchPrerequisite>
     </recipeMaker>
   </ThingDef>
 

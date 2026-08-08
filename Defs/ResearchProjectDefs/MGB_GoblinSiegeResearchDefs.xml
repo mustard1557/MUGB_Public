@@ -7,7 +7,7 @@
   <ResearchProjectDef>
     <defName>MUGB_GoblinSiegecraft</defName>
     <label>goblin siegecraft</label>
-    <description>Adapt goblin blackpowder into the arts of shell lobbing, heavy bolt magazines, and ruinous battlefield improvisation.</description>
+    <description>Develop charges and shells capable of withstanding the muzzle pressure of goblin mortars, along with reinforced frames for heavy repeating crossbows.</description>
     <baseCost>1000</baseCost>
     <techLevel>Medieval</techLevel>
     <tab>MUGB_GoblinResearchTab</tab>

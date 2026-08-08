@@ -13,10 +13,10 @@
   <MUGB_Research_Armorcraft.description>고블린 합금을 두들겨 사슬갑옷, 흉갑, 비늘갑옷, 투구와 튼튼한 방패를 만듭니다.</MUGB_Research_Armorcraft.description>
 
   <MUGB_Research_EliteForging.label>정예 단조</MUGB_Research_EliteForging.label>
-  <MUGB_Research_EliteForging.description>상급 고블린 합금을 정련하고 정예 전쟁 장비를 벼립니다: 판금갑옷, 깃발창, 강화 방패와 전투깃발.</MUGB_Research_EliteForging.description>
+  <MUGB_Research_EliteForging.description>상급 고블린 합금을 정련하고 중무쇠동체갑, 돌격투구, 돌격망치투구, 새머리투구 A를 비롯한 정예 전쟁 장비를 벼립니다.</MUGB_Research_EliteForging.description>
 
   <MUGB_Research_Blackpowder.label>고블린 흑색화약</MUGB_Research_Blackpowder.label>
-  <MUGB_Research_Blackpowder.description>불안정한 고블린 흑색화약을 배합하고 조잡한 화기를 조립합니다: 아쿼버스, 화승총, 핸드곤.</MUGB_Research_Blackpowder.description>
+  <MUGB_Research_Blackpowder.description>고블린들은 최음제와 정력제를 개발하기 위해 말린 오줌과 잘게 빻은 다리털 등 여러 재료를 배합하다가 우연히 고성능 화약을 개발했다고 합니다. 불안정하지만 무연화약보다 어째서인지 더 격렬한 화학 반응을 일으킵니다.</MUGB_Research_Blackpowder.description>
 
   <MUGB_Research_AdvGunpowder.label>상급 화약술</MUGB_Research_AdvGunpowder.label>
   <MUGB_Research_AdvGunpowder.description>더 강한 장약과 더 두꺼운 총열: 고블린 핸드캐논과 상급 화약 병기를 해금합니다.</MUGB_Research_AdvGunpowder.description>
