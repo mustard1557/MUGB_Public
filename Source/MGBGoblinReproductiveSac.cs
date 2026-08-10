@@ -7,6 +7,56 @@ using Verse;
 
 namespace MUGB
 {
+    [StaticConstructorOnStartup]
+    public static class MUGB_HumanlikeSurgeryRecipeRegistrar
+    {
+        private static readonly string[] SurgeryDefNames =
+        {
+            "MUGB_ExtractBrain",
+            "MUGB_ExtractHeart",
+            "MUGB_ExtractFleshChunks",
+            "MUGB_ExtractGoblinReproductiveSac",
+            "MUGB_AdministerGoblinReproductiveSac",
+            "MUGB_ImplantGoblinEmbryo",
+            "MUGB_NosePickLobotomy"
+        };
+
+        static MUGB_HumanlikeSurgeryRecipeRegistrar()
+        {
+            LongEventHandler.ExecuteWhenFinished(Apply);
+        }
+
+        private static void Apply()
+        {
+            List<RecipeDef> surgeries = SurgeryDefNames
+                .Select(DefDatabase<RecipeDef>.GetNamedSilentFail)
+                .Where(recipe => recipe != null)
+                .ToList();
+
+            if (surgeries.Count == 0)
+            {
+                return;
+            }
+
+            foreach (ThingDef raceDef in DefDatabase<ThingDef>.AllDefsListForReading)
+            {
+                if (raceDef?.category != ThingCategory.Pawn || raceDef.race?.Humanlike != true)
+                {
+                    continue;
+                }
+
+                raceDef.recipes ??= new List<RecipeDef>();
+                foreach (RecipeDef surgery in surgeries)
+                {
+                    if (!raceDef.recipes.Contains(surgery))
+                    {
+                        raceDef.recipes.Add(surgery);
+                    }
+                }
+            }
+        }
+    }
+
     public class CompProperties_GoblinReproductiveSac : CompProperties
     {
         public CompProperties_GoblinReproductiveSac()

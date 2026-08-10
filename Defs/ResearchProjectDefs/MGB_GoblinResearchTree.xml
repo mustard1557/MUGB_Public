@@ -219,7 +219,7 @@
   <ResearchProjectDef>
     <defName>MUGB_Research_Fleshcraft</defName>
     <label>fleshcraft</label>
-    <description>Precise extraction of organs, brains and flesh — for the stewpot, the altar, and the skin-mask.</description>
+    <description>Precise extraction of organs, brains, flesh, and goblin reproductive sacs, including the preparation and implantation of goblin embryos.</description>
     <baseCost>450</baseCost>
     <techLevel>Medieval</techLevel>
     <tab>MUGB_GoblinResearchTab</tab>
