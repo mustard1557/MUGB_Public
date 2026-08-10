@@ -1,6 +1,8 @@
+using HarmonyLib;
 using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using MUGB.Patches;
 using Verse;
@@ -10,6 +12,8 @@ namespace MUGB
     [StaticConstructorOnStartup]
     public static class MUGB_HumanlikeSurgeryRecipeRegistrar
     {
+        private static readonly FieldInfo AllRecipesCachedField = AccessTools.Field(typeof(ThingDef), "allRecipesCached");
+
         private static readonly string[] SurgeryDefNames =
         {
             "MUGB_ExtractBrain",
@@ -46,11 +50,17 @@ namespace MUGB
                 }
 
                 raceDef.recipes ??= new List<RecipeDef>();
+                List<RecipeDef> cachedRecipes = AllRecipesCachedField?.GetValue(raceDef) as List<RecipeDef>;
                 foreach (RecipeDef surgery in surgeries)
                 {
                     if (!raceDef.recipes.Contains(surgery))
                     {
                         raceDef.recipes.Add(surgery);
+                    }
+
+                    if (cachedRecipes != null && !cachedRecipes.Contains(surgery))
+                    {
+                        cachedRecipes.Add(surgery);
                     }
                 }
             }
