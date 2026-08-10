@@ -25,8 +25,7 @@ namespace MUGB
                 yield break;
             }
 
-            BodyPartRecord torso = pawn.health.hediffSet.GetNotMissingParts()
-                .FirstOrDefault(part => part?.def?.defName == "Torso");
+            BodyPartRecord torso = pawn.RaceProps.body.corePart;
             if (torso != null)
             {
                 yield return torso;
@@ -86,8 +85,10 @@ namespace MUGB
 
         private static bool IsExtractableLimb(BodyPartRecord part)
         {
-            string defName = part?.def?.defName;
-            return defName == "Arm" || defName == "Leg";
+            List<BodyPartTagDef> tags = part?.def?.tags;
+            return tags != null
+                && (tags.Contains(BodyPartTagDefOf.ManipulationLimbCore)
+                    || tags.Contains(BodyPartTagDefOf.MovingLimbCore));
         }
 
         private static IEnumerable<BodyPartRecord> ChooseLimbsToRemove(List<BodyPartRecord> limbs)
