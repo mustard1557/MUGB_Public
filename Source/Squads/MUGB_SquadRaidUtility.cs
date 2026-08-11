@@ -182,6 +182,18 @@ namespace MUGB.Squads
                 return false;
             }
 
+            if (!caravanAmbush
+                && IsStandardAssaultStrategy(raidStrategy)
+                && TryMakeUnderstrengthSquadOptions(
+                    pointsTotal,
+                    normalTemplates,
+                    out options,
+                    out summary,
+                    out squadSizes))
+            {
+                return true;
+            }
+
             List<RaidAnimalOption> raidAnimals = PlanRaidAnimals(
                 raidStrategy,
                 pointsTotal,
@@ -290,6 +302,95 @@ namespace MUGB.Squads
                 Log.Message($"[MUGB] Goblin squad raid budget check: requested={pointsTotal:F0}, bought={spentTotal:F0}, squads={squads.Count}, leftover={leftover:F0}");
             }
             return true;
+        }
+
+        private static bool TryMakeUnderstrengthSquadOptions(
+            float pointsTotal,
+            List<MUGB_SquadTemplateDef> normalTemplates,
+            out List<PawnGenOptionWithXenotype> options,
+            out string summary,
+            out List<int> squadSizes)
+        {
+            options = null;
+            summary = null;
+            squadSizes = null;
+
+            PawnKindDef cheapFighter = MUGBDefOf.MUGB_GoblinBareBrawler;
+            float cheapFighterCost = CostOf(cheapFighter);
+            if (cheapFighter == null || cheapFighterCost <= 0f || normalTemplates.NullOrEmpty())
+            {
+                return false;
+            }
+
+            float normalSquadCost = normalTemplates
+                .Select(EstimateMinimumRegularSquadCost)
+                .DefaultIfEmpty(float.MaxValue)
+                .Min();
+            if (normalSquadCost == float.MaxValue || pointsTotal >= normalSquadCost)
+            {
+                return false;
+            }
+
+            int pawnCount = pointsTotal >= cheapFighterCost * 2f
+                ? 3
+                : pointsTotal >= cheapFighterCost
+                    ? 2
+                    : 1;
+            options = Enumerable.Range(0, pawnCount)
+                .Select(_ => MakeOption(cheapFighter))
+                .ToList();
+            summary = "MUGB_UnderstrengthGoblinSquad".Translate(pawnCount);
+            squadSizes = new List<int> { pawnCount };
+            return true;
+        }
+
+        private static float EstimateMinimumRegularSquadCost(MUGB_SquadTemplateDef template)
+        {
+            if (template?.leaderOptions.NullOrEmpty() != false || template.memberOptions.NullOrEmpty())
+            {
+                return float.MaxValue;
+            }
+
+            float leaderCost = template.leaderOptions
+                .Where(option => option?.kind != null)
+                .Select(option => CostOf(option.kind))
+                .DefaultIfEmpty(float.MaxValue)
+                .Min();
+            if (leaderCost == float.MaxValue)
+            {
+                return float.MaxValue;
+            }
+
+            List<float> memberCosts = new List<float>();
+            foreach (MUGB_SquadMemberOption option in template.memberOptions
+                .Where(option => option?.kind != null
+                    && option.kind.isFighter
+                    && !option.isAnimal
+                    && option.budgetThreshold <= 0f))
+            {
+                int copies = option.maxCount > 0 && option.maxCount < int.MaxValue
+                    ? Mathf.Min(2, option.maxCount)
+                    : 2;
+                for (int i = 0; i < copies; i++)
+                {
+                    memberCosts.Add(CostOf(option.kind));
+                }
+            }
+
+            if (memberCosts.Count < 2)
+            {
+                return float.MaxValue;
+            }
+            memberCosts.Sort();
+            return leaderCost + memberCosts[0] + memberCosts[1];
+        }
+
+        private static bool IsStandardAssaultStrategy(RaidStrategyDef strategy)
+        {
+            string defName = strategy?.defName;
+            return defName == "ImmediateAttack"
+                || defName == "ImmediateAttackSmart"
+                || defName == "StageThenAttack";
         }
 
         private static List<RaidAnimalOption> PlanRaidAnimals(

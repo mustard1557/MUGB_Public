@@ -89,7 +89,7 @@ namespace MUGB.Squads
                 || pawns.NullOrEmpty()
                 || !(parms.target is Map map)
                 || !MUGB_SquadRaidUtility.TryConsumeSquadLayout(parms, out List<int> squadSizes)
-                || squadSizes.Any(size => size < 3 || size > 6)
+                || squadSizes.Any(size => size < 1 || size > 6)
                 || squadSizes.Sum() != pawns.Count)
             {
                 return true;
