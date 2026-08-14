@@ -26,6 +26,7 @@ namespace MUGB
         private bool textureSkinColorsNormalized;
         private bool goblinBirthStrainsMigrated;
         private bool goblinBabyBornThoughtsMigrated;
+        private bool classicIdeologyContaminationRepairedV2;
 
         public MGBLegacyPawnRepairComponent(Game game)
         {
@@ -38,6 +39,7 @@ namespace MUGB
             Scribe_Values.Look(ref textureSkinColorsNormalized, "MUGB_textureSkinColorsNormalized", false);
             Scribe_Values.Look(ref goblinBirthStrainsMigrated, "MUGB_goblinBirthStrainsMigrated", false);
             Scribe_Values.Look(ref goblinBabyBornThoughtsMigrated, "MUGB_goblinBabyBornThoughtsMigrated", false);
+            Scribe_Values.Look(ref classicIdeologyContaminationRepairedV2, "MUGB_classicIdeologyContaminationRepairedV2", false);
         }
 
         public override void LoadedGame()
@@ -47,6 +49,7 @@ namespace MUGB
             TryNormalizeTextureSkinColors();
             TryMigrateGoblinBirthStrains();
             TryMigrateGoblinBabyBornThoughts();
+            TryRepairClassicIdeologyContamination();
         }
 
         public override void StartedNewGame()
@@ -57,6 +60,7 @@ namespace MUGB
             textureSkinColorsNormalized = true;
             goblinBirthStrainsMigrated = true;
             goblinBabyBornThoughtsMigrated = true;
+            classicIdeologyContaminationRepairedV2 = true;
         }
 
         private void TryRepairDuplicateBodyPlanGenes()
@@ -258,6 +262,33 @@ namespace MUGB
             catch (Exception e)
             {
                 Log.Warning("[MUGB] Could not migrate legacy goblin baby-birth thoughts: " + e);
+            }
+        }
+
+        private void TryRepairClassicIdeologyContamination()
+        {
+            if (classicIdeologyContaminationRepairedV2)
+            {
+                return;
+            }
+
+            try
+            {
+                if (!MGBFactionInjectionComponent.TryRepairClassicIdeologyContamination(out int repairedElements))
+                {
+                    return;
+                }
+
+                classicIdeologyContaminationRepairedV2 = true;
+                if (repairedElements > 0)
+                {
+                    Log.Message($"[MUGB] Repaired {repairedElements} goblin ideology element(s) on the shared classic ideoligion.");
+                }
+            }
+            catch (Exception e)
+            {
+                // Keep the flag unset so a transient load-order failure can be retried on the next load.
+                Log.Warning("[MUGB] Could not repair the shared classic ideoligion: " + e);
             }
         }
     }

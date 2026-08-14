@@ -14,11 +14,21 @@ namespace MUGB.Patches
                 return;
             }
 
+            if (GoblinUtility.IsGoblin(p))
+            {
+                __result = ThoughtState.Inactive;
+                return;
+            }
+
             int stage = -1;
             for (int i = 0; i < p.apparel.WornApparel.Count; i++)
             {
                 Apparel apparel = p.apparel.WornApparel[i];
-                if (apparel == null || GoblinRenderNodeUtility.IsShieldApparelDef(apparel.def))
+                if (apparel == null
+                    || GoblinRenderNodeUtility.IsShieldApparelDef(apparel.def)
+                    || !apparel.def.useHitPoints
+                    || p.apparel.IsLocked(apparel)
+                    || apparel.def.apparel?.careIfDamaged != true)
                 {
                     continue;
                 }

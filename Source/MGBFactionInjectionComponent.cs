@@ -34,6 +34,28 @@ namespace MUGB
             "밤꽃냄새나는"
         };
 
+        private static readonly string[] ForcedGoblinPreceptDefNames =
+        {
+            "Execution_DontCare",
+            "Blinding_Horrible",
+            "Corpses_DontCare",
+            "MUGB_InsectMeatEating_DontCare",
+            "MUGB_FungusEating_DontCare",
+            "Lovin_FreeApproved",
+            "SpouseCount_Male_Unlimited",
+            "SpouseCount_Female_Unlimited",
+            "MUGB_OrganEating_Preferred",
+            "MUGB_OrganEating_Important",
+            "MUGB_SlaveMarriage_Acceptable",
+            "MUGB_SlaveMarriage_Preferred",
+            "MUGB_SlaveMarriage_Important",
+            "Slavery_Acceptable",
+            "Slavery_Honorable",
+            "Cannibalism_Preferred",
+            "Cannibalism_RequiredStrong",
+            "OrganUse_Acceptable"
+        };
+
         private static readonly string[] KoreanPrimitiveSuffixes =
         {
             "무리", "떼", "소굴", "굴", "족", "일족", "소부락", "둥지", "사랑단"
@@ -577,7 +599,12 @@ namespace MUGB
 
         private static void EnsureGoblinIdeology(Faction faction)
         {
-            if (!ModsConfig.IdeologyActive || faction?.def == null || faction.def == MUGBDefOf.MUGB_GoblinHunters)
+            // Classic mode deliberately shares the player's Astropolitan ideoligion with every faction.
+            // Treating that shared object as a goblin-faction ideology contaminates every pawn's beliefs.
+            if (!ModsConfig.IdeologyActive
+                || Find.IdeoManager?.classicMode == true
+                || faction?.def == null
+                || faction.def == MUGBDefOf.MUGB_GoblinHunters)
             {
                 return;
             }
@@ -593,9 +620,15 @@ namespace MUGB
                 return;
             }
 
+            int profile = ResolveGoblinIdeologyProfile(faction, ideo);
+            if (profile < 0)
+            {
+                return;
+            }
+
             EnsureCommonGoblinPrecepts(ideo, faction.def);
 
-            if (IsCultistGoblinFaction(faction.def))
+            if (profile == ProfileCultist)
             {
                 SetIssuePrecept(ideo, faction.def, "MUGB_OrganEating_Important");
                 SetIssuePrecept(ideo, faction.def, "MUGB_SlaveMarriage_Important");
@@ -605,7 +638,7 @@ namespace MUGB
                 return;
             }
 
-            if (IsSavageGoblinFaction(faction.def))
+            if (profile == ProfileSavage)
             {
                 SetIssuePrecept(ideo, faction.def, "MUGB_OrganEating_Important");
                 SetIssuePrecept(ideo, faction.def, "MUGB_SlaveMarriage_Preferred");
@@ -615,14 +648,159 @@ namespace MUGB
                 return;
             }
 
-            if (IsCivilGoblinFaction(faction.def))
+            SetIssuePrecept(ideo, faction.def, "MUGB_OrganEating_Preferred");
+            SetIssuePrecept(ideo, faction.def, "MUGB_SlaveMarriage_Acceptable");
+            SetIssuePrecept(ideo, faction.def, "Slavery_Acceptable");
+            SetIssuePrecept(ideo, faction.def, "Cannibalism_Preferred");
+            SetIssuePrecept(ideo, faction.def, "OrganUse_Acceptable");
+        }
+
+        // 한국어 의도: 이 이념을 실제로 어느 강도로 덮어쓸지 결정합니다.
+        // 바닐라는 조건이 맞으면 이념 하나를 여러 세력이 함께 씁니다. 고블린끼리 공유했다면
+        // 가장 과격한 쪽(광신도 > 야만 > 문명)에 맞춥니다. 문명 고블린이 야만 계율을 갖는 편이
+        // 계율이 아예 안 붙어 밋밋해지는 것보다 낫고, 최댓값이라 세력 처리 순서와도 무관합니다.
+        // 고블린이 아닌 세력이 하나라도 끼어 있으면 남의 이념이므로 건드리지 않습니다.
+        private static int ResolveGoblinIdeologyProfile(Faction owner, Ideo ideo)
+        {
+            if (owner == null || ideo == null || Find.FactionManager == null)
             {
-                SetIssuePrecept(ideo, faction.def, "MUGB_OrganEating_Preferred");
-                SetIssuePrecept(ideo, faction.def, "MUGB_SlaveMarriage_Acceptable");
-                SetIssuePrecept(ideo, faction.def, "Slavery_Acceptable");
-                SetIssuePrecept(ideo, faction.def, "Cannibalism_Preferred");
-                SetIssuePrecept(ideo, faction.def, "OrganUse_Acceptable");
+                return -1;
             }
+
+            int resolved = GoblinIdeologyProfile(owner.def);
+            if (resolved < 0)
+            {
+                return -1;
+            }
+
+            foreach (Faction sharer in Find.FactionManager.AllFactionsListForReading)
+            {
+                if (sharer?.ideos?.PrimaryIdeo != ideo)
+                {
+                    continue;
+                }
+
+                int sharerProfile = GoblinIdeologyProfile(sharer.def);
+                if (sharerProfile < 0)
+                {
+                    return -1;
+                }
+
+                if (sharerProfile > resolved)
+                {
+                    resolved = sharerProfile;
+                }
+            }
+
+            return resolved;
+        }
+
+        // 과격한 순서대로 커집니다. ResolveGoblinIdeologyProfile이 최댓값을 고르는 데 이 순서를 씁니다.
+        private const int ProfileCivil = 0;
+        private const int ProfileSavage = 1;
+        private const int ProfileCultist = 2;
+
+        private static int GoblinIdeologyProfile(FactionDef factionDef)
+        {
+            if (IsCivilGoblinFaction(factionDef))
+            {
+                return ProfileCivil;
+            }
+
+            if (IsSavageGoblinFaction(factionDef))
+            {
+                return ProfileSavage;
+            }
+
+            if (IsCultistGoblinFaction(factionDef))
+            {
+                return ProfileCultist;
+            }
+
+            return -1;
+        }
+
+        internal static bool TryRepairClassicIdeologyContamination(out int repairedElements)
+        {
+            repairedElements = 0;
+            if (!ModsConfig.IdeologyActive || Find.IdeoManager?.classicMode != true)
+            {
+                return true;
+            }
+
+            Ideo sharedIdeo = Faction.OfPlayerSilentFail?.ideos?.PrimaryIdeo;
+            if (sharedIdeo == null || Find.FactionManager == null)
+            {
+                return false;
+            }
+
+            bool sharedWithGoblinFaction = Find.FactionManager.AllFactionsListForReading.Any(faction =>
+                IsGoblinFaction(faction) && faction.ideos?.PrimaryIdeo == sharedIdeo);
+            if (!sharedWithGoblinFaction)
+            {
+                return true;
+            }
+
+            HashSet<MemeDef> contaminatedMemes = new HashSet<MemeDef>
+            {
+                MUGBDefOf.MUGB_ChildrenOfBlinia,
+                MUGBDefOf.MUGB_GoblinSupremacy,
+                DefDatabase<MemeDef>.GetNamedSilentFail("Cannibal"),
+                DefDatabase<MemeDef>.GetNamedSilentFail("Raider"),
+                DefDatabase<MemeDef>.GetNamedSilentFail("MaleSupremacy")
+            };
+            contaminatedMemes.Remove(null);
+
+            HashSet<PreceptDef> memeRequiredPrecepts = contaminatedMemes
+                .Where(meme => sharedIdeo.memes.Contains(meme) && meme.requireOne != null)
+                .SelectMany(meme => meme.requireOne)
+                .Where(group => group != null)
+                .SelectMany(group => group)
+                .Where(def => def != null && !def.classic)
+                .ToHashSet();
+            repairedElements += sharedIdeo.memes.RemoveAll(contaminatedMemes.Contains);
+
+            HashSet<PreceptDef> forcedDefs = ForcedGoblinPreceptDefNames
+                .Select(DefDatabase<PreceptDef>.GetNamedSilentFail)
+                .Where(def => def != null && !def.classic)
+                .ToHashSet();
+            forcedDefs.UnionWith(memeRequiredPrecepts);
+            List<Precept> contaminatedPrecepts = sharedIdeo.PreceptsListForReading
+                .Where(precept => precept?.def != null && forcedDefs.Contains(precept.def))
+                .ToList();
+
+            foreach (Precept contaminated in contaminatedPrecepts)
+            {
+                IssueDef issue = contaminated.def.issue;
+                sharedIdeo.RemovePrecept(contaminated, true);
+                repairedElements++;
+
+                if (issue == null || sharedIdeo.PreceptsListForReading.Any(precept => precept?.def?.issue == issue))
+                {
+                    continue;
+                }
+
+                PreceptDef classicDefault = DefDatabase<PreceptDef>.AllDefsListForReading
+                    .Where(def => def.issue == issue && def.classic)
+                    .OrderByDescending(def => def.defaultSelectionWeight)
+                    .FirstOrDefault();
+                if (classicDefault != null)
+                {
+                    sharedIdeo.AddPrecept(
+                        PreceptMaker.MakePrecept(classicDefault),
+                        true,
+                        Faction.OfPlayerSilentFail?.def,
+                        null);
+                }
+            }
+
+            if (repairedElements > 0)
+            {
+                sharedIdeo.SortMemesInDisplayOrder();
+                sharedIdeo.RecachePrecepts();
+            }
+
+            return true;
         }
 
         private static void EnsureCommonGoblinPrecepts(Ideo ideo, FactionDef factionDef)
