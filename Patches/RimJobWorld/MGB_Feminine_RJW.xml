@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>RimJobWorld</li>
+    </mods>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/TraitDef[defName="MGB_Feminine"]/degreeDatas/li/statOffsets</xpath>
+      <value>
+        <Vulnerability>0.3</Vulnerability>
+      </value>
+    </match>
+  </Operation>
+</Patch>

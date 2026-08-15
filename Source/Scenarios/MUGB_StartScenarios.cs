@@ -597,7 +597,11 @@ namespace MUGB
             }
 
             GiveVillageImprovisedWeapons();
-            LordMaker.MakeNewLord(faction, new LordJob_DefendBase(faction, rect.CenterCell, 18), map, villageResidents);
+            LordMaker.MakeNewLord(
+                faction,
+                new LordJob_DefendPoint(rect.CenterCell, wanderRadius: 12f, defendRadius: 18f),
+                map,
+                villageResidents);
         }
 
         private void GiveVillageImprovisedWeapons()

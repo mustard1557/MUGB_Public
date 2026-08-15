@@ -27,6 +27,7 @@
           <GeneralLaborSpeed>0.04</GeneralLaborSpeed>
           <PlantWorkSpeed>0.05</PlantWorkSpeed>
           <MedicalTendQuality>0.05</MedicalTendQuality>
+          <PawnBeauty>0.3</PawnBeauty>
         </statOffsets>
       </li>
     </degreeDatas>
