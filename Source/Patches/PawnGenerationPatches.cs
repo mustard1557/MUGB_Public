@@ -347,12 +347,12 @@ namespace MUGB.Patches
             }
 
             string label = GoblinUtility.IsHobgoblin(pawn) ? "홉고블린 아기" : "고블린 아기";
-            if (pawn.Name is NameTriple existing && existing.First == label)
+            if (pawn.Name is NameSingle existing && existing.Name == label)
             {
                 return;
             }
 
-            pawn.Name = new NameTriple(label, label, string.Empty);
+            pawn.Name = new NameSingle(label);
         }
 
         public static void TryApplyKoreanGoblinName(Pawn pawn, bool enforceGeneratedFormat = false)

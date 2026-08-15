@@ -343,17 +343,19 @@ namespace MUGB
                     .Where(layout => layout != null)
                     .ToList()
                 : new List<KCSGLayoutDef>();
-            if (layouts.Count == 0)
+            KCSGLayoutDef fallback = DefDatabase<KCSGLayoutDef>.GetNamedSilentFail("MUGB_StartVillageVanilla1");
+            if (layouts.Count == 0 && fallback == null)
             {
-                // 미디블이 없거나 원래 마을을 못 찾으면, 코어 물건만 쓰는 단순한 마을로 대신 세웁니다.
-                // 마을이 아예 안 생기면 이 시나리오의 도입 연출이 사라지기 때문입니다.
-                KCSGLayoutDef fallback = DefDatabase<KCSGLayoutDef>.GetNamedSilentFail("MUGB_StartVillageVanilla1");
-                if (fallback == null)
-                {
-                    Log.Error("[MUGB] Starting village could not be generated because no village layout is available.");
-                    return;
-                }
+                Log.Error("[MUGB] Starting village could not be generated because no village layout is available.");
+                return;
+            }
 
+            // Try the authored villages in random order, then the compact core-only village.
+            // This keeps unusual landforms intact while avoiding a missing village when one
+            // large layout happens not to fit on the selected starting map.
+            layouts = layouts.InRandomOrder().ToList();
+            if (fallback != null && !layouts.Contains(fallback))
+            {
                 layouts.Add(fallback);
             }
 
@@ -365,8 +367,19 @@ namespace MUGB
             }
 
             EnsureHostile(villageFaction);
-            KCSGLayoutDef layout = layouts.RandomElement();
-            if (!TryFindVillageRect(map, layout, out CellRect rect, out bool fullClean))
+            KCSGLayoutDef layout = null;
+            CellRect rect = default;
+            bool fullClean = false;
+            foreach (KCSGLayoutDef candidate in layouts)
+            {
+                if (TryFindVillageRect(map, candidate, out rect, out fullClean))
+                {
+                    layout = candidate;
+                    break;
+                }
+            }
+
+            if (layout == null)
             {
                 Log.Warning("[MUGB] No safe starting-village rectangle was found. The scenario will continue without a village.");
                 return;
