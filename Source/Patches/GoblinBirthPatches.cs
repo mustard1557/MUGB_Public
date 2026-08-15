@@ -850,11 +850,11 @@ namespace MUGB.Patches
             float value = Rand.Value;
             if (hobgoblinFather)
             {
-                if (value < 0.78f)
+                if (value < 0.795f)
                 {
                     return GoblinBirthResult.ThinGoblin;
                 }
-                if (value < 0.98f)
+                if (value < 0.995f)
                 {
                     return GoblinBirthResult.Hobgoblin;
                 }
@@ -863,7 +863,7 @@ namespace MUGB.Patches
 
             // 한국어 의도: 띤 고블린 아비에게서는 어미 종족을 따르는 아기가 나오지 않습니다.
             // 고블린 혈통이 아비 쪽이라는 설정을 띤 아비에서 확실히 하기 위해,
-            // 예전 어미종족 2%를 띤 고블린 쪽으로 넘겼습니다. 홉 아비는 그대로 2%가 남습니다.
+            // 예전 어미종족 2%를 띤 고블린 쪽으로 넘겼습니다. 홉 아비는 희귀 변이로 0.5%만 남습니다.
             if (value < 0.95f)
             {
                 return GoblinBirthResult.ThinGoblin;
