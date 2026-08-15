@@ -347,12 +347,15 @@ namespace MUGB.Patches
             }
 
             string label = GoblinUtility.IsHobgoblin(pawn) ? "홉고블린 아기" : "고블린 아기";
-            if (pawn.Name is NameSingle existing && existing.Name == label)
+            if (pawn.Name is NameTriple existing && existing.First == label && existing.IsValid)
             {
                 return;
             }
 
-            pawn.Name = new NameSingle(label);
+            string lineName = pawn.Name is NameTriple current && !current.Last.NullOrEmpty()
+                ? current.Last
+                : GenerateLineName();
+            pawn.Name = new NameTriple(label, label, lineName);
         }
 
         public static void TryApplyKoreanGoblinName(Pawn pawn, bool enforceGeneratedFormat = false)
@@ -398,7 +401,9 @@ namespace MUGB.Patches
                 // Nick을 비우면 바닐라가 First와 Last 중 하나를 해시로 골라 짧은 이름으로 쓴다.
                 // First/Nick=A+B, Last=C로 두어 맵에서는 A+B, 전체 이름에서는 A+B C가 보이게 한다.
                 string firstName = KoreanNickAdjectives.RandomElement() + " " + KoreanNickNouns.RandomElement();
-                string lineName = GenerateLineName();
+                string lineName = holdingTemporaryName && pawn.Name is NameTriple temporary && !temporary.Last.NullOrEmpty()
+                    ? temporary.Last
+                    : GenerateLineName();
                 pawn.Name = new NameTriple(firstName, firstName, lineName);
             }
             finally
