@@ -50,6 +50,7 @@ namespace MUGB.Patches
     {
         private const string BasePregnancyTypeName = "rjw.Hediff_BasePregnancy";
         private const string PregeneratedBabiesTypeName = "RJW_Menstruation.HediffComp_PregeneratedBabies";
+        private const string MultiplePregnancyTypeName = "RJW_Menstruation.Hediff_MultiplePregnancy";
 
         private static FieldInfo pregnancyFatherField;
         private static bool warnedAboutBabiesField;
@@ -60,6 +61,7 @@ namespace MUGB.Patches
             {
                 PatchRJWPregnancyInitialize(harmony);
                 PatchMenstruationExtraBaby(harmony);
+                PatchMenstruationMultiplePregnancyExtraBaby(harmony);
             }
             catch (Exception e)
             {
@@ -127,6 +129,33 @@ namespace MUGB.Patches
                 postfix: new HarmonyMethod(typeof(GoblinRJWBirthCompat), nameof(AddNewBabyPostfix)));
         }
 
+        // Menstruation의 기본 MultiplePregnancy 경로는 두 번째 이후 수정란을
+        // HediffComp가 아니라 임신 헤디프 자신의 AddNewBaby로 추가합니다.
+        // 첫 임신 목록은 Initialize postfix가 교체하지만, 이 후속 경로도 따로 잡아야
+        // 나중에 추가된 아기만 어미 종족으로 남는 일이 없습니다.
+        private static void PatchMenstruationMultiplePregnancyExtraBaby(Harmony harmony)
+        {
+            Type pregnancyType = AccessTools.TypeByName(MultiplePregnancyTypeName);
+            if (pregnancyType == null)
+            {
+                return;
+            }
+
+            MethodInfo addNewBaby = AccessTools.Method(pregnancyType, "AddNewBaby", new[] { typeof(Pawn), typeof(Pawn) });
+            if (addNewBaby == null)
+            {
+                Log.Warning(
+                    "[MUGB] RJW Menstruation is loaded but Hediff_MultiplePregnancy.AddNewBaby(mother, father) "
+                    + "was not found. Extra fertilized eggs added to a goblin pregnancy may keep the mother's race.");
+                return;
+            }
+
+            harmony.Patch(
+                addNewBaby,
+                prefix: new HarmonyMethod(typeof(GoblinRJWBirthCompat), nameof(AddNewBabyPrefix)),
+                postfix: new HarmonyMethod(typeof(GoblinRJWBirthCompat), nameof(MultiplePregnancyAddNewBabyPostfix)));
+        }
+
         // 매개변수를 하나도 받지 않고 인스턴스 필드만 읽습니다.
         // RJW가 인자 이름을 바꾸어도 이 패치는 그대로 동작합니다.
         public static void RJWPregnancyInitializePostfix(object __instance)
@@ -158,7 +187,7 @@ namespace MUGB.Patches
             }
         }
 
-        public static void AddNewBabyPrefix(HediffComp __instance, out int __state)
+        public static void AddNewBabyPrefix(object __instance, out int __state)
         {
             __state = ReadBabies(__instance)?.Count ?? 0;
         }
@@ -195,6 +224,32 @@ namespace MUGB.Patches
             catch (Exception e)
             {
                 Log.Error("[MUGB] Failed to rebuild an extra RJW Menstruation goblin baby: " + e);
+            }
+        }
+
+        public static void MultiplePregnancyAddNewBabyPostfix(object __instance, Pawn mother, Pawn father, int __state)
+        {
+            try
+            {
+                if (!ShouldRebuildLitter(mother, father))
+                {
+                    return;
+                }
+
+                List<Pawn> babies = ReadBabies(__instance);
+                if (babies == null || babies.Count <= __state)
+                {
+                    return;
+                }
+
+                if (ReplaceBabiesInPlace(babies, mother, father, plan: null, startIndex: __state))
+                {
+                    ClearEnzygoticSiblings(__instance);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error("[MUGB] Failed to rebuild an extra RJW Menstruation multiple-pregnancy goblin baby: " + e);
             }
         }
 
