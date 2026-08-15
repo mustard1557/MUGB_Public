@@ -566,7 +566,7 @@ namespace MUGB
             }
             foreach (Pawn pawn in restrainedPrisoners.Where(pawn => pawn != null && !pawn.Dead))
             {
-                if (pawn.IsPrisoner)
+                if (pawn.IsPrisoner && pawn.guest?.Released != true)
                 {
                     Building_Bed restraintBed = pawn.ownership?.OwnedBed;
                     if (restraintBed != null && IsPrisonerRestraint(restraintBed))
@@ -600,6 +600,33 @@ namespace MUGB
                 {
                     pawn.health.RemoveHediff(hediff);
                 }
+                HediffDef bondage = DefDatabase<HediffDef>.GetNamedSilentFail("DDJY_Hediff_BondageBed");
+                if (bondage != null)
+                {
+                    foreach (Hediff bondageHediff in pawn.health.hediffSet.hediffs
+                        .Where(existing => existing.def == bondage).ToList())
+                    {
+                        pawn.health.RemoveHediff(bondageHediff);
+                    }
+                }
+                if (pawn.CurJobDef == JobDefOf.LayDown)
+                {
+                    pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
+                }
+                pawn.ownership?.UnclaimBed();
+            }
+        }
+
+        public bool IsManagedPrisoner(Pawn pawn)
+        {
+            return pawn != null && restrainedPrisoners?.Contains(pawn) == true;
+        }
+
+        public void NotifyPrisonerReleased(Pawn pawn)
+        {
+            if (pawn != null)
+            {
+                restrainedPrisoners?.Remove(pawn);
             }
         }
 

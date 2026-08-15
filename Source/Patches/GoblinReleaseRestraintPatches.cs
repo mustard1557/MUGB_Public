@@ -26,12 +26,51 @@ namespace MUGB.Patches
     {
         public const int ReleaseInteractionTicks = 120;
 
+        private static readonly HashSet<string> KnownRestraintDefs = new HashSet<string>
+        {
+            "DDJY_PrisonerPole",
+            "DDJY_BindingCross",
+            "DDJY_Pillory",
+            "DDJY_BarCage",
+            "DDJY_RoundCage",
+            "DankPyon_LogColumn"
+        };
+
         public static HediffDef RestrainedDef => DefDatabase<HediffDef>.GetNamedSilentFail("MUGB_Restrained");
 
         public static bool IsRestrained(Pawn pawn)
         {
             HediffDef def = RestrainedDef;
-            return def != null && pawn?.health?.hediffSet?.HasHediff(def) == true;
+            if (def != null && pawn?.health?.hediffSet?.HasHediff(def) == true)
+            {
+                return true;
+            }
+
+            return IsManagedBasePrisoner(pawn)
+                && (HasBfRestraintHediff(pawn)
+                    || IsKnownRestraintBed(pawn?.ownership?.OwnedBed)
+                    || IsKnownRestraintBed(pawn?.CurrentBed()));
+        }
+
+        private static bool IsManagedBasePrisoner(Pawn pawn)
+        {
+            Map map = pawn?.MapHeld;
+            return map != null
+                && (map.GetComponent<MUGB_MedievalBaseManager>()?.IsManagedPrisoner(pawn) == true
+                    || map.GetComponent<MUGB_TribalBasePrisonManager>()?.IsManagedPrisoner(pawn) == true);
+        }
+
+        private static bool HasBfRestraintHediff(Pawn pawn)
+        {
+            HediffDef bondage = DefDatabase<HediffDef>.GetNamedSilentFail("DDJY_Hediff_BondageBed");
+            return bondage != null && pawn?.health?.hediffSet?.HasHediff(bondage) == true;
+        }
+
+        private static bool IsKnownRestraintBed(Building_Bed bed)
+        {
+            return bed != null
+                && (bed.GetType().FullName == "DDJY_BED.Building_BondageBed"
+                    || KnownRestraintDefs.Contains(bed.def?.defName ?? string.Empty));
         }
 
         // 풀어주는 폰이 실제로 작업을 수행할 수 있는지. 대상이 아니라 시전자 쪽 조건입니다.
@@ -72,12 +111,16 @@ namespace MUGB.Patches
         public static void ReleaseRestraint(Pawn target)
         {
             HediffDef def = RestrainedDef;
-            if (def == null || target?.health == null)
+            if (target?.health == null)
             {
                 return;
             }
 
-            foreach (Hediff hediff in target.health.hediffSet.hediffs.Where(h => h.def == def).ToList())
+            bool managedBasePrisoner = IsManagedBasePrisoner(target);
+            HediffDef bondage = DefDatabase<HediffDef>.GetNamedSilentFail("DDJY_Hediff_BondageBed");
+            foreach (Hediff hediff in target.health.hediffSet.hediffs
+                .Where(h => h.def == def || h.def == bondage)
+                .ToList())
             {
                 target.health.RemoveHediff(hediff);
             }
@@ -86,6 +129,23 @@ namespace MUGB.Patches
             if (target.CurJobDef == JobDefOf.LayDown && target.jobs != null)
             {
                 target.jobs.EndCurrentJob(JobCondition.InterruptForced);
+            }
+            target.ownership?.UnclaimBed();
+
+            if (!managedBasePrisoner)
+            {
+                return;
+            }
+
+            Map map = target.MapHeld;
+            map?.GetComponent<MUGB_MedievalBaseManager>()?.NotifyPrisonerReleased(target);
+            map?.GetComponent<MUGB_TribalBasePrisonManager>()?.NotifyPrisonerReleased(target);
+
+            // Use RimWorld's normal prisoner release flow: player pawns are restored,
+            // while non-player captives leave the map for their original faction.
+            if (target.IsPrisoner && target.guest?.HostFaction != Faction.OfPlayer)
+            {
+                GenGuest.PrisonerRelease(target);
             }
         }
     }

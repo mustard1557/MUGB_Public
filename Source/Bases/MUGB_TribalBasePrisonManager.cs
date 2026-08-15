@@ -335,7 +335,7 @@ namespace MUGB
             HediffDef restrained = DefDatabase<HediffDef>.GetNamedSilentFail("MUGB_Restrained");
             foreach (Pawn pawn in restrainedPrisoners.Where(pawn => pawn != null && !pawn.Dead))
             {
-                if (pawn.IsPrisoner && pawn.HostFaction == captorFaction)
+                if (pawn.IsPrisoner && pawn.HostFaction == captorFaction && pawn.guest?.Released != true)
                 {
                     Building_Bed bondageBed = pawn.ownership?.OwnedBed;
                     if (bondageBed != null && IsBondageBed(bondageBed))
@@ -384,6 +384,19 @@ namespace MUGB
                     pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
                 }
                 pawn.ownership?.UnclaimBed();
+            }
+        }
+
+        public bool IsManagedPrisoner(Pawn pawn)
+        {
+            return pawn != null && restrainedPrisoners?.Contains(pawn) == true;
+        }
+
+        public void NotifyPrisonerReleased(Pawn pawn)
+        {
+            if (pawn != null)
+            {
+                restrainedPrisoners?.Remove(pawn);
             }
         }
 
