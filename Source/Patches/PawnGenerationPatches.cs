@@ -2778,14 +2778,19 @@ namespace MUGB.Patches
             component.MarkTeenMatured(pawn);
             bool hobgoblin = pawn.genes?.Xenotype == MUGBDefOf.MUGB_Hobgoblin || pawn.genes?.GetGene(MUGBDefOf.MUGB_Gene_HobgoblinFrame) != null;
             SkillDef boostedSkill = BoostTeenInstinctSkill(pawn, hobgoblin);
-            List<SkillDef> passionSkills = GrantInstinctPassions(pawn, hobgoblin, hobgoblin ? 2 : 1, 0f);
+            int passionCount = hobgoblin
+                ? 1 + (Rand.Chance(0.5f) ? 1 : 0)
+                : (Rand.Chance(0.5f) ? 1 : 0);
+            List<SkillDef> passionSkills = GrantInstinctPassions(pawn, hobgoblin, passionCount, 0f);
             if (pawn.Faction == Faction.OfPlayer)
             {
                 string boostedSkillLabel = boostedSkill?.label ?? "survival";
                 string passionLabels = string.Join(", ", passionSkills.Select(skill => skill.label));
                 string text = passionSkills.Count > 1
                     ? "MUGB_TeenMaturedWithPassions".Translate(pawn.LabelShortCap, boostedSkillLabel, passionLabels)
-                    : "MUGB_TeenMaturedWithPassion".Translate(pawn.LabelShortCap, boostedSkillLabel, passionLabels);
+                    : passionSkills.Count == 1
+                    ? "MUGB_TeenMaturedWithPassion".Translate(pawn.LabelShortCap, boostedSkillLabel, passionLabels)
+                    : "MUGB_TeenMatured".Translate(pawn.LabelShortCap, boostedSkillLabel);
                 Messages.Message(text, pawn, MessageTypeDefOf.PositiveEvent, historical: false);
             }
         }
