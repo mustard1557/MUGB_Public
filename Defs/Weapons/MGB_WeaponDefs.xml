@@ -1794,7 +1794,7 @@
     <thingCategories>
       <li>MUGB_GoblinWeaponCategory</li>
     </thingCategories>
-    <label>staff of maddening rapture</label>
+    <label>goblin staff of maddening rapture</label>
     <description>A blessed goblin shaman staff. It carries the base moving low-shield, and can overload a target's mind into psychic shock — the victim's face looks blissful, though it is anything but.</description>
     <graphicData Inherit="False">
       <texPath>Things/Weapons/MGB_staff/MGB_staffRelicA</texPath>
@@ -1840,7 +1840,7 @@
     <thingCategories>
       <li>MUGB_GoblinWeaponCategory</li>
     </thingCategories>
-    <label>staff of the seething gland</label>
+    <label>goblin staff of the seething gland</label>
     <description>A blessed goblin shaman staff. It carries the base moving low-shield, can purge goblin toxic pheromones from an ally, and can violently release absorbed pheromone particles as a burst of gas and electromagnetic force.</description>
     <graphicData Inherit="False">
       <texPath>Things/Weapons/MGB_staff/MGB_staffRelicB</texPath>
