@@ -3,30 +3,30 @@
   <TipSetDef>
     <defName>MUGB_LoadingTips</defName>
     <tips>
-      <li TKey="MUGBTipSwarmPheromone">Goblins are small and fragile, but combat pheromones make a clustered force more dangerous.</li>
-      <li TKey="MUGBTipHobgoblin">Hobgoblins are rare elite fighters. Give them better equipment and command roles.</li>
-      <li TKey="MUGBTipSquadLeader">A goblin squad leader anchors the squad's morale. Eliminating one can quickly rout that squad.</li>
-      <li TKey="MUGBTipButchery">Goblins can butcher humanlike corpses for human bones and useful body parts.</li>
-      <li TKey="MUGBTipFleshCraving">Leaving flesh craving unattended harms a goblin's mood, consciousness, and movement.</li>
-      <li TKey="MUGBTipCooking">Goblin cuisine makes efficient use of organs and body parts.</li>
-      <li TKey="MUGBTipFarming">Goblins resist toxic environments, but they are poor farmers. Plan food production accordingly.</li>
-      <li TKey="MUGBTipBeacon">A goblin beacon burns goblin corpses to call the attention of other goblins.</li>
-      <li TKey="MUGBTipBeaconQuality">Beacon ritual quality affects the scale and character of the goblins that answer the signal.</li>
-      <li TKey="MUGBTipBeaconRisk">A goblin beacon may attract hostile attention as well as friendly visitors.</li>
-      <li TKey="MUGBTipSlaveMarriage">Slave marriage is a goblin group ritual that binds the master side and the slave side together.</li>
-      <li TKey="MUGBTipPheromoneAdaptation">By default, goblin slave marriage requires pheromone adaptation. This condition can be changed in mod settings.</li>
-      <li TKey="MUGBTipConcubinage">Slave marriage creates a concubine relationship separate from formal marriage.</li>
-      <li TKey="MUGBTipCentralTunnel">Central tunnel raids open clustered tunnels within one attack area.</li>
-      <li TKey="MUGBTipTunnelReinforcements">Living tunnels send reinforcements over time. Destroy them before the next wave arrives.</li>
-      <li TKey="MUGBTipLargeTunnel">Large tunnels carry more troops and reinforce for longer than normal tunnels.</li>
-      <li TKey="MUGBTipMortarSiege">Goblin mortar raids build a field position and prepare bombardment. Cutting off supply tunnels weakens a long siege.</li>
-      <li TKey="MUGBTipBoomstickSappers">Boomstick sappers use explosives to breach walls. Narrow corridors are especially dangerous.</li>
-      <li TKey="MUGBTipBaseTunnel">When defenders fall at a goblin base, defensive tunnels may activate.</li>
-      <li TKey="MUGBTipCaravanAmbush">Goblin ambushes can strike caravans on the world map. Be especially careful near hostile goblin settlements.</li>
-      <li TKey="MUGBTipSpecialWeapons">Special weapons can appear as rare squad leader loot, quest rewards, or ideology relics.</li>
-      <li TKey="MUGBTipSculptures">Goblin sculptures support Children of Blinia ideology rituals.</li>
-      <li TKey="MUGBTipGrowth">Pure goblins grow quickly. Newborn goblins become useful manpower soon after birth.</li>
-      <li TKey="MUGBTipThinAndHob">Thin goblins suit cheap labor and numbers. Hobgoblins are better suited to elite roles.</li>
+      <li TKey="MUGBTipSwarmPheromone">[MUGB] Goblins are small and fragile, but combat pheromones make a clustered force more dangerous.</li>
+      <li TKey="MUGBTipHobgoblin">[MUGB] Hobgoblins are rare elite fighters. Give them better equipment and command roles.</li>
+      <li TKey="MUGBTipSquadLeader">[MUGB] A goblin squad leader anchors the squad's morale. Eliminating one can quickly rout that squad.</li>
+      <li TKey="MUGBTipButchery">[MUGB] Goblins can butcher humanlike corpses for human bones and useful body parts.</li>
+      <li TKey="MUGBTipFleshCraving">[MUGB] Leaving flesh craving unattended harms a goblin's mood, consciousness, and movement.</li>
+      <li TKey="MUGBTipCooking">[MUGB] Goblin cuisine makes efficient use of organs and body parts.</li>
+      <li TKey="MUGBTipFarming">[MUGB] Goblins resist toxic environments, but they are poor farmers. Plan food production accordingly.</li>
+      <li TKey="MUGBTipBeacon">[MUGB] A goblin beacon burns goblin corpses to call the attention of other goblins.</li>
+      <li TKey="MUGBTipBeaconQuality">[MUGB] Beacon ritual quality affects the scale and character of the goblins that answer the signal.</li>
+      <li TKey="MUGBTipBeaconRisk">[MUGB] A goblin beacon may attract hostile attention as well as friendly visitors.</li>
+      <li TKey="MUGBTipSlaveMarriage">[MUGB] Slave marriage is a goblin group ritual that binds the master side and the slave side together.</li>
+      <li TKey="MUGBTipPheromoneAdaptation">[MUGB] By default, goblin slave marriage requires pheromone adaptation. This condition can be changed in mod settings.</li>
+      <li TKey="MUGBTipConcubinage">[MUGB] Slave marriage creates a concubine relationship separate from formal marriage.</li>
+      <li TKey="MUGBTipCentralTunnel">[MUGB] Central tunnel raids open clustered tunnels within one attack area.</li>
+      <li TKey="MUGBTipTunnelReinforcements">[MUGB] Living tunnels send reinforcements over time. Destroy them before the next wave arrives.</li>
+      <li TKey="MUGBTipLargeTunnel">[MUGB] Large tunnels carry more troops and reinforce for longer than normal tunnels.</li>
+      <li TKey="MUGBTipMortarSiege">[MUGB] Goblin mortar raids build a field position and prepare bombardment. Cutting off supply tunnels weakens a long siege.</li>
+      <li TKey="MUGBTipBoomstickSappers">[MUGB] Boomstick sappers use explosives to breach walls. Narrow corridors are especially dangerous.</li>
+      <li TKey="MUGBTipBaseTunnel">[MUGB] When defenders fall at a goblin base, defensive tunnels may activate.</li>
+      <li TKey="MUGBTipCaravanAmbush">[MUGB] Goblin ambushes can strike caravans on the world map. Be especially careful near hostile goblin settlements.</li>
+      <li TKey="MUGBTipSpecialWeapons">[MUGB] Special weapons can appear as rare squad leader loot, quest rewards, or ideology relics.</li>
+      <li TKey="MUGBTipSculptures">[MUGB] Goblin sculptures support Children of Blinia ideology rituals.</li>
+      <li TKey="MUGBTipGrowth">[MUGB] Pure goblins grow quickly. Newborn goblins become useful manpower soon after birth.</li>
+      <li TKey="MUGBTipThinAndHob">[MUGB] Thin goblins suit cheap labor and numbers. Hobgoblins are better suited to elite roles.</li>
     </tips>
   </TipSetDef>
 </Defs>
