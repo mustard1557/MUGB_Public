@@ -242,6 +242,16 @@ namespace MUGB
                 Settings.Write();
             }
 
+            bool oldForceGoblinFatherOffspring = Settings.forceGoblinFatherOffspring;
+            listing.CheckboxLabeled(
+                "MUGB_SettingsForceGoblinFatherOffspringLabel".Translate(),
+                ref Settings.forceGoblinFatherOffspring,
+                "MUGB_SettingsForceGoblinFatherOffspringDesc".Translate());
+            if (oldForceGoblinFatherOffspring != Settings.forceGoblinFatherOffspring)
+            {
+                Settings.Write();
+            }
+
             float oldGoblinChildStageDays = Settings.goblinChildStageDays;
             string childStageDuration = "MUGB_SettingsGoblinChildStageDaysValue".Translate(
                 Settings.goblinChildStageDays.ToString("0.#", CultureInfo.InvariantCulture));
@@ -3057,6 +3067,7 @@ namespace MUGB
         public bool adjustFemaleBodyTypeChances = true;
         public bool americanBeautyStandard;
         public float goblinLitterSizeMultiplier = 1f;
+        public bool forceGoblinFatherOffspring;
         public float goblinChildStageDays = 3.5f;
         public float goblinBabyStageDays = 0.5f;
         public int goblinBirthStrainLimit = 4;
@@ -3166,6 +3177,7 @@ namespace MUGB
             Scribe_Values.Look(ref americanBeautyStandard, "americanBeautyStandard", false);
             Scribe_Values.Look(ref goblinLitterSizeMultiplier, "goblinLitterSizeMultiplier", 1f);
             goblinLitterSizeMultiplier = Patches.GoblinLitterSizeUtility.NormalizeMultiplier(goblinLitterSizeMultiplier);
+            Scribe_Values.Look(ref forceGoblinFatherOffspring, "forceGoblinFatherOffspring", false);
             Scribe_Values.Look(ref goblinChildStageDays, "goblinChildStageDays", 3.5f);
             goblinChildStageDays = Patches.GoblinAgeUtility.NormalizeChildStageDays(goblinChildStageDays);
             Scribe_Values.Look(ref goblinBabyStageDays, "goblinBabyStageDays", 0.5f);

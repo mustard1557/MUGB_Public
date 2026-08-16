@@ -858,7 +858,9 @@ namespace MUGB.Patches
                 {
                     return GoblinBirthResult.Hobgoblin;
                 }
-                return GoblinBirthResult.MotherXenotype;
+                return MUGBMod.Settings?.forceGoblinFatherOffspring == true
+                    ? GoblinBirthResult.ThinGoblin
+                    : GoblinBirthResult.MotherXenotype;
             }
 
             // 한국어 의도: 띤 고블린 아비에게서는 어미 종족을 따르는 아기가 나오지 않습니다.

@@ -134,6 +134,8 @@
   <MUGB_SettingsGoblinLitterSizeExpected>예상 출산 수 - 띤 아비: {0}, 홉 아비: {1}</MUGB_SettingsGoblinLitterSizeExpected>
   <MUGB_SettingsGoblinLitterSizeRange>{0}~{1}</MUGB_SettingsGoblinLitterSizeRange>
   <MUGB_SettingsGoblinLitterSizeDesc>새 임신이 시작될 때 적용됩니다. 진행 중인 임신의 출산 수는 바뀌지 않습니다.</MUGB_SettingsGoblinLitterSizeDesc>
+  <MUGB_SettingsForceGoblinFatherOffspringLabel>고블린 아비의 자식은 항상 고블린으로 태어남</MUGB_SettingsForceGoblinFatherOffspringLabel>
+  <MUGB_SettingsForceGoblinFatherOffspringDesc>활성화하면 새로 수태되는 임신에서 아비가 고블린으로 인식될 경우 띤고블린 또는 홉고블린만 태어납니다. 진행 중인 임신은 바뀌지 않습니다.</MUGB_SettingsForceGoblinFatherOffspringDesc>
   <MUGB_SettingsGoblinChildStageDaysButton>고블린 어린이 기간: {0}</MUGB_SettingsGoblinChildStageDaysButton>
   <MUGB_SettingsGoblinChildStageDaysValue>{0}일</MUGB_SettingsGoblinChildStageDaysValue>
   <MUGB_SettingsGoblinChildStageDaysDesc>순종 고블린이 13세에 도달하기까지의 기간입니다. 0일은 어린이 단계를 생략합니다.</MUGB_SettingsGoblinChildStageDaysDesc>

@@ -134,6 +134,8 @@
   <MUGB_SettingsGoblinLitterSizeExpected>Expected litter - Thin father: {0}, Hob father: {1}</MUGB_SettingsGoblinLitterSizeExpected>
   <MUGB_SettingsGoblinLitterSizeRange>{0}-{1}</MUGB_SettingsGoblinLitterSizeRange>
   <MUGB_SettingsGoblinLitterSizeDesc>Applies when a new pregnancy begins. Existing pregnancies keep their current litter.</MUGB_SettingsGoblinLitterSizeDesc>
+  <MUGB_SettingsForceGoblinFatherOffspringLabel>Goblin fathers always produce goblin offspring</MUGB_SettingsForceGoblinFatherOffspringLabel>
+  <MUGB_SettingsForceGoblinFatherOffspringDesc>When enabled, newly conceived pregnancies with a recognized goblin father can only produce thin goblins or hobgoblins. Existing pregnancies are unchanged.</MUGB_SettingsForceGoblinFatherOffspringDesc>
   <MUGB_SettingsGoblinChildStageDaysButton>Goblin child stage: {0}</MUGB_SettingsGoblinChildStageDaysButton>
   <MUGB_SettingsGoblinChildStageDaysValue>{0} days</MUGB_SettingsGoblinChildStageDaysValue>
   <MUGB_SettingsGoblinChildStageDaysDesc>Time for a pure goblin child to reach age 13. Zero skips the child stage.</MUGB_SettingsGoblinChildStageDaysDesc>
