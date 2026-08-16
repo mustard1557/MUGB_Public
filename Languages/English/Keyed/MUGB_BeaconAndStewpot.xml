@@ -14,7 +14,7 @@
   <MUGB_GoblinBeaconLoadCanceled>Goblin corpse loading canceled for this beacon.</MUGB_GoblinBeaconLoadCanceled>
   <MUGB_GoblinBeaconLoadEnabled>This beacon will accept a reachable goblin corpse.</MUGB_GoblinBeaconLoadEnabled>
   <MUGB_GoblinBeaconNeedCorpse>A goblin corpse must be loaded first.</MUGB_GoblinBeaconNeedCorpse>
-  <MUGB_GoblinBeaconRequiresBlinia>Requires a primary ideology with the Children of Blinia meme.</MUGB_GoblinBeaconRequiresBlinia>
+  <MUGB_GoblinBeaconRequiresBlinia>Requires a primary ideology with either the Children of Blinia or Goblin Supremacy meme.</MUGB_GoblinBeaconRequiresBlinia>
   <MUGB_GoblinBeaconDialogTitle>Ignite goblin beacon</MUGB_GoblinBeaconDialogTitle>
   <MUGB_GoblinBeaconDialogText>Burning the goblin corpse releases a pheromone signal from the beacon and carries it far from the colony.\n\nThat smell may call allies to you, but it can also become a marker for something terrible.\n\nLured groups:\n  - Goblins seeking to join and goblin caravans\n  - Goblin refugees seeking temporary shelter (requires Royalty)\n  - Hostile goblin raiders\n  - Vengeful human goblin hunters</MUGB_GoblinBeaconDialogText>
   <MUGB_GoblinBeaconDialogAccept>Come 'ere!</MUGB_GoblinBeaconDialogAccept>

@@ -1450,7 +1450,7 @@ namespace MUGB
         public override AcceptanceReport AllowsPlacing(BuildableDef checkingDef, IntVec3 loc, Rot4 rot, Map map, Thing thingToIgnore = null, Thing thing = null)
         {
             if (!ModsConfig.IdeologyActive
-                || Faction.OfPlayer?.ideos?.PrimaryIdeo?.HasMeme(MUGBDefOf.MUGB_ChildrenOfBlinia) != true)
+                || !MUGBGoblinIdeologyUtility.HasGoblinCoreMeme(Faction.OfPlayer?.ideos?.PrimaryIdeo))
             {
                 return "MUGB_GoblinBeaconRequiresBlinia".Translate();
             }

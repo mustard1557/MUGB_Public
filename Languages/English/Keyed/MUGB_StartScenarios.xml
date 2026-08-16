@@ -2,7 +2,7 @@
 <LanguageData>
   <MUGB_StartScenarioSummary>Goblin scenario-specific start and story events.</MUGB_StartScenarioSummary>
   <MUGB_GoblinStartRecommendedMemeTitle>Recommended meme</MUGB_GoblinStartRecommendedMemeTitle>
-  <MUGB_GoblinStartRecommendedMemeWarning>This goblin scenario recommends the Children of Blinia meme. Without it, you will not be able to build or use the goblin beacon. Return to ideology configuration to add the meme, or continue with the current ideology.</MUGB_GoblinStartRecommendedMemeWarning>
+  <MUGB_GoblinStartRecommendedMemeWarning>This goblin scenario recommends either the Children of Blinia or Goblin Supremacy meme. Without either meme, you will not be able to build or use the goblin beacon. Return to ideology configuration to add a meme, or continue with the current ideology.</MUGB_GoblinStartRecommendedMemeWarning>
   <MUGB_GoblinStartReturnToIdeo>Return to ideology</MUGB_GoblinStartReturnToIdeo>
   <MUGB_GoblinStartContinueWithoutMeme>Continue anyway</MUGB_GoblinStartContinueWithoutMeme>
   <MUGB_ExileStartText>You stabbed a slave claimed by your boss during a knife-based "tickling" joke and pushed the blade much too deep. Your boss tried to put you into a cooking pot alive, and you barely escaped. There is nowhere to return to; your old mob will tear you apart if it finds you. So you have decided to make a new mob of your own. Can a single goblin become a boss?\n\n"Urgh... played with knife, killed boss's female... boss angry! Tried shoot me with fire-stick! Tried put me in pot! Me not go back! Catch humans, make my own mob! Me! Become boss! Kishishishi!"</MUGB_ExileStartText>

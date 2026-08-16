@@ -6,6 +6,16 @@ using Verse;
 
 namespace MUGB
 {
+    public static class MUGBGoblinIdeologyUtility
+    {
+        public static bool HasGoblinCoreMeme(Ideo ideo)
+        {
+            return ideo != null
+                && ((MUGBDefOf.MUGB_ChildrenOfBlinia != null && ideo.HasMeme(MUGBDefOf.MUGB_ChildrenOfBlinia))
+                    || (MUGBDefOf.MUGB_GoblinSupremacy != null && ideo.HasMeme(MUGBDefOf.MUGB_GoblinSupremacy)));
+        }
+    }
+
     [HarmonyPatch(typeof(Page_ConfigureStartingPawns), nameof(Page_ConfigureStartingPawns.PostOpen))]
     public static class MGBGoblinScenarioIdeoRecommendationPatch
     {
@@ -17,8 +27,7 @@ namespace MUGB
                 || AcknowledgedPages.Contains(__instance)
                 || !ModsConfig.IdeologyActive
                 || !IsGoblinStartScenario()
-                || MUGBDefOf.MUGB_ChildrenOfBlinia == null
-                || Faction.OfPlayer?.ideos?.PrimaryIdeo?.HasMeme(MUGBDefOf.MUGB_ChildrenOfBlinia) == true)
+                || MUGBGoblinIdeologyUtility.HasGoblinCoreMeme(Faction.OfPlayer?.ideos?.PrimaryIdeo))
             {
                 return;
             }

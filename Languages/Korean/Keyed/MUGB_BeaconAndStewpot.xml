@@ -14,7 +14,7 @@
   <MUGB_GoblinBeaconLoadCanceled>이 봉화의 고블린 시체 적재 요청을 취소했다.</MUGB_GoblinBeaconLoadCanceled>
   <MUGB_GoblinBeaconLoadEnabled>이 봉화는 운반 가능한 고블린 시체를 받아들인다.</MUGB_GoblinBeaconLoadEnabled>
   <MUGB_GoblinBeaconNeedCorpse>먼저 고블린 시체를 넣어야 한다.</MUGB_GoblinBeaconNeedCorpse>
-  <MUGB_GoblinBeaconRequiresBlinia>주 이념에 '블리니아의 자손들'이 있어야 건설할 수 있다.</MUGB_GoblinBeaconRequiresBlinia>
+  <MUGB_GoblinBeaconRequiresBlinia>주 이념에 '블리니아의 자손들' 또는 '고블린 우월주의'가 있어야 건설할 수 있다.</MUGB_GoblinBeaconRequiresBlinia>
   <MUGB_GoblinBeaconDialogTitle>고블린 봉화 점화</MUGB_GoblinBeaconDialogTitle>
   <MUGB_GoblinBeaconDialogText>봉화에서 고블린 시체를 태워 발생한 페로몬 신호를 먼 곳까지 보냅니다.\n\n이 냄새는 아군을 불러올 수도 있지만, 끔찍한 재앙을 가리키는 이정표가 될 수도 있습니다.\n\n유인되는 무리:\n  - 합류를 원하는 고블린과 고블린 상단\n  - 잠시 머물 곳을 찾는 고블린 난민(Royalty 필요)\n  - 적대적인 고블린 약탈자들\n  - 복수심에 불타는 인간 고블린 사냥꾼들</MUGB_GoblinBeaconDialogText>
   <MUGB_GoblinBeaconDialogAccept>와바랏!</MUGB_GoblinBeaconDialogAccept>

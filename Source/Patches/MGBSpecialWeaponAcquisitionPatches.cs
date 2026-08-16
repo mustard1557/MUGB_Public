@@ -19,7 +19,7 @@ namespace MUGB
         public static void Postfix(PreceptWorker __instance, Ideo ideo, ref IEnumerable<PreceptThingChance> __result)
         {
             if (!(__instance is PreceptWorker_Relic)
-                || ideo?.memes?.Any(meme => meme.defName == "MUGB_ChildrenOfBlinia") != true
+                || !MUGBGoblinIdeologyUtility.HasGoblinCoreMeme(ideo)
                 || __result == null)
             {
                 return;
