@@ -3,6 +3,9 @@
   <MUGB_CannotEquipWithShield>{0} cannot be equipped while wearing {1}.</MUGB_CannotEquipWithShield>
   <MUGB_CannotWearShieldWithWeapon>{0} cannot be worn while equipped with {1}.</MUGB_CannotWearShieldWithWeapon>
   <MUGB_TeenMatured>{0} has already started acting like a young goblin. A rough instinct for {1} has taken root.</MUGB_TeenMatured>
+  <MUGB_TeenMaturedWithPassion>{0} has already started acting like a young goblin. A rough instinct for {1} and a minor passion for {2} have taken root.</MUGB_TeenMaturedWithPassion>
+  <MUGB_TeenMaturedWithPassions>{0} has already started acting like a young goblin. A rough instinct for {1} and minor passions for {2} have taken root.</MUGB_TeenMaturedWithPassions>
   <MUGB_RapidMatured>{0} has rapidly matured with a rough instinct for {1}.</MUGB_RapidMatured>
   <MUGB_RapidMaturedWithPassion>{0} has rapidly matured with a rough instinct for {1} and a new passion for {2}.</MUGB_RapidMaturedWithPassion>
+  <MUGB_RapidMaturedWithPassions>{0} has rapidly matured with a rough instinct for {1} and new passions for {2}.</MUGB_RapidMaturedWithPassions>
 </LanguageData>

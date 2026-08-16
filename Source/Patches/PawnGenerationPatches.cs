@@ -2778,10 +2778,14 @@ namespace MUGB.Patches
             component.MarkTeenMatured(pawn);
             bool hobgoblin = pawn.genes?.Xenotype == MUGBDefOf.MUGB_Hobgoblin || pawn.genes?.GetGene(MUGBDefOf.MUGB_Gene_HobgoblinFrame) != null;
             SkillDef boostedSkill = BoostTeenInstinctSkill(pawn, hobgoblin);
+            List<SkillDef> passionSkills = GrantInstinctPassions(pawn, hobgoblin, hobgoblin ? 2 : 1, 0f);
             if (pawn.Faction == Faction.OfPlayer)
             {
                 string boostedSkillLabel = boostedSkill?.label ?? "survival";
-                string text = "MUGB_TeenMatured".Translate(pawn.LabelShortCap, boostedSkillLabel);
+                string passionLabels = string.Join(", ", passionSkills.Select(skill => skill.label));
+                string text = passionSkills.Count > 1
+                    ? "MUGB_TeenMaturedWithPassions".Translate(pawn.LabelShortCap, boostedSkillLabel, passionLabels)
+                    : "MUGB_TeenMaturedWithPassion".Translate(pawn.LabelShortCap, boostedSkillLabel, passionLabels);
                 Messages.Message(text, pawn, MessageTypeDefOf.PositiveEvent, historical: false);
             }
         }
@@ -2808,12 +2812,15 @@ namespace MUGB.Patches
             component.MarkMatured(pawn);
             bool hobgoblin = pawn.genes?.Xenotype == MUGBDefOf.MUGB_Hobgoblin || pawn.genes?.GetGene(MUGBDefOf.MUGB_Gene_HobgoblinFrame) != null;
             SkillDef boostedSkill = BoostInstinctSkill(pawn, hobgoblin);
-            SkillDef passionSkill = TryGrantInstinctPassion(pawn, hobgoblin);
+            List<SkillDef> passionSkills = GrantInstinctPassions(pawn, hobgoblin, hobgoblin ? 2 : 1, hobgoblin ? 0.18f : 0.03f);
             if (pawn.Faction == Faction.OfPlayer)
             {
                 string boostedSkillLabel = boostedSkill?.label ?? "survival";
-                string text = passionSkill != null
-                    ? "MUGB_RapidMaturedWithPassion".Translate(pawn.LabelShortCap, boostedSkillLabel, passionSkill.label)
+                string passionLabels = string.Join(", ", passionSkills.Select(skill => skill.label));
+                string text = passionSkills.Count > 1
+                    ? "MUGB_RapidMaturedWithPassions".Translate(pawn.LabelShortCap, boostedSkillLabel, passionLabels)
+                    : passionSkills.Count == 1
+                    ? "MUGB_RapidMaturedWithPassion".Translate(pawn.LabelShortCap, boostedSkillLabel, passionLabels)
                     : "MUGB_RapidMatured".Translate(pawn.LabelShortCap, boostedSkillLabel);
                 Messages.Message(text, pawn, MessageTypeDefOf.PositiveEvent, historical: false);
             }
@@ -2837,10 +2844,8 @@ namespace MUGB.Patches
                 hobgoblin ? new IntRange(6, 8) : new IntRange(3, 4));
         }
 
-        private static SkillDef TryGrantInstinctPassion(Pawn pawn, bool hobgoblin)
+        private static List<SkillDef> GrantInstinctPassions(Pawn pawn, bool hobgoblin, int count, float firstMajorChance)
         {
-            float majorChance = hobgoblin ? 0.18f : 0.03f;
-            Passion targetPassion = Rand.Chance(majorChance) ? Passion.Major : Passion.Minor;
             SkillDef[] pool = hobgoblin ? HobgoblinSkillPool : ThinGoblinSkillPool;
             List<SkillDef> candidates = pool
                 .Where(skill =>
@@ -2849,16 +2854,20 @@ namespace MUGB.Patches
                     return record != null && !record.TotallyDisabled && record.passion == Passion.None;
                 })
                 .ToList();
-            SkillDef skill = candidates.TryRandomElement(out SkillDef selectedSkill) ? selectedSkill : null;
-            if (skill == null)
+            List<SkillDef> granted = new List<SkillDef>();
+            for (int i = 0; i < count && candidates.Count > 0; i++)
             {
-                return null;
+                int index = Rand.Range(0, candidates.Count);
+                SkillDef skill = candidates[index];
+                candidates.RemoveAt(index);
+                SkillRecord record = pawn.skills.GetSkill(skill);
+                record.passion = i == 0 && firstMajorChance > 0f && Rand.Chance(firstMajorChance)
+                    ? Passion.Major
+                    : Passion.Minor;
+                granted.Add(skill);
             }
 
-            SkillRecord record = pawn.skills.GetSkill(skill);
-            record.passion = targetPassion;
-
-            return skill;
+            return granted;
         }
 
         // 한국어 의도: 성숙할 때 본능적으로 익히는 분야를 2~3가지로 넓힙니다.
