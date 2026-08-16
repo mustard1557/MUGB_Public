@@ -32,6 +32,8 @@
       <li>
         <li>Cannibalism_Acceptable</li>
         <li>Cannibalism_Preferred</li>
+        <li>Cannibalism_RequiredStrong</li>
+        <li>Cannibalism_RequiredRavenous</li>
       </li>
       <li>
         <li>MUGB_SlaveMarriage_Acceptable</li>
@@ -42,6 +44,12 @@
         <li>MUGB_OrganEating_Acceptable</li>
         <li>MUGB_OrganEating_Preferred</li>
         <li>MUGB_OrganEating_Important</li>
+      </li>
+      <li>
+        <li>OrganUse_Acceptable</li>
+      </li>
+      <li>
+        <li>Corpses_DontCare</li>
       </li>
     </requireOne>
     <generalRules>
@@ -84,6 +92,12 @@
         <li>Slavery_Honorable</li>
       </li>
       <li>
+        <li>Cannibalism_Acceptable</li>
+        <li>Cannibalism_Preferred</li>
+        <li>Cannibalism_RequiredStrong</li>
+        <li>Cannibalism_RequiredRavenous</li>
+      </li>
+      <li>
         <li>MUGB_SlaveMarriage_Acceptable</li>
         <li>MUGB_SlaveMarriage_Preferred</li>
         <li>MUGB_SlaveMarriage_Important</li>
@@ -92,6 +106,12 @@
         <li>MUGB_OrganEating_Acceptable</li>
         <li>MUGB_OrganEating_Preferred</li>
         <li>MUGB_OrganEating_Important</li>
+      </li>
+      <li>
+        <li>OrganUse_Acceptable</li>
+      </li>
+      <li>
+        <li>Corpses_DontCare</li>
       </li>
     </requireOne>
     <generalRules>

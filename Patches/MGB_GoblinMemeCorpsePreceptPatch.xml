@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <!--
+    Corpses_DontCare is restricted by vanilla to a small set of memes.
+    Add both MUGB goblin memes so their requireOne entries are valid in the
+    ideology editor and during ideology generation.
+  -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/PreceptDef[defName="Corpses_DontCare"]/associatedMemes</xpath>
+    <value>
+      <li>MUGB_ChildrenOfBlinia</li>
+      <li>MUGB_GoblinSupremacy</li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/PreceptDef[defName="Corpses_DontCare"]/requiredMemes</xpath>
+    <value>
+      <li>MUGB_ChildrenOfBlinia</li>
+      <li>MUGB_GoblinSupremacy</li>
+    </value>
+  </Operation>
+
+</Patch>
