@@ -2840,32 +2840,23 @@ namespace MUGB.Patches
         private static SkillDef TryGrantInstinctPassion(Pawn pawn, bool hobgoblin)
         {
             float majorChance = hobgoblin ? 0.18f : 0.03f;
-            float minorChance = hobgoblin ? 0.65f : 0.30f;
-            Passion targetPassion;
-            if (Rand.Chance(majorChance))
-            {
-                targetPassion = Passion.Major;
-            }
-            else if (Rand.Chance(minorChance))
-            {
-                targetPassion = Passion.Minor;
-            }
-            else
-            {
-                return null;
-            }
-
-            SkillDef skill = PickUsableSkill(pawn, hobgoblin ? HobgoblinSkillPool : ThinGoblinSkillPool);
+            Passion targetPassion = Rand.Chance(majorChance) ? Passion.Major : Passion.Minor;
+            SkillDef[] pool = hobgoblin ? HobgoblinSkillPool : ThinGoblinSkillPool;
+            List<SkillDef> candidates = pool
+                .Where(skill =>
+                {
+                    SkillRecord record = pawn.skills.GetSkill(skill);
+                    return record != null && !record.TotallyDisabled && record.passion == Passion.None;
+                })
+                .ToList();
+            SkillDef skill = candidates.TryRandomElement(out SkillDef selectedSkill) ? selectedSkill : null;
             if (skill == null)
             {
                 return null;
             }
 
             SkillRecord record = pawn.skills.GetSkill(skill);
-            if (targetPassion == Passion.Major || record.passion == Passion.None)
-            {
-                record.passion = targetPassion;
-            }
+            record.passion = targetPassion;
 
             return skill;
         }
