@@ -25,14 +25,20 @@ namespace MUGB
                 return;
             }
 
-            List<PreceptThingChance> goblinRelics = __result
+            List<PreceptThingChance> allRelics = __result.ToList();
+            List<PreceptThingChance> goblinRelics = allRelics
                 .Where(choice => choice.def?.relicChance > 0f
                     && (choice.def.weaponTags?.Contains("MUGB_GoblinWeapon") == true
                         || GoblinRelicDefNames.Contains(choice.def.defName)))
                 .ToList();
             if (goblinRelics.Count > 0)
             {
-                __result = goblinRelics;
+                HashSet<ThingDef> goblinRelicDefs = goblinRelics
+                    .Select(choice => choice.def)
+                    .ToHashSet();
+                __result = goblinRelics
+                    .Concat(allRelics.Where(choice => choice.def == null || !goblinRelicDefs.Contains(choice.def)))
+                    .ToList();
             }
         }
     }
