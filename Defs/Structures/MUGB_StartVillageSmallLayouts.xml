@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-  <!-- Compact Medieval Overhaul villages used when the larger authored layouts do not fit. -->
+  <!-- Compact core-only villages used whenever the larger layouts do not fit. -->
   <KCSG.StructureLayoutDef>
     <defName>MUGB_StartVillageSmall1</defName>
     <isStorage>false</isStorage>
     <spawnConduits>false</spawnConduits>
     <layouts>
       <li>
-        <li>.,.,.,.,.,.,.,.,.,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood</li>
-        <li>.,.,.,.,.,.,.,.,.,MUGB_VanVillage_Door,.,.,.,DankPyon_LogWall_DankPyon_RawWood</li>
-        <li>.,.,.,.,.,.,.,.,.,DankPyon_LogWall_DankPyon_RawWood,.,DankPyon_ShelfEmpty_WoodLog_South,.,DankPyon_LogWall_DankPyon_RawWood</li>
-        <li>.,.,.,.,.,.,.,.,.,DankPyon_LogWall_DankPyon_RawWood,DankPyon_RusticTorchLamp_WoodLog,.,.,DankPyon_LogWall_DankPyon_RawWood</li>
-        <li>DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,MUGB_VanVillage_Door,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,.,DankPyon_LogWall_DankPyon_RawWood,.,DankPyon_ShelfEmpty_WoodLog_South,MUGB_VanVillage_Shelf,DankPyon_LogWall_DankPyon_RawWood</li>
-        <li>DankPyon_LogWall_DankPyon_RawWood,MUGB_VanVillage_Shelf,.,.,.,DankPyon_RusticTable1x2c_WoodLog_East,.,DankPyon_LogWall_DankPyon_RawWood,.,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood</li>
-        <li>DankPyon_LogWall_DankPyon_RawWood,.,.,.,.,DankPyon_RusticStool_WoodLog_North,DankPyon_RusticStool_WoodLog_North,DankPyon_LogWall_DankPyon_RawWood,.,.,.,.,.,.</li>
-        <li>DankPyon_LogWall_DankPyon_RawWood,.,.,MUGB_VanVillage_Campfire,.,.,.,DankPyon_LogWall_DankPyon_RawWood,.,DankPyon_LogWall_DankPyon_RawWood,MUGB_VanVillage_Door,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood</li>
-        <li>DankPyon_LogWall_DankPyon_RawWood,.,.,.,.,.,.,DankPyon_LogWall_DankPyon_RawWood,.,DankPyon_LogWall_DankPyon_RawWood,.,.,.,DankPyon_LogWall_DankPyon_RawWood</li>
-        <li>DankPyon_LogWall_DankPyon_RawWood,.,.,.,.,.,.,DankPyon_LogWall_DankPyon_RawWood,.,DankPyon_LogWall_DankPyon_RawWood,.,.,.,DankPyon_LogWall_DankPyon_RawWood</li>
-        <li>DankPyon_LogWall_DankPyon_RawWood,SleepingSpot_South,.,SleepingSpot_South,.,SleepingSpot_South,.,DankPyon_LogWall_DankPyon_RawWood,.,DankPyon_LogWall_DankPyon_RawWood,SleepingSpot_South,DankPyon_RusticTorchLamp_WoodLog,SleepingSpot_South,DankPyon_LogWall_DankPyon_RawWood</li>
-        <li>DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,.,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood</li>
+        <li>.,.,.,.,.,.,.,.,.,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall</li>
+        <li>.,.,.,.,.,.,.,.,.,MUGB_VanVillage_Door,.,.,.,MUGB_VanVillage_Wall</li>
+        <li>.,.,.,.,.,.,.,.,.,MUGB_VanVillage_Wall,.,MUGB_VanVillage_Shelf,.,MUGB_VanVillage_Wall</li>
+        <li>.,.,.,.,.,.,.,.,.,MUGB_VanVillage_Wall,MUGB_VanVillage_Torch,.,.,MUGB_VanVillage_Wall</li>
+        <li>MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Door,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,.,MUGB_VanVillage_Wall,.,MUGB_VanVillage_Shelf,MUGB_VanVillage_Shelf,MUGB_VanVillage_Wall</li>
+        <li>MUGB_VanVillage_Wall,MUGB_VanVillage_Shelf,.,.,.,MUGB_VanVillage_Table,.,MUGB_VanVillage_Wall,.,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall</li>
+        <li>MUGB_VanVillage_Wall,.,.,.,.,MUGB_VanVillage_Chair,MUGB_VanVillage_Chair,MUGB_VanVillage_Wall,.,.,.,.,.,.</li>
+        <li>MUGB_VanVillage_Wall,.,.,MUGB_VanVillage_Campfire,.,.,.,MUGB_VanVillage_Wall,.,MUGB_VanVillage_Wall,MUGB_VanVillage_Door,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall</li>
+        <li>MUGB_VanVillage_Wall,.,.,.,.,.,.,MUGB_VanVillage_Wall,.,MUGB_VanVillage_Wall,.,.,.,MUGB_VanVillage_Wall</li>
+        <li>MUGB_VanVillage_Wall,.,.,.,.,.,.,MUGB_VanVillage_Wall,.,MUGB_VanVillage_Wall,.,.,.,MUGB_VanVillage_Wall</li>
+        <li>MUGB_VanVillage_Wall,MUGB_VanVillage_Bedroll,.,MUGB_VanVillage_Bedroll,.,MUGB_VanVillage_Bedroll,.,MUGB_VanVillage_Wall,.,MUGB_VanVillage_Wall,MUGB_VanVillage_Bedroll,MUGB_VanVillage_Torch,MUGB_VanVillage_Bedroll,MUGB_VanVillage_Wall</li>
+        <li>MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,.,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall</li>
       </li>
       <li>
         <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
@@ -66,7 +66,6 @@
     </terrainGrid>
     <forceGenerateRoof>true</forceGenerateRoof>
     <needRoofClearance>true</needRoofClearance>
-    <modRequirements><li>dankpyon.medieval.overhaul</li></modRequirements>
   </KCSG.StructureLayoutDef>
 
   <KCSG.StructureLayoutDef>
@@ -76,14 +75,14 @@
     <layouts>
       <li>
         <li>.,.,.,.,.,.,.,.</li>
-        <li>DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,MUGB_VanVillage_Door,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood</li>
-        <li>DankPyon_LogWall_DankPyon_RawWood,MUGB_VanVillage_Shelf,.,.,.,DankPyon_RusticTable1x2c_WoodLog_East,.,DankPyon_LogWall_DankPyon_RawWood</li>
-        <li>DankPyon_LogWall_DankPyon_RawWood,Pemmican,.,.,.,DankPyon_RusticStool_WoodLog_North,DankPyon_RusticStool_WoodLog_North,DankPyon_LogWall_DankPyon_RawWood</li>
-        <li>DankPyon_LogWall_DankPyon_RawWood,.,.,MUGB_VanVillage_Campfire,.,.,.,DankPyon_LogWall_DankPyon_RawWood</li>
-        <li>DankPyon_LogWall_DankPyon_RawWood,.,.,.,.,.,.,DankPyon_LogWall_DankPyon_RawWood</li>
-        <li>DankPyon_LogWall_DankPyon_RawWood,.,.,.,.,.,.,DankPyon_LogWall_DankPyon_RawWood</li>
-        <li>DankPyon_LogWall_DankPyon_RawWood,SleepingSpot_South,SleepingSpot_South,SleepingSpot_South,SleepingSpot_South,SleepingSpot_South,SleepingSpot_South,DankPyon_LogWall_DankPyon_RawWood</li>
-        <li>DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood,DankPyon_LogWall_DankPyon_RawWood</li>
+        <li>MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Door,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall</li>
+        <li>MUGB_VanVillage_Wall,MUGB_VanVillage_Shelf,.,.,.,MUGB_VanVillage_Table,.,MUGB_VanVillage_Wall</li>
+        <li>MUGB_VanVillage_Wall,Pemmican,.,.,.,MUGB_VanVillage_Chair,MUGB_VanVillage_Chair,MUGB_VanVillage_Wall</li>
+        <li>MUGB_VanVillage_Wall,.,.,MUGB_VanVillage_Campfire,.,.,.,MUGB_VanVillage_Wall</li>
+        <li>MUGB_VanVillage_Wall,.,.,.,.,.,.,MUGB_VanVillage_Wall</li>
+        <li>MUGB_VanVillage_Wall,.,.,.,.,.,.,MUGB_VanVillage_Wall</li>
+        <li>MUGB_VanVillage_Wall,MUGB_VanVillage_Bedroll,MUGB_VanVillage_Bedroll,MUGB_VanVillage_Bedroll,MUGB_VanVillage_Bedroll,MUGB_VanVillage_Bedroll,MUGB_VanVillage_Bedroll,MUGB_VanVillage_Wall</li>
+        <li>MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall</li>
       </li>
     </layouts>
     <roofGrid>
@@ -110,7 +109,6 @@
     </terrainGrid>
     <forceGenerateRoof>true</forceGenerateRoof>
     <needRoofClearance>true</needRoofClearance>
-    <modRequirements><li>dankpyon.medieval.overhaul</li></modRequirements>
   </KCSG.StructureLayoutDef>
 
 </Defs>

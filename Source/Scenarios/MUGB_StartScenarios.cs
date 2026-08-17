@@ -31,17 +31,6 @@ namespace MUGB
                 return;
             }
 
-            IntVec3 arrivalCell;
-            if (!RCellFinder.TryFindRandomPawnEntryCell(out arrivalCell, map, 1f, false))
-            {
-                arrivalCell = FindClosestStandableCellToEdge(map, initData.startingAndOptionalPawns.Count);
-            }
-            if (!arrivalCell.IsValid)
-            {
-                Log.Error("[MUGB] The goblin starting party could not find any standable edge approach on the starting map.");
-                return;
-            }
-
             List<Thing> party = initData.startingAndOptionalPawns.Cast<Thing>().ToList();
             List<Thing> startingThings = Find.Scenario.AllParts
                 .SelectMany(part => part.PlayerStartingThings())
@@ -56,7 +45,26 @@ namespace MUGB
                 party.Add(thing);
             }
 
-            List<IntVec3> spawnCells = NearbyStandableCells(arrivalCell, map, party.Count);
+            int pawnCount = party.Count(thing => thing is Pawn);
+            IntVec3 arrivalCell;
+            if (!RCellFinder.TryFindRandomPawnEntryCell(out arrivalCell, map, 1f, false)
+                || NearbyStandableCells(arrivalCell, map, pawnCount).Count < pawnCount)
+            {
+                arrivalCell = FindClosestStandableCellToEdge(map, pawnCount);
+            }
+            if (!arrivalCell.IsValid)
+            {
+                Log.Error("[MUGB] The goblin starting party could not find any standable edge approach on the starting map.");
+                return;
+            }
+
+            List<IntVec3> spawnCells = NearbyStandableCells(arrivalCell, map, pawnCount);
+            if (spawnCells.Count < pawnCount)
+            {
+                Log.Error("[MUGB] The goblin starting party could not find enough distinct cells near one map edge.");
+                return;
+            }
+
             List<Pawn> spawnedPawns = new List<Pawn>();
             int spawnCellIndex = 0;
             foreach (Thing thing in party)
@@ -70,7 +78,7 @@ namespace MUGB
                 }
                 else
                 {
-                    GenPlace.TryPlaceThing(thing, spawnCell, map, ThingPlaceMode.Near);
+                    GenPlace.TryPlaceThing(thing, arrivalCell, map, ThingPlaceMode.Near);
                 }
             }
 
@@ -92,7 +100,7 @@ namespace MUGB
 
         private static List<IntVec3> NearbyStandableCells(IntVec3 center, Map map, int required)
         {
-            List<IntVec3> cells = GenRadial.RadialCellsAround(center, 6f, true)
+            List<IntVec3> cells = GenRadial.RadialCellsAround(center, 5f, true)
                 .Where(cell => cell.InBounds(map) && cell.Standable(map))
                 .OrderBy(cell => cell.DistanceToSquared(center))
                 .ToList();
@@ -496,16 +504,18 @@ namespace MUGB
             // 미디블이 켜져 있는지를 직접 확인합니다.
             // 예전에는 Def 존재 여부만 보고 판단해서, 미디블이 없어도 미디블 마을을 골랐고
             // 건물이 전부 빠진 빈 터가 생겼습니다.
-            List<KCSGLayoutDef> layouts = ModsConfig.IsActive(MedievalOverhaulPackageId)
-                ? new[]
-                    {
-                        "MUGB_StartVillage1", "MUGB_StartVillage2", "MUGB_StartVillage3",
-                        "MUGB_StartVillageSmall1", "MUGB_StartVillageSmall2"
-                    }
-                    .Select(DefDatabase<KCSGLayoutDef>.GetNamedSilentFail)
-                    .Where(layout => layout != null)
-                    .ToList()
-                : new List<KCSGLayoutDef>();
+            List<string> layoutDefNames = new List<string>
+            {
+                "MUGB_StartVillageSmall1", "MUGB_StartVillageSmall2"
+            };
+            if (ModsConfig.IsActive(MedievalOverhaulPackageId))
+            {
+                layoutDefNames.AddRange(new[] { "MUGB_StartVillage1", "MUGB_StartVillage2", "MUGB_StartVillage3" });
+            }
+            List<KCSGLayoutDef> layouts = layoutDefNames
+                .Select(DefDatabase<KCSGLayoutDef>.GetNamedSilentFail)
+                .Where(layout => layout != null)
+                .ToList();
             KCSGLayoutDef fallback = DefDatabase<KCSGLayoutDef>.GetNamedSilentFail("MUGB_StartVillageVanilla1");
             KCSGLayoutDef compactFallback = DefDatabase<KCSGLayoutDef>.GetNamedSilentFail("MUGB_StartVillageVanillaCompact");
             if (layouts.Count == 0 && fallback == null && compactFallback == null)
