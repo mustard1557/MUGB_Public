@@ -16,7 +16,7 @@
   <ScenPartDef>
     <defName>MUGB_PlayerPawnsArriveAtEdge</defName>
     <label>goblin starting party arrives at edge</label>
-    <description>Places the goblin starting party at a walkable map edge, with a safe land fallback for islands.</description>
+    <description>Places the goblin starting party together on a standable map edge and has them walk into the map.</description>
     <scenPartClass>MUGB.ScenPart_MUGB_PlayerPawnsArriveAtEdge</scenPartClass>
     <category>Fixed</category>
     <selectionWeight>0</selectionWeight>

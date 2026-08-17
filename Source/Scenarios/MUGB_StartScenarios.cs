@@ -5,6 +5,7 @@ using KCSG;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using Verse.AI;
 using Verse.AI.Group;
 using KCSGLayoutDef = KCSG.StructureLayoutDef;
 
@@ -19,6 +20,8 @@ namespace MUGB
 
     public sealed class ScenPart_MUGB_PlayerPawnsArriveAtEdge : ScenPart
     {
+        private const int WalkInDistance = 10;
+
         public override void GenerateIntoMap(Map map)
         {
             GameInitData initData = Find.GameInitData;
@@ -31,11 +34,11 @@ namespace MUGB
             IntVec3 arrivalCell;
             if (!RCellFinder.TryFindRandomPawnEntryCell(out arrivalCell, map, 1f, false))
             {
-                arrivalCell = FindClosestWalkableLandToEdge(map, initData.startingAndOptionalPawns.Count);
+                arrivalCell = FindClosestStandableCellToEdge(map, initData.startingAndOptionalPawns.Count);
             }
             if (!arrivalCell.IsValid)
             {
-                Log.Error("[MUGB] The goblin starting party could not find any walkable land on the starting map.");
+                Log.Error("[MUGB] The goblin starting party could not find any standable edge approach on the starting map.");
                 return;
             }
 
@@ -53,21 +56,78 @@ namespace MUGB
                 party.Add(thing);
             }
 
-            DropPodUtility.DropThingGroupsNear(
-                arrivalCell,
-                map,
-                new List<List<Thing>> { party },
-                110,
-                true,
-                true,
-                true,
-                true,
-                false,
-                false,
-                null);
+            List<IntVec3> spawnCells = NearbyStandableCells(arrivalCell, map, party.Count);
+            List<Pawn> spawnedPawns = new List<Pawn>();
+            int spawnCellIndex = 0;
+            foreach (Thing thing in party)
+            {
+                IntVec3 spawnCell = spawnCells[Math.Min(spawnCellIndex, spawnCells.Count - 1)];
+                if (thing is Pawn pawn)
+                {
+                    GenSpawn.Spawn(pawn, spawnCell, map, Rot4.Random);
+                    spawnedPawns.Add(pawn);
+                    spawnCellIndex++;
+                }
+                else
+                {
+                    GenPlace.TryPlaceThing(thing, spawnCell, map, ThingPlaceMode.Near);
+                }
+            }
+
+            IntVec3 walkInCenter = FindWalkInCenter(arrivalCell, map);
+            for (int i = 0; i < spawnedPawns.Count; i++)
+            {
+                Pawn pawn = spawnedPawns[i];
+                IntVec3 destination = FindReachableWalkInCell(pawn, walkInCenter, map, i);
+                if (!destination.IsValid || destination == pawn.Position)
+                {
+                    continue;
+                }
+
+                Job job = JobMaker.MakeJob(JobDefOf.Goto, destination);
+                job.locomotionUrgency = LocomotionUrgency.Walk;
+                pawn.jobs.StartJob(job, JobCondition.InterruptForced);
+            }
         }
 
-        private static IntVec3 FindClosestWalkableLandToEdge(Map map, int pawnCount)
+        private static List<IntVec3> NearbyStandableCells(IntVec3 center, Map map, int required)
+        {
+            List<IntVec3> cells = GenRadial.RadialCellsAround(center, 6f, true)
+                .Where(cell => cell.InBounds(map) && cell.Standable(map))
+                .OrderBy(cell => cell.DistanceToSquared(center))
+                .ToList();
+            if (cells.Count == 0)
+            {
+                cells.Add(center);
+            }
+            return cells.Take(Math.Max(required, 1)).ToList();
+        }
+
+        private static IntVec3 FindWalkInCenter(IntVec3 edgeCell, Map map)
+        {
+            Vector3 direction = (map.Center.ToVector3Shifted() - edgeCell.ToVector3Shifted()).normalized;
+            IntVec3 desired = edgeCell + new IntVec3(
+                Mathf.RoundToInt(direction.x * WalkInDistance),
+                0,
+                Mathf.RoundToInt(direction.z * WalkInDistance));
+            return desired.ClampInsideMap(map);
+        }
+
+        private static IntVec3 FindReachableWalkInCell(Pawn pawn, IntVec3 center, Map map, int offset)
+        {
+            foreach (IntVec3 cell in GenRadial.RadialCellsAround(center, 5f, true).Skip(offset % 8))
+            {
+                if (cell.InBounds(map)
+                    && cell.Standable(map)
+                    && map.reachability.CanReach(pawn.Position, cell, PathEndMode.OnCell, TraverseParms.For(pawn)))
+                {
+                    return cell;
+                }
+            }
+            return IntVec3.Invalid;
+        }
+
+        private static IntVec3 FindClosestStandableCellToEdge(Map map, int pawnCount)
         {
             IntVec3 best = IntVec3.Invalid;
             int bestEdgeDistance = int.MaxValue;
@@ -77,7 +137,7 @@ namespace MUGB
                 for (int x = 0; x < map.Size.x; x++)
                 {
                     IntVec3 cell = new IntVec3(x, 0, z);
-                    if (!cell.Standable(map) || cell.GetTerrain(map).IsWater)
+                    if (!cell.Standable(map))
                     {
                         continue;
                     }
@@ -85,7 +145,7 @@ namespace MUGB
                     int nearbyStandable = 0;
                     foreach (IntVec3 nearby in CellRect.CenteredOn(cell, 9, 9).ClipInsideMap(map))
                     {
-                        if (nearby.Standable(map) && !nearby.GetTerrain(map).IsWater)
+                        if (nearby.Standable(map))
                         {
                             nearbyStandable++;
                         }
@@ -190,8 +250,15 @@ namespace MUGB
 
         public override void PostMapGenerate(Map map)
         {
-            if (initialMapHandled || Find.TickManager.TicksGame > 5)
+            if (initialMapHandled)
             {
+                return;
+            }
+
+            if (Find.Maps.Any(existing => existing != map && existing.IsPlayerHome))
+            {
+                initialMapHandled = true;
+                Log.Warning("[MUGB] Starting village generation was skipped because this is not the first player home map.");
                 return;
             }
 
@@ -430,7 +497,11 @@ namespace MUGB
             // 예전에는 Def 존재 여부만 보고 판단해서, 미디블이 없어도 미디블 마을을 골랐고
             // 건물이 전부 빠진 빈 터가 생겼습니다.
             List<KCSGLayoutDef> layouts = ModsConfig.IsActive(MedievalOverhaulPackageId)
-                ? new[] { "MUGB_StartVillage1", "MUGB_StartVillage2", "MUGB_StartVillage3" }
+                ? new[]
+                    {
+                        "MUGB_StartVillage1", "MUGB_StartVillage2", "MUGB_StartVillage3",
+                        "MUGB_StartVillageSmall1", "MUGB_StartVillageSmall2"
+                    }
                     .Select(DefDatabase<KCSGLayoutDef>.GetNamedSilentFail)
                     .Where(layout => layout != null)
                     .ToList()
@@ -496,6 +567,7 @@ namespace MUGB
                 villageRectMaxZ = rect.maxZ;
                 SpawnVillageFoodAndField(map, rect);
                 SpawnVillageResidents(map, villageFaction, rect);
+                Log.Message($"[MUGB] Starting village generated with layout {layout.defName} at {rect.CenterCell}.");
             }
             catch (Exception ex)
             {
