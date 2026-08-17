@@ -17,6 +17,87 @@ namespace MUGB
         GoldenCaravan
     }
 
+    public sealed class ScenPart_MUGB_PlayerPawnsArriveAtEdge : ScenPart
+    {
+        public override void GenerateIntoMap(Map map)
+        {
+            GameInitData initData = Find.GameInitData;
+            if (initData?.startingAndOptionalPawns.NullOrEmpty() != false)
+            {
+                Log.Error("[MUGB] The goblin starting party could not be placed because no starting pawns were configured.");
+                return;
+            }
+
+            IntVec3 arrivalCell;
+            if (!RCellFinder.TryFindRandomPawnEntryCell(out arrivalCell, map, 1f, false))
+            {
+                arrivalCell = FindClosestWalkableLandToEdge(map);
+            }
+            if (!arrivalCell.IsValid)
+            {
+                Log.Error("[MUGB] The goblin starting party could not find any walkable land on the starting map.");
+                return;
+            }
+
+            List<List<Thing>> groups = initData.startingAndOptionalPawns
+                .Select(pawn => new List<Thing> { pawn })
+                .ToList();
+            List<Thing> startingThings = Find.Scenario.AllParts
+                .SelectMany(part => part.PlayerStartingThings())
+                .ToList();
+            for (int i = 0; i < startingThings.Count; i++)
+            {
+                Thing thing = startingThings[i];
+                if (thing.def.CanHaveFaction)
+                {
+                    thing.SetFactionDirect(Faction.OfPlayer);
+                }
+                groups[i % groups.Count].Add(thing);
+            }
+
+            DropPodUtility.DropThingGroupsNear(
+                arrivalCell,
+                map,
+                groups,
+                110,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                null);
+        }
+
+        private static IntVec3 FindClosestWalkableLandToEdge(Map map)
+        {
+            IntVec3 best = IntVec3.Invalid;
+            int bestEdgeDistance = int.MaxValue;
+            float bestCenterDistance = float.MaxValue;
+            for (int z = 0; z < map.Size.z; z++)
+            {
+                for (int x = 0; x < map.Size.x; x++)
+                {
+                    IntVec3 cell = new IntVec3(x, 0, z);
+                    if (!cell.Standable(map) || cell.GetTerrain(map).IsWater)
+                    {
+                        continue;
+                    }
+
+                    int edgeDistance = Math.Min(Math.Min(x, map.Size.x - 1 - x), Math.Min(z, map.Size.z - 1 - z));
+                    float centerDistance = cell.DistanceToSquared(map.Center);
+                    if (edgeDistance < bestEdgeDistance || (edgeDistance == bestEdgeDistance && centerDistance < bestCenterDistance))
+                    {
+                        best = cell;
+                        bestEdgeDistance = edgeDistance;
+                        bestCenterDistance = centerDistance;
+                    }
+                }
+            }
+            return best;
+        }
+    }
+
     public sealed class ScenPart_MUGB_StartScenarioController : ScenPart
     {
         // 미디블 오버홀은 권장 선행이지 필수가 아닙니다. 마을 레이아웃처럼 그 모드의
@@ -98,7 +179,7 @@ namespace MUGB
 
         public override void PostMapGenerate(Map map)
         {
-            if (initialMapHandled || Find.GameInitData == null || Find.TickManager.TicksGame > 5)
+            if (initialMapHandled || Find.TickManager.TicksGame > 5)
             {
                 return;
             }

@@ -13,6 +13,18 @@
     <canBePlayerAddedRemoved>false</canBePlayerAddedRemoved>
   </ScenPartDef>
 
+  <ScenPartDef>
+    <defName>MUGB_PlayerPawnsArriveAtEdge</defName>
+    <label>goblin starting party arrives at edge</label>
+    <description>Places the goblin starting party at a walkable map edge, with a safe land fallback for islands.</description>
+    <scenPartClass>MUGB.ScenPart_MUGB_PlayerPawnsArriveAtEdge</scenPartClass>
+    <category>Fixed</category>
+    <selectionWeight>0</selectionWeight>
+    <summaryPriority>-999</summaryPriority>
+    <canBeRandomlyAdded>false</canBeRandomlyAdded>
+    <canBePlayerAddedRemoved>false</canBePlayerAddedRemoved>
+  </ScenPartDef>
+
   <ScenarioDef ParentName="ScenarioBase">
     <defName>MUGB_ExiledGoblinStart</defName>
     <label>Exiled goblin</label>
@@ -37,7 +49,7 @@ Four poorly equipped thin-goblin trackers arrive on the third day. This is a har
             <li><xenotype>MUGB_Goblin</xenotype><count>1</count><description>adult goblin</description><requiredAtStart>true</requiredAtStart><allowedDevelopmentalStages>Adult</allowedDevelopmentalStages></li>
           </xenotypeCounts>
         </li>
-        <li Class="VEF.Planet.ScenPart_ArriveAtEdge"><def>VFEC_PlayerPawnsArriveMethodEdge</def><method>Standing</method><visible>false</visible></li>
+        <li Class="MUGB.ScenPart_MUGB_PlayerPawnsArriveAtEdge"><def>MUGB_PlayerPawnsArriveAtEdge</def><visible>false</visible></li>
         <li Class="MUGB.ScenPart_MUGB_StartScenarioController"><def>MUGB_StartScenarioController</def><scenarioKind>Exile</scenarioKind><visible>false</visible></li>
         <li Class="ScenPart_ForcedHediff">
           <def>ForcedHediff</def><hediff>Malnutrition</hediff><severityRange>0.05~0.15</severityRange><chance>1</chance><context>PlayerStarter</context>
@@ -72,7 +84,7 @@ A hostile human village is generated once on the starting map. Its fighting men 
             <li><xenotype>MUGB_Hobgoblin</xenotype><count>1</count><description>adult hobgoblin</description><requiredAtStart>true</requiredAtStart><allowedDevelopmentalStages>Adult</allowedDevelopmentalStages></li>
           </xenotypeCounts>
         </li>
-        <li Class="VEF.Planet.ScenPart_ArriveAtEdge"><def>VFEC_PlayerPawnsArriveMethodEdge</def><method>Standing</method><visible>false</visible></li>
+        <li Class="MUGB.ScenPart_MUGB_PlayerPawnsArriveAtEdge"><def>MUGB_PlayerPawnsArriveAtEdge</def><visible>false</visible></li>
         <li Class="MUGB.ScenPart_MUGB_StartScenarioController"><def>MUGB_StartScenarioController</def><scenarioKind>StrandedSquad</scenarioKind><visible>false</visible></li>
         <li Class="ScenPart_StartingAnimal"><def>StartingAnimal</def><animalKind>Warg</animalKind><count>1</count><bondToRandomPlayerPawnChance>0.35</bondToRandomPlayerPawnChance></li>
         <li Class="ScenPart_StartingThing_Defined"><def>StartingThing_Defined</def><thingDef>Silver</thingDef><count>200</count></li>
@@ -109,7 +121,7 @@ Human raiders arrive within four to six days, and one carries a rare, finely mad
             <li><xenotype>MUGB_Hobgoblin</xenotype><count>3</count><description>adult hobgoblin</description><requiredAtStart>true</requiredAtStart><allowedDevelopmentalStages>Adult</allowedDevelopmentalStages></li>
           </xenotypeCounts>
         </li>
-        <li Class="VEF.Planet.ScenPart_ArriveAtEdge"><def>VFEC_PlayerPawnsArriveMethodEdge</def><method>Standing</method><visible>false</visible></li>
+        <li Class="MUGB.ScenPart_MUGB_PlayerPawnsArriveAtEdge"><def>MUGB_PlayerPawnsArriveAtEdge</def><visible>false</visible></li>
         <li Class="MUGB.ScenPart_MUGB_StartScenarioController"><def>MUGB_StartScenarioController</def><scenarioKind>GoldenCaravan</scenarioKind><visible>false</visible></li>
         <li Class="ScenPart_StartingAnimal"><def>StartingAnimal</def><animalKind>Muffalo</animalKind><count>2</count><bondToRandomPlayerPawnChance>0.15</bondToRandomPlayerPawnChance></li>
         <li Class="ScenPart_StartingAnimal"><def>StartingAnimal</def><animalKind>Warg</animalKind><count>1</count><bondToRandomPlayerPawnChance>0.35</bondToRandomPlayerPawnChance></li>
