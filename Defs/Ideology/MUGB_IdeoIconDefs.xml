@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <IdeoIconDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_GoblinA</defName>
+    <iconPath>UI/Ideoligions/GoblinA</iconPath>
+    <memes>
+      <li>MUGB_ChildrenOfBlinia</li>
+      <li>MUGB_GoblinSupremacy</li>
+    </memes>
+  </IdeoIconDef>
+
+  <IdeoIconDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_GoblinB</defName>
+    <iconPath>UI/Ideoligions/GoblinB</iconPath>
+    <memes>
+      <li>MUGB_ChildrenOfBlinia</li>
+      <li>MUGB_GoblinSupremacy</li>
+    </memes>
+  </IdeoIconDef>
+
+  <IdeoIconDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_GoblinC</defName>
+    <iconPath>UI/Ideoligions/GoblinC</iconPath>
+    <memes>
+      <li>MUGB_ChildrenOfBlinia</li>
+      <li>MUGB_GoblinSupremacy</li>
+    </memes>
+  </IdeoIconDef>
+
+  <IdeoIconDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_GoblinD</defName>
+    <iconPath>UI/Ideoligions/GoblinD</iconPath>
+    <memes>
+      <li>MUGB_ChildrenOfBlinia</li>
+      <li>MUGB_GoblinSupremacy</li>
+    </memes>
+  </IdeoIconDef>
+
+  <IdeoIconDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_GoblinE</defName>
+    <iconPath>UI/Ideoligions/GoblinE</iconPath>
+    <memes>
+      <li>MUGB_ChildrenOfBlinia</li>
+      <li>MUGB_GoblinSupremacy</li>
+    </memes>
+  </IdeoIconDef>
+
+  <IdeoIconDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_GoblinF</defName>
+    <iconPath>UI/Ideoligions/GoblinF</iconPath>
+    <memes>
+      <li>MUGB_ChildrenOfBlinia</li>
+      <li>MUGB_GoblinSupremacy</li>
+    </memes>
+  </IdeoIconDef>
+
+  <IdeoIconDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_GoblinG</defName>
+    <iconPath>UI/Ideoligions/GoblinG</iconPath>
+    <memes>
+      <li>MUGB_ChildrenOfBlinia</li>
+      <li>MUGB_GoblinSupremacy</li>
+    </memes>
+  </IdeoIconDef>
+
+  <IdeoIconDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_GoblinH</defName>
+    <iconPath>UI/Ideoligions/GoblinH</iconPath>
+    <memes>
+      <li>MUGB_ChildrenOfBlinia</li>
+      <li>MUGB_GoblinSupremacy</li>
+    </memes>
+  </IdeoIconDef>
+
+  <IdeoIconDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_GoblinI</defName>
+    <iconPath>UI/Ideoligions/GoblinI</iconPath>
+    <memes>
+      <li>MUGB_ChildrenOfBlinia</li>
+      <li>MUGB_GoblinSupremacy</li>
+    </memes>
+  </IdeoIconDef>
+
+  <IdeoIconDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_GoblinJ</defName>
+    <iconPath>UI/Ideoligions/GoblinJ</iconPath>
+    <memes>
+      <li>MUGB_ChildrenOfBlinia</li>
+      <li>MUGB_GoblinSupremacy</li>
+    </memes>
+  </IdeoIconDef>
+
+  <IdeoIconDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_GoblinK</defName>
+    <iconPath>UI/Ideoligions/GoblinK</iconPath>
+    <memes>
+      <li>MUGB_ChildrenOfBlinia</li>
+      <li>MUGB_GoblinSupremacy</li>
+    </memes>
+  </IdeoIconDef>
+
+  <IdeoIconDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_RJGoblinA</defName>
+    <iconPath>UI/Ideoligions/RJGoblinA</iconPath>
+    <memes>
+      <li>MUGB_ChildrenOfBlinia</li>
+    </memes>
+  </IdeoIconDef>
+
+  <IdeoIconDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_RJGoblinB</defName>
+    <iconPath>UI/Ideoligions/RJGoblinB</iconPath>
+    <memes>
+      <li>MUGB_ChildrenOfBlinia</li>
+    </memes>
+  </IdeoIconDef>
+
+</Defs>
