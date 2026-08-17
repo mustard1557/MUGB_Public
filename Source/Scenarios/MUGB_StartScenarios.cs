@@ -22,6 +22,12 @@ namespace MUGB
     {
         private const int WalkInDistance = 10;
 
+        private Map arrivalMap;
+        private IntVec3 walkInCenter = IntVec3.Invalid;
+        private readonly List<Pawn> arrivingPawns = new List<Pawn>();
+        private readonly List<Thing> pendingStartingThings = new List<Thing>();
+        private int expectedStartingThingGroups;
+
         public override void GenerateIntoMap(Map map)
         {
             GameInitData initData = Find.GameInitData;
@@ -65,7 +71,11 @@ namespace MUGB
                 return;
             }
 
-            List<Pawn> spawnedPawns = new List<Pawn>();
+            arrivalMap = map;
+            walkInCenter = FindWalkInCenter(arrivalCell, map);
+            arrivingPawns.Clear();
+            pendingStartingThings.Clear();
+            expectedStartingThingGroups = startingThings.Count;
             int spawnCellIndex = 0;
             foreach (Thing thing in party)
             {
@@ -73,20 +83,46 @@ namespace MUGB
                 if (thing is Pawn pawn)
                 {
                     GenSpawn.Spawn(pawn, spawnCell, map, Rot4.Random);
-                    spawnedPawns.Add(pawn);
+                    arrivingPawns.Add(pawn);
                     spawnCellIndex++;
                 }
-                else
+                else if (!GenPlace.TryPlaceThing(thing, arrivalCell, map, ThingPlaceMode.Near))
                 {
-                    GenPlace.TryPlaceThing(thing, arrivalCell, map, ThingPlaceMode.Near);
+                    pendingStartingThings.Add(thing);
+                }
+            }
+        }
+
+        public override void PostGameStart()
+        {
+            if (arrivalMap == null || !walkInCenter.IsValid)
+            {
+                return;
+            }
+
+            for (int i = pendingStartingThings.Count - 1; i >= 0; i--)
+            {
+                Thing thing = pendingStartingThings[i];
+                if (thing.Spawned || GenPlace.TryPlaceThing(thing, walkInCenter, arrivalMap, ThingPlaceMode.Near))
+                {
+                    pendingStartingThings.RemoveAt(i);
                 }
             }
 
-            IntVec3 walkInCenter = FindWalkInCenter(arrivalCell, map);
-            for (int i = 0; i < spawnedPawns.Count; i++)
+            foreach (Thing thing in pendingStartingThings)
             {
-                Pawn pawn = spawnedPawns[i];
-                IntVec3 destination = FindReachableWalkInCell(pawn, walkInCenter, map, i);
+                Log.Error($"[MUGB] Failed to place starting item {thing.def?.defName ?? "<unknown>"} after retrying on the completed map.");
+            }
+
+            for (int i = 0; i < arrivingPawns.Count; i++)
+            {
+                Pawn pawn = arrivingPawns[i];
+                if (!pawn.Spawned || pawn.Map != arrivalMap)
+                {
+                    continue;
+                }
+
+                IntVec3 destination = FindReachableWalkInCell(pawn, walkInCenter, arrivalMap, i);
                 if (!destination.IsValid || destination == pawn.Position)
                 {
                     continue;
@@ -96,6 +132,13 @@ namespace MUGB
                 job.locomotionUrgency = LocomotionUrgency.Walk;
                 pawn.jobs.StartJob(job, JobCondition.InterruptForced);
             }
+
+            int placedStartingThingGroups = expectedStartingThingGroups - pendingStartingThings.Count;
+            Log.Message($"[MUGB] Starting party placed with {arrivingPawns.Count} pawns and {placedStartingThingGroups}/{expectedStartingThingGroups} starting item groups.");
+            arrivingPawns.Clear();
+            pendingStartingThings.Clear();
+            arrivalMap = null;
+            walkInCenter = IntVec3.Invalid;
         }
 
         private static List<IntVec3> NearbyStandableCells(IntVec3 center, Map map, int required)
