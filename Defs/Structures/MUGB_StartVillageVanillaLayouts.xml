@@ -101,4 +101,51 @@
     <needRoofClearance>true</needRoofClearance>
   </KCSG.StructureLayoutDef>
 
+  <!-- Last-resort village for islands, dense rivers, and other fragmented landforms. -->
+  <KCSG.StructureLayoutDef>
+    <defName>MUGB_StartVillageVanillaCompact</defName>
+    <isStorage>false</isStorage>
+    <spawnConduits>false</spawnConduits>
+    <layouts>
+      <li>
+        <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+        <li>.,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,.,.,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,.</li>
+        <li>.,MUGB_VanVillage_Wall,.,.,.,.,MUGB_VanVillage_Wall,.,.,MUGB_VanVillage_Wall,.,.,.,.,MUGB_VanVillage_Wall,.</li>
+        <li>.,MUGB_VanVillage_Wall,.,MUGB_VanVillage_Bedroll,.,.,MUGB_VanVillage_Wall,.,.,MUGB_VanVillage_Wall,.,MUGB_VanVillage_Bedroll,.,.,MUGB_VanVillage_Wall,.</li>
+        <li>.,MUGB_VanVillage_Wall,.,.,.,MUGB_VanVillage_Bedroll,MUGB_VanVillage_Wall,.,.,MUGB_VanVillage_Wall,.,.,.,MUGB_VanVillage_Bedroll,MUGB_VanVillage_Wall,.</li>
+        <li>.,MUGB_VanVillage_Wall,.,MUGB_VanVillage_Bedroll,.,.,MUGB_VanVillage_Wall,.,.,MUGB_VanVillage_Wall,.,MUGB_VanVillage_Bedroll,.,.,MUGB_VanVillage_Wall,.</li>
+        <li>.,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Door,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,.,.,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Door,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,MUGB_VanVillage_Wall,.</li>
+        <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+        <li>.,.,.,.,.,.,.,MUGB_VanVillage_Campfire,.,.,.,.,.,.,.,.</li>
+        <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+        <li>.,.,.,MUGB_VanVillage_Torch,.,.,.,.,.,.,.,MUGB_VanVillage_Torch,.,.,.,.</li>
+        <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+        <li>.,.,.,MUGB_VanVillage_Table,MUGB_VanVillage_Table,.,.,.,.,.,MUGB_VanVillage_Chair,MUGB_VanVillage_Chair,.,.,.,.</li>
+        <li>.,.,.,MUGB_VanVillage_Chair,MUGB_VanVillage_Chair,.,.,.,.,.,MUGB_VanVillage_Shelf,.,.,.,.,.</li>
+        <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+        <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      </li>
+    </layouts>
+    <roofGrid>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,1,1,1,1,1,1,.,.,1,1,1,1,1,1,.</li>
+      <li>.,1,1,1,1,1,1,.,.,1,1,1,1,1,1,.</li>
+      <li>.,1,1,1,1,1,1,.,.,1,1,1,1,1,1,.</li>
+      <li>.,1,1,1,1,1,1,.,.,1,1,1,1,1,1,.</li>
+      <li>.,1,1,1,1,1,1,.,.,1,1,1,1,1,1,.</li>
+      <li>.,1,1,1,1,1,1,.,.,1,1,1,1,1,1,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+      <li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+    </roofGrid>
+    <forceGenerateRoof>true</forceGenerateRoof>
+    <needRoofClearance>true</needRoofClearance>
+  </KCSG.StructureLayoutDef>
+
 </Defs>

@@ -344,7 +344,8 @@ namespace MUGB
                     .ToList()
                 : new List<KCSGLayoutDef>();
             KCSGLayoutDef fallback = DefDatabase<KCSGLayoutDef>.GetNamedSilentFail("MUGB_StartVillageVanilla1");
-            if (layouts.Count == 0 && fallback == null)
+            KCSGLayoutDef compactFallback = DefDatabase<KCSGLayoutDef>.GetNamedSilentFail("MUGB_StartVillageVanillaCompact");
+            if (layouts.Count == 0 && fallback == null && compactFallback == null)
             {
                 Log.Error("[MUGB] Starting village could not be generated because no village layout is available.");
                 return;
@@ -357,6 +358,10 @@ namespace MUGB
             if (fallback != null && !layouts.Contains(fallback))
             {
                 layouts.Add(fallback);
+            }
+            if (compactFallback != null && !layouts.Contains(compactFallback))
+            {
+                layouts.Add(compactFallback);
             }
 
             Faction villageFaction = GetOrCreateVillageFaction();
@@ -474,19 +479,33 @@ namespace MUGB
             int height = layout.Sizes.z;
             List<IntVec3> playerCells = map.mapPawns.FreeColonistsSpawned.Select(pawn => pawn.Position).ToList();
 
-            // Prefer a central settlement like vanilla map features, but retain the old map-wide
-            // search as a fallback for mountainous, river-heavy, or unusually small maps.
-            for (int centralPass = 0; centralPass < 2; centralPass++)
+            int mapWidth = map.Size.x;
+            int mapHeight = map.Size.z;
+            int[,] waterPrefix = new int[mapWidth + 1, mapHeight + 1];
+            int[,] impassablePrefix = new int[mapWidth + 1, mapHeight + 1];
+            for (int z = 0; z < mapHeight; z++)
             {
-                bool centralOnly = centralPass == 0;
-                for (int cleanPass = 0; cleanPass < 2; cleanPass++)
+                for (int x = 0; x < mapWidth; x++)
                 {
-                    bool allowFullClean = cleanPass > 0;
-                    if (TryFindVillageRectPass(map, width, height, playerCells, centralOnly, allowFullClean, out result))
-                    {
-                        fullClean = allowFullClean;
-                        return true;
-                    }
+                    IntVec3 cell = new IntVec3(x, 0, z);
+                    TerrainDef terrain = cell.GetTerrain(map);
+                    int water = terrain.IsWater || terrain.IsRiver ? 1 : 0;
+                    int impassable = cell.Impassable(map) ? 1 : 0;
+                    waterPrefix[x + 1, z + 1] = water + waterPrefix[x, z + 1] + waterPrefix[x + 1, z] - waterPrefix[x, z];
+                    impassablePrefix[x + 1, z + 1] = impassable + impassablePrefix[x, z + 1] + impassablePrefix[x + 1, z] - impassablePrefix[x, z];
+                }
+            }
+
+            // First preserve passable terrain, then permit KCSG to clear rock and other
+            // impassable obstacles. Water and rivers are never overwritten.
+            for (int cleanPass = 0; cleanPass < 2; cleanPass++)
+            {
+                bool allowFullClean = cleanPass > 0;
+                if (TryFindVillageRectPass(map, width, height, playerCells, allowFullClean,
+                    waterPrefix, impassablePrefix, out result))
+                {
+                    fullClean = allowFullClean;
+                    return true;
                 }
             }
             return false;
@@ -497,47 +516,55 @@ namespace MUGB
             int width,
             int height,
             List<IntVec3> playerCells,
-            bool centralOnly,
             bool allowFullClean,
+            int[,] waterPrefix,
+            int[,] impassablePrefix,
             out CellRect result)
         {
             result = default;
             int edgeMargin = Math.Max(width, height) / 2 + 6;
-            float centralRadius = Math.Max(18f, Math.Min(map.Size.x, map.Size.z) * 0.18f);
-            float centralRadiusSquared = centralRadius * centralRadius;
-            int attempts = centralOnly ? 180 : 240;
-
-            for (int i = 0; i < attempts; i++)
+            float bestDistance = float.MaxValue;
+            int minX = edgeMargin;
+            int maxX = map.Size.x - edgeMargin - 1;
+            int minZ = edgeMargin;
+            int maxZ = map.Size.z - edgeMargin - 1;
+            for (int z = minZ; z <= maxZ; z++)
             {
-                IntVec3 center = CellFinderLoose.RandomCellWith(c =>
-                    c.InBounds(map)
-                    && !c.CloseToEdge(map, edgeMargin)
-                    && (!centralOnly || c.DistanceToSquared(map.Center) <= centralRadiusSquared)
-                    && (playerCells.Count == 0 || playerCells.All(p => p.DistanceTo(c) >= 35f)), map);
-                if (!center.IsValid)
+                for (int x = minX; x <= maxX; x++)
                 {
-                    return false;
-                }
+                    IntVec3 center = new IntVec3(x, 0, z);
+                    float distance = center.DistanceToSquared(map.Center);
+                    if (distance >= bestDistance || (playerCells.Count > 0 && playerCells.Any(p => p.DistanceTo(center) < 35f)))
+                    {
+                        continue;
+                    }
 
-                CellRect rect = CellRect.CenteredOn(center, width, height).ClipInsideMap(map);
-                if (rect.Width != width || rect.Height != height)
-                {
-                    continue;
-                }
+                    CellRect rect = CellRect.CenteredOn(center, width, height);
+                    if (rect.Width != width || rect.Height != height || !rect.FullyContainedWithin(new CellRect(0, 0, map.Size.x, map.Size.z)))
+                    {
+                        continue;
+                    }
 
-                bool valid = rect.Cells.All(cell =>
-                    cell.InBounds(map)
-                    && !cell.GetTerrain(map).IsWater
-                    && !cell.GetTerrain(map).IsRiver
-                    && (allowFullClean || !cell.Impassable(map)));
-                if (valid)
-                {
+                    if (PrefixRectSum(waterPrefix, rect) != 0 || (!allowFullClean && PrefixRectSum(impassablePrefix, rect) != 0))
+                    {
+                        continue;
+                    }
+
                     result = rect;
-                    return true;
+                    bestDistance = distance;
                 }
             }
 
-            return false;
+            return result.Area > 0;
+        }
+
+        private static int PrefixRectSum(int[,] prefix, CellRect rect)
+        {
+            int minX = rect.minX;
+            int minZ = rect.minZ;
+            int maxX = rect.maxX + 1;
+            int maxZ = rect.maxZ + 1;
+            return prefix[maxX, maxZ] - prefix[minX, maxZ] - prefix[maxX, minZ] + prefix[minX, minZ];
         }
 
         private static void SpawnVillageFoodAndField(Map map, CellRect rect)
