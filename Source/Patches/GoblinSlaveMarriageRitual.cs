@@ -906,11 +906,29 @@ namespace MUGB
                 }
             }
 
+            LookTargets letterLookTargets = new LookTargets(masters.Concat(slaves));
+            string attachedOutcomeText = null;
+            RitualOutcomePossibility outcome = def.outcomeChances.FirstOrDefault();
+            if (outcome != null)
+            {
+                ApplyAttachableOutcome(totalPresence, jobRitual, outcome, out attachedOutcomeText, ref letterLookTargets);
+            }
+
+            TaggedString letterText = "MUGB_SlaveMarriageRitualCompletedText".Translate(
+                masters.Count,
+                slaves.Count,
+                registered,
+                quality.ToStringPercent());
+            if (!attachedOutcomeText.NullOrEmpty())
+            {
+                letterText += "\n\n" + attachedOutcomeText;
+            }
+
             Find.LetterStack.ReceiveLetter(
                 "MUGB_SlaveMarriageRitualCompletedLabel".Translate(),
-                "MUGB_SlaveMarriageRitualCompletedText".Translate(masters.Count, slaves.Count, registered, quality.ToStringPercent()),
+                letterText,
                 quality < 0.2f ? LetterDefOf.RitualOutcomeNegative : LetterDefOf.RitualOutcomePositive,
-                new LookTargets(masters.Concat(slaves)));
+                letterLookTargets);
         }
 
         private static int QualityThoughtStage(float quality)

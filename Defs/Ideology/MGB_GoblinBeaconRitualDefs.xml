@@ -83,6 +83,14 @@
         <maxQualityOffset>0.25</maxQualityOffset>
       </li>
     </comps>
+    <outcomeChances>
+      <li>
+        <label>signal sent</label>
+        <chance>1</chance>
+        <description>The goblin beacon sent its signal.</description>
+        <positivityIndex>0</positivityIndex>
+      </li>
+    </outcomeChances>
   </RitualOutcomeEffectDef>
 
   <RitualPatternDef MayRequire="Ludeon.RimWorld.Ideology">

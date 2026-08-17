@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>More Ritual Rewards</li>
+    </mods>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/RitualAttachableOutcomeEffectDef[defName="Sinnamon_RitualTaunt"]/requiredMemeAny</xpath>
+      <value>
+        <li>MUGB_ChildrenOfBlinia</li>
+        <li>MUGB_GoblinSupremacy</li>
+      </value>
+    </match>
+  </Operation>
+
+</Patch>

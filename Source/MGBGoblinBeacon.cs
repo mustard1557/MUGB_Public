@@ -681,13 +681,27 @@ namespace MUGB
                 return;
             }
 
+            LookTargets letterLookTargets = beacon;
+            string attachedOutcomeText = null;
+            RitualOutcomePossibility outcome = def.outcomeChances.FirstOrDefault();
+            if (outcome != null)
+            {
+                ApplyAttachableOutcome(totalPresence, jobRitual, outcome, out attachedOutcomeText, ref letterLookTargets);
+            }
+
+            TaggedString letterText = "MUGB_GoblinBeaconRitualOutcomeText".Translate(
+                ("MUGB_GoblinBeaconSignalQuality" + signalQuality).Translate(),
+                ritualQuality.ToStringPercent());
+            if (!attachedOutcomeText.NullOrEmpty())
+            {
+                letterText += "\n\n" + attachedOutcomeText;
+            }
+
             Find.LetterStack.ReceiveLetter(
                 "MUGB_GoblinBeaconRitualOutcomeLabel".Translate(),
-                "MUGB_GoblinBeaconRitualOutcomeText".Translate(
-                    ("MUGB_GoblinBeaconSignalQuality" + signalQuality).Translate(),
-                    ritualQuality.ToStringPercent()),
+                letterText,
                 LetterDefOf.RitualOutcomePositive,
-                beacon);
+                letterLookTargets);
         }
     }
 
