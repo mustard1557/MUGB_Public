@@ -31,7 +31,7 @@ namespace MUGB
             IntVec3 arrivalCell;
             if (!RCellFinder.TryFindRandomPawnEntryCell(out arrivalCell, map, 1f, false))
             {
-                arrivalCell = FindClosestWalkableLandToEdge(map);
+                arrivalCell = FindClosestWalkableLandToEdge(map, initData.startingAndOptionalPawns.Count);
             }
             if (!arrivalCell.IsValid)
             {
@@ -39,9 +39,7 @@ namespace MUGB
                 return;
             }
 
-            List<List<Thing>> groups = initData.startingAndOptionalPawns
-                .Select(pawn => new List<Thing> { pawn })
-                .ToList();
+            List<Thing> party = initData.startingAndOptionalPawns.Cast<Thing>().ToList();
             List<Thing> startingThings = Find.Scenario.AllParts
                 .SelectMany(part => part.PlayerStartingThings())
                 .ToList();
@@ -52,13 +50,13 @@ namespace MUGB
                 {
                     thing.SetFactionDirect(Faction.OfPlayer);
                 }
-                groups[i % groups.Count].Add(thing);
+                party.Add(thing);
             }
 
             DropPodUtility.DropThingGroupsNear(
                 arrivalCell,
                 map,
-                groups,
+                new List<List<Thing>> { party },
                 110,
                 true,
                 true,
@@ -69,7 +67,7 @@ namespace MUGB
                 null);
         }
 
-        private static IntVec3 FindClosestWalkableLandToEdge(Map map)
+        private static IntVec3 FindClosestWalkableLandToEdge(Map map, int pawnCount)
         {
             IntVec3 best = IntVec3.Invalid;
             int bestEdgeDistance = int.MaxValue;
@@ -80,6 +78,19 @@ namespace MUGB
                 {
                     IntVec3 cell = new IntVec3(x, 0, z);
                     if (!cell.Standable(map) || cell.GetTerrain(map).IsWater)
+                    {
+                        continue;
+                    }
+
+                    int nearbyStandable = 0;
+                    foreach (IntVec3 nearby in CellRect.CenteredOn(cell, 9, 9).ClipInsideMap(map))
+                    {
+                        if (nearby.Standable(map) && !nearby.GetTerrain(map).IsWater)
+                        {
+                            nearbyStandable++;
+                        }
+                    }
+                    if (nearbyStandable < pawnCount + 8)
                     {
                         continue;
                     }
