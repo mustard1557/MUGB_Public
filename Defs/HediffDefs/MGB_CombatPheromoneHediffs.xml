@@ -13,9 +13,6 @@
     <stages>
       <li>
         <label>1/4</label>
-        <statOffsets>
-          <PainShockThreshold>0.03</PainShockThreshold>
-        </statOffsets>
         <statFactors>
           <MoveSpeed>1.01</MoveSpeed>
           <MeleeHitChance>1.02</MeleeHitChance>
@@ -24,9 +21,6 @@
       <li>
         <label>2/4</label>
         <minSeverity>0.50</minSeverity>
-        <statOffsets>
-          <PainShockThreshold>0.06</PainShockThreshold>
-        </statOffsets>
         <statFactors>
           <MoveSpeed>1.02</MoveSpeed>
           <MeleeHitChance>1.04</MeleeHitChance>
@@ -36,9 +30,6 @@
       <li>
         <label>3/4</label>
         <minSeverity>0.75</minSeverity>
-        <statOffsets>
-          <PainShockThreshold>0.08</PainShockThreshold>
-        </statOffsets>
         <statFactors>
           <MoveSpeed>1.03</MoveSpeed>
           <MeleeHitChance>1.05</MeleeHitChance>
@@ -48,9 +39,6 @@
       <li>
         <label>4/4</label>
         <minSeverity>1.00</minSeverity>
-        <statOffsets>
-          <PainShockThreshold>0.10</PainShockThreshold>
-        </statOffsets>
         <statFactors>
           <MoveSpeed>1.04</MoveSpeed>
           <MeleeHitChance>1.06</MeleeHitChance>
@@ -72,9 +60,6 @@
     <maxSeverity>1</maxSeverity>
     <stages>
       <li>
-        <statOffsets>
-          <PainShockThreshold>0.07</PainShockThreshold>
-        </statOffsets>
         <statFactors>
           <MoveSpeed>1.01</MoveSpeed>
           <MeleeHitChance>1.04</MeleeHitChance>
