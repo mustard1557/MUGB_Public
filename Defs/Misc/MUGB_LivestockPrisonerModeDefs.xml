@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    한국어 의도: '고기용 가축' 죄수 처우입니다. 설계지침 7.1.
+
+    바닐라 선례는 Biotech의 HemogenFarm입니다. "처우를 지정해두면 조건이 맞을 때 자동으로
+    작업이 예약되고 담당 폰이 알아서 수행"하는 구조가 똑같습니다.
+
+    기존 Execution 처우와 역할이 겹치지 않습니다.
+      Execution     : 그 자리에서 죽임 → 시체가 감옥에 흩어짐
+      고기용 가축   : 도축 작업대로 끌고 감 → 시체가 도축 지점에 바로 생김
+
+    죄수를 자동 상한 규칙(P4)의 대상으로 삼지 않는 이유가 이 처우입니다. 습격 한 번에
+    여럿이 들어오면 상한 규칙은 즉시 몰살시키지만, 처우는 플레이어가 명시적으로 찍은
+    대상만 걸리므로 폭주할 수 없습니다.
+
+    mustBeAwake false: 전투 직후 기절한 포로가 주 대상이므로 필수입니다.
+    isNonExclusiveInteraction을 넣지 않는 이유: 다른 처우와 배타적이어야 합니다.
+
+    알려진 한계: PrisonerInteractionModeDef에는 "특정 규율이 없으면 숨김" 같은 범용 필드가
+    없습니다(바닐라도 hideIfNotRecruitable처럼 개별 bool뿐). 그래서 규율이 없어도 목록에는
+    뜨지만, 워크기버가 규율을 확인하므로 실제로 아무도 오지 않습니다.
+  -->
+  <PrisonerInteractionModeDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_MeatLivestock</defName>
+    <label>meat livestock</label>
+    <listOrder>41</listOrder>
+    <mustBeAwake>false</mustBeAwake>
+    <description>This prisoner is kept as meat. A handler will haul them to a butcher station and put them down there.</description>
+  </PrisonerInteractionModeDef>
+
+</Defs>

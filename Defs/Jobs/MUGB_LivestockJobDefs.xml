@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    defName이 TakeLivestockToButcher인데 실제 동작은 '제자리 처분'입니다.
+    끌고 가는 설계를 폐기하면서 동작만 바뀌었고, defName은 그대로 둡니다.
+    이미 배포된 defName을 바꾸면 진행 중이던 잡을 담은 세이브에서 참조가 깨집니다.
+    (전에 규율 defName을 바꿨다가 이데올로기에서 규율이 통째로 빠지는 사고를 냈습니다.)
+    표시되는 이름은 라벨과 reportString으로만 바꿉니다.
+  -->
+  <JobDef>
+    <defName>MUGB_TakeLivestockToButcher</defName>
+    <driverClass>MUGB.Livestock.JobDriver_TakeLivestockToButcher</driverClass>
+    <reportString>slaughtering TargetA.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+
+</Defs>

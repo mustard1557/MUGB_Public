@@ -220,6 +220,9 @@ namespace MUGB
             "MUGB_Apparel_CrudeHelmetB"
         };
 
+        [ThreadStatic]
+        private static bool queryingHeadgearVisibility;
+
         protected override Graphic GetGraphic(PawnRenderNode node, PawnDrawParms parms)
         {
             PawnRenderNodeProperties_GoblinAddon props = node.Props as PawnRenderNodeProperties_GoblinAddon;
@@ -321,7 +324,7 @@ namespace MUGB
                 return false;
             }
 
-            if (IsEarAddon(props) && WearsEarHidingHeadgear(pawn))
+            if (IsEarAddon(props) && EarHidingHeadgearIsVisible(node, parms))
             {
                 return false;
             }
@@ -362,6 +365,94 @@ namespace MUGB
         private static bool IsEarAddon(PawnRenderNodeProperties_GoblinAddon props)
         {
             return props.tuningKey == "EarLeft" || props.tuningKey == "EarRight";
+        }
+
+        // 귀를 숨기는 기준은 "투구를 착용했는가"가 아니라 "투구가 지금 실제로 그려지는가"입니다.
+        // 모자 숨김 계열 모드(AB's Head Apparel Tweaker, Hats Display Selection,
+        // Show Hair With Hats 등)는 어패럴을 벗기지 않은 채 헤드 어패럴 노드의 CanDrawNow를 끄거나
+        // 노드 자체를 만들지 않습니다. 초상화의 Prefs.HatsOnlyOnMap도 같은 경로입니다.
+        // 착용 목록만 보면 그런 상황에서 투구도 귀도 없는 민머리가 됩니다.
+        // 그래서 같은 렌더 트리에 있는 해당 투구 노드에게 같은 parms로 직접 물어봅니다.
+        private static bool EarHidingHeadgearIsVisible(PawnRenderNode node, PawnDrawParms parms)
+        {
+            // 값싼 선행 검사. 귀를 가리는 투구를 아예 안 입었으면 트리를 훑지 않습니다.
+            if (!WearsEarHidingHeadgear(parms.pawn))
+            {
+                return false;
+            }
+
+            // 서드파티가 헤드 어패럴 CanDrawNow 안에서 다시 부속 상태를 조회하면 무한 재귀가 됩니다.
+            // 그때는 판정을 포기하고 착용 여부(기존 동작)로 폴백합니다.
+            // 병렬 pre-render 경로에서 호출되므로 스레드마다 별도 플래그여야 합니다.
+            if (queryingHeadgearVisibility)
+            {
+                return true;
+            }
+
+            PawnRenderNode root = node?.tree?.rootNode;
+            if (root == null)
+            {
+                return true;
+            }
+
+            queryingHeadgearVisibility = true;
+            try
+            {
+                // 노드를 하나도 못 찾았다면 모드가 노드 생성 단계에서 걷어낸 것이므로 귀를 그립니다.
+                return TryResolveHeadgearVisibility(root, parms, out bool visible) && visible;
+            }
+            catch (Exception)
+            {
+                return true;
+            }
+            finally
+            {
+                queryingHeadgearVisibility = false;
+            }
+        }
+
+        // 반환값은 "해당 투구 노드를 트리에서 찾았는가", visible은 "그중 하나라도 그려지는가"입니다.
+        private static bool TryResolveHeadgearVisibility(PawnRenderNode node, PawnDrawParms parms, out bool visible)
+        {
+            visible = false;
+            bool found = false;
+
+            if (node is PawnRenderNode_Apparel apparelNode
+                && apparelNode.apparel?.def != null
+                && EarHidingHeadgearDefNames.Contains(apparelNode.apparel.def.defName))
+            {
+                found = true;
+                if (node.Worker?.CanDrawNow(node, parms) == true)
+                {
+                    visible = true;
+                    return true;
+                }
+            }
+
+            PawnRenderNode[] children = node.children;
+            if (children != null)
+            {
+                for (int i = 0; i < children.Length; i++)
+                {
+                    PawnRenderNode child = children[i];
+                    if (child == null)
+                    {
+                        continue;
+                    }
+
+                    if (TryResolveHeadgearVisibility(child, parms, out bool childVisible))
+                    {
+                        found = true;
+                        if (childVisible)
+                        {
+                            visible = true;
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return found;
         }
 
         private static bool WearsEarHidingHeadgear(Pawn pawn)

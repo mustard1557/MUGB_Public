@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    한국어 의도: 인간가축 탭 버튼입니다. 설계지침 6.1~6.3.
+
+    바닐라 가축탭 안에 넣지 않고 독립 탭으로 두는 이유는, 역설적으로 그쪽이 더 안전하기
+    때문입니다. MainTabWindow_Animals는 UI 모드가 가장 많이 몰리는 지점이라 거기를 패치하면
+    로드 순서 운이 됩니다. 독립 MainTabWindow는 바닐라 클래스를 하나도 건드리지 않습니다.
+
+    탭바 혼잡은 두 가지로 해소합니다.
+      minimized + iconPath : 라벨 없이 아이콘만 차지합니다(바닐라 이데올로기 탭과 같은 형태).
+      workerClass          : 규율이 없으면 탭 자체를 숨깁니다. 이 기능을 안 쓰는 플레이어에게는
+                             탭바가 전혀 늘어나지 않습니다.
+
+    defaultHotKey를 넣지 않습니다. 동물 F4 / 야생 F5인데 빈 키를 잡으면 다른 모드와 부딪힙니다.
+
+    order 45: 동물(40)과 야생(50) 사이. 같은 계열로 읽히게 두었습니다.
+  -->
+  <MainButtonDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_HumanLivestockTab</defName>
+    <label>human livestock</label>
+    <description>Manage prisoners and slaves kept as livestock: set prisoner treatment, mark individuals for butchery, and protect the ones you want to keep.</description>
+    <tabWindowClass>MUGB.Livestock.MainTabWindow_HumanLivestock</tabWindowClass>
+    <workerClass>MUGB.Livestock.MainButtonWorker_HumanLivestock</workerClass>
+    <iconPath>UI/Issues/Slavery</iconPath>
+    <minimized>true</minimized>
+    <order>45</order>
+    <closesWorldView>true</closesWorldView>
+  </MainButtonDef>
+
+</Defs>

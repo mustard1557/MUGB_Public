@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    한국어 의도: 인간가축 도축 지정입니다.
+
+    바닐라 Slaughter 지정을 재사용하지 않는 이유는, 그쪽이 동물 전용 워크기버
+    (WorkGiver_Slaughter, RaceProps.Animal 체크가 박혀 있음)와 묶여 있기 때문입니다.
+    같은 지정을 인간형에 달면 바닐라 워크기버가 매번 헛돌게 됩니다.
+
+    아이콘은 바닐라 Core 텍스처를 그대로 씁니다. Core는 항상 로드되므로 안전합니다.
+  -->
+  <DesignationDef>
+    <defName>MUGB_SlaughterHumanlike</defName>
+    <texturePath>Designations/Slaughter</texturePath>
+    <targetType>Thing</targetType>
+  </DesignationDef>
+
+  <!--
+    한국어 의도: 자동 규칙(P4)에서 영구 제외할 개체 표시입니다.
+
+    별도 GameComponent를 만들지 않고 Designation을 쓰는 이유:
+      Designation은 이미 세이브에 저장되고 맵 단위로 관리됩니다. 새 저장 스키마를 만들지
+      않아도 되고, 기존 정리 경로(사망·신분 변경)를 그대로 재사용할 수 있습니다.
+      "보호"는 결국 폰에 붙는 표식이므로 지정과 성격도 같습니다.
+  -->
+  <DesignationDef>
+    <defName>MUGB_ProtectFromSlaughter</defName>
+    <texturePath>Designations/Tame</texturePath>
+    <targetType>Thing</targetType>
+  </DesignationDef>
+
+</Defs>

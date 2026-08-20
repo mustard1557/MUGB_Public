@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    한국어 의도: 노예 도축 규율입니다. 설계지침 3장.
+
+    바닐라 Slavery 이슈는 건드리지 않고 별도 이슈로 둡니다. "노예제를 인정하는가"와
+    "잡아둔 사람을 가축처럼 도축하는가"는 다른 축이기 때문입니다.
+
+    3단 구성 (금지함 / 상관없음 / 허용함):
+      셋이 서로 중복되지 않도록 무드를 다르게 줍니다. 무드가 같으면 상관없음과 허용함이
+      사실상 같은 규율이 되어버립니다.
+
+        금지함   → 도축 불가. 목격/전해들으면 부정 무드
+        상관없음 → 도축 가능. 무드 없음 (무관심)
+        허용함   → 도축 가능. 속죄가 이루어졌다는 긍정 무드
+
+      즉 '상관없음'은 허용의 약한 버전이 아니라 "도덕적 입장 자체가 없음"이고,
+      '허용함'은 단순 허가가 아니라 종교적 의무를 다한 것입니다. 그래서 뺄 이유가 없습니다.
+
+    기능 게이트는 "금지함이 아닐 것"입니다. 상관없음·허용함 모두 도축이 열립니다.
+
+    고블린 밈(MemeDef.requireOne)에는 넣지 않습니다.
+      requireOne은 "이 중 하나여야 한다"라서 이데올로기 편집 화면에서 나머지 선택지를
+      아예 지워버립니다. 여기 넣었더니 고블린 이데올로기에서 '금지함'이 사라져 남은 둘이
+      모두 도축을 허용하는 상태가 되었고, 결과적으로 고를 이유가 없는 이슈가 됐습니다.
+      "고블린 밈이면 기본적으로 허용, 다만 플레이어가 직접 바꿀 수 있게"라는 요구와
+      정면으로 충돌합니다.
+
+      대신 associatedMemes로 생성 시 편향만 줍니다. 세 단계가 전부 선택 가능합니다.
+  -->
+  <IssueDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_SlaveLivestock</defName>
+    <label>slave butchery</label>
+    <iconPath>UI/Icons/MGB_slavebutcher</iconPath>
+  </IssueDef>
+
+  <PreceptDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_LivestockSlaves_Encouraged</defName>
+    <issue>MUGB_SlaveLivestock</issue>
+    <label>required</label>
+    <description>Slaves and prisoners are not of our kind. They are to be butchered, and in that death they atone. To let one die otherwise is to waste the atonement.</description>
+    <impact>High</impact>
+    <displayOrderInIssue>10</displayOrderInIssue>
+    <displayOrderInImpact>100</displayOrderInImpact>
+    <defaultSelectionWeight>0</defaultSelectionWeight>
+    <!--
+      고블린 밈을 가진 이데올로기는 이 규율이 기본으로 잡힙니다.
+      associatedMemes는 강제가 아니라 선호이므로 플레이어가 직접 다른 단계로 바꿀 수 있습니다.
+    -->
+    <associatedMemes>
+      <li>MUGB_ChildrenOfBlinia</li>
+      <li>MUGB_GoblinSupremacy</li>
+    </associatedMemes>
+    <comps />
+  </PreceptDef>
+
+  <!--
+    defName이 _Acceptable인데 라벨이 '상관없음'인 이유:
+      한때 이 단계를 _DontCare로 바꿨다가 되돌렸습니다. 그 사이 배포된 빌드로 플레이한
+      세이브의 이데올로기가 _Acceptable을 참조하고 있어서, 이름을 바꾸면 참조가 깨지고
+      규율이 이데올로기에서 통째로 빠집니다("Could not load reference to PreceptDef").
+      그러면 탭도 기즈모도 전부 숨겨져 기능이 사라진 것처럼 보입니다.
+
+      배포된 defName은 바꾸지 마세요. 표시 이름은 라벨로만 바꾸면 됩니다.
+  -->
+  <PreceptDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_LivestockSlaves_Acceptable</defName>
+    <issue>MUGB_SlaveLivestock</issue>
+    <label>don't care</label>
+    <description>Whatever is done to slaves and prisoners is no concern of ours. Butcher them or don't; it carries no weight either way.</description>
+    <impact>Low</impact>
+    <displayOrderInIssue>20</displayOrderInIssue>
+    <displayOrderInImpact>200</displayOrderInImpact>
+    <defaultSelectionWeight>0.2</defaultSelectionWeight>
+    <associatedMemes>
+      <li>MUGB_ChildrenOfBlinia</li>
+      <li>MUGB_GoblinSupremacy</li>
+    </associatedMemes>
+    <comps />
+  </PreceptDef>
+
+  <PreceptDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_LivestockSlaves_Forbidden</defName>
+    <issue>MUGB_SlaveLivestock</issue>
+    <label>forbidden</label>
+    <description>However low a slave or prisoner may be, butchering one like an animal is wrong. A person is not meat.</description>
+    <impact>Medium</impact>
+    <displayOrderInIssue>30</displayOrderInIssue>
+    <displayOrderInImpact>300</displayOrderInImpact>
+    <defaultSelectionWeight>1</defaultSelectionWeight>
+    <comps />
+  </PreceptDef>
+
+</Defs>

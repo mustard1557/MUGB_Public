@@ -299,6 +299,21 @@ namespace MUGB
                 Settings.Write();
             }
 
+            if (ModsConfig.IdeologyActive)
+            {
+                listing.GapLine();
+                listing.Label("MUGB_SettingsLivestockHeader".Translate());
+                listing.CheckboxLabeled(
+                    "MUGB_SettingsShowLivestockTabLabel".Translate(),
+                    ref Settings.showHumanLivestockTab);
+                listing.Label("MUGB_SettingsShowLivestockTabDesc".Translate());
+                listing.Gap(6f);
+                listing.CheckboxLabeled(
+                    "MUGB_SettingsNewPrisonersAsMeatLabel".Translate(),
+                    ref Settings.newPrisonersAsMeatLivestock);
+                listing.Label("MUGB_SettingsNewPrisonersAsMeatDesc".Translate());
+            }
+
             if (Patches.FacialAnimationCompatPatch.Applied)
             {
                 listing.GapLine();
@@ -3071,6 +3086,13 @@ namespace MUGB
         public float goblinChildStageDays = 3.5f;
         public float goblinBabyStageDays = 0.5f;
         public int goblinBirthStrainLimit = 4;
+        // 인간가축: 탭 버튼을 띄울지. 탭바를 아끼고 싶은 사람을 위한 스위치입니다.
+        // 끄더라도 폰 기즈모와 죄수 처우는 그대로 동작합니다.
+        public bool showHumanLivestockTab = true;
+        // 인간가축(P2): 새로 잡힌 죄수를 '고기용 가축' 처우로 시작할지.
+        // 기본값은 반드시 false입니다. 켜두고 잊으면 고스탯 포로나 퀘스트 인질까지
+        // 도축대로 갑니다(설계지침 7.2의 안전장치).
+        public bool newPrisonersAsMeatLivestock;
         public bool disableToxicPheromonesCheat;
         public bool allowFacialAnimationForGoblins;
         public int goblinSquadSoftCap = 6;
@@ -3184,6 +3206,8 @@ namespace MUGB
             goblinBabyStageDays = Patches.GoblinAgeUtility.NormalizeBabyStageDays(goblinBabyStageDays);
             Scribe_Values.Look(ref goblinBirthStrainLimit, "goblinBirthStrainLimit", 4);
             goblinBirthStrainLimit = Patches.GoblinBirthStrainUtility.NormalizeLimit(goblinBirthStrainLimit);
+            Scribe_Values.Look(ref newPrisonersAsMeatLivestock, "newPrisonersAsMeatLivestock", false);
+            Scribe_Values.Look(ref showHumanLivestockTab, "showHumanLivestockTab", true);
             Scribe_Values.Look(ref disableToxicPheromonesCheat, "disableToxicPheromonesCheat", false);
             Scribe_Values.Look(ref allowFacialAnimationForGoblins, "allowFacialAnimationForGoblins", false);
             Scribe_Values.Look(ref goblinSquadSoftCap, "goblinSquadSoftCap", 6);

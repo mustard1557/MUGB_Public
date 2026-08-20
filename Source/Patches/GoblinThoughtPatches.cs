@@ -851,7 +851,10 @@ namespace MUGB
         private static readonly Dictionary<string, float> GoblinSituationalMoodOverrides = new Dictionary<string, float>
         {
             { "EnvironmentDark", 0f },
-            { "ApparelDamaged", 0f },
+            // 0단계(해진 복장)는 ThoughtWorker_ApparelDamaged_GoblinIgnoreFirstStagePatch에서
+            // 아예 끄기 때문에, 고블린에게 켜질 수 있는 단계는 1단계(낡은 옷)뿐입니다.
+            // 따라서 여기 값 하나가 곧 1단계 기분값입니다.
+            { "ApparelDamaged", -1f },
             { "DeadMansApparel", 0f },
             { "HumanLeatherApparelSad", 8f }
         };

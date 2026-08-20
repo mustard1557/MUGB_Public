@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
   <ThingDef Name="MUGB_GoblinShieldBase" ParentName="BaseMeleeWeapon_Blunt_Quality" Abstract="True">
@@ -32,6 +32,11 @@
       </layers>
       <countsAsClothingForNudity>false</countsAsClothingForNudity>
       <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+      <!-- 방패는 옷 취급이라 내구도가 닳으면 "해진 복장/낡은 옷" 무드와 경고가 뜹니다.
+           전투에서 원래 자주 닳는 장비라 그 경고가 의미가 없어서 판정에서 제외합니다.
+           careIfDamaged는 바닐라 ThoughtWorker_ApparelDamaged가 제일 먼저 보는 조건이고,
+           게임 전체에서 그 한 곳에서만 읽습니다. 내구도 감소, 파괴, HP 표시, 수리는 그대로입니다. -->
+      <careIfDamaged>false</careIfDamaged>
       <tags>
         <li>MUGB_GoblinApparel</li>
         <li>MUGB_GoblinShield</li>

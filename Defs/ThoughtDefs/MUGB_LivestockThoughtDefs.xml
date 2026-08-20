@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    한국어 의도: 노예 도축에 대한 반응 사상들입니다. 설계지침 4.3 / 3.4.
+
+    규율 3단이 서로 다른 무드를 주도록 짰습니다. 무드가 같으면 '상관없음'과 '허용함'이
+    사실상 같은 규율이 되어버립니다. 도축당하는 쪽도 자기 이데올로기에 따라 갈립니다.
+
+      본 사람 \ 이데올로기   금지함 · 무입장          상관없음 · 허용함
+      ─────────────────────────────────────────────────────────────────
+      정착민                 KnowLivestockSlaughter   (허용함만) Atonement
+                             -5                       +2
+      노예 · 죄수            WitnessedLivestockButchery  WitnessedLivestockResigned
+                             -2 (공포)                   -1 (체념)
+
+    바닐라와의 관계:
+      실제 시체 해체는 바닐라 도축 작업이 처리하므로 ButcheredHumanlikeCorpse(-6)와
+      KnowButcheredHumanlikeCorpse(-6)가 그때 따로 걸립니다. 아래 사상들은 그것과
+      '합산'되므로 수치를 바닐라보다 낮게 잡았습니다.
+
+    고블린·하프고블린은 규율이 없어도 부정 사상 면제입니다. XML로는 표현할 수 없어
+    코드에서 거릅니다(MUGB_LivestockUtility.IsGoblinKind).
+  -->
+
+  <!--
+    도축을 금기로 여기는(또는 입장이 없는) 이데올로기의 노예·죄수가 받습니다.
+
+    방향 주의: 이 사상은 노예 사기를 떨어뜨리므로 반란 위험을 '높입니다'. 도축을 공짜로
+    쓰지 못하게 하는 비용입니다.
+
+    stackedEffectMultiplier 1: 바닐라 관찰 사상은 0.5라 중첩할수록 효율이 떨어집니다.
+    여기서는 "-2씩 최대 4중첩 = -8"이 그대로 쌓이게 합니다. 반복될수록 공포가 누적되어야
+    도축의 대가가 됩니다.
+  -->
+  <ThoughtDef>
+    <defName>MUGB_WitnessedLivestockButchery</defName>
+    <icon>Things/Mote/ThoughtSymbol/Skull</icon>
+    <showBubble>true</showBubble>
+    <durationDays>4</durationDays>
+    <stackLimit>4</stackLimit>
+    <stackedEffectMultiplier>1</stackedEffectMultiplier>
+    <nullifyingTraits>
+      <li>Psychopath</li>
+      <li>Bloodlust</li>
+    </nullifyingTraits>
+    <!-- 코드에서도 갈라 주지만, 안전망으로 남겨 둡니다. -->
+    <nullifyingPrecepts>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MUGB_LivestockSlaves_Acceptable</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MUGB_LivestockSlaves_Encouraged</li>
+    </nullifyingPrecepts>
+    <stages>
+      <li>
+        <label>saw a butchering</label>
+        <description>They butchered prisoners and slaves like livestock, without mercy. Will I meet the same end?</description>
+        <baseMoodEffect>-2</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!--
+    도축을 인정하는(상관없음·허용함) 이데올로기의 노예·죄수가 받습니다.
+
+    자기 신앙이 "그래도 된다"고 말하는데도 눈앞에서 벌어지는 일이라, 공포 대신 체념에
+    가깝습니다. 0으로 두지 않는 이유는 그래도 자기 차례를 떠올리기 때문입니다.
+
+    -1 / 4중첩 / 2일: 공포(-2, 4일)의 절반 강도, 절반 지속입니다.
+
+    ThoughtDef에는 requiredPrecepts 필드가 없어(nullifyingPrecepts만 존재) 규율 확인은
+    코드에서 합니다.
+  -->
+  <ThoughtDef>
+    <defName>MUGB_WitnessedLivestockResigned</defName>
+    <icon>Things/Mote/ThoughtSymbol/Skull</icon>
+    <durationDays>2</durationDays>
+    <stackLimit>4</stackLimit>
+    <stackedEffectMultiplier>1</stackedEffectMultiplier>
+    <nullifyingTraits>
+      <li>Psychopath</li>
+      <li>Bloodlust</li>
+    </nullifyingTraits>
+    <stages>
+      <li>
+        <label>watched the culling</label>
+        <description>Another one was taken to the block. That is what we are for. My turn comes when it comes.</description>
+        <baseMoodEffect>-1</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!--
+    '금지함' 이데올로기(또는 이 이슈에 입장이 없는 이데올로기)의 정착민이 받습니다.
+
+    바닐라 ButcheredHumanlikeCorpse는 "시체를 해체했다"이고 KnowGuestExecuted는
+    "정당했지만 슬프다" 톤입니다. 이쪽은 "살아있는 사람을 도살장으로 끌고 가 잡았다"라
+    둘 다와 종류가 다릅니다.
+
+    -5 / 1중첩: 바닐라 도축 사상(-6)과 합산되어 총 -11이 됩니다. 중첩 1은 "알고 있음"
+    계열의 바닐라 관례(KnowButcheredHumanlikeCorpse)를 따른 것입니다.
+  -->
+  <ThoughtDef>
+    <defName>MUGB_KnowLivestockSlaughter</defName>
+    <icon>Things/Mote/ThoughtSymbol/Skull</icon>
+    <durationDays>6</durationDays>
+    <stackLimit>1</stackLimit>
+    <doNotApplyToQuestLodgers>true</doNotApplyToQuestLodgers>
+    <nullifyingTraits>
+      <li>Psychopath</li>
+      <li>Bloodlust</li>
+      <li>Cannibal</li>
+    </nullifyingTraits>
+    <nullifyingPrecepts>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MUGB_LivestockSlaves_Acceptable</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MUGB_LivestockSlaves_Encouraged</li>
+    </nullifyingPrecepts>
+    <stages>
+      <li>
+        <label>human slaughtered like livestock</label>
+        <description>We hauled a living person to the butcher block and put them down like a beast. This is not right. Whatever they were to us, this is badly wrong.</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!--
+    '허용함' 이데올로기의 정착민이 받습니다. 이 규율은 단순 허가가 아니라 "도축을 통해
+    속죄가 이루어진다"는 종교적 의무이므로 긍정 무드가 맞습니다.
+
+    +2 / 2중첩 / 0.5배로 낮게 잡았습니다. 이유가 둘입니다.
+
+      1. 도축이 순이득이 되면 안 됩니다. 금지 이데올로기의 -5보다 확실히 작아야
+         "금지보다는 낫다" 정도로 읽힙니다.
+      2. 중첩이 크면 무드 농장이 됩니다. 솎아내기로 여럿을 연달아 도축할수록 정착지가
+         행복해지는 건 결이 틀렸습니다.
+
+    수치를 올리고 싶으면 baseMoodEffect를 먼저 보고, stackLimit은 3을 넘기지 마세요.
+  -->
+  <ThoughtDef>
+    <defName>MUGB_LivestockSlaughterAtonement</defName>
+    <icon>Things/Mote/ThoughtSymbol/Skull</icon>
+    <durationDays>3</durationDays>
+    <stackLimit>2</stackLimit>
+    <stackedEffectMultiplier>0.5</stackedEffectMultiplier>
+    <stages>
+      <li>
+        <label>atonement was taken</label>
+        <description>One of the chattel was brought to the block and paid what it owed. The debt is settled and the meat is ours. This is how it should be.</description>
+        <baseMoodEffect>2</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+</Defs>

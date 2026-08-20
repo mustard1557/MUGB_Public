@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <MUGB_DesignateForSlaughter>Designate as livestock</MUGB_DesignateForSlaughter>
+  <MUGB_DesignateForSlaughterDesc>Mark this one to be hauled alive to a butcher station and put down there. The body is left beside the station and butchered right away.\n\nThey will only be hauled to a station with a butchery bill that accepts corpses of their race.</MUGB_DesignateForSlaughterDesc>
+
+  <MUGB_NoButcherStationWarning>No butcher station will take {PAWN_nameDef}. Add a butchery bill at a butcher table or goblin cookstation, and allow their race's corpses in its ingredient list.</MUGB_NoButcherStationWarning>
+  <MUGB_NoUsableButcherStation>No butchery bill accepts this race's corpses.</MUGB_NoUsableButcherStation>
+
+  <MUGB_TabViewPrisoners>Prisoners</MUGB_TabViewPrisoners>
+  <MUGB_TabViewSlaves>Slaves</MUGB_TabViewSlaves>
+  <MUGB_TabViewMarked>Marked</MUGB_TabViewMarked>
+  <MUGB_TabBulkTreatment>Set treatment for all</MUGB_TabBulkTreatment>
+  <MUGB_TabSummary>Slaves {0} · Prisoners {1}          Marked {2}</MUGB_TabSummary>
+  <MUGB_TabSummaryNoStation>no butchery bill will take them</MUGB_TabSummaryNoStation>
+
+  <MUGB_ColumnDesignateTip>Mark for butchery. A handler will haul them to a butcher station and put them down.</MUGB_ColumnDesignateTip>
+  <MUGB_ColumnProtectTip>Permanently exclude from automatic rules. You can still mark them by hand.</MUGB_ColumnProtectTip>
+  <MUGB_LivestockSourceManual>manual</MUGB_LivestockSourceManual>
+  <MUGB_LivestockSourceTreatment>treatment</MUGB_LivestockSourceTreatment>
+  <MUGB_KindHybridXenotype>hybrid xenotype</MUGB_KindHybridXenotype>
+
+  <MUGB_SettingsLivestockHeader>Human livestock</MUGB_SettingsLivestockHeader>
+  <MUGB_SettingsNewPrisonersAsMeatLabel>Start new prisoners on 'meat livestock' treatment</MUGB_SettingsNewPrisonersAsMeatLabel>
+  <MUGB_SettingsNewPrisonersAsMeatDesc>Saves setting treatment on every prisoner after a fight. Leave it on and forget, and capable prisoners or quest hostages can end up at the butcher block, so prune the exceptions in the human livestock tab. Prisoners who already have a treatment set are left alone.</MUGB_SettingsNewPrisonersAsMeatDesc>
+  <MUGB_NewPrisonerSetToMeatLivestock>{PAWN_nameDef} was set to meat livestock.</MUGB_NewPrisonerSetToMeatLivestock>
+
+  <MUGB_TabNoPrecept>Locked: your ideoligion has no stance on slave butchery. Reform it and set 'slave butchery' to 'don't care' or 'required'.</MUGB_TabNoPrecept>
+  <MUGB_DesignateNoPrecept>Your ideoligion has no stance on slave butchery. Reform it and pick 'don't care' or 'required'.</MUGB_DesignateNoPrecept>
+
+
+  <MUGB_TabAutoSlaughter>Auto-slaughter</MUGB_TabAutoSlaughter>
+  <MUGB_AutoSlaughterTitle>Automatic culling</MUGB_AutoSlaughterTitle>
+  <MUGB_AutoSlaughterEnable>Enable automatic culling</MUGB_AutoSlaughterEnable>
+  <MUGB_AutoSlaughterNoKinds>This colony holds no slaves.</MUGB_AutoSlaughterNoKinds>
+  <MUGB_CullOrderLowestSkill>Least capable first</MUGB_CullOrderLowestSkill>
+  <MUGB_CullOrderOldest>Longest held first</MUGB_CullOrderOldest>
+  <MUGB_CullOrderRecentlyAdult>Newly adult first</MUGB_CullOrderRecentlyAdult>
+
+
+  <MUGB_AutoSlaughterHint>Blank means no cap. The small number above each box is the current count. Slaves marked to keep are always excluded.</MUGB_AutoSlaughterHint>
+  <MUGB_AutoSlaughterNoCapTip>Leave blank for no cap.</MUGB_AutoSlaughterNoCapTip>
+  <MUGB_AutoColTotal>Total</MUGB_AutoColTotal>
+  <MUGB_AutoColMales>Males</MUGB_AutoColMales>
+  <MUGB_AutoColFemales>Females</MUGB_AutoColFemales>
+  <MUGB_AutoColMalesYoung>Young males</MUGB_AutoColMalesYoung>
+  <MUGB_AutoColFemalesYoung>Young females</MUGB_AutoColFemalesYoung>
+  <MUGB_AutoColPregnant>Cull pregnant</MUGB_AutoColPregnant>
+  <MUGB_AutoColPregnantTip>Include pregnant slaves when culling. Off means they are never marked while pregnant.</MUGB_AutoColPregnantTip>
+  <MUGB_AutoColOrder>Cull order</MUGB_AutoColOrder>
+  <MUGB_AutoColOrderTip>Who gets marked first when over a cap.</MUGB_AutoColOrderTip>
+
+  <MUGB_LivestockSourceAuto>auto</MUGB_LivestockSourceAuto>
+
+  <MUGB_SettingsShowLivestockTabLabel>Show the human livestock tab</MUGB_SettingsShowLivestockTabLabel>
+  <MUGB_SettingsShowLivestockTabDesc>Puts the human livestock button on the bottom tab bar. With it off, the pawn gizmos and prisoner treatment still work and automatic culling keeps running; only the button is hidden.</MUGB_SettingsShowLivestockTabDesc>
+
+</LanguageData>

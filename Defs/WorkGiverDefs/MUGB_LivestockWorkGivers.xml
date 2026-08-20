@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    한국어 의도: 워크타입을 Handling(가축 담당)에 얹습니다. 설계지침 5.1 참조.
+
+    Warden이 아닌 이유:
+      Warden은 workTags에 Social이 있어 사교 결격 폰이 아예 못 하고, disabledForSlaves도
+      켜져 있습니다. 반면 바닐라 동물 도축 워크기버(Slaughter)는 requiredCapacities가
+      Manipulation 하나뿐입니다. 즉 바닐라도 "도축에 사교는 필요없다"고 보고 있습니다.
+
+    새 워크타입을 만들지 않은 이유:
+      작업탭에 열이 하나 늘어나 다른 모드와 화면을 다투게 됩니다. 기존 워크타입에 얹으면
+      그 비용이 없고, priorityInType으로 동물 도축과의 상대 순서만 조절하면 됩니다.
+
+    알려진 부작용:
+      Handling은 workTags에 Animals가 있어 "동물 관련 작업 불가" 백스토리 폰이 제외됩니다.
+      Warden(사교 결격)·새 워크타입(열 증가)과 비교해 손해가 가장 적다고 보고 택했습니다.
+
+    priorityInType 90: 바닐라 동물 도축(100)보다 살짝 뒤. 가축이 우선입니다.
+  -->
+  <WorkGiverDef>
+    <defName>MUGB_TakeLivestockToButcher</defName>
+    <label>slaughter human livestock</label>
+    <giverClass>MUGB.Livestock.WorkGiver_TakeLivestockToButcher</giverClass>
+    <workType>Handling</workType>
+    <verb>slaughter</verb>
+    <gerund>slaughtering livestock</gerund>
+    <priorityInType>90</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+
+</Defs>

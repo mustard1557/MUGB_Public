@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    한국어 의도: 인간가축 탭의 표 정의입니다. 설계지침 6장.
+
+    바닐라 가축탭(PawnTableDef Animals)을 패치하지 않고 별도 표를 만듭니다.
+      가축탭은 UI 모드가 가장 많이 몰리는 지점입니다. 거기에 토글을 끼워넣으려면
+      MainTabWindow_Animals의 프로퍼티와 창 크기 계산까지 Harmony로 갈아야 하고,
+      같은 메서드를 여럿이 물면 로드 순서 운이 됩니다. 별도 표·별도 창은 바닐라 클래스를
+      하나도 건드리지 않습니다.
+
+    뷰마다 표를 따로 두는 이유(설계지침 6.4):
+      노예에겐 '처우'가 무의미하고 죄수에겐 '저항/의지'가 있습니다. 한 표에 섞으면 빈 칸이
+      생기는데, 그게 애초에 동물탭 편입을 반대한 이유였습니다.
+
+    LabelWithIcon / Gender / Age / RemainingSpace는 바닐라 컬럼을 그대로 씁니다.
+    동물 전용 컬럼(훈련·유대·착유)은 쓰지 않으므로 휴머노이드에서 NRE가 날 경로가 없습니다.
+  -->
+
+  <PawnColumnDef>
+    <defName>MUGB_Livestock_Xenotype</defName>
+    <workerClass>MUGB.Livestock.PawnColumnWorker_LivestockXenotype</workerClass>
+    <label>race</label>
+    <sortable>true</sortable>
+    <width>110</width>
+  </PawnColumnDef>
+
+  <PawnColumnDef>
+    <defName>MUGB_Livestock_Health</defName>
+    <workerClass>MUGB.Livestock.PawnColumnWorker_LivestockHealth</workerClass>
+    <label>health</label>
+    <sortable>true</sortable>
+    <width>55</width>
+  </PawnColumnDef>
+
+  <PawnColumnDef>
+    <defName>MUGB_Livestock_Resistance</defName>
+    <workerClass>MUGB.Livestock.PawnColumnWorker_LivestockResistance</workerClass>
+    <label>resistance / will</label>
+    <sortable>true</sortable>
+    <width>80</width>
+  </PawnColumnDef>
+
+  <PawnColumnDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>MUGB_Livestock_InteractionMode</defName>
+    <workerClass>MUGB.Livestock.PawnColumnWorker_LivestockInteractionMode</workerClass>
+    <label>treatment</label>
+    <sortable>true</sortable>
+    <width>150</width>
+  </PawnColumnDef>
+
+  <PawnColumnDef>
+    <defName>MUGB_Livestock_Protect</defName>
+    <workerClass>MUGB.Livestock.PawnColumnWorker_LivestockProtect</workerClass>
+    <label>keep</label>
+    <sortable>true</sortable>
+    <!-- paintable: 한 칸 누른 채로 드래그하면 지나간 줄이 전부 칠해집니다.
+         바닐라 가축탭의 도살 컬럼과 같은 동작입니다. -->
+    <paintable>true</paintable>
+    <width>40</width>
+  </PawnColumnDef>
+
+  <PawnColumnDef>
+    <defName>MUGB_Livestock_Designate</defName>
+    <workerClass>MUGB.Livestock.PawnColumnWorker_LivestockDesignate</workerClass>
+    <label>butcher</label>
+    <sortable>true</sortable>
+    <paintable>true</paintable>
+    <headerIcon>UI/Icons/Animal/Slaughter</headerIcon>
+    <width>55</width>
+  </PawnColumnDef>
+
+  <PawnColumnDef>
+    <defName>MUGB_Livestock_Source</defName>
+    <workerClass>MUGB.Livestock.PawnColumnWorker_LivestockSource</workerClass>
+    <label>source</label>
+    <sortable>true</sortable>
+    <width>60</width>
+  </PawnColumnDef>
+
+  <!-- 죄수 뷰: 기본 뷰입니다. 습격 직후 처우 일괄 지정이 가장 잦은 작업이라서. -->
+  <PawnTableDef>
+    <defName>MUGB_HumanLivestock_Prisoners</defName>
+    <workerClass>RimWorld.PawnTable</workerClass>
+    <minWidth>700</minWidth>
+    <columns>
+      <li>LabelWithIcon</li>
+      <li>Gender</li>
+      <li>Age</li>
+      <li>MUGB_Livestock_Xenotype</li>
+      <li>MUGB_Livestock_Health</li>
+      <li>MUGB_Livestock_Resistance</li>
+      <li>GapTiny</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MUGB_Livestock_InteractionMode</li>
+      <li>GapTiny</li>
+      <li>MUGB_Livestock_Protect</li>
+      <li>MUGB_Livestock_Designate</li>
+      <li>RemainingSpace</li>
+    </columns>
+  </PawnTableDef>
+
+  <!-- 노예 뷰: 정렬은 자동 규칙의 지정 순서와 같게 두어 표 자체가 도축 대기열이 됩니다. -->
+  <PawnTableDef>
+    <defName>MUGB_HumanLivestock_Slaves</defName>
+    <workerClass>RimWorld.PawnTable</workerClass>
+    <minWidth>700</minWidth>
+    <columns>
+      <li>LabelWithIcon</li>
+      <li>Gender</li>
+      <li>Age</li>
+      <li>MUGB_Livestock_Xenotype</li>
+      <li>MUGB_Livestock_Health</li>
+      <li>GapTiny</li>
+      <li>MUGB_Livestock_Protect</li>
+      <li>MUGB_Livestock_Designate</li>
+      <li>RemainingSpace</li>
+    </columns>
+  </PawnTableDef>
+
+  <!--
+    지정됨 뷰: "지금 뭐가 죽으러 가는 중이지?"를 확인하고 취소하는 창구입니다.
+    노예·죄수가 섞여도 무방합니다 — 어차피 같은 파이프라인을 타니까요.
+    '출처' 컬럼으로 수동/처우를 구분합니다.
+  -->
+  <PawnTableDef>
+    <defName>MUGB_HumanLivestock_Marked</defName>
+    <workerClass>RimWorld.PawnTable</workerClass>
+    <minWidth>640</minWidth>
+    <columns>
+      <li>LabelWithIcon</li>
+      <li>Gender</li>
+      <li>Age</li>
+      <li>MUGB_Livestock_Xenotype</li>
+      <li>MUGB_Livestock_Health</li>
+      <li>GapTiny</li>
+      <li>MUGB_Livestock_Source</li>
+      <li>MUGB_Livestock_Protect</li>
+      <li>MUGB_Livestock_Designate</li>
+      <li>RemainingSpace</li>
+    </columns>
+  </PawnTableDef>
+
+</Defs>
