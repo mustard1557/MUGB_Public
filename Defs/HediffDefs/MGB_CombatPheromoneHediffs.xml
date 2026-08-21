@@ -17,6 +17,9 @@
           <MoveSpeed>1.01</MoveSpeed>
           <MeleeHitChance>1.02</MeleeHitChance>
         </statFactors>
+        <statOffsets>
+          <PainShockThreshold>0.03</PainShockThreshold>
+        </statOffsets>
       </li>
       <li>
         <label>2/4</label>
@@ -26,6 +29,9 @@
           <MeleeHitChance>1.04</MeleeHitChance>
           <AimingDelayFactor>0.98</AimingDelayFactor>
         </statFactors>
+        <statOffsets>
+          <PainShockThreshold>0.06</PainShockThreshold>
+        </statOffsets>
       </li>
       <li>
         <label>3/4</label>
@@ -35,6 +41,9 @@
           <MeleeHitChance>1.05</MeleeHitChance>
           <AimingDelayFactor>0.97</AimingDelayFactor>
         </statFactors>
+        <statOffsets>
+          <PainShockThreshold>0.08</PainShockThreshold>
+        </statOffsets>
       </li>
       <li>
         <label>4/4</label>
@@ -45,6 +54,9 @@
           <AimingDelayFactor>0.96</AimingDelayFactor>
           <MeleeDodgeChance>1.02</MeleeDodgeChance>
         </statFactors>
+        <statOffsets>
+          <PainShockThreshold>0.10</PainShockThreshold>
+        </statOffsets>
       </li>
     </stages>
   </HediffDef>
@@ -66,8 +78,18 @@
           <ShootingAccuracyPawn>1.02</ShootingAccuracyPawn>
           <AimingDelayFactor>0.96</AimingDelayFactor>
         </statFactors>
+        <statOffsets>
+          <PainShockThreshold>0.07</PainShockThreshold>
+        </statOffsets>
       </li>
     </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>MUGB_PainShockLogCause</defName>
+    <label>pain</label>
+    <description>Used only to identify pain as the cause of a combat-log collapse.</description>
+    <scenarioCanAdd>false</scenarioCanAdd>
   </HediffDef>
 
 </Defs>

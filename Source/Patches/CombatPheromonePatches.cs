@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using System.Reflection;
+using HarmonyLib;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -201,6 +204,41 @@ namespace MUGB
             {
                 existing.Severity = Mathf.Clamp01(severity);
             }
+        }
+    }
+
+    [HarmonyPatch]
+    internal static class BattleLogEntry_StateTransition_PheromonePainCausePatch
+    {
+        private static MethodBase TargetMethod()
+        {
+            return AccessTools.Constructor(
+                typeof(BattleLogEntry_StateTransition),
+                new[] { typeof(Thing), typeof(RulePackDef), typeof(Pawn), typeof(Hediff), typeof(BodyPartRecord) });
+        }
+
+        private static void Postfix(
+            Thing subject,
+            RulePackDef transitionDef,
+            Hediff culpritHediff,
+            ref HediffDef ___culpritHediffDef)
+        {
+            Pawn pawn = subject as Pawn;
+            if (transitionDef != RulePackDefOf.Transition_Downed
+                || pawn == null
+                || pawn.health?.InPainShock != true
+                || !IsCombatPheromone(culpritHediff?.def))
+            {
+                return;
+            }
+
+            ___culpritHediffDef = MUGBDefOf.MUGB_PainShockLogCause;
+        }
+
+        private static bool IsCombatPheromone(HediffDef def)
+        {
+            return def == MUGBDefOf.MUGB_GoblinSwarmPheromoneBuff
+                || def == MUGBDefOf.MUGB_HobgoblinCommandPheromoneBuff;
         }
     }
 }

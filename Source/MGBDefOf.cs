@@ -139,6 +139,7 @@ namespace MUGB
         public static HediffDef MUGB_ToxicPheromoneImmunity;
         public static HediffDef MUGB_GoblinSwarmPheromoneBuff;
         public static HediffDef MUGB_HobgoblinCommandPheromoneBuff;
+        public static HediffDef MUGB_PainShockLogCause;
         public static HediffDef MUGB_GoblinPheromoneConditioning;
         public static HediffDef MUGB_GoblinPheromonePreference;
         public static HediffDef MUGB_GoblinPepperCheeseFertility;
