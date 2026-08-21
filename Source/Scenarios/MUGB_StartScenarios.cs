@@ -230,6 +230,7 @@ namespace MUGB
 
         private bool initialMapHandled;
         private bool startingLoadoutApplied;
+        private bool startingResearchApplied;
         private bool startDialogShown;
         private bool scheduledThreatExecuted;
         private bool villageNeutralized;
@@ -259,6 +260,7 @@ namespace MUGB
             Scribe_Values.Look(ref scenarioKind, "scenarioKind");
             Scribe_Values.Look(ref initialMapHandled, "initialMapHandled");
             Scribe_Values.Look(ref startingLoadoutApplied, "startingLoadoutApplied");
+            Scribe_Values.Look(ref startingResearchApplied, "startingResearchApplied");
             Scribe_Values.Look(ref startDialogShown, "startDialogShown");
             Scribe_Values.Look(ref scheduledThreatExecuted, "scheduledThreatExecuted");
             Scribe_Values.Look(ref villageNeutralized, "villageNeutralized");
@@ -328,6 +330,11 @@ namespace MUGB
             {
                 ApplyStartingLoadout();
                 startingLoadoutApplied = true;
+            }
+            if (!startingResearchApplied)
+            {
+                ApplyStartingResearch();
+                startingResearchApplied = true;
             }
 
             if (scheduledThreatTick < 0)
@@ -412,6 +419,27 @@ namespace MUGB
                 MUGBStartScenarioKind.StrandedSquad => "MUGB_StrandedStartText".Translate(),
                 _ => "MUGB_GoldenStartText".Translate()
             };
+        }
+
+        private void ApplyStartingResearch()
+        {
+            if (scenarioKind != MUGBStartScenarioKind.StrandedSquad
+                || !ModsConfig.IsActive(MedievalOverhaulPackageId))
+            {
+                return;
+            }
+
+            FinishStartingResearch("DankPyon_Lumber");
+            FinishStartingResearch("Stonecutting");
+        }
+
+        private static void FinishStartingResearch(string defName)
+        {
+            ResearchProjectDef project = DefDatabase<ResearchProjectDef>.GetNamedSilentFail(defName);
+            if (project != null && !project.IsFinished)
+            {
+                Find.ResearchManager.FinishProject(project, false, null, false);
+            }
         }
 
         private void ApplyStartingLoadout()
