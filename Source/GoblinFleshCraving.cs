@@ -1,5 +1,6 @@
 using HarmonyLib;
 using RimWorld;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Verse;
@@ -252,7 +253,7 @@ namespace MUGB
             return kind;
         }
 
-        private static FleshFoodKind FleshFoodKindFor(ThingDef def)
+        internal static FleshFoodKind FleshFoodKindFor(ThingDef def)
         {
             if (def == null)
             {
@@ -272,7 +273,9 @@ namespace MUGB
         private static FleshFoodKind ResolveFleshFoodKind(ThingDef def)
         {
             string defName = def.defName;
-            if (defName == "Meat_Human" || defName == "MUGB_Hchunk" || defName.Contains("HumanMeat") || defName.Contains("HumanFlesh"))
+            if (defName == "Meat_Human" || defName == "MUGB_Hchunk" || HasHumanlikeFleshName(defName)
+                || IsHumanlikeMeatThought(def.ingestible?.specialThoughtDirect)
+                || IsHumanlikeMeatThought(def.ingestible?.specialThoughtAsIngredient))
             {
                 return FleshFoodKind.Humanlike;
             }
@@ -300,6 +303,31 @@ namespace MUGB
             }
 
             return FleshFoodKind.None;
+        }
+
+        private static bool HasHumanlikeFleshName(string defName)
+        {
+            if (string.IsNullOrEmpty(defName)
+                || defName.IndexOf("Human", StringComparison.OrdinalIgnoreCase) < 0)
+            {
+                return false;
+            }
+
+            return defName.IndexOf("Meat", StringComparison.OrdinalIgnoreCase) >= 0
+                || defName.IndexOf("Flesh", StringComparison.OrdinalIgnoreCase) >= 0
+                || defName.IndexOf("Gut", StringComparison.OrdinalIgnoreCase) >= 0
+                || defName.IndexOf("Organ", StringComparison.OrdinalIgnoreCase) >= 0
+                || defName.IndexOf("Heart", StringComparison.OrdinalIgnoreCase) >= 0
+                || defName.IndexOf("Brain", StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+        private static bool IsHumanlikeMeatThought(ThoughtDef thought)
+        {
+            string defName = thought?.defName;
+            return defName == "AteHumanlikeMeatDirect"
+                || defName == "AteHumanlikeMeatDirectCannibal"
+                || defName == "AteHumanlikeMeatAsIngredient"
+                || defName == "AteHumanlikeMeatAsIngredientCannibal";
         }
 
         private static FleshFoodKind Stronger(FleshFoodKind a, FleshFoodKind b)

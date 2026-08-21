@@ -155,6 +155,14 @@ namespace MUGB
                 flags |= FoodIngredientFlags.HumanlikeMeat;
             }
 
+            // Processed foods from other mods may discard their source meat and only encode
+            // the humanlike origin in the finished def. Keep mood reactions in sync with the
+            // flesh-craving classifier used when the food is actually ingested.
+            if (GoblinFleshFoodUtility.FleshFoodKindFor(def) == GoblinFleshFoodUtility.FleshFoodKind.Humanlike)
+            {
+                flags |= FoodIngredientFlags.HumanlikeMeat;
+            }
+
             if (def == MUGBDefOf.Meat_Goblin || def.defName == "Meat_Goblin" || def.defName == "MUGB_Gchunk" || def.defName == "MUGB_Ggut"
                 || def.defName == "MUGB_GBBQ" || def.defName == "MUGB_legGBBQ" || def.defName == "MUGB_armGBBQ" || def.defName == "MUGB_excGBBQ")
             {
