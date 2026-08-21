@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <!-- Beggars use dedicated tags so broad weapon pools from other mods cannot arm them. -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="MeleeWeapon_Club"]/weaponTags</xpath>
+    <value>
+      <li>MUGB_BeggarMelee</li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bow_Short"]/weaponTags</xpath>
+    <value>
+      <li>MUGB_BeggarRanged</li>
+    </value>
+  </Operation>
+
+</Patch>

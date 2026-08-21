@@ -43,6 +43,10 @@
           <thingDef>Silver</thingDef>
           <countRange>3~18</countRange>
         </li>
+        <li>
+          <thingDef>Beer</thingDef>
+          <countRange>1~2</countRange>
+        </li>
       </subOptionsChooseOne>
     </inventoryOptions>
   </PawnKindDef>
@@ -61,9 +65,9 @@
     <isFighter>true</isFighter>
     <weaponMoney>40~120</weaponMoney>
     <weaponTags>
-      <li>NeolithicMeleeBasic</li>
-      <li>MedievalMeleeBasic</li>
+      <li>MUGB_BeggarMelee</li>
     </weaponTags>
+    <weaponStuffOverride>WoodLog</weaponStuffOverride>
     <apparelMoney>80~200</apparelMoney>
   </PawnKindDef>
 
@@ -74,8 +78,7 @@
     <isFighter>true</isFighter>
     <weaponMoney>65~170</weaponMoney>
     <weaponTags>
-      <li>NeolithicRangedBasic</li>
-      <li>NeolithicRangedDecent</li>
+      <li>MUGB_BeggarRanged</li>
     </weaponTags>
     <apparelMoney>90~220</apparelMoney>
   </PawnKindDef>
