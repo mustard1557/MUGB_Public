@@ -5,6 +5,9 @@
 
   <ThingDef Name="MUGB_GoblinClothingBase" ParentName="ApparelMakeableBase" Abstract="True">
     <techLevel>Neolithic</techLevel>
+    <graphicData>
+      <drawSize>1.5</drawSize>
+    </graphicData>
     <thingCategories>
       <li>ApparelMisc</li>
       <li>MUGB_GoblinApparelCategory</li>
@@ -47,6 +50,9 @@
 
   <ThingDef Name="MUGB_GoblinArmorBase" ParentName="ApparelMakeableBase" Abstract="True">
     <techLevel>Medieval</techLevel>
+    <graphicData>
+      <drawSize>1.5</drawSize>
+    </graphicData>
     <thingCategories>
       <li>ApparelArmor</li>
       <li>MUGB_GoblinApparelCategory</li>
@@ -94,6 +100,9 @@
 
   <ThingDef Name="MUGB_GoblinHelmetBase" ParentName="ArmorHelmetMakeableBase" Abstract="True">
     <techLevel>Medieval</techLevel>
+    <graphicData>
+      <drawSize>1.5</drawSize>
+    </graphicData>
     <thingCategories>
       <li>Headgear</li>
       <li>MUGB_GoblinApparelCategory</li>
@@ -503,6 +512,7 @@
     <graphicData>
       <texPath>Things/Apparel/Armor/MGB_chest/chestA_Thin_south</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.8</drawSize>
     </graphicData>
     <costStuffCount>35</costStuffCount>
     <costList>
