@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using HarmonyLib;
 using RimWorld;
 using UnityEngine;
@@ -44,9 +44,31 @@ namespace MUGB.Patches
             }
 
             // 원본을 실행하지 않으므로 "텍스처 없음" 오류 자체가 발생하지 않습니다.
+            // 대신 무엇을 건너뛰었는지 한 번만 남깁니다. 조용히 사라지면 사용자도 제작자도
+            // 원인을 알 수 없습니다. 설치가 정상이면 이 줄은 한 번도 나오지 않습니다.
+            WarnSkippedOnce(apparel, bodyType);
+
             rec = default;
             __result = false;
             return false;
+        }
+
+        private static void WarnSkippedOnce(Apparel apparel, BodyTypeDef bodyType)
+        {
+            ThingDef def = apparel?.def;
+            if (def == null)
+            {
+                return;
+            }
+
+            string basePath = apparel.WornGraphicPath;
+            string bodyTypeName = bodyType?.defName ?? "(none)";
+            Log.WarningOnce(
+                $"[MUGB] Skipped drawing apparel because no worn texture was found: {def.defName} "
+                + $"(path '{basePath}', body type {bodyTypeName}). "
+                + "The mod files may be incomplete, or another mod may have changed this apparel's texture path. "
+                + "If this apparel is invisible only on goblins, this is why.",
+                Gen.HashCombineInt(def.shortHash, 0x4D554742));
         }
 
         private static bool ShouldSkipDrawing(Apparel apparel, BodyTypeDef bodyType)
