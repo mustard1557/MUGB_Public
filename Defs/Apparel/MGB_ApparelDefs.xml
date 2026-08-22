@@ -101,7 +101,7 @@
   <ThingDef Name="MUGB_GoblinHelmetBase" ParentName="ArmorHelmetMakeableBase" Abstract="True">
     <techLevel>Medieval</techLevel>
     <graphicData>
-      <drawSize>1.6</drawSize>
+      <drawSize>1.2</drawSize>
     </graphicData>
     <thingCategories>
       <li>Headgear</li>
