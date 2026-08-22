@@ -100,4 +100,58 @@ namespace MUGB.Patches
             return exists;
         }
     }
+
+    /// <summary>
+    /// MUGB apparel uses a larger ground graphic so dropped gear remains readable. RimWorld
+    /// also feeds that same drawSize into worn graphics, so restore the original worn size
+    /// only while constructing the apparel render record. This runs on render-tree setup,
+    /// not per tick or per frame.
+    /// </summary>
+    [HarmonyPatch(typeof(ApparelGraphicRecordGetter), nameof(ApparelGraphicRecordGetter.TryGetGraphicApparel))]
+    public static class ApparelGraphicRecordGetter_KeepMugbWornSize
+    {
+        private const string GoblinApparelCategoryDefName = "MUGB_GoblinApparelCategory";
+
+        [HarmonyPriority(Priority.Last)]
+        public static void Postfix(Apparel apparel, BodyTypeDef bodyType, bool forStatue,
+            ref ApparelGraphicRecord rec, ref bool __result)
+        {
+            if (!__result || apparel?.def?.thingCategories == null
+                || !apparel.def.thingCategories.Any(category => category?.defName == GoblinApparelCategoryDefName)
+                || apparel.WornGraphicPath.NullOrEmpty())
+            {
+                return;
+            }
+
+            if (bodyType == null)
+            {
+                bodyType = BodyTypeDefOf.Male;
+            }
+
+            string path = apparel.def.apparel.LastLayer != ApparelLayerDefOf.Overhead
+                && apparel.def.apparel.LastLayer != ApparelLayerDefOf.EyeCover
+                && !apparel.RenderAsPack()
+                && apparel.WornGraphicPath != BaseContent.PlaceholderImagePath
+                && apparel.WornGraphicPath != BaseContent.PlaceholderGearImagePath
+                    ? apparel.WornGraphicPath + "_" + bodyType.defName
+                    : apparel.WornGraphicPath;
+
+            Shader shader = ShaderDatabase.Cutout;
+            if (!forStatue)
+            {
+                if (apparel.StyleDef?.graphicData.shaderType != null)
+                {
+                    shader = apparel.StyleDef.graphicData.shaderType.Shader;
+                }
+                else if ((apparel.StyleDef == null && apparel.def.apparel.useWornGraphicMask)
+                    || (apparel.StyleDef != null && apparel.StyleDef.UseWornGraphicMask))
+                {
+                    shader = ShaderDatabase.CutoutComplex;
+                }
+            }
+
+            Graphic graphic = GraphicDatabase.Get<Graphic_Multi>(path, shader, Vector2.one, apparel.DrawColor);
+            rec = new ApparelGraphicRecord(graphic, apparel);
+        }
+    }
 }

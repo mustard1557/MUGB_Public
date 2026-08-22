@@ -38,6 +38,13 @@
     <xpath>Defs/PawnKindDef[starts-with(defName, "MUGB_GoblinKind_") and not(defName="MUGB_GoblinKind_MedievalFootman") and not(defName="MUGB_GoblinKind_MedievalAdvancedFootman")]/apparelTags/li[text()="MedievalBasic"]</xpath>
   </Operation>
 
+  <!-- The broad tag also contains ritual masks and human-hide cloaks. Ordinary combat kinds
+       use their role-specific armor/headgear tags instead; cultists and the two deliberate
+       mixed-medieval footmen keep the broad pool. -->
+  <Operation Class="PatchOperationRemove">
+    <xpath>Defs/PawnKindDef[starts-with(defName, "MUGB_GoblinKind_") and apparelTags and not(contains(defName, "Cultist")) and not(defName="MUGB_GoblinKind_MedievalFootman") and not(defName="MUGB_GoblinKind_MedievalAdvancedFootman")]/apparelTags/li[text()="MUGB_GoblinApparel"]</xpath>
+  </Operation>
+
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/PawnKindDef[starts-with(defName, "MUGB_GoblinKind_") and apparelTags and not(defName="MUGB_GoblinKind_MedievalFootman") and not(defName="MUGB_GoblinKind_MedievalAdvancedFootman") and not(defName="MUGB_GoblinKind_Slave") and not(defName="MUGB_GoblinKind_TunnelSlave") and not(defName="MUGB_GoblinKind_TunnelVanguard") and not(defName="MUGB_GoblinKind_SlaveBomber") and not(defName="MUGB_GoblinKind_SlaveBoomstickSapper") and not(defName="MUGB_GoblinKind_CultistBomberNaked") and not(defName="MUGB_GoblinKind_Beggar")]/apparelTags</xpath>
     <value>

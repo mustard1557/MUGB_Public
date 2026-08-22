@@ -40,6 +40,8 @@
     <li>Ludeon.RimWorld.Ideology</li>
     <li>OskarPotocki.VanillaFactionsExpanded.Core</li>
     <li>DankPyon.Medieval.Overhaul</li>
+    <li>Nals.FacialAnimation</li>
+    <li>Nals.FacialAnimationExperimentals</li>
     <li>rim.job.world</li>
   </loadAfter>
   <description>
