@@ -2167,8 +2167,7 @@ namespace MUGB.Patches
 
         private static bool IsCultistCombatant(Pawn pawn, string kindName)
         {
-            return kindName.Contains("Cultist")
-                || (pawn.Faction?.def == MUGBDefOf.MUGB_GoblinCultists && pawn.kindDef?.isFighter != false);
+            return kindName.Contains("Cultist");
         }
 
         private static void NormalizeCultistHeadgear(Pawn pawn)
