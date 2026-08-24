@@ -73,6 +73,7 @@ namespace MUGB
                 PawnRenderNodeWorker_GoblinSplatterOverlay.PrecacheGraphics();
                 MUGB.Patches.GoblinBirthUtility.PatchAfterDefsLoaded(harmony);
                 MUGB.Patches.GoblinBiotechAppearanceUtility.Initialize();
+                MUGB.Patches.GoblinCampfireRecipeInheritance.Apply();
                 MUGB.Patches.MUGBPassingGroupFrequencyUtility.ApplyStorytellerFrequency();
             });
         }

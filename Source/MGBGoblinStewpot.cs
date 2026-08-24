@@ -336,6 +336,12 @@ namespace MUGB
 
         private bool CanDispenseMealsNow(int mealCount, out string disabledReason)
         {
+            if (this.TryGetComp<CompFlickable>()?.SwitchIsOn == false)
+            {
+                disabledReason = "MUGB_GoblinStewpotExtinguished".Translate();
+                return false;
+            }
+
             if (!HasHeatFuel)
             {
                 disabledReason = "The goblin stewpot has no fuel.";

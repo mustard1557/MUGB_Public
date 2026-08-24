@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using Verse;
@@ -76,25 +76,20 @@ namespace MUGB
                 return false;
             }
 
-            // 한국어 의도: 토스트 메시지가 아니라 중립 편지로 알린다. 놓치면 그대로 공급 기회를 잃기 때문이다.
-            Find.LetterStack.ReceiveLetter(
-                "MUGB_BeggarTravelersPassingLabel".Translate(),
-                "MUGB_BeggarTravelersPassingText".Translate(),
-                LetterDefOf.NeutralEvent,
-                new LookTargets(pawns));
-            // 바닐라 방문객·상단처럼 기지 바로 바깥의 접근 가능한 곳까지 들어와 머문다.
-            // 적당한 장소가 없으면 기존처럼 진입 지점 근처를 사용한다.
-            IntVec3 lingerSpot;
-            if (!RCellFinder.TryFindRandomSpotJustOutsideColony(pawns[0], out lingerSpot))
-            {
-                lingerSpot = CellFinder.RandomClosewalkCellNear(parms.spawnCenter, map, 7);
-            }
+            // 한국어 의도: 편지가 아니라 알림으로 띄운다. 3일마다 같은 편지가 쌓이면
+            // 플레이어가 편지창 자체를 안 보게 되고, 정작 습격 편지까지 같이 흘려보내게 된다.
+            Messages.Message(
+                "MUGB_BeggarTravelersPassing".Translate(),
+                new LookTargets(pawns),
+                MessageTypeDefOf.NeutralEvent);
+            // 기지 앞까지 찾아오지 않는다. 진입한 맵 가장자리 근처에서 잠깐 서성이다가
+            // 반대편으로 천천히 빠져나가는, 바닐라 여행자 무리와 같은 그림으로 둔다.
+            IntVec3 lingerSpot = CellFinder.RandomClosewalkCellNear(parms.spawnCenter, map, 7);
 
-            // 초반 고블린은 느리고 수가 적어 4~6시간으로는 따라잡지 못하므로 15일까지는 창을 넓혀 준다.
-            int lingerTicks = GenDate.DaysPassed < 15
-                ? Rand.RangeInclusive(8 * GenDate.TicksPerHour, 10 * GenDate.TicksPerHour)
-                : Rand.RangeInclusive(4 * GenDate.TicksPerHour, 6 * GenDate.TicksPerHour);
-            LordMaker.MakeNewLord(parms.faction, new LordJob_BeggarLingerAndExit(lingerSpot, lingerTicks), map, pawns);
+            // 가장자리에서 3~4시간 서성인다. 예전처럼 오래 머무를 필요가 없는 이유는
+            // 이동속도를 크게 낮춰서 맵을 가로지르는 시간 자체가 길어졌기 때문이다.
+            int lingerTicks = Rand.RangeInclusive(3 * GenDate.TicksPerHour, 4 * GenDate.TicksPerHour);
+            LordMaker.MakeNewLord(parms.faction, new LordJob_BeggarLingerAndExit(lingerSpot, lingerTicks, travelDest), map, pawns);
             PawnRelationUtility.Notify_PawnsSeenByPlayer_Letter_Send(pawns, "LetterRelatedPawnsNeutralGroup".Translate(Faction.OfPlayer.def.pawnsPlural), LetterDefOf.NeutralEvent, informEvenIfSeenBefore: true);
             return true;
         }
@@ -121,10 +116,21 @@ namespace MUGB
                 Pawn pawn = PawnGenerator.GeneratePawn(request);
                 IntVec3 cell = CellFinder.RandomClosewalkCellNear(parms.spawnCenter, map, 5);
                 GenSpawn.Spawn(pawn, cell, map);
+                ApplyRoadWeariness(pawn);
                 pawns.Add(pawn);
                 parms.storeGeneratedNeutralPawns?.Add(pawn);
             }
             return pawns;
+        }
+
+        // 굶주린 유랑민답게 아주 느리게 걷는다. Def가 없으면 조용히 넘어간다.
+        private static void ApplyRoadWeariness(Pawn pawn)
+        {
+            HediffDef weariness = DefDatabase<HediffDef>.GetNamedSilentFail("MUGB_BeggarRoadWeariness");
+            if (weariness != null && pawn?.health != null && !pawn.health.hediffSet.HasHediff(weariness))
+            {
+                pawn.health.AddHediff(weariness);
+            }
         }
 
         private static PawnKindDef RandomBeggarKind()
@@ -139,16 +145,18 @@ namespace MUGB
     {
         private IntVec3 lingerSpot;
         private int lingerTicks;
+        private IntVec3 exitDest;
         private bool playerHostilityPending;
 
         public LordJob_BeggarLingerAndExit()
         {
         }
 
-        public LordJob_BeggarLingerAndExit(IntVec3 lingerSpot, int lingerTicks)
+        public LordJob_BeggarLingerAndExit(IntVec3 lingerSpot, int lingerTicks, IntVec3 exitDest)
         {
             this.lingerSpot = lingerSpot;
             this.lingerTicks = lingerTicks;
+            this.exitDest = exitDest;
         }
 
         public override StateGraph CreateGraph()
@@ -161,7 +169,10 @@ namespace MUGB
             LordToil_DefendPoint linger = new LordToil_DefendPoint(lingerSpot);
             graph.AddToil(linger);
 
-            StateGraph exitGraph = new LordJob_TravelAndExit(IntVec3.Invalid).CreateGraph();
+            // 유효한 목적지를 넘기면 TransitionAction_EnsureHaveExitDestination이 이를 덮어쓰지
+            // 않으므로(HasDestination 검사) 가까운 가장자리로 되돌아 나가지 않고 맵을 가로지른다.
+            // 구형 세이브(exitDest 없음)는 Invalid이 되어 기존과 똑같이 동작한다.
+            StateGraph exitGraph = new LordJob_TravelAndExit(exitDest).CreateGraph();
             ReplaceTravelHarmTriggers(exitGraph);
             LordToil exitStart = graph.AttachSubgraph(exitGraph).StartingToil;
 
@@ -251,6 +262,7 @@ namespace MUGB
         {
             Scribe_Values.Look(ref lingerSpot, "lingerSpot");
             Scribe_Values.Look(ref lingerTicks, "lingerTicks", 4 * GenDate.TicksPerHour);
+            Scribe_Values.Look(ref exitDest, "exitDest", IntVec3.Invalid);
         }
     }
 

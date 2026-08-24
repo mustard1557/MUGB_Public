@@ -243,6 +243,13 @@ namespace MUGB.Patches
             return ScaleCount(baseCount, multiplier);
         }
 
+        public static int RollGoblinLitterCount(bool hobgoblinFather, Pawn mother)
+        {
+            int baseCount = hobgoblinFather ? Rand.RangeInclusive(2, 4) : Rand.RangeInclusive(3, 4);
+            int maternalBonus = RollMaternalLitterBonus(mother);
+            return ScaleCurrentCount(baseCount + maternalBonus);
+        }
+
         public static int RollMaternalLitterBonus(Pawn mother)
         {
             SimpleCurve litterSizeCurve = mother?.RaceProps?.litterSizeCurve;
@@ -1465,9 +1472,7 @@ namespace MUGB.Patches
             }
 
             hobgoblinFather = fatherIsHobgoblin;
-            int baseCount = hobgoblinFather ? Rand.RangeInclusive(2, 4) : Rand.RangeInclusive(3, 4);
-            int maternalBonus = GoblinLitterSizeUtility.RollMaternalLitterBonus(mother);
-            int count = GoblinLitterSizeUtility.ScaleCurrentCount(baseCount + maternalBonus);
+            int count = GoblinLitterSizeUtility.RollGoblinLitterCount(hobgoblinFather, mother);
             plannedResults = new List<int>(count);
             for (int i = 0; i < count; i++)
             {

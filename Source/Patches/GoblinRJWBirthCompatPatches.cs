@@ -30,10 +30,10 @@ namespace MUGB.Patches
         2) 출산 직후에 어미만 남기는 관계 정리, 사상 계승, 노예/포로 신분 계승을 붙입니다.
            RJW의 MultiplePregnancy 경로는 부모 관계를 아예 걸어주지 않으므로 이 단계가 필요합니다.
 
-        [의도적으로 하지 않은 것]
-        산자수는 RJW가 정한 수를 그대로 씁니다. 마리 수까지 MUGB 규격으로 바꾸면
-        기존 RJW 경로 플레이어의 출산 규모가 갑자기 달라지므로, 이번에는 외형 문제만 고칩니다.
-        같은 이유로 임신 기간 가속과 출산 부담 헤디프도 RJW 경로에 넣지 않았습니다.
+        [산자수]
+        고블린 아비로 새 임신이 성립할 때 MUGB 산자수와 출산 배율을 적용합니다.
+        월경 모드가 나중에 별도 수정란을 추가하는 경우에는 그 이란성 아기도 허용하되,
+        MUGB 종족 확률과 외형 규칙으로 교체합니다. 임신 기간 가속은 이 경로에 넣지 않습니다.
 
         [기존 세이브]
         전부 새 수태부터 적용됩니다. 이미 태어난 폰의 종족은 사후에 바꿀 수 없으므로 그대로 남습니다.
@@ -176,7 +176,7 @@ namespace MUGB.Patches
                     return;
                 }
 
-                if (ReplaceBabiesInPlace(babies, mother, father, plan: null))
+                if (RebuildInitialLitter(babies, mother, father))
                 {
                     ClearEnzygoticSiblings(__instance);
                 }
@@ -256,6 +256,37 @@ namespace MUGB.Patches
         private static bool ShouldRebuildLitter(Pawn mother, Pawn father)
         {
             return mother?.RaceProps?.Humanlike == true && GoblinUtility.IsGoblin(father);
+        }
+
+        private static bool RebuildInitialLitter(List<Pawn> babies, Pawn mother, Pawn father)
+        {
+            bool hobgoblinFather = GoblinUtility.IsHobgoblin(father);
+            int targetCount = GoblinLitterSizeUtility.RollGoblinLitterCount(hobgoblinFather, mother);
+            List<Pawn> replacements = new List<Pawn>(targetCount);
+
+            for (int i = 0; i < targetCount; i++)
+            {
+                GoblinBirthUtility.GoblinBirthResult roll = GoblinBirthUtility.RollGoblinBirthResult(hobgoblinFather);
+                Pawn child = GoblinBirthUtility.GeneratePregeneratedChild(mother, father, roll);
+                if (child == null)
+                {
+                    for (int j = 0; j < replacements.Count; j++)
+                    {
+                        DiscardUnusedBaby(replacements[j]);
+                    }
+                    return false;
+                }
+                replacements.Add(child);
+            }
+
+            List<Pawn> originals = new List<Pawn>(babies);
+            babies.Clear();
+            babies.AddRange(replacements);
+            for (int i = 0; i < originals.Count; i++)
+            {
+                DiscardUnusedBaby(originals[i]);
+            }
+            return true;
         }
 
         /// <summary>

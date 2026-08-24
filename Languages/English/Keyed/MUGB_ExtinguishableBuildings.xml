@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <MUGB_ToggleBuildingFlame>Toggle flame</MUGB_ToggleBuildingFlame>
+  <MUGB_ToggleBuildingFlameDesc>Order this building's flame to be extinguished or lit again. While extinguished, it does not consume fuel or operate.</MUGB_ToggleBuildingFlameDesc>
+  <MUGB_GoblinStewpotExtinguished>The goblin stewpot is extinguished.</MUGB_GoblinStewpotExtinguished>
+</LanguageData>

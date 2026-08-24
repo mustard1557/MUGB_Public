@@ -223,8 +223,19 @@ namespace MUGB
         [ThreadStatic]
         private static bool queryingHeadgearVisibility;
 
+        protected override Material GetMaterial(PawnRenderNode node, PawnDrawParms parms)
+        {
+            return base.GetMaterial(node, NormalizeSouthCrawl(parms));
+        }
+
+        public override void AppendDrawRequests(PawnRenderNode node, PawnDrawParms parms, List<PawnGraphicDrawRequest> requests)
+        {
+            base.AppendDrawRequests(node, NormalizeSouthCrawl(parms), requests);
+        }
+
         protected override Graphic GetGraphic(PawnRenderNode node, PawnDrawParms parms)
         {
+            parms = NormalizeSouthCrawl(parms);
             PawnRenderNodeProperties_GoblinAddon props = node.Props as PawnRenderNodeProperties_GoblinAddon;
             if (AddonPartIsMissing(parms.pawn, props) && GoblinGoneAddonUtility.TryGetGoneGraphic(props.tuningKey, parms.facing, out Graphic goneGraphic))
             {
@@ -241,6 +252,7 @@ namespace MUGB
 
         public override Vector3 OffsetFor(PawnRenderNode node, PawnDrawParms parms, out Vector3 pivot)
         {
+            parms = NormalizeSouthCrawl(parms);
             Vector3 offset = base.OffsetFor(node, parms, out pivot);
             PawnRenderNodeProperties_GoblinAddon props = node.Props as PawnRenderNodeProperties_GoblinAddon;
             if (props == null)
@@ -264,6 +276,7 @@ namespace MUGB
 
         public override Vector3 ScaleFor(PawnRenderNode node, PawnDrawParms parms)
         {
+            parms = NormalizeSouthCrawl(parms);
             PawnRenderNodeProperties_GoblinAddon props = node.Props as PawnRenderNodeProperties_GoblinAddon;
             MUGBSettings settings = MUGBMod.Settings ?? new MUGBSettings();
             float addonScale = props?.addonScale ?? 1f;
@@ -273,6 +286,7 @@ namespace MUGB
 
         public override float LayerFor(PawnRenderNode node, PawnDrawParms parms)
         {
+            parms = NormalizeSouthCrawl(parms);
             float layer = base.LayerFor(node, parms);
             PawnRenderNodeProperties_GoblinAddon props = node.Props as PawnRenderNodeProperties_GoblinAddon;
             if (props == null)
@@ -285,8 +299,27 @@ namespace MUGB
             return layer + settings.LayerOffsetForAddon(props.tuningKey, parms.facing, formKey);
         }
 
+        public override Quaternion RotationFor(PawnRenderNode node, PawnDrawParms parms)
+        {
+            return base.RotationFor(node, NormalizeSouthCrawl(parms));
+        }
+
+        private static PawnDrawParms NormalizeSouthCrawl(PawnDrawParms parms)
+        {
+            if (parms.crawling && parms.flipHead && parms.facing == Rot4.North)
+            {
+                // PawnRenderTree converts a south-facing crawler to north + flipHead before
+                // workers run. Goblin face add-ons need the authored south mesh and tuning.
+                parms.facing = Rot4.South;
+                parms.flipHead = false;
+            }
+
+            return parms;
+        }
+
         public override MaterialPropertyBlock GetMaterialPropertyBlock(PawnRenderNode node, Material material, PawnDrawParms parms)
         {
+            parms = NormalizeSouthCrawl(parms);
             MaterialPropertyBlock block = base.GetMaterialPropertyBlock(node, material, parms);
             PawnRenderNodeProperties_GoblinAddon props = node.Props as PawnRenderNodeProperties_GoblinAddon;
             if (!IsEyeAddon(props) || RotDrawModeFor(parms) != RotDrawMode.Rotting)
@@ -307,6 +340,7 @@ namespace MUGB
 
         public override bool CanDrawNow(PawnRenderNode node, PawnDrawParms parms)
         {
+            parms = NormalizeSouthCrawl(parms);
             if (!base.CanDrawNow(node, parms))
             {
                 return false;

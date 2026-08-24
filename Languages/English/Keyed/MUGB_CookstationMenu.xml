@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <MUGB_SelectCookstationBillToPrioritize>Prioritize a specific bill...</MUGB_SelectCookstationBillToPrioritize>
+  <MUGB_PrioritizeSpecificCookstationBill>{0}. Prioritize {1}</MUGB_PrioritizeSpecificCookstationBill>
+  <MUGB_CookstationBillSuspended>suspended</MUGB_CookstationBillSuspended>
+  <MUGB_CookstationBillNotNeeded>target already satisfied</MUGB_CookstationBillNotNeeded>
+  <MUGB_NoCookstationBillsAvailable>No bills available</MUGB_NoCookstationBillsAvailable>
+  <MUGB_CookstationBillNoLongerAvailable>That bill is no longer available.</MUGB_CookstationBillNoLongerAvailable>
+  <MUGB_CookstationBillUnavailable>That bill cannot be performed right now.</MUGB_CookstationBillUnavailable>
+  <MUGB_CookstationBillPawnUnavailable>The selected pawn cannot perform that bill right now.</MUGB_CookstationBillPawnUnavailable>
+  <MUGB_CookstationNeedsFuel>This production building needs fuel first.</MUGB_CookstationNeedsFuel>
+  <MUGB_CookstationBillMissingIngredients>No usable ingredients are available for that bill.</MUGB_CookstationBillMissingIngredients>
+</LanguageData>

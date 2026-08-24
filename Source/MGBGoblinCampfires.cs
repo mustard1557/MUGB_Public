@@ -15,6 +15,7 @@ namespace MUGB
 
         private int graphicVariant = -1;
         private Graphic variantGraphic;
+        private CompFlickable flickableComp;
 
         private bool DrawFireBehind => def.defName == "MUGB_fireplace";
         private const float FireplaceFireAltitudeOffset = Altitudes.AltInc * 0.25f;
@@ -42,6 +43,12 @@ namespace MUGB
             EnsureVariant();
         }
 
+        public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        {
+            base.SpawnSetup(map, respawningAfterLoad);
+            flickableComp = GetComp<CompFlickable>();
+        }
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -54,7 +61,8 @@ namespace MUGB
 
         protected override void DrawAt(Vector3 drawLoc, bool flip = false)
         {
-            bool drawFire = GetComp<CompRefuelable>()?.HasFuel ?? true;
+            bool drawFire = (GetComp<CompRefuelable>()?.HasFuel ?? true)
+                && (flickableComp?.SwitchIsOn ?? true);
             if (DrawFireBehind && drawFire)
             {
                 Vector3 firePos = drawLoc + new Vector3(0.1f, FireplaceFireAltitudeOffset, 0.33f);

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    한국어 의도: 방랑 거지무리 전용 이동속도 감소 히디프.
+    이들은 맵을 가로질러 통과하기만 하므로, 조금 느리게 걷게 해서
+    "여행자 무리가 지나간다"는 광경이 충분히 오래 보이도록 한다.
+    동시에 초반 고블린이 따라잡을 수 있는 창을 대기시간 대신 이동시간으로 확보한다.
+
+    HediffCompProperties_Disappears를 쓰는 이유: 플레이어가 거지를 붙잡아
+    노예/포로로 삼았을 때 이 히디프가 영구히 남으면 안 된다. 하루가 지나면
+    스스로 사라지므로 별도 제거 코드가 필요 없다(포로는 그동안 침대에 있다).
+  -->
+  <HediffDef>
+    <defName>MUGB_BeggarRoadWeariness</defName>
+    <label>road weariness</label>
+    <description>Months on the road with too little food. This person can still walk, but only slowly.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.75, 0.72, 0.65)</defaultLabelColor>
+    <isBad>true</isBad>
+    <makesAlert>false</makesAlert>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <maxSeverity>1.0</maxSeverity>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>60000~60000</disappearsAfterTicks>
+        <showRemainingTime>false</showRemainingTime>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <!-- 건강탭에 노출하지 않는다. 연출용 감속이라 플레이어가 관리할 대상이 아니고,
+             혹시 붙잡아 노예로 삼아도 하루짜리 잡티가 보이지 않는다. -->
+        <becomeVisible>false</becomeVisible>
+        <statFactors>
+          <MoveSpeed>0.65</MoveSpeed>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+</Defs>

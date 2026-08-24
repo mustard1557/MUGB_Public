@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -285,27 +285,53 @@ namespace MUGB
         }
 
         // 한국어 의도: 어느 세력에도 속하지 않은 거지 무리가 3~5명씩 맵을 통과한다.
-        // 이건 초반 구제용 공급원이지 상시 인육 자판기가 아니다. 8일차에 작업장 퀘스트가 열리고
-        // 기지가 커지면 습격 시체까지 들어오므로, 시간이 갈수록 간격을 뚜렷하게 벌린다.
+        // 초반에는 구제용 공급원이고, 기지가 자리를 잡은 뒤에는 변방계 풍경의 일부다.
+        //
+        // 30일 이후를 7일에서 평탄화한 이유: 예전 곡선은 60일 14일, 120일 20일로 계속 벌어졌는데,
+        // 그건 거지무리가 편지를 띄우고 기지 앞까지 찾아오던 시절의 값이었다. 지금은 토스트 알림에
+        // 맵 가장자리 통과라 무시 비용이 거의 없으므로, 후반에 사실상 사라지게 둘 이유가 없다.
         private static readonly SimpleCurve BeggarIntervalDaysByDaysPassed = new SimpleCurve
         {
             new CurvePoint(0f, 4f),
             new CurvePoint(15f, 4f),
-            new CurvePoint(30f, 8f),
-            new CurvePoint(60f, 14f),
-            new CurvePoint(120f, 20f)
+            new CurvePoint(30f, 7f)
         };
+
+        // 초반 9일은 3일마다 정확히 온다. 고블린 정착지가 자리를 잡기 전까지는
+        // 거지무리가 인육과 번식용 암컷의 유일한 안정 공급원이라, 이 구간만은
+        // 흔들리지 않고 예측 가능해야 한다.
+        private const int BeggarFixedPhaseDays = 9;
+        private const float BeggarFixedPhaseIntervalDays = 3f;
+
+        // 김덕팔은 청중이 지루해지는 꼴을 못 본다. 통행 사건을 조금 더 자주 끼워 넣는다.
+        // 주의: 이 값은 빈도가 아니라 "간격"에 곱해진다. 1보다 작을수록 더 자주 온다.
+        // 예전 0.85(빈도 약 1.18배)는 초반 공급까지 눈에 띄게 흔들어서 0.93(약 1.08배)으로 낮췄다.
+        private const float BeggarKimDeokPalIntervalFactor = 0.93f;
 
         private static int NextBeggarDelayTicks()
         {
-            float days = BeggarIntervalDaysByDaysPassed.Evaluate(GenDate.DaysPassed) * Rand.Range(0.8f, 1.2f);
-            int frequencyPercent = Mathf.Clamp(MUGBMod.Settings?.passingGroupFrequencyPercent ?? 110, 0, 200);
-            days /= Mathf.Max(0.1f, frequencyPercent / 100f);
+            // 고정 구간에는 스토리텔러 보정을 걸지 않는다. "초반 9일은 정확히 3일마다"가
+            // 이 구간의 존재 이유라서, 여기까지 흔들면 고정으로 둔 의미가 없어진다.
+            if (GenDate.DaysPassed < BeggarFixedPhaseDays)
+            {
+                return BeggarDelayTicksAfterSettings(BeggarFixedPhaseIntervalDays);
+            }
+
+            // 9일 이후에는 폭을 넓게 흔들어 "꼬박꼬박 온다"는 인상을 없앤다.
+            // 0.6~1.8(평균 1.2)인 이유: 하한을 너무 낮게 잡으면 이틀도 안 되어 다시 오는 판이 나온다.
+            // 슬라이더 기본값과 김덕팔 보정까지 통과하면 9~15일 구간이 최소 2일, 평균 4일대가 된다.
+            float days = BeggarIntervalDaysByDaysPassed.Evaluate(GenDate.DaysPassed) * Rand.Range(0.6f, 1.8f);
             if (GoblinRaidPerformanceUtility.IsKimDeokPalStorytellerActive)
             {
-                // 김덕팔은 청중이 지루해지는 꼴을 못 본다. 통행 사건을 조금 더 자주 끼워 넣는다.
-                days *= 0.85f;
+                days *= BeggarKimDeokPalIntervalFactor;
             }
+            return BeggarDelayTicksAfterSettings(days);
+        }
+
+        private static int BeggarDelayTicksAfterSettings(float days)
+        {
+            int frequencyPercent = Mathf.Clamp(MUGBMod.Settings?.passingGroupFrequencyPercent ?? 110, 0, 200);
+            days /= Mathf.Max(0.1f, frequencyPercent / 100f);
             return Mathf.RoundToInt(days * GenDate.TicksPerDay);
         }
 

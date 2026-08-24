@@ -74,6 +74,11 @@ namespace MUGB
             for (int attempt = 0; attempt < maxGenerationAttempts; attempt++)
             {
                 PawnKindDef kindDef = PawnKindForAttempt();
+                if (!IsValidSlaveKind(kindDef))
+                {
+                    continue;
+                }
+
                 PawnGenerationRequest request = new PawnGenerationRequest(
                     kindDef,
                     faction,
@@ -147,13 +152,18 @@ namespace MUGB
             }
 
             cachedHARHumanlikeSlaveKinds = DefDatabase<PawnKindDef>.AllDefsListForReading
-                .Where(kind => kind?.race?.race?.Humanlike == true
+                .Where(kind => IsValidSlaveKind(kind)
                     && kind.race != ThingDefOf.Human
                     && !kind.defName.StartsWith("MUGB_")
                     && GoblinUtility.IsHARAlienRaceDef(kind.race))
                 .ToList();
 
             return cachedHARHumanlikeSlaveKinds;
+        }
+
+        private static bool IsValidSlaveKind(PawnKindDef kindDef)
+        {
+            return kindDef?.race?.race?.Humanlike == true && !(kindDef is CreepJoinerFormKindDef);
         }
 
         private bool PassesSlaveFilters(Pawn pawn)
@@ -193,13 +203,10 @@ namespace MUGB
 
         private static void DressNonGoblinSlaveForSale(Pawn pawn)
         {
-            // KO intent: 고블린 상단의 비고블린 노예는 고블린 몸싸개가 아니라 바닐라 노예 몸싸개를 입힌다.
-            // HAR 종족은 바닐라 몸싸개가 종족별 의류 그래픽과 어긋날 수 있어 PawnKind가 입혀온 옷을 존중한다.
-            if (!GoblinUtility.IsHARAlienRace(pawn))
-            {
-                TryWearSlaveApparel(pawn, "Apparel_BodyStrap", QualityCategory.Poor);
-            }
-
+            // KO intent: 판매용 노예의 가격이 무작위 PawnKind 장비값으로 부풀지 않게
+            // 종족과 관계없이 생성 복장을 비우고 값싼 노예 몸싸개와 목줄만 지급한다.
+            pawn?.apparel?.DestroyAll();
+            TryWearSlaveApparel(pawn, "Apparel_BodyStrap", QualityCategory.Poor);
             TryWearSlaveApparel(pawn, "Apparel_Collar", QualityCategory.Normal);
         }
 

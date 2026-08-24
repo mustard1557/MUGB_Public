@@ -63,8 +63,13 @@
       <li>MUGB.ITab_GoblinFuel</li>
     </inspectorTabs>
     <comps>
+      <li Class="CompProperties_Flickable">
+        <commandTexture>UI/Icons/MGB_extinguish</commandTexture>
+        <commandLabelKey>MUGB_ToggleBuildingFlame</commandLabelKey>
+        <commandDescKey>MUGB_ToggleBuildingFlameDesc</commandDescKey>
+      </li>
       <li Class="CompProperties_HeatPusher">
-        <compClass>CompHeatPusherPowered</compClass>
+        <compClass>MUGB.Patches.CompHeatPusherGoblinFlickable</compClass>
         <heatPerSecond>3</heatPerSecond>
       </li>
       <li Class="CompProperties_Refuelable">
@@ -207,6 +212,11 @@
       <workTableNotInRoomRoleFactor>0.8</workTableNotInRoomRoleFactor>
     </building>
     <comps>
+      <li Class="CompProperties_Flickable">
+        <commandTexture>UI/Icons/MGB_extinguish</commandTexture>
+        <commandLabelKey>MUGB_ToggleBuildingFlame</commandLabelKey>
+        <commandDescKey>MUGB_ToggleBuildingFlameDesc</commandDescKey>
+      </li>
       <li Class="CompProperties_Refuelable">
         <fuelConsumptionRate>36</fuelConsumptionRate>
         <fuelCapacity>120</fuelCapacity>
@@ -494,13 +504,18 @@
       <li>MUGB.ITab_GoblinFuel</li>
     </inspectorTabs>
     <comps>
+      <li Class="CompProperties_Flickable">
+        <commandTexture>UI/Icons/MGB_extinguish</commandTexture>
+        <commandLabelKey>MUGB_ToggleBuildingFlame</commandLabelKey>
+        <commandDescKey>MUGB_ToggleBuildingFlameDesc</commandDescKey>
+      </li>
       <li Class="CompProperties_Power">
         <compClass>MUGB.CompGoblinAlwaysPowered</compClass>
         <basePowerConsumption>0</basePowerConsumption>
         <showPowerNeededIfOff>false</showPowerNeededIfOff>
       </li>
       <li Class="CompProperties_HeatPusher">
-        <compClass>CompHeatPusherPowered</compClass>
+        <compClass>MUGB.Patches.CompHeatPusherGoblinFlickable</compClass>
         <heatPerSecond>3</heatPerSecond>
       </li>
       <li Class="CompProperties_Refuelable">

@@ -180,10 +180,17 @@ namespace MUGB
     public class CompGoblinDirectionalFireVisual : ThingComp
     {
         private readonly Dictionary<float, Graphic> fireGraphicsBySize = new Dictionary<float, Graphic>();
+        private CompFlickable flickableComp;
         private bool pawnWorkingHere;
         private int nextWorkCheckTick;
 
         private CompProperties_GoblinDirectionalFireVisual Props => (CompProperties_GoblinDirectionalFireVisual)props;
+
+        public override void PostSpawnSetup(bool respawningAfterLoad)
+        {
+            base.PostSpawnSetup(respawningAfterLoad);
+            flickableComp = parent.GetComp<CompFlickable>();
+        }
 
         public override void CompTick()
         {
@@ -235,7 +242,7 @@ namespace MUGB
 
         private bool ShouldDrawFire()
         {
-            if (!HasFuel())
+            if (!HasFuel() || flickableComp?.SwitchIsOn == false)
             {
                 return false;
             }
@@ -343,11 +350,18 @@ namespace MUGB
     public class CompGoblinBuildingFireVisual : ThingComp
     {
         private Graphic fireGraphic;
+        private CompFlickable flickableComp;
         private bool pawnWorkingHere;
         private int nextWorkCheckTick;
         private int nextSmokeTick;
 
         private CompProperties_GoblinBuildingFireVisual Props => (CompProperties_GoblinBuildingFireVisual)props;
+
+        public override void PostSpawnSetup(bool respawningAfterLoad)
+        {
+            base.PostSpawnSetup(respawningAfterLoad);
+            flickableComp = parent.GetComp<CompFlickable>();
+        }
 
         private Graphic FireGraphic
         {
@@ -394,7 +408,7 @@ namespace MUGB
 
         private bool ShouldDrawFire()
         {
-            if (!HasFuel())
+            if (!HasFuel() || flickableComp?.SwitchIsOn == false)
             {
                 return false;
             }
@@ -435,7 +449,7 @@ namespace MUGB
 
         private void TryThrowSmoke()
         {
-            if (!Props.throwSmoke || !pawnWorkingHere || !HasFuel() || parent.Map == null)
+            if (!Props.throwSmoke || !pawnWorkingHere || !HasFuel() || flickableComp?.SwitchIsOn == false || parent.Map == null)
             {
                 return;
             }
