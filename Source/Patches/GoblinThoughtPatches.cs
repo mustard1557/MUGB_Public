@@ -830,7 +830,6 @@ namespace MUGB
             { "AteWithoutTable", -1f },
             { "GotSomeLovin", 15f },
             { "RebuffedMyRomanceAttemptMood", -4f },
-            { "ObservedTerror", -4f },
             { "WasEnslaved", -25f },
             { "WitnessedDeathAlly", -1f },
             { "WitnessedDeathNonAlly", 2f },

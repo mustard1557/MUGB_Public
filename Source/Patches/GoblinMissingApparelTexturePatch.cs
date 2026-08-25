@@ -140,40 +140,30 @@ namespace MUGB.Patches
         {
             if (!__result || apparel?.def?.thingCategories == null
                 || !apparel.def.thingCategories.Any(category => category?.defName == GoblinApparelCategoryDefName)
-                || apparel.WornGraphicPath.NullOrEmpty())
+                || rec.graphic == null
+                || rec.graphic.drawSize == Vector2.one
+                || rec.graphic.path.NullOrEmpty())
             {
                 return;
             }
 
-            if (bodyType == null)
+            Graphic source = rec.graphic;
+            GraphicData data = source.data;
+            Graphic resized = GraphicDatabase.Get(
+                source.GetType(),
+                source.path,
+                source.Shader,
+                Vector2.one,
+                source.Color,
+                source.ColorTwo,
+                data,
+                data?.shaderParameters,
+                source.maskPath);
+
+            if (resized != null && resized != BaseContent.BadGraphic)
             {
-                bodyType = BodyTypeDefOf.Male;
+                rec = new ApparelGraphicRecord(resized, apparel);
             }
-
-            string path = apparel.def.apparel.LastLayer != ApparelLayerDefOf.Overhead
-                && apparel.def.apparel.LastLayer != ApparelLayerDefOf.EyeCover
-                && !apparel.RenderAsPack()
-                && apparel.WornGraphicPath != BaseContent.PlaceholderImagePath
-                && apparel.WornGraphicPath != BaseContent.PlaceholderGearImagePath
-                    ? apparel.WornGraphicPath + "_" + bodyType.defName
-                    : apparel.WornGraphicPath;
-
-            Shader shader = ShaderDatabase.Cutout;
-            if (!forStatue)
-            {
-                if (apparel.StyleDef?.graphicData.shaderType != null)
-                {
-                    shader = apparel.StyleDef.graphicData.shaderType.Shader;
-                }
-                else if ((apparel.StyleDef == null && apparel.def.apparel.useWornGraphicMask)
-                    || (apparel.StyleDef != null && apparel.StyleDef.UseWornGraphicMask))
-                {
-                    shader = ShaderDatabase.CutoutComplex;
-                }
-            }
-
-            Graphic graphic = GraphicDatabase.Get<Graphic_Multi>(path, shader, Vector2.one, apparel.DrawColor);
-            rec = new ApparelGraphicRecord(graphic, apparel);
         }
     }
 }
