@@ -622,10 +622,17 @@ namespace MUGB.Patches
         // 바꾸지 않기 위한 결정이며, 외형 문제와 무관합니다.
         public static void ApplyRJWNewbornFollowUp(Pawn mother, Pawn father, Pawn baby)
         {
-            if (mother == null
-                || !GoblinUtility.IsGoblin(father)
-                || baby == null
-                || baby.Dead
+            if (mother == null || baby == null || baby.Dead)
+            {
+                return;
+            }
+
+            // 어미 신분 계승은 아비가 누구인지와 무관하므로 고블린 판정보다 앞에 둡니다.
+            // RJW와 월경 모드는 여기 오기 직전에 죄수 어미의 아기를 포로로 지정하는데,
+            // MUGB는 그 아기를 노예로 두기로 했으므로 마지막에 한 번 더 덮어써야 합니다.
+            ApplyBirthGuestStatus(baby, mother);
+
+            if (!GoblinUtility.IsGoblin(father)
                 || (!GoblinUtility.IsGoblin(baby) && !GoblinUtility.HasHalfGoblinAncestry(baby)))
             {
                 return;
@@ -633,7 +640,6 @@ namespace MUGB.Patches
 
             NormalizeGoblinBirthRelations(baby, mother, father);
             InheritGoblinIdeo(baby, mother, father);
-            ApplyBirthGuestStatus(baby, mother);
             ApplyGoblinBirthMood(mother, father, baby);
         }
 
@@ -1169,24 +1175,26 @@ namespace MUGB.Patches
 
         // 한국어 의도: 어미의 신분(노예/포로)을 아기에게 물려줍니다.
         //
-        // 예전에는 순수 고블린만 대상이었습니다. 그래서 어미 종족을 따라 나온 하프고블린은
-        // 이 함수를 그냥 통과했고, 노예는 팩션이 Faction.OfPlayer이므로 게스트 신분이 지정되지 않은
-        // 아기가 자유 정착민으로 태어나 버렸습니다. 하프고블린도 같은 규칙을 따르게 넓혔습니다.
+        // 예전에는 아기가 고블린이나 하프고블린일 때만 물려주었습니다. 그런데 이 함수를 부르는
+        // 출산 경로들이 하나같이 "아비가 고블린일 때"를 조건으로 걸고 있어서, 아비가 고블린이
+        // 아니면 아기도 고블린이 아니게 되고 결국 아무도 신분을 물려주지 않았습니다.
+        // 바닐라는 죄수가 낳은 아기에게 신분을 물려주는 코드가 아예 없으므로, 그 아기는
+        // 어미의 원래 팩션(대개 적대 세력)에 그대로 남아 적으로 태어나 버렸습니다.
+        //
+        // 신분은 아비가 아니라 어미에게서 오는 것이므로 종족 조건을 뺐습니다. 이제 아비가
+        // 누구든, 아기가 고블린이든 인간이든, 내 감옥/내 노예가 낳았으면 내 노예가 됩니다.
+        // 동물 출산까지 휩쓸지 않도록 사람 아기만 대상으로 둡니다.
         //
         // 포로로 태어난 고블린 표시는 13세 신분 선택 편지와 짝인 순수 고블린 전용 흐름이므로
-        // 하프고블린에는 달지 않습니다. 하프고블린은 바닐라 아기->어린이 편지를 그대로 받습니다.
+        // 하프고블린과 인간 아기에는 달지 않습니다. 그쪽은 바닐라 아기->어린이 편지를 그대로 받습니다.
         internal static void ApplyBirthGuestStatus(Pawn child, Pawn geneticMother)
         {
-            if (child?.guest == null || geneticMother == null)
+            if (child?.guest == null || geneticMother == null || child.RaceProps?.Humanlike != true)
             {
                 return;
             }
 
             bool pureGoblin = GoblinUtility.IsGoblin(child);
-            if (!pureGoblin && !GoblinUtility.HasHalfGoblinAncestry(child))
-            {
-                return;
-            }
 
             if (geneticMother.IsSlaveOfColony || geneticMother.IsPrisonerOfColony)
             {

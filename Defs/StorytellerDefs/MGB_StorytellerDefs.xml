@@ -37,8 +37,13 @@ His stories usually drift toward crude cruelty and dreadful endings.</descriptio
            까지 합치면 대략 12일에 한 번에서 7일에 한 번 꼴이 된다.
            이 comp는 StorytellerComp_RandomMain과 별개라 순수 덧셈이다. 여기를 올려도
            RandomMain의 카테고리 굴림(= 습격이 뽑힐 확률)에는 영향이 없다.
-           연달아 두 무리가 겹치지 않도록 최소 간격만 1일에서 2일로 넓혔다. -->
-      <li Class="StorytellerCompProperties_FactionInteraction"><incident>TravelerGroup</incident><minDaysPassed>1</minDaysPassed><baseIncidentsPerYear>30</baseIncidentsPerYear><minSpacingDays>2</minSpacingDays><allowedTargetTags><li>Map_PlayerHome</li></allowedTargetTags></li>
+           연달아 두 무리가 겹치지 않도록 최소 간격을 1일에서 0.5일로 좁혔다.
+           minSpacingDays는 0.5를 넘기면 안 된다. 림월드의 1년은 60일이고
+           IncidentCycleUtility.GenerateHitList는 그 1년 안에서 무작위로 자리를 잡다가
+           간격 조건을 못 맞추면 "Too many tries finding incident time"으로 포기한다.
+           30회 x 2일이면 필요 일수가 60일이라 1년을 통째로 채워야 해서 사실상 배치가 불가능했다.
+           0.5일이면 15일만 쓰므로 여유가 충분하다. 횟수를 더 올릴 거면 간격도 같이 줄일 것. -->
+      <li Class="StorytellerCompProperties_FactionInteraction"><incident>TravelerGroup</incident><minDaysPassed>1</minDaysPassed><baseIncidentsPerYear>30</baseIncidentsPerYear><minSpacingDays>0.5</minSpacingDays><allowedTargetTags><li>Map_PlayerHome</li></allowedTargetTags></li>
       <li Class="StorytellerCompProperties_CategoryIndividualMTBByBiome"><category>Misc</category><allowedTargetTags><li>Caravan</li><li>Map_TempIncident</li></allowedTargetTags></li>
       <li Class="StorytellerCompProperties_CategoryIndividualMTBByBiome"><category>ThreatSmall</category><applyCaravanVisibility>true</applyCaravanVisibility><allowedTargetTags><li>Caravan</li><li>Map_TempIncident</li></allowedTargetTags></li>
       <li Class="StorytellerCompProperties_CategoryIndividualMTBByBiome"><category>ThreatBig</category><applyCaravanVisibility>true</applyCaravanVisibility><allowedTargetTags><li>Caravan</li><li>Map_TempIncident</li></allowedTargetTags></li>
