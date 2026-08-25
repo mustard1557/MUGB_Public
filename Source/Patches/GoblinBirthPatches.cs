@@ -578,7 +578,7 @@ namespace MUGB.Patches
                 ApplyBirthGuestStatus(firstChild, geneticMother);
                 if (!plan.BirthStrainApplied)
                 {
-                    ApplyGoblinBirthMood(geneticMother);
+                    ApplyGoblinBirthMood(geneticMother, father, firstChild);
                     ApplyGoblinBirthStrain(geneticMother);
                     plan.BirthStrainApplied = true;
                 }
@@ -608,7 +608,7 @@ namespace MUGB.Patches
             }
 
             ApplyGoblinBirthStrain(geneticMother);
-            ApplyGoblinBirthMood(geneticMother);
+            ApplyGoblinBirthMood(geneticMother, father, firstChild);
         }
 
         // 한국어 의도: RJW 경로 출산의 출생 후처리입니다.
@@ -634,6 +634,7 @@ namespace MUGB.Patches
             NormalizeGoblinBirthRelations(baby, mother, father);
             InheritGoblinIdeo(baby, mother, father);
             ApplyBirthGuestStatus(baby, mother);
+            ApplyGoblinBirthMood(mother, father, baby);
         }
 
         public static bool IsGoblinPregnancy(Pawn mother, Pawn father, Pawn baby = null)
@@ -1064,22 +1065,29 @@ namespace MUGB.Patches
             }
         }
 
-        private static void ApplyGoblinBirthMood(Pawn geneticMother)
+        private static void ApplyGoblinBirthMood(Pawn geneticMother, Pawn father, Pawn child)
         {
-            if (geneticMother?.needs?.mood?.thoughts?.memories == null || GoblinUtility.IsGoblin(geneticMother))
+            if (geneticMother?.needs?.mood?.thoughts?.memories != null && !GoblinUtility.IsGoblin(geneticMother))
             {
-                return;
+                ThoughtDef babyBorn = DefDatabase<ThoughtDef>.GetNamedSilentFail("BabyBorn");
+                if (babyBorn != null)
+                {
+                    geneticMother.needs.mood.thoughts.memories.RemoveMemoriesOfDef(babyBorn);
+                }
+
+                if (MUGBDefOf.MUGB_GaveBirthToGoblinLitter != null)
+                {
+                    geneticMother.needs.mood.thoughts.memories.TryGainMemory(MUGBDefOf.MUGB_GaveBirthToGoblinLitter);
+                }
             }
 
-            ThoughtDef babyBorn = DefDatabase<ThoughtDef>.GetNamedSilentFail("BabyBorn");
-            if (babyBorn != null)
+            // Goblin fathers are intentionally omitted from the child's Parent relation, so vanilla
+            // BabyBorn never reaches them. Grant the goblin-specific memory at the birth event itself.
+            if (GoblinUtility.IsGoblin(father)
+                && father.needs?.mood?.thoughts?.memories != null
+                && MUGBDefOf.MUGB_GoblinBabyBorn != null)
             {
-                geneticMother.needs.mood.thoughts.memories.RemoveMemoriesOfDef(babyBorn);
-            }
-
-            if (MUGBDefOf.MUGB_GaveBirthToGoblinLitter != null)
-            {
-                geneticMother.needs.mood.thoughts.memories.TryGainMemory(MUGBDefOf.MUGB_GaveBirthToGoblinLitter);
+                father.needs.mood.thoughts.memories.TryGainMemory(MUGBDefOf.MUGB_GoblinBabyBorn, child);
             }
         }
 
@@ -1167,7 +1175,7 @@ namespace MUGB.Patches
         //
         // 포로로 태어난 고블린 표시는 13세 신분 선택 편지와 짝인 순수 고블린 전용 흐름이므로
         // 하프고블린에는 달지 않습니다. 하프고블린은 바닐라 아기->어린이 편지를 그대로 받습니다.
-        private static void ApplyBirthGuestStatus(Pawn child, Pawn geneticMother)
+        internal static void ApplyBirthGuestStatus(Pawn child, Pawn geneticMother)
         {
             if (child?.guest == null || geneticMother == null)
             {
@@ -1202,6 +1210,18 @@ namespace MUGB.Patches
             {
                 child.SetFaction(Faction.OfPlayer);
                 child.guest.SetGuestStatus(null);
+            }
+        }
+
+        [HarmonyPatch(typeof(PawnUtility), nameof(PawnUtility.TrySpawnHatchedOrBornPawn))]
+        private static class PawnUtility_TrySpawnHatchedOrBornPawn_GoblinCaptiveBirthPatch
+        {
+            private static void Postfix(bool __result, Pawn pawn, Thing motherOrEgg)
+            {
+                if (__result && motherOrEgg is Pawn mother)
+                {
+                    ApplyBirthGuestStatus(pawn, mother);
+                }
             }
         }
 
