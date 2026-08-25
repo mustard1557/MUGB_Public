@@ -89,10 +89,14 @@ namespace MUGB.Patches
         {
             ThingWithComps parent = __instance?.parent;
             if (parent != null
-                && !__instance.SwitchIsOn
-                && GoblinExtinguishableBuildingUtility.IsExtinguishableBuilding(parent))
+                && !__instance.SwitchIsOn)
             {
-                GoblinExtinguishableBuildingUtility.InterruptActiveBill(parent);
+                if (GoblinExtinguishableBuildingUtility.IsExtinguishableBuilding(parent))
+                {
+                    GoblinExtinguishableBuildingUtility.InterruptActiveBill(parent);
+                }
+
+                AmbientRimExtinguishedFireCompat.RefreshAfterExtinguishing(parent);
             }
         }
     }
