@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
   <!--
@@ -62,13 +62,19 @@
       </li>
       <li Class="StockGenerator_SingleDef"><thingDef>MUGB_GloopJuice</thingDef><countRange>2~8</countRange></li>
       <li Class="MUGB.StockGenerator_MUGB_NonGoblinSlaves">
+        <!-- KO intent: 고블린 상단은 사람을 헐값에 넘긴다. 구매가를 정가의 40%로 낮춘다. -->
+        <price>VeryCheap</price>
         <countRange>1~2</countRange>
       </li>
       <li Class="MUGB.StockGenerator_MUGB_GoblinSlaves">
+        <!-- KO intent: 고블린 상단은 사람을 헐값에 넘긴다. 구매가를 정가의 40%로 낮춘다. -->
+        <price>VeryCheap</price>
         <countRange>1~1</countRange>
         <slaveKindDef>MUGB_GoblinKind_Slave</slaveKindDef>
       </li>
       <li Class="MUGB.StockGenerator_MUGB_GoblinRecruits">
+        <!-- KO intent: 고블린 상단은 사람을 헐값에 넘긴다. 구매가를 정가의 40%로 낮춘다. -->
+        <price>VeryCheap</price>
         <countRange>0~1</countRange>
         <recruitKindDef>MUGB_GoblinKind_Beggar</recruitKindDef>
       </li>
@@ -139,13 +145,19 @@
         <countRange>2~9</countRange>
       </li>
       <li Class="MUGB.StockGenerator_MUGB_NonGoblinSlaves">
+        <!-- KO intent: 고블린 상단은 사람을 헐값에 넘긴다. 구매가를 정가의 40%로 낮춘다. -->
+        <price>VeryCheap</price>
         <countRange>1~2</countRange>
       </li>
       <li Class="MUGB.StockGenerator_MUGB_GoblinSlaves">
+        <!-- KO intent: 고블린 상단은 사람을 헐값에 넘긴다. 구매가를 정가의 40%로 낮춘다. -->
+        <price>VeryCheap</price>
         <countRange>0~1</countRange>
         <slaveKindDef>MUGB_GoblinKind_Slave</slaveKindDef>
       </li>
       <li Class="MUGB.StockGenerator_MUGB_GoblinRecruits">
+        <!-- KO intent: 고블린 상단은 사람을 헐값에 넘긴다. 구매가를 정가의 40%로 낮춘다. -->
+        <price>VeryCheap</price>
         <countRange>0~1</countRange>
         <recruitKindDef>MUGB_GoblinKind_Beggar</recruitKindDef>
       </li>
@@ -248,13 +260,19 @@
         <countRange>2~5</countRange>
       </li>
       <li Class="MUGB.StockGenerator_MUGB_NonGoblinSlaves">
+        <!-- KO intent: 고블린 상단은 사람을 헐값에 넘긴다. 구매가를 정가의 40%로 낮춘다. -->
+        <price>VeryCheap</price>
         <countRange>1~2</countRange>
       </li>
       <li Class="MUGB.StockGenerator_MUGB_GoblinSlaves">
+        <!-- KO intent: 고블린 상단은 사람을 헐값에 넘긴다. 구매가를 정가의 40%로 낮춘다. -->
+        <price>VeryCheap</price>
         <countRange>0~2</countRange>
         <slaveKindDef>MUGB_GoblinKind_Slave</slaveKindDef>
       </li>
       <li Class="MUGB.StockGenerator_MUGB_GoblinRecruits">
+        <!-- KO intent: 고블린 상단은 사람을 헐값에 넘긴다. 구매가를 정가의 40%로 낮춘다. -->
+        <price>VeryCheap</price>
         <countRange>0~1</countRange>
         <recruitKindDef>MUGB_GoblinKind_Beggar</recruitKindDef>
       </li>
@@ -339,6 +357,8 @@
         <countRange>1~1</countRange>
       </li>
       <li Class="MUGB.StockGenerator_MUGB_NonGoblinSlaves">
+        <!-- KO intent: 고블린 상단은 사람을 헐값에 넘긴다. 구매가를 정가의 40%로 낮춘다. -->
+        <price>VeryCheap</price>
         <!-- KO intent: 암시장은 다른 상단보다 노예 상품이 눈에 띄게 많아야 한다. -->
         <!-- KO intent: 암시장 비고블린 노예는 여성 선별 상품으로, HAR 인간형 종족도 자연스럽게 섞이고 아름다움 특성을 보장한다. -->
         <countRange>4~6</countRange>
@@ -352,10 +372,14 @@
         <beautyTraitDegree>2</beautyTraitDegree>
       </li>
       <li Class="MUGB.StockGenerator_MUGB_GoblinSlaves">
+        <!-- KO intent: 고블린 상단은 사람을 헐값에 넘긴다. 구매가를 정가의 40%로 낮춘다. -->
+        <price>VeryCheap</price>
         <countRange>1~2</countRange>
         <slaveKindDef>MUGB_GoblinKind_Slave</slaveKindDef>
       </li>
       <li Class="MUGB.StockGenerator_MUGB_GoblinRecruits">
+        <!-- KO intent: 고블린 상단은 사람을 헐값에 넘긴다. 구매가를 정가의 40%로 낮춘다. -->
+        <price>VeryCheap</price>
         <countRange>0~1</countRange>
         <recruitKindDef>MUGB_GoblinKind_Beggar</recruitKindDef>
       </li>
@@ -404,6 +428,8 @@
         </createMatingPair>
       </li>
       <li Class="MUGB.StockGenerator_MUGB_NonGoblinSlaves">
+        <!-- KO intent: 고블린 상단은 사람을 헐값에 넘긴다. 구매가를 정가의 40%로 낮춘다. -->
+        <price>VeryCheap</price>
         <!-- KO intent: 가축상단은 짐승과 짐꾼 중심. 비고블린은 정착민 합류 상품이 아니라 소수 노예 상품만 둔다. -->
         <countRange>2~3</countRange>
         <forceFemale>true</forceFemale>
@@ -411,10 +437,14 @@
         <maxAge>40</maxAge>
       </li>
       <li Class="MUGB.StockGenerator_MUGB_GoblinSlaves">
+        <!-- KO intent: 고블린 상단은 사람을 헐값에 넘긴다. 구매가를 정가의 40%로 낮춘다. -->
+        <price>VeryCheap</price>
         <countRange>3~4</countRange>
         <slaveKindDef>MUGB_GoblinKind_Slave</slaveKindDef>
       </li>
       <li Class="MUGB.StockGenerator_MUGB_GoblinRecruits">
+        <!-- KO intent: 고블린 상단은 사람을 헐값에 넘긴다. 구매가를 정가의 40%로 낮춘다. -->
+        <price>VeryCheap</price>
         <countRange>1~2</countRange>
         <recruitKindDef>MUGB_GoblinKind_Beggar</recruitKindDef>
       </li>

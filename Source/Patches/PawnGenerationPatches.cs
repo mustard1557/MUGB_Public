@@ -375,7 +375,7 @@ namespace MUGB.Patches
             }
 
             string currentName = pawn.Name.ToStringFull;
-            bool holdingTemporaryName = currentName != null && (currentName.Contains("고블린 아기") || currentName.Contains("홉고블린 아기"));
+            bool holdingTemporaryName = IsTemporaryGoblinBabyName(pawn.Name);
             if (!holdingTemporaryName && IsExpectedKoreanGoblinName(pawn.Name))
             {
                 return;
@@ -410,6 +410,22 @@ namespace MUGB.Patches
             {
                 Rand.PopState();
             }
+        }
+
+        private static bool IsTemporaryGoblinBabyName(Name name)
+        {
+            if (name is NameTriple triple)
+            {
+                return IsTemporaryGoblinBabyLabel(triple.First)
+                    || IsTemporaryGoblinBabyLabel(triple.Nick);
+            }
+
+            return IsTemporaryGoblinBabyLabel(name?.ToStringFull);
+        }
+
+        private static bool IsTemporaryGoblinBabyLabel(string value)
+        {
+            return value == "고블린 아기" || value == "홉고블린 아기";
         }
 
         public static bool TryNormalizeKoreanGoblinDisplayName(Pawn pawn)

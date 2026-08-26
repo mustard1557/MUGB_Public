@@ -62,6 +62,7 @@ namespace MUGB.Patches
                 PatchRJWPregnancyInitialize(harmony);
                 PatchMenstruationExtraBaby(harmony);
                 PatchMenstruationMultiplePregnancyExtraBaby(harmony);
+                PatchMenstruationFinalGuestStatus(harmony);
             }
             catch (Exception e)
             {
@@ -69,6 +70,36 @@ namespace MUGB.Patches
                 // 호환 패치가 안 걸리는 것보다 게임이 뜨는 것이 우선입니다.
                 Log.Error("[MUGB] Failed to apply the RJW goblin birth compatibility patches: " + e);
             }
+        }
+
+        // Menstruation keeps pregnancies and their pregenerated babies in the save, then births them through
+        // its private HumanlikeBirth method. Apply the captive mother's status after that method has finished,
+        // so old pregnancies and Menstruation's own faction assignments cannot leave newborns hostile.
+        private static void PatchMenstruationFinalGuestStatus(Harmony harmony)
+        {
+            Type pregnancyType = AccessTools.TypeByName(MultiplePregnancyTypeName);
+            MethodInfo humanlikeBirth = pregnancyType == null
+                ? null
+                : AccessTools.Method(pregnancyType, "HumanlikeBirth", new[] { typeof(Pawn) });
+            MethodInfo postfix = AccessTools.Method(
+                typeof(GoblinRJWBirthCompat),
+                nameof(MenstruationHumanlikeBirthPostfix));
+
+            if (humanlikeBirth != null && postfix != null)
+            {
+                harmony.Patch(humanlikeBirth, postfix: new HarmonyMethod(postfix));
+            }
+        }
+
+        private static void MenstruationHumanlikeBirthPostfix(object __instance, Pawn baby)
+        {
+            Pawn mother = ReadPregnancyMother(__instance);
+            GoblinBirthUtility.LogBirthGuestStatus(
+                "월경최종훅 진입",
+                baby,
+                mother,
+                "Hediff_MultiplePregnancy.HumanlikeBirth");
+            GoblinBirthUtility.ApplyBirthGuestStatus(baby, mother);
         }
 
         // Hediff_BasePregnancy.Initialize는 비가상 public이고 그 안에서 가상 GenerateBabies를 부릅니다.
@@ -395,6 +426,44 @@ namespace MUGB.Patches
             return field?.GetValue(instance) as Pawn;
         }
 
+        // 한국어 의도: 한배 새끼 중 마지막으로 태어난 아기인지 판정합니다.
+        //
+        // 출산 부담은 새끼 수가 아니라 출산 한 번을 기준으로 쌓아야 합니다. RJW와 월경 모드의
+        // GiveBirth는 한 번의 호출 안에서 babies 목록을 순서대로 낳으면서 아기마다 PostBirth를
+        // 부르므로, 목록의 마지막 아기일 때만 참을 돌려주면 임신 1회당 정확히 한 번이 됩니다.
+        //
+        // 첫 아기가 아니라 마지막 아기를 고른 이유는 한계 도달 시 어미가 죽기 때문입니다.
+        // 첫 아기에서 죽이면 남은 새끼를 이미 죽어 사라진 어미 자리에 스폰하려다 문제가 납니다.
+        // 바닐라 경로도 아기를 모두 낳은 뒤에 부담을 적용합니다.
+        //
+        // babies 목록을 읽지 못하는 RJW 변종에서는 마지막으로 처리한 임신 헤디프 하나만
+        // 약한 참조로 기억해 같은 임신의 두 번째 아기부터 건너뜁니다. 이 경우에도
+        // 임신 1회당 한 번은 지켜집니다. 저장하지 않고 Tick도 돌지 않으며,
+        // 참조는 다음 출산 때 교체되고 약한 참조라 폰을 살려두지도 않습니다.
+        private static readonly WeakReference lastCountedPregnancy = new WeakReference(null);
+
+        public static bool IsFinalNewbornOfPregnancy(object instance, Pawn baby)
+        {
+            if (instance == null || baby == null)
+            {
+                return false;
+            }
+
+            List<Pawn> babies = ReadBabies(instance);
+            if (babies != null && babies.Count > 0)
+            {
+                return babies[babies.Count - 1] == baby;
+            }
+
+            if (ReferenceEquals(lastCountedPregnancy.Target, instance))
+            {
+                return false;
+            }
+
+            lastCountedPregnancy.Target = instance;
+            return true;
+        }
+
         private static List<Pawn> ReadBabies(object instance)
         {
             if (instance == null)
@@ -453,10 +522,17 @@ namespace MUGB.Patches
         {
             try
             {
-                GoblinBirthUtility.ApplyRJWNewbornFollowUp(
-                    mother ?? GoblinRJWBirthCompat.ReadPregnancyMother(__instance),
-                    father ?? GoblinRJWBirthCompat.ReadPregnancyFather(__instance),
-                    baby);
+                Pawn birthMother = mother ?? GoblinRJWBirthCompat.ReadPregnancyMother(__instance);
+                Pawn birthFather = father ?? GoblinRJWBirthCompat.ReadPregnancyFather(__instance);
+                GoblinBirthUtility.ApplyRJWNewbornFollowUp(birthMother, birthFather, baby);
+
+                // 출산 부담은 새끼마다가 아니라 출산 한 번에 한 번만 쌓습니다.
+                // 사산아가 마지막인 경우에도 출산 자체는 세어야 하므로
+                // 아기 생사와 무관한 이 판정을 후처리 뒤에 따로 둡니다.
+                if (GoblinRJWBirthCompat.IsFinalNewbornOfPregnancy(__instance, baby))
+                {
+                    GoblinBirthUtility.ApplyRJWBirthStrain(birthMother, birthFather);
+                }
             }
             catch (Exception e)
             {

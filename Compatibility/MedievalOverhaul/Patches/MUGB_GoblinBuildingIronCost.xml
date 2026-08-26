@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <!--
+    [파일 개요]
+    미디블 오버홀이 켜져 있을 때만 읽히는 폴더입니다(LoadFolders.xml 참고).
+
+    미디블에서는 강철이 사실상 후반 자원이라, 바닐라 강철을 고정재료로 요구하는
+    생산건물은 중세 단계에서 지을 수가 없습니다. 그래서 미디블이 켜져 있을 때만
+    강철 요구량을 같은 수량의 미디블 철괴로 바꿉니다.
+
+    바꾸는 것은 재료 종류 하나뿐이고 수량, 작업량, 연구 선행, 그 밖의 어떤 값도
+    건드리지 않습니다. 미디블이 없으면 이 폴더 자체가 로드되지 않으므로
+    기본 Defs의 강철 요구가 그대로 남습니다.
+
+    대상은 "고정재료로 강철이 들어가는 생산건물"뿐입니다.
+    고블린 합금 레시피의 강철은 의도된 설계이므로 여기서 바꾸지 않습니다.
+    미디블 환경에서 합금용 강철은 기존처럼 강철 호환 모드나 교역으로 구합니다.
+  -->
+
+  <!-- 고블린 대장간: 강철 60 -> 철괴 60 -->
+  <Operation Class="PatchOperationSetName">
+    <xpath>Defs/ThingDef[defName="MUGB_smithbench"]/costList/Steel</xpath>
+    <name>DankPyon_IronIngot</name>
+  </Operation>
+
+  <!-- 고블린 연금술 테이블: 강철 45 -> 철괴 45 -->
+  <Operation Class="PatchOperationSetName">
+    <xpath>Defs/ThingDef[defName="MUGB_druglab"]/costList/Steel</xpath>
+    <name>DankPyon_IronIngot</name>
+  </Operation>
+
+</Patch>

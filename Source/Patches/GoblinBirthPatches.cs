@@ -562,6 +562,17 @@ namespace MUGB.Patches
                 return;
             }
 
+            // 한국어 의도: 어미 신분 계승은 아비가 누구든 상관없으므로 고블린 판정보다 앞에 둡니다.
+            //
+            // 신분 계승에는 PawnUtility.TrySpawnHatchedOrBornPawn 훅도 걸려 있지만, 그 훅만으로는
+            // 구멍이 남습니다. 바닐라 ApplyBirthOutcome은 의사가 출산을 받아주면 아기를 스폰하지 않고
+            // 의사가 안아 들게 하고(JobDefOf.CarryToMomAfterBirth), 그 경로에서는
+            // TrySpawnHatchedOrBornPawn을 아예 부르지 않습니다. 감옥 출산은 대개 의사가 붙으므로
+            // 실제로는 이쪽이 기본 경로입니다. 그래서 죄수가 낳은 아기가 어미의 원래 팩션에
+            // 그대로 남아 적으로 태어났습니다.
+            LogBirthGuestStatus("바닐라훅 진입", firstChild, geneticMother, "ApplyBirthOutcome");
+            ApplyBirthGuestStatus(firstChild, geneticMother);
+
             if (geneticMother == null || birtherThing == null || !(birtherThing is Pawn) || !geneticMother.RaceProps.Humanlike || !GoblinUtility.IsGoblin(father))
             {
                 return;
@@ -630,6 +641,7 @@ namespace MUGB.Patches
             // 어미 신분 계승은 아비가 누구인지와 무관하므로 고블린 판정보다 앞에 둡니다.
             // RJW와 월경 모드는 여기 오기 직전에 죄수 어미의 아기를 포로로 지정하는데,
             // MUGB는 그 아기를 노예로 두기로 했으므로 마지막에 한 번 더 덮어써야 합니다.
+            LogBirthGuestStatus("RJW훅 진입", baby, mother, "PostBirth");
             ApplyBirthGuestStatus(baby, mother);
 
             if (!GoblinUtility.IsGoblin(father)
@@ -1071,6 +1083,25 @@ namespace MUGB.Patches
             }
         }
 
+        // 한국어 의도: RJW 경로 출산의 출산 부담입니다.
+        //
+        // 바닐라 경로(PostProcessBirth)는 아비가 고블린이면 어미에게 출산 부담을 쌓아 왔지만,
+        // RJW와 월경 모드는 그 경로를 타지 않아 부담이 전혀 쌓이지 않았습니다.
+        // 판정 기준은 바닐라 경로와 같게 아비가 고블린인지 하나만 봅니다.
+        // 어미가 고블린이면 ApplyGoblinBirthStrain 안에서 걸러집니다.
+        //
+        // 부르는 쪽에서 한배 새끼의 마지막 아기일 때만 호출하므로 출산 한 번에 한 번만 쌓입니다.
+        // 새끼 수만큼 쌓으면 한배로 여럿 낳는 순간 한계에 걸려 어미가 즉사합니다.
+        public static void ApplyRJWBirthStrain(Pawn mother, Pawn father)
+        {
+            if (mother == null || mother.Dead || !GoblinUtility.IsGoblin(father))
+            {
+                return;
+            }
+
+            ApplyGoblinBirthStrain(mother);
+        }
+
         private static void ApplyGoblinBirthMood(Pawn geneticMother, Pawn father, Pawn child)
         {
             if (geneticMother?.needs?.mood?.thoughts?.memories != null && !GoblinUtility.IsGoblin(geneticMother))
@@ -1187,10 +1218,37 @@ namespace MUGB.Patches
         //
         // 포로로 태어난 고블린 표시는 13세 신분 선택 편지와 짝인 순수 고블린 전용 흐름이므로
         // 하프고블린과 인간 아기에는 달지 않습니다. 그쪽은 바닐라 아기->어린이 편지를 그대로 받습니다.
+        // 한국어 의도: 개발자 모드에서만 신분 계승 판정을 한 줄로 남깁니다.
+        //
+        // 어느 출산 경로가 실제로 도는지, 그 시점에 어미가 정말 내 죄수로 잡히는지는
+        // 코드만 읽어서는 확정할 수 없습니다. 개발자 모드가 꺼져 있으면 아무것도 하지 않으므로
+        // 평소 플레이에는 비용이 없습니다.
+        internal static void LogBirthGuestStatus(string where, Pawn child, Pawn mother, string outcome)
+        {
+            if (!Prefs.DevMode)
+            {
+                return;
+            }
+
+            Log.Message(
+                "[MUGB 출산신분] " + where
+                + " | 아기=" + (child?.LabelShort ?? "null")
+                + " 팩션=" + (child?.Faction?.Name ?? "없음")
+                + " 신분=" + (child?.guest?.GuestStatus.ToString() ?? "guest없음")
+                + " | 어미=" + (mother?.LabelShort ?? "null")
+                + " 팩션=" + (mother?.Faction?.Name ?? "없음")
+                + " 신분=" + (mother?.guest?.GuestStatus.ToString() ?? "guest없음")
+                + " 주인=" + (mother?.HostFaction?.Name ?? "없음")
+                + " 내죄수=" + (mother?.IsPrisonerOfColony.ToString() ?? "?")
+                + " 내노예=" + (mother?.IsSlaveOfColony.ToString() ?? "?")
+                + " | 결과=" + outcome);
+        }
+
         internal static void ApplyBirthGuestStatus(Pawn child, Pawn geneticMother)
         {
             if (child?.guest == null || geneticMother == null || child.RaceProps?.Humanlike != true)
             {
+                LogBirthGuestStatus("입구컷", child, geneticMother, "guest없음/어미없음/사람아님");
                 return;
             }
 
@@ -1205,14 +1263,18 @@ namespace MUGB.Patches
                     {
                         Current.Game?.GetComponent<GoblinRapidMaturationComponent>()?.MarkCaptiveBornGoblin(child);
                     }
+                    LogBirthGuestStatus("계승", child, geneticMother, "노예로 지정");
                 }
                 else
                 {
                     child.guest.SetGuestStatus(Faction.OfPlayer, GuestStatus.Prisoner);
+                    LogBirthGuestStatus("계승", child, geneticMother, "이데올로기 없어서 포로로 지정");
                 }
                 child.needs?.AddOrRemoveNeedsAsAppropriate();
                 return;
             }
+
+            LogBirthGuestStatus("통과", child, geneticMother, "어미가 내 죄수도 내 노예도 아님");
 
             if (geneticMother.Faction == Faction.OfPlayer && child.Faction != Faction.OfPlayer)
             {
@@ -1228,6 +1290,7 @@ namespace MUGB.Patches
             {
                 if (__result && motherOrEgg is Pawn mother)
                 {
+                    LogBirthGuestStatus("스폰훅 진입", pawn, mother, "TrySpawnHatchedOrBornPawn");
                     ApplyBirthGuestStatus(pawn, mother);
                 }
             }

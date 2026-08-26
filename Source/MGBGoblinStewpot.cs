@@ -83,6 +83,17 @@ namespace MUGB
 
         private Graphic EmptyGraphic => emptyGraphic ?? (emptyGraphic = GraphicDatabase.Get<Graphic_Multi>(EmptyGraphicPath, ShaderDatabase.CutoutComplex, def.graphicData.drawSize, DrawColor, DrawColorTwo, def.graphicData));
 
+        // ko-KR 의도: 스폰 이후에 Rotation을 바꾸지 않습니다.
+        //
+        // 솥단지는 2x2라서 회전에 따라 차지하는 칸이 통째로 한 칸씩 밀립니다
+        // (Verse.GenAdj.AdjustForRotation은 짝수 크기일 때 중심을 보정합니다).
+        // 예전에는 SpawnSetup에서 동쪽을 남쪽으로, 서쪽을 북쪽으로 되돌렸는데,
+        // 그때는 이미 청사진 위치에 맞춰 스폰과 구역 등록이 끝난 뒤라
+        // 완성된 솥이 지은 자리에서 한 칸 어긋나고
+        // "Changed rotation of a spawned non-single-cell thing" 경고가 떴습니다.
+        //
+        // 텍스처는 동쪽이 남쪽과, 서쪽이 북쪽과 같은 그림이므로 회전을 강제로
+        // 되돌릴 이유도 없습니다. 플레이어가 놓은 방향 그대로 둡니다.
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
@@ -91,7 +102,6 @@ namespace MUGB
                 powerComp.PowerOn = true;
             }
             EnsureStorageSettings();
-            NormalizeRotation();
         }
 
         public override void PostMake()
@@ -364,18 +374,6 @@ namespace MUGB
             {
                 CompRefuelable refuelable = this.TryGetComp<CompRefuelable>();
                 return refuelable == null || refuelable.HasFuel;
-            }
-        }
-
-        private void NormalizeRotation()
-        {
-            if (Rotation == Rot4.East)
-            {
-                Rotation = Rot4.South;
-            }
-            else if (Rotation == Rot4.West)
-            {
-                Rotation = Rot4.North;
             }
         }
 

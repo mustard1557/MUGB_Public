@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
   <ThingDef ParentName="BenchBase">
@@ -161,6 +161,11 @@
       </damageData>
     </graphicData>
     <costStuffCount>90</costStuffCount>
+    <!--
+      ko-KR 의도: 미디블 오버홀이 켜져 있으면 강철 요구가 같은 수량의 미디블 철괴로 바뀝니다.
+      Compatibility/MedievalOverhaul/Patches/MUGB_GoblinBuildingIronCost.xml 참고.
+      강철 항목의 이름을 바꾸거나 지우면 그 패치의 xpath가 어긋납니다.
+    -->
     <costList>
       <Steel>60</Steel>
       <WoodLog>30</WoodLog>
@@ -373,6 +378,7 @@
     <castEdgeShadows>true</castEdgeShadows>
     <staticSunShadowHeight>0.20</staticSunShadowHeight>
     <costStuffCount>50</costStuffCount>
+    <!-- ko-KR 의도: 위 대장간과 같은 이유로 미디블 환경에서는 강철 45가 철괴 45로 바뀝니다. -->
     <costList>
       <Steel>45</Steel>
       <WoodLog>25</WoodLog>
@@ -546,6 +552,9 @@
         <northFireSize>0.576</northFireSize>
         <southFireSize>0.576</southFireSize>
         <drawFireOnlySouth>true</drawFireOnlySouth>
+        <!-- ko-KR 의도: 솥단지 그림은 동쪽이 남쪽과, 서쪽이 북쪽과 같은 파일이다.
+             회전이 아니라 보이는 그림을 기준으로 불을 그리게 한다. -->
+        <sideTexturesMirrorFrontBack>true</sideTexturesMirrorFrontBack>
         <offset>(0,0,-0.62)</offset>
       </li>
       <li Class="MUGB.CompProperties_GoblinStewpotIngredients">

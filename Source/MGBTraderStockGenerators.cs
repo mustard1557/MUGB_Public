@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using RimWorld.Planet;
@@ -380,6 +380,7 @@ namespace MUGB
                 if (GoblinUtility.IsGoblin(pawn) && PassesRecruitFilters(pawn))
                 {
                     // 노예 guest 상태를 주지 않는다. 거래로 산 뒤 정착민 합류형으로 처리되게 하는 고블린 전용 상품이다.
+                    MUGBTraderPawnUtility.MarkPawnAsTraderRecruit(pawn);
                     return pawn;
                 }
 
@@ -407,10 +408,36 @@ namespace MUGB
         {
             // KO intent: 고블린 상단이 파는 비고블린은 정착민 합류 상품이 아니라 노예 상품이어야 한다.
             // 정착민 합류형 상품은 추후 고블린 전용 생성기로 따로 만들 때만 허용한다.
-            if (pawn?.guest != null && pawn.Faction != null)
+            if (pawn?.guest == null || pawn.Faction == null)
             {
-                pawn.guest.SetGuestStatus(pawn.Faction, GuestStatus.Slave);
+                return;
             }
+
+            pawn.guest.SetGuestStatus(pawn.Faction, GuestStatus.Slave);
+
+            // KO intent: 사고 난 뒤의 신분과 가격을 노예로 못박는다.
+            //
+            // joinStatus는 폰을 만들 때 바닐라가 무작위로 정한다(이데올로기 기준 75% 노예 /
+            // 25% 자유 정착민). 그대로 두면 노예 매물의 1/4이 사는 순간 자유 정착민으로
+            // 합류해 버리고, 바닐라가 노예 매물에만 주는 구매가 40% 할인도 못 받아
+            // 그 개체만 유독 비싸진다.
+            //
+            // 바닐라가 원래 쓰는 필드라 저장되는 값이 늘지 않는다.
+            pawn.guest.joinStatus = JoinStatus.JoinAsSlave;
+        }
+
+        // KO intent: 고블린 신병은 노예가 아니라 정착민으로 합류하는 상품이다.
+        //
+        // 신병에게는 노예 신분을 주지 않지만, joinStatus를 그냥 두면 바닐라 무작위 때문에
+        // 3/4이 노예로 합류해 버린다. 상품 설명과 실제 결과가 어긋나므로 여기서 못박는다.
+        public static void MarkPawnAsTraderRecruit(Pawn pawn)
+        {
+            if (pawn?.guest == null)
+            {
+                return;
+            }
+
+            pawn.guest.joinStatus = JoinStatus.JoinAsColonist;
         }
     }
 }

@@ -492,6 +492,29 @@ namespace MUGB
         }
     }
 
+    [HarmonyPatch(typeof(TaleRecorder), nameof(TaleRecorder.RecordTale))]
+    public static class TaleRecorder_RecordTale_GoblinChildPatch
+    {
+        public static bool Prefix(TaleDef def, object[] args, ref Tale __result)
+        {
+            // KilledChild is a two-pawn tale: args[0] is the killer and args[1] is the child.
+            // The killer's mood memory is already filtered above. Suppressing this tale also
+            // prevents KilledChild_Opinion from applying a social-opinion penalty to the killer.
+            if (def?.defName == "KilledChild"
+                && args != null
+                && args.Length > 1
+                && args[1] is Pawn child
+                && GoblinUtility.IsGoblin(child)
+                && child.DevelopmentalStage.Juvenile())
+            {
+                __result = null;
+                return false;
+            }
+
+            return true;
+        }
+    }
+
     [HarmonyPatch(typeof(ThoughtWorker_MyChildEnslaved), nameof(ThoughtWorker_MyChildEnslaved.MoodMultiplier))]
     public static class ThoughtWorker_MyChildEnslaved_MoodMultiplier_GoblinChildPatch
     {

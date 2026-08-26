@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
@@ -165,6 +165,16 @@ namespace MUGB
         public bool fireOnlyWhenWorking;
         public int workCheckIntervalTicks = 60;
         public bool drawFireOnlySouth;
+
+        // ko-KR 의도: 옆면 그림이 앞뒤 그림과 같은 파일인 건물을 위한 표시입니다.
+        //
+        // 솥단지 텍스처는 동쪽이 남쪽과, 서쪽이 북쪽과 완전히 같은 파일입니다.
+        // 그래서 회전이 동/서라도 화면에 보이는 그림은 남/북이고, 불도 그 그림을
+        // 기준으로 그려야 맞습니다. 이 값을 켜면 동쪽을 남쪽으로, 서쪽을 북쪽으로
+        // 보고 불의 표시 여부와 크기, 위치를 정합니다.
+        //
+        // 네 방향 그림이 전부 다른 건물에서는 꺼 두어야 하므로 기본값은 꺼짐입니다.
+        public bool sideTexturesMirrorFrontBack;
         public Vector3 offset = Vector3.zero;
         public Vector3 northOffset = Vector3.zero;
         public Vector3 southOffset = Vector3.zero;
@@ -204,6 +214,35 @@ namespace MUGB
             pawnWorkingHere = HasPawnWorkingHere();
         }
 
+        // ko-KR 의도: 저장된 회전이 아니라 "화면에 실제로 나오는 그림"을 돌려줍니다.
+        //
+        // 옆면 그림이 앞뒤 그림과 같은 파일인 건물은 동쪽으로 놓아도 남쪽 그림이,
+        // 서쪽으로 놓아도 북쪽 그림이 나옵니다. 불은 그 그림 위에 얹는 것이므로
+        // 회전이 아니라 이 값을 기준으로 삼아야 불이 사라지거나 엉뚱한 자리에 뜨지 않습니다.
+        private Rot4 VisualRotation
+        {
+            get
+            {
+                Rot4 rotation = parent.Rotation;
+                if (!Props.sideTexturesMirrorFrontBack)
+                {
+                    return rotation;
+                }
+
+                if (rotation == Rot4.East)
+                {
+                    return Rot4.South;
+                }
+
+                if (rotation == Rot4.West)
+                {
+                    return Rot4.North;
+                }
+
+                return rotation;
+            }
+        }
+
         public override void PostDraw()
         {
             base.PostDraw();
@@ -213,14 +252,15 @@ namespace MUGB
             }
 
             // The stewpot art uses a north/south texture convention opposite to the in-game
-            // visual facing after rotation normalization, so "south-only" fire maps to Rot4.North.
-            if (Props.drawFireOnlySouth && parent.Rotation != Rot4.North)
+            // visual facing, so "south-only" fire maps to Rot4.North.
+            Rot4 visualRotation = VisualRotation;
+            if (Props.drawFireOnlySouth && visualRotation != Rot4.North)
             {
                 return;
             }
 
-            float fireSize = FireSizeFor(parent.Rotation);
-            Vector3 drawPos = parent.DrawPos + OffsetFor(parent.Rotation);
+            float fireSize = FireSizeFor(visualRotation);
+            Vector3 drawPos = parent.DrawPos + OffsetFor(visualRotation);
             drawPos.y = AltitudeLayer.MoteOverhead.AltitudeFor();
             FireGraphicFor(fireSize).Draw(drawPos, Rot4.North, parent);
         }
