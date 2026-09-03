@@ -4,7 +4,7 @@
   <HediffDef>
     <defName>MUGB_GoblinPheromoneConditioning</defName>
     <label>goblin pheromone conditioning</label>
-    <description>Repeated exposure to goblin food and gut-heavy meals is dulling the natural disgust response.</description>
+    <description>Repeated exposure to goblin food and gut-heavy meals is dulling the natural disgust response. Near completion, this conditioning also begins to reduce the buildup of toxic goblin pheromones.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <scenarioCanAdd>false</scenarioCanAdd>
     <isBad>true</isBad>
@@ -24,7 +24,7 @@
   <HediffDef>
     <defName>MUGB_GoblinPheromonePreference</defName>
     <label>goblin pheromone adaptation</label>
-    <description>Long exposure has settled the stomach and the nerves alike: goblin musk, goblin food, and everything that comes with them now register as ordinary.</description>
+    <description>Long exposure has settled the stomach and the nerves alike: goblin musk, goblin food, and everything that comes with them now register as ordinary. Toxic goblin pheromones accumulate at half their normal rate while this adaptation remains.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <scenarioCanAdd>false</scenarioCanAdd>
     <isBad>true</isBad>

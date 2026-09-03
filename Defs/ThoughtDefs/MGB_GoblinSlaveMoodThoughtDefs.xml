@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThoughtDef>
+    <defName>MUGB_SurvivedGoblinCaptivity</defName>
+    <thoughtClass>Thought_Situational</thoughtClass>
+    <workerClass>MUGB.ThoughtWorker_SurvivedGoblinCaptivity</workerClass>
+    <stages>
+      <li>
+        <label>survived goblin captivity</label>
+        <description>Ugh... Those disgusting goblins. Why did they keep me alive? What are they planning? At least, while I am alive, there is still hope of escape.</description>
+        <baseMoodEffect>4</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>MUGB_GoblinSlaveMood</defName>
+    <thoughtClass>Thought_Situational</thoughtClass>
+    <workerClass>MUGB.ThoughtWorker_GoblinSlaveMood</workerClass>
+    <stages>
+      <li>
+        <label>goblin slave</label>
+        <description>I must be useful for something if they have not eaten me... It is a miserable life, but I am relieved to have even a little more time alive.</description>
+        <baseMoodEffect>8</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+</Defs>

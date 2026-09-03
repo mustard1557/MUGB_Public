@@ -79,6 +79,10 @@ namespace MUGB
         private bool relationsInitialized;
         private bool nonGoblinRelationsInitialized;
         private bool playerStartedAsGoblins;
+        private bool newGameGoblinRelationsEnabled;
+        private bool newGamePlayerStartedAsGoblins;
+        private static bool newGameGoblinRelationsActive;
+        private static bool newGamePlayerStartedAsGoblinsActive;
         private int nextBeggarTravelerTick;
         private int nextKimDeokPalCaravanTick;
         private int nextTemporaryBeggarCleanupTick;
@@ -93,6 +97,8 @@ namespace MUGB
             Scribe_Values.Look(ref relationsInitialized, "MUGB_relationsInitialized", false);
             Scribe_Values.Look(ref nonGoblinRelationsInitialized, "MUGB_nonGoblinRelationsInitialized", false);
             Scribe_Values.Look(ref playerStartedAsGoblins, "MUGB_playerStartedAsGoblins", false);
+            Scribe_Values.Look(ref newGameGoblinRelationsEnabled, "MUGB_newGameGoblinRelationsEnabled", false);
+            Scribe_Values.Look(ref newGamePlayerStartedAsGoblins, "MUGB_newGamePlayerStartedAsGoblins", false);
             Scribe_Values.Look(ref nextBeggarTravelerTick, "MUGB_nextBeggarTravelerTick", 0);
             Scribe_Values.Look(ref nextKimDeokPalCaravanTick, "MUGB_nextKimDeokPalCaravanTick", 0);
             Scribe_Values.Look(ref nextTemporaryBeggarCleanupTick, "MUGB_nextTemporaryBeggarCleanupTick", 0);
@@ -101,11 +107,14 @@ namespace MUGB
         public override void LoadedGame()
         {
             base.LoadedGame();
+            newGameGoblinRelationsActive = newGameGoblinRelationsEnabled;
+            newGamePlayerStartedAsGoblinsActive = newGamePlayerStartedAsGoblins;
             if (!relationsInitialized)
             {
                 playerStartedAsGoblins = DetectGoblinStartFromPlayerPawns();
             }
             EnsureGoblinFaction(playerStartedAsGoblins, initializeNonGoblinRelations: !nonGoblinRelationsInitialized);
+            Patches.GoblinRitualEligibilityUtility.RemoveInvalidRitualsFromAllIdeos();
             relationsInitialized = true;
             nonGoblinRelationsInitialized = true;
         }
@@ -113,8 +122,14 @@ namespace MUGB
         public override void StartedNewGame()
         {
             base.StartedNewGame();
+            newGameGoblinRelationsEnabled = true;
+            newGameGoblinRelationsActive = true;
             playerStartedAsGoblins = DetectGoblinStartScenario();
+            newGamePlayerStartedAsGoblins = playerStartedAsGoblins;
+            newGamePlayerStartedAsGoblinsActive = playerStartedAsGoblins;
             EnsureGoblinFaction(playerStartedAsGoblins, initializeNonGoblinRelations: true);
+            ApplyNewGameGoblinFactionRelations();
+            Patches.GoblinRitualEligibilityUtility.RemoveInvalidRitualsFromAllIdeos();
             relationsInitialized = true;
             nonGoblinRelationsInitialized = true;
         }
@@ -224,6 +239,123 @@ namespace MUGB
             return GoblinFactionDefs().Contains(faction.def);
         }
 
+        internal static bool NewGameGoblinRelationsActive => newGameGoblinRelationsActive;
+
+        private static bool IsNpcGoblinFaction(Faction faction)
+        {
+            FactionDef def = faction?.def;
+            return def == MUGBDefOf.MUGB_GoblinTribe
+                || def == MUGBDefOf.MUGB_GoblinCivilTribe
+                || def == MUGBDefOf.MUGB_GoblinCivilMedieval
+                || def == MUGBDefOf.MUGB_GoblinSavageMedieval
+                || def == MUGBDefOf.MUGB_GoblinCultists;
+        }
+
+        private static bool IsHostileNpcGoblinFaction(Faction faction)
+        {
+            FactionDef def = faction?.def;
+            return def == MUGBDefOf.MUGB_GoblinTribe
+                || def == MUGBDefOf.MUGB_GoblinSavageMedieval
+                || def == MUGBDefOf.MUGB_GoblinCultists;
+        }
+
+        private static void ApplyNewGameGoblinFactionRelations()
+        {
+            if (!newGameGoblinRelationsActive || Find.FactionManager == null)
+            {
+                return;
+            }
+
+            List<Faction> factions = Find.FactionManager.AllFactionsListForReading.ToList();
+            foreach (Faction goblin in factions.Where(IsNpcGoblinFaction).ToList())
+            {
+                ApplyNewGameGoblinFactionRelations(goblin, factions);
+            }
+        }
+
+        internal static void ApplyNewGameGoblinFactionRelations(Faction goblin)
+        {
+            if (!newGameGoblinRelationsActive || !IsNpcGoblinFaction(goblin) || Find.FactionManager == null)
+            {
+                return;
+            }
+
+            ApplyNewGameGoblinFactionRelations(
+                goblin,
+                Find.FactionManager.AllFactionsListForReading.ToList());
+        }
+
+        private static void ApplyNewGameGoblinFactionRelations(Faction goblin, List<Faction> factions)
+        {
+            ApplyNewGameGoblinPlayerRelation(goblin);
+
+            foreach (Faction other in factions)
+            {
+                if (other == null || other == goblin || other == Faction.OfPlayer)
+                {
+                    continue;
+                }
+
+                if (!TryGetNewGameGoblinRelation(goblin, other, out FactionRelationKind kind, out int goodwill))
+                {
+                    continue;
+                }
+
+                MUGBFactionRelationSafety.SetPair(goblin, other, kind, goodwill);
+            }
+        }
+
+        private static void ApplyNewGameGoblinPlayerRelation(Faction goblin)
+        {
+            if (goblin == null || goblin == Faction.OfPlayer)
+            {
+                return;
+            }
+
+            if (newGamePlayerStartedAsGoblinsActive && IsCivilGoblinFaction(goblin.def))
+            {
+                EnsureLowNeutralToPlayer(goblin, -35);
+                return;
+            }
+
+            EnsureHostileToPlayer(goblin);
+        }
+
+        private static bool TryGetNewGameGoblinRelation(
+            Faction goblin,
+            Faction other,
+            out FactionRelationKind kind,
+            out int goodwill)
+        {
+            kind = FactionRelationKind.Neutral;
+            goodwill = -35;
+            if (!IsNpcGoblinFaction(goblin)
+                || other == null
+                || other == Faction.OfPlayer)
+            {
+                return false;
+            }
+
+            if (IsHostileNpcGoblinFaction(goblin)
+                || IsHostileNpcGoblinFaction(other))
+            {
+                kind = FactionRelationKind.Hostile;
+                goodwill = -100;
+                return true;
+            }
+
+            if (IsNpcGoblinFaction(other)
+                && IsCivilGoblinFaction(goblin.def)
+                && IsCivilGoblinFaction(other.def))
+            {
+                return true;
+            }
+
+            kind = FactionRelationKind.Hostile;
+            goodwill = -100;
+            return true;
+        }
+
         private static IEnumerable<FactionDef> GoblinFactionDefs()
         {
             if (MUGBDefOf.MUGB_GoblinTribe != null)
@@ -301,6 +433,7 @@ namespace MUGB
         // 거지무리가 인육과 번식용 암컷의 유일한 안정 공급원이라, 이 구간만은
         // 흔들리지 않고 예측 가능해야 한다.
         private const int BeggarFixedPhaseDays = 9;
+        private const float BeggarFirstArrivalDays = 2f;
         private const float BeggarFixedPhaseIntervalDays = 3f;
 
         // 김덕팔은 청중이 지루해지는 꼴을 못 본다. 통행 사건을 조금 더 자주 끼워 넣는다.
@@ -345,7 +478,10 @@ namespace MUGB
 
             if (nextBeggarTravelerTick <= 0)
             {
-                nextBeggarTravelerTick = currentTick + NextBeggarDelayTicks();
+                float initialDays = GenDate.DaysPassed < BeggarFixedPhaseDays
+                    ? BeggarFirstArrivalDays
+                    : BeggarIntervalDaysByDaysPassed.Evaluate(GenDate.DaysPassed);
+                nextBeggarTravelerTick = currentTick + BeggarDelayTicksAfterSettings(initialDays);
                 return;
             }
 
@@ -1050,6 +1186,7 @@ namespace MUGB
             // 한국어 환경에서는 생성 직후 고블린 세력명을 전용 한국어 이름풀로 다시 뽑는다.
             MGBFactionInjectionComponent.TryApplyLocalizedGoblinFactionName(__result, replaceExistingEnglish: true);
             MGBFactionInjectionComponent.EnsureGoblinFactionIconUsesNeutralTint(__result);
+            MGBFactionInjectionComponent.ApplyNewGameGoblinFactionRelations(__result);
         }
     }
 

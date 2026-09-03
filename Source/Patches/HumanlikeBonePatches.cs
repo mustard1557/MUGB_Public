@@ -5,9 +5,21 @@ using Verse;
 
 namespace MUGB.Patches
 {
+    [StaticConstructorOnStartup]
     public static class HumanlikeBoneGearUtility
     {
         private static readonly Dictionary<ThingDef, bool> FixedHumanlikeBoneCache = new Dictionary<ThingDef, bool>();
+        private static readonly ThingDef HumanlikeBone = DefDatabase<ThingDef>.GetNamedSilentFail("MUGB_Bone");
+
+        static HumanlikeBoneGearUtility()
+        {
+            List<ThingDef> defs = DefDatabase<ThingDef>.AllDefsListForReading;
+            for (int i = 0; i < defs.Count; i++)
+            {
+                ThingDef def = defs[i];
+                FixedHumanlikeBoneCache[def] = HasFixedHumanlikeBoneCost(def);
+            }
+        }
 
         public static bool ContainsHumanlikeBone(Thing thing)
         {
@@ -16,7 +28,7 @@ namespace MUGB.Patches
                 return false;
             }
 
-            if (thing.Stuff == MUGBDefOf.MUGB_Bone)
+            if (thing.Stuff == HumanlikeBone)
             {
                 return true;
             }
@@ -26,22 +38,26 @@ namespace MUGB.Patches
                 return cached;
             }
 
-            bool containsHumanlikeBone = false;
-            List<ThingDefCountClass> costs = thing.def.costList;
+            // Defs are normally immutable after startup. A late runtime Def is rare, but
+            // calculating it without mutating the shared cache keeps parallel thought checks safe.
+            return HasFixedHumanlikeBoneCost(thing.def);
+        }
+
+        private static bool HasFixedHumanlikeBoneCost(ThingDef def)
+        {
+            List<ThingDefCountClass> costs = def?.costList;
             if (costs != null)
             {
                 for (int i = 0; i < costs.Count; i++)
                 {
-                    if (costs[i]?.thingDef == MUGBDefOf.MUGB_Bone)
+                    if (costs[i]?.thingDef == HumanlikeBone)
                     {
-                        containsHumanlikeBone = true;
-                        break;
+                        return true;
                     }
                 }
             }
 
-            FixedHumanlikeBoneCache[thing.def] = containsHumanlikeBone;
-            return containsHumanlikeBone;
+            return false;
         }
     }
 

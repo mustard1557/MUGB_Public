@@ -10,8 +10,8 @@ namespace MUGB
     public class Need_FleshCraving : Need
     {
         private const int TickInterval = 150;
-        private const float GoblinDaysToEmpty = 9.5f;
-        private const float HobgoblinDaysToEmpty = 6f;
+        private const float GoblinDaysToEmpty = 10f;
+        private const float HobgoblinDaysToEmpty = 6.5f;
         private const float StableCellDecayFactor = 0.75f;
         private const float UnstableCellDecayFactor = 1.25f;
 

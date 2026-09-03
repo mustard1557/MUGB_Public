@@ -58,7 +58,7 @@ namespace MUGB.Patches
             ApplyFormAppropriateAge(pawn, form);
             GoblinAgeUtility.RemovePrematureAgeHediffs(pawn);
             GoblinUtility.EnforceGoblinStoryGraphics(pawn);
-            GoblinPersonalNameUtility.TryApplyKoreanGoblinName(pawn, enforceGeneratedFormat: true);
+            GoblinPersonalNameUtility.TryApplyGoblinName(pawn, enforceGeneratedFormat: true);
             ApplyCreepJoinerBackstories(pawn, form, benefit);
             MarkGeneratedCreepJoinerAsMature(pawn);
             ReplaceGear(pawn, map);

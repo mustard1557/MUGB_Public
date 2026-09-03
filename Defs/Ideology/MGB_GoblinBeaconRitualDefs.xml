@@ -120,6 +120,10 @@
     <countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>
     <selectionWeight>0</selectionWeight>
     <receivesExpectationsQualityOffset>true</receivesExpectationsQualityOffset>
+    <requiredMemes>
+      <li>MUGB_ChildrenOfBlinia</li>
+      <li>MUGB_GoblinSupremacy</li>
+    </requiredMemes>
     <associatedMemes>
       <li>MUGB_ChildrenOfBlinia</li>
       <li>MUGB_GoblinSupremacy</li>

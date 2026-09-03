@@ -15,6 +15,9 @@ namespace MUGB
         private const float StrongRange = 15f;
         private const float WeakRange = 11f;
         private const float DailyRecovery = 0.05f;
+        private const float PartialAdaptationThreshold = 20f;
+        private const float PartialAdaptationSensitivity = 0.75f;
+        private const float FullAdaptationSensitivity = 0.5f;
 
         private readonly List<Pawn> emitters = new List<Pawn>();
         private readonly Dictionary<Pawn, Room> roomCache = new Dictionary<Pawn, Room>();
@@ -195,6 +198,20 @@ namespace MUGB
             if (pawn?.genes?.GetGene(MUGBDefOf.MUGB_Gene_HalfGoblinAncestry) != null)
             {
                 factor *= 0.2f;
+            }
+
+            HediffSet hediffSet = pawn?.health?.hediffSet;
+            if (hediffSet?.HasHediff(MUGBDefOf.MUGB_GoblinPheromonePreference) == true)
+            {
+                factor *= FullAdaptationSensitivity;
+            }
+            else
+            {
+                Hediff conditioning = hediffSet?.GetFirstHediffOfDef(MUGBDefOf.MUGB_GoblinPheromoneConditioning);
+                if (conditioning?.Severity >= PartialAdaptationThreshold)
+                {
+                    factor *= PartialAdaptationSensitivity;
+                }
             }
 
             return Mathf.Clamp(factor, 0.15f, 1f);

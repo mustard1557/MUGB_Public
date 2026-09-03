@@ -12,7 +12,7 @@
       <li>
         <label>ate plant scraps</label>
         <description>Ugh... Plant scraps in my teeth... Me hate plants... Me want meat... Me want human meat...</description>
-        <baseMoodEffect>-2</baseMoodEffect>
+        <baseMoodEffect>-1</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>

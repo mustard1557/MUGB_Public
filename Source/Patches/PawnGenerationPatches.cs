@@ -280,6 +280,25 @@ namespace MUGB.Patches
         }
     }
 
+    [HarmonyPatch(typeof(PawnBioAndNameGenerator), nameof(PawnBioAndNameGenerator.GiveAppropriateBioAndNameTo))]
+    public static class PawnBioAndNameGenerator_GiveAppropriateBioAndNameTo_GoblinNamePatch
+    {
+        [HarmonyPriority(Priority.Last)]
+        public static void Postfix(Pawn pawn, XenotypeDef xenotype)
+        {
+            if (MUGB.MGBFactionInjectionComponent.IsKoreanActive()
+                || !GoblinUtility.IsGoblinXenotype(xenotype))
+            {
+                return;
+            }
+
+            GoblinPersonalNameUtility.TryApplyRulePackGoblinName(
+                pawn,
+                xenotype,
+                enforceGeneratedFormat: true);
+        }
+    }
+
     public static class GoblinPersonalNameUtility
     {
         private static readonly string[] KoreanNickAdjectives =
@@ -333,6 +352,75 @@ namespace MUGB.Patches
         // 한국어 의도: 고블린은 13세로 태어나 16세에 유년기 백스토리를 받습니다.
         // 갓 태어난 개체까지 정식 이름을 붙이면 바닐라 이름짓기 창과 겹치고 어색하므로,
         // 16세 전에는 "고블린 아기" 같은 임시 이름만 달고 있다가 성숙할 때 정식 이름을 받습니다.
+        public static void TryApplyGoblinName(Pawn pawn, bool enforceGeneratedFormat = false)
+        {
+            if (MUGB.MGBFactionInjectionComponent.IsKoreanActive())
+            {
+                TryApplyKoreanGoblinName(pawn, enforceGeneratedFormat);
+                return;
+            }
+
+            TryApplyRulePackGoblinName(pawn, pawn?.genes?.Xenotype, enforceGeneratedFormat);
+        }
+
+        public static void TryApplyRulePackGoblinName(
+            Pawn pawn,
+            XenotypeDef xenotype,
+            bool enforceGeneratedFormat)
+        {
+            bool goblin = GoblinUtility.IsGoblinXenotype(xenotype) || GoblinUtility.IsGoblin(pawn);
+            if (pawn?.Name == null || !goblin || IsTooYoungForRealName(pawn))
+            {
+                return;
+            }
+
+            // Non-generation callers must not overwrite names deliberately assigned to a player pawn.
+            // Fresh generation and maturation explicitly opt in through enforceGeneratedFormat.
+            if (!enforceGeneratedFormat
+                && pawn.Faction == Faction.OfPlayerSilentFail
+                && !pawn.Name.ToStringFull.NullOrEmpty())
+            {
+                return;
+            }
+
+            if (!GoblinUtility.IsGoblinXenotype(xenotype))
+            {
+                xenotype = GoblinUtility.IsHobgoblin(pawn)
+                    ? MUGBDefOf.MUGB_Hobgoblin
+                    : MUGBDefOf.MUGB_Goblin;
+            }
+
+            if (xenotype?.GetNameMaker(pawn.gender) == null)
+            {
+                return;
+            }
+
+            Rand.PushState(pawn.thingIDNumber ^ 0x6E616D65);
+            try
+            {
+                Name generatedName = PawnBioAndNameGenerator.GenerateFullPawnName(
+                    pawn.def,
+                    xenotype: xenotype,
+                    creepjoiner: false,
+                    gender: pawn.gender,
+                    nameCategory: pawn.RaceProps.nameCategory);
+                if (generatedName == null)
+                {
+                    return;
+                }
+
+                pawn.Name = generatedName;
+                if (generatedName is NameTriple triple && !triple.Last.NullOrEmpty())
+                {
+                    pawn.story.birthLastName = triple.Last;
+                }
+            }
+            finally
+            {
+                Rand.PopState();
+            }
+        }
+
         public static bool IsTooYoungForRealName(Pawn pawn)
         {
             return pawn?.ageTracker != null
@@ -2789,7 +2877,7 @@ namespace MUGB.Patches
 
             GoblinPawnKindBackstoryUtility.AssignMatureGoblinChildhood(pawn);
             // 임시 이름을 달고 있던 개체가 여기서 정식 고블린 이름을 받습니다.
-            GoblinPersonalNameUtility.TryApplyKoreanGoblinName(pawn);
+            GoblinPersonalNameUtility.TryApplyGoblinName(pawn, enforceGeneratedFormat: true);
             component.MarkTeenMatured(pawn);
             bool hobgoblin = pawn.genes?.Xenotype == MUGBDefOf.MUGB_Hobgoblin || pawn.genes?.GetGene(MUGBDefOf.MUGB_Gene_HobgoblinFrame) != null;
             SkillDef boostedSkill = BoostTeenInstinctSkill(pawn, hobgoblin);

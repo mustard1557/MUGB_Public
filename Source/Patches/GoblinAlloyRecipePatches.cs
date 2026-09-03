@@ -40,7 +40,8 @@ namespace MUGB
             float steelScore = MUGBResourceUtility.ArmorScore(ThingDefOf.Steel);
             float weightedScore = 0f;
             int metalCount = 0;
-            int fixedSteelToSkip = FixedSteelCount(recipeDef);
+            ThingDef fixedBaseMetal = FixedBaseMetalFor(recipeDef);
+            int fixedBaseMetalToSkip = FixedBaseMetalCount(recipeDef, fixedBaseMetal);
 
             foreach (Thing ingredient in ingredients ?? Enumerable.Empty<Thing>())
             {
@@ -51,11 +52,11 @@ namespace MUGB
                 }
 
                 int count = ingredient.stackCount;
-                if (def == ThingDefOf.Steel && fixedSteelToSkip > 0)
+                if (def == fixedBaseMetal && fixedBaseMetalToSkip > 0)
                 {
-                    int skipped = Math.Min(count, fixedSteelToSkip);
+                    int skipped = Math.Min(count, fixedBaseMetalToSkip);
                     count -= skipped;
-                    fixedSteelToSkip -= skipped;
+                    fixedBaseMetalToSkip -= skipped;
                 }
 
                 if (count <= 0)
@@ -81,14 +82,24 @@ namespace MUGB
             return MUGBDefOf.MUGB_GoblinAlloy;
         }
 
-        private static int FixedSteelCount(RecipeDef recipeDef)
+        private static ThingDef FixedBaseMetalFor(RecipeDef recipeDef)
         {
-            return recipeDef.defName switch
+            return recipeDef.ingredients?
+                .SelectMany(ingredient => ingredient?.filter?.AllowedThingDefs ?? Enumerable.Empty<ThingDef>())
+                .FirstOrDefault(def => def == ThingDefOf.Steel || def.defName == "DankPyon_IronIngot");
+        }
+
+        private static int FixedBaseMetalCount(RecipeDef recipeDef, ThingDef fixedBaseMetal)
+        {
+            bool usesMedievalIron = fixedBaseMetal?.defName == "DankPyon_IronIngot";
+            int steelCount = recipeDef.defName switch
             {
                 "MUGB_MakeGoblinAlloyBulk100" => 20,
                 "MUGB_MakeGoblinAlloyBulk50" => 10,
                 _ => 1
             };
+
+            return usesMedievalIron ? steelCount * 2 : steelCount;
         }
     }
 }

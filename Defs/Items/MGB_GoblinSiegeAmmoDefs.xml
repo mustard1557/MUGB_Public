@@ -65,6 +65,9 @@
     <description>A heavy alloy-tipped bolt for the goblin repeater ballista. The head punches through armor and breaks into dangerous fragments on impact.</description>
     <techLevel>Medieval</techLevel>
     <stackLimit>40</stackLimit>
+    <thingCategories>
+      <li>MUGB_GoblinSiegeAmmoCategory</li>
+    </thingCategories>
     <graphicData>
       <texPath>Things/Item/MGB_GoblinHeavyBolt</texPath>
       <graphicClass>MUGB.Graphic_GoblinTenStackCount</graphicClass>

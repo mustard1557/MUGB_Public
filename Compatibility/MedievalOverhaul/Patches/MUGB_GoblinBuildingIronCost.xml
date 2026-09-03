@@ -13,9 +13,9 @@
     건드리지 않습니다. 미디블이 없으면 이 폴더 자체가 로드되지 않으므로
     기본 Defs의 강철 요구가 그대로 남습니다.
 
-    대상은 "고정재료로 강철이 들어가는 생산건물"뿐입니다.
-    고블린 합금 레시피의 강철은 의도된 설계이므로 여기서 바꾸지 않습니다.
-    미디블 환경에서 합금용 강철은 기존처럼 강철 호환 모드나 교역으로 구합니다.
+    고블린 합금도 미디블 자원 흐름에 맞춰 고정 강철 대신 철괴를 사용합니다.
+    철괴는 강철보다 덜 가공된 재료이므로 기존 강철량의 두 배를 요구하며,
+    합금 등급은 여전히 별도로 투입한 가변 금속만으로 계산합니다.
   -->
 
   <!-- 고블린 대장간: 강철 60 -> 철괴 60 -->
@@ -28,6 +28,45 @@
   <Operation Class="PatchOperationSetName">
     <xpath>Defs/ThingDef[defName="MUGB_druglab"]/costList/Steel</xpath>
     <name>DankPyon_IronIngot</name>
+  </Operation>
+
+  <!-- 고블린 합금 공통 고정 필터: 강철 -> 철괴 -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[@Name="MUGB_MakeGoblinAlloyBase"]/fixedIngredientFilter/thingDefs/li[text()="Steel"]</xpath>
+    <value><li>DankPyon_IronIngot</li></value>
+  </Operation>
+
+  <!-- 고블린 합금 x5: 강철 1 -> 철괴 2 -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MUGB_MakeGoblinAlloy"]/ingredients/li[filter/thingDefs/li="Steel"]</xpath>
+    <value>
+      <li>
+        <filter><thingDefs><li>DankPyon_IronIngot</li></thingDefs></filter>
+        <count>2</count>
+      </li>
+    </value>
+  </Operation>
+
+  <!-- 고블린 합금 x50: 강철 10 -> 철괴 20 -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MUGB_MakeGoblinAlloyBulk50"]/ingredients/li[filter/thingDefs/li="Steel"]</xpath>
+    <value>
+      <li>
+        <filter><thingDefs><li>DankPyon_IronIngot</li></thingDefs></filter>
+        <count>20</count>
+      </li>
+    </value>
+  </Operation>
+
+  <!-- 고블린 합금 x100: 강철 20 -> 철괴 40 -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MUGB_MakeGoblinAlloyBulk100"]/ingredients/li[filter/thingDefs/li="Steel"]</xpath>
+    <value>
+      <li>
+        <filter><thingDefs><li>DankPyon_IronIngot</li></thingDefs></filter>
+        <count>40</count>
+      </li>
+    </value>
   </Operation>
 
 </Patch>

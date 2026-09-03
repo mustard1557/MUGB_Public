@@ -19,7 +19,7 @@
       <li Class="StockGenerator_SingleDef"><thingDef>MedicineHerbal</thingDef><countRange>12~30</countRange></li>
       <li Class="StockGenerator_SingleDef"><thingDef>RawFungus</thingDef><countRange>40~110</countRange></li>
       <li Class="StockGenerator_SingleDef"><thingDef>MUGB_Bone</thingDef><countRange>120~300</countRange></li>
-      <li Class="StockGenerator_SingleDef"><thingDef>MUGB_CrudeGoblinAlloy</thingDef><countRange>45~140</countRange></li>
+      <li Class="StockGenerator_SingleDef"><thingDef>MUGB_CrudeGoblinAlloy</thingDef><countRange>50~100</countRange></li>
       <li Class="StockGenerator_SingleDef"><thingDef>MUGB_Hgut</thingDef><countRange>20~60</countRange></li>
       <li Class="StockGenerator_SingleDef"><thingDef>MUGB_Ggut</thingDef><countRange>12~40</countRange></li>
       <!--
@@ -78,6 +78,7 @@
         <countRange>0~1</countRange>
         <recruitKindDef>MUGB_GoblinKind_Beggar</recruitKindDef>
       </li>
+      <li Class="MUGB.StockGenerator_MUGB_BuyApparel" />
       <li Class="StockGenerator_BuyExpensiveSimple" />
       <li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
       <li Class="StockGenerator_BuyTradeTag"><tag>MusicalInstrument</tag></li>
@@ -93,8 +94,8 @@
       <li Class="StockGenerator_SingleDef"><thingDef>Pemmican</thingDef><countRange>160~340</countRange></li>
       <li Class="StockGenerator_SingleDef"><thingDef>MedicineHerbal</thingDef><countRange>16~36</countRange></li>
       <li Class="StockGenerator_SingleDef"><thingDef>RawFungus</thingDef><countRange>45~130</countRange></li>
-      <li Class="StockGenerator_SingleDef"><thingDef>MUGB_GoblinAlloy</thingDef><countRange>70~180</countRange></li>
-      <li Class="StockGenerator_SingleDef"><thingDef>MUGB_FineGoblinAlloy</thingDef><countRange>0~70</countRange></li>
+      <li Class="StockGenerator_SingleDef"><thingDef>MUGB_GoblinAlloy</thingDef><countRange>40~75</countRange></li>
+      <li Class="StockGenerator_SingleDef"><thingDef>MUGB_FineGoblinAlloy</thingDef><countRange>10~25</countRange></li>
       <!--
         중세 무기상도 샤먼 지팡이를 취급하지만 전문 분야가 아니라 드물게 들여옵니다.
         -4~1이라 여섯 번 중 한 번쯤만 한 자루가 나옵니다. (암시장보다 확실히 낮음)
@@ -166,6 +167,7 @@
         <thingDefCountRange>0~2</thingDefCountRange>
         <countRange>1~1</countRange>
       </li>
+      <li Class="MUGB.StockGenerator_MUGB_BuyApparel" />
       <li Class="StockGenerator_BuyExpensiveSimple" />
       <li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
       <li Class="StockGenerator_BuyTradeTag"><tag>MusicalInstrument</tag></li>
@@ -207,9 +209,10 @@
       <li Class="StockGenerator_SingleDef"><thingDef>MUGB_Gskin</thingDef><countRange>80~240</countRange></li>
       <li Class="StockGenerator_SingleDef"><thingDef>MUGB_Bone</thingDef><countRange>300~900</countRange></li>
       <li Class="StockGenerator_SingleDef"><thingDef>MUGB_BoneDust</thingDef><countRange>100~320</countRange></li>
-      <li Class="StockGenerator_SingleDef"><thingDef>MUGB_CrudeGoblinAlloy</thingDef><countRange>180~480</countRange></li>
-      <li Class="StockGenerator_SingleDef"><thingDef>MUGB_GoblinAlloy</thingDef><countRange>140~420</countRange></li>
-      <li Class="StockGenerator_SingleDef"><thingDef>MUGB_FineGoblinAlloy</thingDef><countRange>0~120</countRange></li>
+      <!-- KO intent: 세 합금 등급을 합쳐 총 200~300개가 되도록 유지한다. -->
+      <li Class="StockGenerator_SingleDef"><thingDef>MUGB_CrudeGoblinAlloy</thingDef><countRange>100~150</countRange></li>
+      <li Class="StockGenerator_SingleDef"><thingDef>MUGB_GoblinAlloy</thingDef><countRange>80~120</countRange></li>
+      <li Class="StockGenerator_SingleDef"><thingDef>MUGB_FineGoblinAlloy</thingDef><countRange>20~30</countRange></li>
       <li Class="StockGenerator_SingleDef"><thingDef>MUGB_Hgut</thingDef><countRange>60~180</countRange></li>
       <li Class="StockGenerator_SingleDef"><thingDef>MUGB_Ggut</thingDef><countRange>50~160</countRange></li>
       <li Class="StockGenerator_SingleDef"><thingDef>MUGB_Hchunk</thingDef><countRange>70~210</countRange></li>
@@ -276,6 +279,9 @@
         <countRange>0~1</countRange>
         <recruitKindDef>MUGB_GoblinKind_Beggar</recruitKindDef>
       </li>
+      <!-- KO intent: 원자재상은 다른 모드가 ResourcesRaw 아래에 추가한 원목·벽돌·금속도 매입한다. -->
+      <li Class="MUGB.StockGenerator_MUGB_BuyCategory"><categoryDef>ResourcesRaw</categoryDef></li>
+      <li Class="MUGB.StockGenerator_MUGB_BuyApparel" />
       <li Class="StockGenerator_BuyExpensiveSimple" />
       <li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
       <li Class="StockGenerator_BuyTradeTag"><tag>MusicalInstrument</tag></li>
@@ -310,6 +316,7 @@
       <li Class="StockGenerator_SingleDef"><thingDef>MUGB_brain</thingDef><countRange>-4~6</countRange></li>
       <li Class="StockGenerator_SingleDef"><thingDef>MUGB_GBroodSac</thingDef><countRange>-4~5</countRange></li>
       <li Class="StockGenerator_SingleDef"><thingDef>MUGB_Gfetus</thingDef><countRange>-5~3</countRange></li>
+      <li Class="StockGenerator_SingleDef"><thingDef>MUGB_FineGoblinAlloy</thingDef><countRange>-8~12</countRange></li>
       <!-- KO intent: 암시장은 고블린 약물과 바닐라 약물 모두를 취급한다. -->
       <li Class="StockGenerator_SingleDef"><thingDef>MUGB_GloopJuice</thingDef><countRange>4~14</countRange></li>
       <li Class="StockGenerator_SingleDef"><thingDef>MUGB_Smartyoil</thingDef><countRange>-3~6</countRange></li>
@@ -395,6 +402,7 @@
         <kindCountRange>2~4</kindCountRange>
         <countRange>2~5</countRange>
       </li>
+      <li Class="MUGB.StockGenerator_MUGB_BuyApparel" />
       <li Class="StockGenerator_BuyExpensiveSimple" />
       <li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
       <li Class="StockGenerator_BuyTradeTag"><tag>MusicalInstrument</tag></li>
@@ -411,6 +419,7 @@
       <li Class="StockGenerator_SingleDef"><thingDef>MUGB_gutstew</thingDef><countRange>24~60</countRange></li>
       <li Class="StockGenerator_SingleDef"><thingDef>MedicineHerbal</thingDef><countRange>12~34</countRange></li>
       <li Class="StockGenerator_SingleDef"><thingDef>RawFungus</thingDef><countRange>55~150</countRange></li>
+      <li Class="StockGenerator_SingleDef"><thingDef>MUGB_CrudeGoblinAlloy</thingDef><countRange>-8~12</countRange></li>
       <li Class="StockGenerator_Animals">
         <maxWildness>0.80</maxWildness>
         <tradeTagsSell>
@@ -457,6 +466,7 @@
         <maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
         <countRange>2~6</countRange>
       </li>
+      <li Class="MUGB.StockGenerator_MUGB_BuyApparel" />
       <li Class="StockGenerator_BuyExpensiveSimple" />
       <li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
       <li Class="StockGenerator_BuyTradeTag"><tag>MusicalInstrument</tag></li>

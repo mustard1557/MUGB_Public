@@ -421,22 +421,25 @@ namespace MUGB.Patches
         public static void BeginExpectedNewborn(Pawn geneticMother, Pawn father)
         {
             expectingFullGoblinNewborn = false;
-            if (geneticMother == null || !GoblinUtility.IsGoblin(father))
+            if (geneticMother == null)
             {
                 return;
             }
 
             HediffComp_MUGBGoblinPregnancyPlan plan = GetActivePregnancyPlan(geneticMother);
             GoblinBirthResult? next = plan?.PeekNextResult();
-            if (next == null)
+            if (next != null)
             {
-                // 계획이 없으면 아비가 고블린일 때 순수 고블린이 기본값이므로 남성으로 봅니다.
-                expectingFullGoblinNewborn = true;
+                expectingFullGoblinNewborn = next.Value == GoblinBirthResult.ThinGoblin
+                    || next.Value == GoblinBirthResult.Hobgoblin;
                 return;
             }
 
-            expectingFullGoblinNewborn = next.Value == GoblinBirthResult.ThinGoblin
-                || next.Value == GoblinBirthResult.Hobgoblin;
+            if (GoblinUtility.IsGoblin(father))
+            {
+                // 계획이 없으면 아비가 고블린일 때 순수 고블린이 기본값이므로 남성으로 봅니다.
+                expectingFullGoblinNewborn = true;
+            }
         }
 
         public static void EndExpectedNewborn()
@@ -573,14 +576,19 @@ namespace MUGB.Patches
             LogBirthGuestStatus("바닐라훅 진입", firstChild, geneticMother, "ApplyBirthOutcome");
             ApplyBirthGuestStatus(firstChild, geneticMother);
 
-            if (geneticMother == null || birtherThing == null || !(birtherThing is Pawn) || !geneticMother.RaceProps.Humanlike || !GoblinUtility.IsGoblin(father))
+            if (geneticMother == null || birtherThing == null || !(birtherThing is Pawn) || !geneticMother.RaceProps.Humanlike)
+            {
+                return;
+            }
+
+            HediffComp_MUGBGoblinPregnancyPlan plan = GetActivePregnancyPlan(geneticMother);
+            if (plan == null && !GoblinUtility.IsGoblin(father))
             {
                 return;
             }
 
             ApplyRapidPostpartumRecovery(geneticMother);
-            bool hobgoblinFather = GoblinUtility.IsHobgoblin(father);
-            HediffComp_MUGBGoblinPregnancyPlan plan = GetActivePregnancyPlan(geneticMother);
+            bool hobgoblinFather = plan?.HobgoblinSource ?? GoblinUtility.IsHobgoblin(father);
             if (plan != null && plan.UsesPregeneratedBabies)
             {
                 ApplyBirthResult(firstChild, geneticMother, plan.NextResultOrFallback(hobgoblinFather));
@@ -1195,13 +1203,15 @@ namespace MUGB.Patches
                 child.relations.AddDirectRelation(PawnRelationDefOf.Parent, geneticMother);
             }
 
-            if (father != null && child.relations.DirectRelationExists(PawnRelationDefOf.Parent, father))
+            if (father != null)
             {
-                child.relations.RemoveDirectRelation(PawnRelationDefOf.Parent, father);
+                if (child.relations.DirectRelationExists(PawnRelationDefOf.Parent, father))
+                {
+                    child.relations.RemoveDirectRelation(PawnRelationDefOf.Parent, father);
+                }
+                child.relations.TryRemoveDirectRelation(PawnRelationDefOf.ParentBirth, father);
+                GoblinPersonalNameUtility.InheritGoblinLineName(child, father);
             }
-
-            child.relations.TryRemoveDirectRelation(PawnRelationDefOf.ParentBirth, father);
-            GoblinPersonalNameUtility.InheritGoblinLineName(child, father);
         }
 
         // 한국어 의도: 어미의 신분(노예/포로)을 아기에게 물려줍니다.
@@ -1499,6 +1509,7 @@ namespace MUGB.Patches
         private bool birthStrainApplied;
 
         public bool Initialized => initialized;
+        public bool HobgoblinSource => hobgoblinFather;
         public bool UsesPregeneratedBabies => usesPregeneratedBabies;
         public bool HasUnbornResult => plannedResults != null && nextResultIndex < plannedResults.Count;
         public int PlannedCount => plannedResults?.Count ?? 0;

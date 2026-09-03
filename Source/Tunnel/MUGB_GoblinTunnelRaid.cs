@@ -139,21 +139,20 @@ namespace MUGB
                 List<Building_GoblinTunnel> participants = cluster.tunnels
                     .Where(tunnel => tunnel.CanReinforceAtWave(cluster.wave))
                     .ToList();
-                foreach (Building_GoblinTunnel tunnel in participants)
-                {
-                    tunnel.ReleaseReinforcement(cluster.wave);
-                }
+                List<Building_GoblinTunnel> reinforced = participants
+                    .Where(tunnel => tunnel.ReleaseReinforcement(cluster.wave))
+                    .ToList();
 
-                if (participants.Count > 0)
+                if (reinforced.Count > 0)
                 {
                     Messages.Message(
                         "MUGB_GoblinTunnelReinforcementsArrived".Translate(),
-                        new LookTargets(participants.Cast<Thing>()),
+                        new LookTargets(reinforced.Cast<Thing>()),
                         MessageTypeDefOf.ThreatBig,
                         historical: false);
                 }
 
-                foreach (Building_GoblinTunnel tunnel in participants.Where(t => t.ShouldCollapseAfterWave(cluster.wave)).ToList())
+                foreach (Building_GoblinTunnel tunnel in reinforced.Where(t => t.ShouldCollapseAfterWave(cluster.wave)).ToList())
                 {
                     tunnel.CollapseAfterFinalWave();
                 }
@@ -200,6 +199,29 @@ namespace MUGB
         }
     }
 
+    internal static class MUGB_GoblinTunnelPawnUtility
+    {
+        public static bool NormalizeForRaid(Pawn pawn, Faction faction)
+        {
+            if (pawn == null || pawn.Dead || pawn.Destroyed || faction == null)
+            {
+                return false;
+            }
+
+            // Tunnel workers are hostile combat pawns despite their PawnKind name and collar.
+            // Clear only an accidental colony status before restoring the raid faction.
+            if (pawn.IsSlaveOfColony || pawn.IsPrisonerOfColony)
+            {
+                pawn.guest?.SetGuestStatus(null);
+            }
+            if (pawn.Faction != faction)
+            {
+                pawn.SetFaction(faction);
+            }
+            return pawn.Faction == faction;
+        }
+    }
+
     public class MUGB_GoblinTunnelSpawner : ThingWithComps, IThingHolder
     {
         private const int DefaultSpawnDelayTicks = 1050;
@@ -239,7 +261,10 @@ namespace MUGB
             innerContainer.ClearAndDestroyContents(DestroyMode.Vanish);
             foreach (Pawn pawn in pawns)
             {
-                innerContainer.TryAdd(pawn, false);
+                if (MUGB_GoblinTunnelPawnUtility.NormalizeForRaid(pawn, faction))
+                {
+                    innerContainer.TryAddOrTransfer(pawn, false);
+                }
             }
         }
 
@@ -445,14 +470,26 @@ namespace MUGB
                         0);
                 }
             }
+
+            initialSquad = NormalizePawns(initialSquad);
+            if (initialSquad.Count == 0)
+            {
+                initialSquad = GenerateFallbackSquad(edgeTunnel ? 5 : 4);
+                squadSizes = initialSquad.Count > 0 ? new List<int> { initialSquad.Count } : new List<int>();
+            }
             if (!initialSquad.NullOrEmpty())
             {
                 initialSquadSizes = !squadSizes.NullOrEmpty()
                     ? new List<int>(squadSizes)
                     : new List<int> { initialSquad.Count };
+                bool storageFailed = false;
                 foreach (Pawn pawn in initialSquad)
                 {
-                    initialContainer.TryAdd(pawn, false);
+                    storageFailed |= !initialContainer.TryAddOrTransfer(pawn, false);
+                }
+                if (storageFailed)
+                {
+                    initialSquadSizes = new List<int> { initialContainer.Count };
                 }
                 initialReleaseTick = Find.TickManager.TicksGame + InitialSquadDelayTicks;
             }
@@ -477,13 +514,12 @@ namespace MUGB
             return wave >= (largeTunnel ? 7 : 4);
         }
 
-        public void ReleaseReinforcement(int wave)
+        public bool ReleaseReinforcement(int wave)
         {
             if (!CanReinforceAtWave(wave))
             {
-                return;
+                return false;
             }
-            lastReinforcementWave = wave;
             PlayDiggingEffects();
             float factor = largeTunnel ? LargeReinforcementFactor : SmallReinforcementFactor;
             int maxReinforcementSize = edgeTunnel ? 5 : 4;
@@ -492,10 +528,16 @@ namespace MUGB
                 assignedPoints * factor,
                 maxReinforcementSize);
             List<Pawn> pawns = kinds.Select(kind => PawnGenerator.GeneratePawn(kind, Faction)).ToList();
-            if (pawns.Count > 0)
+            if (pawns.Count == 0)
             {
-                SpawnAsUndergroundJump(pawns, MakeAssaultLordJob(), EmergenceDelayTicks);
+                pawns = GenerateFallbackSquad(Mathf.Min(3, maxReinforcementSize));
             }
+            if (!SpawnAsUndergroundJump(pawns, MakeAssaultLordJob(), EmergenceDelayTicks))
+            {
+                return false;
+            }
+            lastReinforcementWave = wave;
+            return true;
         }
 
         public void CollapseAfterFinalWave()
@@ -587,6 +629,12 @@ namespace MUGB
                 pawns.Add(initialContainer[i]);
             }
             initialContainer.Clear();
+            pawns = NormalizePawns(pawns);
+            if (pawns.Count == 0)
+            {
+                pawns = GenerateFallbackSquad(edgeTunnel ? 5 : 4);
+                initialSquadSizes = pawns.Count > 0 ? new List<int> { pawns.Count } : new List<int>();
+            }
 
             int pawnIndex = 0;
             foreach (int requestedSize in initialSquadSizes)
@@ -622,6 +670,28 @@ namespace MUGB
             return pawns;
         }
 
+        private List<Pawn> GenerateFallbackSquad(int maxSquadSize)
+        {
+            List<PawnKindDef> kinds = Squads.MUGB_SquadRaidUtility.GenerateTunnelSquadKinds(
+                Faction,
+                Mathf.Max(assignedPoints, 1f),
+                maxSquadSize);
+            if (!kinds.NullOrEmpty())
+            {
+                return NormalizePawns(kinds.Select(kind => PawnGenerator.GeneratePawn(kind, Faction)));
+            }
+
+            PawnKindDef worker = DefDatabase<PawnKindDef>.GetNamedSilentFail("MUGB_GoblinKind_TunnelSlave");
+            return NormalizePawns(GeneratePawns(worker, Mathf.Clamp(maxSquadSize, 1, 3)));
+        }
+
+        private List<Pawn> NormalizePawns(IEnumerable<Pawn> pawns)
+        {
+            return pawns?
+                .Where(pawn => MUGB_GoblinTunnelPawnUtility.NormalizeForRaid(pawn, Faction))
+                .ToList() ?? new List<Pawn>();
+        }
+
         private LordJob MakeAssaultLordJob()
         {
             return new LordJob_AssaultColony(
@@ -648,16 +718,18 @@ namespace MUGB
                 canPickUpOpportunisticWeapons: false);
         }
 
-        private void SpawnAsUndergroundJump(List<Pawn> pawns, LordJob lordJob, int delayTicks)
+        private bool SpawnAsUndergroundJump(List<Pawn> pawns, LordJob lordJob, int delayTicks)
         {
-            if (!Spawned || pawns.NullOrEmpty())
+            pawns = NormalizePawns(pawns);
+            if (!Spawned || pawns.Count == 0 || lordJob == null)
             {
-                return;
+                return false;
             }
 
             List<IntVec3> destinations = FindEmergenceDestinations(pawns.Count);
             List<Thing> flyers = new List<Thing>();
             List<IntVec3> sourceCells = new List<IntVec3>();
+            List<Pawn> directSpawns = new List<Pawn>();
             CellRect sourceRect = this.OccupiedRect();
             for (int i = 0; i < pawns.Count; i++)
             {
@@ -679,20 +751,34 @@ namespace MUGB
                     flyers.Add(flyer);
                     sourceCells.Add(source);
                 }
+                else
+                {
+                    directSpawns.Add(pawn);
+                }
             }
 
-            if (flyers.Count == 0)
+            Lord lord = LordMaker.MakeNewLord(Faction, lordJob, Map);
+            if (flyers.Count > 0)
             {
-                return;
+                // Korean source intent: one tunnel wave is one squad. The whole squad jumps out together,
+                // rather than looking like an endless stream of individual pawns.
+                SpawnRequest request = new SpawnRequest(flyers, sourceCells, flyers.Count, 0.1f)
+                {
+                    initialDelay = delayTicks,
+                    lord = lord
+                };
+                Map.deferredSpawner.AddRequest(request);
             }
-            // Korean source intent: one tunnel wave is one squad. The whole squad jumps out together,
-            // rather than looking like an endless stream of individual pawns.
-            SpawnRequest request = new SpawnRequest(flyers, sourceCells, flyers.Count, 0.1f)
+
+            foreach (Pawn pawn in directSpawns)
             {
-                initialDelay = delayTicks,
-                lord = LordMaker.MakeNewLord(Faction, lordJob, Map)
-            };
-            Map.deferredSpawner.AddRequest(request);
+                if (!pawn.Spawned)
+                {
+                    GenSpawn.Spawn(pawn, CellFinder.RandomClosewalkCellNear(Position, Map, largeTunnel ? 6 : 5), Map);
+                }
+                lord.AddPawn(pawn);
+            }
+            return flyers.Count > 0 || directSpawns.Count > 0;
         }
 
         private List<IntVec3> FindEmergenceDestinations(int count)

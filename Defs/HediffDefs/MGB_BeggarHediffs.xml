@@ -32,6 +32,13 @@
         <!-- 건강탭에 노출하지 않는다. 연출용 감속이라 플레이어가 관리할 대상이 아니고,
              혹시 붙잡아 노예로 삼아도 하루짜리 잡티가 보이지 않는다. -->
         <becomeVisible>false</becomeVisible>
+        <painOffset>0.20</painOffset>
+        <capMods>
+          <li>
+            <capacity>Manipulation</capacity>
+            <postFactor>0.55</postFactor>
+          </li>
+        </capMods>
         <statFactors>
           <MoveSpeed>0.65</MoveSpeed>
         </statFactors>

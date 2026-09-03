@@ -7,6 +7,35 @@ using Verse;
 
 namespace MUGB
 {
+    // Buy-only generators widen what a caravan accepts without adding anything to generated stock.
+    public class StockGenerator_MUGB_BuyCategory : StockGenerator
+    {
+        public ThingCategoryDef categoryDef;
+
+        public override IEnumerable<Thing> GenerateThings(PlanetTile forTile, Faction faction = null)
+        {
+            yield break;
+        }
+
+        public override bool HandlesThingDef(ThingDef thingDef)
+        {
+            return thingDef != null && categoryDef != null && thingDef.IsWithinCategory(categoryDef);
+        }
+    }
+
+    public class StockGenerator_MUGB_BuyApparel : StockGenerator
+    {
+        public override IEnumerable<Thing> GenerateThings(PlanetTile forTile, Faction faction = null)
+        {
+            yield break;
+        }
+
+        public override bool HandlesThingDef(ThingDef thingDef)
+        {
+            return thingDef?.IsApparel == true;
+        }
+    }
+
     public class StockGenerator_MUGB_SpecialWeapon : StockGenerator
     {
         public float chance = 0.03f;

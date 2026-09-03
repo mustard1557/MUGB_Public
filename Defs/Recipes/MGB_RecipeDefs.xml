@@ -554,7 +554,6 @@
     <workSpeedStat>CookSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_ButcherCorpseFlesh</soundWorking>
-    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
     <workSkill>Cooking</workSkill>
     <workSkillLearnFactor>0.35</workSkillLearnFactor>
     <displayPriority>50</displayPriority>
@@ -697,7 +696,7 @@
             <li>MUGB_Ggut</li>
           </thingDefs>
         </filter>
-        <count>5</count>
+        <count>8</count>
       </li>
       <li>
         <filter>
@@ -720,7 +719,7 @@
     <label>prepare heart x4</label>
     <workAmount>1080</workAmount>
     <ingredients>
-      <li><filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter><count>20</count></li>
+      <li><filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter><count>32</count></li>
       <li><filter><thingDefs><li>Meat_Human</li><li>Meat_Goblin</li></thingDefs></filter><count>80</count></li>
     </ingredients>
     <products>
@@ -734,7 +733,7 @@
     <label>prepare heart x8</label>
     <workAmount>1920</workAmount>
     <ingredients>
-      <li><filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter><count>40</count></li>
+      <li><filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter><count>64</count></li>
       <li><filter><thingDefs><li>Meat_Human</li><li>Meat_Goblin</li></thingDefs></filter><count>160</count></li>
     </ingredients>
     <products>
@@ -755,7 +754,7 @@
             <li>MUGB_Ggut</li>
           </thingDefs>
         </filter>
-        <count>1</count>
+        <count>12</count>
       </li>
       <li>
         <filter>
@@ -778,8 +777,8 @@
     <label>prepare brain x4</label>
     <workAmount>1440</workAmount>
     <ingredients>
-      <li><filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter><count>4</count></li>
-      <li><filter><thingDefs><li>Meat_Human</li><li>Meat_Goblin</li></thingDefs></filter><count>1</count></li>
+      <li><filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter><count>48</count></li>
+      <li><filter><thingDefs><li>Meat_Human</li><li>Meat_Goblin</li></thingDefs></filter><count>4</count></li>
     </ingredients>
     <products>
       <MUGB_brain>4</MUGB_brain>
@@ -792,8 +791,8 @@
     <label>prepare brain x8</label>
     <workAmount>2520</workAmount>
     <ingredients>
-      <li><filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter><count>8</count></li>
-      <li><filter><thingDefs><li>Meat_Human</li><li>Meat_Goblin</li></thingDefs></filter><count>1</count></li>
+      <li><filter><thingDefs><li>MUGB_Hgut</li><li>MUGB_Ggut</li></thingDefs></filter><count>96</count></li>
+      <li><filter><thingDefs><li>Meat_Human</li><li>Meat_Goblin</li></thingDefs></filter><count>8</count></li>
     </ingredients>
     <products>
       <MUGB_brain>8</MUGB_brain>
@@ -1223,9 +1222,9 @@
     <label>cook lavish human flesh platter x4</label>
     <workAmount>2560</workAmount>
     <ingredients>
-      <li><filter><thingDefs><li>MUGB_Hchunk</li></thingDefs></filter><count>6</count></li>
-      <li><filter><thingDefs><li>Meat_Human</li></thingDefs></filter><count>5</count></li>
-      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>5</count></li>
+      <li><filter><thingDefs><li>MUGB_Hchunk</li></thingDefs></filter><count>24</count></li>
+      <li><filter><thingDefs><li>Meat_Human</li></thingDefs></filter><count>20</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>20</count></li>
     </ingredients>
     <products>
       <MUGB_excHBBQ>4</MUGB_excHBBQ>
@@ -1253,9 +1252,9 @@
     <label>cook lavish goblin flesh platter x4</label>
     <workAmount>2560</workAmount>
     <ingredients>
-      <li><filter><thingDefs><li>MUGB_Gchunk</li></thingDefs></filter><count>6</count></li>
-      <li><filter><thingDefs><li>Meat_Goblin</li></thingDefs></filter><count>5</count></li>
-      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>5</count></li>
+      <li><filter><thingDefs><li>MUGB_Gchunk</li></thingDefs></filter><count>24</count></li>
+      <li><filter><thingDefs><li>Meat_Goblin</li></thingDefs></filter><count>20</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>20</count></li>
     </ingredients>
     <products>
       <MUGB_excGBBQ>4</MUGB_excGBBQ>

@@ -560,7 +560,7 @@
       <li Class="MUGB.CompProperties_GoblinStewpotIngredients">
         <nutritionCapacity>30</nutritionCapacity>
         <nutritionCostPerMeal>0.45</nutritionCostPerMeal>
-        <gutUnitsCostPerMeal>0.12</gutUnitsCostPerMeal>
+        <gutUnitsCostPerMeal>0.15</gutUnitsCostPerMeal>
         <ingredientNutritionEfficiency>1.6</ingredientNutritionEfficiency>
         <autoFillPercent>1</autoFillPercent>
         <showAllowAutoFillToggle>true</showAllowAutoFillToggle>

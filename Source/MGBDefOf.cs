@@ -17,6 +17,7 @@ namespace MUGB
         public static FactionDef MUGB_GoblinCultists;
         public static FactionDef MUGB_GoblinHunters;
         public static FactionDef MUGB_NeutralBeggarBand;
+        public static FactionDef MUGB_PlayerGoblinFaction;
         public static IncidentDef MUGB_BeggarTravelerGroup;
         public static IncidentDef MUGB_GoblinCaravanAmbush;
         public static StorytellerDef MUGB_KimDeokPal;
@@ -166,6 +167,8 @@ namespace MUGB
         public static ThoughtDef MUGB_AteGoblinPepperCheese;
         public static ThoughtDef MUGB_AteGoblinPepperCheeseNonGoblin;
         public static ThoughtDef MUGB_FleshCravingLow;
+        public static ThoughtDef MUGB_SurvivedGoblinCaptivity;
+        public static ThoughtDef MUGB_GoblinSlaveMood;
         public static ThoughtDef MUGB_GoblinPregnancyBurden;
         public static ThoughtDef MUGB_GaveBirthToGoblinLitter;
         public static ThoughtDef MUGB_GoblinBabyBorn;

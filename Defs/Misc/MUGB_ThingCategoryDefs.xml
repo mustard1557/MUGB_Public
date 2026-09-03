@@ -19,6 +19,12 @@
     <parent>Root</parent>
   </ThingCategoryDef>
 
+  <ThingCategoryDef>
+    <defName>MUGB_GoblinSiegeAmmoCategory</defName>
+    <label>goblin siege ammunition</label>
+    <parent>Manufactured</parent>
+  </ThingCategoryDef>
+
   <!--
     한국어 의도: 인간형에게서 얻은 생재료를 한 묶음으로 모읍니다.
     (인육/고블린 살점 덩어리, 내장, 심장, 뇌, 고블린 고기)
