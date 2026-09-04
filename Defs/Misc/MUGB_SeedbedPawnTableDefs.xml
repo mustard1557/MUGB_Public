@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    한국어 의도: 인간가축 탭의 네 번째 뷰 '모판'입니다.
+
+    기존 세 뷰(죄수 / 노예 / 지정됨)의 PawnTableDef는 하나도 건드리지 않습니다.
+    고기용 가축 쪽 흐름과 모판 관리는 필요한 정보가 겹치지 않아서, 컬럼을 섞으면
+    양쪽 다 빈 칸이 생깁니다. 뷰를 나누는 것이 애초에 이 탭의 설계 방침입니다.
+
+    별도 파일로 둔 이유도 같습니다 - 이 기능만 통째로 되돌릴 수 있어야 합니다.
+
+    행은 두 종류를 한 표에 담습니다.
+      - 모판 : 시술이 끝난 폰. 위쪽에 단계 높은 순으로 모입니다.
+      - 후보 : 아직 아닌 여성 죄수/노예. 아래쪽에 모입니다.
+    후보 물색과 라인 관리를 오가려고 탭을 바꿀 일이 없게 하려는 것입니다.
+    후보가 거슬리면 상단 버튼으로 숨길 수 있습니다.
+
+    체크박스를 종류별로 다른 컬럼에 둡니다. 후보 행은 '모판화' 칸에만, 모판 행은
+    '자동' 칸에만 체크박스가 있으므로, 체크박스의 위치가 그 행의 종류를 그대로
+    말해줍니다. 한 칸이 두 가지 일을 하면 매번 "이 체크가 무슨 뜻이지"를 생각해야 합니다.
+
+    '젖' 컬럼은 두지 않습니다. 착유 작업이 없어서 수치를 봐도 할 수 있는 일이 없습니다.
+    (수유 자체는 유지됩니다 - 설계지침 5.1)
+
+    행 목록은 창이 열려 있을 때만 계산됩니다. 표 자체는 틱을 먹지 않습니다.
+  -->
+
+  <PawnColumnDef>
+    <defName>MUGB_Seedbed_Convert</defName>
+    <workerClass>MUGB.Seedbed.PawnColumnWorker_SeedbedConvert</workerClass>
+    <label>seedbed</label>
+    <sortable>true</sortable>
+    <paintable>true</paintable>
+    <width>46</width>
+  </PawnColumnDef>
+
+  <PawnColumnDef>
+    <defName>MUGB_Seedbed_Auto</defName>
+    <workerClass>MUGB.Seedbed.PawnColumnWorker_SeedbedAuto</workerClass>
+    <label>auto</label>
+    <sortable>true</sortable>
+    <width>40</width>
+  </PawnColumnDef>
+
+  <PawnColumnDef>
+    <defName>MUGB_Seedbed_Stage</defName>
+    <workerClass>MUGB.Seedbed.PawnColumnWorker_SeedbedStage</workerClass>
+    <label>stage</label>
+    <sortable>true</sortable>
+    <width>55</width>
+  </PawnColumnDef>
+
+  <PawnColumnDef>
+    <defName>MUGB_Seedbed_Status</defName>
+    <workerClass>MUGB.Seedbed.PawnColumnWorker_SeedbedStatus</workerClass>
+    <label>status</label>
+    <sortable>true</sortable>
+    <width>95</width>
+  </PawnColumnDef>
+
+  <PawnColumnDef>
+    <defName>MUGB_Seedbed_Due</defName>
+    <workerClass>MUGB.Seedbed.PawnColumnWorker_SeedbedDue</workerClass>
+    <label>due in</label>
+    <sortable>true</sortable>
+    <width>70</width>
+  </PawnColumnDef>
+
+  <PawnColumnDef>
+    <defName>MUGB_Seedbed_Yield</defName>
+    <workerClass>MUGB.Seedbed.PawnColumnWorker_SeedbedYield</workerClass>
+    <label>yield</label>
+    <sortable>true</sortable>
+    <width>55</width>
+  </PawnColumnDef>
+
+  <PawnTableDef>
+    <defName>MUGB_HumanLivestock_Seedbeds</defName>
+    <workerClass>RimWorld.PawnTable</workerClass>
+    <minWidth>760</minWidth>
+    <columns>
+      <li>LabelWithIcon</li>
+      <li>Age</li>
+      <li>MUGB_Livestock_Xenotype</li>
+      <li>MUGB_Livestock_Health</li>
+      <li>GapTiny</li>
+      <li>MUGB_Seedbed_Stage</li>
+      <li>MUGB_Seedbed_Status</li>
+      <li>MUGB_Seedbed_Due</li>
+      <li>MUGB_Seedbed_Yield</li>
+      <li>GapTiny</li>
+      <li>MUGB_Seedbed_Convert</li>
+      <li>MUGB_Seedbed_Auto</li>
+      <li>MUGB_Livestock_Protect</li>
+      <li>RemainingSpace</li>
+    </columns>
+  </PawnTableDef>
+
+</Defs>

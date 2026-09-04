@@ -7,7 +7,9 @@ namespace MUGB
     {
         protected override ThoughtState CurrentStateInternal(Pawn pawn)
         {
-            if (pawn == null || GoblinUtility.IsGoblin(pawn))
+            if (pawn == null
+                || GoblinUtility.IsGoblin(pawn)
+                || MUGBMod.Settings?.enableNonGoblinGoblinGearMoodPenalty == false)
             {
                 return ThoughtState.Inactive;
             }
@@ -39,7 +41,29 @@ namespace MUGB
                 return ThoughtState.Inactive;
             }
 
-            if (HasTrait(pawn, "Psychopath"))
+            bool hasPheromoneAdaptation = MUGBDefOf.MUGB_GoblinPheromonePreference != null
+                && pawn.health?.hediffSet?.HasHediff(MUGBDefOf.MUGB_GoblinPheromonePreference) == true;
+            bool hasGoblinIdeology = HasGoblinIdeology(pawn);
+            bool psychopath = HasTrait(pawn, "Psychopath");
+
+            if (hasPheromoneAdaptation && (hasGoblinIdeology || psychopath))
+            {
+                return ThoughtState.Inactive;
+            }
+
+            if (hasPheromoneAdaptation)
+            {
+                return count <= 1
+                    ? ThoughtState.Inactive
+                    : ThoughtState.ActiveAtStage(count >= 3 ? 3 : 4);
+            }
+
+            if (hasGoblinIdeology)
+            {
+                return count <= 1 ? ThoughtState.Inactive : ThoughtState.ActiveAtStage(4);
+            }
+
+            if (psychopath)
             {
                 return ThoughtState.ActiveAtStage(3);
             }
@@ -62,6 +86,18 @@ namespace MUGB
                 }
             }
             return false;
+        }
+
+        private static bool HasGoblinIdeology(Pawn pawn)
+        {
+            Ideo ideo = pawn?.Ideo;
+            if (ideo == null)
+            {
+                return false;
+            }
+
+            return MUGBDefOf.MUGB_ChildrenOfBlinia != null && ideo.HasMeme(MUGBDefOf.MUGB_ChildrenOfBlinia)
+                || MUGBDefOf.MUGB_GoblinSupremacy != null && ideo.HasMeme(MUGBDefOf.MUGB_GoblinSupremacy);
         }
     }
 }

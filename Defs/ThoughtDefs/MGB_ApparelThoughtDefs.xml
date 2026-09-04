@@ -26,6 +26,11 @@
         <description>It is filthy goblin gear, but that hardly bothers me.</description>
         <baseMoodEffect>-2</baseMoodEffect>
       </li>
+      <li>
+        <label>using goblin gear</label>
+        <description>The smell is still there, but it is little more than a minor annoyance now.</description>
+        <baseMoodEffect>-1</baseMoodEffect>
+      </li>
     </stages>
   </ThoughtDef>
 

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <MUGB_MessageTumorsDelivered>{0}이(가) 살덩이 종양 {1}개를 낳았습니다.</MUGB_MessageTumorsDelivered>
+
+  <MUGB_SeedbedAutoActivateOn>자동 활성화: 켜짐</MUGB_SeedbedAutoActivateOn>
+  <MUGB_SeedbedAutoActivateOff>자동 활성화: 꺼짐</MUGB_SeedbedAutoActivateOff>
+
+  <MUGB_TabViewSeedbeds>모판</MUGB_TabViewSeedbeds>
+  <MUGB_TabSeedbedSummary>모판 {0} (잉태 {1}, 대기 {2})   후보 {3}</MUGB_TabSeedbedSummary>
+  <MUGB_TabSeedbedNoSurgeon>활성화액을 주입할 수 있는 고블린 남성이 없습니다.</MUGB_TabSeedbedNoSurgeon>
+
+  <MUGB_SeedbedColumnAuto>자동</MUGB_SeedbedColumnAuto>
+  <MUGB_SeedbedColumnAutoTip>출산이 끝나는 즉시 종양 활성화액 주입을 자동으로 예약합니다. 끄면 이번 주기가 끝난 뒤 라인이 멈춥니다.</MUGB_SeedbedColumnAutoTip>
+  <MUGB_SeedbedColumnStage>단계</MUGB_SeedbedColumnStage>
+  <MUGB_SeedbedColumnStatus>상태</MUGB_SeedbedColumnStatus>
+  <MUGB_SeedbedColumnNext>출산까지</MUGB_SeedbedColumnNext>
+  <MUGB_SeedbedColumnYield>누적</MUGB_SeedbedColumnYield>
+
+  <MUGB_SeedbedStatusGestating>잉태 중</MUGB_SeedbedStatusGestating>
+  <MUGB_SeedbedStatusLabor>진통</MUGB_SeedbedStatusLabor>
+  <MUGB_SeedbedStatusPushing>밀어내는 중</MUGB_SeedbedStatusPushing>
+  <MUGB_SeedbedStatusQueued>주입 예약됨</MUGB_SeedbedStatusQueued>
+  <MUGB_SeedbedStatusIdle>대기</MUGB_SeedbedStatusIdle>
+
+  <MUGB_TabSeedbedNoResearch>육신공예 연구가 끝나지 않아 모판화 수술을 걸 수 없습니다.</MUGB_TabSeedbedNoResearch>
+  <MUGB_TabSeedbedHideCandidates>후보 숨기기</MUGB_TabSeedbedHideCandidates>
+  <MUGB_TabSeedbedShowCandidates>후보 보기</MUGB_TabSeedbedShowCandidates>
+  <MUGB_SeedbedColumnConvert>모판화</MUGB_SeedbedColumnConvert>
+  <MUGB_SeedbedColumnConvertTip>이 폰에게 종양 모판 시술을 예약합니다. 한 번 시술하면 영구적이며 되돌릴 수 없습니다.</MUGB_SeedbedColumnConvertTip>
+  <MUGB_SeedbedColumnConvertDone>이미 종양 모판입니다.</MUGB_SeedbedColumnConvertDone>
+  <MUGB_SeedbedStageTip>모판화 단계. 출산할 때마다 한 단계씩 진행됩니다.</MUGB_SeedbedStageTip>
+  <MUGB_SeedbedStageFinalTip>최종 단계. 더 이상 출산을 슬퍼하지 않습니다 - 무드 페널티가 고양감으로 바뀝니다.</MUGB_SeedbedStageFinalTip>
+  <MUGB_SeedbedStatusCandidate>후보</MUGB_SeedbedStatusCandidate>
+  <MUGB_SeedbedStatusSurgeryQueued>수술 예약됨</MUGB_SeedbedStatusSurgeryQueued>
+
+</LanguageData>

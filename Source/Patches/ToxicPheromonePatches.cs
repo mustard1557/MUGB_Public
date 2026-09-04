@@ -8,7 +8,7 @@ namespace MUGB
     public class MUGBToxicPheromoneMapComponent : MapComponent
     {
         private const int CheckIntervalTicks = 2500;
-        private const float StrongIndoorDeathDays = 16f;
+        private const float StrongIndoorDeathDays = 23f;
         private const float WeakStrengthMultiplier = 0.5f;
         private const float OutdoorMultiplier = 0.50f;
         private const float MaxStackedEmitterStrength = 2f;

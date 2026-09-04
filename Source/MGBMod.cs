@@ -85,7 +85,7 @@ namespace MUGB
 
         public override void DoSettingsWindowContents(Rect inRect)
         {
-            Rect viewRect = new Rect(0f, 0f, inRect.width - 16f, 1300f);
+            Rect viewRect = new Rect(0f, 0f, inRect.width - 16f, 1340f);
             Widgets.BeginScrollView(inRect, ref settingsScrollPosition, viewRect);
             Listing_Standard listing = new Listing_Standard();
             listing.Begin(viewRect);
@@ -100,6 +100,16 @@ namespace MUGB
                 ref Settings.enableDraftedWeaponPoseOffsets,
                 "MUGB_SettingsEnableDraftedWeaponPoseOffsetsDesc".Translate());
             if (oldEnableDraftedWeaponPoseOffsets != Settings.enableDraftedWeaponPoseOffsets)
+            {
+                Settings.Write();
+            }
+
+            bool oldEnableNonGoblinGoblinGearMoodPenalty = Settings.enableNonGoblinGoblinGearMoodPenalty;
+            listing.CheckboxLabeled(
+                "MUGB_SettingsEnableNonGoblinGoblinGearMoodPenaltyLabel".Translate(),
+                ref Settings.enableNonGoblinGoblinGearMoodPenalty,
+                "MUGB_SettingsEnableNonGoblinGoblinGearMoodPenaltyDesc".Translate());
+            if (oldEnableNonGoblinGoblinGearMoodPenalty != Settings.enableNonGoblinGoblinGearMoodPenalty)
             {
                 Settings.Write();
             }
@@ -3073,6 +3083,7 @@ namespace MUGB
         public bool harHeadSizeExemption = false;
         public bool addonFollowHeadScale = true;
         public bool enableDraftedWeaponPoseOffsets = true;
+        public bool enableNonGoblinGoblinGearMoodPenalty = true;
         public int pawnLossAdaptationPercent = 50;
         public int kimDeokPalPawnLossAdaptationPercent = 50;
         public int passingGroupFrequencyPercent = 110;
@@ -3188,6 +3199,7 @@ namespace MUGB
             Scribe_Values.Look(ref harHeadSizeExemption, "harHeadSizeExemption", false);
             Scribe_Values.Look(ref addonFollowHeadScale, "addonFollowHeadScale", true);
             Scribe_Values.Look(ref enableDraftedWeaponPoseOffsets, "enableDraftedWeaponPoseOffsets", true);
+            Scribe_Values.Look(ref enableNonGoblinGoblinGearMoodPenalty, "enableNonGoblinGoblinGearMoodPenalty", true);
             Scribe_Values.Look(ref pawnLossAdaptationPercent, "pawnLossAdaptationPercent", 50);
             Scribe_Values.Look(ref kimDeokPalPawnLossAdaptationPercent, "kimDeokPalPawnLossAdaptationPercent", 50);
             Scribe_Values.Look(ref passingGroupFrequencyPercent, "passingGroupFrequencyPercent", 110);

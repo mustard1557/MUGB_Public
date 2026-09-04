@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    한국어 의도: 종양 모판 시스템의 헤디프 4종입니다. 설계지침 4·5·8장.
+
+      MUGB_TumorSeedbed          영구 모판. 이게 있어야 나머지가 돌아갑니다.
+      MUGB_TumorGestation        종양 잉태. 1.5일 만에 만삭이 되고 출산합니다.
+      MUGB_SeedbedDegeneration   모판화 4단계. 신체 디버프만 담당합니다.
+      MUGB_ActivatorDrain        시술자(고블린 남성)가 받는 누적 피로.
+
+    역할 분리 원칙: 신체는 헤디프, 무드는 사상입니다.
+    출산 주기가 1.5일이라 헤디프에도 무드를 넣으면 4단계 반전에 도달하기 전에
+    정신붕괴가 반복됩니다. 무드는 전부 MGB_TumorSeedbedThoughtDefs.xml에 있습니다.
+  -->
+
+  <!--
+    영구 모판. 부위를 Torso로 고정합니다.
+
+    RJW가 있을 때 Genitals로 분기하지 않는 이유:
+      확인 결과 RJW가 추가하는 휴머노이드 부위는 Genitals / Chest / Anus 셋뿐이고
+      자궁은 애초에 존재하지 않습니다(rjw-master/1.6/Defs/BodyPartDefs/BodyParts_Flesh.xml).
+      건강 탭의 "생식기 - 질"은 Genitals 부위 + Vagina 헤디프 조합입니다.
+      즉 Genitals에 붙일 필연성이 없고, 부위를 분기하면 RJW 유무에 따라 세이브가 갈라집니다.
+      Torso 고정이면 림잡을 나중에 켜고 꺼도 기존 세이브가 그대로 살아납니다.
+  -->
+  <HediffDef>
+    <defName>MUGB_TumorSeedbed</defName>
+    <label>tumor seedbed</label>
+    <labelNoun>a tumor seedbed</labelNoun>
+    <description>The ovaries have been forced into permanent overproduction. They release malformed eggs without pause, and those eggs no longer resist implantation. Nothing that grows here will ever be a child.\n\nThis condition cannot be reversed.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.72, 0.45, 0.52)</defaultLabelColor>
+    <isBad>true</isBad>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+    <tendable>false</tendable>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <comps>
+      <li Class="MUGB.Seedbed.HediffCompProperties_TumorSeedbed" />
+    </comps>
+    <stages>
+      <li>
+        <label>seedbed</label>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!--
+    종양 잉태.
+
+    진통을 별도 헤디프 2개로 나누지 않고 이 헤디프의 마지막 두 단계로 접었습니다.
+      바닐라는 PregnancyLabor / PregnancyLaborPushing을 따로 두지만, 그건 임신이
+      18일이라 단계 전환이 드물기 때문입니다. 여기는 주기가 1.5일이라 헤디프를
+      붙였다 떼는 일이 1/12 빈도로 일어납니다. 단계로 접으면 그 붙임/떼임이 전부
+      사라지고, 저장되는 헤디프 수도 폰당 하나로 유지됩니다.
+
+    진행은 바닐라 HediffComp_SeverityPerDay가 담당합니다(0.667/일 = 1.5일에 1.0).
+    출산 판정만 우리 comp가 하고, 그것도 severity >= 1 비교 하나뿐입니다.
+
+    마지막 12%(0.18일 = 10800틱)가 진통입니다. 바닐라 진통 최대치가 30000틱이므로
+    주기 대비 체감이 비슷한 자리에 오도록 잘라낸 값입니다.
+  -->
+  <HediffDef>
+    <defName>MUGB_TumorGestation</defName>
+    <label>tumor gestation</label>
+    <labelNoun>a tumor gestation</labelNoun>
+    <description>Malformed tissue is growing in the womb. It draws on the body like a pregnancy and swells at several times the pace, but there is no child in it.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.72, 0.45, 0.52)</defaultLabelColor>
+    <isBad>true</isBad>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+    <tendable>false</tendable>
+    <initialSeverity>0.001</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>0.667</severityPerDay>
+      </li>
+      <li Class="MUGB.Seedbed.HediffCompProperties_TumorGestation" />
+    </comps>
+    <stages>
+      <li>
+        <label>gestating</label>
+      </li>
+      <li>
+        <minSeverity>0.88</minSeverity>
+        <label>labor</label>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.10</offset>
+          </li>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.15</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>0.96</minSeverity>
+        <label>pushing</label>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.25</offset>
+          </li>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.40</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!--
+    모판화. 출산 1회당 1스택, 영구 지속, 최대 4단계.
+
+    Consciousness는 반드시 offset으로만 씁니다. setMax를 쓰면 영양실조나 부상과
+    겹칠 때 사망합니다. 4단계 -0.35는 기본 1.0에서 0.65가 되므로 안전 범위입니다.
+    기존 MUGB_GoblinBirthStrain이 마지막 단계에서 setMax 0을 쓰므로, 종양 출산에는
+    그 헤디프를 절대 부여하지 않습니다(Source/Seedbed 쪽에서 명시적으로 제외).
+
+    Talking을 고른 이유: 대화 실패와 사교 활동 불가로 즉시 눈에 보이고, 모판이
+    콜로니 사회망에서 떨어져 나가는 것이 설정과 맞습니다. Manipulation은 건드리지
+    않습니다 - 자가 섭식이 막히면 관리 부담만 늘어납니다.
+
+    배고픔이 내려가는 것은 디버프가 아니라 설정입니다. 뇌가 쓰던 열량이 자궁으로
+    갔다는 서사이고, 실제로 사육 비용이 싸지는 보상 역할을 합니다.
+  -->
+  <HediffDef>
+    <defName>MUGB_SeedbedDegeneration</defName>
+    <label>seedbed degeneration</label>
+    <labelNoun>seedbed degeneration</labelNoun>
+    <description>The organ that burns the most energy in the body is the brain, and it is losing that argument. Each cycle moves a little more of her upkeep from thinking to producing. She eats less every time, and has less to say about it.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.72, 0.45, 0.52)</defaultLabelColor>
+    <isBad>true</isBad>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+    <tendable>false</tendable>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>4</maxSeverity>
+    <stages>
+      <li>
+        <label>clouding</label>
+        <hungerRateFactor>0.90</hungerRateFactor>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.08</offset>
+          </li>
+          <li>
+            <capacity>Talking</capacity>
+            <offset>-0.15</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>dulling</label>
+        <hungerRateFactor>0.80</hungerRateFactor>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.16</offset>
+          </li>
+          <li>
+            <capacity>Talking</capacity>
+            <offset>-0.30</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>emptying</label>
+        <hungerRateFactor>0.70</hungerRateFactor>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.25</offset>
+          </li>
+          <li>
+            <capacity>Talking</capacity>
+            <offset>-0.50</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>4</minSeverity>
+        <label>seedbed</label>
+        <hungerRateFactor>0.55</hungerRateFactor>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.35</offset>
+          </li>
+          <li>
+            <capacity>Talking</capacity>
+            <offset>-0.80</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!--
+    시술자가 받는 누적 피로. 종양 활성화액 주입 1회당 severity +0.25.
+
+    하드 쿨다운(차단)이 아니라 누적 디버프인 이유:
+      차단이면 "왜 시술이 안 뜨지?"를 유저가 추적해야 합니다. 누적이면 급할 때
+      몰아서 할 수 있고, 대신 그 대가가 눈에 보입니다. 스스로 억제되는 구조입니다.
+
+    severityPerDay -6이면 1회분(0.25)이 정확히 1시간에 사라집니다.
+    1회만 하면 1시간 동안 1단계뿐이라 "살짝 거슬리는" 수준이고,
+    하루에 6~7명을 몰아서 처리하면 4단계까지 올라가 밥을 많이 먹고 굼떠집니다.
+
+    무드 효과는 넣지 않습니다. 시술자 쪽까지 무드를 넣으면 모판 쪽 무드 설계와
+    섞여서 어느 쪽이 원인인지 읽히지 않습니다.
+  -->
+  <HediffDef>
+    <defName>MUGB_ActivatorDrain</defName>
+    <label>activator drain</label>
+    <labelNoun>activator drain</labelNoun>
+    <description>Producing tumor activator on demand takes it out of a goblin. He is warm, slow, and suddenly very interested in the next meal.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.65, 0.62, 0.45)</defaultLabelColor>
+    <isBad>true</isBad>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+    <tendable>false</tendable>
+    <initialSeverity>0.25</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-6</severityPerDay>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <label>languid</label>
+        <hungerRateFactorOffset>0.30</hungerRateFactorOffset>
+        <statFactors>
+          <RestRateMultiplier>0.95</RestRateMultiplier>
+          <WorkSpeedGlobal>0.95</WorkSpeedGlobal>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>0.26</minSeverity>
+        <label>hazy</label>
+        <hungerRateFactorOffset>0.60</hungerRateFactorOffset>
+        <statFactors>
+          <RestRateMultiplier>0.90</RestRateMultiplier>
+          <WorkSpeedGlobal>0.90</WorkSpeedGlobal>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>0.51</minSeverity>
+        <label>drained</label>
+        <hungerRateFactorOffset>1.00</hungerRateFactorOffset>
+        <statFactors>
+          <RestRateMultiplier>0.85</RestRateMultiplier>
+          <WorkSpeedGlobal>0.85</WorkSpeedGlobal>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>0.76</minSeverity>
+        <label>wrung out</label>
+        <hungerRateFactorOffset>1.50</hungerRateFactorOffset>
+        <statFactors>
+          <RestRateMultiplier>0.80</RestRateMultiplier>
+          <WorkSpeedGlobal>0.75</WorkSpeedGlobal>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+</Defs>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    한국어 의도: 종양 모판 시스템의 무드입니다. 설계지침 8장.
+
+    무드는 전부 여기에 모으고 헤디프에는 하나도 넣지 않습니다.
+    출산 주기가 1.5일이라 두 곳에 흩어지면 어느 쪽이 원인인지 읽히지 않습니다.
+
+    반전 구조:
+      모판화가 4단계에 도달하면 MUGB_GaveBirthToTumor를 아예 부여하지 않고
+      MUGB_SeedbedEuphoria가 대신 붙습니다. 4단계는 "아무것도 생각나지 않는" 상태인데
+      출산 슬픔을 계속 받는 것이 설정과 어긋나기도 하고, 슬픔이 남아 있으면
+      고양감 만료와 다음 출산 사이의 공백에 무드가 급락해 정신붕괴가 터집니다.
+
+      ThoughtDef.nullifyingHediffs는 헤디프의 유무만 보고 단계는 못 보기 때문에
+      XML로는 이 분기를 만들 수 없습니다. 부여 시점에 코드가 판단합니다
+      (Source/Seedbed/MUGB_SeedbedMood.cs).
+
+    실제 무드 흐름(주기 1.5일, 종양 3~4개 기준):
+      0.0일  수술 -12, 주입 -3                        = -15
+      1.5일  1회차 출산 -6, 주입 -3                    =  -9
+      3.0일  2회차 -12, 주입 -3                        = -15  <- 최저점
+      4.5일  3회차 -12(2스택 상한), 주입 -3            = -15
+      6.0일  4회차 -> 4단계 도달. 슬픔 미부여, 주입 +3  =  -9
+      7.5일  5회차 -> 고양감 +45~60, 주입 +3           = +48~63
+  -->
+
+  <!--
+    모판화 수술 직후. 평생 1회뿐이라 스택이 의미 없습니다.
+    이 시점에는 아직 1단계이므로 반전도 없습니다.
+  -->
+  <ThoughtDef>
+    <defName>MUGB_TumorSeedbedInstalled</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>1.5</durationDays>
+    <stackLimit>1</stackLimit>
+    <nullifyingHediffs>
+      <li MayRequire="Ludeon.RimWorld.Anomaly">Inhumanized</li>
+    </nullifyingHediffs>
+    <stages>
+      <li>
+        <label>something was done to my womb</label>
+        <description>They put me under and cut into me, and whatever they left inside is still moving. I do not know what I am anymore.</description>
+        <baseMoodEffect>-12</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!--
+    활성화액 주입. 지속 0.5일은 주기 1.5일의 1/3이라 상시가 아니라 간헐적으로 뜹니다.
+    주사 맞고 반나절 찝찝하다가 가라앉는 리듬입니다.
+  -->
+  <ThoughtDef>
+    <defName>MUGB_InjectedWithActivator</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>0.5</durationDays>
+    <stackLimit>1</stackLimit>
+    <nullifyingHediffs>
+      <li MayRequire="Ludeon.RimWorld.Anomaly">Inhumanized</li>
+    </nullifyingHediffs>
+    <stages>
+      <li>
+        <label>injected with something</label>
+        <description>Ngh... this is humiliating... what did they just put inside me!</description>
+        <baseMoodEffect>-3</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!--
+    위 사상의 반전판. 부여 조건은 둘 중 하나만 맞으면 됩니다.
+      1) 모판화 4단계 (본편)
+      2) RJW FeelingBroken 최종 단계 (애드온에서 판정)
+  -->
+  <ThoughtDef>
+    <defName>MUGB_ActivatorAccepted</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>0.5</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>received the activator</label>
+        <description>Warm... my body answers on its own. It was waiting for this. Grow well in there.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!--
+    종양 출산. 종양 개수와 무관하게 출산 1회당 1스택입니다.
+    지속 3일 / 주기 1.5일이므로 정상 상태는 2스택 = -12로 고정됩니다.
+    모판화 4단계에서는 부여하지 않습니다(위 반전 구조 참고).
+  -->
+  <ThoughtDef>
+    <defName>MUGB_GaveBirthToTumor</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>3</durationDays>
+    <stackLimit>2</stackLimit>
+    <nullifyingHediffs>
+      <li MayRequire="Ludeon.RimWorld.Anomaly">Inhumanized</li>
+    </nullifyingHediffs>
+    <stages>
+      <li>
+        <label>gave birth to tumors</label>
+        <description>It came out of me wrong. It came out of me warm. They carried it away in a bucket.</description>
+        <baseMoodEffect>-6</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!--
+    4단계 전용 반전 버프. 출산 시 종양 개수만큼 스택이 붙습니다.
+
+    stackLimit이 4인 이유: 종양이 3~4개이므로 3으로 두면 4번째가 버려집니다.
+    지속 1.4일 / 주기 1.5일이라 0.1일의 공백이 생기는데, 4단계에서는 슬픔이
+    부여되지 않으므로 그 공백의 순 무드가 0입니다. 정신붕괴 판정이 돌지 않으면서
+    "출산 직전에 잠깐 제정신이 든다"는 연출만 남습니다.
+  -->
+  <ThoughtDef>
+    <defName>MUGB_SeedbedEuphoria</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>1.4</durationDays>
+    <stackLimit>4</stackLimit>
+    <stages>
+      <li>
+        <label>the seedbed's purpose</label>
+        <description>Emptied again. My head goes quiet and my body goes light. This is what I was made for.</description>
+        <baseMoodEffect>15</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+</Defs>

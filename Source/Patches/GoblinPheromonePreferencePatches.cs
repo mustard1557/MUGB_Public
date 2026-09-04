@@ -176,12 +176,19 @@ namespace MUGB
             zeroPointDay = -1;
         }
 
-        public void NotifyGoblinFoodEaten()
+        public void NotifyPheromoneExposure()
         {
             preferencePoints = MaxPreferencePoints;
             lastGoblinFoodDay = CurrentDay();
             lastDecayCheckDay = lastGoblinFoodDay;
             zeroPointDay = -1;
+        }
+
+        // Backward-compatible entry point for integrations compiled against the
+        // former food-specific API. Food is one kind of pheromone exposure.
+        public void NotifyGoblinFoodEaten()
+        {
+            NotifyPheromoneExposure();
         }
 
         public override void CompPostTickInterval(ref float severityAdjustment, int delta)
@@ -286,10 +293,16 @@ namespace MUGB
             hediff?.TryGetComp<HediffComp_GoblinPheromoneConditioning>()?.AddForcedConditioning(points);
         }
 
-        public static void NotifyPreferenceGoblinFoodEaten(Pawn pawn)
+        public static void NotifyPheromoneExposure(Pawn pawn)
         {
             Hediff hediff = pawn?.health?.hediffSet?.GetFirstHediffOfDef(MUGBDefOf.MUGB_GoblinPheromonePreference);
-            hediff?.TryGetComp<HediffComp_GoblinPheromonePreference>()?.NotifyGoblinFoodEaten();
+            hediff?.TryGetComp<HediffComp_GoblinPheromonePreference>()?.NotifyPheromoneExposure();
+        }
+
+        // Preserve binary/source compatibility for existing food integrations.
+        public static void NotifyPreferenceGoblinFoodEaten(Pawn pawn)
+        {
+            NotifyPheromoneExposure(pawn);
         }
 
         public static void RemoveHumanlikeAndGoblinFoodPenalties(Pawn pawn)

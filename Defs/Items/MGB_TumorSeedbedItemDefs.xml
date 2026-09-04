@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    한국어 의도: 종양 모판이 낳는 살덩이입니다. 설계지침 6장.
+
+    pawn 시체가 아니라 아이템인 이유:
+      사산아 pawn으로 만들면 MySonDied / MyDaughterDied(-20, 30일, 최대 10스택)가
+      출산마다 부모 양쪽에 박혀 콜로니가 붕괴합니다. 아이템이면 그 문제와 함께
+      두개골 무한 생산, 세이브 비대, 휘청이 부활 후보 편입이 한 번에 사라지고
+      도축 산출을 products에 직접 박아 100% 통제할 수 있습니다.
+
+    stackLimit 1:
+      한 덩이가 한 칸을 차지합니다. 뇌처럼 여러 개가 한 칸에 쌓이면 "몇 마리 분량인지"가
+      안 보이고, 무엇보다 도축 계획서가 개수 단위로 도는 편이 산출 통제에 맞습니다.
+      stackLimit이 1이라 뇌가 쓰는 2단계 스택 그래픽(_a/_b)이 필요 없어 Graphic_Single입니다.
+      같은 이유로 스택 수 오버레이도 끕니다(항상 1이라 의미가 없습니다).
+
+    preferability를 DesperateOnly로 낮춘 이유:
+      부모(MUGB_RawGoblinFoodIngredientBase)가 foodType=Meat / RawBad라 그대로 두면
+      굶주린 폰이 도축 전에 생으로 주워 먹습니다. DesperateOnly면 아사 직전에만 먹습니다.
+      카테고리는 그대로 두어야 냉장고·저장구역 필터에서 다른 고기와 같은 자리에 잡힙니다.
+      요리 계획서 기본 제외는 Patches/MGB_TumorSeedbedFilters.xml이 담당합니다.
+  -->
+  <ThingDef ParentName="MUGB_RawGoblinFoodIngredientBase">
+    <defName>MUGB_FleshTumor</defName>
+    <label>flesh tumor</label>
+    <description>A wet, fist-heavy lump of living tissue expelled by a tumor seedbed. It has no bones worth the name and no shape anyone wants to look at twice, but it is dense muscle almost all the way through. Goblin butchers consider it the cleanest meat in the settlement precisely because nothing in it ever had a face.</description>
+    <tradeability>All</tradeability>
+    <stackLimit>1</stackLimit>
+    <drawGUIOverlay>false</drawGUIOverlay>
+    <statBases>
+      <Nutrition>0.05</Nutrition>
+      <Mass>0.6</Mass>
+      <MarketValue>3</MarketValue>
+      <Beauty>-14</Beauty>
+      <DeteriorationRate>6</DeteriorationRate>
+    </statBases>
+    <graphicData>
+      <texPath>Things/Item/Food/MGB_tumor</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(0.765,0.765)</drawSize>
+    </graphicData>
+    <ingestible>
+      <preferability>DesperateOnly</preferability>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Forbiddable" />
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>2</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

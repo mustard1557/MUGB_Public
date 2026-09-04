@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
   <MUGB_GoblinTraderSlaveDiscount>Goblin trader slave discount</MUGB_GoblinTraderSlaveDiscount>
+  <MUGB_GoblinTraderGoodsDiscount>Goblin trader discount</MUGB_GoblinTraderGoodsDiscount>
   <MUGB_GoblinRawTraderPurchaseDiscount>Goblin raw materials purchase price</MUGB_GoblinRawTraderPurchaseDiscount>
 </LanguageData>

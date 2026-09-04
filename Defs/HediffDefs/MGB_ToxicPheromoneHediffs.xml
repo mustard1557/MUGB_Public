@@ -19,15 +19,15 @@
         <label>2/5</label>
         <minSeverity>0.20</minSeverity>
         <capMods>
-          <li><capacity>Consciousness</capacity><postFactor>0.98</postFactor></li>
+          <li><capacity>Consciousness</capacity><postFactor>0.99</postFactor></li>
         </capMods>
       </li>
       <li>
         <label>3/5</label>
         <minSeverity>0.45</minSeverity>
         <capMods>
-          <li><capacity>Consciousness</capacity><postFactor>0.95</postFactor></li>
-          <li><capacity>Moving</capacity><postFactor>0.95</postFactor></li>
+          <li><capacity>Consciousness</capacity><postFactor>0.97</postFactor></li>
+          <li><capacity>Moving</capacity><postFactor>0.97</postFactor></li>
         </capMods>
       </li>
       <li>
@@ -35,8 +35,8 @@
         <minSeverity>0.70</minSeverity>
         <capMods>
           <li><capacity>Consciousness</capacity><postFactor>0.88</postFactor></li>
-          <li><capacity>Moving</capacity><postFactor>0.90</postFactor></li>
-          <li><capacity>Manipulation</capacity><postFactor>0.95</postFactor></li>
+          <li><capacity>Moving</capacity><postFactor>0.94</postFactor></li>
+          <li><capacity>Manipulation</capacity><postFactor>0.97</postFactor></li>
         </capMods>
       </li>
       <li>

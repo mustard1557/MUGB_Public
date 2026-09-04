@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    한국어 의도: 종양 모판 시스템의 레시피입니다. 설계지침 3·7장.
+      수술 2종  - 모판화 시술(1회, 영구) / 종양 활성화액 주입(반복)
+      도축 3종  - 도축대 / 고블린 조리대 / 인간해체음미
+  -->
+
+  <!-- ============================ 수술 ============================ -->
+
+  <!--
+    모판화 시술. 평생 한 번뿐인 진입 시술입니다.
+
+    불끈즙 2개가 진입 비용 전부입니다. 이후 운영에는 재료가 들지 않습니다.
+      불끈즙은 DrugProduction(500, Industrial) -> MUGB_Research_WarBrews(500)와
+      MUGB_Research_FineButchery(350) -> MUGB_Research_Fleshcraft(450)를 모두 요구하고,
+      1개당 낭 1 + 생버섯 1 + 생약 4가 듭니다. 이걸 주기마다 소모하면 고기 라인이
+      적자가 되므로 진입 티켓으로만 씁니다.
+
+    genderPrerequisite는 바닐라 필드입니다(Biotech Recipes_Surgery_Misc.xml, IUD 삽입 등).
+    이 한 줄이면 남성 폰에게는 수술 목록에 아예 뜨지 않습니다.
+
+    surgeryOutcomeEffect를 넣지 않은 이유:
+      실패해도 의학적으로 의미가 없는데 불끈즙 2개가 날아갑니다. 되돌릴 수 없는
+      수술이라 재시도 비용이 그대로 유저 손해가 되므로 결정적으로 둡니다.
+      기존 MUGB_ExtractGoblinReproductiveSac도 같은 이유로 미지정입니다.
+
+    부위는 Torso 고정입니다. RJW가 있어도 자궁 부위는 존재하지 않으므로
+    Genitals로 분기할 필연성이 없고, 분기하면 림잡을 켜고 끌 때 세이브가 갈라집니다.
+  -->
+  <RecipeDef>
+    <defName>MUGB_InduceTumorSeedbed</defName>
+    <researchPrerequisite>MUGB_Research_Fleshcraft</researchPrerequisite>
+    <label>induce tumor seedbed</label>
+    <description>Inject concentrated tadpole vigor juice directly into the ovaries. The overproduction it triggers never stops. From this point the patient can only carry malformed tissue, never a child, and there is no way back.</description>
+    <workerClass>MUGB.Seedbed.Recipe_InduceTumorSeedbed</workerClass>
+    <jobString>Inducing tumor seedbed.</jobString>
+    <workAmount>1400</workAmount>
+    <effectWorking>Surgery</effectWorking>
+    <soundWorking>Recipe_Surgery</soundWorking>
+    <workSpeedStat>MedicalOperationSpeed</workSpeedStat>
+    <workSkill>Medicine</workSkill>
+    <workSkillLearnFactor>4</workSkillLearnFactor>
+    <humanlikeOnly>true</humanlikeOnly>
+    <genderPrerequisite>Female</genderPrerequisite>
+    <isViolation>true</isViolation>
+    <anesthetize>true</anesthetize>
+    <uiIconThing>MUGB_FleshTumor</uiIconThing>
+    <displayPriority>254</displayPriority>
+    <skillRequirements>
+      <Medicine>4</Medicine>
+    </skillRequirements>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>MUGB_SpermJuice</li></thingDefs></filter>
+        <count>2</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>MedicineHerbal</li></thingDefs></filter>
+        <count>2</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>MUGB_SpermJuice</li>
+        <li>MedicineHerbal</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <appliedOnFixedBodyParts>
+      <li>Torso</li>
+    </appliedOnFixedBodyParts>
+  </RecipeDef>
+
+  <!--
+    종양 활성화액 주입. 반복 시술이고 재료가 들지 않습니다.
+
+    재료가 없는 이유는 시술자 자신이 공급원이기 때문입니다. 그래서 고블린 남성만
+    수행할 수 있고(MUGB.Seedbed.SeedbedSurgeonPatches가 판정), 시술 후 시술자에게
+    MUGB_ActivatorDrain이 누적됩니다.
+
+    수술(RecipeDef + Bill_Medical)로 만든 이유:
+      바닐라 수술 큐를 그대로 타므로 새 JobDef도 새 WorkGiver도 필요 없습니다.
+      AI가 꼬일 지점이 구조적으로 없고, 자동 종부가 Bill_Medical 등록 한 줄로 끝납니다.
+      WorkGiver로 만들면 우선순위·중복 예약·대상 유효성을 전부 직접 관리해야 합니다.
+
+    skillRequirements를 두지 않아 의료 0인 고블린 남성 노예도 시술자가 될 수 있습니다.
+    다만 수술이므로 작업 유형 Doctor는 켜져 있어야 합니다(바닐라 제약).
+
+    workAmount 600은 1배속 기준 약 10초입니다(60틱 = 1초).
+    실제로는 걸어가는 시간이 더 크고, 실질 원가는 시술자 헤디프 쪽입니다.
+  -->
+  <RecipeDef>
+    <defName>MUGB_InjectTumorActivator</defName>
+    <label>inject tumor activator</label>
+    <description>Trigger a seedbed's next cycle by hand. Only a male goblin can perform this, for reasons the settlement does not discuss over dinner. The seedbed will be full term in about a day and a half.</description>
+    <workerClass>MUGB.Seedbed.Recipe_InjectTumorActivator</workerClass>
+    <jobString>Injecting tumor activator.</jobString>
+    <workAmount>600</workAmount>
+    <effectWorking>Surgery</effectWorking>
+    <soundWorking>Recipe_Surgery</soundWorking>
+    <workSpeedStat>MedicalOperationSpeed</workSpeedStat>
+    <workSkill>Medicine</workSkill>
+    <workSkillLearnFactor>2</workSkillLearnFactor>
+    <humanlikeOnly>true</humanlikeOnly>
+    <genderPrerequisite>Female</genderPrerequisite>
+    <isViolation>true</isViolation>
+    <anesthetize>false</anesthetize>
+    <uiIconThing>MUGB_SpermJuice</uiIconThing>
+    <displayPriority>255</displayPriority>
+    <appliedOnFixedBodyParts>
+      <li>Torso</li>
+    </appliedOnFixedBodyParts>
+  </RecipeDef>
+
+  <!-- ============================ 도축 ============================ -->
+
+  <!--
+    전용 레시피를 새로 만드는 이유:
+      기존 도축 3종은 Corpses 카테고리 재료 + specialProducts=Butchery로 동작합니다.
+      Butchery 산출 계산은 시체 내부의 폰을 참조하므로 폰이 없는 종양을 넣으면 터집니다.
+      products에 직접 박으면 그 계산을 아예 타지 않아 안전하고, 작업대별 수율 차등도
+      숫자를 바꾸는 것으로 끝납니다.
+
+    주의: efficiencyStat은 specialProducts에만 적용되고 고정 products는 스케일하지
+    않습니다. 그래서 +10% / +25% 차등을 숫자에 직접 반영했습니다.
+
+    산출은 어미 종족과 무관하게 항상 고블린 것으로 고정입니다. 인간 노예를 모판으로
+    써도 고블린 고기가 나옵니다 - 자란 것이 어미의 살이 아니라 종양이기 때문입니다.
+  -->
+  <RecipeDef Name="MUGB_TumorButcheryBase" Abstract="True">
+    <workerCounterClass>RecipeWorkerCounter</workerCounterClass>
+    <jobString>Butchering flesh tumor.</jobString>
+    <workAmount>320</workAmount>
+    <workSpeedStat>ButcheryFleshSpeed</workSpeedStat>
+    <workSkill>Cooking</workSkill>
+    <effectWorking>ButcherFlesh</effectWorking>
+    <soundWorking>Recipe_ButcherCorpseFlesh</soundWorking>
+    <interruptIfIngredientIsRotting>true</interruptIfIngredientIsRotting>
+    <uiIconThing>MUGB_FleshTumor</uiIconThing>
+    <displayPriority>7</displayPriority>
+    <forceHiddenSpecialFilters>
+      <li>AllowFresh</li>
+    </forceHiddenSpecialFilters>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>MUGB_FleshTumor</li></thingDefs></filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>MUGB_FleshTumor</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_TumorButcheryBase">
+    <defName>MUGB_ButcherFleshTumor</defName>
+    <label>butcher flesh tumor</label>
+    <description>Break down a flesh tumor. There is no skeleton to work around, so it goes quickly.</description>
+    <recipeUsers>
+      <li>ButcherSpot</li>
+      <li>TableButcher</li>
+    </recipeUsers>
+    <products>
+      <Meat_Goblin>60</Meat_Goblin>
+      <MUGB_Ggut>6</MUGB_Ggut>
+      <MUGB_Bone>3</MUGB_Bone>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_TumorButcheryBase">
+    <defName>MUGB_ButcherFleshTumorCookstation</defName>
+    <label>butcher flesh tumor (goblin)</label>
+    <description>Break down a flesh tumor at the goblin cookstation. Goblin tools waste less of it.</description>
+    <recipeUsers>
+      <li>MUGB_cookstation</li>
+    </recipeUsers>
+    <products>
+      <Meat_Goblin>66</Meat_Goblin>
+      <MUGB_Ggut>7</MUGB_Ggut>
+      <MUGB_Bone>3</MUGB_Bone>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MUGB_TumorButcheryBase">
+    <defName>MUGB_SavorFleshTumor</defName>
+    <researchPrerequisite>MUGB_Research_FineButchery</researchPrerequisite>
+    <label>savor flesh tumor</label>
+    <description>Take a flesh tumor apart slowly and with appreciation. It takes longer and gives up almost everything.</description>
+    <jobString>Savoring flesh tumor disassembly.</jobString>
+    <workAmount>520</workAmount>
+    <displayPriority>8</displayPriority>
+    <recipeUsers>
+      <li>MUGB_cookstation</li>
+    </recipeUsers>
+    <products>
+      <Meat_Goblin>75</Meat_Goblin>
+      <MUGB_Ggut>8</MUGB_Ggut>
+      <MUGB_Bone>4</MUGB_Bone>
+    </products>
+  </RecipeDef>
+
+</Defs>

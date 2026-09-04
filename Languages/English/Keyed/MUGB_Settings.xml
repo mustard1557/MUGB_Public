@@ -3,6 +3,8 @@
   <MUGB_SettingsOpenVisualTuning>Open visual tuning</MUGB_SettingsOpenVisualTuning>
   <MUGB_SettingsEnableDraftedWeaponPoseOffsetsLabel>Use drafted goblin weapon pose adjustments</MUGB_SettingsEnableDraftedWeaponPoseOffsetsLabel>
   <MUGB_SettingsEnableDraftedWeaponPoseOffsetsDesc>When disabled, drafted pawns at rest use vanilla weapon positioning. Attack poses, spear thrusts, throws and charges are unchanged.</MUGB_SettingsEnableDraftedWeaponPoseOffsetsDesc>
+  <MUGB_SettingsEnableNonGoblinGoblinGearMoodPenaltyLabel>Non-goblins dislike wearing goblin gear</MUGB_SettingsEnableNonGoblinGoblinGearMoodPenaltyLabel>
+  <MUGB_SettingsEnableNonGoblinGoblinGearMoodPenaltyDesc>When disabled, the MUGB mood penalty for non-goblins wearing goblin gear is removed. Vanilla apparel thoughts are unchanged.</MUGB_SettingsEnableNonGoblinGoblinGearMoodPenaltyDesc>
   <MUGB_SettingsStorytellerHeader>Storyteller</MUGB_SettingsStorytellerHeader>
   <MUGB_SettingsPassingGroupFrequencyLabel>Passing group frequency: {0}%</MUGB_SettingsPassingGroupFrequencyLabel>
   <MUGB_SettingsPassingGroupFrequencyDesc>Adjusts the frequency of traveler groups and MUGB wandering beggars. Kim Deok-pal produces them slightly more often.</MUGB_SettingsPassingGroupFrequencyDesc>

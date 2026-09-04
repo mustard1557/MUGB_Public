@@ -37,7 +37,7 @@ namespace MUGB
 
                     if (conditioningScore > 0f && MUGBDefOf.MUGB_AteGoblinFoodPreferred != null)
                     {
-                        GoblinPheromonePreferenceUtility.NotifyPreferenceGoblinFoodEaten(ingester);
+                        GoblinPheromonePreferenceUtility.NotifyPheromoneExposure(ingester);
                         ingester.needs.mood.thoughts.memories.TryGainMemory(MUGBDefOf.MUGB_AteGoblinFoodPreferred);
                     }
                     return;

@@ -17,7 +17,11 @@ namespace MUGB.Livestock
         {
             Prisoners,
             Slaves,
-            Marked
+            Marked,
+
+            // 종양 모판 전용 뷰입니다. 고기용 가축 흐름과 정보가 겹치지 않아 뷰를 나눕니다.
+            // 기존 세 뷰의 표 정의와 컬럼은 하나도 건드리지 않습니다.
+            Seedbeds
         }
 
         // 기본 뷰는 죄수입니다. 습격 직후 이 탭을 여는 것이 가장 잦고, 그때 필요한 것은
@@ -27,6 +31,11 @@ namespace MUGB.Livestock
         private PawnTable prisonerTable;
         private PawnTable slaveTable;
         private PawnTable markedTable;
+        private PawnTable seedbedTable;
+
+        // 모판 뷰에서 후보(아직 시술 안 한 여성 죄수/노예)를 함께 보여줄지.
+        // 라인이 자리를 잡고 나면 후보가 계속 보이는 것이 방해가 되므로 접을 수 있게 둡니다.
+        private bool seedbedShowCandidates = true;
 
         private const float TopRowHeight = 32f;
         private const float SummaryHeight = 24f;
@@ -58,6 +67,7 @@ namespace MUGB.Livestock
             prisonerTable?.SetDirty();
             slaveTable?.SetDirty();
             markedTable?.SetDirty();
+            seedbedTable?.SetDirty();
         }
 
         private PawnTable CurrentTable
@@ -70,6 +80,8 @@ namespace MUGB.Livestock
                         return slaveTable ?? (slaveTable = MakeTable(MUGB_LivestockDefOf.MUGB_HumanLivestock_Slaves, SlavePawns));
                     case View.Marked:
                         return markedTable ?? (markedTable = MakeTable(MUGB_LivestockDefOf.MUGB_HumanLivestock_Marked, MarkedPawns));
+                    case View.Seedbeds:
+                        return seedbedTable ?? (seedbedTable = MakeTable(Seedbed.MUGB_SeedbedDefOf.MUGB_HumanLivestock_Seedbeds, SeedbedRows));
                     default:
                         return prisonerTable ?? (prisonerTable = MakeTable(MUGB_LivestockDefOf.MUGB_HumanLivestock_Prisoners, PrisonerPawns));
                 }
@@ -124,6 +136,12 @@ namespace MUGB.Livestock
                 .Where(p => MUGB_LivestockUtility.IsValidTarget(p) && MUGB_LivestockUtility.IsMarkedForSlaughter(p));
         }
 
+        // 모판(위) + 후보(아래)를 한 표에 담습니다.
+        private IEnumerable<Pawn> SeedbedRows()
+        {
+            return Seedbed.MUGB_SeedbedUtility.SeedbedRows(Map, seedbedShowCandidates);
+        }
+
         // ── 그리기 ───────────────────────────────────────────────────
         public override void DoWindowContents(Rect rect)
         {
@@ -142,6 +160,14 @@ namespace MUGB.Livestock
         private void DrawSummary(Rect rect)
         {
             Text.Font = GameFont.Small;
+
+            // 모판 뷰는 도축 규율과 무관합니다. 종양은 아이템이라 인간형 도축 규율을
+            // 타지 않으므로, 규율이 없어도 이 줄이 붉게 뜨면 오해를 만듭니다.
+            if (view == View.Seedbeds)
+            {
+                DrawSeedbedSummary(rect);
+                return;
+            }
 
             // 규율이 없으면 이 기능 전체가 잠깁니다. 그 사실을 여기서 가장 먼저 알립니다.
             // 전에는 탭을 통째로 숨겨서 원인을 알 방법이 없었습니다.
@@ -174,16 +200,78 @@ namespace MUGB.Livestock
             Text.Font = GameFont.Small;
         }
 
+        private void DrawSeedbedSummary(Rect rect)
+        {
+            List<Pawn> seedbeds = Seedbed.MUGB_SeedbedUtility.SeedbedsOn(Map).ToList();
+            int gestating = seedbeds.Count(Seedbed.MUGB_SeedbedUtility.IsGestating);
+            int candidates = Seedbed.MUGB_SeedbedUtility.CandidatesOn(Map).Count();
+
+            GUI.color = new Color(0.8f, 0.8f, 0.8f);
+            string text = "MUGB_TabSeedbedSummary".Translate(
+                seedbeds.Count, gestating, seedbeds.Count - gestating, candidates);
+
+            // 경고는 하나만 띄웁니다. 둘 다 걸린 상태에서 두 줄을 붙이면 요약이 길어져
+            // 정작 숫자가 안 읽힙니다. 먼저 막히는 쪽(연구)을 우선합니다.
+            string warning = null;
+            if (!Seedbed.MUGB_SeedbedUtility.SeedbedSurgeryResearched())
+            {
+                warning = "MUGB_TabSeedbedNoResearch".Translate();
+            }
+            else if (seedbeds.Count > 0 && !AnyActivatorSurgeonAvailable())
+            {
+                // 고블린 남성이 하나도 없으면 활성화액 주입을 아무도 수행할 수 없습니다.
+                // 계획서는 쌓이는데 아무도 오지 않는 상황이라 원인을 여기서 알립니다.
+                warning = "MUGB_TabSeedbedNoSurgeon".Translate();
+            }
+
+            if (warning != null)
+            {
+                GUI.color = ColorLibrary.Orange;
+                text = text + "   " + warning;
+            }
+
+            Widgets.Label(rect, text);
+            GUI.color = Color.white;
+        }
+
+        private static bool AnyActivatorSurgeonAvailable()
+        {
+            Map map = Map;
+            if (map == null)
+            {
+                return false;
+            }
+
+            return map.mapPawns.FreeColonistsAndPrisonersSpawned
+                .Any(p => p != null && p.gender == Gender.Male && GoblinUtility.IsGoblin(p));
+        }
+
         private void DrawTopRow(Rect rect)
         {
             float x = rect.x;
             x = DrawViewButton(rect, x, View.Prisoners, "MUGB_TabViewPrisoners");
             x = DrawViewButton(rect, x, View.Slaves, "MUGB_TabViewSlaves");
-            DrawViewButton(rect, x, View.Marked, "MUGB_TabViewMarked");
+            x = DrawViewButton(rect, x, View.Marked, "MUGB_TabViewMarked");
+            DrawViewButton(rect, x, View.Seedbeds, "MUGB_TabViewSeedbeds");
 
             // [자동 도축]은 노예 뷰에서만 띄웁니다. 죄수는 자동 상한 규칙 대상이 아니고
             // '고기용 가축' 처우로 들어옵니다(설계지침 7.3).
             float right = rect.xMax;
+
+            if (view == View.Seedbeds)
+            {
+                Rect toggleRect = new Rect(right - 150f, rect.y, 150f, rect.height - 4f);
+                if (Widgets.ButtonText(toggleRect, seedbedShowCandidates
+                        ? "MUGB_TabSeedbedHideCandidates".Translate()
+                        : "MUGB_TabSeedbedShowCandidates".Translate()))
+                {
+                    seedbedShowCandidates = !seedbedShowCandidates;
+                    seedbedTable?.SetDirty();
+                }
+
+                return;
+            }
+
             if (view == View.Slaves)
             {
                 Rect autoRect = new Rect(right - 150f, rect.y, 150f, rect.height - 4f);

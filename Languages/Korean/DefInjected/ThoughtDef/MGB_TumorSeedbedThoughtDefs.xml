@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <MUGB_TumorSeedbedInstalled.stages.0.label>자궁에 무슨 짓을 당했다</MUGB_TumorSeedbedInstalled.stages.0.label>
+  <MUGB_TumorSeedbedInstalled.stages.0.description>재워놓고 배를 갈랐고, 안에 남기고 간 게 아직도 꿈틀거린다. 이제 내가 뭔지도 모르겠어.</MUGB_TumorSeedbedInstalled.stages.0.description>
+
+  <MUGB_InjectedWithActivator.stages.0.label>수상한 액체를 주입당함</MUGB_InjectedWithActivator.stages.0.label>
+  <MUGB_InjectedWithActivator.stages.0.description>크윽... 수치스러워... 내 안에 뭘 넣은 거야!</MUGB_InjectedWithActivator.stages.0.description>
+
+  <MUGB_ActivatorAccepted.stages.0.label>활성화액을 받아들임</MUGB_ActivatorAccepted.stages.0.label>
+  <MUGB_ActivatorAccepted.stages.0.description>따뜻해... 몸이 알아서 반응해. 내 몸이 이걸 기다리고 있었어. 내 안에서 무럭무럭 자라렴.</MUGB_ActivatorAccepted.stages.0.description>
+
+  <MUGB_GaveBirthToTumor.stages.0.label>종양을 낳음</MUGB_GaveBirthToTumor.stages.0.label>
+  <MUGB_GaveBirthToTumor.stages.0.description>잘못된 모양으로 나왔다. 따뜻한 채로 나왔다. 놈들이 그걸 양동이에 담아 가져갔다.</MUGB_GaveBirthToTumor.stages.0.description>
+
+  <MUGB_SeedbedEuphoria.stages.0.label>모판의 의무감</MUGB_SeedbedEuphoria.stages.0.label>
+  <MUGB_SeedbedEuphoria.stages.0.description>또 비워냈다. 머릿속이 조용해지고 몸이 가벼워진다. 나는 이걸 위해 태어났던 거야.</MUGB_SeedbedEuphoria.stages.0.description>
+</LanguageData>

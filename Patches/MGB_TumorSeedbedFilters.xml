@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <!--
+    한국어 의도: 종양을 요리 계획서 기본 재료에서 빼둡니다.
+
+    MUGB_FleshTumor는 MUGB_RawGoblinFoodIngredientBase를 상속하므로
+    MUGB_HumanlikeMeatCategory(-> MeatRaw -> FoodRaw)에 들어가고 foodType이 Meat입니다.
+    그대로 두면 간단한 식사 계획서가 종양을 고기 재료로 집어가서, 도축해서 60을 뽑을
+    덩어리가 식사 한 끼로 사라집니다.
+
+    MGB_GoblinMeatDefaultFilters.xml이 인육·고블린 고기·내장 등에 쓰는 것과 같은 방식으로,
+    "인육이 기본 제외되는 자리"를 전부 훑어서 함께 넣습니다. 이렇게 하면 바닐라뿐 아니라
+    다른 모드가 추가한 요리 계획서나 보관 건물에도 같은 규칙이 따라갑니다.
+
+    기존 파일을 고치지 않고 별도 파일로 둔 이유: 이 기능만 통째로 되돌릴 수 있게 하려는
+    것입니다. 가드가 [not(li="MUGB_FleshTumor")]라 중복 적용되지 않습니다.
+
+    이것은 금지가 아니라 기본값입니다. 유저가 계획서에서 직접 켤 수 있습니다.
+  -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs//disallowedThingDefs[li="Meat_Human"][not(li="MUGB_FleshTumor")]</xpath>
+    <value>
+      <li>MUGB_FleshTumor</li>
+    </value>
+    <success>Always</success>
+  </Operation>
+
+</Patch>
