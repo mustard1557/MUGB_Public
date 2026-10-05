@@ -6,7 +6,7 @@ using Verse;
 
 namespace MUGB
 {
-    // 한국어 의도: 김덕팔은 랜디의 무작위성은 유지하되, 습격만 조금 더 자주 보내고 습격 점수를 10% 높인다.
+    // Keep random event timing; favor enemy raids and increase their points by 30%.
     public class StorytellerCompProperties_RandomMain_KimDeokPal : StorytellerCompProperties_RandomMain
     {
         public StorytellerCompProperties_RandomMain_KimDeokPal()
@@ -22,12 +22,26 @@ namespace MUGB
             foreach (FiringIncident firingIncident in base.MakeIntervalIncidents(target))
             {
                 // ThreatBig 전체가 아니라 실제 Raid worker에만 적용한다.
-                if (firingIncident?.def?.Worker is IncidentWorker_Raid && firingIncident.parms?.points > 0f)
+                if (firingIncident?.def?.Worker is IncidentWorker_RaidEnemy && firingIncident.parms?.points > 0f)
                 {
-                    firingIncident.parms.points *= 1.10f;
+                    firingIncident.parms.points *= 1.30f;
                 }
 
                 yield return firingIncident;
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(StorytellerComp), "IncidentChanceFinal")]
+    public static class StorytellerComp_IncidentChanceFinal_KimDeokPalPatch
+    {
+        public static void Postfix(StorytellerComp __instance, IncidentDef def, ref float __result)
+        {
+            if (__instance is StorytellerComp_RandomMain_KimDeokPal
+                && Find.Storyteller?.def == MUGBDefOf.MUGB_KimDeokPal
+                && def?.Worker is IncidentWorker_RaidEnemy)
+            {
+                __result *= 1.8f;
             }
         }
     }

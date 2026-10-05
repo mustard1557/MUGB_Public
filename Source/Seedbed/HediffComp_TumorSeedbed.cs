@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Verse;
 
 namespace MUGB.Seedbed
@@ -19,9 +20,10 @@ namespace MUGB.Seedbed
     //     임신이 걸리면 그 자리에서 종양 잉태로 전환됩니다.
     //
     // 틱 비용:
-    //   CompPostTickInterval은 이미 배치 호출이고, 여기서 다시 1시간(2500틱)에 한 번만
+    //   CompPostTickInterval은 이미 배치 호출이고, 여기서 다시 30분(1250틱)에 한 번만
     //   실제 검사를 합니다. 나머지 호출은 정수 비교 하나로 빠져나갑니다.
-    //   검사 자체도 폰의 헤디프 목록을 한 번 훑는 것뿐이고, 대상은 모판 폰뿐입니다.
+    //   검사 자체도 폰의 헤디프 목록 한 번 + 기록값 두 번 + 기억 목록 한 번이 전부이고,
+    //   대상은 모판 폰뿐입니다.
     public class HediffCompProperties_TumorSeedbed : HediffCompProperties
     {
         public HediffCompProperties_TumorSeedbed()
@@ -32,7 +34,10 @@ namespace MUGB.Seedbed
 
     public class HediffComp_TumorSeedbed : HediffComp
     {
-        private const int CheckIntervalTicks = 2500;
+        // 30분(게임 내)마다 확인합니다. 성행위 직후 반응이 눈에 보여야 하는데
+        // 1시간은 "안 되는 건가?"로 읽힐 만큼 깁니다. 검사 자체가 기록값 비교 몇 번이라
+        // 주기를 절반으로 줄여도 비용은 여전히 무시할 수준이고, 대상도 모판 폰뿐입니다.
+        private const int CheckIntervalTicks = 1250;
 
         // 기본값이 true인 이유: 이 수술의 목적 자체가 생산이므로, 수술을 해 두고
         // 스위치를 따로 켜야 한다면 한 단계가 그냥 번거롭기만 합니다.
@@ -43,6 +48,12 @@ namespace MUGB.Seedbed
 
         // 누적 산출량. 인간가축 탭이 "이 모판이 지금까지 얼마나 뽑았는지"를 보여주는 데 씁니다.
         private int totalTumors;
+
+        // 성행위 신호의 직전 값입니다. 이 값이 올라가면 성행위가 있었다는 뜻입니다.
+        // -1은 아직 기준값을 안 잡았다는 표시이고, 그때는 발동시키지 않고 기준만 잡습니다
+        // (수술 직후나 세이브 로드 직후에 과거 기록으로 잘못 발동하는 것을 막습니다).
+        private float lastCreampied = -1f;
+        private float lastSexCount = -1f;
 
         public bool AutoActivate
         {
@@ -63,6 +74,8 @@ namespace MUGB.Seedbed
             Scribe_Values.Look(ref autoActivate, "MUGB_seedbedAutoActivate", true);
             Scribe_Values.Look(ref nextCheckTick, "MUGB_seedbedNextCheckTick", -1);
             Scribe_Values.Look(ref totalTumors, "MUGB_seedbedTotalTumors", 0);
+            Scribe_Values.Look(ref lastCreampied, "MUGB_seedbedLastCreampied", -1f);
+            Scribe_Values.Look(ref lastSexCount, "MUGB_seedbedLastSexCount", -1f);
         }
 
         public override void CompPostTickInterval(ref float severityAdjustment, int delta)
@@ -82,6 +95,47 @@ namespace MUGB.Seedbed
             }
 
             ConvertForeignPregnancy(pawn);
+            CheckSexSignals(pawn);
+        }
+
+        // 성행위가 있었으면 종양 잉태를 시작합니다.
+        //
+        // 임신이 성사되기를 기다리지 않는 것이 핵심입니다. 모판의 난소는 배란 주기도
+        // 수정 확률도 타지 않는다는 것이 이 시스템의 전제이므로, 정자가 들어온 사실
+        // 하나로 충분합니다. 나이가 많아 임신률이 0이어도 종양은 생깁니다
+        // (산출량은 MUGB_SeedbedUtility.TumorCountRangeFor가 따로 줄입니다).
+        private void CheckSexSignals(Pawn pawn)
+        {
+            float creampied = MUGB_SeedbedUtility.CreampiedRecordOf(pawn);
+            float sexCount = MUGB_SeedbedUtility.SexCountRecordOf(pawn);
+
+            // 생리모드가 있으면 질내사정 기록만 봅니다. CountOfSex는 구강·항문 성교까지
+            // 세므로, 둘을 함께 보면 정확한 신호가 있는데도 부정확한 쪽 때문에
+            // 정자 없이 종양이 생깁니다. 폴백은 생리모드가 없을 때만 씁니다.
+            bool useCreampie = MUGB_SeedbedUtility.HasCreampieRecord;
+
+            bool baselineMissing = useCreampie ? lastCreampied < 0f : lastSexCount < 0f;
+            bool recordRose = useCreampie
+                ? creampied > lastCreampied
+                : sexCount > lastSexCount;
+
+            bool signalled =
+                !baselineMissing
+                && (recordRose || MUGB_SeedbedUtility.HadRecentVanillaLovin(pawn, CheckIntervalTicks));
+
+            lastCreampied = creampied;
+            lastSexCount = sexCount;
+
+            if (baselineMissing)
+            {
+                // 기준값만 잡고 이번에는 넘어갑니다.
+                return;
+            }
+
+            if (signalled)
+            {
+                MUGB_SeedbedUtility.TryStartGestation(pawn);
+            }
         }
 
         // 외부 임신을 종양 잉태로 갈아끼웁니다.
@@ -96,14 +150,16 @@ namespace MUGB.Seedbed
                 return;
             }
 
-            Hediff foreign = null;
-            for (int i = 0; i < hediffs.Count; i++)
+            // 한 번에 전부 걷습니다. 예전에는 첫 번째 하나만 지우고 빠져나가서,
+            // 임신 헤디프가 둘 이상 붙는 경우 시간당 하나씩만 정리되었습니다.
+            // 뒤에서부터 도는 이유는 목록에서 지우면서 순회하기 때문입니다.
+            List<Hediff> foreign = null;
+            for (int i = hediffs.Count - 1; i >= 0; i--)
             {
                 Hediff hediff = hediffs[i];
                 if (hediff?.def != null && MUGB_SeedbedUtility.ForeignPregnancyDefs.Contains(hediff.def))
                 {
-                    foreign = hediff;
-                    break;
+                    (foreign ?? (foreign = new List<Hediff>())).Add(hediff);
                 }
             }
 
@@ -112,7 +168,11 @@ namespace MUGB.Seedbed
                 return;
             }
 
-            pawn.health.RemoveHediff(foreign);
+            for (int i = 0; i < foreign.Count; i++)
+            {
+                pawn.health.RemoveHediff(foreign[i]);
+            }
+
             MUGB_SeedbedUtility.TryStartGestation(pawn);
         }
 

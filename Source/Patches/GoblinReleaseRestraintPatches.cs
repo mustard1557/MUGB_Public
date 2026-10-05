@@ -8,69 +8,41 @@ using Verse.AI;
 namespace MUGB.Patches
 {
     /// <summary>
-    /// 고블린 기지 포로에게 걸린 MUGB_Restrained(구속) 헤디프를 플레이어가 풀어줄 수 있게 합니다.
+    /// 고블린 기지에서 MUGB가 추적하는 포로를 플레이어가 해방할 수 있게 합니다.
     ///
     /// 배경:
     /// - 고블린 기지는 BF 가구모드가 없을 때 포로를 말뚝에 묶은 것처럼 보이게 하려고
     ///   MUGB_Restrained를 부여합니다. 이 헤디프는 이동과 조작을 0으로 막습니다.
-    /// - 이 헤디프는 순수 데이터라 스스로 풀리지 않습니다. 원래는 포로의 소속이 고블린에서
-    ///   벗어날 때만(MUGB_TribalBasePrisonManager) 자동 제거됐는데, 그 전까지는 플레이어가
-    ///   직접 풀 방법이 없었습니다. 그래서 우클릭 명령을 추가합니다.
+    /// - BF가 있으면 BF 가구가 자체 구속 헤디프를 사용하지만, BF의 구속 해제는 바닐라 포로
+    ///   석방이 아닙니다. 따라서 물리적 구속 여부 대신 MUGB 기지 관리 목록으로 대상을 한정합니다.
     ///
     /// 동작:
-    /// - 묶인 포로에게 우클릭하면 "구속 풀기"가 뜨고, 지정한 폰이 다가가 잠깐 작업한 뒤
-    ///   헤디프를 제거합니다. 바닐라 "포로 잡기"와 같은 흐름이라, 풀어준 뒤에는 평소처럼
-    ///   포로로 데려가거나 석방할 수 있습니다.
+    /// - 관리 중인 포로에게 우클릭하면 "해방하기"가 뜹니다. 작업이 끝나면 MUGB/BF 구속을
+    ///   제거하고 바닐라 석방 흐름으로 맵 밖에 내보냅니다.
+    /// - Released 상태와 기존 관리 목록을 함께 표식으로 사용해, 떠나는 동안 플레이어와만
+    ///   상호 비적대가 됩니다. 맵을 나가면 목록에서도 제거됩니다.
     /// </summary>
     public static class GoblinRestraintUtility
     {
         public const int ReleaseInteractionTicks = 120;
 
-        private static readonly HashSet<string> KnownRestraintDefs = new HashSet<string>
-        {
-            "DDJY_PrisonerPole",
-            "DDJY_BindingCross",
-            "DDJY_Pillory",
-            "DDJY_BarCage",
-            "DDJY_RoundCage",
-            "DankPyon_LogColumn"
-        };
-
         public static HediffDef RestrainedDef => DefDatabase<HediffDef>.GetNamedSilentFail("MUGB_Restrained");
 
         public static bool IsRestrained(Pawn pawn)
         {
-            HediffDef def = RestrainedDef;
-            if (def != null && pawn?.health?.hediffSet?.HasHediff(def) == true)
-            {
-                return true;
-            }
-
+            // BF's own unbind job only removes its bed hediff; it does not release the prisoner.
+            // Keep MUGB's liberation option available for the exact captives tracked by the base.
             return IsManagedBasePrisoner(pawn)
-                && (HasBfRestraintHediff(pawn)
-                    || IsKnownRestraintBed(pawn?.ownership?.OwnedBed)
-                    || IsKnownRestraintBed(pawn?.CurrentBed()));
+                && pawn.IsPrisoner
+                && pawn.guest?.Released != true;
         }
 
-        private static bool IsManagedBasePrisoner(Pawn pawn)
+        internal static bool IsManagedBasePrisoner(Pawn pawn)
         {
             Map map = pawn?.MapHeld;
             return map != null
                 && (map.GetComponent<MUGB_MedievalBaseManager>()?.IsManagedPrisoner(pawn) == true
                     || map.GetComponent<MUGB_TribalBasePrisonManager>()?.IsManagedPrisoner(pawn) == true);
-        }
-
-        private static bool HasBfRestraintHediff(Pawn pawn)
-        {
-            HediffDef bondage = DefDatabase<HediffDef>.GetNamedSilentFail("DDJY_Hediff_BondageBed");
-            return bondage != null && pawn?.health?.hediffSet?.HasHediff(bondage) == true;
-        }
-
-        private static bool IsKnownRestraintBed(Building_Bed bed)
-        {
-            return bed != null
-                && (bed.GetType().FullName == "DDJY_BED.Building_BondageBed"
-                    || KnownRestraintDefs.Contains(bed.def?.defName ?? string.Empty));
         }
 
         // 풀어주는 폰이 실제로 작업을 수행할 수 있는지. 대상이 아니라 시전자 쪽 조건입니다.
@@ -110,13 +82,12 @@ namespace MUGB.Patches
 
         public static void ReleaseRestraint(Pawn target)
         {
-            HediffDef def = RestrainedDef;
-            if (target?.health == null)
+            if (target?.health == null || !IsManagedBasePrisoner(target))
             {
                 return;
             }
 
-            bool managedBasePrisoner = IsManagedBasePrisoner(target);
+            HediffDef def = RestrainedDef;
             HediffDef bondage = DefDatabase<HediffDef>.GetNamedSilentFail("DDJY_Hediff_BondageBed");
             foreach (Hediff hediff in target.health.hediffSet.hediffs
                 .Where(h => h.def == def || h.def == bondage)
@@ -132,21 +103,74 @@ namespace MUGB.Patches
             }
             target.ownership?.UnclaimBed();
 
-            if (!managedBasePrisoner)
+            if (!target.IsPrisoner || target.guest?.Released == true)
             {
                 return;
             }
 
-            Map map = target.MapHeld;
-            map?.GetComponent<MUGB_MedievalBaseManager>()?.NotifyPrisonerReleased(target);
-            map?.GetComponent<MUGB_TribalBasePrisonManager>()?.NotifyPrisonerReleased(target);
+            // RimWorld marks the pawn Released and immediately assigns an exit-map job.
+            // Keep it in the base's serialized captive list until ExitMap; that list is the
+            // precise, save-safe liberation marker and avoids adding another ticking hediff.
+            GenGuest.PrisonerRelease(target);
+        }
 
-            // Use RimWorld's normal prisoner release flow: player pawns are restored,
-            // while non-player captives leave the map for their original faction.
-            if (target.IsPrisoner && target.guest?.HostFaction != Faction.OfPlayer)
+        internal static bool IsLiberatedBaseCaptive(Pawn pawn)
+        {
+            // Released is checked first because hostility queries are hot and almost every pawn fails here.
+            return pawn?.guest?.Released == true
+                && IsManagedBasePrisoner(pawn);
+        }
+
+        internal static void ForgetManagedBasePrisoner(Pawn pawn)
+        {
+            Map map = pawn?.MapHeld;
+            if (map != null)
             {
-                GenGuest.PrisonerRelease(target);
+                map.GetComponent<MUGB_MedievalBaseManager>()?.NotifyPrisonerReleased(pawn);
+                map.GetComponent<MUGB_TribalBasePrisonManager>()?.NotifyPrisonerReleased(pawn);
             }
+        }
+    }
+
+    [HarmonyPatch(typeof(GenHostility), nameof(GenHostility.HostileTo), new[] { typeof(Thing), typeof(Thing) })]
+    public static class GenHostility_HostileToThings_LiberatedBaseCaptivePatch
+    {
+        public static bool Prefix(Thing a, Thing b, ref bool __result)
+        {
+            if ((a?.Faction?.IsPlayer == true && b is Pawn captiveB && GoblinRestraintUtility.IsLiberatedBaseCaptive(captiveB))
+                || (b?.Faction?.IsPlayer == true && a is Pawn captiveA && GoblinRestraintUtility.IsLiberatedBaseCaptive(captiveA)))
+            {
+                __result = false;
+                return false;
+            }
+
+            return true;
+        }
+    }
+
+    [HarmonyPatch(typeof(GenHostility), nameof(GenHostility.HostileTo), new[] { typeof(Thing), typeof(Faction) })]
+    public static class GenHostility_HostileToFaction_LiberatedBaseCaptivePatch
+    {
+        public static bool Prefix(Thing t, Faction fac, ref bool __result)
+        {
+            if (fac?.IsPlayer == true
+                && t is Pawn captive
+                && GoblinRestraintUtility.IsLiberatedBaseCaptive(captive))
+            {
+                __result = false;
+                return false;
+            }
+
+            return true;
+        }
+    }
+
+    [HarmonyPatch(typeof(Pawn), nameof(Pawn.ExitMap))]
+    public static class Pawn_ExitMap_ClearLiberatedBaseCaptivePatch
+    {
+        public static void Prefix(Pawn __instance)
+        {
+            GoblinRestraintUtility.ForgetManagedBasePrisoner(__instance);
         }
     }
 

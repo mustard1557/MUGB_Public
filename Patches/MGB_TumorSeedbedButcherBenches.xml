@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <!--
+    한국어 의도: 종양 도축을 "고기 도축이 되는 작업대" 전부에 붙입니다.
+
+    레시피의 recipeUsers에 작업대 목록을 직접 적지 않는 이유:
+      바닐라에서 도축이 되는 건물은 ButcherSpot(간이 도축 장소)과 TableButcher(도축대)
+      둘뿐이지만, 모드가 자기 도축대를 추가하면 그쪽은 목록에서 빠집니다.
+      실제로 미디블 오버홀의 DankPyon_ButchersBlock이 그런 경우입니다.
+
+    대신 "바닐라 도축 레시피(ButcherCorpseFlesh)를 이미 갖고 있는 작업대"를 찾아서 붙입니다.
+    도축대를 추가하는 모드는 거의 예외 없이 그 레시피를 자기 recipes에 담기 때문에,
+    이렇게 하면 바닐라 2개 + 미디블 오버홀 + 앞으로 켤 모드까지 자동으로 따라갑니다.
+    이 기능에서 계속 써온 "이름을 적지 말고 결과를 보라"는 방침과 같습니다.
+
+    확인한 대상 (2026-09-05 기준):
+      ButcherSpot            Core/Defs/ThingDefs_Buildings/Buildings_Production.xml
+      TableButcher           같은 파일
+      DankPyon_ButchersBlock 미디블 오버홀 1.6/Defs/ThingDefs_Buildings/Production/
+
+    고블린 조리대용 2종(MUGB_ButcherFleshTumorCookstation / MUGB_SavorFleshTumor)은
+    조리대 전용 수율이라 여기서 다루지 않습니다. 그쪽은 recipeUsers 그대로입니다.
+
+    [not(li="MUGB_ButcherFleshTumor")] 가드 덕분에 중복 적용되지 않습니다.
+  -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef/recipes[li="ButcherCorpseFlesh"][not(li="MUGB_ButcherFleshTumor")]</xpath>
+    <value>
+      <li>MUGB_ButcherFleshTumor</li>
+    </value>
+    <success>Always</success>
+  </Operation>
+
+</Patch>

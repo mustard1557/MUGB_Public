@@ -58,12 +58,11 @@
     <casualInterruptible>false</casualInterruptible>
   </JobDef>
 
-  <!-- 고블린 기지 포로에게 걸린 MUGB_Restrained(구속) 헤디프를 풀어주는 작업입니다.
-       포로에게 다가가 잠깐 작업한 뒤 헤디프를 제거합니다. -->
+  <!-- 고블린 기지에서 MUGB가 추적하는 포로를 구속에서 풀고 석방하는 작업입니다. -->
   <JobDef>
     <defName>MUGB_ReleaseRestraint</defName>
     <driverClass>MUGB.Patches.JobDriver_ReleaseRestraint</driverClass>
-    <reportString>releasing TargetA from restraints.</reportString>
+    <reportString>liberating TargetA.</reportString>
     <casualInterruptible>false</casualInterruptible>
   </JobDef>
 

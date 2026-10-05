@@ -15,5 +15,12 @@
       덮어써서 미디블판을 복원합니다. 나중에 읽는 폴더가 이깁니다.
     -->
     <li IfModActive="DankPyon.Medieval.Overhaul">Compatibility/MedievalOverhaul</li>
+    <!--
+      Sized Apparel이 켜져 있을 때만 읽는 폴더입니다. 종양 잉태 중 배가 불러오게 하는
+      def 하나씩만 들어 있고, SA가 없으면 폴더가 아예 로드되지 않아 아무 영향이 없습니다.
+      1세대와 2세대는 def 타입과 필드 표기가 달라 폴더를 나눴습니다.
+    -->
+    <li IfModActive="OTYOTY.SizedApparel">Compatibility/SizedApparel1</li>
+    <li IfModActive="OTYOTY.SizedApparel2">Compatibility/SizedApparel2</li>
   </v1.6>
 </loadFolders>

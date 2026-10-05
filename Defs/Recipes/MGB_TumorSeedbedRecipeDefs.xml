@@ -51,21 +51,46 @@
     <skillRequirements>
       <Medicine>4</Medicine>
     </skillRequirements>
+    <!--
+      약품은 특정 def가 아니라 Medicine 카테고리로 받습니다.
+
+      바닐라 수술(Anesthetize, RemoveBodyPart 등)이 전부 이 방식입니다. thingDefs로
+      MedicineHerbal을 콕 집으면 생약만 받게 되는데, 이 모드팩은 Odyssey가 켜져 있어
+      MUGB의 다른 레시피들은 생약을 실로캡으로 갈아끼웁니다
+      (Compatibility/Odyssey/Patches/MGB_OdysseyPsilocapRecipes.xml).
+      카테고리로 받으면 생약·공업 치료제·실로캡·미디블 오버홀 약품이 전부 통과하므로
+      그 호환 패치 자체가 필요 없어지고, 나중에 약품을 갈아끼우는 모드가 붙어도
+      여기가 혼자 어긋날 일이 없습니다.
+
+      개수가 1개인 이유: 불끈즙 1개를 만드는 데 이미 생약 4개가 들어갑니다
+      (MGB_RecipeDefs.xml의 MUGB_MakeSpermJuice). 불끈즙 2개면 약품 8개 상당이므로
+      수술대에서 또 2개를 받으면 이중 과금이 됩니다.
+
+      참고: 약품을 재료로 쓰는 수술은 환자의 의료 설정 등급으로 후보가 걸러집니다
+      (MedicalCareUtility.AllowsMedicine). 이것은 바닐라 수술 전부가 그런 정상 동작이므로
+      환자 의료 설정을 올리면 됩니다.
+    -->
     <ingredients>
       <li>
         <filter><thingDefs><li>MUGB_SpermJuice</li></thingDefs></filter>
         <count>2</count>
       </li>
       <li>
-        <filter><thingDefs><li>MedicineHerbal</li></thingDefs></filter>
-        <count>2</count>
+        <filter>
+          <categories>
+            <li>Medicine</li>
+          </categories>
+        </filter>
+        <count>1</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
       <thingDefs>
         <li>MUGB_SpermJuice</li>
-        <li>MedicineHerbal</li>
       </thingDefs>
+      <categories>
+        <li>Medicine</li>
+      </categories>
     </fixedIngredientFilter>
     <appliedOnFixedBodyParts>
       <li>Torso</li>
@@ -159,10 +184,12 @@
     <defName>MUGB_ButcherFleshTumor</defName>
     <label>butcher flesh tumor</label>
     <description>Break down a flesh tumor. There is no skeleton to work around, so it goes quickly.</description>
-    <recipeUsers>
-      <li>ButcherSpot</li>
-      <li>TableButcher</li>
-    </recipeUsers>
+    <!--
+      recipeUsers를 적지 않습니다. 대신 Patches/MGB_TumorSeedbedButcherBenches.xml이
+      "고기 도축이 되는 작업대"를 전부 찾아서 붙입니다. 여기에 목록을 적으면
+      바닐라 두 개만 잡히고 미디블 오버홀 도축대 같은 모드 작업대가 빠집니다.
+      양쪽에 다 적으면 계획서 목록에 같은 레시피가 두 번 뜹니다.
+    -->
     <products>
       <Meat_Goblin>60</Meat_Goblin>
       <MUGB_Ggut>6</MUGB_Ggut>

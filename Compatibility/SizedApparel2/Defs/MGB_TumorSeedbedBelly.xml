@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    한국어 의도: Sized Apparel 2세대용입니다. 내용은 1세대와 같지만 스키마가 다릅니다.
+
+      1세대: SizedApparel.SizedApparelHediffDef / <BodyPartOf> / isBodyPartHediff
+      2세대: SizedApparel.SA_AddonHediffDef     / <bodyPartOf>
+
+    타입 이름과 필드 대소문자가 둘 다 달라서 한 파일로 합칠 수 없습니다.
+    각각 LoadFolders.xml에서 해당 packageId가 켜져 있을 때만 읽힙니다.
+    (SA2가 RJW 임신에 쓰는 ModSupport/RJW/Defs/SA_HediffDef/RJW_Belly.xml과 같은 형식)
+  -->
+  <SizedApparel.SA_AddonHediffDef>
+    <defName>MUGB_TumorGestation</defName>
+    <bodyPartOf>Belly</bodyPartOf>
+  </SizedApparel.SA_AddonHediffDef>
+
+</Defs>

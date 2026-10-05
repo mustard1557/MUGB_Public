@@ -61,8 +61,11 @@
     <label>goblin punitive shooter</label>
     <combatPower>75</combatPower>
     <weaponMoney>260~650</weaponMoney>
+    <!-- 고블린 화약무기에서 Gun 태그를 뺐으므로(MGB_WeaponDefs.xml 참조) 여기서 직접 지정합니다.
+         토벌대는 노획한 고블린 총과 자기 산업 총을 함께 씁니다. -->
     <weaponTags>
       <li>Gun</li>
+      <li>MUGB_GoblinGunpowderBasic</li>
     </weaponTags>
     <disallowedTraits>
       <li>Brawler</li>
@@ -80,9 +83,12 @@
     <label>goblin hunter</label>
     <combatPower>62</combatPower>
     <weaponMoney>250~500</weaponMoney>
+    <!-- MedievalRangedDecent는 바닐라 무기가 0개인 태그라 고블린 석궁에서 뺐습니다.
+         노획 석궁은 MUGB_GoblinRangedMedieval로 직접 지정합니다. -->
     <weaponTags>
       <li>Gun</li>
-      <li>MedievalRangedDecent</li>
+      <li>MUGB_GoblinGunpowderBasic</li>
+      <li>MUGB_GoblinRangedMedieval</li>
     </weaponTags>
     <apparelMoney>450~900</apparelMoney>
     <disallowedTraits>
@@ -105,8 +111,10 @@
     <label>goblin hunter crossbowman</label>
     <combatPower>58</combatPower>
     <weaponMoney>200~420</weaponMoney>
+    <!-- MedievalRangedDecent만 두면 후보 무기가 0개라 맨손으로 나옵니다.
+         이 태그를 가진 바닐라 무기가 존재하지 않기 때문입니다. -->
     <weaponTags>
-      <li>MedievalRangedDecent</li>
+      <li>MUGB_GoblinRangedMedieval</li>
     </weaponTags>
     <apparelMoney>420~850</apparelMoney>
     <disallowedTraits>
@@ -125,8 +133,12 @@
     <label>goblin hunter musketeer</label>
     <combatPower>82</combatPower>
     <weaponMoney>260~650</weaponMoney>
+    <!-- 머스킷병은 노획한 고블린 화승총이 주무기입니다.
+         Basic(아쿼버스/핸드곤)을 함께 두는 이유는 예산 때문입니다. weaponMoney를 낮게 굴리면
+         화승총 하나만으로는 후보가 0개가 되어 맨손으로 나올 수 있습니다. -->
     <weaponTags>
-      <li>Gun</li>
+      <li>MUGB_GoblinGunpowderAdvanced</li>
+      <li>MUGB_GoblinGunpowderBasic</li>
     </weaponTags>
     <apparelMoney>550~1100</apparelMoney>
     <disallowedTraits>
@@ -145,9 +157,12 @@
     <label>goblin hunter captor</label>
     <combatPower>60</combatPower>
     <weaponMoney>180~450</weaponMoney>
+    <!-- 포획조는 고블린 포획 도구를 노획해 씁니다. -->
     <weaponTags>
       <li>MedievalMeleeDecent</li>
       <li>Gun</li>
+      <li>MUGB_GoblinGunpowderBasic</li>
+      <li>MUGB_GoblinCapture</li>
     </weaponTags>
     <apparelMoney>450~900</apparelMoney>
     <skills>
@@ -172,6 +187,7 @@
     <weaponTags>
       <li>Gun</li>
       <li>MedievalMeleeAdvanced</li>
+      <li>MUGB_GoblinGunpowderAdvanced</li>
     </weaponTags>
     <apparelMoney>1000~1800</apparelMoney>
     <apparelAllowHeadgearChance>0.9</apparelAllowHeadgearChance>
@@ -202,6 +218,7 @@
       <li>Gun</li>
       <li>SniperRifle</li>
       <li>MedievalMeleeAdvanced</li>
+      <li>MUGB_GoblinGunpowderAdvanced</li>
     </weaponTags>
     <apparelMoney>1200~2200</apparelMoney>
     <apparelAllowHeadgearChance>0.9</apparelAllowHeadgearChance>

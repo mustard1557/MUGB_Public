@@ -110,23 +110,112 @@
   </ThoughtDef>
 
   <!--
-    4단계 전용 반전 버프. 출산 시 종양 개수만큼 스택이 붙습니다.
+    4단계 도달 이후 출산할 때마다 붙는 보상입니다.
 
-    stackLimit이 4인 이유: 종양이 3~4개이므로 3으로 두면 4번째가 버려집니다.
-    지속 1.4일 / 주기 1.5일이라 0.1일의 공백이 생기는데, 4단계에서는 슬픔이
-    부여되지 않으므로 그 공백의 순 무드가 0입니다. 정신붕괴 판정이 돌지 않으면서
-    "출산 직전에 잠깐 제정신이 든다"는 연출만 남습니다.
+    처음에는 +15에 종양 개수만큼 스택(최대 4) = 최대 +60이었는데, 그때는 이것이
+    반전을 혼자 짊어지고 있었습니다. 지금은 MUGB_CarryingTumor의 5~9단계가
+    잉태 내내 +2~+9를 상시로 주므로 역할이 겹칩니다. 둘을 합치면 4단계 모판이
+    +70 근처가 되어 노예 신분이든 감방이든 굶주림이든 전부 덮어버립니다.
+
+    그래서 역할을 나눴습니다.
+      MUGB_CarryingTumor  : 잉태 내내 깔리는 상시 보상 (+2~+9)
+      MUGB_SeedbedEuphoria: 비워낸 순간의 보너스 (+10, 한 번)
+
+    스택과 종양 개수 연동을 뺀 이유: 개수는 이미 Fertility에 따라 산출량으로
+    갈리고 있어서, 무드까지 같은 축으로 흔들 필요가 없습니다. 스택이 하나면
+    "출산했다"는 사실만 깔끔하게 전달됩니다.
   -->
   <ThoughtDef>
     <defName>MUGB_SeedbedEuphoria</defName>
     <thoughtClass>Thought_Memory</thoughtClass>
     <durationDays>1.4</durationDays>
-    <stackLimit>4</stackLimit>
+    <stackLimit>1</stackLimit>
     <stages>
       <li>
         <label>the seedbed's purpose</label>
         <description>Emptied again. My head goes quiet and my body goes light. This is what I was made for.</description>
-        <baseMoodEffect>15</baseMoodEffect>
+        <baseMoodEffect>10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!--
+    잉태 중 상시 무드입니다.
+
+    단계가 10개인 이유: 0~4가 평상시, 5~9가 반전판입니다. 어느 쪽을 쓸지는
+    MUGB.Seedbed.ThoughtWorker_TumorGestation이 정합니다.
+      - 모판화 4단계 / RJW 무너짐 최종 / 피학성애자 -> 5~9
+      - 그 외                                      -> 0~4
+    사상을 둘로 쪼개지 않은 이유는 워커 쪽 주석에 적어두었습니다.
+
+    기억(Thought_Memory)이 아니라 상황 사상이라 헤디프가 사라지면 즉시 없어집니다.
+    출산하고 나면 그 자리에서 걷히고, 다음 주입까지의 공백에는 뜨지 않습니다.
+
+    평상시 폭을 작게 잡은 이유: 잉태는 주기의 대부분을 차지하므로 사실상 상시
+    페널티입니다. 여기에 고통 15%가 막판에 바닐라 '경미한 통증'(-5)을 부르고,
+    출산 슬픔과 주입 사상까지 겹칩니다. 4단계 도달 전 구간이 이 시스템의 유일한
+    위험 구간이라 그 골을 더 깊게 파지 않도록 -2에서 시작합니다.
+  -->
+  <ThoughtDef>
+    <defName>MUGB_CarryingTumor</defName>
+    <workerClass>MUGB.Seedbed.ThoughtWorker_TumorGestation</workerClass>
+    <validWhileDespawned>true</validWhileDespawned>
+    <developmentalStageFilter>Adult</developmentalStageFilter>
+    <nullifyingHediffs>
+      <li MayRequire="Ludeon.RimWorld.Anomaly">Inhumanized</li>
+    </nullifyingHediffs>
+    <stages>
+      <!-- 0~4: 평상시 -->
+      <li>
+        <label>something took root</label>
+        <description>Something has settled where a child would sit, and it is not a child. It is still small, but it has already made up its mind to stay.</description>
+        <baseMoodEffect>-2</baseMoodEffect>
+      </li>
+      <li>
+        <label>it keeps growing</label>
+        <description>Bigger than yesterday. Bigger than an hour ago. I can feel it growing while I try to sleep, so I do not sleep much.</description>
+        <baseMoodEffect>-3</baseMoodEffect>
+      </li>
+      <li>
+        <label>heavy with it</label>
+        <description>I cannot straighten up. It does not kick the way a baby kicks. It just quietly, steadily takes more room.</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+      <li>
+        <label>it wants out</label>
+        <description>It is working its way down. Something that was never once alive is forcing its way out of my body.</description>
+        <baseMoodEffect>-7</baseMoodEffect>
+      </li>
+      <li>
+        <label>expelling it</label>
+        <description>Please. Whatever it takes, just get it out. I do not want to know what it is anymore.</description>
+        <baseMoodEffect>-9</baseMoodEffect>
+      </li>
+      <!-- 5~9: 반전 (모판화 4단계 / 무너짐 최종 / 피학성애자) -->
+      <li>
+        <label>it took root again</label>
+        <description>Rooted again already. Good. That is where you belong.</description>
+        <baseMoodEffect>2</baseMoodEffect>
+      </li>
+      <li>
+        <label>it is growing well</label>
+        <description>Growing so fast. I can feel every bite I take going straight to you.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+      <li>
+        <label>pleasantly full</label>
+        <description>So heavy... and I love the weight of it. Full means useful. Full means they still have a reason to keep me.</description>
+        <baseMoodEffect>5</baseMoodEffect>
+      </li>
+      <li>
+        <label>it is coming</label>
+        <description>It is coming down. Just a little longer, little one. We will meet soon.</description>
+        <baseMoodEffect>7</baseMoodEffect>
+      </li>
+      <li>
+        <label>giving it up</label>
+        <description>Ahh... there it is... this is what I was made for. I will bear as many as you want.</description>
+        <baseMoodEffect>9</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>

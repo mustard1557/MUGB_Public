@@ -44,13 +44,13 @@
     <ingestible>
       <preferability>DesperateOnly</preferability>
     </ingestible>
-    <comps>
-      <li Class="CompProperties_Forbiddable" />
-      <li Class="CompProperties_Rottable">
-        <daysToRotStart>2</daysToRotStart>
-        <rotDestroys>true</rotDestroys>
-      </li>
-    </comps>
+    <!--
+      comps는 일부러 다시 선언하지 않습니다.
+      부모가 이미 Forbiddable + Rottable(2일, rotDestroys)을 갖고 있어 값이 똑같은데,
+      리스트 노드를 자식에서 다시 쓰면 상속 규칙에 따라 부모 것을 덮을지 이어붙일지가
+      갈립니다. 이어붙는 쪽이면 CompRottable이 두 개가 되어 부패가 이상하게 돕니다.
+      값이 같다면 아예 안 쓰는 것이 그 위험을 원천적으로 없앱니다.
+    -->
   </ThingDef>
 
 </Defs>

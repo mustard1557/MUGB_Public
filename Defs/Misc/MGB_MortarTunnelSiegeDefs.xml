@@ -22,6 +22,7 @@
 
   <PawnsArrivalModeDef>
     <defName>MUGB_GoblinMortarTunnelArrival</defName>
+    <canBeBackup>false</canBeBackup>
     <workerClass>MUGB.PawnsArrivalModeWorker_GoblinMortarTunnelSiege</workerClass>
     <selectionWeightCurve><points><li>(0, 1)</li></points></selectionWeightCurve>
     <pointsFactorCurve><points><li>(0, 1)</li></points></pointsFactorCurve>

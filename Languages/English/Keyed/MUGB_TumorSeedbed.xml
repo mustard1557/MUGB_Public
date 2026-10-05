@@ -10,15 +10,11 @@
   <MUGB_TabSeedbedSummary>seedbeds: {0} (gestating {1}, idle {2})   candidates: {3}</MUGB_TabSeedbedSummary>
   <MUGB_TabSeedbedNoSurgeon>No male goblin is available to inject activator.</MUGB_TabSeedbedNoSurgeon>
 
-  <MUGB_SeedbedColumnAuto>auto</MUGB_SeedbedColumnAuto>
   <MUGB_SeedbedColumnAutoTip>Automatically queue a tumor activator injection as soon as this seedbed finishes a birth. Turning this off stops the line after the current cycle.</MUGB_SeedbedColumnAutoTip>
-  <MUGB_SeedbedColumnStage>stage</MUGB_SeedbedColumnStage>
-  <MUGB_SeedbedColumnStatus>status</MUGB_SeedbedColumnStatus>
-  <MUGB_SeedbedColumnNext>due in</MUGB_SeedbedColumnNext>
-  <MUGB_SeedbedColumnYield>yield</MUGB_SeedbedColumnYield>
 
   <MUGB_SeedbedStatusGestating>gestating</MUGB_SeedbedStatusGestating>
   <MUGB_SeedbedStatusLabor>labor</MUGB_SeedbedStatusLabor>
+  <MUGB_SeedbedStatusFullTerm>full term</MUGB_SeedbedStatusFullTerm>
   <MUGB_SeedbedStatusPushing>pushing</MUGB_SeedbedStatusPushing>
   <MUGB_SeedbedStatusQueued>injection queued</MUGB_SeedbedStatusQueued>
   <MUGB_SeedbedStatusIdle>idle</MUGB_SeedbedStatusIdle>
@@ -26,7 +22,6 @@
   <MUGB_TabSeedbedNoResearch>Fleshcraft research is not finished, so no seedbed surgery can be queued.</MUGB_TabSeedbedNoResearch>
   <MUGB_TabSeedbedHideCandidates>Hide candidates</MUGB_TabSeedbedHideCandidates>
   <MUGB_TabSeedbedShowCandidates>Show candidates</MUGB_TabSeedbedShowCandidates>
-  <MUGB_SeedbedColumnConvert>seedbed</MUGB_SeedbedColumnConvert>
   <MUGB_SeedbedColumnConvertTip>Queue the tumor seedbed surgery for this pawn. This is permanent and cannot be undone once performed.</MUGB_SeedbedColumnConvertTip>
   <MUGB_SeedbedColumnConvertDone>Already a tumor seedbed.</MUGB_SeedbedColumnConvertDone>
   <MUGB_SeedbedStageTip>Seedbed degeneration. Each birth advances one stage.</MUGB_SeedbedStageTip>

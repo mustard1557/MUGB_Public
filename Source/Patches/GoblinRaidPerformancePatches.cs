@@ -17,7 +17,7 @@ namespace MUGB
             {
                 MUGBSettings settings = MUGBMod.Settings;
                 int value = IsKimDeokPalStorytellerActive
-                    ? settings?.kimDeokPalPawnLossAdaptationPercent ?? 50
+                    ? settings?.kimDeokPalPawnLossAdaptationPercent ?? 35
                     : settings?.pawnLossAdaptationPercent ?? 50;
                 return Mathf.Clamp(value, 0, 100);
             }
@@ -29,7 +29,7 @@ namespace MUGB
 
         public static bool ShouldAdjustPawnLossAdaptation(Pawn pawn, AdaptationEvent ev)
         {
-            if (PawnLossAdaptationPercent >= 100 || pawn?.RaceProps?.Humanlike != true)
+            if (pawn?.RaceProps?.Humanlike != true)
             {
                 return false;
             }
@@ -41,9 +41,22 @@ namespace MUGB
                 return false;
             }
 
-            return ev == AdaptationEvent.Died
+            bool supportedEvent = ev == AdaptationEvent.Downed
+                || ev == AdaptationEvent.Died
                 || ev == AdaptationEvent.Kidnapped
                 || ev == AdaptationEvent.LostBecauseMapClosed;
+            return supportedEvent && RetainedLossFactor(ev) < 1f;
+        }
+
+        public static float RetainedLossFactor(AdaptationEvent ev)
+        {
+            float factor = PawnLossAdaptationPercent / 100f;
+            if (ev == AdaptationEvent.Downed)
+            {
+                factor -= 0.10f;
+            }
+
+            return Mathf.Clamp01(factor);
         }
 
         public static float AdaptDays(StoryWatcher_Adaptation watcher)
@@ -76,17 +89,17 @@ namespace MUGB
         }
     }
 
-    [HarmonyPatch(typeof(StoryWatcher_Adaptation), nameof(StoryWatcher_Adaptation.Notify_PawnEvent))]
-    public static class StoryWatcher_Adaptation_NotifyPawnEvent_MUGBAdaptationPatch
+    [HarmonyPatch(typeof(StoryWatcher_Adaptation), "ResolvePawnEvent", new[] { typeof(Pawn), typeof(AdaptationEvent) })]
+    public static class StoryWatcher_Adaptation_ResolvePawnEvent_MUGBAdaptationPatch
     {
-        public static void Prefix(StoryWatcher_Adaptation __instance, Pawn p, AdaptationEvent ev, out float __state)
+        public static void Prefix(StoryWatcher_Adaptation __instance, Pawn __0, AdaptationEvent __1, out float __state)
         {
-            __state = GoblinRaidPerformanceUtility.ShouldAdjustPawnLossAdaptation(p, ev)
+            __state = GoblinRaidPerformanceUtility.ShouldAdjustPawnLossAdaptation(__0, __1)
                 ? GoblinRaidPerformanceUtility.AdaptDays(__instance)
                 : float.NaN;
         }
 
-        public static void Postfix(StoryWatcher_Adaptation __instance, float __state)
+        public static void Postfix(StoryWatcher_Adaptation __instance, AdaptationEvent __1, float __state)
         {
             if (float.IsNaN(__state))
             {
@@ -100,8 +113,8 @@ namespace MUGB
                 return;
             }
 
-            float vanillaFactor = GoblinRaidPerformanceUtility.PawnLossAdaptationPercent / 100f;
-            float restored = loss * (1f - vanillaFactor);
+            float retainedFactor = GoblinRaidPerformanceUtility.RetainedLossFactor(__1);
+            float restored = loss * (1f - retainedFactor);
             GoblinRaidPerformanceUtility.SetAdaptDays(__instance, after + restored);
         }
     }

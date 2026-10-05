@@ -10,8 +10,55 @@ namespace MUGB.Seedbed
     public static class MUGB_SeedbedUtility
     {
         // 출산당 종양 개수. 설계지침 5장.
+        //
+        // 임신 능력(Fertility)에 따라 산출이 갈립니다. 모판화가 난소를 폭주시키긴 하지만
+        // 배출할 난자 자체가 줄어든 몸에서 같은 양이 나오는 것은 어색하고, 무엇보다
+        // 나이를 아무 상관 없게 두면 아무 여자폰이나 넣으면 되어 후보를 고르는 판단이
+        // 사라집니다. 젊은 폰을 모판으로 쓸 이유를 남겨두는 쪽이 낫습니다.
+        //
+        //   Fertility  > 0.3   종양 3~4개   (가임기)
+        //   Fertility  > 0.1   종양 2~3개   (쇠퇴기)
+        //   그 이하            종양 1~2개   (폐경 이후 포함)
+        //
+        // 하한이 1인 것이 중요합니다. 0이 되면 주기는 돌았는데 아무것도 안 나오므로
+        // 유저가 고장으로 읽습니다. "폐경한 모판도 쓸 수는 있는데 효율이 반토막"이라는
+        // 읽히는 규칙으로 만듭니다.
         public const int MinTumorsPerBirth = 3;
         public const int MaxTumorsPerBirth = 4;
+
+        private const float FertileThreshold = 0.3f;
+        private const float DecliningThreshold = 0.1f;
+
+        // 나이·유전자·모드가 만든 임신 능력을 바닐라 Fertility 스탯 하나로 받습니다.
+        //
+        // 나이를 직접 읽지 않는 이유: RJW·생리모드·유전자가 전부 이 스탯을 건드리므로,
+        // 스탯을 보면 어떤 임신 모드를 쓰든 그쪽 수치를 자동으로 따라갑니다. 아무 모드가
+        // 없어도 바닐라 Biotech의 나이 곡선이 그대로 반영됩니다. 나이를 직접 계산하면
+        // 그 모드들과 따로 놀게 되고, 생리모드의 폐경 헤디프를 이름으로 잡으러 가야 해서
+        // 지금까지 피해온 결합이 도로 생깁니다.
+        //
+        // 틱 비용은 없습니다. 출산 처리에서 1.5일에 한 번 읽을 뿐이고,
+        // GetStatValue는 캐시된 조회입니다.
+        public static void TumorCountRangeFor(Pawn pawn, out int min, out int max)
+        {
+            float fertility = pawn?.GetStatValue(StatDefOf.Fertility) ?? 1f;
+
+            if (fertility > FertileThreshold)
+            {
+                min = MinTumorsPerBirth;
+                max = MaxTumorsPerBirth;
+            }
+            else if (fertility > DecliningThreshold)
+            {
+                min = 2;
+                max = 3;
+            }
+            else
+            {
+                min = 1;
+                max = 2;
+            }
+        }
 
         // 모판화 최종 단계. 이 단계에서 무드가 반전됩니다.
         public const float FinalDegenerationSeverity = 4f;
@@ -52,7 +99,7 @@ namespace MUGB.Seedbed
                         (def.hediffClass != null && typeof(Hediff_Pregnant).IsAssignableFrom(def.hediffClass))
                         || def.defName.IndexOf("Pregnan", System.StringComparison.OrdinalIgnoreCase) >= 0;
 
-                    if (looksLikePregnancy)
+                    if (looksLikePregnancy && !IsPregnancyNameFalsePositive(def.defName))
                     {
                         foreignPregnancyDefs.Add(def);
                     }
@@ -60,6 +107,119 @@ namespace MUGB.Seedbed
 
                 return foreignPregnancyDefs;
             }
+        }
+
+        // 이름에 Pregnan이 들어가지만 임신 자체가 아닌 헤디프들입니다.
+        //
+        // 특히 바닐라 PregnancyLabor / PregnancyLaborPushing이 문제입니다. 이것들은
+        // 임신이 아니라 진통 단계인데, 걸러내지 않으면 진통 중인 폰이 모판이 되는 순간
+        // 진통만 뜯겨나가고 바닐라 출산 흐름이 중간에 끊깁니다.
+        //
+        // 이름 기반 판별의 한계는 인정하고 씁니다. 대안은 남의 모드 타입을 리플렉션으로
+        // 잡는 것인데 그쪽이 훨씬 잘 깨집니다. 오탐이 하나 더 발견되면 이 목록에 추가하면 됩니다.
+        private static bool IsPregnancyNameFalsePositive(string defName)
+        {
+            return defName.IndexOf("Labor", System.StringComparison.OrdinalIgnoreCase) >= 0
+                || defName.IndexOf("Ended", System.StringComparison.OrdinalIgnoreCase) >= 0
+                || defName.IndexOf("Terminated", System.StringComparison.OrdinalIgnoreCase) >= 0
+                || defName.IndexOf("Attitude", System.StringComparison.OrdinalIgnoreCase) >= 0
+                || defName.IndexOf("Mood", System.StringComparison.OrdinalIgnoreCase) >= 0
+                || defName.IndexOf("Unwanted", System.StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+        // ── 성행위 신호 ──────────────────────────────────────────────
+        //
+        // 종양 잉태의 트리거는 "임신이 성사됐는가"가 아니라 "성행위가 있었는가"입니다.
+        //
+        // 처음에는 임신 헤디프가 붙는 것을 기다렸는데, 그건 설계와 정반대였습니다.
+        // 설계지침 4장은 "착상 확률 100%, 배란 주기·수정 확률 롤을 전부 건너뛴다"인데,
+        // 임신 헤디프를 기다리면 그 롤을 전부 통과해야만 종양이 생깁니다. 모판은
+        // 나이가 많거나 배란기가 아닌 경우가 흔해서, 질내사정을 해도 아무 일도
+        // 일어나지 않았습니다. 폭주한 난소라는 설정 자체가 무의미해집니다.
+        //
+        // 남의 어셈블리를 참조하지 않는다는 원칙은 유지합니다. 세 경로 모두
+        // 바닐라 자료구조만 읽어서 판별합니다.
+        //
+        //   생리모드 : RecordDef "AmountofCreampied" - 자궁에 정액이 들어간 양.
+        //              질내사정에만 오르므로 가장 정확한 신호입니다.
+        //              (HediffComp_Menstruation.CumIn -> records.AddTo)
+        //   RJW      : RecordDef "CountOfSex" - 생리모드가 없을 때의 폴백입니다.
+        //              (AfterSexUtility -> records.Increment)
+        //   바닐라   : ThoughtDef "GotSomeLovin" 기억의 나이. 사랑을 나눔이 끝나면
+        //              붙으므로, 방금 붙은 것이면 직전에 성행위가 있었다는 뜻입니다.
+        //
+        // 바닐라 쪽을 JobDriver_Lovin 패치로 하지 않은 이유: 그 클래스가 완료 시점에
+        // 실행하는 것은 MakeNewToils 안의 람다(b__12_1 같은 것)뿐이라, 패치하면
+        // 게임 빌드가 바뀔 때마다 이름이 흔들립니다. 기억을 읽는 쪽이 훨씬 안정적입니다.
+        private static bool sexSignalDefsResolved;
+        private static RecordDef creampiedRecord;
+        private static RecordDef sexCountRecord;
+        private static ThoughtDef lovinThought;
+
+        private static void ResolveSexSignalDefs()
+        {
+            if (sexSignalDefsResolved)
+            {
+                return;
+            }
+
+            sexSignalDefsResolved = true;
+            creampiedRecord = DefDatabase<RecordDef>.GetNamedSilentFail("AmountofCreampied");
+            sexCountRecord = DefDatabase<RecordDef>.GetNamedSilentFail("CountOfSex");
+            lovinThought = DefDatabase<ThoughtDef>.GetNamedSilentFail("GotSomeLovin");
+        }
+
+        // 생리모드가 켜져 있는지를 이 기록의 존재로 판별합니다.
+        public static bool HasCreampieRecord
+        {
+            get
+            {
+                ResolveSexSignalDefs();
+                return creampiedRecord != null;
+            }
+        }
+
+        public static float CreampiedRecordOf(Pawn pawn)
+        {
+            ResolveSexSignalDefs();
+            return creampiedRecord == null || pawn?.records == null
+                ? 0f
+                : pawn.records.GetValue(creampiedRecord);
+        }
+
+        public static float SexCountRecordOf(Pawn pawn)
+        {
+            ResolveSexSignalDefs();
+            return sexCountRecord == null || pawn?.records == null
+                ? 0f
+                : pawn.records.GetValue(sexCountRecord);
+        }
+
+        // 최근 maxAgeTicks 안에 사랑을 나눔이 끝났는지.
+        public static bool HadRecentVanillaLovin(Pawn pawn, int maxAgeTicks)
+        {
+            ResolveSexSignalDefs();
+            if (lovinThought == null)
+            {
+                return false;
+            }
+
+            List<Thought_Memory> memories = pawn?.needs?.mood?.thoughts?.memories?.Memories;
+            if (memories == null)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < memories.Count; i++)
+            {
+                Thought_Memory memory = memories[i];
+                if (memory != null && memory.def == lovinThought && memory.age <= maxAgeTicks)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         // RJW의 무너짐(FeelingBroken)입니다. 없으면 null이고 그래도 아무 문제 없습니다.
@@ -136,13 +296,14 @@ namespace MUGB.Seedbed
                 return;
             }
 
-            int count = Rand.RangeInclusive(MinTumorsPerBirth, MaxTumorsPerBirth);
+            TumorCountRangeFor(pawn, out int minTumors, out int maxTumors);
+            int count = Rand.RangeInclusive(minTumors, maxTumors);
             SpawnTumors(pawn, count);
             SeedbedCompOn(pawn)?.RecordDelivery(count);
 
             AdvanceDegeneration(pawn);
             RefreshLactation(pawn);
-            ApplyBirthMood(pawn, count);
+            ApplyBirthMood(pawn);
 
             // 기존 MUGB_GoblinBirthStrain은 일부러 부여하지 않습니다.
             // 그쪽 마지막 단계가 Consciousness setMax 0이라 모판화 4단계(-0.35)와 겹치면
@@ -153,6 +314,16 @@ namespace MUGB.Seedbed
                 pawn,
                 MessageTypeDefOf.NeutralEvent,
                 false);
+
+            // 자동 종부. 폴링 없이 여기 한 곳에서만 다음 시술을 예약합니다.
+            //
+            // 이 시점에는 잉태 헤디프가 아직 붙어 있습니다(제거는 체력 처리가 순회를
+            // 끝낸 뒤에 합니다). 그래서 잉태 중 검사를 건너뛰도록 알려줍니다.
+            HediffComp_TumorSeedbed seedbed = SeedbedCompOn(pawn);
+            if (seedbed != null && seedbed.AutoActivate)
+            {
+                TryQueueActivatorBill(pawn, ignoreCurrentGestation: true);
+            }
         }
 
         private static void SpawnTumors(Pawn pawn, int count)
@@ -224,7 +395,7 @@ namespace MUGB.Seedbed
         //
         // ThoughtDef.nullifyingHediffs로는 이 분기를 만들 수 없습니다. 그쪽은 헤디프의
         // 유무만 보고 단계는 못 봅니다. 그래서 부여 시점에 코드가 판단합니다.
-        private static void ApplyBirthMood(Pawn pawn, int tumorCount)
+        private static void ApplyBirthMood(Pawn pawn)
         {
             MemoryThoughtHandler memories = pawn?.needs?.mood?.thoughts?.memories;
             if (memories == null)
@@ -238,11 +409,10 @@ namespace MUGB.Seedbed
                 return;
             }
 
-            // 종양 개수만큼 스택. ThoughtDef의 stackLimit이 4라 4개까지 그대로 들어갑니다.
-            for (int i = 0; i < tumorCount; i++)
-            {
-                memories.TryGainMemory(MUGB_SeedbedDefOf.MUGB_SeedbedEuphoria);
-            }
+            // 출산 1회당 한 번만 붙입니다. 종양 개수만큼 쌓던 것을 되돌린 이유는
+            // ThoughtDef 쪽 주석에 적어두었습니다 - 잉태 사상이 이미 상시 보상을
+            // 주고 있어서 여기까지 개수로 부풀리면 4단계 모판이 무적이 됩니다.
+            memories.TryGainMemory(MUGB_SeedbedDefOf.MUGB_SeedbedEuphoria);
         }
 
         // 주입 시술을 받은 폰의 무드. 반전 조건이 맞으면 디버프 대신 버프가 붙습니다.
@@ -277,7 +447,7 @@ namespace MUGB.Seedbed
 
         // 출산 직후에 다음 시술을 예약합니다. 폴링이 아니라 이벤트 구동이므로
         // 이 함수 밖에서는 아무것도 돌지 않습니다.
-        public static void TryQueueActivatorBill(Pawn pawn)
+        public static void TryQueueActivatorBill(Pawn pawn, bool ignoreCurrentGestation = false)
         {
             RecipeDef recipe = MUGB_SeedbedDefOf.MUGB_InjectTumorActivator;
             if (recipe == null || pawn?.health?.surgeryBills == null)
@@ -285,17 +455,51 @@ namespace MUGB.Seedbed
                 return;
             }
 
-            if (!IsSeedbed(pawn) || IsGestating(pawn))
+            if (!IsSeedbed(pawn) || (!ignoreCurrentGestation && IsGestating(pawn)))
             {
                 return;
             }
 
-            if (HasActivatorBill(pawn))
+            TryAddSurgeryBill(pawn, recipe, ignoreCurrentGestation);
+        }
+
+        // 수술 계획서는 반드시 대상 부위를 함께 지정해야 합니다.
+        //
+        // new Bill_Medical(recipe, null)만으로 넣으면 Part가 null인 채로 들어가고,
+        // 부위를 대상으로 하는 레시피(appliedOnFixedBodyParts가 있으면 기본값이 그렇습니다)에서는
+        // 그 계획서가 유효하지 않아 곧바로 정리되어 사라집니다. UI에서는 "체크했는데 즉시
+        // 풀린다"로 보입니다. 재료 부족이나 구속 상태와는 무관합니다 - 재료가 없는 계획서는
+        // 경고만 달고 그대로 남습니다.
+        //
+        // 부위는 레시피 워커에게 물어봅니다. 그러면 자격 판정(이미 모판인지, 잉태 중인지)이
+        // 계획서 생성과 같은 코드 한 곳에서만 정의되고, 자격이 없으면 부위가 비어 돌아오므로
+        // 애초에 계획서가 만들어지지 않습니다.
+        private static bool TryAddSurgeryBill(Pawn pawn, RecipeDef recipe, bool forceTorso = false)
+        {
+            if (pawn?.health?.surgeryBills == null || recipe?.Worker == null)
             {
-                return;
+                return false;
             }
 
-            pawn.health.surgeryBills.AddBill(new Bill_Medical(recipe, null));
+            if (HasBillOf(pawn, recipe))
+            {
+                return true;
+            }
+
+            // 출산 직후 예약처럼 워커가 아직 자격 없다고 답하는 순간이 있습니다
+            // (잉태 헤디프 제거가 이 틱 뒤로 밀려 있어서). 그때만 몸통을 직접 찾습니다.
+            BodyPartRecord part = forceTorso
+                ? TorsoOf(pawn)
+                : recipe.Worker.GetPartsToApplyOn(pawn, recipe).FirstOrDefault();
+            if (part == null)
+            {
+                return false;
+            }
+
+            Bill_Medical bill = new Bill_Medical(recipe, null);
+            bill.Part = part;
+            pawn.health.surgeryBills.AddBill(bill);
+            return true;
         }
 
         public static bool HasActivatorBill(Pawn pawn)
@@ -343,11 +547,7 @@ namespace MUGB.Seedbed
 
             if (wanted)
             {
-                if (!HasSeedbedSurgeryBill(pawn))
-                {
-                    stack.AddBill(new Bill_Medical(recipe, null));
-                }
-
+                TryAddSurgeryBill(pawn, recipe);
                 return;
             }
 
@@ -377,6 +577,12 @@ namespace MUGB.Seedbed
             }
 
             return false;
+        }
+
+        private static BodyPartRecord TorsoOf(Pawn pawn)
+        {
+            return pawn?.health?.hediffSet?.GetNotMissingParts()
+                .FirstOrDefault(part => part?.def?.defName == "Torso");
         }
 
         public static HediffComp_TumorSeedbed SeedbedCompOn(Pawn pawn)

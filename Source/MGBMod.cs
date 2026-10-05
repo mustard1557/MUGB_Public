@@ -85,7 +85,7 @@ namespace MUGB
 
         public override void DoSettingsWindowContents(Rect inRect)
         {
-            Rect viewRect = new Rect(0f, 0f, inRect.width - 16f, 1340f);
+            Rect viewRect = new Rect(0f, 0f, inRect.width - 16f, 1440f);
             Widgets.BeginScrollView(inRect, ref settingsScrollPosition, viewRect);
             Listing_Standard listing = new Listing_Standard();
             listing.Begin(viewRect);
@@ -110,6 +110,16 @@ namespace MUGB
                 ref Settings.enableNonGoblinGoblinGearMoodPenalty,
                 "MUGB_SettingsEnableNonGoblinGoblinGearMoodPenaltyDesc".Translate());
             if (oldEnableNonGoblinGoblinGearMoodPenalty != Settings.enableNonGoblinGoblinGearMoodPenalty)
+            {
+                Settings.Write();
+            }
+
+            int oldNonGoblinGoblinWeaponWeightPercent = Settings.nonGoblinGoblinWeaponWeightPercent;
+            listing.Label("MUGB_SettingsNonGoblinGoblinWeaponWeightLabel".Translate(Settings.nonGoblinGoblinWeaponWeightPercent));
+            Settings.nonGoblinGoblinWeaponWeightPercent = Mathf.RoundToInt(
+                listing.Slider(Settings.nonGoblinGoblinWeaponWeightPercent, 0f, 100f) / 5f) * 5;
+            listing.Label("MUGB_SettingsNonGoblinGoblinWeaponWeightDesc".Translate());
+            if (oldNonGoblinGoblinWeaponWeightPercent != Settings.nonGoblinGoblinWeaponWeightPercent)
             {
                 Settings.Write();
             }
@@ -144,11 +154,12 @@ namespace MUGB
             if (listing.ButtonText("MUGB_KimDeokPalPawnLossAdaptationButton".Translate(Settings.kimDeokPalPawnLossAdaptationPercent)))
             {
                 Settings.kimDeokPalPawnLossAdaptationPercent = Settings.kimDeokPalPawnLossAdaptationPercent == 0
-                    ? 50
-                    : (Settings.kimDeokPalPawnLossAdaptationPercent == 50 ? 100 : 0);
+                    ? 35
+                    : (Settings.kimDeokPalPawnLossAdaptationPercent == 35 ? 50
+                        : (Settings.kimDeokPalPawnLossAdaptationPercent == 50 ? 100 : 0));
             }
             listing.Label("MUGB_KimDeokPalPawnLossAdaptationDescription".Translate());
-            // 한국어 참고: 김덕팔 스토리텔러 전용 정착민/노예 손실 습격 완화값. 0/50/100% 중 선택.
+            // Kim Deok-pal loss relief: preserve existing choices and add the 35% default.
             if (oldKimDeokPalPawnLossAdaptationPercent != Settings.kimDeokPalPawnLossAdaptationPercent)
             {
                 Settings.Write();
@@ -195,6 +206,16 @@ namespace MUGB
                 ref Settings.enableGoblinCompositeRaids,
                 "MUGB_SettingsEnableGoblinCompositeRaidsDesc".Translate());
             if (oldEnableGoblinCompositeRaids != Settings.enableGoblinCompositeRaids)
+            {
+                Settings.Write();
+            }
+
+            bool oldEnableGoblinTunnelRaids = Settings.enableGoblinTunnelRaids;
+            listing.CheckboxLabeled(
+                "MUGB_SettingsEnableGoblinTunnelRaidsLabel".Translate(),
+                ref Settings.enableGoblinTunnelRaids,
+                "MUGB_SettingsEnableGoblinTunnelRaidsDesc".Translate());
+            if (oldEnableGoblinTunnelRaids != Settings.enableGoblinTunnelRaids)
             {
                 Settings.Write();
             }
@@ -3084,11 +3105,16 @@ namespace MUGB
         public bool addonFollowHeadScale = true;
         public bool enableDraftedWeaponPoseOffsets = true;
         public bool enableNonGoblinGoblinGearMoodPenalty = true;
+        // 비고블린 세력이 고블린 무기를 뽑을 때의 추첨 무게 배수입니다(%).
+        // 100이면 바닐라와 동일(= 이 기능 끔), 15면 고블린 무기가 나올 확률이 1/6 남짓입니다.
+        // 자세한 배경은 Source/Patches/GoblinWeaponFactionLeakPatches.cs 를 보세요.
+        public int nonGoblinGoblinWeaponWeightPercent = 15;
         public int pawnLossAdaptationPercent = 50;
-        public int kimDeokPalPawnLossAdaptationPercent = 50;
+        public int kimDeokPalPawnLossAdaptationPercent = 35;
         public int passingGroupFrequencyPercent = 110;
         public bool enableGoblinSquadSystem = true;
         public bool enableGoblinCompositeRaids = true;
+        public bool enableGoblinTunnelRaids = true;
         public bool requireSlaveMarriagePheromonePreference = true;
         public bool enableFeminineTrait = true;
         public bool adjustFemaleBodyTypeChances = true;
@@ -3201,11 +3227,14 @@ namespace MUGB
             Scribe_Values.Look(ref enableDraftedWeaponPoseOffsets, "enableDraftedWeaponPoseOffsets", true);
             Scribe_Values.Look(ref enableNonGoblinGoblinGearMoodPenalty, "enableNonGoblinGoblinGearMoodPenalty", true);
             Scribe_Values.Look(ref pawnLossAdaptationPercent, "pawnLossAdaptationPercent", 50);
-            Scribe_Values.Look(ref kimDeokPalPawnLossAdaptationPercent, "kimDeokPalPawnLossAdaptationPercent", 50);
+            Scribe_Values.Look(ref kimDeokPalPawnLossAdaptationPercent, "kimDeokPalPawnLossAdaptationPercent", 35);
+            Scribe_Values.Look(ref nonGoblinGoblinWeaponWeightPercent, "nonGoblinGoblinWeaponWeightPercent", 15);
+            nonGoblinGoblinWeaponWeightPercent = Mathf.Clamp(nonGoblinGoblinWeaponWeightPercent, 0, 100);
             Scribe_Values.Look(ref passingGroupFrequencyPercent, "passingGroupFrequencyPercent", 110);
             passingGroupFrequencyPercent = Mathf.Clamp(passingGroupFrequencyPercent, 0, 200);
             Scribe_Values.Look(ref enableGoblinSquadSystem, "enableGoblinSquadSystem", true);
             Scribe_Values.Look(ref enableGoblinCompositeRaids, "enableGoblinCompositeRaids", true);
+            Scribe_Values.Look(ref enableGoblinTunnelRaids, "enableGoblinTunnelRaids", true);
             Scribe_Values.Look(ref requireSlaveMarriagePheromonePreference, "requireSlaveMarriagePheromonePreference", true);
             Scribe_Values.Look(ref enableFeminineTrait, "enableFeminineTrait", true);
             Scribe_Values.Look(ref adjustFemaleBodyTypeChances, "adjustFemaleBodyTypeChances", true);
@@ -3264,9 +3293,9 @@ namespace MUGB
                 {
                     pawnLossAdaptationPercent = 50;
                 }
-                if (kimDeokPalPawnLossAdaptationPercent != 0 && kimDeokPalPawnLossAdaptationPercent != 50 && kimDeokPalPawnLossAdaptationPercent != 100)
+                if (kimDeokPalPawnLossAdaptationPercent != 0 && kimDeokPalPawnLossAdaptationPercent != 35 && kimDeokPalPawnLossAdaptationPercent != 50 && kimDeokPalPawnLossAdaptationPercent != 100)
                 {
-                    kimDeokPalPawnLossAdaptationPercent = 50;
+                    kimDeokPalPawnLossAdaptationPercent = 35;
                 }
                 goblinSquadSoftCap = Mathf.Clamp(goblinSquadSoftCap, 1, 9);
                 goblinSquadHardCap = Mathf.Clamp(goblinSquadHardCap, goblinSquadSoftCap, 12);

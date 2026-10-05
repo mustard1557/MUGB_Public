@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +16,7 @@ namespace MUGB
         public override bool CanUseWith(IncidentParms parms, PawnGroupKindDef groupKind)
         {
             return base.CanUseWith(parms, groupKind)
+                && MUGBMod.Settings?.enableGoblinTunnelRaids != false
                 && parms.points >= 850f
                 && Squads.MUGB_SquadRaidUtility.CanUseGoblinTunnelWarfare(parms.faction)
                 && parms.target is Map map
@@ -32,7 +33,8 @@ namespace MUGB
     {
         public override bool CanUseWith(IncidentParms parms)
         {
-            return parms?.target is Map map
+            return MUGBMod.Settings?.enableGoblinTunnelRaids != false
+                && parms?.target is Map map
                 && parms.points >= 850f
                 && Squads.MUGB_SquadRaidUtility.CanUseGoblinTunnelWarfare(parms.faction)
                 && MUGB_GoblinMortarSiegeUtility.TryFindSiegeCenter(map, out _);
@@ -40,6 +42,8 @@ namespace MUGB
 
         public override bool TryResolveRaidSpawnCenter(IncidentParms parms)
         {
+            if (!MUGB_RaidArrivalGuard.IsRaid(parms, def))
+                return MUGB_RaidArrivalGuard.ResolvePeacefulArrival(parms);
             if (!(parms?.target is Map map) || !MUGB_GoblinMortarSiegeUtility.TryFindSiegeCenter(map, out IntVec3 center))
             {
                 return false;
@@ -51,6 +55,11 @@ namespace MUGB
 
         public override void Arrive(List<Pawn> pawns, IncidentParms parms)
         {
+            if (!MUGB_RaidArrivalGuard.IsRaid(parms, def))
+            {
+                MUGB_RaidArrivalGuard.ArrivePeacefully(pawns, parms);
+                return;
+            }
             Map map = (Map)parms.target;
             if (!MUGB_GoblinMortarSiegeUtility.TryFindSiegeCenter(map, out IntVec3 center))
             {

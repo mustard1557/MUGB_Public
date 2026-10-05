@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
   <MUGB_SettingsOpenVisualTuning>Open visual tuning</MUGB_SettingsOpenVisualTuning>
   <MUGB_SettingsEnableDraftedWeaponPoseOffsetsLabel>Use drafted goblin weapon pose adjustments</MUGB_SettingsEnableDraftedWeaponPoseOffsetsLabel>
   <MUGB_SettingsEnableDraftedWeaponPoseOffsetsDesc>When disabled, drafted pawns at rest use vanilla weapon positioning. Attack poses, spear thrusts, throws and charges are unchanged.</MUGB_SettingsEnableDraftedWeaponPoseOffsetsDesc>
   <MUGB_SettingsEnableNonGoblinGoblinGearMoodPenaltyLabel>Non-goblins dislike wearing goblin gear</MUGB_SettingsEnableNonGoblinGoblinGearMoodPenaltyLabel>
   <MUGB_SettingsEnableNonGoblinGoblinGearMoodPenaltyDesc>When disabled, the MUGB mood penalty for non-goblins wearing goblin gear is removed. Vanilla apparel thoughts are unchanged.</MUGB_SettingsEnableNonGoblinGoblinGearMoodPenaltyDesc>
+  <MUGB_SettingsNonGoblinGoblinWeaponWeightLabel>Goblin weapons on other factions: {0}%</MUGB_SettingsNonGoblinGoblinWeaponWeightLabel>
+  <MUGB_SettingsNonGoblinGoblinWeaponWeightDesc>How often non-goblin factions spawn carrying goblin weapons, relative to vanilla. 100% is vanilla behaviour, where goblin weapons make up most of the tribal and medieval weapon pools. Goblin pawns and the goblin hunter factions are never affected by this slider.</MUGB_SettingsNonGoblinGoblinWeaponWeightDesc>
   <MUGB_SettingsStorytellerHeader>Storyteller</MUGB_SettingsStorytellerHeader>
   <MUGB_SettingsPassingGroupFrequencyLabel>Passing group frequency: {0}%</MUGB_SettingsPassingGroupFrequencyLabel>
   <MUGB_SettingsPassingGroupFrequencyDesc>Adjusts the frequency of traveler groups and MUGB wandering beggars. Kim Deok-pal produces them slightly more often.</MUGB_SettingsPassingGroupFrequencyDesc>
@@ -15,6 +17,8 @@
   <MUGB_SettingsEnableGoblinSquadSystemDesc>Uses squad templates to compose regular goblin raids while preserving their selected raid strategy and arrival mode.</MUGB_SettingsEnableGoblinSquadSystemDesc>
   <MUGB_SettingsEnableGoblinCompositeRaidsLabel>Enable goblin combined-tactics raids</MUGB_SettingsEnableGoblinCompositeRaidsLabel>
   <MUGB_SettingsEnableGoblinCompositeRaidsDesc>Allows large goblin raids to split into a sapper force and a conventional assault force approaching from two directions.</MUGB_SettingsEnableGoblinCompositeRaidsDesc>
+  <MUGB_SettingsEnableGoblinTunnelRaidsLabel>Enable goblin tunnel raids</MUGB_SettingsEnableGoblinTunnelRaidsLabel>
+  <MUGB_SettingsEnableGoblinTunnelRaidsDesc>Allows goblin raids to arrive by digging tunnels that keep releasing reinforcement waves until destroyed. Turning this off only stops new tunnel raids; tunnels already on the map are unaffected.</MUGB_SettingsEnableGoblinTunnelRaidsDesc>
   <MUGB_SettingsCompatHeader>Mod compatibility</MUGB_SettingsCompatHeader>
   <MUGB_AllowFacialAnimationForGoblinsLabel>Allow Facial Animation on goblins</MUGB_AllowFacialAnimationForGoblinsLabel>
   <MUGB_AllowFacialAnimationForGoblinsDesc>Off by default. When off, goblins are excluded from [NL] Facial Animation's face replacement and keep their goblin faces. When on, Facial Animation replaces goblin faces with its humanlike animated faces, which may look broken.</MUGB_AllowFacialAnimationForGoblinsDesc>

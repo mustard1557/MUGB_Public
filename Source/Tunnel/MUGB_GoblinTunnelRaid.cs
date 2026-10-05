@@ -1,4 +1,4 @@
-using HarmonyLib;
+﻿using HarmonyLib;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -12,6 +12,37 @@ using Verse.Sound;
 
 namespace MUGB
 {
+    // One emergence wave from a cluster. Every squad that surfaced together shares a morale pool,
+    // so the whole wave breaks at once instead of squad by squad. Later waves start fresh.
+    public sealed class MUGB_GoblinTunnelCohort : IExposable
+    {
+        public int wave;
+        public int startTick;
+        public int pawnsGained;
+        public int pawnsLost;
+        public float fleeFraction = 0.5f;
+        public bool routed;
+        public bool dirty;
+        public List<Lord> lords = new List<Lord>();
+
+        public void ExposeData()
+        {
+            Scribe_Values.Look(ref wave, "wave");
+            Scribe_Values.Look(ref startTick, "startTick");
+            Scribe_Values.Look(ref pawnsGained, "pawnsGained");
+            Scribe_Values.Look(ref pawnsLost, "pawnsLost");
+            Scribe_Values.Look(ref fleeFraction, "fleeFraction", 0.5f);
+            Scribe_Values.Look(ref routed, "routed", false);
+            Scribe_Values.Look(ref dirty, "dirty", false);
+            Scribe_Collections.Look(ref lords, "lords", LookMode.Reference);
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                lords = lords ?? new List<Lord>();
+                lords.RemoveAll(lord => lord == null);
+            }
+        }
+    }
+
     public sealed class MUGB_GoblinTunnelCluster : IExposable
     {
         public int id;
@@ -21,8 +52,18 @@ namespace MUGB
         public int expectedTunnels;
         public int creationDeadlineTick;
         public bool warningSent;
+        public bool sharedMorale;
+        public List<MUGB_GoblinTunnelCohort> cohorts = new List<MUGB_GoblinTunnelCohort>();
         public Faction faction;
         public List<Building_GoblinTunnel> tunnels = new List<Building_GoblinTunnel>();
+
+        // 0.8.9 fields. Only read, so an in-flight raid keeps its morale instead of resetting to none.
+        private List<Lord> legacyLords;
+        private int legacyGained;
+        private int legacyLost;
+        private float legacyFleeFraction = 0.5f;
+        private bool legacyRetreating;
+        private int legacyMoraleStartTick;
 
         public void ExposeData()
         {
@@ -33,12 +74,46 @@ namespace MUGB
             Scribe_Values.Look(ref expectedTunnels, "expectedTunnels");
             Scribe_Values.Look(ref creationDeadlineTick, "creationDeadlineTick");
             Scribe_Values.Look(ref warningSent, "warningSent");
+            Scribe_Values.Look(ref sharedMorale, "sharedMorale", false);
+            Scribe_Collections.Look(ref cohorts, "cohorts", LookMode.Deep);
             Scribe_References.Look(ref faction, "faction");
             Scribe_Collections.Look(ref tunnels, "tunnels", LookMode.Reference);
-            if (Scribe.mode == LoadSaveMode.PostLoadInit && tunnels == null)
+            if (Scribe.mode == LoadSaveMode.LoadingVars)
             {
-                tunnels = new List<Building_GoblinTunnel>();
+                Scribe_Collections.Look(ref legacyLords, "lords", LookMode.Reference);
+                Scribe_Values.Look(ref legacyGained, "pawnsGained");
+                Scribe_Values.Look(ref legacyLost, "pawnsLost");
+                Scribe_Values.Look(ref legacyFleeFraction, "fleeFraction", 0.5f);
+                Scribe_Values.Look(ref legacyRetreating, "retreating", false);
+                Scribe_Values.Look(ref legacyMoraleStartTick, "moraleStartTick");
             }
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                tunnels = tunnels ?? new List<Building_GoblinTunnel>();
+                cohorts = cohorts ?? new List<MUGB_GoblinTunnelCohort>();
+                MigrateLegacyMorale();
+            }
+        }
+
+        private void MigrateLegacyMorale()
+        {
+            legacyLords?.RemoveAll(lord => lord == null);
+            if (cohorts.Count > 0 || legacyLords.NullOrEmpty())
+            {
+                legacyLords = null;
+                return;
+            }
+            cohorts.Add(new MUGB_GoblinTunnelCohort
+            {
+                wave = wave,
+                startTick = legacyMoraleStartTick,
+                pawnsGained = legacyGained,
+                pawnsLost = legacyLost,
+                fleeFraction = legacyFleeFraction,
+                routed = legacyRetreating,
+                lords = new List<Lord>(legacyLords)
+            });
+            legacyLords = null;
         }
     }
 
@@ -50,12 +125,14 @@ namespace MUGB
 
         private List<MUGB_GoblinTunnelCluster> clusters = new List<MUGB_GoblinTunnelCluster>();
         private int nextClusterId = 1;
+        private readonly Dictionary<Lord, MUGB_GoblinTunnelCohort> moraleByLord =
+            new Dictionary<Lord, MUGB_GoblinTunnelCohort>();
 
         public MUGB_GoblinTunnelClusterManager(Map map) : base(map)
         {
         }
 
-        public int CreateCluster(Faction faction, int expectedTunnels)
+        public int CreateCluster(Faction faction, int expectedTunnels, bool sharedMorale)
         {
             int now = Find.TickManager.TicksGame;
             int nextTick = now + MUGB_GoblinTunnelSpawner.EmergenceDelayMaxTicks + InitialSquadDelayTicks + RandomReinforcementDelay();
@@ -64,12 +141,110 @@ namespace MUGB
                 id = nextClusterId++,
                 faction = faction,
                 expectedTunnels = expectedTunnels,
+                // Wave-wide morale is a central-tunnel behavior. Edge tunnels keep vanilla per-squad flee only.
+                sharedMorale = sharedMorale && faction != null && faction.def.autoFlee && !faction.neverFlee,
                 creationDeadlineTick = now + MUGB_GoblinTunnelSpawner.EmergenceDelayMaxTicks + 600,
                 nextReinforcementTick = nextTick,
                 warningTick = nextTick - WarningLeadTicks
             };
             clusters.Add(cluster);
             return cluster.id;
+        }
+
+        internal void RegisterSquad(int clusterId, Lord lord)
+        {
+            MUGB_GoblinTunnelCluster cluster = FindCluster(clusterId);
+            if (cluster?.sharedMorale != true || lord == null || moraleByLord.ContainsKey(lord)) return;
+            MUGB_GoblinTunnelCohort cohort = CohortForCurrentWave(cluster);
+            cohort.lords.Add(lord);
+            moraleByLord.Add(lord, cohort);
+        }
+
+        // Squads that surface in the same wave share one pool. A wave that arrives after an earlier
+        // wave broke starts with fresh morale, which is what lets a raid keep pressing between waves.
+        private MUGB_GoblinTunnelCohort CohortForCurrentWave(MUGB_GoblinTunnelCluster cluster)
+        {
+            MUGB_GoblinTunnelCohort cohort = cluster.cohorts.FirstOrDefault(c => c.wave == cluster.wave);
+            if (cohort != null) return cohort;
+
+            int now = Find.TickManager.TicksGame;
+            cohort = new MUGB_GoblinTunnelCohort
+            {
+                wave = cluster.wave,
+                // Ignore losses while the squad is still climbing out of the ground. The opening wave
+                // also stages before it attacks, so it needs the longer grace.
+                startTick = now + MUGB_GoblinTunnelSpawner.EmergenceDelayMaxTicks + 60
+                    + (cluster.wave == 0 ? InitialSquadDelayTicks : 0),
+                fleeFraction = cluster.faction?.def.attackersDownPercentageRangeForAutoFlee.RandomInRange ?? 0.5f
+            };
+            cluster.cohorts.Add(cohort);
+            return cohort;
+        }
+
+        internal void NotifySquadChanged(Lord lord, int gained, int lost)
+        {
+            if (!moraleByLord.TryGetValue(lord, out MUGB_GoblinTunnelCohort cohort)) return;
+            cohort.pawnsGained += gained;
+            cohort.pawnsLost += lost;
+            cohort.dirty = true;
+            // Defer transitions until the current Lord notification has completely unwound.
+            // The existing cluster maintenance pass processes this flag.
+        }
+
+        private void UpdateMorale(MUGB_GoblinTunnelCluster cluster, int now)
+        {
+            if (!cluster.sharedMorale) return;
+            foreach (MUGB_GoblinTunnelCohort cohort in cluster.cohorts)
+            {
+                UpdateCohort(cluster, cohort, now);
+            }
+        }
+
+        private void UpdateCohort(MUGB_GoblinTunnelCluster cluster, MUGB_GoblinTunnelCohort cohort, int now)
+        {
+            if (cohort.routed || !cohort.dirty || now < cohort.startTick) return;
+            cohort.dirty = false;
+            if (!map.CanEverExit || cluster.faction == null || !cluster.faction.HostileTo(Faction.OfPlayer)
+                || cohort.pawnsGained == 0 || cohort.pawnsLost < cohort.pawnsGained * cohort.fleeFraction) return;
+
+            cohort.routed = true;
+            Pawn witness = null;
+            foreach (Lord lord in cohort.lords)
+            {
+                if (lord == null || !map.lordManager.lords.Contains(lord) || lord.faction != cluster.faction) continue;
+                LordToil flee = lord.Graph.lordToils.Find(toil => toil is LordToil_PanicFlee);
+                if (flee == null || lord.CurLordToil == flee) continue;
+                lord.GotoToil(flee);
+                QuestUtility.SendQuestTargetSignals(lord.questTags, "Fleeing", lord.Named("SUBJECT"));
+                witness = witness ?? lord.ownedPawns.FirstOrDefault(pawn => pawn != null && pawn.Spawned);
+            }
+            // Nobody left to run means the wave was wiped out, not routed. Stay quiet.
+            if (witness == null) return;
+            Messages.Message(
+                "MessageFightersFleeing".Translate(
+                    cluster.faction.def.pawnsPlural.CapitalizeFirst(), cluster.faction.Name),
+                new LookTargets(witness),
+                MessageTypeDefOf.NeutralEvent);
+        }
+
+        private bool HasActiveSquads(MUGB_GoblinTunnelCluster cluster)
+        {
+            if (!cluster.sharedMorale) return false;
+            bool any = false;
+            for (int c = cluster.cohorts.Count - 1; c >= 0; c--)
+            {
+                MUGB_GoblinTunnelCohort cohort = cluster.cohorts[c];
+                for (int i = cohort.lords.Count - 1; i >= 0; i--)
+                {
+                    Lord lord = cohort.lords[i];
+                    if (lord != null && map.lordManager.lords.Contains(lord)) continue;
+                    if (lord != null) moraleByLord.Remove(lord);
+                    cohort.lords.RemoveAt(i);
+                }
+                if (cohort.lords.Count > 0) any = true;
+                else if (cohort.routed) cluster.cohorts.RemoveAt(c);
+            }
+            return any;
         }
 
         public void RegisterTunnel(int clusterId, Building_GoblinTunnel tunnel)
@@ -110,10 +285,11 @@ namespace MUGB
             for (int i = clusters.Count - 1; i >= 0; i--)
             {
                 MUGB_GoblinTunnelCluster cluster = clusters[i];
+                UpdateMorale(cluster, now);
                 PruneDestroyed(cluster);
                 if (cluster.tunnels.Count == 0)
                 {
-                    if (now >= cluster.creationDeadlineTick)
+                    if (now >= cluster.creationDeadlineTick && !HasActiveSquads(cluster))
                     {
                         clusters.RemoveAt(i);
                     }
@@ -157,7 +333,7 @@ namespace MUGB
                     tunnel.CollapseAfterFinalWave();
                 }
                 PruneDestroyed(cluster);
-                if (cluster.tunnels.Count == 0 || cluster.wave >= 7)
+                if ((cluster.tunnels.Count == 0 || cluster.wave >= 7) && !HasActiveSquads(cluster))
                 {
                     clusters.RemoveAt(i);
                     continue;
@@ -173,11 +349,32 @@ namespace MUGB
         public override void ExposeData()
         {
             base.ExposeData();
+            if (Scribe.mode == LoadSaveMode.Saving)
+            {
+                foreach (MUGB_GoblinTunnelCluster cluster in clusters) HasActiveSquads(cluster);
+            }
             Scribe_Values.Look(ref nextClusterId, "nextClusterId", 1);
             Scribe_Collections.Look(ref clusters, "clusters", LookMode.Deep);
             if (Scribe.mode == LoadSaveMode.PostLoadInit && clusters == null)
             {
                 clusters = new List<MUGB_GoblinTunnelCluster>();
+            }
+        }
+
+        public override void FinalizeInit()
+        {
+            base.FinalizeInit();
+            moraleByLord.Clear();
+            foreach (MUGB_GoblinTunnelCluster cluster in clusters)
+            {
+                if (!cluster.sharedMorale) continue;
+                foreach (MUGB_GoblinTunnelCohort cohort in cluster.cohorts)
+                {
+                    foreach (Lord lord in cohort.lords)
+                    {
+                        if (lord != null) moraleByLord[lord] = cohort;
+                    }
+                }
             }
         }
 
@@ -369,7 +566,7 @@ namespace MUGB
             GenSpawn.Spawn(tunnel, loc, map, Rot4.North);
             if (clusterId <= 0)
             {
-                clusterId = map.GetComponent<MUGB_GoblinTunnelClusterManager>().CreateCluster(faction, 1);
+                clusterId = map.GetComponent<MUGB_GoblinTunnelClusterManager>().CreateCluster(faction, 1, sharedMorale: false);
             }
             tunnel.Initialize(clusterId, assignedPoints, edgeTunnel, largeTunnel);
             map.GetComponent<MUGB_GoblinTunnelClusterManager>().RegisterTunnel(clusterId, tunnel);
@@ -446,7 +643,7 @@ namespace MUGB
 
         public void ReleaseInitialForces(List<Pawn> initialSquad, List<int> squadSizes)
         {
-            int slaveCount = largeTunnel ? 5 : 2;
+            int slaveCount = largeTunnel ? 3 : 2;
             List<Pawn> slaves = GeneratePawns(DefDatabase<PawnKindDef>.GetNamedSilentFail("MUGB_GoblinKind_TunnelSlave"), slaveCount);
             if (slaves.Count > 0)
             {
@@ -522,7 +719,7 @@ namespace MUGB
             }
             PlayDiggingEffects();
             float factor = largeTunnel ? LargeReinforcementFactor : SmallReinforcementFactor;
-            int maxReinforcementSize = edgeTunnel ? 5 : 4;
+            int maxReinforcementSize = largeTunnel || edgeTunnel ? 5 : 4;
             List<PawnKindDef> kinds = Squads.MUGB_SquadRaidUtility.GenerateTunnelSquadKinds(
                 Faction,
                 assignedPoints * factor,
@@ -758,6 +955,7 @@ namespace MUGB
             }
 
             Lord lord = LordMaker.MakeNewLord(Faction, lordJob, Map);
+            Map.GetComponent<MUGB_GoblinTunnelClusterManager>().RegisterSquad(clusterId, lord);
             if (flyers.Count > 0)
             {
                 // Korean source intent: one tunnel wave is one squad. The whole squad jumps out together,
@@ -1025,6 +1223,7 @@ namespace MUGB
         public override bool CanUseWith(IncidentParms parms)
         {
             return base.CanUseWith(parms)
+                && MUGBMod.Settings?.enableGoblinTunnelRaids != false
                 && parms?.faction != null
                 && Squads.MUGB_SquadRaidUtility.CanUseGoblinTunnelWarfare(parms.faction)
                 && parms.target is Map map
@@ -1034,6 +1233,8 @@ namespace MUGB
 
         public override bool TryResolveRaidSpawnCenter(IncidentParms parms)
         {
+            if (!MUGB_RaidArrivalGuard.IsRaid(parms, def))
+                return MUGB_RaidArrivalGuard.ResolvePeacefulArrival(parms);
             Map map = (Map)parms.target;
             if (!TryFindTunnelCell(map, CenterTunnel, out IntVec3 cell))
             {
@@ -1046,6 +1247,11 @@ namespace MUGB
 
         public override void Arrive(List<Pawn> pawns, IncidentParms parms)
         {
+            if (!MUGB_RaidArrivalGuard.IsRaid(parms, def))
+            {
+                MUGB_RaidArrivalGuard.ArrivePeacefully(pawns, parms);
+                return;
+            }
             if (pawns.NullOrEmpty() || !(parms.target is Map map))
             {
                 return;
@@ -1071,7 +1277,7 @@ namespace MUGB
             }
 
             MUGB_GoblinTunnelClusterManager manager = map.GetComponent<MUGB_GoblinTunnelClusterManager>();
-            int clusterId = manager.CreateCluster(parms.faction, assignments.Count);
+            int clusterId = manager.CreateCluster(parms.faction, assignments.Count, CenterTunnel && !usedEdgeFallback);
             List<MUGB_GoblinTunnelSpawner> spawners = new List<MUGB_GoblinTunnelSpawner>();
             for (int i = 0; i < assignments.Count; i++)
             {
@@ -1112,7 +1318,10 @@ namespace MUGB
             return sizes;
         }
 
-        private static List<TunnelAssignment> BuildAssignments(List<Pawn> pawns, List<int> squadSizes, float raidPoints)
+        private const int LargeTunnelSquads = 4;
+        private const float PackedSmallTunnelBudgetCap = 600f;
+
+        private List<TunnelAssignment> BuildAssignments(List<Pawn> pawns, List<int> squadSizes, float raidPoints)
         {
             List<TunnelAssignment> squads = new List<TunnelAssignment>();
             int pawnIndex = 0;
@@ -1128,48 +1337,63 @@ namespace MUGB
                 squads.Add(assignment);
             }
 
-            int largeCount = RollLargeTunnelCount(raidPoints, squads.Count);
+            // One squad used to mean one tunnel, so a big raid opened a dozen holes and every hole was
+            // its own reinforcement tap. Pack squads into a bounded number of tunnels instead: the
+            // opening wave is unchanged, but the number of taps scales gently with raid size.
+            int largeCount = Mathf.Min(RollLargeTunnelCount(raidPoints, squads.Count), squads.Count / LargeTunnelSquads);
             List<TunnelAssignment> result = new List<TunnelAssignment>();
             int index = 0;
             for (int large = 0; large < largeCount; large++)
             {
-                const int squadsToMerge = 3;
-                if (squads.Count - index < squadsToMerge)
-                {
-                    break;
-                }
                 TunnelAssignment merged = new TunnelAssignment { Large = true };
-                for (int i = 0; i < squadsToMerge; i++, index++)
+                for (int i = 0; i < LargeTunnelSquads; i++, index++)
                 {
                     merged.Pawns.AddRange(squads[index].Pawns);
                     merged.SquadSizes.AddRange(squads[index].SquadSizes);
                     merged.Points += squads[index].Points;
                 }
-                merged.Points = Mathf.Clamp(merged.Points, 1250f, 1500f);
+                merged.Points = Mathf.Clamp(merged.Points, 1000f, 1800f);
                 result.Add(merged);
             }
-            while (index < squads.Count)
+
+            int remaining = squads.Count - index;
+            if (remaining > 0)
             {
-                result.Add(squads[index++]);
+                int smallTunnels = Mathf.Min(remaining, SmallTunnelLimit(raidPoints));
+                int perTunnel = Mathf.CeilToInt(remaining / (float)smallTunnels);
+                while (index < squads.Count)
+                {
+                    TunnelAssignment packed = new TunnelAssignment();
+                    for (int i = 0; i < perTunnel && index < squads.Count; i++, index++)
+                    {
+                        packed.Pawns.AddRange(squads[index].Pawns);
+                        packed.SquadSizes.AddRange(squads[index].SquadSizes);
+                        packed.Points += squads[index].Points;
+                    }
+                    // Small tunnels reinforce at a higher rate than large ones, so an unbounded packed
+                    // budget would let them out-scale the large tier. Keep them underneath it.
+                    packed.Points = Mathf.Min(packed.Points, PackedSmallTunnelBudgetCap);
+                    result.Add(packed);
+                }
             }
             return result;
         }
 
+        // Edge tunnels open outside the colony, so a few extra holes there cost nothing visually.
+        private int SmallTunnelLimit(float points)
+        {
+            return Mathf.Clamp(Mathf.FloorToInt(points / 1000f), 2, CenterTunnel ? 5 : 8);
+        }
+
         private static int RollLargeTunnelCount(float points, int squadCount)
         {
-            float chance;
-            int max;
-            if (points < 1500f) return 0;
-            if (points < 2500f) { chance = 0.15f; max = 1; }
-            else if (points < 4000f) { chance = 0.30f; max = 1; }
-            else if (points < 6000f) { chance = 0.50f; max = 1; }
-            else if (points < 8000f) { chance = 0.65f; max = 2; }
-            else { chance = 0.75f; max = 2; }
-
+            // Points arrive already scaled by the arrival mode's pointsFactorCurve, so these thresholds
+            // are measured against that reduced value rather than the storyteller's raw budget.
+            int max = Mathf.Clamp(Mathf.FloorToInt(points / 1200f), 0, 3);
             int count = 0;
-            for (int i = 0; i < max && squadCount - count * 3 >= 3; i++)
+            for (int i = 0; i < max && squadCount - count * LargeTunnelSquads >= LargeTunnelSquads; i++)
             {
-                if (Rand.Chance(chance))
+                if (Rand.Chance(0.75f))
                 {
                     count++;
                 }
@@ -1182,12 +1406,18 @@ namespace MUGB
             usedEdgeFallback = false;
             if (CenterTunnel)
             {
-                foreach (IntVec3 candidate in BuildCenterTunnelCandidates(map, center))
+                // A worse spot at the preferred tier beats a closer spot in someone's bedroom, so the
+                // tier sweeps every candidate before the next tier is considered at all.
+                List<IntVec3> candidates = BuildCenterTunnelCandidates(map, center);
+                foreach (TunnelPlacementTier tier in PlacementTiers)
                 {
-                    List<IntVec3> cells = TryFindClusterWithinRadii(map, candidate, assignments);
-                    if (cells.Count == assignments.Count)
+                    foreach (IntVec3 candidate in candidates)
                     {
-                        return cells;
+                        List<IntVec3> cells = TryFindClusterWithinRadii(map, candidate, assignments, tier);
+                        if (cells.Count == assignments.Count)
+                        {
+                            return cells;
+                        }
                     }
                 }
 
@@ -1198,7 +1428,7 @@ namespace MUGB
                     {
                         break;
                     }
-                    List<IntVec3> cells = TryFindClusterWithinRadii(map, edgeCenter, assignments);
+                    List<IntVec3> cells = TryFindClusterWithinRadii(map, edgeCenter, assignments, TunnelPlacementTier.Anywhere);
                     if (cells.Count == assignments.Count)
                     {
                         usedEdgeFallback = true;
@@ -1208,16 +1438,19 @@ namespace MUGB
                 return new List<IntVec3>();
             }
 
-            List<IntVec3> initialCells = TryFindClusterWithinRadii(map, center, assignments);
-            if (initialCells.Count == assignments.Count)
+            foreach (TunnelPlacementTier tier in PlacementTiers)
             {
-                return initialCells;
+                List<IntVec3> initialCells = TryFindClusterWithinRadii(map, center, assignments, tier);
+                if (initialCells.Count == assignments.Count)
+                {
+                    return initialCells;
+                }
             }
             for (int i = 0; i < 4; i++)
             {
                 if (TryFindEdgeTunnelCell(map, out IntVec3 alternativeCenter))
                 {
-                    List<IntVec3> cells = TryFindClusterWithinRadii(map, alternativeCenter, assignments);
+                    List<IntVec3> cells = TryFindClusterWithinRadii(map, alternativeCenter, assignments, TunnelPlacementTier.Anywhere);
                     if (cells.Count == assignments.Count)
                     {
                         return cells;
@@ -1227,13 +1460,38 @@ namespace MUGB
             return new List<IntVec3>();
         }
 
-        private static List<IntVec3> TryFindClusterWithinRadii(Map map, IntVec3 center, List<TunnelAssignment> assignments)
+        private static List<IntVec3> TryFindClusterWithinRadii(Map map, IntVec3 center, List<TunnelAssignment> assignments, TunnelPlacementTier tier)
         {
-            List<IntVec3> cells = TryFindClusterCells(map, center, assignments, 13);
-            return cells.Count == assignments.Count ? cells : TryFindClusterCells(map, center, assignments, 20);
+            foreach (int radius in ClusterRadii)
+            {
+                List<IntVec3> cells = TryFindClusterCells(map, center, assignments, radius, tier);
+                if (cells.Count == assignments.Count)
+                {
+                    return cells;
+                }
+            }
+            return new List<IntVec3>();
         }
 
-        private static List<IntVec3> TryFindClusterCells(Map map, IntVec3 center, List<TunnelAssignment> assignments, int radius)
+        // Digging up under someone's bed reads as unfair rather than threatening, so the rooms a
+        // colony sleeps, heals and works in are the last resort, not the first pick.
+        private enum TunnelPlacementTier
+        {
+            OutdoorOnly,
+            AvoidLivingSpace,
+            Anywhere
+        }
+
+        private static readonly TunnelPlacementTier[] PlacementTiers =
+        {
+            TunnelPlacementTier.OutdoorOnly,
+            TunnelPlacementTier.AvoidLivingSpace,
+            TunnelPlacementTier.Anywhere
+        };
+
+        private static readonly int[] ClusterRadii = { 13, 20 };
+
+        private static List<IntVec3> TryFindClusterCells(Map map, IntVec3 center, List<TunnelAssignment> assignments, int radius, TunnelPlacementTier tier)
         {
             const int minSpacingSquared = 16;
             List<IntVec3> candidates = GenRadial.RadialCellsAround(center, radius, true)
@@ -1244,7 +1502,7 @@ namespace MUGB
             foreach (TunnelAssignment assignment in assignments.OrderByDescending(a => a.Large))
             {
                 int size = assignment.Large ? 3 : 2;
-                IntVec3 chosen = candidates.FirstOrDefault(cell => CanPlaceTunnelAt(cell, map, size)
+                IntVec3 chosen = candidates.FirstOrDefault(cell => CanPlaceTunnelAt(cell, map, size, tier)
                     && result.All(existing => existing.DistanceToSquared(cell) >= minSpacingSquared));
                 if (!chosen.IsValid)
                 {
@@ -1359,9 +1617,18 @@ namespace MUGB
 
         private static bool CanPlaceTunnelAt(IntVec3 root, Map map, int size)
         {
+            return CanPlaceTunnelAt(root, map, size, TunnelPlacementTier.Anywhere);
+        }
+
+        private static bool CanPlaceTunnelAt(IntVec3 root, Map map, int size, TunnelPlacementTier tier)
+        {
             CellRect rect = CellRect.FromLimits(root.x, root.z, root.x + size - 1, root.z + size - 1);
             foreach (IntVec3 cell in rect)
             {
+                if (!AllowedByTier(cell, map, tier))
+                {
+                    return false;
+                }
                 if (!cell.InBounds(map))
                 {
                     return false;
@@ -1381,6 +1648,34 @@ namespace MUGB
                 }
             }
             return true;
+        }
+
+        private static bool AllowedByTier(IntVec3 cell, Map map, TunnelPlacementTier tier)
+        {
+            if (tier == TunnelPlacementTier.Anywhere)
+            {
+                return true;
+            }
+            Room room = cell.GetRoom(map);
+            // No room data means open ground as far as placement is concerned.
+            if (room == null || room.PsychologicallyOutdoors)
+            {
+                return true;
+            }
+            if (tier == TunnelPlacementTier.OutdoorOnly)
+            {
+                return false;
+            }
+            // Storage, corridors and dining rooms still read as fair game; the rooms a colony sleeps,
+            // heals and works in do not.
+            return room.Role != RoomRoleDefOf.Bedroom
+                && room.Role != RoomRoleDefOf.Barracks
+                && room.Role != RoomRoleDefOf.Hospital
+                && room.Role != RoomRoleDefOf.PrisonCell
+                && room.Role != RoomRoleDefOf.PrisonBarracks
+                && room.Role != RoomRoleDefOf.Laboratory
+                && room.Role != RoomRoleDefOf.Workshop
+                && !room.ContainedAndAdjacentThings.Any(thing => thing is Building_WorkTable || thing is Building_Bed);
         }
 
         private sealed class TunnelAssignment

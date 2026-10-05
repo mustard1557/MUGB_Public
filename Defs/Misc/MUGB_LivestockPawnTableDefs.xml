@@ -53,12 +53,16 @@
   <PawnColumnDef>
     <defName>MUGB_Livestock_Protect</defName>
     <workerClass>MUGB.Livestock.PawnColumnWorker_LivestockProtect</workerClass>
-    <label>keep</label>
+    <!-- 'keep'에서 바꿨습니다. 이 지정은 MUGB_LivestockAutoRules.IsCullable 한 곳에서만
+         참조되므로 막는 것은 자동 규칙뿐이고, 손으로 지정하는 것은 그대로 됩니다.
+         상태가 하나뿐이니 이름도 하나여야 합니다 - 뷰마다 다른 이름을 붙이면
+         스위치가 여러 개인 것처럼 읽힙니다. -->
+    <label>no auto-butcher</label>
     <sortable>true</sortable>
     <!-- paintable: 한 칸 누른 채로 드래그하면 지나간 줄이 전부 칠해집니다.
          바닐라 가축탭의 도살 컬럼과 같은 동작입니다. -->
     <paintable>true</paintable>
-    <width>40</width>
+    <width>78</width>
   </PawnColumnDef>
 
   <PawnColumnDef>

@@ -3,14 +3,16 @@
   <MUGB_TumorSeedbed.label>종양 모판</MUGB_TumorSeedbed.label>
   <MUGB_TumorSeedbed.labelNoun>종양 모판</MUGB_TumorSeedbed.labelNoun>
   <MUGB_TumorSeedbed.description>난소가 영구적인 과잉 생산 상태로 굳었다. 쉬지 않고 망가진 난자를 배출하고, 그 난자들은 더 이상 착상에 저항하지 않는다. 여기서 자라는 것은 무엇이든 아이가 되지 못한다.\n\n이 상태는 되돌릴 수 없다.</MUGB_TumorSeedbed.description>
-  <MUGB_TumorSeedbed.stages.0.label>모판</MUGB_TumorSeedbed.stages.0.label>
+  <MUGB_TumorSeedbed.stages.0.label>종양 모판</MUGB_TumorSeedbed.stages.0.label>
 
   <MUGB_TumorGestation.label>종양 잉태</MUGB_TumorGestation.label>
   <MUGB_TumorGestation.labelNoun>종양 잉태</MUGB_TumorGestation.labelNoun>
   <MUGB_TumorGestation.description>자궁에서 망가진 조직이 자라고 있다. 임신처럼 몸을 갉아먹지만 몇 배로 빨리 부풀고, 그 안에 아이는 없다.</MUGB_TumorGestation.description>
-  <MUGB_TumorGestation.stages.0.label>잉태 중</MUGB_TumorGestation.stages.0.label>
-  <MUGB_TumorGestation.stages.1.label>진통</MUGB_TumorGestation.stages.1.label>
-  <MUGB_TumorGestation.stages.2.label>밀어내는 중</MUGB_TumorGestation.stages.2.label>
+  <MUGB_TumorGestation.stages.0.label>잉태 초기</MUGB_TumorGestation.stages.0.label>
+  <MUGB_TumorGestation.stages.1.label>부풀는 중</MUGB_TumorGestation.stages.1.label>
+  <MUGB_TumorGestation.stages.2.label>만삭</MUGB_TumorGestation.stages.2.label>
+  <MUGB_TumorGestation.stages.3.label>진통</MUGB_TumorGestation.stages.3.label>
+  <MUGB_TumorGestation.stages.4.label>밀어내는 중</MUGB_TumorGestation.stages.4.label>
 
   <MUGB_SeedbedDegeneration.label>모판화</MUGB_SeedbedDegeneration.label>
   <MUGB_SeedbedDegeneration.labelNoun>모판화</MUGB_SeedbedDegeneration.labelNoun>
@@ -18,7 +20,7 @@
   <MUGB_SeedbedDegeneration.stages.0.label>흐려짐</MUGB_SeedbedDegeneration.stages.0.label>
   <MUGB_SeedbedDegeneration.stages.1.label>무뎌짐</MUGB_SeedbedDegeneration.stages.1.label>
   <MUGB_SeedbedDegeneration.stages.2.label>비워짐</MUGB_SeedbedDegeneration.stages.2.label>
-  <MUGB_SeedbedDegeneration.stages.3.label>모판</MUGB_SeedbedDegeneration.stages.3.label>
+  <MUGB_SeedbedDegeneration.stages.3.label>완성된 모판</MUGB_SeedbedDegeneration.stages.3.label>
 
   <MUGB_ActivatorDrain.label>활성화액 고갈</MUGB_ActivatorDrain.label>
   <MUGB_ActivatorDrain.labelNoun>활성화액 고갈</MUGB_ActivatorDrain.labelNoun>

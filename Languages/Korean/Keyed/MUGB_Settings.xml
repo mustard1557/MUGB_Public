@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
   <MUGB_SettingsOpenVisualTuning>외형 조정 열기</MUGB_SettingsOpenVisualTuning>
   <MUGB_SettingsEnableDraftedWeaponPoseOffsetsLabel>소집 시 고블린 무기 자세 보정 사용</MUGB_SettingsEnableDraftedWeaponPoseOffsetsLabel>
   <MUGB_SettingsEnableDraftedWeaponPoseOffsetsDesc>끄면 소집 후 대기 중인 폰이 바닐라 무기 위치를 사용합니다. 공격 자세와 창 찌르기, 투척, 돌진은 유지됩니다.</MUGB_SettingsEnableDraftedWeaponPoseOffsetsDesc>
   <MUGB_SettingsEnableNonGoblinGoblinGearMoodPenaltyLabel>비고블린의 고블린 장비 불쾌감</MUGB_SettingsEnableNonGoblinGoblinGearMoodPenaltyLabel>
   <MUGB_SettingsEnableNonGoblinGoblinGearMoodPenaltyDesc>끄면 비고블린이 고블린 장비를 착용할 때 받는 MUGB 전용 무드 불이익이 사라집니다. 바닐라 의류 생각은 유지됩니다.</MUGB_SettingsEnableNonGoblinGoblinGearMoodPenaltyDesc>
+  <MUGB_SettingsNonGoblinGoblinWeaponWeightLabel>타 세력의 고블린 무기 사용률: {0}%</MUGB_SettingsNonGoblinGoblinWeaponWeightLabel>
+  <MUGB_SettingsNonGoblinGoblinWeaponWeightDesc>고블린이 아닌 세력이 고블린 무기를 들고 나오는 빈도입니다. 100%는 바닐라 그대로이며, 이때는 부족민·중세 무기 풀의 절반 이상을 고블린 무기가 차지합니다. 고블린 폰과 고블린 토벌대는 이 값의 영향을 받지 않습니다.</MUGB_SettingsNonGoblinGoblinWeaponWeightDesc>
   <MUGB_SettingsStorytellerHeader>스토리텔러</MUGB_SettingsStorytellerHeader>
   <MUGB_SettingsPassingGroupFrequencyLabel>지나가는 무리 빈도: {0}%</MUGB_SettingsPassingGroupFrequencyLabel>
   <MUGB_SettingsPassingGroupFrequencyDesc>여행객 무리와 MUGB 방랑 거지무리의 발생 빈도를 조절합니다. 김덕팔은 이 값보다 조금 더 자주 발생시킵니다.</MUGB_SettingsPassingGroupFrequencyDesc>
@@ -15,6 +17,8 @@
   <MUGB_SettingsEnableGoblinSquadSystemDesc>일반 고블린 습격 병력을 분대 템플릿으로 편성하되 선택된 습격 전략과 도착 방식은 유지합니다.</MUGB_SettingsEnableGoblinSquadSystemDesc>
   <MUGB_SettingsEnableGoblinCompositeRaidsLabel>고블린 복합전술 습격 사용</MUGB_SettingsEnableGoblinCompositeRaidsLabel>
   <MUGB_SettingsEnableGoblinCompositeRaidsDesc>대규모 고블린 습격이 공병 부대와 일반 공격 부대로 나뉘어 두 방향에서 접근할 수 있게 합니다.</MUGB_SettingsEnableGoblinCompositeRaidsDesc>
+  <MUGB_SettingsEnableGoblinTunnelRaidsLabel>고블린 땅굴 습격 사용</MUGB_SettingsEnableGoblinTunnelRaidsLabel>
+  <MUGB_SettingsEnableGoblinTunnelRaidsDesc>고블린 습격이 땅굴을 파고 등장하며, 땅굴을 부수기 전까지 증원 웨이브를 계속 내보냅니다. 끄면 새 땅굴 습격만 막히고, 이미 맵에 있는 땅굴에는 영향이 없습니다.</MUGB_SettingsEnableGoblinTunnelRaidsDesc>
   <MUGB_SettingsCompatHeader>모드 호환성</MUGB_SettingsCompatHeader>
   <MUGB_AllowFacialAnimationForGoblinsLabel>고블린에게 페이셜 애니메이션 적용 허용</MUGB_AllowFacialAnimationForGoblinsLabel>
   <MUGB_AllowFacialAnimationForGoblinsDesc>기본값은 꺼짐입니다. 꺼져 있으면 고블린은 [NL] Facial Animation의 얼굴 교체에서 제외되어 고블린 전용 얼굴을 유지합니다. 켜면 페이셜 애니메이션이 고블린 얼굴을 인간형 애니메이션 얼굴로 교체하므로 외형이 깨질 수 있습니다.</MUGB_AllowFacialAnimationForGoblinsDesc>

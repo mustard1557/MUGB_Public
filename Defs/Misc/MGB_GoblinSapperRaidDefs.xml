@@ -70,6 +70,7 @@
 
   <PawnsArrivalModeDef>
     <defName>MUGB_GoblinCompositeTwoDirections</defName>
+    <canBeBackup>false</canBeBackup>
     <workerClass>MUGB.PawnsArrivalModeWorker_GoblinCompositeTwoDirections</workerClass>
     <selectionWeightCurve><points><li>(0, 1)</li></points></selectionWeightCurve>
     <textEnemy>They are approaching from two directions.</textEnemy>

@@ -31,7 +31,9 @@
     <workerClass>MUGB.Seedbed.PawnColumnWorker_SeedbedConvert</workerClass>
     <label>seedbed</label>
     <sortable>true</sortable>
-    <paintable>true</paintable>
+    <!-- paintable은 넣지 않습니다. 드래그 칠하기는 PawnColumnWorker_Designator가
+         Designation을 다룰 때만 동작하는데, 이 컬럼은 수술 계획서를 직접 다루는
+         일반 워커라 값을 켜도 아무 일도 일어나지 않습니다. -->
     <width>46</width>
   </PawnColumnDef>
 

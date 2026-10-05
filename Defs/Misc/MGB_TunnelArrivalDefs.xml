@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
   <PawnsArrivalModeDef>
     <defName>MUGB_GoblinTunnelArrival</defName>
+    <canBeBackup>false</canBeBackup>
     <workerClass>MUGB.PawnsArrivalModeWorker_GoblinTunnel</workerClass>
     <selectionWeightCurve>
       <points>
@@ -46,7 +47,7 @@
     </selectionWeightCurvesPerFaction>
     <pointsFactorCurve>
       <points>
-        <li>(0, 1)</li>
+        <li>(0, 0.8)</li>
       </points>
     </pointsFactorCurve>
     <textEnemy>A group of {0} from {1} are emerging from goblin tunnels nearby. Surviving tunnels will release reinforcements; destroy them to stop the later waves.</textEnemy>
@@ -58,6 +59,7 @@
 
   <PawnsArrivalModeDef>
     <defName>MUGB_GoblinTunnelArrivalCenter</defName>
+    <canBeBackup>false</canBeBackup>
     <workerClass>MUGB.PawnsArrivalModeWorker_GoblinTunnelCenter</workerClass>
     <selectionWeightCurve>
       <points>
@@ -104,7 +106,7 @@
     </selectionWeightCurvesPerFaction>
     <pointsFactorCurve>
       <points>
-        <li>(0, 1)</li>
+        <li>(0, 0.4)</li>
       </points>
     </pointsFactorCurve>
     <textEnemy>A group of {0} from {1} are digging up from a goblin tunnel inside your lines. Surviving tunnels will release reinforcements; destroy them to stop the later waves.</textEnemy>

@@ -5,7 +5,7 @@
   <MUGB_Livestock_Health.label>건강</MUGB_Livestock_Health.label>
   <MUGB_Livestock_Resistance.label>저항 / 의지</MUGB_Livestock_Resistance.label>
   <MUGB_Livestock_InteractionMode.label>처우</MUGB_Livestock_InteractionMode.label>
-  <MUGB_Livestock_Protect.label>보호</MUGB_Livestock_Protect.label>
+  <MUGB_Livestock_Protect.label>자동도축 금지</MUGB_Livestock_Protect.label>
   <MUGB_Livestock_Designate.label>도축</MUGB_Livestock_Designate.label>
   <MUGB_Livestock_Source.label>출처</MUGB_Livestock_Source.label>
 

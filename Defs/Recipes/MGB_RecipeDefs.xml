@@ -583,7 +583,7 @@
             <li>Meat_Human</li>
           </thingDefs>
         </filter>
-        <count>1</count>
+        <count>10</count>
       </li>
       <li>
         <filter>
@@ -605,8 +605,8 @@
     <label>make human flesh chunk x4</label>
     <workAmount>600</workAmount>
     <ingredients>
-      <li><filter><thingDefs><li>Meat_Human</li></thingDefs></filter><count>3</count></li>
-      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>1</count></li>
+      <li><filter><thingDefs><li>Meat_Human</li></thingDefs></filter><count>40</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>4</count></li>
     </ingredients>
     <products>
       <MUGB_Hchunk>4</MUGB_Hchunk>
@@ -619,8 +619,8 @@
     <label>make human flesh chunk x8</label>
     <workAmount>1080</workAmount>
     <ingredients>
-      <li><filter><thingDefs><li>Meat_Human</li></thingDefs></filter><count>5</count></li>
-      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>1</count></li>
+      <li><filter><thingDefs><li>Meat_Human</li></thingDefs></filter><count>80</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>8</count></li>
     </ingredients>
     <products>
       <MUGB_Hchunk>8</MUGB_Hchunk>
@@ -639,7 +639,7 @@
             <li>Meat_Goblin</li>
           </thingDefs>
         </filter>
-        <count>1</count>
+        <count>10</count>
       </li>
       <li>
         <filter>
@@ -661,8 +661,8 @@
     <label>make goblin flesh chunk x4</label>
     <workAmount>600</workAmount>
     <ingredients>
-      <li><filter><thingDefs><li>Meat_Goblin</li></thingDefs></filter><count>3</count></li>
-      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>1</count></li>
+      <li><filter><thingDefs><li>Meat_Goblin</li></thingDefs></filter><count>40</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>4</count></li>
     </ingredients>
     <products>
       <MUGB_Gchunk>4</MUGB_Gchunk>
@@ -675,8 +675,8 @@
     <label>make goblin flesh chunk x8</label>
     <workAmount>1080</workAmount>
     <ingredients>
-      <li><filter><thingDefs><li>Meat_Goblin</li></thingDefs></filter><count>6</count></li>
-      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>1</count></li>
+      <li><filter><thingDefs><li>Meat_Goblin</li></thingDefs></filter><count>80</count></li>
+      <li><filter><thingDefs><li>MUGB_Bone</li></thingDefs></filter><count>8</count></li>
     </ingredients>
     <products>
       <MUGB_Gchunk>8</MUGB_Gchunk>

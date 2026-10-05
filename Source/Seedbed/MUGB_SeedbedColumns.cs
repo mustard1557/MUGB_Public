@@ -193,12 +193,17 @@ namespace MUGB.Seedbed
             Hediff gestation = GestationOn(pawn);
             if (gestation != null)
             {
+                // 인덱스는 MGB_TumorSeedbedHediffs.xml의 단계 순서와 짝입니다.
+                // 0 초기 / 1 커지는 중 / 2 만삭 / 3 진통 / 4 밀어내는 중.
+                // 그쪽 단계를 늘리거나 줄이면 여기도 같이 고쳐야 합니다.
                 switch (gestation.CurStageIndex)
                 {
-                    case 2:
+                    case 4:
                         return "MUGB_SeedbedStatusPushing".Translate();
-                    case 1:
+                    case 3:
                         return "MUGB_SeedbedStatusLabor".Translate();
+                    case 2:
+                        return "MUGB_SeedbedStatusFullTerm".Translate();
                     default:
                         return "MUGB_SeedbedStatusGestating".Translate();
                 }

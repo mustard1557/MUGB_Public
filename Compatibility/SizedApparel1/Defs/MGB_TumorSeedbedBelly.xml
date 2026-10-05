@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    한국어 의도: Sized Apparel(1세대)이 켜져 있을 때 종양 잉태 중 배가 불러오게 합니다.
+
+    SA는 완전히 데이터 기반입니다. 폰의 헤디프를 훑으면서 같은 이름의
+    SizedApparelHediffDef를 찾고, 있으면 BodyPartOf에 맞춰 그립니다
+    (SizedApparelComp.cs의 UpdateHediff, Belly 분기):
+
+        bellySeverity += h.Severity * def.severityScale;
+
+    즉 헤디프 severity가 그대로 배 크기가 됩니다. MUGB_TumorGestation은
+    severity가 0에서 1까지 1.5일에 걸쳐 차오르므로, 잉태 초기에는 티가 안 나다가
+    만삭에 가까울수록 불러오고 출산 직후 헤디프가 사라지면서 원래대로 돌아옵니다.
+    RJW 임신과 정확히 같은 방식입니다.
+
+    severityScale을 지정하지 않아 기본값(1)을 씁니다. SA가 RJW_pregnancy와
+    바닐라 PregnantHuman에 쓰는 것과 동일하므로 배 크기도 그것들과 같은 눈금입니다.
+
+    이 파일은 LoadFolders.xml에서 OTYOTY.SizedApparel이 켜져 있을 때만 읽습니다.
+    SA가 없는 사람에게는 폴더 자체가 로드되지 않으므로 이 def 타입을 못 찾는 오류도
+    나지 않습니다. MayRequire로 처리하지 않은 이유가 그것입니다 - 그쪽은 타입 해석
+    단계에서 걸릴 수 있어서 폴더 게이트가 확실합니다.
+
+    SA 2세대는 타입 이름과 필드 표기가 달라서(SA_AddonHediffDef / bodyPartOf)
+    Compatibility/SizedApparel2에 따로 두었습니다.
+  -->
+  <SizedApparel.SizedApparelHediffDef>
+    <defName>MUGB_TumorGestation</defName>
+    <BodyPartOf>Belly</BodyPartOf>
+    <isBodyPartHediff>true</isBodyPartHediff>
+  </SizedApparel.SizedApparelHediffDef>
+
+</Defs>

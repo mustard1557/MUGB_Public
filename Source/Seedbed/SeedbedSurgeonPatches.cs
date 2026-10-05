@@ -49,6 +49,18 @@ namespace MUGB.Seedbed
             }
         }
 
+        // 인자를 이름이 아니라 위치(__0)로 받는 이유 - 실제로 여기서 사고가 났던 자리입니다.
+        //
+        //   Bill.PawnAllowedToStartAnew(Pawn p)
+        //   Bill_Medical.PawnAllowedToStartAnew(Pawn pawn)   <- override하면서 인자명이 다름
+        //
+        // C#은 override할 때 인자 이름을 자유롭게 바꿀 수 있고, Harmony는 인자를 **이름으로**
+        // 바인딩합니다. 그래서 `Pawn p`로 두면 Bill_Medical 쪽 패치에서 "p라는 인자가 없다"로
+        // 예외가 나고, 그 예외가 PatchAll() 전체를 중단시켜 **이 어셈블리의 나머지 패치가
+        // 전부 적용되지 않습니다.** 실제로 고블린 눈·피부색 렌더 패치가 통째로 죽었습니다.
+        //
+        // 컴파일러는 이걸 잡아주지 못합니다. Harmony 바인딩은 100% 런타임이라 빌드가
+        // 통과해도 아무것도 보장되지 않습니다. 위치 인자는 이름 변경에 영향을 받지 않습니다.
         public static void Postfix(Bill __instance, Pawn __0, ref bool __result)
         {
             if (!__result)

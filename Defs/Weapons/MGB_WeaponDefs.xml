@@ -142,7 +142,10 @@
       <li>MUGB_GoblinWeaponCategory</li>
     </thingCategories>
     <weaponTags>
-      <li>Gun</li>
+      <!-- Gun 태그는 해적·아웃랜더·기업 등 산업~우주 세력이 전부 쓰기 때문에 뺐습니다.
+           RimWorld의 def 상속은 <li> 항목을 덮어쓰지 않고 이어붙이므로, 자식 def에서만
+           지워봐야 이 부모에서 다시 상속됩니다. 반드시 여기서 지워야 합니다.
+           고블린 화약무기는 MUGB_GoblinGunpowder* 태그로만 배분합니다. -->
       <li>MUGB_GoblinWeapon</li>
     </weaponTags>
     <weaponClasses>
@@ -1099,7 +1102,7 @@
       <drawSize>0.9</drawSize>
     </graphicData>
     <weaponTags>
-      <li>MedievalRangedDecent</li>
+      <!-- MedievalRangedDecent는 이 태그를 가진 바닐라 무기가 하나도 없어, 남겨두면 중세 모드 석궁병이 100% 고블린 석궁을 듭니다. MUGB_GoblinRangedMedieval로만 배분합니다. -->
       <li>MUGB_GoblinWeapon</li>
       <li>MUGB_ShieldForbidden</li>
       <li>MUGB_GoblinRangedMedieval</li>
@@ -1172,7 +1175,7 @@
       <drawSize>0.9</drawSize>
     </graphicData>
     <weaponTags>
-      <li>MedievalRangedDecent</li>
+      <!-- MedievalRangedDecent는 이 태그를 가진 바닐라 무기가 하나도 없어, 남겨두면 중세 모드 석궁병이 100% 고블린 석궁을 듭니다. MUGB_GoblinRangedMedieval로만 배분합니다. -->
       <li>MUGB_GoblinWeapon</li>
       <li>MUGB_ShieldForbidden</li>
       <li>MUGB_GoblinRangedMedieval</li>
@@ -1247,7 +1250,7 @@
       <drawSize>1.0</drawSize>
     </graphicData>
     <weaponTags>
-      <li>Gun</li>
+      <!-- Gun 태그는 해적·아웃랜더·기업 등 산업~우주 세력이 전부 쓰기 때문에 뺐습니다. 고블린 화약무기는 MUGB_GoblinGunpowder* 태그로만 배분합니다. -->
       <li>MUGB_GoblinWeapon</li>
       <li>MUGB_GoblinGunpowder</li>
       <li>MUGB_GoblinGunpowderBasic</li>
@@ -1300,7 +1303,7 @@
       <drawSize>1.1</drawSize>
     </graphicData>
     <weaponTags>
-      <li>Gun</li>
+      <!-- Gun 태그는 해적·아웃랜더·기업 등 산업~우주 세력이 전부 쓰기 때문에 뺐습니다. 고블린 화약무기는 MUGB_GoblinGunpowder* 태그로만 배분합니다. -->
       <li>MUGB_GoblinWeapon</li>
       <li>MUGB_ShieldForbidden</li>
       <li>MUGB_GoblinGunpowder</li>
@@ -1360,7 +1363,7 @@
       <drawSize>1.35</drawSize>
     </graphicData>
     <weaponTags>
-      <li>Gun</li>
+      <!-- Gun 태그는 해적·아웃랜더·기업 등 산업~우주 세력이 전부 쓰기 때문에 뺐습니다. 고블린 화약무기는 MUGB_GoblinGunpowder* 태그로만 배분합니다. -->
       <li>MUGB_GoblinWeapon</li>
       <li>MUGB_GoblinGunpowder</li>
       <li>MUGB_GoblinGunpowderBasic</li>
@@ -1414,7 +1417,7 @@
       <drawSize>0.95</drawSize>
     </graphicData>
     <weaponTags>
-      <li>Gun</li>
+      <!-- Gun 태그는 해적·아웃랜더·기업 등 산업~우주 세력이 전부 쓰기 때문에 뺐습니다. 고블린 화약무기는 MUGB_GoblinGunpowder* 태그로만 배분합니다. -->
       <li>MUGB_GoblinWeapon</li>
       <li>MUGB_ShieldForbidden</li>
       <li>MUGB_GoblinGunpowder</li>
@@ -1668,7 +1671,9 @@
       <drawSize>1.1</drawSize>
     </graphicData>
     <weaponTags>
-      <li>MedievalRangedDecent</li>
+      <!-- 포획 도구라 원거리 무기군에서는 뺐습니다(MedievalRangedDecent 제거). 이 태그는
+           바닐라 무기가 하나도 없어서, 남겨두면 중세 모드 석궁병이 올가미를 들고 나옵니다.
+           근접 후보로는 남겨 두어 중세 보병 풀에 계속 섞입니다. -->
       <li>MedievalMeleeDecent</li>
       <li>MUGB_GoblinWeapon</li>
       <li>MUGB_GoblinCapture</li>

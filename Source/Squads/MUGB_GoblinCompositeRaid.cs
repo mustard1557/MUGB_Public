@@ -88,6 +88,11 @@ namespace MUGB
 
         public override void Arrive(List<Pawn> pawns, IncidentParms parms)
         {
+            if (!MUGB_RaidArrivalGuard.IsRaid(parms, def))
+            {
+                MUGB_RaidArrivalGuard.ArrivePeacefully(pawns, parms);
+                return;
+            }
             Map map = parms?.target as Map;
             if (map == null
                 || pawns.NullOrEmpty())
@@ -140,6 +145,8 @@ namespace MUGB
 
         public override bool TryResolveRaidSpawnCenter(IncidentParms parms)
         {
+            if (!MUGB_RaidArrivalGuard.IsRaid(parms, def))
+                return MUGB_RaidArrivalGuard.ResolvePeacefulArrival(parms);
             parms.spawnRotation = Rot4.Random;
             return true;
         }

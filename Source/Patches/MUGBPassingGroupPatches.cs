@@ -66,7 +66,7 @@ namespace MUGB.Patches
     [HarmonyPatch(typeof(IncidentWorker_TravelerGroup), "TryExecuteWorker")]
     public static class IncidentWorker_TravelerGroup_RelationPatch
     {
-        private const float BeggarReplacementChance = 0.45f;
+        private const float BeggarReplacementChance = 0.60f;
 
         public static bool Prefix(
             IncidentWorker_TravelerGroup __instance,
@@ -78,7 +78,8 @@ namespace MUGB.Patches
             // Replace part of the vanilla passing-traveler incidents instead of firing an
             // additional event. The custom beggar incident uses this same worker base, so
             // the exact def check also prevents recursive replacement.
-            if (Faction.OfPlayer?.def == MUGBDefOf.MUGB_PlayerGoblinFaction
+            if ((Faction.OfPlayer?.def == MUGBDefOf.MUGB_PlayerGoblinFaction
+                    || Find.Storyteller?.def == MUGBDefOf.MUGB_KimDeokPal)
                 && __instance?.def?.defName == "TravelerGroup"
                 && parms?.target is Map map
                 && Rand.Chance(BeggarReplacementChance)
