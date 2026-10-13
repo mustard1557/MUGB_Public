@@ -49,6 +49,9 @@ namespace MUGB.Seedbed
         // 누적 산출량. 인간가축 탭이 "이 모판이 지금까지 얼마나 뽑았는지"를 보여주는 데 씁니다.
         private int totalTumors;
 
+        // 출산 횟수입니다. 종양 개수(totalTumors)와 다릅니다.
+        private int births;
+
         // 성행위 신호의 직전 값입니다. 이 값이 올라가면 성행위가 있었다는 뜻입니다.
         // -1은 아직 기준값을 안 잡았다는 표시이고, 그때는 발동시키지 않고 기준만 잡습니다
         // (수술 직후나 세이브 로드 직후에 과거 기록으로 잘못 발동하는 것을 막습니다).
@@ -63,9 +66,12 @@ namespace MUGB.Seedbed
 
         public int TotalTumors => totalTumors;
 
+        public int BirthCount => births;
+
         public void RecordDelivery(int count)
         {
             totalTumors += count;
+            births++;
         }
 
         public override void CompExposeData()
@@ -74,6 +80,7 @@ namespace MUGB.Seedbed
             Scribe_Values.Look(ref autoActivate, "MUGB_seedbedAutoActivate", true);
             Scribe_Values.Look(ref nextCheckTick, "MUGB_seedbedNextCheckTick", -1);
             Scribe_Values.Look(ref totalTumors, "MUGB_seedbedTotalTumors", 0);
+            Scribe_Values.Look(ref births, "MUGB_seedbedBirths", 0);
             Scribe_Values.Look(ref lastCreampied, "MUGB_seedbedLastCreampied", -1f);
             Scribe_Values.Look(ref lastSexCount, "MUGB_seedbedLastSexCount", -1f);
         }
@@ -174,6 +181,17 @@ namespace MUGB.Seedbed
             }
 
             MUGB_SeedbedUtility.TryStartGestation(pawn);
+        }
+
+        // 건강 탭의 헤디프 이름 옆에 남은 수명을 붙입니다. 예고 없이 죽으면 유저가
+        // 버그로 읽으므로, 언제 끝나는지가 항상 보여야 합니다.
+        public override string CompLabelInBracketsExtra
+        {
+            get
+            {
+                int limit = MUGB_SeedbedUtility.BirthLimit;
+                return limit > 0 ? births + " / " + limit : births.ToString();
+            }
         }
 
         public override string CompTipStringExtra

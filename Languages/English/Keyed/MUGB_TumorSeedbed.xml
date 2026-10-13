@@ -29,4 +29,10 @@
   <MUGB_SeedbedStatusCandidate>candidate</MUGB_SeedbedStatusCandidate>
   <MUGB_SeedbedStatusSurgeryQueued>surgery queued</MUGB_SeedbedStatusSurgeryQueued>
 
+  <MUGB_MessageSeedbedExpired>{0} pushed out one last lump and stopped breathing. With nothing left to empty, her body found no reason to go on.</MUGB_MessageSeedbedExpired>
+  <MUGB_SettingsSeedbedBirthLimitButton>Tumor seedbed lifespan: {0}</MUGB_SettingsSeedbedBirthLimitButton>
+  <MUGB_SettingsSeedbedBirthLimitCount>dies after {0} births</MUGB_SettingsSeedbedBirthLimitCount>
+  <MUGB_SettingsSeedbedBirthLimitDisabled>unlimited</MUGB_SettingsSeedbedBirthLimitDisabled>
+  <MUGB_SettingsSeedbedBirthLimitDesc>How many times a tumor seedbed gives birth before her body gives out. Counted in births, not tumors - one birth yields three to four tumors. The health tab shows her count beside the seedbed condition. Unlimited turns the lifespan off entirely.</MUGB_SettingsSeedbedBirthLimitDesc>
+
 </LanguageData>

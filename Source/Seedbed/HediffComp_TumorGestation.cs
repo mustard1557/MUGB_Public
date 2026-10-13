@@ -64,10 +64,9 @@ namespace MUGB.Seedbed
                 return;
             }
 
-            // 재진입 방지 겸 제거 신호입니다. 아래 CompShouldRemove가 이 값을 봅니다.
-            delivered = true;
-
-            MUGB_SeedbedUtility.DeliverTumors(pawn);
+            // 산출이 실제로 끝난 경우에만 제거 신호를 올립니다. 맵 전환처럼 드문 순간에
+            // 조건이 어긋나면 다음 interval에서 다시 시도하고, 빈 출산으로 처리하지 않습니다.
+            delivered = MUGB_SeedbedUtility.DeliverTumors(pawn);
         }
 
         // 배가 자라는 것이 보이도록 주기적으로 외형 갱신을 알립니다.
@@ -102,6 +101,19 @@ namespace MUGB.Seedbed
         // HediffComp_Disappears 등에서 쓰는 방식이 이것이고, 체력 처리가 순회를
         // 끝낸 뒤에 안전하게 제거해 줍니다.
         public override bool CompShouldRemove => delivered;
+
+        // Pawn_HealthTracker가 잉태 헤디프를 목록에서 안전하게 제거한 뒤 호출됩니다.
+        // 여기서 모판화 단계를 올려야 밀어내기의 의식 저하와 새 모판화 단계가 같은
+        // 체력 계산 순간에 겹치지 않습니다. 별도 틱 검사나 지연 큐는 필요 없습니다.
+        public override void CompPostPostRemoved()
+        {
+            base.CompPostPostRemoved();
+
+            if (delivered)
+            {
+                MUGB_SeedbedUtility.FinishTumorDelivery(Pawn);
+            }
+        }
 
         public override string CompLabelInBracketsExtra
         {

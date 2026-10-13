@@ -107,6 +107,7 @@ namespace MUGB
         public override void LoadedGame()
         {
             base.LoadedGame();
+            GoblinChildThoughtUtility.CleanupLegacyChildKillPenalties();
             newGameGoblinRelationsActive = newGameGoblinRelationsEnabled;
             newGamePlayerStartedAsGoblinsActive = newGamePlayerStartedAsGoblins;
             if (!relationsInitialized)

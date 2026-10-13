@@ -113,12 +113,16 @@ namespace MUGB.Seedbed
             {
                 comp.AutoActivate = value;
 
-                // 켤 때만 즉시 예약합니다. 끄는 것이 다음 주기에 적용되면 "껐는데 한 번 더
-                // 낳는다"가 되지만, 켜는 것이 다음 주기까지 밀리면 "켰는데 아무 일도 없다"가
-                // 되어 유저가 고장으로 읽습니다.
+                // 켜면 즉시 예약하고, 끄면 이미 예약된 것까지 취소합니다.
+                // 양쪽 다 즉시 반영해야 합니다. 끌 때 예약을 남겨두면 시술자가 그대로
+                // 걸어와서 주입하고 가므로 "껐는데 왜 와?"가 됩니다.
                 if (value)
                 {
                     MUGB_SeedbedUtility.TryQueueActivatorBill(pawn);
+                }
+                else
+                {
+                    MUGB_SeedbedUtility.CancelActivatorBill(pawn);
                 }
             }
 

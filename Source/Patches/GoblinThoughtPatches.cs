@@ -419,10 +419,64 @@ namespace MUGB
         public static bool ShouldBlockKilledGoblinChildThought(Pawn pawn, ThoughtDef thought, Pawn otherPawn)
         {
             return pawn != null
-                && thought?.defName == "KilledChild"
-                && !GoblinUtility.IsGoblin(pawn)
-                && GoblinUtility.IsGoblin(otherPawn)
-                && otherPawn.DevelopmentalStage.Juvenile();
+                && IsGoblinChildKill(thought, otherPawn);
+        }
+
+        public static bool IsGoblinChildKill(Def def, Pawn victim)
+        {
+            // KilledChild already identifies the event. Teenagers have an Adult developmental
+            // stage but MUGB's ageTracker.Adult remains false until 18, so stage checks miss them.
+            return def?.defName == "KilledChild" && GoblinUtility.IsGoblin(victim);
+        }
+
+        public static void CleanupLegacyChildKillPenalties()
+        {
+            bool removedTale = false;
+            List<Tale> tales = Find.TaleManager?.AllTalesListForReading;
+            if (tales != null)
+            {
+                for (int i = tales.Count - 1; i >= 0; i--)
+                {
+                    Tale tale = tales[i];
+                    if (tale is Tale_DoublePawn pair
+                        && tale.Unused
+                        && IsGoblinChildKill(tale.def, pair.secondPawnData?.pawn))
+                    {
+                        // Only unused records are removable; keep any art references intact.
+                        tales.RemoveAt(i);
+                        removedTale = true;
+                    }
+                }
+            }
+
+            // LoadedGame runs after pawn cross-references are resolved. This is one pass per
+            // load, not a ticking repair, and records with an unknown victim are preserved.
+            IEnumerable<Pawn> pawns = PawnsFinder.AllMapsWorldAndTemporary_Alive ?? Enumerable.Empty<Pawn>();
+            foreach (Pawn pawn in pawns)
+            {
+                MemoryThoughtHandler memories = pawn?.needs?.mood?.thoughts?.memories;
+                List<Thought_Memory> list = memories?.Memories;
+                if (list == null)
+                {
+                    continue;
+                }
+
+                bool removedMemory = false;
+                for (int i = list.Count - 1; i >= 0; i--)
+                {
+                    Thought_Memory memory = list[i];
+                    if (memory != null && IsGoblinChildKill(memory.def, memory.otherPawn))
+                    {
+                        memories.RemoveMemory(memory);
+                        removedMemory = true;
+                    }
+                }
+
+                if (removedTale || removedMemory)
+                {
+                    pawn.needs.mood.thoughts.situational.Notify_SituationalThoughtsDirty();
+                }
+            }
         }
 
         public static int NonGoblinEnslavedChildrenCount(Pawn parent)
@@ -504,8 +558,7 @@ namespace MUGB
                 && args != null
                 && args.Length > 1
                 && args[1] is Pawn child
-                && GoblinUtility.IsGoblin(child)
-                && child.DevelopmentalStage.Juvenile())
+                && GoblinChildThoughtUtility.IsGoblinChildKill(def, child))
             {
                 __result = null;
                 return false;

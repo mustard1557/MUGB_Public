@@ -15,7 +15,11 @@
   <modIconPath IgnoreIfNoMatchingField="True">UI/MUGBModIcon</modIconPath>
   <supportedVersions>
     <li>1.6</li>
+    <li>1.7</li>
   </supportedVersions>
+  <descriptionsByVersion>
+    <v1.7>MUGB Goblin 1.7 compatibility build. Compiled and statically checked against RimWorld 1.7.4976. Optional integrations still require their own 1.7-compatible releases.</v1.7>
+  </descriptionsByVersion>
   <modDependencies>
     <li>
       <packageId>brrainz.harmony</packageId>
@@ -45,7 +49,7 @@
     <li>rim.job.world</li>
   </loadAfter>
   <description>
-Version: 0.9.1
+Version: 0.9.2
 
 Adds a Biotech-based goblin xenotype designed around small, numerous, rough-edged goblins and rarer stronger hobgoblins.
 

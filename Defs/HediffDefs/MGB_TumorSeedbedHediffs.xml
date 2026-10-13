@@ -28,7 +28,7 @@
     <defName>MUGB_TumorSeedbed</defName>
     <label>tumor seedbed</label>
     <labelNoun>a tumor seedbed</labelNoun>
-    <description>The ovaries have been forced into permanent overproduction. They release malformed eggs without pause, and those eggs no longer resist implantation. Nothing that grows here will ever be a child.\n\nThis condition cannot be reversed.</description>
+    <description>Her ovaries have forgotten how to stop. They pour out malformed eggs without pause, and those eggs know how to do exactly one thing: take hold of the womb wall. Whatever settles in here will never be a child.\n\nThere is no undoing it.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(0.72, 0.45, 0.52)</defaultLabelColor>
     <isBad>true</isBad>
@@ -40,10 +40,10 @@
     <comps>
       <li Class="MUGB.Seedbed.HediffCompProperties_TumorSeedbed" />
     </comps>
+    <!-- 단계 라벨을 비워둡니다. 단계가 하나뿐인데 라벨을 달면 건강 탭에
+         "종양 모판 (종양 모판)"처럼 같은 말이 두 번 나옵니다. -->
     <stages>
-      <li>
-        <label>seedbed</label>
-      </li>
+      <li />
     </stages>
   </HediffDef>
 
@@ -66,7 +66,7 @@
     <defName>MUGB_TumorGestation</defName>
     <label>tumor gestation</label>
     <labelNoun>a tumor gestation</labelNoun>
-    <description>Malformed tissue is growing in the womb. It draws on the body like a pregnancy and swells at several times the pace, but there is no child in it.</description>
+    <description>A lump of flesh is growing in the womb. It drains her the way a pregnancy would and swells several times faster, and there is no child anywhere in it.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(0.72, 0.45, 0.52)</defaultLabelColor>
     <isBad>true</isBad>
@@ -100,9 +100,10 @@
       이동은 같은 수준까지 가되, 허기는 모판화 헤디프의 감소와 곱해지므로
       배율로 둡니다. 바닐라처럼 offset으로 주면 모판화의 "열량 효율" 성격이 깨집니다.
 
-      Consciousness 주의: 모판화 4단계가 이미 -0.35입니다. 여기 밀어내기 -0.25와
-      겹치면 0.40까지 내려가는데, 이 정도면 잠깐 무력해질 뿐 죽지는 않습니다.
-      더 내리면 영양실조나 부상과 겹쳤을 때 위험해지므로 이 값을 유지할 것.
+      Consciousness는 고정 offset이 아니라 postFactor를 씁니다. 고정 감소는 모판화,
+      영양실조, 출혈과 덧셈되어 의식을 0으로 밀 수 있습니다. 양수 배율은 기존 질환이
+      남긴 의식에 곱해지므로 쇠약은 유지하면서 이 헤디프가 돌연사의 마지막 원인이
+      되는 것을 막습니다.
 
       단계를 늘리거나 줄이면 상태 컬럼의 CurStageIndex 분기가 밀립니다.
       MUGB_SeedbedColumns.cs의 PawnColumnWorker_SeedbedStatus를 함께 고쳐야 합니다.
@@ -161,7 +162,7 @@
           </li>
           <li>
             <capacity>Consciousness</capacity>
-            <offset>-0.10</offset>
+            <postFactor>0.90</postFactor>
           </li>
         </capMods>
       </li>
@@ -181,7 +182,7 @@
           </li>
           <li>
             <capacity>Consciousness</capacity>
-            <offset>-0.25</offset>
+            <postFactor>0.75</postFactor>
           </li>
         </capMods>
       </li>
@@ -191,8 +192,9 @@
   <!--
     모판화. 출산 1회당 1스택, 영구 지속, 최대 4단계.
 
-    Consciousness는 반드시 offset으로만 씁니다. setMax를 쓰면 영양실조나 부상과
-    겹칠 때 사망합니다. 4단계 -0.35는 기본 1.0에서 0.65가 되므로 안전 범위입니다.
+    Consciousness는 양수 postFactor로만 씁니다. offset이나 setMax는 영양실조나
+    부상과 겹쳐 의식을 0으로 밀 수 있습니다. 4단계 x0.65는 건강한 폰에서 기존
+    -0.35와 같은 수치지만, 다른 질환이 남긴 의식에 곱해져 돌연사를 만들지 않습니다.
     기존 MUGB_GoblinBirthStrain이 마지막 단계에서 setMax 0을 쓰므로, 종양 출산에는
     그 헤디프를 절대 부여하지 않습니다(Source/Seedbed 쪽에서 명시적으로 제외).
 
@@ -207,7 +209,7 @@
     <defName>MUGB_SeedbedDegeneration</defName>
     <label>seedbed degeneration</label>
     <labelNoun>seedbed degeneration</labelNoun>
-    <description>The organ that burns the most energy in the body is the brain, and it is losing that argument. Each cycle moves a little more of her upkeep from thinking to producing. She eats less every time, and has less to say about it.</description>
+    <description>The brain is the hungriest organ a body has. Every cycle hands a little more of that ration to the womb instead. She answers slower, says less, and eats less along with it.\n\nNo one has been brought back from the far end of this.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(0.72, 0.45, 0.52)</defaultLabelColor>
     <isBad>true</isBad>
@@ -223,7 +225,7 @@
         <capMods>
           <li>
             <capacity>Consciousness</capacity>
-            <offset>-0.08</offset>
+            <postFactor>0.92</postFactor>
           </li>
           <li>
             <capacity>Talking</capacity>
@@ -238,7 +240,7 @@
         <capMods>
           <li>
             <capacity>Consciousness</capacity>
-            <offset>-0.16</offset>
+            <postFactor>0.84</postFactor>
           </li>
           <li>
             <capacity>Talking</capacity>
@@ -248,12 +250,12 @@
       </li>
       <li>
         <minSeverity>3</minSeverity>
-        <label>emptying</label>
+        <label>hollowing out</label>
         <hungerRateFactor>0.70</hungerRateFactor>
         <capMods>
           <li>
             <capacity>Consciousness</capacity>
-            <offset>-0.25</offset>
+            <postFactor>0.75</postFactor>
           </li>
           <li>
             <capacity>Talking</capacity>
@@ -263,12 +265,12 @@
       </li>
       <li>
         <minSeverity>4</minSeverity>
-        <label>seedbed</label>
+        <label>hollowed out</label>
         <hungerRateFactor>0.55</hungerRateFactor>
         <capMods>
           <li>
             <capacity>Consciousness</capacity>
-            <offset>-0.35</offset>
+            <postFactor>0.65</postFactor>
           </li>
           <li>
             <capacity>Talking</capacity>
@@ -297,7 +299,7 @@
     <defName>MUGB_ActivatorDrain</defName>
     <label>activator drain</label>
     <labelNoun>activator drain</labelNoun>
-    <description>Producing tumor activator on demand takes it out of a goblin. He is warm, slow, and suddenly very interested in the next meal.</description>
+    <description>Squeezing out activator on demand takes more out of a goblin than anyone admits. He runs hot, moves slow, and can think of nothing but his next meal.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(0.65, 0.62, 0.45)</defaultLabelColor>
     <isBad>true</isBad>
@@ -331,7 +333,7 @@
       </li>
       <li>
         <minSeverity>0.51</minSeverity>
-        <label>drained</label>
+        <label>wrung dry</label>
         <hungerRateFactorOffset>1.00</hungerRateFactorOffset>
         <statFactors>
           <RestRateMultiplier>0.85</RestRateMultiplier>

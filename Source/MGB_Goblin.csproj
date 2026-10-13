@@ -5,7 +5,7 @@
     <LangVersion>8.0</LangVersion>
     <OutputType>Library</OutputType>
     <AssemblyName>MUGB_Goblin</AssemblyName>
-    <OutputPath>..\Assemblies\</OutputPath>
+    <OutputPath>..\1.6\Assemblies\</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>

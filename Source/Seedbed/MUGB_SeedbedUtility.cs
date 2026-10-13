@@ -63,6 +63,51 @@ namespace MUGB.Seedbed
         // 모판화 최종 단계. 이 단계에서 무드가 반전됩니다.
         public const float FinalDegenerationSeverity = 4f;
 
+        // ── 모판 수명 ────────────────────────────────────────────────
+        //
+        // 수명이 없으면 수술 한 번으로 고기가 영원히 나옵니다. 유지비가 의사 노동뿐이라
+        // 라인이 한 번 서면 노예를 더 잡아올 이유가 사라지고, 고기 공장이 콜로니 운영과
+        // 분리됩니다. 수명이 있으면 여성 죄수·노예를 꾸준히 확보해야 하는 소모성
+        // 파이프라인이 되고, 모판화 설명("여기 끝까지 간 뒤에 돌아온 사람은 아직 없다")도
+        // 사실이 됩니다.
+        //
+        // 값은 종양 개수가 아니라 출산 횟수입니다. 한 번 출산에 종양이 3~4개 나오므로
+        // 기본값 10회면 총 30~40개, 고기로 1800~2400입니다.
+        // 종양 개수로 세면 임신 능력이 낮은 폰이 훨씬 오래 사는 이상한 결과가 됩니다.
+        //
+        // 0은 수명 없음입니다. 설정 버튼이 이 목록을 순환합니다.
+        public static readonly int[] BirthLimitChoices = { 0, 30, 20, 10, 5, 3, 1 };
+
+        public static int NormalizeBirthLimit(int value)
+        {
+            for (int i = 0; i < BirthLimitChoices.Length; i++)
+            {
+                if (BirthLimitChoices[i] == value)
+                {
+                    return value;
+                }
+            }
+
+            // 예전 세이브나 손으로 고친 설정값이 목록에 없으면 기본값으로 되돌립니다.
+            return 10;
+        }
+
+        public static int NextBirthLimit(int current)
+        {
+            for (int i = 0; i < BirthLimitChoices.Length; i++)
+            {
+                if (BirthLimitChoices[i] == current)
+                {
+                    return BirthLimitChoices[(i + 1) % BirthLimitChoices.Length];
+                }
+            }
+
+            return BirthLimitChoices[0];
+        }
+
+        // 0이면 수명 없음입니다.
+        public static int BirthLimit => MUGBMod.Settings?.seedbedBirthLimit ?? 10;
+
         // ── 외부 임신 시스템 판별 ────────────────────────────────────
         //
         // 바닐라 / RJW / RJW 생리모드를 각각 패치하지 않고, "임신 헤디프로 보이는 것"을
@@ -287,13 +332,14 @@ namespace MUGB.Seedbed
 
         // ── 출산 ─────────────────────────────────────────────────────
 
-        // 종양 잉태가 끝났을 때 호출됩니다. 이 안에서 전부 끝나므로 바닐라 출산 경로,
-        // RJW 출산 경로, 생리모드 경로를 하나도 타지 않습니다.
-        public static void DeliverTumors(Pawn pawn)
+        // 종양 잉태가 끝났을 때 호출됩니다. 산출물과 메시지만 여기서 처리하고, 폰의
+        // 건강 상태를 바꾸는 후처리는 잉태 헤디프가 제거된 뒤 FinishTumorDelivery에서
+        // 처리합니다. 바닐라 출산 경로, RJW 출산 경로, 생리모드 경로는 타지 않습니다.
+        public static bool DeliverTumors(Pawn pawn)
         {
             if (pawn == null || !pawn.Spawned || pawn.Map == null)
             {
-                return;
+                return false;
             }
 
             TumorCountRangeFor(pawn, out int minTumors, out int maxTumors);
@@ -301,28 +347,56 @@ namespace MUGB.Seedbed
             SpawnTumors(pawn, count);
             SeedbedCompOn(pawn)?.RecordDelivery(count);
 
-            AdvanceDegeneration(pawn);
-            RefreshLactation(pawn);
-            ApplyBirthMood(pawn);
-
-            // 기존 MUGB_GoblinBirthStrain은 일부러 부여하지 않습니다.
-            // 그쪽 마지막 단계가 Consciousness setMax 0이라 모판화 4단계(-0.35)와 겹치면
-            // 즉사급이 됩니다. 종양 출산은 별도 경로이므로 명시적으로 제외합니다.
-
             Messages.Message(
                 "MUGB_MessageTumorsDelivered".Translate(pawn.LabelShortCap, count),
                 pawn,
                 MessageTypeDefOf.NeutralEvent,
                 false);
 
-            // 자동 종부. 폴링 없이 여기 한 곳에서만 다음 시술을 예약합니다.
-            //
-            // 이 시점에는 잉태 헤디프가 아직 붙어 있습니다(제거는 체력 처리가 순회를
-            // 끝낸 뒤에 합니다). 그래서 잉태 중 검사를 건너뛰도록 알려줍니다.
+            return true;
+        }
+
+        // 잉태 헤디프가 완전히 제거된 뒤 한 번만 실행됩니다. 밀어내기 단계와 새 모판화
+        // 단계가 동시에 의식을 낮추는 순간을 없애며, 이벤트 콜백이라 주기 검사가 없습니다.
+        public static void FinishTumorDelivery(Pawn pawn)
+        {
+            if (pawn == null || pawn.Dead || pawn.health == null)
+            {
+                return;
+            }
+
+            AdvanceDegeneration(pawn);
+            RefreshLactation(pawn);
+            ApplyBirthMood(pawn);
+
+            // 기존 MUGB_GoblinBirthStrain은 일부러 부여하지 않습니다.
+            // 그쪽 마지막 단계는 Consciousness setMax 0이므로 종양 출산과 섞지 않습니다.
+
             HediffComp_TumorSeedbed seedbed = SeedbedCompOn(pawn);
+
+            // 수명이 다했으면 여기서 끝냅니다.
+            //
+            // 종양을 이미 낳은 뒤이므로 마지막 산출이 버려지지 않고, 시체도 갓 죽은
+            // 상태라 바로 도축할 수 있습니다. 잉태 헤디프가 제거된 뒤에 불리는 함수라
+            // 헤디프 목록을 순회하는 도중에 폰을 죽이는 일도 없습니다.
+            //
+            // 설정을 낮춰서 이미 한계를 넘긴 모판이 생겼을 수 있으므로 >= 로 비교합니다.
+            if (seedbed != null && BirthLimit > 0 && seedbed.BirthCount >= BirthLimit)
+            {
+                Messages.Message(
+                    "MUGB_MessageSeedbedExpired".Translate(pawn.LabelShortCap),
+                    pawn,
+                    MessageTypeDefOf.NegativeEvent,
+                    false);
+
+                pawn.Kill(null);
+                return;
+            }
+
+            // 자동 종부. 잉태 헤디프가 이미 제거됐으므로 일반 자격 판정을 그대로 씁니다.
             if (seedbed != null && seedbed.AutoActivate)
             {
-                TryQueueActivatorBill(pawn, ignoreCurrentGestation: true);
+                TryQueueActivatorBill(pawn);
             }
         }
 
@@ -505,6 +579,31 @@ namespace MUGB.Seedbed
         public static bool HasActivatorBill(Pawn pawn)
         {
             return HasBillOf(pawn, MUGB_SeedbedDefOf.MUGB_InjectTumorActivator);
+        }
+
+        // 자동을 껐을 때 이미 걸려 있던 주입 계획서까지 걷어냅니다.
+        //
+        // 이것이 없으면 껐는데도 시술자가 걸어와서 주입을 하고 갑니다. 유저 입장에서는
+        // 스위치를 껐는데 아무 일도 안 일어난 것처럼 보이므로 고장으로 읽힙니다.
+        // "다음 주기부터 안 건다"와 "지금 예약된 것도 취소한다"는 다른 얘기인데,
+        // 체크박스 하나에 두 뜻이 다 담겨 있다고 유저가 읽는 쪽이 자연스럽습니다.
+        public static void CancelActivatorBill(Pawn pawn)
+        {
+            RecipeDef recipe = MUGB_SeedbedDefOf.MUGB_InjectTumorActivator;
+            BillStack stack = pawn?.health?.surgeryBills;
+            if (recipe == null || stack == null)
+            {
+                return;
+            }
+
+            // 지우면서 순회하므로 뒤에서부터 돕니다.
+            for (int i = stack.Bills.Count - 1; i >= 0; i--)
+            {
+                if (stack.Bills[i]?.recipe == recipe)
+                {
+                    stack.Delete(stack.Bills[i]);
+                }
+            }
         }
 
         // ── 모판화 후보와 그 수술 계획서 ──────────────────────────────

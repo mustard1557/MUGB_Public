@@ -331,6 +331,21 @@ namespace MUGB
                 Settings.Write();
             }
 
+            listing.GapLine();
+            int oldSeedbedBirthLimit = Settings.seedbedBirthLimit;
+            string seedbedLimitLabel = Settings.seedbedBirthLimit <= 0
+                ? "MUGB_SettingsSeedbedBirthLimitDisabled".Translate().ToString()
+                : "MUGB_SettingsSeedbedBirthLimitCount".Translate(Settings.seedbedBirthLimit).ToString();
+            if (listing.ButtonText("MUGB_SettingsSeedbedBirthLimitButton".Translate(seedbedLimitLabel)))
+            {
+                Settings.seedbedBirthLimit = Seedbed.MUGB_SeedbedUtility.NextBirthLimit(Settings.seedbedBirthLimit);
+            }
+            listing.Label("MUGB_SettingsSeedbedBirthLimitDesc".Translate());
+            if (oldSeedbedBirthLimit != Settings.seedbedBirthLimit)
+            {
+                Settings.Write();
+            }
+
             if (ModsConfig.IdeologyActive)
             {
                 listing.GapLine();
@@ -3124,6 +3139,10 @@ namespace MUGB
         public float goblinChildStageDays = 3.5f;
         public float goblinBabyStageDays = 0.5f;
         public int goblinBirthStrainLimit = 4;
+        // 종양 모판이 몇 번 출산하고 죽는지. 0이면 수명 없음(무제한)입니다.
+        // 종양 개수가 아니라 출산 횟수입니다 - 한 번 출산할 때 종양이 3~4개 나옵니다.
+        // 허용값은 MUGB_SeedbedUtility.BirthLimitChoices 를 보세요.
+        public int seedbedBirthLimit = 10;
         // 인간가축: 탭 버튼을 띄울지. 탭바를 아끼고 싶은 사람을 위한 스위치입니다.
         // 끄더라도 폰 기즈모와 죄수 처우는 그대로 동작합니다.
         public bool showHumanLivestockTab = true;
@@ -3247,6 +3266,8 @@ namespace MUGB
             Scribe_Values.Look(ref goblinBabyStageDays, "goblinBabyStageDays", 0.5f);
             goblinBabyStageDays = Patches.GoblinAgeUtility.NormalizeBabyStageDays(goblinBabyStageDays);
             Scribe_Values.Look(ref goblinBirthStrainLimit, "goblinBirthStrainLimit", 4);
+            Scribe_Values.Look(ref seedbedBirthLimit, "seedbedBirthLimit", 10);
+            seedbedBirthLimit = Seedbed.MUGB_SeedbedUtility.NormalizeBirthLimit(seedbedBirthLimit);
             goblinBirthStrainLimit = Patches.GoblinBirthStrainUtility.NormalizeLimit(goblinBirthStrainLimit);
             Scribe_Values.Look(ref newPrisonersAsMeatLivestock, "newPrisonersAsMeatLivestock", false);
             Scribe_Values.Look(ref showHumanLivestockTab, "showHumanLivestockTab", true);
